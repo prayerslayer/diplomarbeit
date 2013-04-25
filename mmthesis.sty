@@ -1,0 +1,194 @@
+% Technische Universität Dresden
+% Fakultät Informatik
+% Institut für Software- und Multimediatechnik
+% Professur für Multimediatechnik
+%
+% LaTeX style for student theses and KOMAScript book class.
+% 2012-10-26 Andreas Rümpel
+
+\KOMAoption{twoside}{false}
+\KOMAoption{numbers}{noenddot}
+%\KOMAoption{headsepline}{true} % doesn't work yet
+%\KOMAoption{footsepline}{true} % doesn't work yet
+
+\usepackage[
+	a4paper,
+	left=3cm,
+	right=3cm, 
+	top=2.5cm,
+	bottom=3cm
+]{geometry} % this kind of margin definition is not recommended
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % for correct guillemets, http://en.wikibooks.org/wiki/LaTeX/Internationalization#German
+\usepackage{lmodern} % to avoid rastered fonts, http://www.komascript.de/node/699
+
+%\usepackage{mathpazo} % palatino linotype
+\usepackage{amsmath}
+%\usepackage{amscd}
+%\usepackage{amsthm}
+%\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[cmyk]{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs} % http://www.dante.de/dante/events/mv37/programm/handouts/hoeppner-tabellen.pdf
+\usepackage{ifthen} % for checking some conditions
+\usepackage{tikz} % TikZ ist kein Zeichenprogramm
+\usepackage[colorinlistoftodos]{todonotes} % TODO notes
+
+%\usepackage{gensymb}
+%\usepackage[all]{xy}
+%\usepackage{pstricks,pst-node}
+%\usepackage[center]{subfigure} % for groups of figures (2 figures aligned horizontally)
+
+% http://en.wikipedia.org/wiki/Widows_and_orphans
+\clubpenalty=9999
+\widowpenalty=9999
+\brokenpenalty=100
+%\hyphenpenalty=9999
+
+
+%### meta data
+\def\@mmtype{TODO set mmtype}
+\def\@mmtitle{TODO set mmtitle}
+\def\@mmtshorttitle{TODO set mmtshorttitle}
+\def\@mmtauthor{TODO set mmtauthor}
+\def\@mmtsubmissionmonth{TODO Januar 1970}
+\def\@mmtsubmissiondate{TODO 1. Januar 1970}
+\def\@mmtsupervisor{Dipl.-Medieninf. Andreas Rümpel}
+\def\@mmtsupervisorii{TODO}
+
+\newcommand*\mmtype[1]{\def\@mmtype{#1}}
+\newcommand*\mmtitle[1]{\def\@mmtitle{#1}}
+\newcommand*\mmtshorttitle[1]{\def\@mmtshorttitle{#1}}
+\newcommand*\mmtauthor[1]{\def\@mmtauthor{#1}}
+\newcommand*\mmtsubmissionmonth[1]{\def\@mmtsubmissionmonth{#1}}
+\newcommand*\mmtsubmissiondate[1]{\def\@mmtsubmissiondate{#1}}
+\newcommand*\mmtsupervisor[1]{\def\@mmtsupervisor{#1}}
+\newcommand*\mmtsupervisorii[1]{\def\@mmtsupervisorii{#1}}
+%### end of meta data
+
+%### hyperref
+\usepackage[
+	pdftex,
+	hyperfootnotes=false,
+	bookmarks,
+	pdfpagelabels=true,
+	plainpages=false
+]{hyperref}
+
+
+	
+\definecolor{lc}{cmyk}{0.9,0.6,0,0.4} % for screen output, blue links
+\newcommand{\printoutput}{\definecolor{lc}{cmyk}{0,0,0,1}} % for print output, black links
+
+% defer hypersetup to set the right information for pdf metadata
+\newcommand{\mmthypersetup}{\hypersetup{
+	pdftitle={\@mmtitle},
+	pdfauthor={\@mmtauthor},
+	pdfsubject={\@mmtitle},
+	pdfkeywords={\@mmtitle},
+	pdftoolbar=true,
+	bookmarksopen,
+	bookmarksnumbered=false,
+	bookmarksopenlevel=1,
+	pdfdisplaydoctitle,	
+	colorlinks=true,
+	linkcolor=lc,
+	citecolor=lc,
+	filecolor=lc,
+	menucolor=lc,
+	urlcolor=lc
+}}
+%### end of hyperref
+
+%### glossaries
+\usepackage[nonumberlist,acronym,nomain]{glossaries}
+\renewcommand*{\glspostdescription}{} % remove dot at end of description
+\makeglossaries
+%### end of glossaries
+
+\usepackage[ngerman]{babel}
+\usepackage[autostyle=true,german=guillemets]{csquotes} % type of quotes -- german=quotes|guillemets
+
+%### conditional use of biblatex (for LyX mod)
+%### use it in document as follows: \usepackage[nobiblatex]{mmthesis}
+\def\@usebiblatex{true}
+\newcommand*\usebiblatex[1]{\def\@usebiblatex{#1}}
+\DeclareOption{nobiblatex}{\usebiblatex{false}}
+\ProcessOptions
+\ifthenelse{\equal{\@usebiblatex}{false}}{}{\usepackage[style=alphabetic,backend=biber,backref=true,minnames=3,abbreviate=false]{biblatex}}
+
+
+
+
+
+%### custom headings
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\renewcommand*{\chapterpagestyle}{scrheadings}
+
+\clearscrheadfoot
+\lohead{\@mmtshorttitle}
+\rohead{\headmark}
+\lofoot{Copyright TU Dresden, \@mmtauthor}
+\rofoot{\thepage}
+
+\setkomafont{pageheadfoot}{\normalfont\footnotesize}
+\setkomafont{pagenumber}{\normalfont\footnotesize}
+%### end of custom headings
+
+%### generate title page, confirmation, toc
+\newcommand{\mmtfrontmatter}{
+%### title page
+\begin{titlepage}
+\center \vspace*{3em}
+\huge\textbf{\textsf{\@mmtitle}}\\
+\vspace{5em}
+\normalsize
+\@mmtype\\
+Technische Universität Dresden\\
+\@mmtsubmissionmonth\\
+\vspace{4em}
+\Large\@mmtauthor\\
+\vspace{4em}
+\normalsize 
+Betreuer: \@mmtsupervisor\ifthenelse{\equal{\@mmtsupervisorii}{TODO}}{\\}{,\\\@mmtsupervisorii\\}
+Hochschullehrer: Prof. Dr.-Ing. Klaus Meißner\\
+\vspace{1em}
+Fakultät Informatik\\
+Institut für Software- und Multimediatechnik\\
+Seniorprofessur für Multimediatechnik\\			
+\vspace{3em} 			 
+\includegraphics[width=3.5cm]{mmt-logo} 
+\end{titlepage} 
+
+%### conditionally used registration form
+\ifthenelse{\equal{\@mmtype}{Bachelorarbeit}}{
+\chapter*{\textcolor{red}{Anmeldeformular}}
+Diese Seite muss vor dem Binden der gedruckten Fassung der Arbeit durch das von den Gutachtern, dem Studenten bzw. der Studentin und dem Vorsitzenden des Prüfungsausschusses unterschriebene originale Anmeldeformular der Arbeit ersetzt werden. Das zweite abzugebende gebundene Exemplar soll stattdessen eine Kopie dieses originalen Anmeldeformulars enthalten.}{}
+
+%### objective
+\chapter*{\textcolor{red}{Aufgabenstellung}}
+Diese Seite muss vor dem Binden der gedruckten Fassung der Arbeit durch die von Herrn Meißner und dem Studenten eigenhändig unterschriebene originale Aufgabenstellung ersetzt werden. Das zweite abzugebende gebundene Exemplar soll stattdessen eine Kopie dieser originalen Aufgabenstellung enthalten.
+
+%### confirmation
+\vspace{4em}
+\chapter*{Erklärung}
+Hiermit erkläre ich, \@mmtauthor, \ifthenelse{\equal{\@mmtype}{Großer Beleg}}{den vorliegenden Großen Beleg}{die vorliegende \@mmtype} zum Thema\\
+
+\vspace{0.7em}
+\noindent\textbf{\@mmtitle}\\
+
+\vspace{0.7em}
+\noindent{}selbstständig und ausschließlich unter Verwendung sowie korrekter Zitierung der im Literaturverzeichnis angegebenen Quellen und Hilfsmittel verfasst zu haben.\\
+
+\vspace{3em}
+\noindent{}Dresden, \@mmtsubmissiondate\\
+
+\vspace{3em}
+\noindent{}Unterschrift
+
+%### toc
+\tableofcontents
+}
