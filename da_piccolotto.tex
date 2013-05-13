@@ -59,7 +59,6 @@
 % my acronyms
 \newacronym{InfoVis}{InfoVis}{Informationsvisualisierung}
 
-
 \begin{document}
 \frontmatter
 \pagenumbering{Roman}
@@ -137,6 +136,37 @@ In der Tabelle findet sie auch eine Spalte \enquote{SNP}. Alice weiß zwar, dass
 \chapter{Konzept}
 
 \section{Anforderungsanalyse}
+\label{section:anforderungsanalyse}
+
+Aus dem Szenario (Kapitel~\ref{section:szenario}) lassen sich nun verschiedene Anforderungen an ein Hilfesystem für komposite Informationsvisualisierungssysteme ableiten.
+
+\subsection{Funktionale Anforderungen}
+\label{section:funktionale_anforderungen}
+
+Blabla
+
+\begin{itemize}
+	\item\textbf{Überblick}: Das Hilfesystem soll einen kurzen Überblick über das InfoVis-System geben und Darstellungsform sowie Inhalt jeder Komponente kurz erläutern.
+	\item\textbf{Bedienung}: Das Hilfesystem soll erklären können, wie eine Komponente bedient wird. Diese Informationen umfassen beispielsweise welche Operationen auf welchen DOM Elementen welche Aktionen (eventuell auf welchen Daten) ausführen.
+	\item\textbf{Reporting}: Fehler in Komponenten sollen über ein Reporting-System gemeldet werden können.
+	\item\textbf{Kommunikation}: Das Hilfesystem soll erklären können, wie zwei gegebene Komponenten miteinander kommunizieren.
+	\item\textbf{Kommentare}: Der Benutzer soll die Möglichkeit haben Daten zu kommentieren und Bereiche der Visualisierung zu markieren und mit ebenfalls mit einem Kommentar zu versehen, sodass auch auf fehlende Daten hingewiesen werden kann.
+\end{itemize}
+
+\subsection{Nichtfunktionale Anforderungen}
+\label{section:nichtfunktionale_anforderungen}
+
+Bla bla
+
+\begin{itemize}
+	\item\textbf{Korrektheit}: Eine gegebene Hilfestellung darf keine Fehlinformationen enthalten, weil sie sonst mehr verwirrt als hilft.
+	\item\textbf{Vollständigkeit}: Eine gegebene Hilfestellung muss alle Informationen enthalten, die der Nutzer benötigt um danach seine gewünschte Aufgabe ausführen zu können.
+	\item\textbf{Verständlichkeit}: Hilfestellungen müssen in einer Form präsentiert werden, die der Benutzer schnell und mit geringem mentalen Aufwand verarbeiten kann.
+	\item\textbf{Einheitlichkeit}: Das Look \& Feel von Teilen des Hilfesystems (z.B. Kommentare) muss komponentenübergreifend einheitlich sein, damit der Benutzer einmal gelerntes wiederverwenden kann.
+	\item\textbf{Minimalität}: Der Komponentenentwickler soll seine Komponente mit möglichst wenig Aufwand zum Hilfesystem kompatibel machen können, ansonsten werden nur sehr wenige Komponenten -- und damit der Benutzer -- davon profitieren.
+	\item\textbf{Universalität}: Das Hilfesystem soll für alle Komponenten und Visualisierungen in gleicher Qualität funktionieren.
+	\item\textbf{Wiederverwendbarkeit}: Die Kommentare sollen möglichst in allen Visualisierungen wiederverwendet werden, damit viele Benutzer von den Erkenntnissen anderer profitieren können.
+\end{itemize}
 
 %### end of appendix
 %#####################################################
