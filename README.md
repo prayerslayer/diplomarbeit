@@ -49,5 +49,206 @@ Wie kriegt man das jetzt gebacken? Grundsätzlich gibt es zwei Möglichkeiten:
 
 1. Lösung: A wird bevorzugt, B als Fallback für den Fall, dass Dev keinen Bock hat die Kommentar-API zu implementieren. Nachteil: Devs sind faul und Hilfe uninteressant, deswegen stehen wir dann in 99 % der Fälle mit B da.
 2. Lösung: Wir bringen die Vorteile von A und B zusammen. Das bedeutet wir haben grundsätzlich folgende Varianten zur Verfügung:
-**Amin**: Eine kleinstmögliche API, die uns sagt welche Daten ausgewählt sind (sodass wir dort unsere Kommentare anhängen können) und welches DOM Element welches Datenelement repräsentiert (sodass wir dort unser Overlay anbringen können). Dev muss jetzt nicht mehr so viel implementieren, aber immer noch: Auswahl von Elementen muss klappen, Relation zwischen DOM Element und Daten muss bekannt sein. Nachteil: Die Lösung klappt sicher toll bei Listen und Tabellen, vielleicht auch Treemaps, wo recht einfach eine Selektion eingebaut werden kann. Aber was ist mit Karten? Oder Linecharts? Wie werden Multiselections und Bereichsselektionen umgesetzt? Sicher nicht immer mit denselben Interaktionen. Das kann man zwar umgehen indem man sich die daten-repräsentierenden DOM Elemente per API ausgeben lässt und Selektionen selbst managed. Bleiben die Karten. Und Line Charts. Oder Scatterplots.
+**Amin**: Eine kleinstmögliche API, die uns sagt welche Daten ausgewählt sind (sodass wir dort unsere Kommentare anhängen können) und welches DOM Element welches Datenelement repräsentiert (sodass wir dort unser Overlay anbringen können).  Klappt relativ super, wenn wir an existierenden Datenpunkten kommentieren wollen. Wie aber Markierungen so umsetzen, dass sie visualisierungsunabhängig funktionieren und einfach + zuverlässig wiederhergestellt werden können?
 **Bmax**: Wir finden irgendwie eine Möglichkeit, wie wir von einem Shape auf dem SVG/Canvas Overlay über der Komponente auf die Daten kommen. Ohne API. Klingt für mich nach zu viel Aufwand für zu wenig Erfolgsversprechen.
+
+Die Frage ist nun, wie wir zu einer zufriedenstellenden, universalen **Amin** kommen. Dazu nehmen wir die Visualisierungen in Heer2010 her, klassifizieren sie anhand Keim2002 und überlegen uns was.
+
+Faktoren:
+* Ob Daten durch Komponente aggregiert werden oder nicht, weil wenn ja kann mans sich sparen an Originaldaten kommentieren zu wollen.
+* Anzahl der Dimensionen der Daten. D = { 1, 2, 3 ..} **Warum noch mal wichtig?**
+* Achsen der Visualisierung? zB Abweichung von Gaussverteilung. Ist relevant wenn man an die Daten selbst annotieren will.
+* Visualisierungstyp: Standard, Karte (Projektion!?), Mixed… **Warum noch mal wichtig?**
+* Visualisierungsverhalten: statisch, dynamisch. Bei dynamischen Visualisierungen, wo ständig neue Daten reingeladen werden zB neueste Tweets von @XY, brauch ich keine Bereiche markieren. Ändert sich ja eh in den nächsten 2 Sekunden.
+* Ob Visualisierung idempotent ist, d.h. liefern bei zwei unterschiedlichen Anzeigen derselben Daten das exakt gleiche Ergebnis? Eine Treemap ist es, nehme ich an, aber Force Layout gar nicht. Hängt vom **Layoutalgorithmus** ab.
+* Sich ändernde Daten - wird das berücksichtigt? Wenn ja, dann muss ich irgendwie noch einen Hash als Checksumme einbauen. Selber Hash = selbe Daten = okay einen Kommentar anzuzeigen.
+
+**API**
+Im Prinzip ein Memento nach Gamma2001. Die Komponente definiert selbst, wie es aussieht. Ob das jetzt nur ein Tupel (X, Y) oder (X, Y, S, R) oder ein String oder whatever ist, ist mir egal. Wichtig ist, dass ich mit getMemento() ein Memento m bekomme und mit setMemento(m) den Zustand wiederherstellen kann. 
+
+**Problem**: Unterschiedliche Viewportgröße bei der Wiederherstellung. Die sollte wohl auch abgespeichert werden, sodass später entsprechend skaliert werden kann.
+
+* Memento zusammen mit Kommentardaten ablegen
+* Zusätzlich optional Transformationsfunktionen Koordinaten -> Daten und Daten -> Koordinaten, optional weil evtl viel Aufwand. Nötig um Bereich direkt in Daten kommentieren zu können. **WIE?**
+* Was selektiert ist mit data-vizboard-selected=true markuppen
+* URI von Daten mit data-vizboard-uri markuppen
+* Die Visualisierung selbst mit data-vizboard-vizroot markuppen, hier kommt das Overlay drüber
+* Was muss jetzt definitiv in die MCDL?
+
+## Index Charts
+*Daten*: 2-dimensional (Zeit + Wert)
+*Visualisierung*: Standard 2D
+*Interaktion*: Panning
+
+Ausgewählte Daten kriegt man mit entsprechendem Markup (data-vizboard-selected, data-vizboard-uri) an den DOM Elementen raus.
+
+Jetzt mal davon ausgehend, dass das Linien SVG Elemente sind. Man würde sich den aktuellen Zustand (Monat) abspeichern wollen und dann einen Bereich mit Koordinaten auswählen und markieren. Dieser Bereich zusammen mit dem Monat würde mit Kommentardaten abgelegt.
+
+Um Kommentare wiederverwendbar zu machen, würde die Komponente idealerweise noch XY Koordinaten in Punkte auf den tatsächlich dargestellten Dimensionen konvertieren können. Also beispielsweise (100, 75) entspricht (März 2004, 125 %).
+
+## Stacked Graphs
+*Daten*: 2-dimensional (Zeit + Aggregat)
+*Visualisierung*: Stacked display
+*Interaktion*: Browsing (Umschalten)
+
+Same wie bei Index Charts. Außer dass wegen dem Aggregat nicht an die Daten selbst kommentiert werden kann (weil sie aggregiert wurden und nicht mehr auseinandergenommen werden können, duh).
+
+## Small Multiples
+*Daten*: 2-dimensional (Zeit + Aggregat)
+*Visualisierung*: Multiple Standard 2D
+*Interaktion*: keine visualisierungsverändernde
+
+Stacked Graphs auseinandergenommen und parallel dargestellt. Wegen Aggregat kann wiederum nicht an Originaldaten kommentiert werden - außer Aggregate SIND Originaldaten.
+
+## Horizon Graph
+*Daten*: 2-dimensional (Zeit + Wert)
+*Visualisierung*: Standard 2D - sort of
+*Interaktion*: Browsing
+
+Siehe Index Chart.
+
+## Stem & Leaf Plots
+*Daten*: 1-dimensional (Werte)
+*Visualisierung*: Standard 2D - sort of
+*Interaktion*: Keine
+
+Siehe Index Chart, aber es gibt keine Transformation (x,y) in Werte der Dimensionen. X/Y bleibt X/Y.
+
+## Q-Q Plots
+*Daten*: 2-dimensional (Werte + Abweichung von Verteilung)
+*Visualisierung*: Standard 2D
+*Interaktion*: Browsing
+
+Siehe Index Chart. Problem aber: Die Dimensionen des Charts entsprechen keinen Dimensionen in den Daten. Verteilung + Abweichung davon ist nicht im Datensatz. Deswegen kann man hier auch keinen Bereich in den Daten kommentieren. Außer man definiert sich halt Verteilungen.
+
+## Scatter Plot Matrix
+*Daten*: Multidimensional
+*Visualisierung*: Geometrically transformed
+*Interaktion*: Linking & Brushing
+
+Ausgewählte Daten würde man leicht mit ein bisschen Markup (data-vizboard-selected, data-vizboard-uri) rauskriegen. Ansonsten siehe Index Chart.
+
+## Parallel Coordinates
+*Daten*: Multidimensional
+*Visualisierung*: Geometrically transformed
+*Interaktion*: Linking & Brushing
+
+Same wie Scatter Plot Matrix.
+
+## Flow Map
+*Daten*: Multidimensional (Richtung, Anzahl, von, nach, …)
+*Visualisierung*: Special 2D
+*Interaktion*: Pan & Zoom
+
+Siehe Index Chart, aber wie man an einzelne Datenpunkte kommen soll, ist mir nicht ganz klar. Weil ich nicht weiß, wie die Daten überhaupt aussehen.
+
+## Choropleth Maps
+*Daten*: 2-dimensional (Bundesstaat + Wert)
+*Visualisierung*: Special 2D
+*Interaktion*: Browsing
+
+Eigentlich wie Index Charts.
+
+## Graduated Symbol Maps
+*Daten*: Multidimensional (Bundesstaat + Bevölkerung + % Normal + % Overweight + % Obese)
+*Visualisierung*: Special 2D + Iconic display
+*Interaktion*: Browsing
+
+Siehe Index Chart.
+
+## Cartogram
+*Daten*: Multidimensional (Bundesstaat + Position + Bevölkerung + % Obese)
+*Visualisierung*: Geometrically transformed
+*Interaktion*: Browsing
+
+Siehe Index Chart.
+
+## Node-Link Diagram
+Hier gibt es mehrere Möglichkeiten.
+
+### Baum
+*Daten*: Hierarchie
+*Visualisierung*: Standard 2D (?)
+*Interaktion*: Keine
+
+Siehe Index Chart.
+
+### Radial
+*Daten*: Hierarchie
+*Visualisierung*: Standard 2D (?)
+*Interaktion*: Keine
+
+Siehe Index Chart. Layoutalgorithmus? --> X/Y <-> Daten
+
+### Indented Tree
+*Daten*: Hierarchie
+*Visualisierung*: Standard 2D
+*Interaktion*: Keine
+
+Siehe Index Chart.
+
+### Adjacency Diagram
+*Daten*: Hierarchie + 1-dimensional (Größe)
+*Visualisierung*: Stacked
+*Interaktion*: Keine
+
+Siehe Index Chart, möglicherweise keine X/Y <-> Daten Transformation.
+
+### Sunburst
+*Daten*: Hierarchie + 1-dimensional (Größe)
+*Visualisierung*: Stacked
+*Interaktion*: Keine
+
+Siehe Index Chart, aber keine X/Y <-> Daten Transformation.
+
+### Enclosure Diagram
+*Daten*: Hierarchie + 1-dimensional (Größe)
+*Visualisierung*: Stacked
+*Interaktion*: Keine
+
+Siehe Index Chart, aber keine X/Y <-> Daten Transformation.
+
+### Nested Circles
+*Daten*: Hierarchie + 1-dimensional (Größe)
+*Visualisierung*: Stacked
+*Interaktion*: Keine
+
+Keine X/Y <-> Daten Transformation
+
+## Force-Directed Network
+*Daten*: Netzwerk mit gewichteten Kanten
+*Visualisierung*: Standard 2D
+*Interaktion*: Pan, Zoom, Verschieben
+
+Hier würde es gar nicht gehen, weil das Layout nicht vorhersehbar ist. Eine Möglichkeit: Checken, welche Elemente sich im ausgewählten Bereich befinden und ihn so definieren. In einer späteren Visualisierung würden es halt mehrere Bereiche sein. Nachteil: Was eigentlich interessant war, ist vermutlich _so_ nicht mehr sichtbar, weswegen man sich den Kommentar ohnehin schenken kann.
+
+## Arc Diagram
+*Daten*: Netzwerk
+*Visualisierung*: Standard 2D
+*Interaktion*: Keine
+
+Wieder die Frage nach dem Layoutalgorithmus. Sonst wie Index Chart.
+
+## Matrix View
+*Daten*: Netzwerk
+*Visualisierung*: Standard 2D
+*Interaktion*: Keine
+
+Wie Index Chart eigentlich.
+
+## Was fehlt
+
+Tja, gute Frage. Histogramme. Bar Charts. Stacked Bar Charts. Dendrogramme, sind aber wie Bäume. Listen. Tabellen.
+
+## Timeline
+                 A       B   C      D E 
+         - - - - / - - - / - / - - -/ / - - -
+*Daten*: 2-dimensional (Jahr + Beschreibung zB)
+*Visualisierung*: Standard 1D
+*Interaktion*: Zoom, Pan
+
+Wie Index Chart.
+
+### 3-dimensionale Visualisierungen
+
+Standard 3D Plot, 3D Netzwerke… Lasse ich erstmal raus weil sie auch noch nicht so häufig sind im Web (obwohl sich das mit der Verbreitung von WebGL ändern wird). Das Prinzip wäre dasselbe. Voraussetzungen: Statische Visualisierung und Komponente macht Properties öffentlich, mit der ein Zustand wiederhergestellt werden kann.
