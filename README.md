@@ -68,12 +68,13 @@ Im Prinzip ein Memento nach Gamma2001. Die Komponente definiert selbst, wie es a
 
 **Problem**: Unterschiedliche Viewportgröße bei der Wiederherstellung. Die sollte wohl auch abgespeichert werden, sodass später entsprechend skaliert werden kann.
 
-* Memento zusammen mit Kommentardaten ablegen
-* Zusätzlich optional Transformationsfunktionen Koordinaten -> Daten und Daten -> Koordinaten, optional weil evtl viel Aufwand. Nötig um Bereich direkt in Daten kommentieren zu können. **WIE?**
+* Memento, Grenzen markierten Bereichs, Viewportgröße zusammen mit Kommentardaten ablegen
+* Zusätzlich optional Transformationsfunktionen Koordinaten -> Daten und Daten -> Koordinaten, optional weil evtl viel Aufwand. Nötig um Bereich direkt in Daten kommentieren zu können. "Direkt in Daten" geht halt nicht bei uns weil alles Tripel sind. Deswegen eigenes Kommentar-Tripel, was sagt auf welchen Achsen welcher Bereich kommentiert wurde. **Kriegen wir das in 100 % der Fälle raus?**
 * Was selektiert ist mit data-vizboard-selected=true markuppen
 * URI von Daten mit data-vizboard-uri markuppen
 * Die Visualisierung selbst mit data-vizboard-vizroot markuppen, hier kommt das Overlay drüber
-* Was muss jetzt definitiv in die MCDL?
+* Was muss jetzt definitiv in die MCDL? -> Ob Komponente aggregiert (performsAggregation), ob Komponente dynamisch Daten lädt (loadsDynamicData), ob Komponente idempotentes Layout hat (isLayoutIdempotent), wie das Memento aussieht.
+* Wie funktioniert die Wiederherstellung eines Kommentars? -> Kommentaranzeige wird getoggelt. Wenn ja, wird über jedem DOM Element mit data-vizboard-uri die entsprechende Anzahl an Kommentaren angezeigt. Mit Klick drauf werden die Kommentare geladen. Bei Bereichen wird ein Overlay über data-vizboard-vizroot erstellt und dort entsprechend den gespeicherten Koordinaten - auf neue Komponentengröße skaliert - draufgemalt.
 
 ## Index Charts
 *Daten*: 2-dimensional (Zeit + Wert)
