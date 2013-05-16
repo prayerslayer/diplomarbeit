@@ -6,9 +6,16 @@ My diploma thesis at Dresden University of Technology.
 
 * Beispiel generisches Barchart: Wie zur Laufzeit herausfinden, was auf den Achsen dargestellt wird?
 * Beispiel generisches Barchart: Wie interaktionsversprechende Elemente kennzeichnen im MCDL? --> Über Capabilities und API, sodass dann .getInteractionElementsForCapability( capId ) ausgeführt werden kann
-* Kommentare: Überlegen wie Darstellung von Kommentaren bei Relationen 1:n und n:1 sowie n:n zwischen DOM Element : Datenelement.
-* Kommentare: Wie können Daten per Multiselections und Bereichsselektionen in Charts wie Karten, Scatterplots oder Linecharts markiert werden mit quasi null Aufwand für Entwickler? In Scatterplots mit eigenem Overlay und API, weil Relation DOM:Daten 1:n oder 1:1. In Linecharts ist die Relation n:1 (mehrere Datenpunkte in einer SVG Kurve), in Karten auch (mehere Datenpunkte in einer Kachel).
-* Kommentare: Wie können Freihandmarkierungen abgespeichert werden, sodass sie einfach wiederherstellbar sind? Größtes Problem ist wohl die Skalierung.
+
+# Tatsächliche Hilfe
+
+In MCDL steht drin
+* welche Operation (linksklick, doubletap…)
+* auf welchen Elementen (svg > .bar)
+* welche Aktion (Sortieren, Achsen tauschen…)
+* wie durchführt (nach Land, alphabetisch, …)
+
+Dann kommt PhantomJS zum Einsatz und wir rendern die Komponente in einer Testumgebung. Machen 1 Screenshot/Capability und 1 Screenshot/Operation (wenn mit Parametern: Beispiel steht in MCDL). Aus diesen Bildern setzen wir zur Laufzeit eine Art animiertes Comic zusammen.
 
 # Anforderungen
 
@@ -32,6 +39,7 @@ Anforderungen an das Hilfesystem für komposite Informationsvisualisierungen. Da
 * Überblick: Das Hilfesystem soll einen kurzen Überblick über das InfoVis-System geben und Darstellungsform sowie Inhalt jeder Komponente kurz erläutern.
 * Bedienung: Das Hilfesystem soll erklären können, wie eine Komponente bedient wird. Diese Informationen umfassen welche Operationen (1) auf welchen DOM Elementen (2) welche Aktionen (3) (eventuell auf welchen Daten (3a)) ausführen. Zum Beispiel bei einer Tabelle den Spalten "Land" und "BIP": Mit einem **Linksklick** (1) auf den **Kopf der Spalte "BIP"** (2) wird die Tabelle **nach BIP** (3a) **sortiert** (3).
 * Reporting: Fehler in Komponenten sollen über ein Reporting-System gemeldet werden können.
+* Verlinkung: Das Hilfesystem soll nicht-triviale Begriffe mit der Wikipedia verlinken.
 * Kommunikation: Das Hilfesystem soll erklären können, wie zwei gegebene Komponenten miteinander kommunizieren. Die notwendigen Informationen sind dieselben wie in *Bedienung*, aber komponentenübergreifend.
 * Kommentare: Der Benutzer soll die Möglichkeit haben Daten zu kommentieren und Bereiche der Visualisierung zu markieren und mit ebenfalls mit einem Kommentar zu versehen, sodass auch auf fehlende Daten hingewiesen werden kann.
 * Wiederverwendbarkeit: Die Kommentare sollen möglichst in allen Visualisierungen wiederverwendet werden, sodass alle etwas davon haben.
@@ -69,7 +77,7 @@ Im Prinzip ein Memento nach Gamma2001. Die Komponente definiert selbst, wie es a
 **Problem**: Unterschiedliche Viewportgröße bei der Wiederherstellung. Die sollte wohl auch abgespeichert werden, sodass später entsprechend skaliert werden kann.
 
 * Memento, Grenzen markierten Bereichs, Viewportgröße zusammen mit Kommentardaten ablegen
-* Zusätzlich optional Transformationsfunktionen Koordinaten -> Daten und Daten -> Koordinaten, optional weil evtl viel Aufwand. Nötig um Bereich direkt in Daten kommentieren zu können. "Direkt in Daten" geht halt nicht bei uns weil alles Tripel sind. Deswegen eigenes Kommentar-Tripel, was sagt auf welchen Achsen welcher Bereich kommentiert wurde. **Kriegen wir das in 100 % der Fälle raus?**
+* Zusätzlich optional Transformationsfunktionen Koordinaten -> Daten und Daten -> Koordinaten, optional weil evtl viel Aufwand. Nötig um Bereich direkt in Daten kommentieren zu können. "Direkt in Daten" geht halt nicht bei uns weil alles Tripel sind. Deswegen eigenes Kommentar-Tripel, was sagt auf welchen Achsen welcher Bereich kommentiert wurde. Jop weils meistens eine Datatype Property sein wird. Kann man außerdem auch die Komponente per API ausgeben lassen. getDataBoundaries(x1, y1, x2, y2) => (namespace:Date=Jan 2000, namespace:Dollar=5000) etc.
 * Was selektiert ist mit data-vizboard-selected=true markuppen
 * URI von Daten mit data-vizboard-uri markuppen
 * Die Visualisierung selbst mit data-vizboard-vizroot markuppen, hier kommt das Overlay drüber
