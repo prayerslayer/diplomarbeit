@@ -12,7 +12,7 @@
 % glossaries and acronyms: makeglossaries %
 %
 % Das LATEX2e-Sündenregister: ftp://ftp.dante.de/tex-archive/info/l2tabu/german/l2tabu.pdf
-% KOMAScript-Guide: ftp://ftp.dante.de/tex-archive/macros/latex/contrib/koma-script/scrguide.pdf
+% KOMAScript-Guide: ftp://ftp.dante.de/tex-archive/macros/latex/contrib/koma-script/scrguide.påådf
 % Einige typographische Grundregeln und ihre Umsetzung in LaTeX: http://www2.informatik.hu-berlin.de/sv/lehre/typographie.pdf
 
 \documentclass[
@@ -24,8 +24,6 @@
 	bibliography=totoc
 ]{scrbook}
 
-
-\usepackage[utf8]{inputenc}
 \usepackage{mmthesis}
 \addbibresource{library.bib} % put name of bib file here with extension
 
@@ -187,15 +185,98 @@ Bla bla
 \section{Grundlagen}
 \label{section:grundlagen}
 
-\subsection{Semantische Daten}
+\subsection{Semantische Datensätze}
 \label{section:semantische_daten}
 
 % Grundlagen von RDF, RDFS, OWL. Kann ich mehr oder weniger aus dem Beleg abschreiben.
+Eine Ontologie ist \enquote{an explicit specification of a conceptualization} \cite{Gruber1995} und wird benutzt um domänenspezifisches Wissen abzubilden \cite{Chandrasekaran1999}. Sie besteht aus mehreren Elementen:
+
+\begin{itemize}
+	\item Eine Klasse repräsentiert ein Konzept, eine Entität, ein Ding, beispielsweise ein \textit{Smartphone}.
+	\item Eine Instanz ist ein konkretes Objekt einer Klasse, zum Beispiel das \textit{iPhone mit der Seriennummer XYZ-ABC}.
+	\item Datenattribute beschreiben eine Instanz näher, zum Beispiel die \textit{Seriennummer} oder \textit{Bildschirmgröße} des iPhones.
+	\item Objektattribute beschreiben Beziehungen zwischen Klassen und deren Instanzen, beispielsweise eine Person \textit{besitzt} ein Smartphone.
+	\item Außerdem existieren noch Axiome, Regeln, Funktionen und Einschränkungen, welche die Logik einer Ontologie beschreiben.
+\end{itemize}
+
+Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortium (W3C) verschiedene Beschreibungssprachen eingeführt. Die bekanntesten sind Resource Description Framework Schema (RDFS) und Web Ontology Language (OWL). Mit diesen Sprachen lässt sich unterschiedlich viel Semantik u.\,a. in Form von Ontologien, Thesauren oder Vokabularen ausdrücken; die Komplexität der Dokumente und damit der Aufwand, sie zu erstellen, verhalten sich aber direkt proportional (siehe Abbildung~\ref{figure:grundlagen-semantic_spectrum}) \cite{Bergman2007}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/grundlagen-semantic_spectrum.png}
+	\caption{Semantic Spectrum}
+	\label{figure:grundlagen-semantic_spectrum}
+\end{figure}
+
+%TODO Noch auf OWL oder RDF/RDFS eingehen?
+
 
 \subsection{Informationsvisualisierung}
 \label{section:informationsvisualisierung}
 
 % Grundlagen von InfoVis und Beispiele
+Card et al. \cite{Card1999} definieren den Begriff \enquote{Informationsvisualisierung} wie folgt:
+
+\begin{quote}
+The use of computer-supported, interactive, visual representations of abstract data to amplify cognition.
+\end{quote}
+
+Beispiele dafür sind Balkendiagramme, Treemaps \cite{Shneiderman1992} und Parallel Coordinates (Abbildung~\ref{figure:parallel_coordinates}) \cite{Inselberg1991}.
+
+%TODO abgrenzung zu infografiken
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/grundlagen-parallel_coordinates.png} 
+   \caption{Parallel Coordinates}
+   \label{figure:parallel_coordinates}
+\end{figure}
+
+Keim \cite{Keim2002} klassifiziert Informationsvisualisierungen nach dargestellten Daten, Visualisierungs- und Interaktionstechnik:
+
+%TODO was mache ich hier? ich will einen überblick geben, aber nicht sein ganzes paper abschreiben
+
+\begin{itemize}
+	\item Dargestellte Daten
+	\begin{itemize}
+		\item Eindimensional: Zum Beispiel Zahlenreihen (1992, 1994, 2001, 2002...)
+		\item Zweidimensional: Beispielsweise Key/Value Paare (Apple: 445, Google: 873, Microsoft: 34, ...)
+		\item Multidimensional: Etwa verschachtelte Key/Value Paare (Apple: \{Stock: 445, Founded: 1976\}, ...) 
+		\item Text: Zum Beispiel Blogposts.
+		\item Netzwerke/Graphen, wie zum Beispiel die Hyperlinks im World Wide Web.
+		\item Software/Algorithmen, beispielsweise welche Prozesse welche Locks halten.
+	\end{itemize}
+	\item Visualisierungstechniken
+	\begin{itemize}
+		\item Standard 2D/3D: Balkendiagramme, Liniendiagramme, Karten etc.
+		\item Geometrically transformed: Zum Beispiel Parallel Coordinates.
+		\item Iconic: Hier werden Bilder zur Informationsvisualisierung benutzt, beispielsweise Smileys \cite{Chernoff1973}.
+		\item Dense Pixel: Wie zum Beispiel Recursive Patterns (Abbildung~\ref{figure:recursive_pattern}).
+		\item Stacked: Zum Beispiel Treemaps.
+	\end{itemize}
+	\item Interaktionstechniken
+	\begin{itemize}
+		\item Standard
+		\item Projection
+		\item Filtering
+		\item Zoom
+		\item Distortion
+		\item Link \& Brush
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/grundlagen-recursive_pattern.png}
+   \caption{Recursive Pattern Visualisierungstechnik}
+   \label{figure:recursive_pattern}
+\end{figure}
+
+\subsubsection{Interaktionstechniken}
+\label{section:interaktionstechniken}
+
+% computer-supported und interactive!
+% zoom, pan, fisheye, browse, filter, blahr, link & brush
 
 \subsection{Software Support}
 \label{section:software_support}
