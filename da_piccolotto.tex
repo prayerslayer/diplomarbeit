@@ -208,7 +208,7 @@ Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortiu
 	\label{figure:grundlagen-semantic_spectrum}
 \end{figure}
 
-%TODO Noch auf OWL oder RDF/RDFS eingehen?
+%TODO Noch auf OWL oder RDF/RDFS eingehen? Für diese Arbeit ist es ja eigentlich egal.
 
 
 \subsection{Informationsvisualisierung}
@@ -221,68 +221,147 @@ Card et al. \cite{Card1999} definieren den Begriff \enquote{Informationsvisualis
 The use of computer-supported, interactive, visual representations of abstract data to amplify cognition.
 \end{quote}
 
-Beispiele dafür sind Balkendiagramme, Treemaps \cite{Shneiderman1992} und Parallel Coordinates (Abbildung~\ref{figure:parallel_coordinates}) \cite{Inselberg1991}.
-
-%TODO abgrenzung zu infografiken
+Beispiele dafür sind Balkendiagramme, Treemaps \cite{Shneiderman1992} und Parallel Coordinates \cite{Inselberg1991} (Abbildung~\ref{figure:parallel_coordinates}). Mangels Interaktivität sind Infografiken \cite{Smiciklas2012} von den eben definierten Informationsvisualisierungen ausgeschlossen.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/grundlagen-parallel_coordinates.png} 
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-parallel_coordinates.png} 
    \caption{Parallel Coordinates}
    \label{figure:parallel_coordinates}
 \end{figure}
 
-Keim \cite{Keim2002} klassifiziert Informationsvisualisierungen nach dargestellten Daten, Visualisierungs- und Interaktionstechnik:
+Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen gegeben. Dieser orientiert sich an Keim \cite{Keim2002}, welcher Informationsvisualisierungen nach dargestellten Daten, Visualisierungs- und Interaktionstechnik klassifizierte. Die Abbildungen stammen, sofern nicht anders angegeben, aus \cite{Heer2010}.
 
-%TODO was mache ich hier? ich will einen überblick geben, aber nicht sein ganzes paper abschreiben
+\subsubsection{Dargestellte Daten}
+\label{section:dargestellte_daten}
 
-\begin{itemize}
-	\item Dargestellte Daten
-	\begin{itemize}
-		\item Eindimensional: Zum Beispiel Zahlenreihen (1992, 1994, 2001, 2002...)
-		\item Zweidimensional: Beispielsweise Key/Value Paare (Apple: 445, Google: 873, Microsoft: 34, ...)
-		\item Multidimensional: Etwa verschachtelte Key/Value Paare (Apple: \{Stock: 445, Founded: 1976\}, ...) 
-		\item Text: Zum Beispiel Blogposts.
-		\item Netzwerke/Graphen, wie zum Beispiel die Hyperlinks im World Wide Web.
-		\item Software/Algorithmen, beispielsweise welche Prozesse welche Locks halten.
-	\end{itemize}
-	\item Visualisierungstechniken
-	\begin{itemize}
-		\item Standard 2D/3D: Balkendiagramme, Liniendiagramme, Karten etc.
-		\item Geometrically transformed: Zum Beispiel Parallel Coordinates.
-		\item Iconic: Hier werden Bilder zur Informationsvisualisierung benutzt, beispielsweise Smileys \cite{Chernoff1973}.
-		\item Dense Pixel: Wie zum Beispiel Recursive Patterns (Abbildung~\ref{figure:recursive_pattern}).
-		\item Stacked: Zum Beispiel Treemaps.
-	\end{itemize}
-	\item Interaktionstechniken
-	\begin{itemize}
-		\item Standard
-		\item Projection
-		\item Filtering
-		\item Zoom
-		\item Distortion
-		\item Link \& Brush
-	\end{itemize}
-\end{itemize}
+\textbf{Eindimensionale Daten} sind beispielsweise Zeitreihen, also Folgen von Daten (1992, 1993, 1995...). Nach Keim können diese aber mit anderen Datenobjekten assoziiert sein. Beispiele für InfoVis eindimensionaler Daten wären demnach ein Index Chart (Abbildung~\ref{figure:index_chart}) oder eine einfache Timeline.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/grundlagen-recursive_pattern.png}
-   \caption{Recursive Pattern Visualisierungstechnik}
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-index_chart.png}
+   \caption{Index Chart}
+   \label{figure:index_chart}
+\end{figure}
+
+\textbf{Zweidimensionale Daten} haben zwei unterschiedliche Dimensionen, wie zum Beispiel eine Geokoordinate (geografische Länge und Breite). Beispiele für InfoVis dieser Daten sind eben Karten (Abbildung~\ref{figure:karte}) oder häufig verwendete zweidimensionale Visualisierungen wie z.\,B. ein Balkendiagramm.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-karte.png}
+   \caption{Karte}
+   \label{figure:karte}
+\end{figure}
+
+\textbf{Multidimensionale Daten} haben demnach mehr als zwei unterschiedliche Dimensionen, typischerweise komplexe Objekte wie Autos (Hubraum, Maximalgeschwindigkeit, Leistung, Benzinverbrauch...) oder Digitalkameras (Megapixel, Sensorgröße, maximale Lichtempfindlichkeit, Gewicht...). Um diese Daten darzustellen, werden oft Parallel Coordinates (Abbildung~\ref{figure:parallel_coordinates}) oder Scatterplot Matrizen (Abbildung~\ref{figure:scatterplot_matrix}) verwendet.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-scatterplot_matrix.png}
+   \caption{Scatterplot Matrix}
+   \label{figure:scatterplot_matrix}
+\end{figure}
+
+\textbf{Text} kann erst nach einer Vorverarbeitungsphase mit Zahlen beschrieben werden (z.\,B. Wörter zählen), ansonsten schlagen herkömmliche Visualisierungsansätze fehl. Ein im Web verbreitetes Beispiel ist die Tag Cloud (Abbildung~\ref{figure:tag_cloud}\footnote{\url{http://4.bp.blogspot.com/-WvicpJ9QqQs/TpbqvbKhX3I/AAAAAAAADGc/3PczLY2P0xs/s1600/uni_tag_cloud_wordle.png}}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-tag_cloud.png}
+   \caption{Tag Cloud}
+   \label{figure:tag_cloud}
+\end{figure}
+
+\textbf{Hierarchien und Netzwerke} beschreiben Relationen und Verbindungen zwischen Objekten. Ein Beispiel für InfoVis von Hierarchien ist der klassische Baum (Abbildung~\ref{figure:baum}), für Netzwerke ein Node-Link-Diagramm (Abbildung~\ref{figure:node-link-diagramm}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/grundlagen-baum.png}
+   \caption{Baum}
+   \label{figure:baum}
+\end{figure}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.25\textwidth]{images/grundlagen-node-link-diagramm.png}
+   \caption{Node-Link-Diagramm}
+   \label{figure:node-link-diagramm}
+\end{figure}
+
+% Am Schluss hat Keim noch Software/Algorithmen, aber ich sehe den Unterschied zu Multidimensionalen Daten nicht. Außerdem kann man - wenn schon mal grundlos neue Kategorien eingeführt werden - dann auch Produktionsprozesse oder what not gesondert betrachten
+
+\subsubsection{Visualisierungstechniken}
+\label{section:Visualisierungstechniken}
+
+\textbf{Standard 2D/3D} Visualisierungen beinhalten Balkendiagramme, Liniendiagramme, sowie andere zweidimensionale Plots und Karten. Ein Beispiel dafür ist das Index Chart (Abbildung~\ref{figure:index_chart}).
+
+\textbf{Multidimensionale} Visualisierungen\footnote{Die Bezeichnung stammt von Chi \cite{Chi2000} und wird verwendet, da sie logischer erscheint als Keims \enquote{geometrically transformed displays}.} sind Darstellungen multidimensionaler Datensätze jeder Art. Beispiele sind Parallel Coordinates (Abbildung~\ref{figure:parallel_coordinates}) und die Scatterplot Matrix (Abbildung~\ref{figure:scatterplot_matrix}).
+
+\textbf{Symbolische} Visualisierungen setzen auf verschiedene Art und Weise Symbole ein. Das können auf eine Karte projizierte Kuchendiagramme sein (Abbildung~\ref{figure:symbol_map}) oder Smileys, die abhängig von den Daten lächeln oder weinen \cite{Chernoff1973}.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-symbol_map.png}
+   \caption{Symbol Map}
+   \label{figure:symbol_map}
+\end{figure}
+
+\textbf{Dense Pixel} Visualisierungen assoziieren jeden Wert einer Dimension mit einem eingefärbten Pixel und platzieren die Pixel einer Dimension nebeneinander. Ein Beispiel dafür ist das Recursive Pattern \cite{Keim1995} (Abbildung~\ref{figure:recursive_pattern}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-recursive_pattern.png}
+   \caption{Recursive Pattern}
    \label{figure:recursive_pattern}
+\end{figure}
+
+\textbf{Verschachtelte} Visualisierungen repräsentieren Hierarchien, wobei Kindknoten innerhalb ihrer Eltern dargestellt werden. Beispiele dafür sind Treemaps \cite{Shneiderman1992} oder Nested Circles (Abbildung~\ref{figure:nested_circles}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.25\textwidth]{images/grundlagen-nested_circles.png}
+   \caption{Nested Circles}
+   \label{figure:nested_circles}
 \end{figure}
 
 \subsubsection{Interaktionstechniken}
 \label{section:interaktionstechniken}
 
-% computer-supported und interactive!
-% zoom, pan, fisheye, browse, filter, blahr, link & brush
+\textbf{Dynamische Projektionen} zeigen dem Benutzer automatisch beispielsweise verschiedene Scatterplots des Datensatzes. Diese Interaktionstechnik eignet sich besonders für multidimensionale Datensätze. Umgesetzt wurde sie zum Beispiel in XGobi \cite{Swayne1998}.
 
-\subsection{Software Support}
-\label{section:software_support}
+Durch \textbf{interaktives Filtern} bestimmt der Benutzer, welche Teilmenge des Datensatzes visualisiert wird. Das kann durch direktes Auswählen (Browsing) oder durch Bestimmen von Eigenschaften der gewünschten Daten (Querying) passieren. Letzteres ist in modernen E-Commerce-Systemen durch Facetten \cite{Yee2003} umgesetzt (Abbildung~\ref{figure:faceted_browsing}).
 
-% Konzepte für Hilfe in Software: Karl Klammer, F1, Foren, Handbücher, ...
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-faceted_browsing.png}
+   \caption{Faceted Browsing}
+   \label{figure:faceted_browsing}
+\end{figure}
 
+\textbf{Interaktives Zoomen} ermöglicht es dem Benutzer mehr oder weniger Details anzuzeigen. Damit ist nicht nur der computergrafische Vorgang der Skalierung gemeint (wie etwa bei einem Mikroskop), sondern auch schlecht sichtbare Elemente auszublenden (wie z.\,B. bei Google Maps, siehe Abbildung~\ref{figure:zoom}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-zoom.png}
+   \caption{Interaktiver Zoom bei Google Maps: Im rechten, ausgezoomten Bild fehlt beispielsweise die Interstate 278 (grüne Markierung)}
+   \label{figure:zoom}
+\end{figure}
+
+% distortion (fisheyes and such)
+
+% link & brush
+
+\subsection{User Assistance}
+\label{section:user_assistance}
+
+% wie funktioniert überhaupt sensemaking, also wissensaufnahme?
+
+% Hilfe für Devs wird hier ausgenommen, weil das System ja auf Endnutzer ausgelegt sein wird
+
+% End-User Hilfe in Desktop Software: Karl Klammer, F1, ?-Button, FAQ, First Steps, Tutorials, Manual
+
+% End-User Hilfe im Web: Intros, sonst eher gar nix. User wird geholfen durch ausprobieren und Semantic Transparency. Und Adaptivität, Personalisierung.
+
+% intelligente, automatische, what not user assistance
 
 % ###################################################
 \chapter{Konzeption}
