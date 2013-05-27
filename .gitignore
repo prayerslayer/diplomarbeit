@@ -12,6 +12,8 @@
 
 *.lot
 
+*.pdf
+
 *.out
 
 *.toc
