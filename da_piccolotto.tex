@@ -292,9 +292,14 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 \subsubsection{Visualisierungstechniken}
 \label{section:Visualisierungstechniken}
 
+% standard 2d/3d
+
 \textbf{Standard 2D/3D} Visualisierungen beinhalten Balkendiagramme, Liniendiagramme, sowie andere zweidimensionale Plots und Karten. Ein Beispiel dafür ist das Index Chart (Abbildung~\ref{figure:index_chart}).
 
+% multidimensional
 \textbf{Multidimensionale} Visualisierungen\footnote{Die Bezeichnung stammt von Chi \cite{Chi2000} und wird verwendet, da sie logischer erscheint als Keims \enquote{geometrically transformed displays}.} sind Darstellungen multidimensionaler Datensätze jeder Art. Beispiele sind Parallel Coordinates (Abbildung~\ref{figure:parallel_coordinates}) und die Scatterplot Matrix (Abbildung~\ref{figure:scatterplot_matrix}).
+
+% iconic displays
 
 \textbf{Symbolische} Visualisierungen setzen auf verschiedene Art und Weise Symbole ein. Das können auf eine Karte projizierte Kuchendiagramme sein (Abbildung~\ref{figure:symbol_map}) oder Smileys, die abhängig von den Daten lächeln oder weinen \cite{Chernoff1973}.
 
@@ -305,6 +310,8 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
    \label{figure:symbol_map}
 \end{figure}
 
+% dense pixel displays
+
 \textbf{Dense Pixel} Visualisierungen assoziieren jeden Wert einer Dimension mit einem eingefärbten Pixel und platzieren die Pixel einer Dimension nebeneinander. Ein Beispiel dafür ist das Recursive Pattern \cite{Keim1995} (Abbildung~\ref{figure:recursive_pattern}).
 
 \begin{figure}[htbp]
@@ -313,6 +320,8 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
    \caption{Recursive Pattern}
    \label{figure:recursive_pattern}
 \end{figure}
+
+% stacked displays
 
 \textbf{Verschachtelte} Visualisierungen repräsentieren Hierarchien, wobei Kindknoten innerhalb ihrer Eltern dargestellt werden. Beispiele dafür sind Treemaps \cite{Shneiderman1992} oder Nested Circles (Abbildung~\ref{figure:nested_circles}).
 
@@ -326,16 +335,22 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 \subsubsection{Interaktionstechniken}
 \label{section:interaktionstechniken}
 
+% dynamische projektionen
+
 \textbf{Dynamische Projektionen} zeigen dem Benutzer automatisch beispielsweise verschiedene Scatterplots des Datensatzes. Diese Interaktionstechnik eignet sich besonders für multidimensionale Datensätze. Umgesetzt wurde sie zum Beispiel in XGobi \cite{Swayne1998}.
+
+% interaktives filtern
 
 Durch \textbf{interaktives Filtern} bestimmt der Benutzer, welche Teilmenge des Datensatzes visualisiert wird. Das kann durch direktes Auswählen (Browsing) oder durch Bestimmen von Eigenschaften der gewünschten Daten (Querying) passieren. Letzteres ist in modernen E-Commerce-Systemen durch Facetten \cite{Yee2003} umgesetzt (Abbildung~\ref{figure:faceted_browsing}).
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/grundlagen-faceted_browsing.png}
-   \caption{Faceted Browsing}
+   \caption{Faceted Browsing bei Amazon.de}
    \label{figure:faceted_browsing}
 \end{figure}
+
+% interaktives zoomen
 
 \textbf{Interaktives Zoomen} ermöglicht es dem Benutzer mehr oder weniger Details anzuzeigen. Damit ist nicht nur der computergrafische Vorgang der Skalierung gemeint (wie etwa bei einem Mikroskop), sondern auch schlecht sichtbare Elemente auszublenden (wie z.\,B. bei Google Maps, siehe Abbildung~\ref{figure:zoom}).
 
@@ -348,20 +363,37 @@ Durch \textbf{interaktives Filtern} bestimmt der Benutzer, welche Teilmenge des 
 
 % distortion (fisheyes and such)
 
+Durch \textbf{Verzerrung} kann ein Bereich der Visualisierung mit hohem Detailgrad angezeigt werden, während der Rest nur wenig detailliert sichtbar ist. Ein bekanntes Beispiel dafür ist das Fisheye (Abbildung~\ref{figure:fisheye}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-fisheye.png}
+   \caption{Fisheye: Das Zentrum der Verzerrung befindet sich ungefähr beim hellblauen Knoten in der Mitte}
+   \label{figure:fisheye}
+\end{figure}
+
 % link & brush
+
+\textbf{Linking \& Brushing} wird vor allem bei mehreren verschiedenen Visualisierungen eingesetzt. Die in einer Visualisierung markierten Daten werden auch in allen anderen Visualisierungen hervorgehoben. Das können zum Beispiel Scatterplots (siehe multidimensionale Visualisierungen in Abschnitt~\ref{section:Visualisierungstechniken}), verschiedene Histogramme (Abbildung~\ref{figure:link_brush}\footnote{\url{http://square.github.io/crossfilter/}}) oder gemischte Visualisierungen sein.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/grundlagen-link_brush.png}
+   \caption{Linking \& Brushing bei Crossfilter.js: Ausgewählt wurden Flüge mit mehr als 80 Minuten Verspätung, die betroffenen Bereiche in anderen Histogrammen wurden automatisch markiert.}
+   \label{figure:link_brush}
+\end{figure}
 
 \subsection{User Assistance}
 \label{section:user_assistance}
 
-% wie funktioniert überhaupt sensemaking, also wissensaufnahme?
-
-% Hilfe für Devs wird hier ausgenommen, weil das System ja auf Endnutzer ausgelegt sein wird
+% wie funktioniert überhaupt sensemaking, also wissensaufnahme? soll ich darauf eingehen? ich bin kein psychologe!
 
 % End-User Hilfe in Desktop Software: Karl Klammer, F1, ?-Button, FAQ, First Steps, Tutorials, Manual
+% dazu finde ich nicht so viel. höchstens das paper über posts in foren von adobe und autodesk und DIN 8418: Hinweise zur Erstellung von Benutzerinformatione
 
 % End-User Hilfe im Web: Intros, sonst eher gar nix. User wird geholfen durch ausprobieren und Semantic Transparency. Und Adaptivität, Personalisierung.
 
-% intelligente, automatische, what not user assistance
+% intelligente, automatische, what not user assistance, ein bisschen ausblick vielleicht
 
 % ###################################################
 \chapter{Konzeption}
