@@ -143,7 +143,6 @@ Damit bekommt Anna einen Überblick über die verfügbaren Visualisierungen und 
 
 % Was heißt GDP? Wie wird das berechnet? Was soll die Spitze bei 1990? Woher kommt die? Diese eine Komponente scheint kaputt zu sein, wo kann ich mich beschweren?
 
-In der Tabelle findet sie auch eine Spalte \enquote{SNP}. Anna weiß zwar, dass sie die Abkürzung schon einmal gesehen hat, kennt aber im Moment ihre Bedeutung nicht. Praktischerweise ist der Spaltenkopf mit der Wikipedia verlinkt und sie wird sofort auf die entsprechende Seite weitergeleitet. Anna erinnert sich, dass \enquote{SNP} \enquote{Single-nucleotide polymorphism} bedeutet und sie bekommt auch gleich zusätzliche Informationen zu diesem Thema. Sie widmet sich weiter der Tabelle und stellt fest, dass die Ortsbezeichnung \enquote{Kopenhagen} nicht mit der Markierung in der Karte übereinstimmt. Außerdem ist sie erstaunt, wie hoch die Verbreitung eines bestimmten SNPs dort ist und würde gerne die Ursache dafür wissen. In der Hilfe zur Tabelle wurde sie auch über die Möglichkeit, Kommentare an den Daten vorzunehmen, aufgeklärt. Anna kommentiert sowohl die falschen Geokoordinaten als auch ihre Frage über die Verbreitung des SNPs, sodass sie später per Email über Antworten informiert wird. Nun kann Anna sich mit der vierten Visualisierung, dem Balkendiagramm, beschäftigen. Allerdings reagiert es auf keine Mausklicks und macht auch sonst nicht den Eindruck, die Daten akkurat darzustellen. Anna meldet die kaputte Visualisierung über die eingebaute Reporting-Funktion und schließt das Fenster, um sich den anderen drei Visualisierungskomponenten zuzuwenden.
 In der Tabelle findet sie auch eine Spalte \enquote{SNP}. Anna weiß zwar, dass sie die Abkürzung schon einmal gesehen hat, kennt aber im Moment ihre Bedeutung nicht. Praktischerweise ist der Spaltenkopf mit der Wikipedia verlinkt und sie wird sofort auf die entsprechende Seite weitergeleitet. Anna erinnert sich, dass \enquote{SNP} \enquote{Single-nucleotide polymorphism} bedeutet und sie bekommt auch gleich zusätzliche Informationen zu diesem Thema. Sie widmet sich weiter der Tabelle und stellt fest, dass die Ortsbezeichnung \enquote{Kopenhagen} nicht mit der Markierung in der Karte übereinstimmt. Außerdem ist sie erstaunt, wie hoch die Verbreitung eines bestimmten SNPs dort ist und würde gerne die Ursache dafür wissen. In der Hilfe zur Tabelle wurde sie auch über die Möglichkeit, Kommentare an den Daten vorzunehmen, aufgeklärt. Anna kommentiert sowohl die falschen Geokoordinaten als auch ihre Frage über die Verbreitung des SNPs, sodass sie später über Antworten informiert wird. Nun kann Anna sich mit der vierten Visualisierung, dem Balkendiagramm, beschäftigen. Allerdings reagiert es auf keine Mausklicks und macht auch sonst nicht den Eindruck, die Daten akkurat darzustellen. Anna meldet die kaputte Visualisierung über die eingebaute Reporting-Funktion und schließt das Fenster, um sich den anderen drei Visualisierungskomponenten zuzuwenden.
 
 % ###################################################
@@ -161,11 +160,16 @@ Blabla
 	\item\textbf{Überblick}: Das Hilfesystem soll einen kurzen Überblick über das InfoVis-System geben und Darstellungsform sowie Inhalt jeder Komponente kurz erläutern.
 	\item\textbf{Bedienung}: Das Hilfesystem soll erklären können, wie eine Komponente bedient wird. Diese Informationen umfassen beispielsweise welche Operationen welche Aktionen (eventuell auf welchen Daten) ausführen.
 	\item\textbf{Reporting}: Fehler in Komponenten sollen über ein Reporting-System gemeldet werden können.
-	\item\textbf{Verlinkung}: Das Hilfesystem soll nicht-triviale Begriffe mit der Wikipedia verlinken, sodass nicht nur auf die Begriffsbedeutung hingewiesen werden, sondern dem Benutzer auch zusätzliche Informationen zur Verfügung gestellt werden können.
 	\item\textbf{Verlinkung}: Das Hilfesystem soll nicht-triviale Begriffe mit einer Wissensbasis‚ verlinken, sodass nicht nur auf die Begriffsbedeutung hingewiesen werden, sondern dem Benutzer auch zusätzliche Informationen zur Verfügung gestellt werden können.
 	\item\textbf{Kommunikation}: Das Hilfesystem soll erklären können, wie gegebene Komponenten miteinander kommunizieren.
 	\item\textbf{Kommentare}: Der Benutzer soll die Möglichkeit haben Daten zu kommentieren und Bereiche der Visualisierung zu markieren und mit ebenfalls mit einem Kommentar zu versehen, sodass auch auf fehlende Daten hingewiesen werden kann.
 \end{itemize}
+
+% was muss also ins related work?
+% wie der wissensaufnahmeprozess funktioniert, weil ich ja erklärungen gebe, speziell planerklärung
+% was es so für infovis gibt, weil ich mit denen arbeite
+% was es so für hilfekonzepte gibt, weil es das ist was ich tue
+% social web, weil kommentare implementiert werden
 
 \subsection{Nichtfunktionale Anforderungen}
 \label{section:nichtfunktionale_anforderungen}
@@ -187,10 +191,27 @@ Bla bla
 \section{Grundlagen}
 \label{section:grundlagen}
 
+\subsection{CRUISe, EDYRA \& VizBoard}
+\label{section:vizboard}
+
+% grundlagen von cruise edyra vizboard. wichtig weil mein hilfesystem dort eingesetzt wird
+
+% architekturbild --> vizboard paper
+
+% komponentenbeschreibung 5.1.3
+
+% anwendungsmodell 5.2.2
+
+% laufzeitumgebung (tsr) 6.2, 7.2.2
+
+% dare --> vizboard paper, beleg
+
+% viso --> vizboard paper
+
 \subsection{Semantische Datensätze}
 \label{section:semantische_daten}
 
-% Grundlagen von RDF, RDFS, OWL. Kann ich mehr oder weniger aus dem Beleg abschreiben.
+% Grundlagen von RDF, RDFS, OWL. Wichtig weil später Kommentare wieder in einer Ontologie abgelegt werden müssen
 Eine Ontologie ist \enquote{an explicit specification of a conceptualization} \cite{Gruber1995} und wird benutzt um domänenspezifisches Wissen abzubilden \cite{Chandrasekaran1999}. Sie besteht aus mehreren Elementen:
 
 \begin{itemize}
@@ -210,13 +231,19 @@ Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortiu
 	\label{figure:grundlagen-semantic_spectrum}
 \end{figure}
 
-%TODO Noch auf OWL oder RDF/RDFS eingehen? Für diese Arbeit ist es ja eigentlich egal.
+Sprache mit wenigsten Features, aber sehr verbreitet: RDF, hier nur Tripel der Form (S, P, O).
 
+Klassen und andere Schemainformationen mit RDFS.
+
+OWL bringt dann Konzepte aus der Logik wie Axiome und Funktionen.
+
+Mächtigkeit: RDF < RDFS < OWL
 
 \subsection{Informationsvisualisierung}
 \label{section:informationsvisualisierung}
 
-% Grundlagen von InfoVis und Beispiele
+% InfoVis Grundlagen. Wichtig weil das die Komponenten sind, mit denen ich zu tun habe.
+
 Card et al. \cite{Card1999} definieren den Begriff \enquote{Informationsvisualisierung} wie folgt:
 
 \begin{quote}
@@ -230,6 +257,24 @@ Beispiele dafür sind Balkendiagramme, Treemaps \cite{Shneiderman1992} und Paral
    \includegraphics[width=0.5\textwidth]{images/grundlagen-parallel_coordinates.png} 
    \caption{Parallel Coordinates}
    \label{figure:parallel_coordinates}
+\end{figure}
+
+Informationsvisualisierungen können besonders bei der Exploration großer Datenmengen hilfreich sein \cite{Kohlhammer2011}. Die Wissensaneignung erfolgt dabei iterativ (Abbildung~\ref{figure:visual_analytics_process}). Zuerst werden Daten auf eine Visualisierung gemappt, deren Parameter vom Benutzer geändert werden können. Daraus lernt dieser etwas über die Daten und kann danach (\enquote{Feedback loop}) von vorne anfangen und eine andere Visualisierung wählen oder die Daten transformieren.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-visual_analytics_process.png} 
+   \caption{Visual Analytics Process nach \cite{Kohlhammer2011}}
+   \label{figure:visual_analytics_process}
+\end{figure}
+
+Van Wijk \cite{vanWijk2005} stellt ein ähnliches Modell für den Prozess der Wissensaufnahme über Visualisierungen vor (Abbildung~\ref{figure:visualization_model}). Am Anfang stehen die Daten $D$, welche anhand einer Visualisierungsspezifikation $S$ in eine Visualisierung $V$ transformiert werden. Diese wird vom Benutzer aufgenommen ($P$) und in Wissen ($K$) umgesetzt. Danach startet die Exploration der Daten $E$ indem die Spezifikation geändert und neues Wissen aufgenommen wird (entspricht der \enquote{Feedback loop} aus \cite{Kohlhammer2011}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-visualization_model.png} 
+   \caption{Generic Model on Visualization nach \cite{vanWijk2005}}
+   \label{figure:visualization_model}
 \end{figure}
 
 Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen gegeben. Dieser orientiert sich an Keim \cite{Keim2002}, welcher Informationsvisualisierungen nach dargestellten Daten, Visualisierungs- und Interaktionstechnik klassifizierte. Die Abbildungen stammen, sofern nicht anders angegeben, aus \cite{Heer2010}.
@@ -264,7 +309,7 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
    \label{figure:scatterplot_matrix}
 \end{figure}
 
-\textbf{Text} kann erst nach einer Vorverarbeitungsphase mit Zahlen beschrieben werden (z.\,B. Wörter zählen), ansonsten schlagen herkömmliche Visualisierungsansätze fehl. Ein im Web verbreitetes Beispiel ist die Tag Cloud (Abbildung~\ref{figure:tag_cloud}\footnote{\url{http://4.bp.blogspot.com/-WvicpJ9QqQs/TpbqvbKhX3I/AAAAAAAADGc/3PczLY2P0xs/s1600/uni_tag_cloud_wordle.png}}).
+\textbf{Text} kann erst nach einer Vorverarbeitungsphase mit Zahlen beschrieben werden (z.\,B. Wörter zählen), ansonsten schlagen herkömmliche Visualisierungsansätze fehl. Ein im Web verbreitetes Beispiel ist die Tag Cloud (Abbildung~\ref{figure:tag_cloud}\footnote{\url{http://4.bp.blogspot.com/-WvicpJ9QqQs/TpbqvbKhX3I/AAAAAAAADGc/3PczLY2P0xs/s1600/uni_tag_cloud_wordle.png}}). Je häufiger ein Begriff im Textkorpus vorkommt, desto größer wird er dargestellt.
 
 \begin{figure}[htbp]
    \centering
@@ -385,17 +430,109 @@ Durch \textbf{Verzerrung} kann ein Bereich der Visualisierung mit hohem Detailgr
    \label{figure:link_brush}
 \end{figure}
 
+todo: Was habe ich daraus jetzt gelernt?
+
 \subsection{User Assistance}
 \label{section:user_assistance}
 
-% wie funktioniert überhaupt sensemaking, also wissensaufnahme? soll ich darauf eingehen? ich bin kein psychologe!
+% was ist assistance?
 
-% End-User Hilfe in Desktop Software: Karl Klammer, F1, ?-Button, FAQ, First Steps, Tutorials, Manual
-% dazu finde ich nicht so viel. höchstens das paper über posts in foren von adobe und autodesk und DIN 8418: Hinweise zur Erstellung von Benutzerinformatione
+Der Begriff \enquote{User Assistance} steht für verschiedene Möglichkeiten, einem Benutzer zu helfen seine Ziele zu erreichen. Gapenne et al. \cite{Gapenne2002} definieren vier Beziehungstypen zwischen Mensch und Technologie, welche auch konkret auf Software übertragen werden können. Einer davon ist Assistance:
 
-% End-User Hilfe im Web: Intros, sonst eher gar nix. User wird geholfen durch ausprobieren und Semantic Transparency. Und Adaptivität, Personalisierung.
+\begin{quote}
+The assistance relationship appears as a sub-category of supplementation since it is not a crucial one for the actual and main activity. The function of this type of technology is to qualify and display the state and/or the becoming of the supplementation device which the subject is engaged in.
+\end{quote}
 
-% intelligente, automatische, what not user assistance, ein bisschen ausblick vielleicht
+Assistance sind also zum Beispiel eine Einparkhilfe im Auto oder eine Eieruhr in der Küche: Erfolgreiches Einparken oder Kochen ist auch ohne sie möglich, aber leichter mit ihnen. Supplementation hingegen erweitert die Fähigkeiten des Anwenders, also zum Beispiel eine Handprothese mit der die Pfanne angefasst werden kann.
+
+% wie kann man assistance klassifizieren?
+
+Rech et al. \cite{Rech2007} beschreiben intelligente Assistance in der Softwareentwicklung. Prinzipiell müssen zuerst Daten gesammelt werden, bevor die Assistance generiert und angeboten werden kann (Abbildung~\ref{figure:intelligent_assistance}). Folgende Punkte müssen in den einzelnen Schritten beachtet werden.
+
+\begin{itemize}
+
+	\item Daten sammeln
+	\begin{itemize}
+		\item Welche Datenquellen sollen benutzt werden?
+		\item Wann soll die Datenanalyse stattfinden?
+		\item Wie können Erkenntnisse aus den Daten gewonnen werden?
+	\end{itemize}
+	\item Assistance generieren
+	\begin{itemize}
+		\item Für wen ist die Assistance gedacht?
+		\item Was soll durch Assistance erweitert werden?
+		\item Für welchen Prozess/Vorgang ist die Assistance gedacht?
+		\item Was ist die Zielumgebung der Assistance?
+	\end{itemize}
+	\item Assistance anbieten
+	\begin{itemize}
+		\item Wann soll Asssistance angeboten werden?
+		\item Welche Modalität (visuell, akustisch usw.) soll die Assistance anbieten?
+		\item Wo soll die Information angezeigt werden?
+		\item Warum muss dem Benutzer geholfen werden?
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/grundlagen-intelligent_assistance.png}
+   \caption{Intelligente Assistance nach \cite{Rech2007}}
+   \label{figure:intelligent_assistance}
+\end{figure}
+
+Besonders die Modalität der Assistance erscheint von großer Bedeutung für eine schnelle und effektive Wissensaufnahme. Wie Information wahrgenommen wird hat Auswirkungen sowohl auf Verständnis (\enquote{Ein Bild sagt mehr als tausend Worte}) als auch auf die benötigte Zeit. Tausend Worte können auf der Suche nach relevanten Informationen immer noch überflogen werden, eine zehnminütige akustische Hilfestellung nicht.
+
+% effektivität von textuellen, akustischen, visuellen, gemischten erklärungen
+
+Da kein Medium (Film, Audio, Buch etc.) besser zum Lernen geeignet ist als ein anderes \cite{Clark1994, Kozma1994} und multimodale Erklärungen effektiver als monomodale sind \cite{Mayer2002}, stellt sich die Frage, wie Multimedia-Hilfe konstruiert werden soll. Dazu kann auf die kognitive Multimedia-Lerntheorie zurückgegriffen werden. Sie geht davon aus, dass Menschen Wissen grundsätzlich über zwei Kanäle (visuell und verbal) aufnehmen, entsprechende Repräsentationen bilden und mit vorhandenem Wissen verknüpfen (Abbildung~\ref{figure:kognitive_multimedia_lerntheorie}). Die beiden Aufnahmekanäle sind in ihrer Kapazität beschränkt. Müssen zu viele Informationen verarbeitet werden, kommt es zum \enquote{Cognitive Overload} und die Lernfähigkeit wird eingeschränkt. Daraus ergeben sich vier Richtlinien zur Kontruktion der Multimedia-Erklärungen:
+
+\begin{itemize}
+	\item \textbf{Gleichzeitigkeit}: Werden akustische und visuelle Mittel eingesetzt, so sollen sie gleichzeitig präsentiert werden \cite{Mayer1991}. So können Lernende ihre visuellen und verbalen Wissensrepräsentationen besser miteinander verknüpfen.
+	\item \textbf{Prägnanz}: Unterhaltsame aber irrelevante Details fördern die Erinnerungsfähigkeit an einen Text nicht \cite{Garner1989}. Deswegen sollen nur relevante Informationen vermittelt werden.
+	\item \textbf{Multimodalität}: Informationen sollten möglichst auf visuelle und verbale Art vermittelt werden, um zu verhindern, dass ein Aufnahmekanal überlastet wird (bspw. durch die Darstellung einer Animation mit On-Screen-Text) \cite{Moreno1999}.
+	\item \textbf{Keine Redundanz}: Aus dem selben Grund warum zweikanälige Erklärungen vorzuziehen sind, sollte auch Redundanz in einem Aufnahmekanel vermieden werden.
+\end{itemize}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/grundlagen-kognitive_multimedia_lerntheorie.png}
+   \caption{Kognitive Multimedia-Lerntheorie nach \cite{Mayer2002}}
+   \label{figure:kognitive_multimedia_lerntheorie}
+\end{figure}
+
+% user assistance möglichkeiten für jede modalität
+
+Wie kann User Assistance im visuellen bzw. verbalen Aufnahmekanal aussehen? Verbale Erklärungen können zur Laufzeit generiert werden \cite{Bauer2011, Gesell2012, Matheson2012}, sind jedoch tendenziell zu langatmig formuliert und enthalten viele Wiederholungen. Auf Grund der vorhin erwähnten Designprinzipien \enquote{Prägnanz} und \enquote{Keine Redundanz} sollte davon wahrscheinlich abgesehen und verbale Erklärungen handgeschrieben oder sehr kurz gehalten werden.
+
+Die naheliegendste Möglichkeit für visuelle User Assistance sind Bilder. Illustrationen/Schemata sind in der Tat hilfreich, solange sowohl die Bestandteile des Systems (z.\,B. eine Luftpumpe) als auch die einzelnen Schritte des Prozesses (z.\,B. pumpen) dargestellt werden \cite{Mayer1990}. Auch Comics sind gut geeignet Sachverhalte zu erklären (siehe z.\,B. \cite{McCloud1994, McCloud2008}) und eine ansprechende Variante für User Assistance \cite{Webb2012}.
+
+Animationen können ebenfalls ein geeigneter Weg sein um Wissen zu vermitteln, sofern die erwähnten Designprinzipien eingehalten werden \cite{Mayer2002a}. Allerdings ist es möglich, dass Benutzer mit wenig Vorwissen weniger davon profitieren also solche mit viel Vorwissen \cite{Kayuga2008}. Wenn Animationen eingesetzt werden, sollte den Benutzern Kontrolle über die Geschwindigkeit der Animation gegeben und wichtige Teile gekennzeichnet werden \cite{Wong2011}.
+
+Filme? Hier gibt es eine Doktorarbeit, aber die finde ich online nicht \url{http://search.proquest.com/docview/1286857518}. Ansonsten scheint sich damit niemand so richtig zu beschäftigen. Vielleicht kann ich Semantic Transparency hier anbringen.
+
+\subsubsection{Sensemaking}
+\label{section:sensemaking}
+
+% was ist der unterschied zwischen learning und sensemaking?
+
+% wie funktioniert der prozess der wissensaneignung?
+
+\cite{Russell1993}: Learnining Loop. Im Prinzip ist es dasselbe wie Klein2006 oder der Visual Analytics Process.
+
+\cite{Klein2006a}: Im Prinzip hat man ein mentales Modell, wo versucht wird, die Daten reinzupassen. Gegebenenfalls werden entweder die Daten oder das mentale Modell in Frage gestellt. Das ist ein iterativer Prozess, der nicht wirklich einen Anfang oder ein Ende hat.
+
+\cite{Klein2006}: Was nicht zwingend hilft beim Sensemaking: Zuviel Datenvorverarbeitung, zuviel präsentierte Daten, Hypothesen die nicht überprüfbar sind.
+
+\cite{Fisher2012, Qu2005, Novak2007, Umapathy2010} betonen die Wichtigkeit von der Struktur der Wissensrepräsentation. Wissensexternalisierung ist aber wichtig und hilft beim Verständnis. Aber eben Struktur > Inhalt.
+
+\cite{Grammel2012}: Matching the user's mental model ist wichtig. (seite 127!)
+
+\cite{Kohlhase2009} muss auch irgendwie rein. Wichtige Eigenschaft von UI.
+
+\section{Zusammenfassung}
+\label{section:grundlagen_zusammenfassung}
+
+yay
 
 % ###################################################
 \chapter{Konzeption}
