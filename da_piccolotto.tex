@@ -191,22 +191,123 @@ Bla bla
 \section{Grundlagen}
 \label{section:grundlagen}
 
+Hurrrrr derp herp
+
 \subsection{CRUISe, EDYRA \& VizBoard}
 \label{section:vizboard}
 
 % grundlagen von cruise edyra vizboard. wichtig weil mein hilfesystem dort eingesetzt wird
+CRUISe \cite{Pietschmann2009, Pietschmann2012} ist ein Framework zur Konstruktion von sogenannten Mashup User Interfaces. Diese bestehen aus mehreren voneinander unabhängigen, wiederverwendbaren User Interface Services (z.\,B. eine Karte, eine Tabelle und ein Kalender) welche zur Laufzeit hinzugefügt, konfiguriert und ausgetauscht werden können. Abbildung~\ref{figure:cruise_architektur} zeigt die Architektur von CRUISe. Zuerst werden Komponenten von Entwicklern erstellt und modelliert (1). Danach interpretiert CRUIse das Kompositionsmodell (2), matcht (3) es gegen die Kontextanforderungen, bildet ein Ranking (4) und integriert schließlich die am besten geeignete Komponente ins User Interface (5).
 
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/grundlagen-cruise_architektur.png}
+	\caption{CRUISe Architektur aus \cite{Pietschmann2012}}
+	\label{figure:cruise_architektur}
+\end{figure}
+
+VizBoard \cite{Voigt2012} benutzt das CRUISe Framework um Endnutzern die Möglichkeit zu geben, semantische Datensätze mit Hilfe verschiedener InfoVis verstehen zu können. Abbildung~\ref{figure:vizboard_architektur} zeigt die Architektur von VizBoard. Die Daten werden zuerst aus verschiedenen Quellen in eine semantische Repräsentation konvertiert und im Data Repository (DaRe, 1) gespeichert. Das Component Repository (Core, 3) verwaltet die verschiedenen Visualisierungskomponenten (2) und ist für Matching und Ranking von Komponenten zuständig, bevor sie in der Runtime (4) integriert werden. Sowohl das DaRe als auch das CoRe greifen auf die Visualization Ontology (VISO, 5) zurück, die Wissen über verschiedene Aspekte von Visualisierungen, wie z.\,B. Struktur der visualisierten Daten, Mapping der Daten auf visuelle Attribute oder Interaktionsmöglichkeiten, enthält \cite{Voigt2011}.
 % architekturbild --> vizboard paper
 
-% komponentenbeschreibung 5.1.3
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/grundlagen-vizboard_architektur.png}
+	\caption{VizBoard Architektur aus \cite{Voigt2012}}
+	\label{figure:vizboard_architektur}
+\end{figure}
 
-% anwendungsmodell 5.2.2
-
-% laufzeitumgebung (tsr) 6.2, 7.2.2
+\subsubsection{Data Repository}
+\label{section:data_repository}
 
 % dare --> vizboard paper, beleg
+Im Data Repository (DaRe) werden Daten aus verschiedenen Quellen in einer semantischen Repräsentation gespeichert. Dabei durchläuft das DaRe verschiedene Phasen (Abbildung~\ref{figure:dare_phasen}). Zuerst wird der Datensatz \emph{analysiert} und Metainformationen gesammelt, beispielsweise werden Subklassen gezählt und wichtige Konzepte identifiziert. Diese werden an den Datensatz \emph{annotiert}. Zur Laufzeit müssen diese Erkenntnisse wieder aus dem Datensatz \emph{extrahiert} werden. Das DaRe stellt eine REST API zur Verfügung, über die ein Datensatz abgerufen werden kann.
 
-% viso --> vizboard paper
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/grundlagen-dare_phasen.png}
+	\caption{Die Phasen des Data Repository aus \cite{Piccolotto2012}}
+	\label{figure:dare_phasen}
+\end{figure}
+
+\subsubsection{Komponentenbeschreibung}
+\label{section:komponentenbeschreibung}
+
+% komponentenbeschreibung 5.1.3
+Komponenten in CRUISe werden generisch und einheitlich durch Properties, Events und Operationen sowie Metainformationen beschrieben. Properties geben Auskunft über den Zustand einer Komponente, also beispielsweise Breite und Höhe oder die Sortierreihenfolge der Elemente. Events weisen andere Komponenten auf interne Zustandsänderungen hin, zum Beispiel wenn sich die Sortierreihenfolge geändert hat. Operationen sind Methoden einer Komponente, die durch Events ausgelöst werden, z.\,B. \texttt{reassignNumbers(order)} um die Nummerierung der Pins in einer Karte anzupassen. Zu den Metainformationen gehören u.\,a. der Name einer Komponente oder der Preis.
+
+\subsubsection{Kommunikationsmodell}
+\label{section:kommunikationsmodell}
+
+% kommunikationsmodell 5.2.2
+Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. eine Komponente veröffentlicht ein Event, dessen Nachricht mit Hilfe des Publish/Subscribe Paradigma an alle Subscriber in diesem Kanal (Link) übertragen wird. Subscriber reagieren auf das Event indem sie bestimmte Operationen ausführen. Die Übertragung der Nachrichten wird durch sogenannte Links umgesetzt, welche $n$ Events mit $m$ Operationen verbinden. Spezielle Links sind Backlinks, die eine Zweiwegekommunikation zwischen Komponenten ermöglichen und PropertyLinks, die Properties synchron halten.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/grundlagen-cruise_links.png}
+	\caption{CRUISe Links aus \cite{Pietschmann2012}}
+	\label{figure:cruise_links}
+\end{figure}
+
+\subsubsection{Laufzeitumgebung}
+\label{section:laufzeitumgebung}
+
+Die Laufzeitumgebung (Mashup Runtime Environment, MRE) ist für die Ausführung und Verwaltung der kompositen Anwendung verantwortlich und besteht aus mehreren Modulen (Abbildung~\ref{figure:cruise_mre}).
+
+% laufzeitumgebung (tsr) 6.2, 7.2.2
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/grundlagen-cruise_mre.png}
+	\caption{Mashup Runtime Environment Architektur aus \cite{Pietschmann2012}}
+	\label{figure:cruise_mre}
+\end{figure}
+
+Der \textbf{Application Manager} initialisiert alle anderen Module und ist für die globale Fehlerbehandlung zuständig. Für den Lebenszyklus der einzelnen Komponenten ist der \textbf{Component Manager} zuständig. Die Integration übernimmt allerdings der \textbf{Integration Manager}. Im Mashup Modell definierte Sichten und Übergänge zwischen ihnen werden vom \textbf{Screenflow Manager} interpretiert. Gerendert werden die Komponenten aber vom \textbf{Layout Manager}. Nachrichten zwischen Komponenten der Anwendung und Modulen der MRE werden durch den \textbf{Event Broker} übermittelt. Sind die Parameter von Event und Operation syntaktisch nicht äquivalent, aber semantisch aufeinander abbildbar (z.\,B. zwei gleiche Konzepte aus verschiedenen Namespaces wie dbpedia:city und geonames:city), übernimmt dies der \textbf{Mediator}. Die dynamische Anpassung der Anwendung (z.\,B. von Komponenten, Layout und Kommunikationsmodell) wird gegebenenfalls durch den \textbf{Adaptation Manager} durchgeführt. Letztlich erlaubt das \textbf{Service Access} Modul Zugriff auf Web-Dienste und Ressourcen im Backend.
+
+\subsubsection{VISO}
+\label{section:viso}
+
+% viso
+In der Visualization Ontology (VISO) ist Visualisierungswissen gespeichert. Dazu gehören unter anderem folgende Konzepte und deren Verbindungen untereinander:
+
+\begin{itemize}
+	\item Visualisierte Daten (\texttt{viso:data})
+	\begin{itemize}
+		\item Scale of Measurement (nominal, ordinal, quantitativ, unstrukturiert)
+		\item Struktur der Daten (tabellarisch, Tripel, verlinkt)
+		\item Art der Variable (abhängig, unabhängig, Dimension etc.)
+		\item Domäne
+	\end{itemize}
+	\item Aktivitäten (\texttt{viso:activity})
+	\begin{itemize}
+		\item Nutzeraktivitäten (Operationen, Aktionen, Aufgaben)
+		\item Visualisierungspipeline (Editieren, Visual Mapping, Datentransformation etc.)
+	\end{itemize}
+	\item Visualisierungen (\texttt{viso:graphic})
+	\begin{itemize}
+		\item Visuelle Attribute (Größe, Farbe, Textur etc.)
+		\item Koordinaten (kartesisch, Zylinder, Kugel etc.)
+		\item Charts (Karten, Chart mit zwei Achsen, animierte InfoVis etc.)
+		\item Beziehungen zwischen Objekten (Clustering, Labeling, verlinkt etc.)
+	\end{itemize}
+	\item System (\texttt{viso:system})
+	\begin{itemize}
+		\item Hardware
+		\item Software
+		\item Bildschirmauflösung
+		\item Rundes, eckiges oder unstrukturiertes Display
+	\end{itemize}
+\end{itemize}
+
+Dieses Wissen wird in VizBoard auf verschiedene Art und Weise genutzt (Abbildung~\ref{figure:viso}). Mit Hilfe der VISO kann Wissen von Visualisierungsexperten formalisiert und im Rankingalgorithmus berücksichtigt werden (2). Gleichermaßen wird sie zur Annotation der Daten im Data Repository (Abschnitt~\ref{section:data_repository}) benutzt (3). Visualisierungskomponenten (4) und Nutzer- bzw. Systemkontext (5) werden durch VISO-Konzepte beschrieben.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/grundlagen-viso.png}
+	\caption{Nutzung der VISO in VizBoard}
+	\label{figure:viso}
+\end{figure}
+
+Die VISO kann dabei helfen, zur Laufzeit die Domäne dargestellter Daten zu identifizieren oder notwendiges Wissen zur User Assistance (Abschnitt~\ref{section:user_assistance}) zur Komponentenbeschreibung hinzuzufügen.
 
 \subsection{Semantische Datensätze}
 \label{section:semantische_daten}
@@ -222,13 +323,13 @@ Eine Ontologie ist \enquote{an explicit specification of a conceptualization} \c
 	\item Außerdem existieren noch Axiome, Regeln, Funktionen und Einschränkungen, welche die Logik einer Ontologie beschreiben.
 \end{itemize}
 
-Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortium (W3C) verschiedene Beschreibungssprachen eingeführt. Die bekanntesten sind Resource Description Framework Schema (RDFS) und Web Ontology Language (OWL). Mit diesen Sprachen lässt sich unterschiedlich viel Semantik u.\,a. in Form von Ontologien, Thesauren oder Vokabularen ausdrücken; die Komplexität der Dokumente und damit der Aufwand, sie zu erstellen, verhalten sich aber direkt proportional (siehe Abbildung~\ref{figure:grundlagen-semantic_spectrum}) \cite{Bergman2007}.
+Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortium (W3C) verschiedene Beschreibungssprachen eingeführt. Die bekanntesten sind Resource Description Framework Schema (RDFS) und Web Ontology Language (OWL). Mit diesen Sprachen lässt sich unterschiedlich viel Semantik u.\,a. in Form von Ontologien, Thesauren oder Vokabularen ausdrücken; die Komplexität der Dokumente und damit der Aufwand, sie zu erstellen, verhalten sich aber direkt proportional (siehe Abbildung~\ref{figure:semantic_spectrum}) \cite{Bergman2007}.
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.75\textwidth]{images/grundlagen-semantic_spectrum.png}
 	\caption{Semantic Spectrum}
-	\label{figure:grundlagen-semantic_spectrum}
+	\label{figure:semantic_spectrum}
 \end{figure}
 
 Sprache mit wenigsten Features, aber sehr verbreitet: RDF, hier nur Tripel der Form (S, P, O).
