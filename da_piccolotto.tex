@@ -506,28 +506,33 @@ Wie kann User Assistance im visuellen bzw. verbalen Aufnahmekanal aussehen? Verb
 
 Die naheliegendste Möglichkeit für visuelle User Assistance sind Bilder. Illustrationen/Schemata sind in der Tat hilfreich, solange sowohl die Bestandteile des Systems (z.\,B. eine Luftpumpe) als auch die einzelnen Schritte des Prozesses (z.\,B. pumpen) dargestellt werden \cite{Mayer1990}. Auch Comics sind gut geeignet Sachverhalte zu erklären (siehe z.\,B. \cite{McCloud1994, McCloud2008}) und eine ansprechende Variante für User Assistance \cite{Webb2012}.
 
-Animationen können ebenfalls ein geeigneter Weg sein um Wissen zu vermitteln, sofern die erwähnten Designprinzipien eingehalten werden \cite{Mayer2002a}. Allerdings ist es möglich, dass Benutzer mit wenig Vorwissen weniger davon profitieren also solche mit viel Vorwissen \cite{Kayuga2008}. Wenn Animationen eingesetzt werden, sollte den Benutzern Kontrolle über die Geschwindigkeit der Animation gegeben und wichtige Teile gekennzeichnet werden \cite{Wong2011}.
+Animationen im Sinne von kurzen Videos mit abstrahiertem Inhalt können ebenfalls ein geeigneter Weg sein um Wissen zu vermitteln, sofern die erwähnten Designprinzipien eingehalten werden \cite{Mayer2002a}. Allerdings ist es möglich, dass Benutzer mit wenig Vorwissen weniger davon profitieren also solche mit viel Vorwissen \cite{Kalyuga2008}. Wenn Animationen eingesetzt werden, sollte den Benutzern Kontrolle über die Geschwindigkeit der Animation gegeben und wichtige Teile gekennzeichnet werden \cite{Wong2011}. Bei Web User Interfaces besteht die Möglichkeit konkrete Elemente der InfoVis für die Animation heranzuziehen. Das würde dem Prinzip der \enquote{Semantic Transparency} \cite{Kohlhase2009} entsprechen, wonach Benutzer möglichst direkt auf den für ihre Ziele relevanten UI-Elementen arbeiten sollen.
 
-Filme? Hier gibt es eine Doktorarbeit, aber die finde ich online nicht \url{http://search.proquest.com/docview/1286857518}. Ansonsten scheint sich damit niemand so richtig zu beschäftigen. Vielleicht kann ich Semantic Transparency hier anbringen.
+Filme? Hier gibt es eine Doktorarbeit, aber die finde ich online nicht \url{http://search.proquest.com/docview/1286857518}. Ansonsten scheint sich damit niemand so richtig zu beschäftigen und eigentlich ist es mir auch wurscht weil Tutorialvideos einen immer so aus dem Arbeitskontext reissen.
+
 
 \subsubsection{Sensemaking}
 \label{section:sensemaking}
 
 % was ist der unterschied zwischen learning und sensemaking?
+Im vorhergehenden Abschnitt wurde der Prozess der Wissensvermittlung betrachtet. Um Wissen dauerhaft aufzunehmen, müssen Lernende den Inhalt \emph{verstehen}. Der Begriff \enquote{Understanding} (gleichbedeutend mit Sensemaking) wird angewandt, wenn das Gehirn mehr Elemente des Inhalts (z.\,B. Variablen einer Gleichung) verarbeiten muss als ins Arbeitsgedächtnis passen \cite{Sweller1998}. \emph{Verstanden} hat der Lernende dann, wenn diese Elemente zu einem sogenannten Schema (mentales Modell) verarbeitet wurden und als ein einziges Element im Arbeitsgedächtnis gehalten werden können (z\,B. eine komplexe Zahl statt drei Variablen $a$, $b$ und $i$).
 
 % wie funktioniert der prozess der wissensaneignung?
 
-\cite{Russell1993}: Learnining Loop. Im Prinzip ist es dasselbe wie Klein2006 oder der Visual Analytics Process.
+Klein \cite{Klein2006a} beschreibt in seinem Data/Frame Modell (Abbildung~\ref{figure:data_frame_model}), wie dieser Prozess funktioniert. \enquote{Data} beschreibt dabei die Elemente des Inhalts und \enquote{Frame} das mentale Modell oder Schema. Ähnlich dem Visual Analytics Process (Abschnitt~\ref{section:informationsvisualisierung}) ist Sensemaking ein iterativer Prozess, aber ohne wirklichen Anfang oder Ende. Der Lernende startet mit Daten oder einem Frame, konstruiert ein Frame dazu oder versucht die Daten einzupassen und nimmt Anpassungen vor bzw. verwirft ein Frame, wenn die Daten es nicht stützen. Dabei sollte der Lernende möglichst selbstständig einer Lösung kommen, nicht zu viele Daten gleichzeitig sehen und während des Prozesses keine Hypothesen aufstellen müssen, die nicht überprüft werden können \cite{Klein2006}.
 
-\cite{Klein2006a}: Im Prinzip hat man ein mentales Modell, wo versucht wird, die Daten reinzupassen. Gegebenenfalls werden entweder die Daten oder das mentale Modell in Frage gestellt. Das ist ein iterativer Prozess, der nicht wirklich einen Anfang oder ein Ende hat.
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/grundlagen-data_frame_model.png}
+   \caption{Data/Frame Modell nach \cite{Klein2006}}
+   \label{figure:data_frame_model}
+\end{figure}
 
-\cite{Klein2006}: Was nicht zwingend hilft beim Sensemaking: Zuviel Datenvorverarbeitung, zuviel präsentierte Daten, Hypothesen die nicht überprüfbar sind.
+% was ist dabei zu beachten?
 
-\cite{Fisher2012, Qu2005, Novak2007, Umapathy2010} betonen die Wichtigkeit von der Struktur der Wissensrepräsentation. Wissensexternalisierung ist aber wichtig und hilft beim Verständnis. Aber eben Struktur > Inhalt.
+Während des Verständnisprozesses ist es außerdem hilfreich, Wissen in irgendeiner Form externalisieren zu können, beispielsweise mit Hilfe einer Mind Map \cite{Qu2005, Novak2007, Umapathy2010}. Andere Menschen können dadurch auf bereits durchgeführte Verständnisprozesse anderer aufbauen, wobei die Struktur aber wichtiger ist als der tatsächliche Inhalt \cite{Fisher2012}.
 
-\cite{Grammel2012}: Matching the user's mental model ist wichtig. (seite 127!)
-
-\cite{Kohlhase2009} muss auch irgendwie rein. Wichtige Eigenschaft von UI.
+Nachdem betrachtet wurde, wie Verständnis funktioniert, stellt sich die Frage, \emph{was} vermittelt werden soll um Menschen mit wenig InfoVis-Erfahrung zu helfen. Dazu gehört laut Grammel \cite[S. 127]{Grammel2012} unter anderem das mentale Modell des Benutzers zu verwenden, beispielsweise indem dieselben Bezeichnungen verwendet werden, und zu lehren, wie Visualisierungen verwendet und interpretiert werden.
 
 \section{Zusammenfassung}
 \label{section:grundlagen_zusammenfassung}
