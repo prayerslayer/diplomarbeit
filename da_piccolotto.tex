@@ -77,13 +77,13 @@
 
 % ###################################################
 \section{Motivation}
-\label{section:motivation}
+\label{section:einleitung_motivation}
 
 % Hier wird generell eingeleitet, also vermutlich die Problematik zwischen semantischen Datensätzen und Endusern
 
 % ###################################################
 \section{Problemstellung und Zielsetzung}
-\label{section:problemstellung}
+\label{section:einleitung_problemstellung}
 
 % Hier wird quasi der Vizboard Workflow umrissen
 % und erklärt, wo das eigentliche Problem liegt, nämlich im Information Overload beim letzten Schritt
@@ -97,7 +97,7 @@
 
 % ###################################################
 \section{Aufbau der Arbeit}
-\label{section:aufbau}
+\label{section:einleitung_aufbau}
 
 % Aufbau der Arbeit erklären, kommt zum Schluss
 
@@ -105,11 +105,11 @@
 \chapter{Stand der Forschung und Technik}
 \label{chapter:standderforschung}
 
-Der folgende Abschnitt besteht aus drei Teilen. Zuerst wird die Aufgabenstellung in einem Szenario verdeutlicht (Abschnitt~\ref{section:szenario}). Daraus werden Anforderungen an das Hilfesystem abgeleitet (Abschnitt~\ref{section:anforderungsanalyse}) und danach die Grundlagen von semantischen Daten, Informationsvisualisierungen und Software Support erläutert (Abschnitt~\ref{section:grundlagen}).
+Der folgende Abschnitt besteht aus drei Teilen. Zuerst wird die Aufgabenstellung in einem Szenario verdeutlicht (Abschnitt~\ref{section:standderforschung_szenario}). Daraus werden Anforderungen an das Hilfesystem abgeleitet (Abschnitt~\ref{section:standderforschung_anforderungsanalyse}) und danach die Grundlagen von semantischen Daten, Informationsvisualisierungen und Software Support erläutert (Abschnitt~\ref{section:standderforschung_grundlagen}).
 
 % ###################################################
 \section{Szenario}
-\label{section:szenario}
+\label{section:standderforschung_szenario}
 
 % kurze einleitung noch mal
 
@@ -147,12 +147,12 @@ In der Tabelle findet sie auch eine Spalte \enquote{SNP}. Anna weiß zwar, dass 
 
 % ###################################################
 \section{Anforderungsanalyse}
-\label{section:anforderungsanalyse}
+\label{section:standderforschung_anforderungsanalyse}
 
-Aus dem Szenario (Kapitel~\ref{section:szenario}) lassen sich nun verschiedene Anforderungen an ein Hilfesystem für komposite Informationsvisualisierungssysteme ableiten.
+Aus dem Szenario (Kapitel~\ref{section:standderforschung_szenario}) lassen sich nun verschiedene Anforderungen an ein Hilfesystem für komposite Informationsvisualisierungssysteme ableiten.
 
 \subsection{Funktionale Anforderungen}
-\label{section:funktionale_anforderungen}
+\label{section:standderforschung_funktionale_anforderungen}
 
 Blabla
 
@@ -172,7 +172,7 @@ Blabla
 % social web, weil kommentare implementiert werden
 
 \subsection{Nichtfunktionale Anforderungen}
-\label{section:nichtfunktionale_anforderungen}
+\label{section:standderforschung_nichtfunktionale_anforderungen}
 
 Bla bla
 
@@ -189,12 +189,12 @@ Bla bla
 
 % ###################################################
 \section{Grundlagen}
-\label{section:grundlagen}
+\label{section:standderforschung_grundlagen}
 
 Hurrrrr derp herp
 
 \subsection{CRUISe, EDYRA \& VizBoard}
-\label{section:vizboard}
+\label{section:standderforschung_vizboard}
 
 % grundlagen von cruise edyra vizboard. wichtig weil mein hilfesystem dort eingesetzt wird
 CRUISe \cite{Pietschmann2009, Pietschmann2012} ist ein Framework zur Konstruktion von sogenannten Mashup User Interfaces. Diese bestehen aus mehreren voneinander unabhängigen, wiederverwendbaren User Interface Services (z.\,B. eine Karte, eine Tabelle und ein Kalender) welche zur Laufzeit hinzugefügt, konfiguriert und ausgetauscht werden können. Abbildung~\ref{figure:cruise_architektur} zeigt die Architektur von CRUISe. Zuerst werden Komponenten von Entwicklern erstellt und modelliert (1). Danach interpretiert CRUIse das Kompositionsmodell (2), matcht es gegen die Kontextanforderungen (3), bildet ein Ranking (4) und integriert schließlich die am besten geeignete Komponente ins User Interface (5).
@@ -219,7 +219,7 @@ VizBoard \cite{Voigt2012} benutzt das CRUISe Framework um Endnutzern die Möglic
 \end{figure}
 
 \subsubsection{Data Repository}
-\label{section:data_repository}
+\label{section:standderforschung_data_repository}
 
 % dare --> vizboard paper, beleg
 Im Data Repository (DaRe) werden Daten aus verschiedenen Quellen in einer semantischen Repräsentation gespeichert. Dabei durchläuft das DaRe verschiedene Phasen (Abbildung~\ref{figure:dare_phasen}). Zuerst wird der Datensatz \emph{analysiert} und Metainformationen gesammelt, beispielsweise werden Subklassen gezählt und wichtige Konzepte identifiziert. Diese werden an den Datensatz \emph{annotiert}. Zur Laufzeit müssen diese Erkenntnisse wieder aus dem Datensatz \emph{extrahiert} werden. Das DaRe stellt eine REST API zur Verfügung, über die ein Datensatz abgerufen werden kann.
@@ -232,13 +232,13 @@ Im Data Repository (DaRe) werden Daten aus verschiedenen Quellen in einer semant
 \end{figure}
 
 \subsubsection{Komponentenbeschreibung}
-\label{section:komponentenbeschreibung}
+\label{section:standderforschung_komponentenbeschreibung}
 
 % komponentenbeschreibung 5.1.3
 Komponenten in CRUISe werden generisch und einheitlich durch Properties, Events und Operationen sowie Metainformationen beschrieben. Properties geben Auskunft über den Zustand einer Komponente, also beispielsweise Breite und Höhe oder die Sortierreihenfolge der Elemente. Events weisen andere Komponenten auf interne Zustandsänderungen hin, zum Beispiel wenn sich die Sortierreihenfolge geändert hat. Operationen sind Methoden einer Komponente, die durch Events ausgelöst werden, z.\,B. \texttt{reassignNumbers(order)} um die Nummerierung der Pins in einer Karte anzupassen. Zu den Metainformationen gehören u.\,a. der Name einer Komponente oder der Preis.
 
 \subsubsection{Kommunikationsmodell}
-\label{section:kommunikationsmodell}
+\label{section:standderforschung_kommunikationsmodell}
 
 % kommunikationsmodell 5.2.2
 Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. eine Komponente veröffentlicht ein Event, dessen Nachricht mit Hilfe des Publish/Subscribe Paradigma an alle Subscriber in diesem Kanal (Link) übertragen wird. Subscriber reagieren auf das Event indem sie bestimmte Operationen ausführen. Die Übertragung der Nachrichten wird durch sogenannte Links umgesetzt, welche $n$ Events mit $m$ Operationen verbinden. Spezielle Links sind Backlinks, die eine Zweiwegekommunikation zwischen Komponenten ermöglichen und PropertyLinks, die Properties synchron halten. Ein Überblick über die verschiedenen Links ist in Abbildung~\ref{figure:cruise_links} zu sehen.
@@ -251,7 +251,7 @@ Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. ei
 \end{figure}
 
 \subsubsection{Laufzeitumgebung}
-\label{section:laufzeitumgebung}
+\label{section:standderforschung_laufzeitumgebung}
 
 Die Laufzeitumgebung (Mashup Runtime Environment, MRE) ist für die Ausführung und Verwaltung der kompositen Anwendung verantwortlich und besteht aus mehreren Modulen (Abbildung~\ref{figure:cruise_mre}).
 
@@ -266,10 +266,10 @@ Die Laufzeitumgebung (Mashup Runtime Environment, MRE) ist für die Ausführung 
 Der \textbf{Application Manager} initialisiert alle anderen Module und ist für die globale Fehlerbehandlung zuständig. Für den Lebenszyklus der einzelnen Komponenten ist der \textbf{Component Manager} zuständig. Die Integration übernimmt allerdings der \textbf{Integration Manager}. Im Mashup Modell definierte Sichten und Übergänge zwischen ihnen werden vom \textbf{Screenflow Manager} interpretiert. Gerendert werden die Komponenten aber vom \textbf{Layout Manager}. Nachrichten zwischen Komponenten der Anwendung und Modulen der MRE werden durch den \textbf{Event Broker} übermittelt. Sind die Parameter von Event und Operation syntaktisch nicht äquivalent, aber semantisch aufeinander abbildbar (z.\,B. zwei gleiche Konzepte aus verschiedenen Namespaces wie \texttt{dbpedia:city} und \texttt{geonames:city}), übernimmt dies der \textbf{Mediator}. Die dynamische Anpassung der Anwendung (z.\,B. von Komponenten, Layout und Kommunikationsmodell) wird gegebenenfalls durch den \textbf{Adaptation Manager} durchgeführt. Letztlich erlaubt das \textbf{Service Access} Modul Zugriff auf Web-Dienste und Ressourcen im Backend.
 
 \subsubsection{VISO}
-\label{section:viso}
+\label{section:standderforschung_viso}
 
 % viso
-In der Visualization Ontology (VISO) ist Visualisierungswissen gespeichert. Sie kann dabei helfen, zur Laufzeit die Domäne dargestellter Daten zu identifizieren oder notwendiges Wissen zur User Assistance (Abschnitt~\ref{section:user_assistance}) zur Komponentenbeschreibung hinzuzufügen. Unter anderem enthält sie folgende Konzepte und deren Verbindungen untereinander:
+In der Visualization Ontology (VISO) ist Visualisierungswissen gespeichert. Sie kann dabei helfen, zur Laufzeit die Domäne dargestellter Daten zu identifizieren oder notwendiges Wissen zur User Assistance (Abschnitt~\ref{section:standderforschung_user_assistance}) zur Komponentenbeschreibung hinzuzufügen. Unter anderem enthält sie folgende Konzepte und deren Verbindungen untereinander:
 
 \begin{itemize}
 	\item Visualisierte Daten (\texttt{viso:data})
@@ -300,7 +300,7 @@ In der Visualization Ontology (VISO) ist Visualisierungswissen gespeichert. Sie 
 	\end{itemize}
 \end{itemize}
 
-Dieses Wissen wird in VizBoard auf verschiedene Art und Weise genutzt (Abbildung~\ref{figure:viso}). Mit Hilfe der VISO kann Wissen von Visualisierungsexperten formalisiert und im Rankingalgorithmus berücksichtigt werden (2). Gleichermaßen wird sie zur Annotation der Daten im Data Repository (Abschnitt~\ref{section:data_repository}) benutzt (3). Visualisierungskomponenten (4) und Nutzer- bzw. Systemkontext (5) werden durch VISO-Konzepte beschrieben.
+Dieses Wissen wird in VizBoard auf verschiedene Art und Weise genutzt (Abbildung~\ref{figure:viso}). Mit Hilfe der VISO kann Wissen von Visualisierungsexperten formalisiert und im Rankingalgorithmus berücksichtigt werden (2). Gleichermaßen wird sie zur Annotation der Daten im Data Repository (Abschnitt~\ref{section:standderforschung_data_repository}) benutzt (3). Visualisierungskomponenten (4) und Nutzer- bzw. Systemkontext (5) werden durch VISO-Konzepte beschrieben.
 
 \begin{figure}[htbp]
 	\centering
@@ -310,7 +310,7 @@ Dieses Wissen wird in VizBoard auf verschiedene Art und Weise genutzt (Abbildung
 \end{figure}
 
 \subsection{Semantische Datensätze}
-\label{section:semantische_daten}
+\label{section:standderforschung_semantische_daten}
 
 % Grundlagen von RDF, RDFS, OWL. Wichtig weil später Kommentare wieder in einer Ontologie abgelegt werden müssen
 Eine Ontologie ist \enquote{an explicit specification of a conceptualization} \cite{Gruber1995} und wird benutzt um domänenspezifisches Wissen abzubilden \cite{Chandrasekaran1999}. Sie besteht aus mehreren Elementen:
@@ -341,7 +341,7 @@ OWL bringt dann Konzepte aus der Logik wie Axiome und Funktionen.
 Mächtigkeit: RDF < RDFS < OWL
 
 \subsection{Informationsvisualisierung}
-\label{section:informationsvisualisierung}
+\label{section:standderforschung_informationsvisualisierung}
 
 % InfoVis Grundlagen. Wichtig weil das die Komponenten sind, mit denen ich zu tun habe.
 
@@ -381,7 +381,7 @@ Van Wijk \cite{vanWijk2005} stellt ein ähnliches Modell für den Prozess der Wi
 Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen gegeben. Dieser orientiert sich an Keim \cite{Keim2002}, welcher Informationsvisualisierungen nach dargestellten Daten, Visualisierungs- und Interaktionstechnik klassifizierte. Die Abbildungen stammen, sofern nicht anders angegeben, aus \cite{Heer2010}.
 
 \subsubsection{Dargestellte Daten}
-\label{section:dargestellte_daten}
+\label{section:standderforschung_dargestellte_daten}
 
 \textbf{Eindimensionale Daten} sind beispielsweise Zeitreihen, also Folgen von Daten (1992, 1993, 1995...). Nach Keim können diese aber mit anderen Datenobjekten assoziiert sein. Beispiele für InfoVis eindimensionaler Daten wären demnach ein Index Chart (Abbildung~\ref{figure:index_chart}) oder eine einfache Timeline.
 
@@ -438,7 +438,7 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 % Am Schluss hat Keim noch Software/Algorithmen, aber ich sehe den Unterschied zu Multidimensionalen Daten nicht. Außerdem kann man - wenn schon mal grundlos neue Kategorien eingeführt werden - dann auch Produktionsprozesse oder what not gesondert betrachten
 
 \subsubsection{Visualisierungstechniken}
-\label{section:Visualisierungstechniken}
+\label{section:standderforschung_Visualisierungstechniken}
 
 % standard 2d/3d
 
@@ -481,7 +481,7 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 \end{figure}
 
 \subsubsection{Interaktionstechniken}
-\label{section:interaktionstechniken}
+\label{section:standderforschung_interaktionstechniken}
 
 % dynamische projektionen
 
@@ -522,7 +522,7 @@ Durch \textbf{Verzerrung} kann ein Bereich der Visualisierung mit hohem Detailgr
 
 % link & brush
 
-\textbf{Linking \& Brushing} wird vor allem bei mehreren verschiedenen Visualisierungen eingesetzt. Die in einer Visualisierung markierten Daten werden auch in allen anderen Visualisierungen hervorgehoben. Das können zum Beispiel Scatterplots (siehe multidimensionale Visualisierungen in Abschnitt~\ref{section:Visualisierungstechniken}), verschiedene Histogramme (Abbildung~\ref{figure:link_brush}\footnote{\url{http://square.github.io/crossfilter/}}) oder gemischte Visualisierungen sein.
+\textbf{Linking \& Brushing} wird vor allem bei mehreren verschiedenen Visualisierungen eingesetzt. Die in einer Visualisierung markierten Daten werden auch in allen anderen Visualisierungen hervorgehoben. Das können zum Beispiel Scatterplots (siehe multidimensionale Visualisierungen in Abschnitt~\ref{section:standderforschung_Visualisierungstechniken}), verschiedene Histogramme (Abbildung~\ref{figure:link_brush}\footnote{\url{http://square.github.io/crossfilter/}}) oder gemischte Visualisierungen sein.
 
 \begin{figure}[htbp]
    \centering
@@ -534,7 +534,7 @@ Durch \textbf{Verzerrung} kann ein Bereich der Visualisierung mit hohem Detailgr
 todo: Was habe ich daraus jetzt gelernt?
 
 \subsection{User Assistance}
-\label{section:user_assistance}
+\label{section:standderforschung_user_assistance}
 
 % was ist assistance?
 
@@ -613,14 +613,14 @@ Filme? Hier gibt es eine Doktorarbeit, aber die finde ich online nicht \url{http
 
 
 \subsubsection{Sensemaking}
-\label{section:sensemaking}
+\label{section:standderforschung_sensemaking}
 
 % was ist der unterschied zwischen learning und sensemaking?
 Im vorhergehenden Abschnitt wurde der Prozess der Wissensvermittlung betrachtet. Um Wissen dauerhaft aufzunehmen, müssen Lernende den Inhalt \emph{verstehen}. Der Begriff \enquote{Understanding} (gleichbedeutend mit Sensemaking) wird angewandt, wenn das Gehirn mehr Elemente des Inhalts (z.\,B. Variablen einer Gleichung) verarbeiten muss als ins Arbeitsgedächtnis passen \cite{Sweller1998}. \emph{Verstanden} hat der Lernende dann, wenn diese Elemente zu einem sogenannten Schema (mentales Modell) verarbeitet wurden und als ein einziges Element im Arbeitsgedächtnis gehalten werden können (z\,B. eine komplexe Zahl statt drei Variablen $a$, $b$ und $i$).
 
 % wie funktioniert der prozess der wissensaneignung?
 
-Klein \cite{Klein2006a} beschreibt in seinem Data/Frame Modell (Abbildung~\ref{figure:data_frame_model}), wie dieser Prozess funktioniert. \enquote{Data} beschreibt dabei die Elemente des Inhalts und \enquote{Frame} das mentale Modell oder Schema. Ähnlich dem Visual Analytics Process (Abschnitt~\ref{section:informationsvisualisierung}) ist Sensemaking ein iterativer Prozess, aber ohne wirklichen Anfang oder Ende. Der Lernende startet mit Daten oder einem Frame, konstruiert ein Frame dazu oder versucht die Daten einzupassen und nimmt Anpassungen vor bzw. verwirft ein Frame, wenn die Daten es nicht stützen. Dabei sollte der Lernende möglichst selbstständig einer Lösung kommen, nicht zu viele Daten gleichzeitig sehen und während des Prozesses keine Hypothesen aufstellen müssen, die nicht überprüft werden können \cite{Klein2006}.
+Klein \cite{Klein2006a} beschreibt in seinem Data/Frame Modell (Abbildung~\ref{figure:data_frame_model}), wie dieser Prozess funktioniert. \enquote{Data} beschreibt dabei die Elemente des Inhalts und \enquote{Frame} das mentale Modell oder Schema. Ähnlich dem Visual Analytics Process (Abschnitt~\ref{section:standderforschung_informationsvisualisierung}) ist Sensemaking ein iterativer Prozess, aber ohne wirklichen Anfang oder Ende. Der Lernende startet mit Daten oder einem Frame, konstruiert ein Frame dazu oder versucht die Daten einzupassen und nimmt Anpassungen vor bzw. verwirft ein Frame, wenn die Daten es nicht stützen. Dabei sollte der Lernende möglichst selbstständig einer Lösung kommen, nicht zu viele Daten gleichzeitig sehen und während des Prozesses keine Hypothesen aufstellen müssen, die nicht überprüft werden können \cite{Klein2006}.
 
 \begin{figure}[htbp]
    \centering
@@ -636,7 +636,7 @@ Während des Verständnisprozesses ist es außerdem hilfreich, Wissen in irgende
 Nachdem betrachtet wurde, wie Verständnis funktioniert, stellt sich die Frage, \emph{was} vermittelt werden soll um Menschen mit wenig InfoVis-Erfahrung zu helfen. Dazu gehört laut Grammel \cite[S. 127]{Grammel2012} unter anderem das mentale Modell des Benutzers zu verwenden, beispielsweise indem dieselben Bezeichnungen verwendet werden, und zu lehren, wie Visualisierungen verwendet und interpretiert werden.
 
 \section{Zusammenfassung}
-\label{section:grundlagen_zusammenfassung}
+\label{section:standderforschung_zusammenfassung}
 
 yay
 
@@ -644,6 +644,29 @@ yay
 \chapter{Konzeption}
 \label{chapter:konzeption}
 
+\section{Überblick}
+\label{section:konzeption_ueberblick}
+
+\section{Bedienung}
+\label{section:konzeption_bedienung}
+
+\section{Reporting}
+\label{section:konzeption_reporting}
+
+\section{Verlinkung}
+\label{section:konzeption_verlinkung}
+
+\section{Kommunikation}
+\label{section:konzeption_kommunikation}
+
+\section{Kommentare}
+\label{section:konzeption_kommentare}
+
+\section{Synthese}
+\label{section:konzeption_synthese}
+
+\section{Zusammenfassung}
+\label{section:konzeption_zusammenfassung}
 
 %#####################################################
 \printbibliography[title=Literaturverzeichnis]
