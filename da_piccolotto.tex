@@ -197,7 +197,7 @@ Hurrrrr derp herp
 \label{section:vizboard}
 
 % grundlagen von cruise edyra vizboard. wichtig weil mein hilfesystem dort eingesetzt wird
-CRUISe \cite{Pietschmann2009, Pietschmann2012} ist ein Framework zur Konstruktion von sogenannten Mashup User Interfaces. Diese bestehen aus mehreren voneinander unabhängigen, wiederverwendbaren User Interface Services (z.\,B. eine Karte, eine Tabelle und ein Kalender) welche zur Laufzeit hinzugefügt, konfiguriert und ausgetauscht werden können. Abbildung~\ref{figure:cruise_architektur} zeigt die Architektur von CRUISe. Zuerst werden Komponenten von Entwicklern erstellt und modelliert (1). Danach interpretiert CRUIse das Kompositionsmodell (2), matcht (3) es gegen die Kontextanforderungen, bildet ein Ranking (4) und integriert schließlich die am besten geeignete Komponente ins User Interface (5).
+CRUISe \cite{Pietschmann2009, Pietschmann2012} ist ein Framework zur Konstruktion von sogenannten Mashup User Interfaces. Diese bestehen aus mehreren voneinander unabhängigen, wiederverwendbaren User Interface Services (z.\,B. eine Karte, eine Tabelle und ein Kalender) welche zur Laufzeit hinzugefügt, konfiguriert und ausgetauscht werden können. Abbildung~\ref{figure:cruise_architektur} zeigt die Architektur von CRUISe. Zuerst werden Komponenten von Entwicklern erstellt und modelliert (1). Danach interpretiert CRUIse das Kompositionsmodell (2), matcht es gegen die Kontextanforderungen (3), bildet ein Ranking (4) und integriert schließlich die am besten geeignete Komponente ins User Interface (5).
 
 \begin{figure}[htbp]
 	\centering
@@ -205,6 +205,8 @@ CRUISe \cite{Pietschmann2009, Pietschmann2012} ist ein Framework zur Konstruktio
 	\caption{CRUISe Architektur aus \cite{Pietschmann2012}}
 	\label{figure:cruise_architektur}
 \end{figure}
+
+CRUISe geht davon aus, dass professionelle Softwarentwickler Komponenten zu kompositen Sichten modellieren, welche dann von Endnutzern nur noch aufgerufen werden. EDYRA \cite{Ruempel2011} greift auf das CRUISe Framework zurück um es Endnutzern selbst zu ermöglichen, diese Aufgabe auszuführen. Dazu schlägt EDYRA zur Laufzeit Komponenten vor, welche sofort integriert oder gelöscht werden können.
 
 VizBoard \cite{Voigt2012} benutzt das CRUISe Framework um Endnutzern die Möglichkeit zu geben, semantische Datensätze mit Hilfe verschiedener InfoVis verstehen zu können. Abbildung~\ref{figure:vizboard_architektur} zeigt die Architektur von VizBoard. Die Daten werden zuerst aus verschiedenen Quellen in eine semantische Repräsentation konvertiert und im Data Repository (DaRe, 1) gespeichert. Das Component Repository (Core, 3) verwaltet die verschiedenen Visualisierungskomponenten (2) und ist für Matching und Ranking von Komponenten zuständig, bevor sie in der Runtime (4) integriert werden. Sowohl das DaRe als auch das CoRe greifen auf die Visualization Ontology (VISO, 5) zurück, die Wissen über verschiedene Aspekte von Visualisierungen, wie z.\,B. Struktur der visualisierten Daten, Mapping der Daten auf visuelle Attribute oder Interaktionsmöglichkeiten, enthält \cite{Voigt2011}.
 % architekturbild --> vizboard paper
@@ -239,7 +241,7 @@ Komponenten in CRUISe werden generisch und einheitlich durch Properties, Events 
 \label{section:kommunikationsmodell}
 
 % kommunikationsmodell 5.2.2
-Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. eine Komponente veröffentlicht ein Event, dessen Nachricht mit Hilfe des Publish/Subscribe Paradigma an alle Subscriber in diesem Kanal (Link) übertragen wird. Subscriber reagieren auf das Event indem sie bestimmte Operationen ausführen. Die Übertragung der Nachrichten wird durch sogenannte Links umgesetzt, welche $n$ Events mit $m$ Operationen verbinden. Spezielle Links sind Backlinks, die eine Zweiwegekommunikation zwischen Komponenten ermöglichen und PropertyLinks, die Properties synchron halten.
+Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. eine Komponente veröffentlicht ein Event, dessen Nachricht mit Hilfe des Publish/Subscribe Paradigma an alle Subscriber in diesem Kanal (Link) übertragen wird. Subscriber reagieren auf das Event indem sie bestimmte Operationen ausführen. Die Übertragung der Nachrichten wird durch sogenannte Links umgesetzt, welche $n$ Events mit $m$ Operationen verbinden. Spezielle Links sind Backlinks, die eine Zweiwegekommunikation zwischen Komponenten ermöglichen und PropertyLinks, die Properties synchron halten. Ein Überblick über die verschiedenen Links ist in Abbildung~\ref{figure:cruise_links} zu sehen.
 
 \begin{figure}[htbp]
 	\centering
@@ -261,13 +263,13 @@ Die Laufzeitumgebung (Mashup Runtime Environment, MRE) ist für die Ausführung 
 	\label{figure:cruise_mre}
 \end{figure}
 
-Der \textbf{Application Manager} initialisiert alle anderen Module und ist für die globale Fehlerbehandlung zuständig. Für den Lebenszyklus der einzelnen Komponenten ist der \textbf{Component Manager} zuständig. Die Integration übernimmt allerdings der \textbf{Integration Manager}. Im Mashup Modell definierte Sichten und Übergänge zwischen ihnen werden vom \textbf{Screenflow Manager} interpretiert. Gerendert werden die Komponenten aber vom \textbf{Layout Manager}. Nachrichten zwischen Komponenten der Anwendung und Modulen der MRE werden durch den \textbf{Event Broker} übermittelt. Sind die Parameter von Event und Operation syntaktisch nicht äquivalent, aber semantisch aufeinander abbildbar (z.\,B. zwei gleiche Konzepte aus verschiedenen Namespaces wie dbpedia:city und geonames:city), übernimmt dies der \textbf{Mediator}. Die dynamische Anpassung der Anwendung (z.\,B. von Komponenten, Layout und Kommunikationsmodell) wird gegebenenfalls durch den \textbf{Adaptation Manager} durchgeführt. Letztlich erlaubt das \textbf{Service Access} Modul Zugriff auf Web-Dienste und Ressourcen im Backend.
+Der \textbf{Application Manager} initialisiert alle anderen Module und ist für die globale Fehlerbehandlung zuständig. Für den Lebenszyklus der einzelnen Komponenten ist der \textbf{Component Manager} zuständig. Die Integration übernimmt allerdings der \textbf{Integration Manager}. Im Mashup Modell definierte Sichten und Übergänge zwischen ihnen werden vom \textbf{Screenflow Manager} interpretiert. Gerendert werden die Komponenten aber vom \textbf{Layout Manager}. Nachrichten zwischen Komponenten der Anwendung und Modulen der MRE werden durch den \textbf{Event Broker} übermittelt. Sind die Parameter von Event und Operation syntaktisch nicht äquivalent, aber semantisch aufeinander abbildbar (z.\,B. zwei gleiche Konzepte aus verschiedenen Namespaces wie \texttt{dbpedia:city} und \texttt{geonames:city}), übernimmt dies der \textbf{Mediator}. Die dynamische Anpassung der Anwendung (z.\,B. von Komponenten, Layout und Kommunikationsmodell) wird gegebenenfalls durch den \textbf{Adaptation Manager} durchgeführt. Letztlich erlaubt das \textbf{Service Access} Modul Zugriff auf Web-Dienste und Ressourcen im Backend.
 
 \subsubsection{VISO}
 \label{section:viso}
 
 % viso
-In der Visualization Ontology (VISO) ist Visualisierungswissen gespeichert. Dazu gehören unter anderem folgende Konzepte und deren Verbindungen untereinander:
+In der Visualization Ontology (VISO) ist Visualisierungswissen gespeichert. Sie kann dabei helfen, zur Laufzeit die Domäne dargestellter Daten zu identifizieren oder notwendiges Wissen zur User Assistance (Abschnitt~\ref{section:user_assistance}) zur Komponentenbeschreibung hinzuzufügen. Unter anderem enthält sie folgende Konzepte und deren Verbindungen untereinander:
 
 \begin{itemize}
 	\item Visualisierte Daten (\texttt{viso:data})
@@ -307,8 +309,6 @@ Dieses Wissen wird in VizBoard auf verschiedene Art und Weise genutzt (Abbildung
 	\label{figure:viso}
 \end{figure}
 
-Die VISO kann dabei helfen, zur Laufzeit die Domäne dargestellter Daten zu identifizieren oder notwendiges Wissen zur User Assistance (Abschnitt~\ref{section:user_assistance}) zur Komponentenbeschreibung hinzuzufügen.
-
 \subsection{Semantische Datensätze}
 \label{section:semantische_daten}
 
@@ -323,12 +323,12 @@ Eine Ontologie ist \enquote{an explicit specification of a conceptualization} \c
 	\item Außerdem existieren noch Axiome, Regeln, Funktionen und Einschränkungen, welche die Logik einer Ontologie beschreiben.
 \end{itemize}
 
-Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortium (W3C) verschiedene Beschreibungssprachen eingeführt. Die bekanntesten sind Resource Description Framework Schema (RDFS) und Web Ontology Language (OWL). Mit diesen Sprachen lässt sich unterschiedlich viel Semantik u.\,a. in Form von Ontologien, Thesauren oder Vokabularen ausdrücken; die Komplexität der Dokumente und damit der Aufwand, sie zu erstellen, verhalten sich aber direkt proportional (siehe Abbildung~\ref{figure:semantic_spectrum}) \cite{Bergman2007}.
+Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortium (W3C) verschiedene Beschreibungssprachen eingeführt. Die bekanntesten sind Resource Description Framework Schema (RDFS) und Web Ontology Language (OWL). Mit diesen Sprachen lässt sich unterschiedlich viel Semantik u.\,a. in Form von Ontologien, Thesauren oder Vokabularen ausdrücken; die Komplexität der Dokumente und damit der Aufwand, sie zu erstellen, verhalten sich aber direkt proportional (siehe Abbildung~\ref{figure:semantic_spectrum}).
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.75\textwidth]{images/grundlagen-semantic_spectrum.png}
-	\caption{Semantic Spectrum}
+	\caption{Semantic Spectrum \cite{Bergman2007}}
 	\label{figure:semantic_spectrum}
 \end{figure}
 
@@ -605,7 +605,7 @@ Da kein Medium (Film, Audio, Buch etc.) besser zum Lernen geeignet ist als ein a
 
 Wie kann User Assistance im visuellen bzw. verbalen Aufnahmekanal aussehen? Verbale Erklärungen können zur Laufzeit generiert werden \cite{Bauer2011, Gesell2012, Matheson2012}, sind jedoch tendenziell zu langatmig formuliert und enthalten viele Wiederholungen. Auf Grund der vorhin erwähnten Designprinzipien \enquote{Prägnanz} und \enquote{Keine Redundanz} sollte davon wahrscheinlich abgesehen und verbale Erklärungen handgeschrieben oder sehr kurz gehalten werden.
 
-Die naheliegendste Möglichkeit für visuelle User Assistance sind Bilder. Illustrationen/Schemata sind in der Tat hilfreich, solange sowohl die Bestandteile des Systems (z.\,B. eine Luftpumpe) als auch die einzelnen Schritte des Prozesses (z.\,B. pumpen) dargestellt werden \cite{Mayer1990}. Auch Comics sind gut geeignet Sachverhalte zu erklären (siehe z.\,B. \cite{McCloud1994, McCloud2008}) und eine ansprechende Variante für User Assistance \cite{Webb2012}.
+Die naheliegendste Möglichkeit für visuelle User Assistance sind Bilder. Illustrationen/Schemata sind in der Tat hilfreich, solange sowohl die Bestandteile des Systems (z.\,B. eine Luftpumpe) als auch die einzelnen Schritte des Prozesses (z.\,B. pumpen) dargestellt werden \cite{Mayer1990}. Auch Comics sind gut geeignet um Sachverhalte zu erklären (siehe z.\,B. \cite{McCloud1994, McCloud2008}) und eine ansprechende Variante für User Assistance \cite{Webb2012}.
 
 Animationen im Sinne von kurzen Videos mit abstrahiertem Inhalt können ebenfalls ein geeigneter Weg sein um Wissen zu vermitteln, sofern die erwähnten Designprinzipien eingehalten werden \cite{Mayer2002a}. Allerdings ist es möglich, dass Benutzer mit wenig Vorwissen weniger davon profitieren also solche mit viel Vorwissen \cite{Kalyuga2008}. Wenn Animationen eingesetzt werden, sollte den Benutzern Kontrolle über die Geschwindigkeit der Animation gegeben und wichtige Teile gekennzeichnet werden \cite{Wong2011}. Bei Web User Interfaces besteht die Möglichkeit konkrete Elemente der InfoVis für die Animation heranzuziehen. Das würde dem Prinzip der \enquote{Semantic Transparency} \cite{Kohlhase2009} entsprechen, wonach Benutzer möglichst direkt auf den für ihre Ziele relevanten UI-Elementen arbeiten sollen.
 
