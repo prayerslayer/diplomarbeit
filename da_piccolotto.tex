@@ -644,42 +644,35 @@ yay
 \chapter{Konzeption}
 \label{chapter:konzeption}
 
+Hab das Gefühl, dass ich hier irgendwo \cite{Grammel2012} anbringen sollte, damit man sieht dass ich mir nicht alles aus den Fingern sauge.
+
 \section{Überblick}
 \label{section:konzeption_ueberblick}
 
-Darstellungsform und Überblick erklären laut Szenario. Grammel sagt 
+\begin{enumerate}
+	\item Was ist das für eine Visualisierung? Z.B. Eine Treemap, die tut das und das, ist für dieses und jenes gut geeignet, hat aber den und den Nachteil, sie zeigt jetzt konkret xy an. Frage: Gehören Vorteile und Nachteile eigentlich nicht eher in den Schritt davor? Weil wenn ich die ausbessern wöllte wäre es jetzt zu spät. Andererseits ist es schon auch gut, daran erinnert zu werden.
+	\item Links zu Tutorials und Erklärungen (siehe Grammel)
+	\item Noch etwas? Bedienung gehört dazu, ist aber ein eigenes Kapitel. Verlinkung von dings auch.
+\end{enumerate}
 
-Using familiar terminology
-- Labels that explain the visualization --> VISO + Komponentenbeschreibung, siehe 3.2
-- Labels for the visualization construction user interface --> NMP
-- Infer visualization settings from partial specifications --> wat?
-- Provide appropriate visualizations based on the user’s visual literacy --> Nicht mein Problem
-- Contextualized help --> Yes sir
-- Link to tutorials --> Gute Idee. Komponentenbeschreibung
-- Show information on prominent features --> wat?
-- Collaborative visualization --> I'm on it. Siehe KOmmentare.
-- Distributed collaboration support for user-initiated, short-term help seeking --> Das wäre quasi ein Chat. Mal überlegen.
-– Learning to choose visualization types and visual mappings (Section 7.4.2) --> Nicht meine Aufgabe
-- Reducing the risk and increasing the speed of visualization design --> wat?
-
-- Suggesting alternative visualizations and mappings --> NMP
-- Providing explanations --> Yes sir
-- Tutorials that explain visualization concepts and trade-offs --> NMP
-– Learning tool usage (general usability guidelines) --> Yes Sir
+Eine Möglichkeit wäre, dass der Komp.entw. eine Beschreibung seiner Komponente verfasst. Vorteil: Nachdem die Komponenten nach CRUISe Konzept schwarze Kisten sind, kann ja IRGENDWAS daherkommen und wir werden nicht alles in der VISO unterbringen können - es wäre also alles abgedeckt. Nachteil: Wer sagt mir, dass der Dev die Sprache meiner Benutzer verwendet? Wenn dann 4 Vis.komp. im View sind, die mit 3 verschiedenen Begriffen aufs selbe referieren, ist das nicht wirklich hilfreich.
+Also am Besten in entsprechende viso:graphic Konzepte (Graphic Representation) hinzufügen. Die Interaktion damit kann aber nicht erklärt werden, nur die Konzepte, weil die konkrete Umsetzung in der Hand des Dev liegt. Also vielleicht erweitern wir auch noch die Komponentenbeschreibung, sodass er eigene Links zu Tutorialvideos oder so einbinden kann. Und dort halt sagen muss, was es für eine Graphical Representation ist. Frage: Wie finde ich raus, welche Daten angezeigt werden? Und wie kann ich alles laden?
 
 \section{Bedienung}
 \label{section:konzeption_bedienung}
 
-Konzept von Operationen, Aktionen und Aufgaben. Wird alles in Komponente annotiert und dann Assistance daraus generiert.
+Konzept von Operationen, Aktionen (=Capabilities in Komponentenbeschreibung) und Aktivitäten \cite{Kuutti1996}. In Komponente muss beschrieben werden: Welche Operationen werden auf welchen Objekten (CSS Klassen! IDs mögen automatisch von Ext vergeben werden, aber auf Klassen hat man Einfluss) unterstützt (Doppelklick auf .asdf, Rechtsklick auf .blublu). Welche Operationen führen zu welchen Aktionen (Sortieren, Zoomen, Pannen, ...). Aktivitäten sind langfristige Ziele des Nutzers, die können wir nicht beeinflussen. Assistance wird dann generiert BEVOR der Benutzer sie braucht. Mit PhantomJS, falls wer fragt. 
 
-Form der Assistance? Multimodal wäre lt Grundlagen gut, aber von UX Standpunkt aus gesehen nervt plötzlicher Sound tierisch. Vielleicht an/ausschaltbar. Comic-Animation mit optionaler Soundausgabe.
+Form der Assistance? Multimodal (verbal/akustisch und visuell) wäre lt Grundlagen gut, aber von UX Standpunkt aus gesehen nervt plötzlicher Sound tierisch. Vielleicht an/ausschaltbar. Also Comic-Animation in 4 Panels (1: Überblick, 2: Wie 1, dann Zoom auf relevante Elemente, 3: Wie 2, dann Overlay mit Operation (Click, Drag, Hover...), 4: Wie 2, dann wieder rauszoomen und Unterschied sehen
 
-Animationen mit tatsächlichen DOM Elementen wäre wahrscheinlich verständnisfördender, aber das geht entweder mit a) einer Beschreibungssprache für Aktivitäten (welche Elemente wie sortiert werden sollen, welche Achsen getauscht werden sollen usw usf) weil der Interaktion in den Komponenten keine Grenzen gesetzt sind oder b) Dev schreibt für jede Interaktion ein Demo-Funktion (die zB Tabellenzeilen hin und herschiebt um Sortierung zu demonstrieren). Probleme a): Sehr umfangreich und trotzdem werden nie alle Fälle abgedeckt sein. Probleme b): Entwicklungsaufwand, uneinheitliches Look \& Feel.
+Animationen mit tatsächlichen DOM Elementen wäre wahrscheinlich verständnisfördender, aber das geht entweder mit a) einer Beschreibungssprache für Interaktionen (welche Elemente wie sortiert werden sollen, welche Achsen getauscht werden sollen usw usf) weil der Interaktion in den Komponenten keine Grenzen gesetzt sind oder b) Dev schreibt für jede Interaktion ein Demo-Funktion (die zB Tabellenzeilen hin und herschiebt um Sortierung zu demonstrieren). Probleme a): Sehr umfangreich und trotzdem werden nie alle Fälle abgedeckt sein. Probleme b): Entwicklungsaufwand, uneinheitliches Look \& Feel.
 
 \section{Reporting}
 \label{section:konzeption_reporting}
 
-Kontext mitschicken zum Bug Report sodass überprüft werden kann, ob die Komponente tatsächlich kaputt ist oder nur falsch verdrahtet wurde. Am Besten Freitext, weil es für den Benutzer eh nicht ersichtlich ist, was falsch läuft. Da braucht man auch keine Kategorisierung vornehmen. Der Report sollte automatisch ein Ticket in irgendeinem Support-System erstellen.
+Kontext mitschicken zum Bug Report sodass überprüft werden kann, ob die Komponente tatsächlich kaputt ist oder nur falsch verdrahtet wurde. Am Besten Freitext, weil es für den Anfänger-Benutzer eh nicht ersichtlich ist, was falsch läuft. Da braucht man auch keine Kategorisierung vornehmen. Der Report sollte automatisch ein Ticket in irgendeinem Support-System erstellen.
+
+Frage: Wie Anwendungskontext sammeln?
 
 \section{Verlinkung}
 \label{section:konzeption_verlinkung}
@@ -689,14 +682,16 @@ Bei der Analyse im DaRe wird schon nach Synonymen über WordNet gesucht. Die kan
 \section{Kommunikation}
 \label{section:konzeption_kommunikation}
 
-Hier aufpassen, weil es bei edyra schon irgendeinen View gibt, der die Kommunikation anzeigt. Meine Idee war alle Verbindungen der verschiedenen Kanäle explizit sichtbar zu machen, zu animieren wenn etwas passiert und eine Erklärung zu geben (ähnlich 2.2) warum das passiert: Welche Interaktion mit welchen Elementen löst welches Element aus was wiederum welche Operation ausführt die ihrerseits was macht?
+Hier aufpassen, weil es bei edyra schon irgendeinen View gibt, der die Kommunikation anzeigt. Meine Idee war alle Verbindungen der verschiedenen Kanäle explizit sichtbar zu machen, zu animieren wenn etwas passiert und eine Erklärung zu geben (ähnlich 3.2 nur mit 5 panels) warum das passiert: Welche Interaktion mit welchen Elementen löst welches Element aus was wiederum welche Operation ausführt die ihrerseits was macht?
+
+ABER: Die Assistance wird ja a priori generiert da müsste man wohl auch Operationen ausführen. Sonst hat man keine Bilder für die andere Komponente. Problematisch ist auch, dass es Operationen geben kann, die auf der UI nix machen. Da sieht man dann keinen Unterschied. Bei Operationen die Parameter brauchen, muss der Dev dann halt Beispieldaten in der Komponentenbeschreibung angeben.
 
 \section{Kommentare}
 \label{section:konzeption_kommentare}
 
 Was ist überhaupt wichtig für Kommentare und welche Arten von Insights gibt es? Text + Markierung in InfoVis damit man weiß, was gemeint ist. Achtung: InfoVis ist interaktiv, kann sich also verändern.
 
-Allgemein: Avatare, Benutzernamen für Credibility. Verlinkung von Kommentaren notwendig. Tiefe des Antwortbaumes maximal 1, sonst wirds unübersichtlich. Zustand der KOmponente muss wiederhergestellt werden, bevor Kommentar angezeigt werden kann (sonst sinnlos).
+Allgemein: Avatare, Benutzernamen für Credibility. Verlinkung von Kommentaren notwendig. Tiefe des Antwortbaumes maximal 1, sonst wirds unübersichtlich. Zustand der KOmponente muss wiederhergestellt werden, bevor Kommentar angezeigt werden kann (sonst sinnlos). Kommentare können natürlich nur für denselben Datensatz angezeigt werden.
 
 Markierung: Kann prinzipiell auf Bereichen (in Scatterplot, Balkendiagrammen...) erfolgen oder konkrete Elemente sein (Scatterplot). Bereiche: Erstmal nur Rechtecke aufziehen, aber prinzipiell kanns ein beliebiges Polygon sein. Elemente: So auswählen (data-vizboard-selected Markup). 
 
@@ -706,7 +701,7 @@ Laden: Mit SPARQL rausziehen, schauen ob die sichtbaren Elemente oder Koordinate
 
 Offene Fragen: Wie Kommentare zu Datenbereichen abspeichern? Idealerweise URI von datatype property hernehmen und deren grenzwerte (Dollar, 200-5000). ABER! Was ist mit Metadaten, also irgenwelchen Verteilungen oder Abweichungen davon?
 
-Wie können Kommentare wieder in Wissensbasis eingebracht werden? Viele Papers durchsuchen Kommentare nach Termen, die wiederum für Suche oder Kategorisierung verwendet werden können. Ansonsten kann wahrscheinlich auch eine ganze Ontologie aus Kommentaren extrahiert werden \url{http://eprints.soton.ac.uk/258194/1/Alani-HLT03-final.pdf}, wenn man die mal definiert hat. Stichworte Text Mining und Knowledge Extraction.
+Wie können Kommentare wieder in Wissensbasis eingebracht werden? Viele Papers durchsuchen Kommentare nach Termen, die wiederum für Suche oder Kategorisierung verwendet werden können. Möglich wäre positive und negative Kommentare zu klassifizieren und daraus einen Score für den jeweiligen Datensatz zu berechnen um später diese Visualisierung bei der Auswahl niedriger zu ranken. Ansonsten kann wahrscheinlich auch eine ganze Ontologie aus Kommentaren extrahiert werden \url{http://eprints.soton.ac.uk/258194/1/Alani-HLT03-final.pdf}, wenn man die mal definiert hat. Stichworte Text Mining und Knowledge Extraction.
 
 \section{Synthese}
 \label{section:konzeption_synthese}
