@@ -78,12 +78,14 @@
 % ###################################################
 \section{Motivation}
 \label{section:einleitung_motivation}
+\label{section:einleitung:motivation}
 
 % Hier wird generell eingeleitet, also vermutlich die Problematik zwischen semantischen Datensätzen und Endusern
 
 % ###################################################
 \section{Problemstellung und Zielsetzung}
 \label{section:einleitung_problemstellung}
+\label{section:einleitung:problemstellung}
 
 % Hier wird quasi der Vizboard Workflow umrissen
 % und erklärt, wo das eigentliche Problem liegt, nämlich im Information Overload beim letzten Schritt
@@ -98,6 +100,7 @@
 % ###################################################
 \section{Aufbau der Arbeit}
 \label{section:einleitung_aufbau}
+\label{section:einleitung:aufbau}
 
 % Aufbau der Arbeit erklären, kommt zum Schluss
 
@@ -110,6 +113,7 @@ Der folgende Abschnitt besteht aus drei Teilen. Zuerst wird die Aufgabenstellung
 % ###################################################
 \section{Szenario}
 \label{section:standderforschung_szenario}
+\label{section:standderforschung:szenario}
 
 % kurze einleitung noch mal
 
@@ -148,11 +152,13 @@ In der Tabelle findet sie auch eine Spalte \enquote{SNP}. Anna weiß zwar, dass 
 % ###################################################
 \section{Anforderungsanalyse}
 \label{section:standderforschung_anforderungsanalyse}
+\label{section:standderforschung:anforderungsanalyse}
 
 Aus dem Szenario (Kapitel~\ref{section:standderforschung_szenario}) lassen sich nun verschiedene Anforderungen an ein Hilfesystem für komposite Informationsvisualisierungssysteme ableiten.
 
 \subsection{Funktionale Anforderungen}
 \label{section:standderforschung_funktionale_anforderungen}
+\label{section:standderforschung:anforderungsanalyse:funktionale_anforderungen}
 
 Blabla
 
@@ -173,6 +179,7 @@ Blabla
 
 \subsection{Nichtfunktionale Anforderungen}
 \label{section:standderforschung_nichtfunktionale_anforderungen}
+\label{section:standderforschung:anforderungsanalyse:nichtfunktionale_anforderungen}
 
 Bla bla
 
@@ -190,11 +197,13 @@ Bla bla
 % ###################################################
 \section{Grundlagen}
 \label{section:standderforschung_grundlagen}
+\label{section:standderforschung:grundlagen}
 
 Hurrrrr derp herp
 
 \subsection{CRUISe, EDYRA \& VizBoard}
 \label{section:standderforschung_vizboard}
+\label{section:standderforschung:grundlagen:cruise_vizboard}
 
 % grundlagen von cruise edyra vizboard. wichtig weil mein hilfesystem dort eingesetzt wird
 CRUISe \cite{Pietschmann2009, Pietschmann2012} ist ein Framework zur Konstruktion von webbasierten, kompositen User Interfaces (auch Mashups). Diese bestehen aus mehreren voneinander unabhängigen, wiederverwendbaren User Interface Services (z.\,B. eine Karte, eine Tabelle und ein Kalender) welche zur Laufzeit hinzugefügt, konfiguriert und ausgetauscht werden können. Abbildung~\ref{figure:cruise_architektur} zeigt die Architektur von CRUISe. Zuerst werden Komponenten von Entwicklern erstellt und modelliert (1). Danach interpretiert CRUISe das Kompositionsmodell (2), matcht es gegen die Kontextanforderungen (3), bildet ein Ranking (4) und integriert schließlich die am besten geeignete Komponente ins User Interface (5).
@@ -226,12 +235,14 @@ Im DaRe werden Daten aus verschiedenen Quellen in einer semantischen Repräsenta
 
 \subsubsection{Komponentenbeschreibung}
 \label{section:standderforschung_komponentenbeschreibung}
+\label{section:standderforschung:grundlagen:cruise_vizboard:komponentenbeschreibung}
 
 % komponentenbeschreibung 5.1.3
 Komponenten in CRUISe werden generisch und einheitlich durch Properties, Events und Operationen sowie Metainformationen beschrieben. Properties geben Auskunft über den Zustand einer Komponente, also beispielsweise Breite und Höhe oder die Sortierreihenfolge der Elemente. Events weisen andere Komponenten auf interne Zustandsänderungen hin, zum Beispiel wenn sich die Sortierreihenfolge geändert hat. Operationen sind Methoden einer Komponente, die durch Events ausgelöst werden, z.\,B. \texttt{reassignNumbers(order)}, um die Nummerierung der Pins in einer Karte anzupassen. Zu den Metainformationen gehören u.\,a. der Name einer Komponente oder der Preis.
 
 \subsubsection{Kommunikationsmodell}
 \label{section:standderforschung_kommunikationsmodell}
+\label{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}
 
 % kommunikationsmodell 5.2.2
 Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. eine Komponente veröffentlicht ein Event, dessen Nachricht mit Hilfe des Publish/Subscribe Paradigma an alle Subscriber in diesem Kanal (Link) übertragen wird. Subscriber reagieren auf das Event, indem sie bestimmte Operationen ausführen. Die Übertragung der Nachrichten wird durch sogenannte Links umgesetzt, welche $n$ Events mit $m$ Operationen verbinden. Spezielle Links sind Backlinks, die eine Zweiwegekommunikation zwischen Komponenten ermöglichen und PropertyLinks, die Properties synchron halten. Ein Überblick über die verschiedenen Links ist in Abbildung~\ref{figure:cruise_links} zu sehen.
@@ -245,6 +256,7 @@ Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. ei
 
 \subsubsection{Laufzeitumgebung}
 \label{section:standderforschung_laufzeitumgebung}
+\label{section:standderforschung:grundlagen:cruise_vizboard:laufzeitumgebung}
 
 Die Laufzeitumgebung (Mashup Runtime Environment, MRE) ist für die Ausführung und Verwaltung der kompositen Anwendung verantwortlich und besteht aus mehreren Modulen (Abbildung~\ref{figure:cruise_mre}).
 
@@ -260,6 +272,7 @@ Der \textbf{Application Manager} initialisiert alle anderen Module und ist für 
 
 \subsubsection{VISO}
 \label{section:standderforschung_viso}
+\label{section:standderforschung:grundlagen:cruise_vizboard:viso}
 
 % viso
 In der Visualization Ontology (VISO) ist Visualisierungswissen gespeichert. Sie kann dabei helfen, zur Laufzeit die Domäne dargestellter Daten zu identifizieren oder notwendiges Wissen zur User Assistance (Abschnitt~\ref{section:standderforschung_user_assistance}) zur Komponentenbeschreibung hinzuzufügen. Unter anderem enthält sie folgende Konzepte und deren Verbindungen untereinander:
@@ -304,6 +317,7 @@ Dieses Wissen wird in VizBoard auf verschiedene Art und Weise genutzt (Abbildung
 
 \subsection{Semantische Datensätze}
 \label{section:standderforschung_semantische_daten}
+\label{section:standderforschung:semantische_daten}
 
 % Grundlagen von RDF, RDFS, OWL. Wichtig weil später Kommentare wieder in einer Ontologie abgelegt werden müssen
 Eine Ontologie ist \enquote{an explicit specification of a conceptualization} \cite{Gruber1995} und wird benutzt um domänenspezifisches Wissen abzubilden \cite{Chandrasekaran1999}. Sie besteht aus mehreren Elementen:
@@ -335,6 +349,7 @@ Mächtigkeit: RDF < RDFS < OWL
 
 \subsection{Informationsvisualisierung}
 \label{section:standderforschung_informationsvisualisierung}
+\label{section:standderforschung:informationsvisualisierung}
 
 % InfoVis Grundlagen. Wichtig weil das die Komponenten sind, mit denen ich zu tun habe.
 
@@ -375,6 +390,7 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 
 \subsubsection{Dargestellte Daten}
 \label{section:standderforschung_dargestellte_daten}
+\label{section:standderforschung:informationsvisualisierung:dargestellte_daten}
 
 \textbf{Eindimensionale Daten} sind beispielsweise Zeitreihen, also Folgen von Daten (1992, 1993, 1995...). Nach Keim können diese aber mit anderen Datenobjekten assoziiert sein. Beispiele für InfoVis eindimensionaler Daten wären demnach ein Index Chart (Abbildung~\ref{figure:index_chart}) oder eine einfache Timeline.
 
@@ -432,6 +448,7 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 
 \subsubsection{Visualisierungstechniken}
 \label{section:standderforschung_Visualisierungstechniken}
+\label{section:standderforschung:informationsvisualisierung:visualisierungstechniken}
 
 % standard 2d/3d
 
@@ -475,6 +492,7 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 
 \subsubsection{Interaktionstechniken}
 \label{section:standderforschung_interaktionstechniken}
+\label{section:standderforschung:informationsvisualisierung:interaktionstechniken}
 
 % dynamische projektionen
 
@@ -528,6 +546,7 @@ todo: Was habe ich daraus jetzt gelernt?
 
 \subsection{User Assistance}
 \label{section:standderforschung_user_assistance}
+\label{section:standderforschung:user_assistance}
 
 % was ist assistance?
 
@@ -607,6 +626,7 @@ Filme? Hier gibt es eine Doktorarbeit, aber die finde ich online nicht \url{http
 
 \subsubsection{Sensemaking}
 \label{section:standderforschung_sensemaking}
+\label{section:standderforschung:user_assistance:sensemaking}
 
 % was ist der unterschied zwischen learning und sensemaking?
 Im vorhergehenden Abschnitt wurde der Prozess der Wissensvermittlung betrachtet. Um Wissen dauerhaft aufzunehmen, müssen Lernende den Inhalt \emph{verstehen}. Der Begriff \enquote{Understanding} (gleichbedeutend mit Sensemaking) wird angewandt, wenn das Gehirn mehr Elemente des Inhalts (z.\,B. Variablen einer Gleichung) verarbeiten muss als ins Arbeitsgedächtnis passen \cite{Sweller1998}. \emph{Verstanden} hat der Lernende dann, wenn diese Elemente zu einem sogenannten Schema (mentales Modell) verarbeitet wurden und als ein einziges Element im Arbeitsgedächtnis gehalten werden können (z\,B. eine komplexe Zahl statt drei Variablen $a$, $b$ und $i$).
@@ -630,6 +650,7 @@ Nachdem betrachtet wurde, wie Verständnis funktioniert, stellt sich die Frage, 
 
 \section{Zusammenfassung}
 \label{section:standderforschung_zusammenfassung}
+\label{section:standderforschung:zusammenfassung}
 
 yay
 
@@ -641,6 +662,7 @@ Hab das Gefühl, dass ich hier irgendwo \cite{Grammel2012} anbringen sollte, dam
 
 \section{Überblick}
 \label{section:konzeption_ueberblick}
+\label{section:konzeption:ueberblick}
 
 \begin{enumerate}
 	\item Was ist das für eine Visualisierung? Z.B. Eine Treemap, die tut das und das, ist für dieses und jenes gut geeignet, hat aber den und den Nachteil, sie zeigt jetzt konkret xy an. Frage: Gehören Vorteile und Nachteile eigentlich nicht eher in den Schritt davor? Weil wenn ich die ausbessern wöllte wäre es jetzt zu spät. Andererseits ist es schon auch gut, daran erinnert zu werden.
@@ -653,6 +675,7 @@ Also am Besten in entsprechende viso:graphic Konzepte (Graphic Representation) h
 
 \section{Bedienung}
 \label{section:konzeption_bedienung}
+\label{section:konzeption:bedienung}
 
 Konzept von Operationen, Aktionen (=Capabilities in Komponentenbeschreibung) und Aktivitäten \cite{Kuutti1996}. In Komponente muss beschrieben werden: Welche Operationen werden auf welchen Objekten (CSS Klassen! IDs mögen automatisch von Ext vergeben werden, aber auf Klassen hat man Einfluss) unterstützt (Doppelklick auf .asdf, Rechtsklick auf .blublu). Welche Operationen führen zu welchen Aktionen (Sortieren, Zoomen, Pannen, ...). Aktivitäten sind langfristige Ziele des Nutzers, die können wir nicht beeinflussen. Assistance wird dann generiert BEVOR der Benutzer sie braucht. Mit PhantomJS, falls wer fragt. 
 
@@ -662,6 +685,7 @@ Animationen mit tatsächlichen DOM Elementen wäre wahrscheinlich verständnisf�
 
 \section{Reporting}
 \label{section:konzeption_reporting}
+\label{section:konzeption:reporting}
 
 Kontext mitschicken zum Bug Report sodass überprüft werden kann, ob die Komponente tatsächlich kaputt ist oder nur falsch verdrahtet wurde. Am Besten Freitext, weil es für den Anfänger-Benutzer eh nicht ersichtlich ist, was falsch läuft. Da braucht man auch keine Kategorisierung vornehmen. Der Report sollte automatisch ein Ticket in irgendeinem Support-System erstellen.
 
@@ -669,11 +693,13 @@ Frage: Wie Anwendungskontext sammeln?
 
 \section{Verlinkung}
 \label{section:konzeption_verlinkung}
+\label{section:konzeption:verlinkung}
 
 Bei der Analyse im DaRe wird schon nach Synonymen über WordNet gesucht. Die kann man versuchen in der DBpedia zu finden und dort den Link zu mehreren relevanten Wikipedia-Artikeln rauszuholen. Wenn man dann wiederum weiß, welche Daten in einem Chart angezeigt werden (WIE? auch für 3.1 wichtig), kann man die Konzepte verlinken.
 
 \section{Kommunikation}
 \label{section:konzeption_kommunikation}
+\label{section:konzeption:kommunikation}
 
 Hier aufpassen, weil es bei edyra schon irgendeinen View gibt, der die Kommunikation anzeigt. Meine Idee war alle Verbindungen der verschiedenen Kanäle explizit sichtbar zu machen, zu animieren wenn etwas passiert und eine Erklärung zu geben (ähnlich 3.2 nur mit 5 panels) warum das passiert: Welche Interaktion mit welchen Elementen löst welches Element aus was wiederum welche Operation ausführt die ihrerseits was macht?
 
@@ -681,6 +707,7 @@ ABER: Die Assistance wird ja a priori generiert da müsste man wohl auch Operati
 
 \section{Kommentare}
 \label{section:konzeption_kommentare}
+\label{section:konzeption:kommentare}
 
 Was ist überhaupt wichtig für Kommentare und welche Arten von Insights gibt es? Text + Markierung in InfoVis damit man weiß, was gemeint ist. Achtung: InfoVis ist interaktiv, kann sich also verändern.
 
@@ -689,6 +716,8 @@ Allgemein: Avatare, Benutzernamen für Credibility. Verlinkung von Kommentaren n
 Markierung: Kann prinzipiell auf Bereichen (in Scatterplot, Balkendiagrammen...) erfolgen oder konkrete Elemente sein (Scatterplot). Bereiche: Erstmal nur Rechtecke aufziehen, aber prinzipiell kanns ein beliebiges Polygon sein. Elemente: So auswählen (data-vizboard-selected Markup). 
 
 Speichern: Komponente definiert Memento um Zustand wiederherzustellen (geht auch über Properties, ist aber für mich umständlicher). Wenn möglich (Scatterplot ja, Treemap nein) Funktion zur Tranformation von Auswahlkoordinaten in Datenpunkte. Kommentare an Elementen einfach so ablegen und Element mit URI referenzieren.
+\subsection{User Interface \& Interaktion}
+\label{section:konzeption:kommentare:ui}
 
 Laden: Mit SPARQL rausziehen, schauen ob die sichtbaren Elemente oder Koordinaten übereinstimmen, overlay bilden, anzeigen.
 
@@ -698,9 +727,11 @@ Wie können Kommentare wieder in Wissensbasis eingebracht werden? Viele Papers d
 
 \section{Synthese}
 \label{section:konzeption_synthese}
+\label{section:konzeption:synthese}
 
 \section{Zusammenfassung}
 \label{section:konzeption_zusammenfassung}
+\label{section:konzeption:zusammenfassung}
 
 %#####################################################
 \printbibliography[title=Literaturverzeichnis]
