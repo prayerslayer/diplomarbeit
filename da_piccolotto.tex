@@ -25,6 +25,8 @@
 ]{scrbook}
 
 \usepackage{mmthesis}
+\usepackage{listings}
+% \usepackage{showkeys} % used to show labels
 \addbibresource{library.bib} % put name of bib file here with extension
 
 %### switches
@@ -77,14 +79,12 @@
 
 % ###################################################
 \section{Motivation}
-\label{section:einleitung_motivation}
 \label{section:einleitung:motivation}
 
 % Hier wird generell eingeleitet, also vermutlich die Problematik zwischen semantischen Datensätzen und Endusern
 
 % ###################################################
 \section{Problemstellung und Zielsetzung}
-\label{section:einleitung_problemstellung}
 \label{section:einleitung:problemstellung}
 
 % Hier wird quasi der Vizboard Workflow umrissen
@@ -99,7 +99,6 @@
 
 % ###################################################
 \section{Aufbau der Arbeit}
-\label{section:einleitung_aufbau}
 \label{section:einleitung:aufbau}
 
 % Aufbau der Arbeit erklären, kommt zum Schluss
@@ -108,11 +107,10 @@
 \chapter{Stand der Forschung und Technik}
 \label{chapter:standderforschung}
 
-Der folgende Abschnitt besteht aus drei Teilen. Zuerst wird die Aufgabenstellung in einem Szenario verdeutlicht (Abschnitt~\ref{section:standderforschung_szenario}). Daraus werden Anforderungen an das Hilfesystem abgeleitet (Abschnitt~\ref{section:standderforschung_anforderungsanalyse}) und danach die Grundlagen von semantischen Daten, Informationsvisualisierungen und Software Support erläutert (Abschnitt~\ref{section:standderforschung_grundlagen}).
+Der folgende Abschnitt besteht aus drei Teilen. Zuerst wird die Aufgabenstellung in einem Szenario verdeutlicht (Abschnitt~\ref{section:standderforschung:szenario}). Daraus werden Anforderungen an das Hilfesystem abgeleitet (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}) und danach die Grundlagen von semantischen Daten, Informationsvisualisierungen und Software Support erläutert (Abschnitt~\ref{section:standderforschung:grundlagen}).
 
 % ###################################################
 \section{Szenario}
-\label{section:standderforschung_szenario}
 \label{section:standderforschung:szenario}
 
 % kurze einleitung noch mal
@@ -151,13 +149,11 @@ In der Tabelle findet sie auch eine Spalte \enquote{SNP}. Anna weiß zwar, dass 
 
 % ###################################################
 \section{Anforderungsanalyse}
-\label{section:standderforschung_anforderungsanalyse}
 \label{section:standderforschung:anforderungsanalyse}
 
-Aus dem Szenario (Kapitel~\ref{section:standderforschung_szenario}) lassen sich nun verschiedene Anforderungen an ein Hilfesystem für komposite Informationsvisualisierungssysteme ableiten.
+Aus dem Szenario (Kapitel~\ref{section:standderforschung:szenario}) lassen sich nun verschiedene Anforderungen an ein Hilfesystem für komposite Informationsvisualisierungssysteme ableiten.
 
 \subsection{Funktionale Anforderungen}
-\label{section:standderforschung_funktionale_anforderungen}
 \label{section:standderforschung:anforderungsanalyse:funktionale_anforderungen}
 
 Blabla
@@ -178,7 +174,6 @@ Blabla
 % social web, weil kommentare implementiert werden
 
 \subsection{Nichtfunktionale Anforderungen}
-\label{section:standderforschung_nichtfunktionale_anforderungen}
 \label{section:standderforschung:anforderungsanalyse:nichtfunktionale_anforderungen}
 
 Bla bla
@@ -196,13 +191,11 @@ Bla bla
 
 % ###################################################
 \section{Grundlagen}
-\label{section:standderforschung_grundlagen}
 \label{section:standderforschung:grundlagen}
 
 Hurrrrr derp herp
 
 \subsection{CRUISe, EDYRA \& VizBoard}
-\label{section:standderforschung_vizboard}
 \label{section:standderforschung:grundlagen:cruise_vizboard}
 
 % grundlagen von cruise edyra vizboard. wichtig weil mein hilfesystem dort eingesetzt wird
@@ -217,13 +210,13 @@ CRUISe \cite{Pietschmann2009, Pietschmann2012} ist ein Framework zur Konstruktio
 
 CRUISe geht davon aus, dass professionelle Softwarentwickler Komponenten zu kompositen Sichten modellieren, welche dann von Endnutzern nur noch aufgerufen werden. EDYRA \cite{Ruempel2011} greift auf das CRUISe Framework zurück, um es Endnutzern selbst zu ermöglichen, diese Aufgabe auszuführen. Dazu schlägt EDYRA zur Laufzeit Komponenten vor, welche sofort integriert oder gelöscht werden können.
 
-VizBoard \cite{Voigt2012} benutzt das CRUISe Framework, um Endnutzern die Möglichkeit zu geben, semantische Datensätze mit Hilfe verschiedener InfoVis verstehen zu können. Abbildung~\ref{figure:vizboard_architektur} zeigt die Architektur von VizBoard. Die Daten werden zuerst aus verschiedenen Quellen in eine semantische Repräsentation konvertiert und im Data Repository (DaRe, 1) gespeichert. Das Component Repository (CoRe, 3) verwaltet die verschiedenen Visualisierungskomponenten (2) und ist für Matching und Ranking von Komponenten zuständig, bevor sie in der Runtime (4) integriert werden. Sowohl das DaRe als auch das CoRe greifen auf die Visualization Ontology (VISO, 5) zurück, die Wissen über verschiedene Aspekte von Visualisierungen, wie z.\,B. Struktur der visualisierten Daten, Mapping der Daten auf visuelle Attribute oder Interaktionsmöglichkeiten, enthält \cite{Voigt2011}.
+VizBoard \cite{Voigt2013} benutzt das CRUISe Framework, um Endnutzern die Möglichkeit zu geben, semantische Datensätze mit Hilfe verschiedener InfoVis verstehen zu können. Abbildung~\ref{figure:vizboard_architektur} zeigt die Architektur von VizBoard. Die Daten werden zuerst aus verschiedenen Quellen in eine semantische Repräsentation konvertiert und im Data Repository (DaRe, 1) gespeichert. Das Component Repository (CoRe, 3) verwaltet die verschiedenen Visualisierungskomponenten (2) und ist für Matching und Ranking von Komponenten zuständig, bevor sie in der Runtime (4) integriert werden. Sowohl das DaRe als auch das CoRe greifen auf die Visualization Ontology (VISO, 5) zurück, die Wissen über verschiedene Aspekte von Visualisierungen, wie z.\,B. Struktur der visualisierten Daten, Mapping der Daten auf visuelle Attribute oder Interaktionsmöglichkeiten, enthält \cite{Polowinski2013}.
 % architekturbild --> vizboard paper
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.75\textwidth]{images/grundlagen-vizboard_architektur.png}
-	\caption{VizBoard Architektur aus \cite{Voigt2012}}
+	\caption{VizBoard Architektur aus \cite{Voigt2013}}
 	\label{figure:vizboard_architektur}
 \end{figure}
 
@@ -234,14 +227,12 @@ VizBoard \cite{Voigt2012} benutzt das CRUISe Framework, um Endnutzern die Mögli
 Im DaRe werden Daten aus verschiedenen Quellen in einer semantischen Repräsentation gespeichert. Dabei durchläuft das DaRe verschiedene Phasen (Abbildung~\ref{figure:dare_phasen}). Zuerst wird der Datensatz \emph{analysiert} und Metainformationen gesammelt, beispielsweise werden Subklassen gezählt und wichtige Konzepte identifiziert. Diese werden an den Datensatz \emph{annotiert}. Zur Laufzeit müssen diese Erkenntnisse wieder aus dem Datensatz \emph{extrahiert} werden. Das DaRe stellt eine REST API zur Verfügung, über die ein Datensatz abgerufen werden kann \cite{Piccolotto2012}.
 
 \subsubsection{Komponentenbeschreibung}
-\label{section:standderforschung_komponentenbeschreibung}
 \label{section:standderforschung:grundlagen:cruise_vizboard:komponentenbeschreibung}
 
 % komponentenbeschreibung 5.1.3
 Komponenten in CRUISe werden generisch und einheitlich durch Properties, Events und Operationen sowie Metainformationen beschrieben. Properties geben Auskunft über den Zustand einer Komponente, also beispielsweise Breite und Höhe oder die Sortierreihenfolge der Elemente. Events weisen andere Komponenten auf interne Zustandsänderungen hin, zum Beispiel wenn sich die Sortierreihenfolge geändert hat. Operationen sind Methoden einer Komponente, die durch Events ausgelöst werden, z.\,B. \texttt{reassignNumbers(order)}, um die Nummerierung der Pins in einer Karte anzupassen. Zu den Metainformationen gehören u.\,a. der Name einer Komponente oder der Preis.
 
 \subsubsection{Kommunikationsmodell}
-\label{section:standderforschung_kommunikationsmodell}
 \label{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}
 
 % kommunikationsmodell 5.2.2
@@ -255,7 +246,6 @@ Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. ei
 \end{figure}
 
 \subsubsection{Laufzeitumgebung}
-\label{section:standderforschung_laufzeitumgebung}
 \label{section:standderforschung:grundlagen:cruise_vizboard:laufzeitumgebung}
 
 Die Laufzeitumgebung (Mashup Runtime Environment, MRE) ist für die Ausführung und Verwaltung der kompositen Anwendung verantwortlich und besteht aus mehreren Modulen (Abbildung~\ref{figure:cruise_mre}).
@@ -271,11 +261,10 @@ Die Laufzeitumgebung (Mashup Runtime Environment, MRE) ist für die Ausführung 
 Der \textbf{Application Manager} initialisiert alle anderen Module und ist für die globale Fehlerbehandlung zuständig. Für den Lebenszyklus der einzelnen Komponenten ist der \textbf{Component Manager} zuständig. Die Integration übernimmt allerdings der \textbf{Integration Manager}. Im Mashup Modell definierte Sichten und Übergänge zwischen ihnen werden vom \textbf{Screenflow Manager} interpretiert. Gerendert werden die Komponenten aber vom \textbf{Layout Manager}. Nachrichten zwischen Komponenten der Anwendung und Modulen der MRE werden durch den \textbf{Event Broker} übermittelt. Sind die Parameter von Event und Operation syntaktisch nicht äquivalent, aber semantisch aufeinander abbildbar (z.\,B. zwei gleiche Konzepte aus verschiedenen Namespaces wie \texttt{dbpedia:city} und \texttt{geonames:city}), übernimmt dies der \textbf{Mediator}. Die dynamische Anpassung der Anwendung (z.\,B. von Komponenten, Layout und Kommunikationsmodell) wird gegebenenfalls durch den \textbf{Adaptation Manager} durchgeführt. Letztlich erlaubt das \textbf{Service Access} Modul Zugriff auf Web-Dienste und Ressourcen im Backend.
 
 \subsubsection{VISO}
-\label{section:standderforschung_viso}
 \label{section:standderforschung:grundlagen:cruise_vizboard:viso}
 
 % viso
-In der Visualization Ontology (VISO) ist Visualisierungswissen gespeichert. Sie kann dabei helfen, zur Laufzeit die Domäne dargestellter Daten zu identifizieren oder notwendiges Wissen zur User Assistance (Abschnitt~\ref{section:standderforschung_user_assistance}) zur Komponentenbeschreibung hinzuzufügen. Unter anderem enthält sie folgende Konzepte und deren Verbindungen untereinander:
+In der Visualization Ontology (VISO) ist Visualisierungswissen gespeichert. Sie kann dabei helfen, zur Laufzeit die Domäne dargestellter Daten zu identifizieren oder notwendiges Wissen zur User Assistance (Abschnitt~\ref{section:standderforschung:user_assistance}) zur Komponentenbeschreibung hinzuzufügen. Unter anderem enthält sie folgende Konzepte und deren Verbindungen untereinander:
 
 \begin{itemize}
 	\item Visualisierte Daten (\texttt{viso:data})
@@ -316,7 +305,6 @@ Dieses Wissen wird in VizBoard auf verschiedene Art und Weise genutzt (Abbildung
 \end{figure}
 
 \subsection{Semantische Datensätze}
-\label{section:standderforschung_semantische_daten}
 \label{section:standderforschung:semantische_daten}
 
 % Grundlagen von RDF, RDFS, OWL. Wichtig weil später Kommentare wieder in einer Ontologie abgelegt werden müssen
@@ -348,7 +336,6 @@ OWL bringt dann Konzepte aus der Logik wie Axiome und Funktionen.
 Mächtigkeit: RDF < RDFS < OWL
 
 \subsection{Informationsvisualisierung}
-\label{section:standderforschung_informationsvisualisierung}
 \label{section:standderforschung:informationsvisualisierung}
 
 % InfoVis Grundlagen. Wichtig weil das die Komponenten sind, mit denen ich zu tun habe.
@@ -389,7 +376,6 @@ Van Wijk \cite{vanWijk2005} stellt ein ähnliches Modell für den Prozess der Wi
 Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen gegeben. Dieser orientiert sich an Keim \cite{Keim2002}, welcher Informationsvisualisierungen nach dargestellten Daten, Visualisierungs- und Interaktionstechnik klassifizierte. Die Abbildungen stammen, sofern nicht anders angegeben, aus \cite{Heer2010}.
 
 \subsubsection{Dargestellte Daten}
-\label{section:standderforschung_dargestellte_daten}
 \label{section:standderforschung:informationsvisualisierung:dargestellte_daten}
 
 \textbf{Eindimensionale Daten} sind beispielsweise Zeitreihen, also Folgen von Daten (1992, 1993, 1995...). Nach Keim können diese aber mit anderen Datenobjekten assoziiert sein. Beispiele für InfoVis eindimensionaler Daten wären demnach ein Index Chart (Abbildung~\ref{figure:index_chart}) oder eine einfache Timeline.
@@ -447,7 +433,6 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 % Am Schluss hat Keim noch Software/Algorithmen, aber ich sehe den Unterschied zu Multidimensionalen Daten nicht. Außerdem kann man - wenn schon mal grundlos neue Kategorien eingeführt werden - dann auch Produktionsprozesse oder what not gesondert betrachten
 
 \subsubsection{Visualisierungstechniken}
-\label{section:standderforschung_Visualisierungstechniken}
 \label{section:standderforschung:informationsvisualisierung:visualisierungstechniken}
 
 % standard 2d/3d
@@ -491,7 +476,6 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 \end{figure}
 
 \subsubsection{Interaktionstechniken}
-\label{section:standderforschung_interaktionstechniken}
 \label{section:standderforschung:informationsvisualisierung:interaktionstechniken}
 
 % dynamische projektionen
@@ -533,7 +517,7 @@ Durch \textbf{Verzerrung} kann ein Bereich der Visualisierung mit hohem Detailgr
 
 % link & brush
 
-\textbf{Linking \& Brushing} wird vor allem bei mehreren verschiedenen Visualisierungen eingesetzt. Die in einer Visualisierung markierten Daten werden auch in allen anderen Visualisierungen hervorgehoben. Das können zum Beispiel Scatterplots (siehe multidimensionale Visualisierungen in Abschnitt~\ref{section:standderforschung_Visualisierungstechniken}), verschiedene Histogramme (Abbildung~\ref{figure:link_brush}\footnote{\url{http://square.github.io/crossfilter/}}) oder gemischte Visualisierungen sein.
+\textbf{Linking \& Brushing} wird vor allem bei mehreren verschiedenen Visualisierungen eingesetzt. Die in einer Visualisierung markierten Daten werden auch in allen anderen Visualisierungen hervorgehoben. Das können zum Beispiel Scatterplots (siehe multidimensionale Visualisierungen in Abschnitt~\ref{section:standderforschung:informationsvisualisierung:visualisierungstechniken}), verschiedene Histogramme (Abbildung~\ref{figure:link_brush}\footnote{\url{http://square.github.io/crossfilter/}}) oder gemischte Visualisierungen sein.
 
 \begin{figure}[htbp]
    \centering
@@ -545,7 +529,6 @@ Durch \textbf{Verzerrung} kann ein Bereich der Visualisierung mit hohem Detailgr
 todo: Was habe ich daraus jetzt gelernt?
 
 \subsection{User Assistance}
-\label{section:standderforschung_user_assistance}
 \label{section:standderforschung:user_assistance}
 
 % was ist assistance?
@@ -625,7 +608,6 @@ Filme? Hier gibt es eine Doktorarbeit, aber die finde ich online nicht \url{http
 
 
 \subsubsection{Sensemaking}
-\label{section:standderforschung_sensemaking}
 \label{section:standderforschung:user_assistance:sensemaking}
 
 % was ist der unterschied zwischen learning und sensemaking?
@@ -633,7 +615,7 @@ Im vorhergehenden Abschnitt wurde der Prozess der Wissensvermittlung betrachtet.
 
 % wie funktioniert der prozess der wissensaneignung?
 
-Klein \cite{Klein2006a} beschreibt in seinem Data/Frame-Modell (Abbildung~\ref{figure:data_frame_model}), wie dieser Prozess funktioniert. \enquote{Data} beschreibt dabei die Elemente des Inhalts und \enquote{Frame} das mentale Modell oder Schema. Ähnlich dem Visual Analytics Process (Abschnitt~\ref{section:standderforschung_informationsvisualisierung}) ist Sensemaking ein iterativer Prozess, aber ohne wirklichen Anfang oder Ende. Der Lernende startet mit einem Frame, versucht die Daten einzupassen und nimmt Anpassungen vor bzw. verwirft ein Frame, wenn es nicht weiter durch Daten gestützt wird. Dabei sollte der Lernende möglichst selbstständig einer Lösung kommen, nicht zu viele Daten gleichzeitig sehen und während des Prozesses keine Hypothesen aufstellen müssen, die nicht überprüft werden können \cite{Klein2006}.
+Klein \cite{Klein2006a} beschreibt in seinem Data/Frame-Modell (Abbildung~\ref{figure:data_frame_model}), wie dieser Prozess funktioniert. \enquote{Data} beschreibt dabei die Elemente des Inhalts und \enquote{Frame} das mentale Modell oder Schema. Ähnlich dem Visual Analytics Process (Abschnitt~\ref{section:standderforschung:informationsvisualisierung}) ist Sensemaking ein iterativer Prozess, aber ohne wirklichen Anfang oder Ende. Der Lernende startet mit einem Frame, versucht die Daten einzupassen und nimmt Anpassungen vor bzw. verwirft ein Frame, wenn es nicht weiter durch Daten gestützt wird. Dabei sollte der Lernende möglichst selbstständig einer Lösung kommen, nicht zu viele Daten gleichzeitig sehen und während des Prozesses keine Hypothesen aufstellen müssen, die nicht überprüft werden können \cite{Klein2006}.
 
 \begin{figure}[htbp]
    \centering
@@ -649,7 +631,6 @@ Während des Verständnisprozesses ist es außerdem hilfreich, Wissen in irgende
 Nachdem betrachtet wurde, wie Verständnis funktioniert, stellt sich die Frage, \emph{was} vermittelt werden soll um Menschen mit wenig InfoVis-Erfahrung zu helfen. Dazu gehört laut Grammel \cite[S. 127]{Grammel2012} unter anderem das mentale Modell des Benutzers zu verwenden, beispielsweise indem dieselben Bezeichnungen verwendet werden, und zu lehren, wie Visualisierungen verwendet und interpretiert werden.
 
 \section{Zusammenfassung}
-\label{section:standderforschung_zusammenfassung}
 \label{section:standderforschung:zusammenfassung}
 
 yay
@@ -658,33 +639,147 @@ yay
 \chapter{Konzeption}
 \label{chapter:konzeption}
 
-Hab das Gefühl, dass ich hier irgendwo \cite{Grammel2012} anbringen sollte, damit man sieht dass ich mir nicht alles aus den Fingern sauge.
+Trolololo. Basierend auf Related Work und Szenario wird Konzept erstellt. Das Konzept ist stark abhängig vom Document Object Model, das heißt wir glauben die Zeit von Flash und Silverlight Charts ist vorbei. Sieht man an D3, Ext4 und der Tatsache, dass Adobe selbst Flash hauptsächlich als Plattform für Spiele und Video sieht http://www.adobe.com/devnet/flashplatform/whitepapers/roadmap.html.
+
+Ziele bei der Hilfe: Siehe nichtfunktionale Anforderungen.
 
 \section{Überblick}
-\label{section:konzeption_ueberblick}
 \label{section:konzeption:ueberblick}
 
+Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wurde deutlich, dass dem Endnutzer zuerst ein Überblick über die verschiedenen ausgewählten Komponenten gegeben werden muss. Dieser beinhaltet folgende Punkte.
+
+% was kommt rein?
+
 \begin{enumerate}
-	\item Was ist das für eine Visualisierung? Z.B. Eine Treemap, die tut das und das, ist für dieses und jenes gut geeignet, hat aber den und den Nachteil, sie zeigt jetzt konkret xy an. Frage: Gehören Vorteile und Nachteile eigentlich nicht eher in den Schritt davor? Weil wenn ich die ausbessern wöllte wäre es jetzt zu spät. Andererseits ist es schon auch gut, daran erinnert zu werden.
-	\item Links zu Tutorials und Erklärungen (siehe Grammel)
-	\item Noch etwas? Bedienung gehört dazu, ist aber ein eigenes Kapitel. Verlinkung von dings auch.
+	\item Art der Visualisierung, z.\,B. \enquote{Balkendiagramm}
+	\item Beschreibung der Visualisierung, z.\,B. \enquote{Ein Diagramm, das durch auf der x-Achse senkrecht stehende, nicht aneinander grenzende Rechtecke die Häufigkeitsverteilung einer diskreten Variable veranschaulicht.}
+	\item Vor- und Nachteile der Visualisierung \cite{Grammel2012}, z.\,B. \enquote{Das Balkendiagramm eignet sich besonders, um wenige Ausprägungen zu veranschaulichen. Bei mehr Kategorien leidet die Anschaulichkeit.}
+	\item Inhalt der Visualisierung, z.\,B. BIP auf der y-Achse und Länder auf der x-Achse.
 \end{enumerate}
 
-Eine Möglichkeit wäre, dass der Komp.entw. eine Beschreibung seiner Komponente verfasst. Vorteil: Nachdem die Komponenten nach CRUISe Konzept schwarze Kisten sind, kann ja IRGENDWAS daherkommen und wir werden nicht alles in der VISO unterbringen können - es wäre also alles abgedeckt. Nachteil: Wer sagt mir, dass der Dev die Sprache meiner Benutzer verwendet? Wenn dann 4 Vis.komp. im View sind, die mit 3 verschiedenen Begriffen aufs selbe referieren, ist das nicht wirklich hilfreich.
-Also am Besten in entsprechende viso:graphic Konzepte (Graphic Representation) hinzufügen. Die Interaktion damit kann aber nicht erklärt werden, nur die Konzepte, weil die konkrete Umsetzung in der Hand des Dev liegt. Also vielleicht erweitern wir auch noch die Komponentenbeschreibung, sodass er eigene Links zu Tutorialvideos oder so einbinden kann. Und dort halt sagen muss, was es für eine Graphical Representation ist. Frage: Wie finde ich raus, welche Daten angezeigt werden? Und wie kann ich alles laden?
+% was bleibt draußen?
+
+% links zu externen quellen
+Nach Grammel \cite{Grammel2012} können Links zu externen Tutorials und Erklärungen hilfreich sein, Endnutzern Visualisierungen zu erklären. Da diese aber nicht durch das Hilfesystem kontrolliert werden, kann es nicht sicherstellen, dass überall ein einheitliches Vokabular benutzt wird. Ein konsistentes Vokabular ist aber wichtig für effektive Hilfestellungen, weswegen dieser Punkt ausgelassen wird. Was allerdings möglich ist, sind vom VizBoard-Betreiber erstellte, vertonte Animationen, die Aufbau und Vor- bzw. Nachteile grafischer Repräsentationen erklären. Da die Anzahl der Repräsentationen endlich ist und nicht alle gleich wichtig sind\footnote{Ein Balkendiagramm ist gängiger und deswegen leichter verständlich als eine Scatterplot Matrix.}, ist der nötige Aufwand gerechtfertigt.
+
+% interaktionshilfen - kommen später
+
+Über die Interaktion mit der Visualisierung wird hier noch keine Aussage gemacht, da sie sehr umfangreich sein kann und den Rahmen des Überblicks sprengen würde. In Abschnitt~\ref{section:konzeption_bedienung} wird eine Hilfestellung zur Bedienung einer Komponente erarbeitet.
+
+% wie wird es umgesetzt?
+
+% abgrenzung zu "der dev macht das"
+Eine Möglichkeit, wie die Beschreibung einer Komponente umgesetzt werden kann, ist sie dem Komponentenentwickler zu überlassen. Er würde sie in die Komponentenbeschreibung einfügen, von wo das Hilfesystem sie dann auslesen kann. Allerdings kann auf diese Weise kein einheitliches Vokabular bezüglich Informationsvisualisierungen sichergestellt werden. Bei Erklärungen ist einheitliches Vokabular aber wichtig, da unterschiedliche Bezeichnungen für dieselben Konzepte kontraproduktiv für das Verständnis sind. Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein solches Vokabular. Deswegen ist es naheliegend, Vor- und Nachteile sowie die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler in der Komponentenbeschreibung hinzufügen, dann kann das Hilfesystem die entsprechenden Daten auslesen. \textbf{Der Inhalt der Visualisierung entspricht dem Domain Assignment, das muss ich wohl noch mal nachlesen wie das genau war.}
+
+\subsection{User Interface und Interaktion}
+\label{section:konzeption:ueberblick:ui}
+
+% überblick über alles: am besten eine tour wo zu jeder komponente so eine infobox aufploppt. die frage des inhalts stellt sich im folgenden.
+
+% hier müssen erstmal die möglichkeiten erwägt werden. immerhin hab ich in den grundlagen von multimedia geschwafelt, jetzt müssen wir hier mal sehen, dass wir es auch ansprechend gestalten.
+
+% Möglichkeit 0: Vertonte Animation, die alles abdeckt. Muss halt kurz gehalten sein wegen Anforderung Verständlichkeit.
+
+% Punkt 1: Geht nur mit Text. Das ist ein Wort.
+
+% Punkt 2: Text. Würde Text vorziehen und Animation optional (s.o.) machen, weil FALLS wer die Sprache nicht versteht kann er den Text immer noch kopieren und in Google Translate hauen.
+
+% Punkt 3: Tabellarischer Text oder Tabelle mit Icons. Problem hauptsächlich da verständliche Icons zu finden, deswegen eher Text.
+
+% Punkt 4: Text. Ist dynamisch, kann von daher in keine a priori erstellte Animation eingebaut werden und Bilder/Videos funktionieren nicht/dauern zu lange.
+
+\subsection{Backend}
+\label{section:konzeption:ueberblick:backend}
+
+% VISO erweitern um: Beschreibung einer graf. Rep., Vor und Nachteile derselben. Erklären, wie genau das funktionieren soll. Wie sehen Vor/Nachteile Tripel aus, wie muss Komp.beschreibung erweitert werden.
+
+Wie würden Vor/Nachteile in der VISO aussehen? Oder ist das Implementierung? Auf alle Fälle gibt es gewisse Eigenschaften (Sichtbarkeit, Unterscheidbarkeit von Elementen zB), die sich positiv oder negativ (Advantage/Disadvantage) unter bestimmten Bedingungen (zu viele Daten, zu wenige Daten, zu viele Farben zB) auswirken können. So müsste man das wohl modellieren. In \texttt{viso:facts} wahrscheinlich.
 
 \section{Bedienung}
-\label{section:konzeption_bedienung}
 \label{section:konzeption:bedienung}
 
-Konzept von Operationen, Aktionen (=Capabilities in Komponentenbeschreibung) und Aktivitäten \cite{Kuutti1996}. In Komponente muss beschrieben werden: Welche Operationen werden auf welchen Objekten (CSS Klassen! IDs mögen automatisch von Ext vergeben werden, aber auf Klassen hat man Einfluss) unterstützt (Doppelklick auf .asdf, Rechtsklick auf .blublu). Welche Operationen führen zu welchen Aktionen (Sortieren, Zoomen, Pannen, ...). Aktivitäten sind langfristige Ziele des Nutzers, die können wir nicht beeinflussen. Assistance wird dann generiert BEVOR der Benutzer sie braucht. Mit PhantomJS, falls wer fragt. 
+Da die Komponenten \enquote{Black Boxes} sind und von verschiedenen Entwicklern stammen, kann der Benutzer weder von verfügbaren möglichen Aktionen wie z.\,B. zoomen noch von einheitlicher Gestaltung der Interaktionen\footnote{Beispielsweise wann eine Interaktion durch \texttt{MouseOver} anstatt \texttt{Click} ausgeführt wird.} ausgehen. Deswegen ist eine Hilfestellung zur Bedienung notwendig.
 
-Form der Assistance? Multimodal (verbal/akustisch und visuell) wäre lt Grundlagen gut, aber von UX Standpunkt aus gesehen nervt plötzlicher Sound tierisch. Vielleicht an/ausschaltbar. Also Comic-Animation in 4 Panels (1: Überblick, 2: Wie 1, dann Zoom auf relevante Elemente, 3: Wie 2, dann Overlay mit Operation (Click, Drag, Hover...), 4: Wie 2, dann wieder rauszoomen und Unterschied sehen
+% wieder erste möglichkeit: dev baut selbst hilfe ein. text+bilder: kein einfluss auf wortwahl, art der bilder, ausführlichkeit etc. Comics: für jede aktion eins, übelster aufwand, kann man nicht verlangen, außerdem 2. wer sagt dass ein prof. sw-entwickler das können soll?
 
-Animationen mit tatsächlichen DOM Elementen wäre wahrscheinlich verständnisfördender, aber das geht entweder mit a) einer Beschreibungssprache für Interaktionen (welche Elemente wie sortiert werden sollen, welche Achsen getauscht werden sollen usw usf) weil der Interaktion in den Komponenten keine Grenzen gesetzt sind oder b) Dev schreibt für jede Interaktion ein Demo-Funktion (die zB Tabellenzeilen hin und herschiebt um Sortierung zu demonstrieren). Probleme a): Sehr umfangreich und trotzdem werden nie alle Fälle abgedeckt sein. Probleme b): Entwicklungsaufwand, uneinheitliches Look \& Feel.
+Am einfachsten würde diese umgesetzt, indem dem Komponentenentwickler eine Möglichkeit gegeben wird, Text und Bilder zu diesem Thema in die Komponentenbeschreibung einzufügen. Das hat allerdings den Nachteil, dass das Hilfesystem keinen Einfluss auf die Wortwahl, Aussehen der Bilder oder Ausführlichkeit der Erklärung hat. Wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:user_assistance}) gezeigt, können Comics außerdem eine effektivere Lösung als Text für User Assistance sein. Allerdings stellt es für den Entwickler erheblichen Mehraufwand dar, für jede mögliche Aktion verschiedene Comicpanels zu erstellen. Davon abgesehen können (und sollen) die gestalterischen Fähigkeiten dazu nicht von ihm erwartet werden und das Problem der Kontrolle über den Inhalt ist auch nicht gelöst.
+
+% also bleibt es an uns hängen.
+
+Um automatisch Comicpanels zur User Assistance erstellen zu können, werden Aktivitäten zunächst nach Kuutti \cite{Kuuti1996} in Operationen, Aktionen und Aktivitäten unterteilt.
+
+\begin{itemize}
+	\item \textbf{Aktivitäten} stellen langfristige Ziele des Benutzers dar, die nicht unmittelbar zu Ergebnissen führen (müssen). In Bezug auf das Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wäre die Aktivität von Anna \enquote{mehr über die geografische Verteilung verschiedener Genvariationen lernen}.
+	\item \textbf{Aktionen} sind Teilziele der Aktivität. Im Szenario sind das \enquote{VizBoard aufrufen}, \enquote{Komponenten auswählen} etc.
+	\item Aktionen bestehen wiederum aus einer Kette von \textbf{Operationen}, also beispielsweise Klicks oder Drags.
+\end{itemize}
+
+Die VISO enthält diese Konzepte bereits im Namensraum \texttt{viso:activity}. Für das Hilfesystem sind Operationen und Aktionen relevant, da Aktivitäten nicht beeinflusst werden können. Aktionen einer Komponente sind beispielsweise zoomen, suchen oder filtern; Operationen sind etwa Klicks, Drags oder Multitouch-Gesten.
+
+Das weitere Verfahren wird gemäß den Grundlagen zu intelligenter Assistance (Abschnitt~\ref{section:standderforschung:grundlagen_user_assistance}) in den Teilschritten Daten sammeln, Assistance generieren und Assistance anbieten erläutert.
+
+\subsection{API und Komponentenbeschreibung}
+
+% ### daten sammeln
+
+Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen eine Aktion ausführen. Um dem beizukommen, werden CSS Selektoren (\enquote{welche Elemente}) und Operationen aus der VISO (\enquote{welche Operationen}) zur Komponentenbeschreibung hinzugefügt. Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind.
+
+\subsection{Generierung der Assistance}
+
+% ### assistance generieren
+
+% warum müssen wir bilder generieren und wie sehen die aus?
+
+Die User Assistance zur Bedienung soll ein Comic werden (für die Gründe dafür siehe Abschnitt~\ref{section:konzeption:bedienung:ui}), der per Definition wiederum aus mehreren Panels besteht, die Bilder und/oder Text enthalten \cite{McCloud1994}. Die Bilder der Panels können nicht a priori gezeichnet werden, da der Inhalt der Komponenten unbekannt ist (\enquote{Black Box} Prinzip). Aus diesem Grund müssen sie automatisch generiert werden. Die einfachste Möglichkeit dazu sind Screenshots der Komponente.
+
+% wie machen wir das?
+
+Dazu wird ein sogenannter \enquote{Headless Browser} verwendet. Das ist ein programmierbarer Browser ohne grafische Benutzeroberfläche, der z.\,B. Screenshots einer Seite abspeichern oder Testskripte ausführen kann. Beispiele sind unter anderem PhantomJS\footnote{\url{http://phantomjs.org/}}, HTMLUnit\footnote{\url{http://htmlunit.sourceforge.net/}} oder Ghost\footnote{\url{http://jeanphix.me/Ghost.py/}}.
+
+% wie läuft das ab?
+
+Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. Sobald eine Komponente hinzugefügt oder upgedatet wurde, parst das CoRe die entsprechende Beschreibung und schickt eine Anfrage an das Hilfemodul\footnote{Dem \enquote{Separation of Concerns} Designprinzip folgend sollte das CoRe, welches schon für Verwaltung, Matching und Ranking der Komponenten verantwortlich ist, nicht auch noch die User Assistance generieren.}. Dieses rendert die Komponente mit Hilfe des Headless Browsers in einer CRUISe Testumgebung. Danach führt es folgende Schritte aus:
+
+\begin{enumerate}
+	\item Erstelle einen Screenshot vom Ausgangszustand der Komponente
+	\item Für jede verfügbare Aktion tue folgendes:
+	\begin{enumerate}
+		\item Finde die Bounding Box der relevanten Elemente
+		\item Hebe relevante Elemente hervor
+		\item Erstelle einen Screenshot der Bounding Box
+		\item Setze Zustand der relevanten Elemente zurück
+		\item Führe die Operation aus oder eine davon, wenn mehrere definiert wurden
+		\item Warte die definierte Anzahl an Sekunden
+		\item Erstelle einen Screenshot vom Ergebnis der Aktion
+	\end{enumerate}
+\end{enumerate}
+
+Das Hilfemodul bietet die erstellten Bilder danach über einen Webservice an, damit das Hilfesystem zur Laufzeit einen Comic generieren kann.
+
+% nachteile
+
+Die vorgestellte Lösung hat auch Nachteile. Zunächst ist sie stark vom Document Object Model (DOM) abhängig, was eine automatische Hilfegenerierung für Komponenten ausschließt, die auf Flash, Silverlight oder ähnlichen Technologien basieren. Da Flash laut Adobe hauptsächlich für Videoauslieferung und Spiele gedacht ist \cite{Adobe2013}, Microsoft HTML5 Silverlight vorzieht \cite{Foley2010} und die JavaScript Bibliothek für Informationsvisualisierungen D3\footnote{\url{http://d3js.org/}} weiterhin beliebt ist\footnote{Mehr als 15000 Stars auf Github am 10.06.2013.}, sollte das nicht ins Gewicht fallen.
+
+Eine weitere Einschränkung ist, dass zeitabhängige Interaktionen wie zum Beispiel \enquote{MouseOver für 3 Sekunden} nicht modelliert werden können. Diese sind im Web aber ohnehin sehr unüblich.
+
+\subsection{User Interface \& Interaktion}
+\label{section:konzeption:bedienung:ui}
+
+% ### assistance anbieten
+
+Hilfestellungen zur Bedienung würde vom Benutzer wahrscheinlich am besten verstanden, wenn sie tatsächlich vorhandene, konkrete Elemente der Komponente verwendete (\enquote{Semantic Transparency} \cite{Kohlhase2009}). Um zu demonstrieren, dass nach einem Klick die Tabelle sortiert sein wird, könnten die Zeilen derselben beispielhaft ihre Position wechseln. Assistance in dieser Form kann auf zwei Arten umgesetzt werden, die beide ihre Nachteile haben. Einerseits könnte eine Beschreibungssprache für Aktionen in der Komponentenbeschreibung angeben, welche Folgen eine Operation haben wird. So könnte das Hilfesystem selbst die Tabellenzeilen beispielhaft sortieren, da es nun weiß, wie der Vorgang \enquote{sortieren} aussieht. Der große Nachteil daran ist, dass es vermutlich immer einen Komponentenentwickler geben wird, der eine nicht vorhandene Aktion in seiner Komponente umsetzen will und sie nicht beschreiben kann. Die zweite Art, semantisch transparente Assistance umzusetzen, ist den Komponentenentwickler für jede Aktion eine Methode in seiner Komponente hinzuzufügen, die diese demonstriert. Zur Laufzeit würde die Methode einfach vom Hilfesystem aufgerufen. Das hat allerdings den Nachteil, dass dem Komponentenentwickler erheblicher Mehraufwand aufgebürdet wird und keine Einheitlichkeit der Assistance garantiert werden kann. Aus diesen Gründen ist eine andere Lösung notwendig.
+
+Die Assistance wird in Form von Comics ausgeliefert, da diese wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) ausgeführt, eine effektive und ansprechende Variante dafür darstellen. Aus den Grundlagen geht ebenfalls hervor, dass eine multimodale Ausgabe (akustisch-verbal und visuell) zur Lerneffektivität beiträgt. Darauf wird aber aus zwei Gründen verzichtet. Einerseits sollen beide Kanäle gleichzeitig ausgegeben werden. Das ist problematisch, weil vier Panels darzustellen wesentlich schneller möglich ist als eine verbale Erklärung für den Vorgang zu sprechen. Die Darstellung der Panels müsste sich der Audioausgabe anpassen und würde wesentlich langsamer vonstatten gehen. Eine nichtfunktionale Anforderung an die Hilfestellung war aber, dass der Benutzer die Hilfe schnell aufnehmen und verarbeiten können soll. Zweitens wird automatische Soundausgabe gemeinhin als schlechte Usability angesehen\footnote{Hauptsächlich weil der Nutzen von Screenreadern dadurch eingeschränkt wird, aber auch weil der Benutzer automatische Wiedergabe nicht kontrollieren kann und die Audiodaten Bandbreite beanspruchen.}.
+
+% jetzt mockups
+
+Multimodal (verbal/akustisch und visuell) wäre lt Grundlagen gut, aber von UX Standpunkt aus gesehen nervt plötzlicher Sound tierisch. Außerdem globales UI Ziel 1: Schnelles Verständnis klappt nicht so dolle mit Audio, weil das muss man fertig hören. Weiters Problem: Gleichzeitigkeit ist lt Grundlagen bei Multimedia nötig, und das kann bedeuten, dass die Animation aufs Audio warten muss oder umgekehrt, was wiederum nicht gut ist. Also Comic-Animation in 4 Panels (1: Überblick, 2: Wie 1, dann Zoom auf relevante Elemente, 3: Wie 2, dann Overlay mit Operation (Click, Drag, Hover...), 4: Wie 2, dann wieder rauszoomen und Unterschied sehen. Die Frage ist noch WER dafür verantwortlich ist: Entweder die MRE (Component Manager) oder wir erweitern das Default Ext Frame, in dem alle Komponenten gekapselt sind.
+
+
+Wie sieht die UI aus? ?-Button in der Titelleiste. Dann Overlay über Komponente, interaktionsförderliche Elemente nicht davon betroffen. Oben liste mit Caps wozu es hilfe gibt (2way). Hover gibt Text "Klicken um Hilfe zu Zoom zu sehen". Klick macht richtiges Overlay wo Comicanimation abgespielt wird.
+
 
 \section{Reporting}
-\label{section:konzeption_reporting}
 \label{section:konzeption:reporting}
 
 Kontext mitschicken zum Bug Report sodass überprüft werden kann, ob die Komponente tatsächlich kaputt ist oder nur falsch verdrahtet wurde. Am Besten Freitext, weil es für den Anfänger-Benutzer eh nicht ersichtlich ist, was falsch läuft. Da braucht man auch keine Kategorisierung vornehmen. Der Report sollte automatisch ein Ticket in irgendeinem Support-System erstellen.
@@ -692,45 +787,157 @@ Kontext mitschicken zum Bug Report sodass überprüft werden kann, ob die Kompon
 Frage: Wie Anwendungskontext sammeln?
 
 \section{Verlinkung}
-\label{section:konzeption_verlinkung}
 \label{section:konzeption:verlinkung}
 
-Bei der Analyse im DaRe wird schon nach Synonymen über WordNet gesucht. Die kann man versuchen in der DBpedia zu finden und dort den Link zu mehreren relevanten Wikipedia-Artikeln rauszuholen. Wenn man dann wiederum weiß, welche Daten in einem Chart angezeigt werden (WIE? auch für 3.1 wichtig), kann man die Konzepte verlinken.
+% einführung - warum brauchen wir verlinkung?
+
+Es ist möglich, dass ein Benutzer in VizBoard auf vollständig (\enquote{Was ist ein Säurezeiger?}) oder teilweise (\enquote{Wie ist das BIP definiert?}) unbekannte Konzepte trifft. Um das Verständnis der Daten zu fördern, müssen diese erklärt werden, weswegen sie mit einer externen Wissensbasis verlinkt sein sollen. Zu erklärende Konzepte werden vermutlich hauptsächlich in Legenden von Visualisierungen zu finden sein, können prinzipiell aber auch in Freitext vorkommen.
+
+\subsection{Backend}
+
+Um zu erklärende Konzepte für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einer dafür vorgesehenen CSS Klasse aus. So können sie über CSS Selektoren gefunden werden. Betreffen die Konzepte Achsen der Visualisierung, ist das korrespondierende DBpedia Konzept bereits im Domain Assignment enthalten. Für frei gewählte Worte müsste eine eigene Anfrage ans Data Repository oder die DBpedia gestellt werden. Von dort wird das Abstract geladen und zusammen mit einem Link präsentiert.
+
+\subsection{User Interface \& Interaktion}
+
 
 \section{Kommunikation}
-\label{section:konzeption_kommunikation}
 \label{section:konzeption:kommunikation}
 
-Hier aufpassen, weil es bei edyra schon irgendeinen View gibt, der die Kommunikation anzeigt. Meine Idee war alle Verbindungen der verschiedenen Kanäle explizit sichtbar zu machen, zu animieren wenn etwas passiert und eine Erklärung zu geben (ähnlich 3.2 nur mit 5 panels) warum das passiert: Welche Interaktion mit welchen Elementen löst welches Element aus was wiederum welche Operation ausführt die ihrerseits was macht?
+Im kompositen Infomationsvisualisierungssystem VizBoard kommunizieren Komponenten miteinander, indem sie Nachrichten austauschen (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}). Dieser Vorgang ist für den Benutzer nicht sichtbar und kann für Verwirrung sorgen, wenn andere Komponenten auf Interaktionen reagieren, die dort nicht geätigt wurden.
 
-ABER: Die Assistance wird ja a priori generiert da müsste man wohl auch Operationen ausführen. Sonst hat man keine Bilder für die andere Komponente. Problematisch ist auch, dass es Operationen geben kann, die auf der UI nix machen. Da sieht man dann keinen Unterschied. Bei Operationen die Parameter brauchen, muss der Dev dann halt Beispieldaten in der Komponentenbeschreibung angeben.
+\subsection{User Interface \& Interaktion}
+\label{section:konzeption:kommunikation:ui}
+
+Der erste Schritt zu einer erfolgreichen Hilfestellung ist die Kommunikation sichtbar zu machen.
+
+Danach sollte erklärt werden, wie diese zustande kam.
+
+\subsection{Backend}
+\label{section:konzeption:kommunikation:backend}
+
+Eigentlich ist schon alles in place, es müssen nur bei der Generierung zusätzlich Operationen betrachtet werden (und gegebenenfalls ausgeschlossen werden können, falls sie die UI nicht ändern).
 
 \section{Kommentare}
-\label{section:konzeption_kommentare}
 \label{section:konzeption:kommentare}
 
-Was ist überhaupt wichtig für Kommentare und welche Arten von Insights gibt es? Text + Markierung in InfoVis damit man weiß, was gemeint ist. Achtung: InfoVis ist interaktiv, kann sich also verändern.
+% allgemeines zu kommentaren. woraus bestehen sie, was müssen sie können.
 
-Allgemein: Avatare, Benutzernamen für Credibility. Verlinkung von Kommentaren notwendig. Tiefe des Antwortbaumes maximal 1, sonst wirds unübersichtlich. Zustand der KOmponente muss wiederhergestellt werden, bevor Kommentar angezeigt werden kann (sonst sinnlos). Kommentare können natürlich nur für denselben Datensatz angezeigt werden.
+Mit Hilfe von Kommentaren können Endnutzer andere auf beobachtete Fakten der Daten wie Ausreisser oder Trends hinweisen und so zum Verständnis beitragen. Ein Kommentar zu einer konkreten Informationsvisualisierung besteht einerseits aus dem Kommentar selbst und andererseits aus einer Referenz auf einen oder mehrere Bereiche der InfoVis, damit eine gemeinsame Grundlage für Diskussionen geschaffen werden kann \cite{Heer2007}. Außerdem sollte es möglich sein, Referenzen auf andere Kommentare herstellen zu können, um Diskussionen zu fördern. Des weiteren sind Weblinks eine wichtige Möglichkeit, um auf externes Wissen zu verweisen.
 
-Markierung: Kann prinzipiell auf Bereichen (in Scatterplot, Balkendiagrammen...) erfolgen oder konkrete Elemente sein (Scatterplot). Bereiche: Erstmal nur Rechtecke aufziehen, aber prinzipiell kanns ein beliebiges Polygon sein. Elemente: So auswählen (data-vizboard-selected Markup). 
+% wie können kommentare umgesetzt werden? dev vs us! warum machen wir es so wie geplant?
 
-Speichern: Komponente definiert Memento um Zustand wiederherzustellen (geht auch über Properties, ist aber für mich umständlicher). Wenn möglich (Scatterplot ja, Treemap nein) Funktion zur Tranformation von Auswahlkoordinaten in Datenpunkte. Kommentare an Elementen einfach so ablegen und Element mit URI referenzieren.
+Prinzipiell gibt es zwei Varianten, wie Kommentare in einer InfoVis-Komponente umgesetzt werden können. In der ersten kümmert sich die Komponente darum, wie und wann sie Kommentare lädt und anzeigt. Der Vorteil daran ist, dass die Handhabung von Kommentaren speziell auf jede Komponente angepasst wird. Allerdings kann so kein einheitliches Look \& Feel gewährleistet werden\footnote{Zwar könnten Designrichtlinien Aussehen und Interaktionen vorschreiben, sie sind aber zwecklos wenn der Komponentenentwickler sie nicht einhält.}. Außerdem erhöht diese Variante den Entwicklungsaufwand der Komponente stark.
+
+In der zweiten Variante ist es Aufgabe des Hilfesystems, Kommentare zu verwalten und anzuzeigen. Die vorhin genannten Nachteile werden hier zu Vorteilen: Einheitliches Look \& Feel wird sichergestellt und der Komponentenentwickler hat keinen zusätzlichen Entwicklungsaufwand. Allerdings hat das Hilfesystem auf Grund des \enquote{Black Box} Prinzips keinen Zugriff auf die in der Komponente verwendeten Daten. Aus demselben Grund kommt hinzu, dass das User Interface für Kommentare sich verschiedenen Interaktionen der Komponente wie z.\,B. scrollen, Tab wechseln, zoomen etc. anpassen muss, ohne darüber informiert zu werden. Um diese Nachteile zu umgehen, wird im folgenden die API einer Komponente und die erforderliche Komponentenbeschreibung erweitert.
+
+\subsection{API und Komponentenbeschreibung}
+\label{section:konzeption:kommentare:api}
+
+% konkreter. was gibt es für kommentare, wie unterscheiden sie sich, was ergeben sich für anforderungen daraus --> keine dynamischen daten, kein unvorhersehbares layout, keine aggregation, memento definieren, 
+
+Bereiche der InfoVis, die von einem Kommentar referenziert werden können, sind entweder Flächen, die Datenpunkte enthalten können oder nicht, oder Datenpunkte selbst (Abbildung~\ref{figure:datenbereiche}). Um Kommentare in anderen Visualisierungskomponenten wiederverwenden zu können ist es sinnvoll, sie mit einer Referenz auf die visualisierten Daten anstatt auf die Komponente abzuspeichern (datenbasierte Kommentare). Damit das möglich ist, müssen drei Voraussetzungen gegeben sein:
+
+\begin{enumerate}
+	\item Die grafische Repräsentation muss Werte von Variablen auf die Position kodieren, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann. Das ist beispielsweise bei einem Scatterplot der Fall, bei einer Treemap nicht. Dort sind Größe und Farbe die visuellen Attribute.  
+	\item Die Komponente muss eine Operation bereitstellen, welche kartesische Koordinaten $(x_1,y_1)$ in Datenbereiche (2000 \$, 14. Mai 1998) transformiert sowie deren Umkehrung. Komponenten sind \enquote{Black Boxes} und es kann deswegen keine Annahme über die verwendete Skala (linear oder logarithmisch) oder andere Interna getroffen werden. Aus diesem Grund ist es nicht möglich, aus Auswahlkoordinaten $(x_1,y_1,x_2,y_2)$ direkt auf Daten zu schließen.
+	\item Die Komponente darf keine Datenverarbeitung in Form von Aggregationen o.\,ä. durchführen, da diese Daten nicht im Data Repository gespeichert sind und es folglich keine Daten enthält, die referenziert werden könnten.
+\end{enumerate}
+
+Erfüllt eine Komponente diese Bedingungen nicht vollständig, können in ihr verfasste Kommentare nur dort wieder angezeigt werden (flächenbasierte Kommentare).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-datenbereiche.png}
+   \caption{Ein Scatterplot mit eingezeichneten Referenzierungsmöglichkeiten: Leere Bereiche (rot), nicht-leere Bereiche (grün) und einzelne Datenpunkte (orange).}
+   \label{figure:datenbereiche}
+\end{figure}
+
+Mit Datenpunkten verhält sich die Situation einfacher. Der Komponentenentwickler kann ihre URI durch ein Datenattribut im DOM (\texttt{data-*}) angeben. Dadurch ist es möglich, sie über CSS Selektoren aufzufinden, auswählbar zu machen und direkt die notwendigen Daten, nämlich deren URI, auszulesen.
+
+Wenn Kommentare angezeigt werden und von anderen Benutzern nachvollzogen werden sollen, muss das Hilfesystem die Komponente in den damals aktiven Zustand zurücksetzen können, da ansonsten die referenzierten Bereiche andere Daten enthalten. Diese Tatsache führt zu weiteren Anforderungen an die Komponente.
+
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item Die Komponente darf keine dynamischen Daten anzeigen, wie zum Beispiel die neuesten Tweets eines Twitter-Accounts.
+	\item Das Layout der Komponente muss vollständig reproduzierbar sein, also zum Beispiel kein Force Directed Layout \cite{Fruchterman1991}.
+	\item Die Komponente muss dem Hilfesystem einen Weg zur Verfügung stellen, mit dem Zustände (wie z.\,B. Zentrum und Zoomlevel einer Karte) gespeichert und wiederhergestellt werden können.
+\end{enumerate}
+
+Bezüglich der letzten Anforderung bietet sich ein Memento-Pattern \cite{Gamma1994} an:
+
+\begin{quote}
+Without violating encapsulation, capture and externalize an object's internal state allowing the object to be restored to this state later.
+\end{quote} 
+
+Der Komponentenentwickler würde das Format des Mementos in der Komponentenbeschreibung definieren, nämlich welche Properties den Zustand der Komponente vollständig beschreiben. Das Hilfesystem kann diese dann über entsprechende Getter/Setter-Methoden -- welche in der API einer Komponente bereits vorgesehen sind -- verändern.
+
 \subsection{User Interface \& Interaktion}
 \label{section:konzeption:kommentare:ui}
 
-Laden: Mit SPARQL rausziehen, schauen ob die sichtbaren Elemente oder Koordinaten übereinstimmen, overlay bilden, anzeigen.
+% ### user interface & interaktion
 
-Offene Fragen: Wie Kommentare zu Datenbereichen abspeichern? Idealerweise URI von datatype property hernehmen und deren grenzwerte (Dollar, 200-5000). ABER! Was ist mit Metadaten, also irgenwelchen Verteilungen oder Abweichungen davon?
+In der Titelleiste gibt es einen Button mit einer Sprechblase. Dort draufgeklickt erscheint ein Popover mit 2 Buttons: Plus und Auge.
 
-Wie können Kommentare wieder in Wissensbasis eingebracht werden? Viele Papers durchsuchen Kommentare nach Termen, die wiederum für Suche oder Kategorisierung verwendet werden können. Möglich wäre positive und negative Kommentare zu klassifizieren und daraus einen Score für den jeweiligen Datensatz zu berechnen um später diese Visualisierung bei der Auswahl niedriger zu ranken. Ansonsten kann wahrscheinlich auch eine ganze Ontologie aus Kommentaren extrahiert werden \url{http://eprints.soton.ac.uk/258194/1/Alani-HLT03-final.pdf}, wenn man die mal definiert hat. Stichworte Text Mining und Knowledge Extraction.
+Plus ist hinzufügen, nach einem Klick wird das Popover mit einer Textbox gefüllt und der Viewport wird abgedunkelt. Man kann nur Rechtecke auf den Viewport hinzufügen, weil so am wenigsten Arbeit für den Dev entsteht. Dafür aber mehr als eins. Oder man wählt Datenpunkte aus. (Frage: Wie dieselbe Interaktion für beide Kommentartypen haben?) Ist man fertig mit dem ganzen, holt die MRE zusätzliche Daten - falls möglich, siehe Treemap - von der Komponente, sendet das ans DaRe zum speichern und setzt die Komponente in AUsgangszustand zurück.
+
+Auge ist anzeigen, nach einem Klick wird eine Liste von Kommentaren im Popover angezeigt. Die kann man auswählen, dann wird der Bereich - falls vorhanden - wieder reingeladen (Vorsicht! Komponente ist interaktiv, zuvor muss also der Zustand zum Zeitpunkt des Kommentars wiederhergestellt werden --> Memento definieren). Jeder Kommentar enthält Text, Bild, Avatar, Benutzernamen, Datum/Uhrzeit, evtl Buttons zum Ändern/Löschen falls eigene Kommentare. Außerdem Anzahl KOmmentare an jeden Datenpunkt überblenden so wie NOtification iCons. Hier sind Kommentare anderer Vis sichtbar.
+
+\subsection{Backend}
+\label{section:konzeption:kommentare:backend}
+
+% ### backend
+
+% welche daten enthält ein gespeichertes kommentar?
+
+Den Ausführungen in Abschnitt~\ref{section:konzeption-kommentare_api} nach enthält ein abgespeichertes Kommentar im DaRe folgende Daten:
+
+\begin{itemize}
+	\item ID des Kommentars, um darauf verweisen zu können
+	\item ID der Komponente, in der der Kommentar verfasst wurde. Das ist notwendig um flächenbasierte Kommentare wiederherstellen zu können. Bei datenbasierten Kommentaren kann eventuell ein Verweis auf die ursprüngliche Komponente erstellt werden.
+	\item ID des Datensatzes, der visualisiert wurde
+	\item URIs der Datatype Properties, die visualisiert wurden
+	\item Memento der Komponente zum Zeitpunkt des Kommentars
+	\item Zeitpunkt des Kommentars
+	\item Verfasser des Kommentars
+	\item Kommentartext
+	\item \textit{Wenn flächenbasiert}
+		\begin{itemize}
+			\item Koordinaten der Auswahlrechtecke, relativ zur linken oberen Ecke der Visualisierung
+			\item Größe der Visualisierung zum Zeitpunkt des Kommentars, um die Auswahlrechtecke entsprechend skalieren zu können, falls notwendig.
+		\end{itemize}
+	\item \textit{Wenn datenbasiert}
+		\begin{itemize}
+			\item Grenzwerte der Datatype Properties
+		\end{itemize}
+	\item URIs der referenzierten Datenpunkte
+\end{itemize}
+
+% wie läuft das mit speichern?
+
+Hat ein Benutzer Bereiche und Datenpunkte referenziert, sowie einen Kommentar geschrieben, sammelt das Hilfesystem die eben beschriebenen Daten der Komponente und sendet sie ans Data Repository. Das Speichern und Laden von Kommentaren liegt in dessen Verantwortung.
+
+% wie läuft das mit laden, vor allem wenn kommentare in anderer komponente gemacht wurden?
+
+Sollen Kommentare angezeigt werden, schickt das Hilfesystem eine entsprechende Anfrage ans DaRe und empfängt die Daten aller relevanten Kommentare. Für flächenbasierte Kommentare ist nichts weiter zu tun, sie können direkt in dieser Komponente angezeigt werden. Um datenbasierte Kommentare anzuzeigen, muss das Hilfesystem zuerst die Datengrenzen in Koordinaten in der Visualisierung transformieren lassen.
+
+% wie können kommentare noch genutzt werden?
+
+Kommentare können auch Metainformationen über die Daten oder Komponente enthalten \cite{Chen2009}. Es wäre denkbar, mittels automatischer Textklassifikation \cite{Sebastiani2002} diese Kommentare zu identifizieren und als positiv oder negativ zu kategorisieren. Daraus ließe sich wiederum eine Bewertung für die Kombination (Datensatz, Komponente) berechnen\footnote{Am einfachsten ginge das indem bei Null gestartet wird und für jeden positiven Kommentar der Zähler um eins erhöht und jeden Negativen um eins verringert wird.}. Der errechnete Wert könnte in Zukunft beim Ranking einer Komponente für einen ausgewählten Datensatz berücksichtigt werden. Wenn der Aufwand dafür gerechtfertigt werden kann, ist es auch möglich, eine -- zuvor definierte -- Ontologie aus Kommentaren zu extrahieren \cite{Alani2003}. Diese könnte zum Beispiel das Qualitätsmanagement von Komponenten automatisieren.
+
+\section{Meta-Hilfe}
+\label{section:konzeption:meta-hilfe}
+Ich bau da grade was ganz schön umfangreiches, das muss man auch erstmal bedienen können. Jetzt stellt sich irgendwie die Frage, wie die Hilfe zum Hilfesystem aussehen soll...
 
 \section{Synthese}
-\label{section:konzeption_synthese}
 \label{section:konzeption:synthese}
 
+Hier führe ich alles aus den letzten Abschnitten zusammen.
+
+\section{Beispiel}
+\label{section:konzeption:beispiel}
+Vielleicht sollte ich ein paar InfoVis aus \cite{Heer2010} exemplarisch durchgehen um zu beweisen, dass das mein Konzept auch funktioniert? Ansonsten müsste man mir das an dieser Stelle einfach glauben, bevor es zur Implementierung geht.
+
 \section{Zusammenfassung}
-\label{section:konzeption_zusammenfassung}
 \label{section:konzeption:zusammenfassung}
 
 %#####################################################
