@@ -674,6 +674,13 @@ Eine Möglichkeit, wie die Beschreibung einer Komponente umgesetzt werden kann, 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:ueberblick:ui}
 
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-ueberblick.png}
+   \caption{UI Mockup des Überblicks}
+   \label{figure:ueberblick}
+\end{figure}
+
 % überblick über alles: am besten eine tour wo zu jeder komponente so eine infobox aufploppt. die frage des inhalts stellt sich im folgenden.
 
 % hier müssen erstmal die möglichkeiten erwägt werden. immerhin hab ich in den grundlagen von multimedia geschwafelt, jetzt müssen wir hier mal sehen, dass wir es auch ansprechend gestalten.
@@ -706,7 +713,7 @@ Am einfachsten würde diese umgesetzt, indem dem Komponentenentwickler eine Mög
 
 % also bleibt es an uns hängen.
 
-Um automatisch Comicpanels zur User Assistance erstellen zu können, werden Aktivitäten zunächst nach Kuutti \cite{Kuuti1996} in Operationen, Aktionen und Aktivitäten unterteilt.
+Um automatisch Comicpanels zur User Assistance erstellen zu können, werden Aktivitäten zunächst nach Kuutti \cite{Kuutti1996} in Operationen, Aktionen und Aktivitäten unterteilt.
 
 \begin{itemize}
 	\item \textbf{Aktivitäten} stellen langfristige Ziele des Benutzers dar, die nicht unmittelbar zu Ergebnissen führen (müssen). In Bezug auf das Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wäre die Aktivität von Anna \enquote{mehr über die geografische Verteilung verschiedener Genvariationen lernen}.
@@ -773,11 +780,30 @@ Die Assistance wird in Form von Comics ausgeliefert, da diese wie in den Grundla
 
 % jetzt mockups
 
-Multimodal (verbal/akustisch und visuell) wäre lt Grundlagen gut, aber von UX Standpunkt aus gesehen nervt plötzlicher Sound tierisch. Außerdem globales UI Ziel 1: Schnelles Verständnis klappt nicht so dolle mit Audio, weil das muss man fertig hören. Weiters Problem: Gleichzeitigkeit ist lt Grundlagen bei Multimedia nötig, und das kann bedeuten, dass die Animation aufs Audio warten muss oder umgekehrt, was wiederum nicht gut ist. Also Comic-Animation in 4 Panels (1: Überblick, 2: Wie 1, dann Zoom auf relevante Elemente, 3: Wie 2, dann Overlay mit Operation (Click, Drag, Hover...), 4: Wie 2, dann wieder rauszoomen und Unterschied sehen. Die Frage ist noch WER dafür verantwortlich ist: Entweder die MRE (Component Manager) oder wir erweitern das Default Ext Frame, in dem alle Komponenten gekapselt sind.
+Die Hilfestellung zur Bedienung wird über einen ?-Button aufgerufen, den der Benutzer vielleicht von nativen Desktop-Applikationen kennt (Abbildung~\ref{figure:bedienung-step1}). Der Viewport der Komponente wird abgedunkelt und nur die Elemente, für die auch Hilfestellungen existieren, bleiben sichtbar. Über dem ?-Button erscheint ein sogenanntes Popover, welches die verfügbaren Aktionen noch einmal auflistet. Die Assistance wird entweder nach einem Klick auf ein sichtbares UI Element oder ein Element der Liste aufgerufen. So kann der Benutzer sowohl die Frage \enquote{Was macht dieser Button?} als auch \enquote{Wie kann ich Aktion XY ausführen?} beantworten.
 
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-bedienung-step1.png}
+   \caption{UI Mockup der Bedienung (Schritt 1)}
+   \label{figure:bedienung-step1}
+\end{figure}
 
-Wie sieht die UI aus? ?-Button in der Titelleiste. Dann Overlay über Komponente, interaktionsförderliche Elemente nicht davon betroffen. Oben liste mit Caps wozu es hilfe gibt (2way). Hover gibt Text "Klicken um Hilfe zu Zoom zu sehen". Klick macht richtiges Overlay wo Comicanimation abgespielt wird.
+Danach werden schrittweise vier Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel zeigt die ganze Komponente. Das zweite Panel startet mit dem gleichen Inhalt wie Panel 1, zoomt dann aber auf die relevanten UI Elemente. Panel 3 startet wiederum mit dem Inhalt von Panel 2, überblendet dann aber eine notwendige Operation. Das vierte Panel startet ebenfalls mit dem Inhalt aus Panel 2, zoomt aber auf eine Gesamtansicht wie in Panel 1 hinaus, sodass der Benutzer den Unterschied sehen kann.
 
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-bedienung-step2.png}
+   \caption{UI Mockup der Bedienung (Schritt 2)}
+   \label{figure:bedienung-step2}
+\end{figure}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-bedienung-comic.png}
+   \caption{UI Mockup des Comics}
+   \label{figure:bedienung-comic}
+\end{figure}
 
 \section{Reporting}
 \label{section:konzeption:reporting}
@@ -785,6 +811,13 @@ Wie sieht die UI aus? ?-Button in der Titelleiste. Dann Overlay über Komponente
 Kontext mitschicken zum Bug Report sodass überprüft werden kann, ob die Komponente tatsächlich kaputt ist oder nur falsch verdrahtet wurde. Am Besten Freitext, weil es für den Anfänger-Benutzer eh nicht ersichtlich ist, was falsch läuft. Da braucht man auch keine Kategorisierung vornehmen. Der Report sollte automatisch ein Ticket in irgendeinem Support-System erstellen.
 
 Frage: Wie Anwendungskontext sammeln?
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-reporting.png}
+   \caption{UI Mockup der Reporting-Funktion}
+   \label{figure:reporting}
+\end{figure}
 
 \section{Verlinkung}
 \label{section:konzeption:verlinkung}
@@ -794,11 +827,20 @@ Frage: Wie Anwendungskontext sammeln?
 Es ist möglich, dass ein Benutzer in VizBoard auf vollständig (\enquote{Was ist ein Säurezeiger?}) oder teilweise (\enquote{Wie ist das BIP definiert?}) unbekannte Konzepte trifft. Um das Verständnis der Daten zu fördern, müssen diese erklärt werden, weswegen sie mit einer externen Wissensbasis verlinkt sein sollen. Zu erklärende Konzepte werden vermutlich hauptsächlich in Legenden von Visualisierungen zu finden sein, können prinzipiell aber auch in Freitext vorkommen.
 
 \subsection{Backend}
+\label{section:konzeption:verlinkung:backend}
 
 Um zu erklärende Konzepte für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einer dafür vorgesehenen CSS Klasse aus. So können sie über CSS Selektoren gefunden werden. Betreffen die Konzepte Achsen der Visualisierung, ist das korrespondierende DBpedia Konzept bereits im Domain Assignment enthalten. Für frei gewählte Worte müsste eine eigene Anfrage ans Data Repository oder die DBpedia gestellt werden. Von dort wird das Abstract geladen und zusammen mit einem Link präsentiert.
 
 \subsection{User Interface \& Interaktion}
 
+Hinter die entsprechend markierten DOM Elemente (siehe Abschnitt~\ref{section:konzeption:verlinkung:backend}) wird ein Fragezeichen eingefügt. Dieses kann angeklickt werden, woraufhin ein Popover mit einer kurzen Erklärung des Konzepts angezeigt wird (Abbildung~\ref{figure:verlinkung}). Das Popover enthält auch einen Link, der den entsprechenden Artikel auf Wikipedia in einem neuen Tab öffnet.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-verlinkung.png}
+   \caption{UI Mockup der Verlinkung}
+   \label{figure:verlinkung}
+\end{figure}
 
 \section{Kommunikation}
 \label{section:konzeption:kommunikation}
@@ -858,7 +900,7 @@ Wenn Kommentare angezeigt werden und von anderen Benutzern nachvollzogen werden 
 
 \begin{enumerate}
 	\setcounter{enumi}{3}
-	\item Die Komponente darf keine dynamischen Daten anzeigen, wie zum Beispiel die neuesten Tweets eines Twitter-Accounts.
+	\item Die Komponente darf keine externen Daten anzeigen, wie zum Beispiel die neuesten Tweets eines Twitter-Accounts. Diese unterliegen nicht der Kontrolle von VizBoard und können nachträglich editiert oder gelöscht werden.
 	\item Das Layout der Komponente muss vollständig reproduzierbar sein, also zum Beispiel kein Force Directed Layout \cite{Fruchterman1991}.
 	\item Die Komponente muss dem Hilfesystem einen Weg zur Verfügung stellen, mit dem Zustände (wie z.\,B. Zentrum und Zoomlevel einer Karte) gespeichert und wiederhergestellt werden können.
 \end{enumerate}
@@ -876,11 +918,59 @@ Der Komponentenentwickler würde das Format des Mementos in der Komponentenbesch
 
 % ### user interface & interaktion
 
-In der Titelleiste gibt es einen Button mit einer Sprechblase. Dort draufgeklickt erscheint ein Popover mit 2 Buttons: Plus und Auge.
+% todo: auswählen/schließen von popovers und kommentaren etc?
 
-Plus ist hinzufügen, nach einem Klick wird das Popover mit einer Textbox gefüllt und der Viewport wird abgedunkelt. Man kann nur Rechtecke auf den Viewport hinzufügen, weil so am wenigsten Arbeit für den Dev entsteht. Dafür aber mehr als eins. Oder man wählt Datenpunkte aus. (Frage: Wie dieselbe Interaktion für beide Kommentartypen haben?) Ist man fertig mit dem ganzen, holt die MRE zusätzliche Daten - falls möglich, siehe Treemap - von der Komponente, sendet das ans DaRe zum speichern und setzt die Komponente in AUsgangszustand zurück.
+In der Titelleiste gibt es einen Button mit einem Sprechblasen-Icon. Nach einem Klick erscheint ein Popover mit zwei Auswahlmöglichkeiten: Auge oder Mund. Das Auge steht für \enquote{Kommentare anzeigen}, der Mund dementsprechend für \enquote{Kommentar verfassen} (Abbildung~\ref{figure:kommentare-step1}).
 
-Auge ist anzeigen, nach einem Klick wird eine Liste von Kommentaren im Popover angezeigt. Die kann man auswählen, dann wird der Bereich - falls vorhanden - wieder reingeladen (Vorsicht! Komponente ist interaktiv, zuvor muss also der Zustand zum Zeitpunkt des Kommentars wiederhergestellt werden --> Memento definieren). Jeder Kommentar enthält Text, Bild, Avatar, Benutzernamen, Datum/Uhrzeit, evtl Buttons zum Ändern/Löschen falls eigene Kommentare. Außerdem Anzahl KOmmentare an jeden Datenpunkt überblenden so wie NOtification iCons. Hier sind Kommentare anderer Vis sichtbar.
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.25\textwidth]{images/konzeption-kommentare-step1.png}
+   \caption{UI Mockup: Auge bedeutet Kommentare anzeigen, Mund bedeutet verfassen}
+   \label{figure:kommentare-step1}
+\end{figure}
+
+Wenn der Benutzer einen Kommentar verfassen will, wechselt der Inhalt des Popovers zu einer Textbox und zwei Buttons zum Bestätigen oder Abbrechen (Abbildung~\ref{figure:kommentare-step4}). Der Viewport der Komponente wird abgedunkelt. Der Benutzer kann nun ein oder mehrere, nicht überlappende Rechtecke erstellen oder Datenpunkte markieren (linker Balken in Abbildung~\ref{figure:kommentare-step4}). Das Hilfesystem setzt die Komponente in den Ausgangszustand zurück, sobald der Benutzer bestätigt oder abgebrochen hat.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.25\textwidth]{images/konzeption-kommentare-step4.png}
+   \caption{UI Mockup: Kommentar hinzufügen}
+   \label{figure:kommentare-step4}
+\end{figure}
+
+Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt des Popovers zu einer Liste aller in dieser Komponente oder zu diesen Daten verfassten Kommentare (Abbildung~\ref{figure:kommentare-step2}, oben). Die Datenpunkte in der Visualisierung werden mit einer Anzeige, wie viele Kommentare dazu vorhanden sind, erweitert (Abbildung~\ref{figure:kommentare-step2}, unten).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.25\textwidth]{images/konzeption-kommentare-step2.png}
+   \caption{UI Mockup: Anzeige aller Kommentare}
+   \label{figure:kommentare-step2}
+\end{figure}
+
+Diese Icons, welche die Anzahl an Kommentaren repräsentieren, können angeklickt werden. Das Popover enthält dann alle Kommentare, die den gewählten Datenpunkt referenzieren (Abbildung~\ref{figure:kommentare-step3c}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.25\textwidth]{images/konzeption-kommentare-step3c.png}
+   \caption{UI Mockup: Alle Kommentare zum ausgewählten Datenpunkt}
+   \label{figure:kommentare-step3c}
+\end{figure}
+
+Kommentare können angewählt werden. Der Viewport der Visualisierung wird dann abgedunkelt und nur die vom ausgewählten Kommentar referenzierten Bereiche bzw. Datenpunkte bleiben sichtbar (Abbildungen~\ref{figure:kommentare-step3a} und~\ref{figure:kommentare-step3b}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.25\textwidth]{images/konzeption-kommentare-step3a.png}
+   \caption{UI Mockup: Ausgewählter Kommentar mit referenziertem Bereich}
+   \label{figure:kommentare-step3a}
+\end{figure}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.25\textwidth]{images/konzeption-kommentare-step3b.png}
+   \caption{UI Mockup: Ausgewählter Kommentar mit zwei referenzierten Datenpunkten}
+   \label{figure:kommentare-step3b}
+\end{figure}
 
 \subsection{Backend}
 \label{section:konzeption:kommentare:backend}
