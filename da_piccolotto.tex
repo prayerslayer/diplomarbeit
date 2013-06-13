@@ -639,9 +639,7 @@ yay
 \chapter{Konzeption}
 \label{chapter:konzeption}
 
-Trolololo. Basierend auf Related Work und Szenario wird Konzept erstellt. Das Konzept ist stark abhängig vom Document Object Model, das heißt wir glauben die Zeit von Flash und Silverlight Charts ist vorbei. Sieht man an D3, Ext4 und der Tatsache, dass Adobe selbst Flash hauptsächlich als Plattform für Spiele und Video sieht http://www.adobe.com/devnet/flashplatform/whitepapers/roadmap.html.
-
-Ziele bei der Hilfe: Siehe nichtfunktionale Anforderungen.
+Basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) und den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen}) wird ein Konzept zur User Assistance für das webbasierte, komposite Informationsvisualisierungssystem VizBoard erstellt. Die Ziele richten sich dabei nach der Anforderungsanalyse (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}).
 
 \section{Überblick}
 \label{section:konzeption:ueberblick}
@@ -653,14 +651,16 @@ Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wurde deut
 \begin{enumerate}
 	\item Art der Visualisierung, z.\,B. \enquote{Balkendiagramm}
 	\item Beschreibung der Visualisierung, z.\,B. \enquote{Ein Diagramm, das durch auf der x-Achse senkrecht stehende, nicht aneinander grenzende Rechtecke die Häufigkeitsverteilung einer diskreten Variable veranschaulicht.}
-	\item Vor- und Nachteile der Visualisierung \cite{Grammel2012}, z.\,B. \enquote{Das Balkendiagramm eignet sich besonders, um wenige Ausprägungen zu veranschaulichen. Bei mehr Kategorien leidet die Anschaulichkeit.}
 	\item Inhalt der Visualisierung, z.\,B. BIP auf der y-Achse und Länder auf der x-Achse.
 \end{enumerate}
 
 % was bleibt draußen?
 
 % links zu externen quellen
-Nach Grammel \cite{Grammel2012} können Links zu externen Tutorials und Erklärungen hilfreich sein, Endnutzern Visualisierungen zu erklären. Da diese aber nicht durch das Hilfesystem kontrolliert werden, kann es nicht sicherstellen, dass überall ein einheitliches Vokabular benutzt wird. Ein konsistentes Vokabular ist aber wichtig für effektive Hilfestellungen, weswegen dieser Punkt ausgelassen wird. Was allerdings möglich ist, sind vom VizBoard-Betreiber erstellte, vertonte Animationen, die Aufbau und Vor- bzw. Nachteile grafischer Repräsentationen erklären. Da die Anzahl der Repräsentationen endlich ist und nicht alle gleich wichtig sind\footnote{Ein Balkendiagramm ist gängiger und deswegen leichter verständlich als eine Scatterplot Matrix.}, ist der nötige Aufwand gerechtfertigt.
+Nach Grammel \cite{Grammel2012} können Links zu Tutorials und Erklärungen hilfreich sein, Endnutzern Visualisierungen zu erklären. Da externe Quellen aber nicht durch das Hilfesystem kontrolliert werden, kann es nicht sicherstellen, dass überall ein einheitliches Vokabular benutzt wird. Ein konsistentes Vokabular ist aber wichtig für effektive Hilfestellungen, weswegen dieser Punkt in dieser Form nicht umgesetzt werden kann. Was allerdings möglich ist, sind vom VizBoard-Betreiber erstellte, vertonte Animationen, die Aufbau und Vor- bzw. Nachteile grafischer Repräsentationen erklären. Da die Anzahl der Repräsentationen endlich ist und nicht alle gleich wichtig sind\footnote{Ein Balkendiagramm ist gängiger und deswegen leichter verständlich als eine Scatterplot Matrix.}, ist der nötige Aufwand gerechtfertigt.
+
+% vor- und nachteile
+Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von verschiedenen Visualisierungstypen und visuellen Mappings lernen sollten \cite[S. 125]{Grammel2012}. Es wäre möglich, allgemeine Eigenschaften von grafischen Repräsentationen in der VISO zu beschreiben. Diese sind abhängig von den dargestellten Daten und den visuellen Mappings. Die Eigenschaft \enquote{Übersichtlichkeit} ist bei einem Balkendiagramm mit drei Balken gegeben (Vorteil), bei 15 Balken nicht (Nachteil). Ähnlich verhält es sich mit der Farbkodierung: Ein Mensch kann bis zu acht Farben in einer Visualisierung gut unterscheiden (Vorteil) \cite{Mazza2009}, aber mehr nicht (Nachteil). Das Hilfesystem müsste dem Benutzer demnach sowohl die unterschiedlichen Vor- und Nachteile als auch deren Bedingungen präsentieren, was sehr viel Information für einen Überblick darstellt. Im schlechtesten Fall besteht auch kein Bezug zur beschriebenen Visualisierung, da keine der aufgeführten Bedingungen erfüllt ist. Aus den beschriebenen Gründen wird auf diese Funktion verzichtet.
 
 % interaktionshilfen - kommen später
 
@@ -669,10 +669,14 @@ Nach Grammel \cite{Grammel2012} können Links zu externen Tutorials und Erkläru
 % wie wird es umgesetzt?
 
 % abgrenzung zu "der dev macht das"
-Eine Möglichkeit, wie die Beschreibung einer Komponente umgesetzt werden kann, ist sie dem Komponentenentwickler zu überlassen. Er würde sie in die Komponentenbeschreibung einfügen, von wo das Hilfesystem sie dann auslesen kann. Allerdings kann auf diese Weise kein einheitliches Vokabular bezüglich Informationsvisualisierungen sichergestellt werden. Bei Erklärungen ist einheitliches Vokabular aber wichtig, da unterschiedliche Bezeichnungen für dieselben Konzepte kontraproduktiv für das Verständnis sind. Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein solches Vokabular. Deswegen ist es naheliegend, Vor- und Nachteile sowie die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler in der Komponentenbeschreibung hinzufügen, dann kann das Hilfesystem die entsprechenden Daten auslesen. \textbf{Der Inhalt der Visualisierung entspricht dem Domain Assignment, das muss ich wohl noch mal nachlesen wie das genau war.}
+Eine Möglichkeit, wie die Beschreibung einer Komponente umgesetzt werden kann, ist sie dem Komponentenentwickler zu überlassen. Er würde sie in die Komponentenbeschreibung einfügen, von wo das Hilfesystem sie dann auslesen kann. Allerdings kann auf diese Weise kein einheitliches Vokabular bezüglich Informationsvisualisierungen sichergestellt werden. Bei Erklärungen ist einheitliches Vokabular aber wichtig, da unterschiedliche Bezeichnungen für dieselben Konzepte kontraproduktiv für das Verständnis sind.
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:ueberblick:ui}
+
+Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten sieht, wird der gesamte Viewport abgedunkelt und ein Popover neben der ersten Komponente (von links oben nach rechts unten) eingeblendet (Abbildung~\ref{figure:ueberblick}). Dort sind die im vorigen Abschnitt erläuterten Informationen zu finden: Die Art der Visualisierung (\enquote{Karte}), darunter eine Beschreibung einer Karte, Informationen zu den dargestellten Daten und zuletzt ein Tutorial-Video, wenn vorhanden. Mit den Pfeilen links und rechts kann zwischen den Beschreibungen für verschiedene Komponenten gewechselt werden. Das Popover wird geschlossen, nachdem der Benutzer außerhalb desselben einen Klick tätigt.
+
+TODO: Wie wieder anzeigen?
 
 \begin{figure}[htbp]
    \centering
@@ -681,26 +685,10 @@ Eine Möglichkeit, wie die Beschreibung einer Komponente umgesetzt werden kann, 
    \label{figure:ueberblick}
 \end{figure}
 
-% überblick über alles: am besten eine tour wo zu jeder komponente so eine infobox aufploppt. die frage des inhalts stellt sich im folgenden.
-
-% hier müssen erstmal die möglichkeiten erwägt werden. immerhin hab ich in den grundlagen von multimedia geschwafelt, jetzt müssen wir hier mal sehen, dass wir es auch ansprechend gestalten.
-
-% Möglichkeit 0: Vertonte Animation, die alles abdeckt. Muss halt kurz gehalten sein wegen Anforderung Verständlichkeit.
-
-% Punkt 1: Geht nur mit Text. Das ist ein Wort.
-
-% Punkt 2: Text. Würde Text vorziehen und Animation optional (s.o.) machen, weil FALLS wer die Sprache nicht versteht kann er den Text immer noch kopieren und in Google Translate hauen.
-
-% Punkt 3: Tabellarischer Text oder Tabelle mit Icons. Problem hauptsächlich da verständliche Icons zu finden, deswegen eher Text.
-
-% Punkt 4: Text. Ist dynamisch, kann von daher in keine a priori erstellte Animation eingebaut werden und Bilder/Videos funktionieren nicht/dauern zu lange.
-
 \subsection{Backend}
 \label{section:konzeption:ueberblick:backend}
 
-% VISO erweitern um: Beschreibung einer graf. Rep., Vor und Nachteile derselben. Erklären, wie genau das funktionieren soll. Wie sehen Vor/Nachteile Tripel aus, wie muss Komp.beschreibung erweitert werden.
-
-Wie würden Vor/Nachteile in der VISO aussehen? Oder ist das Implementierung? Auf alle Fälle gibt es gewisse Eigenschaften (Sichtbarkeit, Unterscheidbarkeit von Elementen zB), die sich positiv oder negativ (Advantage/Disadvantage) unter bestimmten Bedingungen (zu viele Daten, zu wenige Daten, zu viele Farben zB) auswirken können. So müsste man das wohl modellieren. In \texttt{viso:facts} wahrscheinlich.
+Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein Vokabular für Informationsvisualisierungen. Deswegen ist es naheliegend, die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler in der Komponentenbeschreibung hinzufügen, dann kann das Hilfesystem die entsprechenden Daten auslesen. \textbf{Der Inhalt der Visualisierung entspricht dem Domain Assignment, das muss ich wohl noch mal nachlesen wie das genau war.}
 
 \section{Bedienung}
 \label{section:konzeption:bedienung}
@@ -723,8 +711,6 @@ Um automatisch Comicpanels zur User Assistance erstellen zu können, werden Akti
 
 Die VISO enthält diese Konzepte bereits im Namensraum \texttt{viso:activity}. Für das Hilfesystem sind Operationen und Aktionen relevant, da Aktivitäten nicht beeinflusst werden können. Aktionen einer Komponente sind beispielsweise zoomen, suchen oder filtern; Operationen sind etwa Klicks, Drags oder Multitouch-Gesten.
 
-Das weitere Verfahren wird gemäß den Grundlagen zu intelligenter Assistance (Abschnitt~\ref{section:standderforschung:grundlagen_user_assistance}) in den Teilschritten Daten sammeln, Assistance generieren und Assistance anbieten erläutert.
-
 \subsection{API und Komponentenbeschreibung}
 
 % ### daten sammeln
@@ -737,7 +723,7 @@ Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktione
 
 % warum müssen wir bilder generieren und wie sehen die aus?
 
-Die User Assistance zur Bedienung soll ein Comic werden (für die Gründe dafür siehe Abschnitt~\ref{section:konzeption:bedienung:ui}), der per Definition wiederum aus mehreren Panels besteht, die Bilder und/oder Text enthalten \cite{McCloud1994}. Die Bilder der Panels können nicht a priori gezeichnet werden, da der Inhalt der Komponenten unbekannt ist (\enquote{Black Box} Prinzip). Aus diesem Grund müssen sie automatisch generiert werden. Die einfachste Möglichkeit dazu sind Screenshots der Komponente.
+Die User Assistance zur Bedienung soll ein Comic werden (für die Gründe dafür siehe Abschnitt~\ref{section:konzeption:bedienung:ui}), der per Definition wiederum aus mehreren Panels besteht, die Bilder und/oder Text enthalten \cite{McCloud1994}. Die Bilder der Panels können nicht a priori gezeichnet werden, da der Inhalt der Komponenten unbekannt ist (\enquote{Black Box} Prinzip). Aus diesem Grund müssen sie automatisch generiert werden. Die einfachste Möglichkeit dafür sind Screenshots der Komponente.
 
 % wie machen wir das?
 
@@ -776,7 +762,7 @@ Eine weitere Einschränkung ist, dass zeitabhängige Interaktionen wie zum Beisp
 
 Hilfestellungen zur Bedienung würde vom Benutzer wahrscheinlich am besten verstanden, wenn sie tatsächlich vorhandene, konkrete Elemente der Komponente verwendete (\enquote{Semantic Transparency} \cite{Kohlhase2009}). Um zu demonstrieren, dass nach einem Klick die Tabelle sortiert sein wird, könnten die Zeilen derselben beispielhaft ihre Position wechseln. Assistance in dieser Form kann auf zwei Arten umgesetzt werden, die beide ihre Nachteile haben. Einerseits könnte eine Beschreibungssprache für Aktionen in der Komponentenbeschreibung angeben, welche Folgen eine Operation haben wird. So könnte das Hilfesystem selbst die Tabellenzeilen beispielhaft sortieren, da es nun weiß, wie der Vorgang \enquote{sortieren} aussieht. Der große Nachteil daran ist, dass es vermutlich immer einen Komponentenentwickler geben wird, der eine nicht vorhandene Aktion in seiner Komponente umsetzen will und sie nicht beschreiben kann. Die zweite Art, semantisch transparente Assistance umzusetzen, ist den Komponentenentwickler für jede Aktion eine Methode in seiner Komponente hinzuzufügen, die diese demonstriert. Zur Laufzeit würde die Methode einfach vom Hilfesystem aufgerufen. Das hat allerdings den Nachteil, dass dem Komponentenentwickler erheblicher Mehraufwand aufgebürdet wird und keine Einheitlichkeit der Assistance garantiert werden kann. Aus diesen Gründen ist eine andere Lösung notwendig.
 
-Die Assistance wird in Form von Comics ausgeliefert, da diese wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) ausgeführt, eine effektive und ansprechende Variante dafür darstellen. Aus den Grundlagen geht ebenfalls hervor, dass eine multimodale Ausgabe (akustisch-verbal und visuell) zur Lerneffektivität beiträgt. Darauf wird aber aus zwei Gründen verzichtet. Einerseits sollen beide Kanäle gleichzeitig ausgegeben werden. Das ist problematisch, weil vier Panels darzustellen wesentlich schneller möglich ist als eine verbale Erklärung für den Vorgang zu sprechen. Die Darstellung der Panels müsste sich der Audioausgabe anpassen und würde wesentlich langsamer vonstatten gehen. Eine nichtfunktionale Anforderung an die Hilfestellung war aber, dass der Benutzer die Hilfe schnell aufnehmen und verarbeiten können soll. Zweitens wird automatische Soundausgabe gemeinhin als schlechte Usability angesehen\footnote{Hauptsächlich weil der Nutzen von Screenreadern dadurch eingeschränkt wird, aber auch weil der Benutzer automatische Wiedergabe nicht kontrollieren kann und die Audiodaten Bandbreite beanspruchen.}.
+Die Assistance wird in Form von Comics ausgeliefert, da diese wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) ausgeführt, eine effektive und ansprechende Variante dafür darstellen. Aus den Grundlagen geht ebenfalls hervor, dass eine multimodale Ausgabe (akustisch-verbal und visuell) zur Lerneffektivität beiträgt. Darauf wird aber aus zwei Gründen verzichtet. Einerseits sollen beide Kanäle gleichzeitig ausgegeben werden. Das ist problematisch, weil vier Panels darzustellen wesentlich schneller möglich ist als eine verbale Erklärung für den Vorgang zu sprechen. Die Darstellung der Panels müsste sich der Audioausgabe anpassen und würde wesentlich langsamer vonstatten gehen. Eine nichtfunktionale Anforderung an die Hilfestellung ist aber, dass der Benutzer die Hilfe schnell aufnehmen und verarbeiten können soll. Zweitens wird automatische Soundausgabe gemeinhin als schlechte Usability angesehen\footnote{Hauptsächlich weil der Nutzen von Screenreadern dadurch eingeschränkt wird, aber auch weil der Benutzer automatische Wiedergabe nicht kontrollieren kann und die Audiodaten Bandbreite beanspruchen.}.
 
 % jetzt mockups
 
@@ -845,19 +831,42 @@ Hinter die entsprechend markierten DOM Elemente (siehe Abschnitt~\ref{section:ko
 \section{Kommunikation}
 \label{section:konzeption:kommunikation}
 
-Im kompositen Infomationsvisualisierungssystem VizBoard kommunizieren Komponenten miteinander, indem sie Nachrichten austauschen (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}). Dieser Vorgang ist für den Benutzer nicht sichtbar und kann für Verwirrung sorgen, wenn andere Komponenten auf Interaktionen reagieren, die dort nicht geätigt wurden.
+Im kompositen Infomationsvisualisierungssystem VizBoard kommunizieren Komponenten miteinander, indem sie Nachrichten austauschen (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}). Dieser Vorgang ist für den Benutzer nicht sichtbar und kann für Verwirrung sorgen, wenn andere Komponenten auf Interaktionen reagieren, die dort nicht getätigt wurden. Dem wird beigekommen, indem 
+
+\begin{enumerate}
+	\item die Kommunikation zwischen Komponenten sichtbar gemacht wird und
+	\item die Abhängigkeiten zwischen Komponenten wie bei der Bedienung (Abschnitt~\ref{section:konzeption:bedienung}) mit Comics erklärt werden.
+\end{enumerate}
 
 \subsection{User Interface \& Interaktion}
 \label{section:konzeption:kommunikation:ui}
 
-Der erste Schritt zu einer erfolgreichen Hilfestellung ist die Kommunikation sichtbar zu machen.
+Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte einen Brief enthält. Sollten mehrere Empfänger sein, existiert für jeden davon ein Brief.
 
-Danach sollte erklärt werden, wie diese zustande kam.
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-kommunikation-step1.png}
+   \caption{UI Mockup der Verlinkung}
+   \label{figure:kommunikation-step1}
+\end{figure}
+
+Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf den Brief geklickt wurde (Abbildung~\ref{figure:kommunikation-step2}). Ein Popover wird geöffnet, welches einen ähnlichen Comic wie in Abschnitt~\ref{section:konzeption:bedienung} enthält. Im Unterschied dazu enthält der Comic hier fünf Panels. Im ersten wird der Empfänger der Nachricht gezeigt, da diese Komponente auf die Nachricht reagieren muss. Das zweite Panel zeigt den Sender, der den Empfänger durch die Nachricht \enquote{kontrolliert}. Die Panels drei bis fünf zeigen wie gewohnt die relevanten UI Elemente, eine notwendige Operation und das Ergebnis (den Empfänger).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-kommunikation-step2.png}
+   \caption{UI Mockup der Verlinkung}
+   \label{figure:kommunikation-step2}
+\end{figure}
 
 \subsection{Backend}
 \label{section:konzeption:kommunikation:backend}
 
-Eigentlich ist schon alles in place, es müssen nur bei der Generierung zusätzlich Operationen betrachtet werden (und gegebenenfalls ausgeschlossen werden können, falls sie die UI nicht ändern).
+Die Kommunikation zwischen Komponenten kann über den Event Broker (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) nachvollzogen werden, da dieser zentraler Austauschpunkt für Nachrichten ist (ein Mediator nach \cite{Gamma1994}). Das Hilfesystem zeichnet Pfeile, sobald es vom Event Broker über Nachrichten informiert wird.
+
+Für die Generierung des Comics muss das Konzept der User Assistance für Bedienung (Abschnitt~\ref{section:konzeption:bedienung:api}) nur leicht erweitert werden. Da Komponenten mit Operationen auf Nachrichten reagieren (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}), muss für das Ergebnis einer Operation ebenfalls ein Screenshot erstellt werden. Diese sind jetzt schon in der Komponentenbeschreibung vorhanden und können während der Panel-Generierung einfach ausgeführt werden. Sollten die Operationen Parameter erwarten, muss der Komponentenentwickler Beispieldaten in die Komponentenbeschreibung einfügen.
+
+Zu beachten ist allerdings, dass es Operationen geben kann, welche das User Interface der Komponente nicht verändern. Das Konzept der Hilfestellung mit Comics fußt darauf, dass ein sichtbarer Unterschied zwischen dem Zustand vor und nach einer Interaktion bzw. Operation besteht. Ist jener nicht vorhanden, ergibt der Comic keinen Sinn mehr. Deswegen muss dem Komponentenentwickler eine Möglichkeit gegeben werden, Operationen zu identifizieren, für die keine Hilfe generiert werden soll.
 
 \section{Kommentare}
 \label{section:konzeption:kommentare}
@@ -917,8 +926,6 @@ Der Komponentenentwickler würde das Format des Mementos in der Komponentenbesch
 \label{section:konzeption:kommentare:ui}
 
 % ### user interface & interaktion
-
-% todo: auswählen/schließen von popovers und kommentaren etc?
 
 In der Titelleiste gibt es einen Button mit einem Sprechblasen-Icon. Nach einem Klick erscheint ein Popover mit zwei Auswahlmöglichkeiten: Auge oder Mund. Das Auge steht für \enquote{Kommentare anzeigen}, der Mund dementsprechend für \enquote{Kommentar verfassen} (Abbildung~\ref{figure:kommentare-step1}).
 
@@ -1014,14 +1021,59 @@ Sollen Kommentare angezeigt werden, schickt das Hilfesystem eine entsprechende A
 
 Kommentare können auch Metainformationen über die Daten oder Komponente enthalten \cite{Chen2009}. Es wäre denkbar, mittels automatischer Textklassifikation \cite{Sebastiani2002} diese Kommentare zu identifizieren und als positiv oder negativ zu kategorisieren. Daraus ließe sich wiederum eine Bewertung für die Kombination (Datensatz, Komponente) berechnen\footnote{Am einfachsten ginge das indem bei Null gestartet wird und für jeden positiven Kommentar der Zähler um eins erhöht und jeden Negativen um eins verringert wird.}. Der errechnete Wert könnte in Zukunft beim Ranking einer Komponente für einen ausgewählten Datensatz berücksichtigt werden. Wenn der Aufwand dafür gerechtfertigt werden kann, ist es auch möglich, eine -- zuvor definierte -- Ontologie aus Kommentaren zu extrahieren \cite{Alani2003}. Diese könnte zum Beispiel das Qualitätsmanagement von Komponenten automatisieren.
 
-\section{Meta-Hilfe}
+\section{Hilfception}
 \label{section:konzeption:meta-hilfe}
-Ich bau da grade was ganz schön umfangreiches, das muss man auch erstmal bedienen können. Jetzt stellt sich irgendwie die Frage, wie die Hilfe zum Hilfesystem aussehen soll...
+
+In diesem Konzept wurden bisher sechs unterschiedliche Hilfefunktionen erarbeitet: Überblick, Bedienung, Reporting, Verlinkung, Kommunikation und Kommentare. Diese sind zwar optisch und vom Interaktionsdesign her konsistent, bringen aber trotzdem viel zusätzliche Komplexität in die Anwendung. Um die Hilfefunktionen in vollem Umfang nutzen zu können, benötigt der Benutzer einige Informationen. Dazu gehört sowohl das Wissen, welche Hilfefunktionen existieren und wie sie aufgerufen werden, als auch konzeptionelle Dinge, wie z.\,B. dass Kommentare mit Bereichen und/oder Datenpunkten in der Visualisierung assoziiert sind. Es ist anzunehmen, dass diese Meta-Hilfe vor allem bei der ersten Nutzung von VizBoard benötigt wird und danach nicht mehr. Aus diesem Grund sollte sie so unaufdringlich wie möglich gestaltet sein.
+
+Es gibt nun verschiedene Lösungen für die Umsetzung der Meta-Hilfe. Die einfachste davon wäre ein Button in der rechten oberen Ecke, der bei Bedarf eine klassische Hilfefunktion aufruft, welche die verschiedenen Funktionen in Wort und Bild erklärt. Das größte konzeptionelle Problem dabei ist die dreifache Hilfception: Für VizBoard existiert ein Hilfesystem (einfach), welches wiederum erklärt werden muss (zweifach) und wo diese Erklärung zu finden ist, muss dem Benutzer ebenfalls mitgeteilt werden (dreifach). Das bedeutet viel Zeit- und Klickaufwand, bis der Nutzer bei den gewünschten Informationen ist. Aber es hat auch Vorteile: Durch den statischen Hilfeknopf ist immer klar, wo weitergeholfen wird. Außerdem kann er für andere Sachen missbraucht werden, beispielsweise Einstellungen. Ob der Pfeil bei der KOmmunikation immer gerendert werden soll oder nicht.
+
+\subsection{User Interface \& Interaktion}
+
+Mockups 
+
 
 \section{Synthese}
 \label{section:konzeption:synthese}
 
 Hier führe ich alles aus den letzten Abschnitten zusammen.
+
+\subsection{Markup einer Komponente}
+
+\begin{itemize}
+	\item CSS Klasse für automatische Verlinkungen
+	\item CSS Klasse für Wurzelelement der Visualisierung (Kommentare)
+	\item Datenattribut mit URI für Datenpunkte (Kommentare)
+\end{itemize}
+
+\subsection{Komponentenbeschreibung}
+
+\begin{itemize}
+	\item Graf. Repräsentation (Überblick)
+	\item CSS Selektoren zu Capabilities (Bedienung)
+	\item Operationen zu Capabilities (Bedienung)
+	\item Anzahl Sekunden zu warten vor Screenshot (Bedienung)
+	\item Boolean ob Hilfe für Capability/Operation generiert werden soll oder nicht
+	\item Beispieldaten für Operation, falls sie Parameter erwartet
+	\item Memento (Kommentare)
+	\item Boolean ob graf. Rep. die Position kodiert (Kommentare)
+	\item Boolean ob Komponente Datenverarbeitung durchführt (Kommentare)
+	\item Boolean ob externe Daten angezeigt werden (Kommentare)
+	\item Boolean ob Layout vollständig reproduzierbar ist (Kommentare)
+\end{itemize}
+
+\subsection{API einer Komponente}
+
+\begin{itemize}
+	\item Funktion, die Koordinaten in Datenpunkte umrechnet (Kommentare)
+	\item Deren Umkehrung (Kommentare)
+\end{itemize}
+
+\subsection{VISO}
+
+\begin{itemize}
+	\item Beschreibung einer graf. Repräsentation (Überblick)
+\end{itemize}
 
 \section{Beispiel}
 \label{section:konzeption:beispiel}
