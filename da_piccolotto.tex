@@ -1026,12 +1026,25 @@ Kommentare können auch Metainformationen über die Daten oder Komponente enthal
 
 In diesem Konzept wurden bisher sechs unterschiedliche Hilfefunktionen erarbeitet: Überblick, Bedienung, Reporting, Verlinkung, Kommunikation und Kommentare. Diese sind zwar optisch und vom Interaktionsdesign her konsistent, bringen aber trotzdem viel zusätzliche Komplexität in die Anwendung. Um die Hilfefunktionen in vollem Umfang nutzen zu können, benötigt der Benutzer einige Informationen. Dazu gehört sowohl das Wissen, welche Hilfefunktionen existieren und wie sie aufgerufen werden, als auch konzeptionelle Dinge, wie z.\,B. dass Kommentare mit Bereichen und/oder Datenpunkten in der Visualisierung assoziiert sind. Es ist anzunehmen, dass diese Meta-Hilfe vor allem bei der ersten Nutzung von VizBoard benötigt wird und danach nicht mehr. Aus diesem Grund sollte sie so unaufdringlich wie möglich gestaltet sein.
 
-Es gibt nun verschiedene Lösungen für die Umsetzung der Meta-Hilfe. Die einfachste davon wäre ein Button in der rechten oberen Ecke, der bei Bedarf eine klassische Hilfefunktion aufruft, welche die verschiedenen Funktionen in Wort und Bild erklärt. Das größte konzeptionelle Problem dabei ist die dreifache Hilfception: Für VizBoard existiert ein Hilfesystem (einfach), welches wiederum erklärt werden muss (zweifach) und wo diese Erklärung zu finden ist, muss dem Benutzer ebenfalls mitgeteilt werden (dreifach). Das bedeutet viel Zeit- und Klickaufwand, bis der Nutzer bei den gewünschten Informationen ist. Aber es hat auch Vorteile: Durch den statischen Hilfeknopf ist immer klar, wo weitergeholfen wird. Außerdem kann er für andere Sachen missbraucht werden, beispielsweise Einstellungen. Ob der Pfeil bei der KOmmunikation immer gerendert werden soll oder nicht.
+Es gibt nun verschiedene Lösungen für die Umsetzung der Meta-Hilfe. Die einfachste davon wäre ein Button in der rechten oberen Ecke, der bei Bedarf eine klassische Hilfefunktion aufruft, welche die verschiedenen Funktionen in Wort und Bild erklärt. Das größte konzeptionelle Problem dabei ist die dreifache Hilfception: Für VizBoard existiert ein Hilfesystem (einfach), welches wiederum erklärt werden muss (zweifach) und wo diese Erklärung zu finden ist, muss dem Benutzer ebenfalls mitgeteilt werden (dreifach). Das bedeutet relativ viel Zeit- und Klickaufwand, bis der Nutzer bei den gewünschten Informationen ist. Aber es hat auch Vorteile: Durch den statischen Hilfeknopf ist immer klar, wo weitergeholfen wird. Außerdem kann er gegebenenfalls für andere Sachen benutzt werden, beispielsweise Einstellungen. Ob der Pfeil bei der Kommunikation immer gerendert werden soll oder nicht.
+
+Die Alternative zum statischen Button wäre dem Benutzer dynamisch und kontextabhängig Hilfe anzubieten, beispielsweise in Form von Notifications wie bei OSX. So könnten ihm Erklärungen zu den Kommentaren angeboten werden, sobald er auf den Kommentar-Button geklickt hat oder eine allgemeine Hilfe, wenn er längere Zeit keine Aktion ausgeführt hat. Der große Vorteil daran ist, dass nur die Benutzer die Meta-Hilfe sehen, welche sie auch benötigen. Allerdings hat diese Lösung einige Nachteile. Zunächst ist es so, dass Notifications nach einer festgelegten Zeitspanne wieder verschwinden müssen, da sie sonst stören. Dadurch ist es dem Benutzer unmöglich, aus eigener Initiative zur Meta-Hilfe zu gelangen. Hinzu kommt, dass die Meta-Hilfe für die meisten Funktionen recht kurz ausfällt. Beim Überblick beispielsweise kann der Benutzer ohnehin nicht mehr machen als vor oder zurück zu navigieren und das Popover zu schließen. Unbedingt notwendig wäre es deswegen nur bei Kommentaren und der Bedienung. Wenn die Hinweise auf die Meta-Hilfe aber nur bei zwei von sechs Funktionen erscheinen, ist das zu inkonsistent und wirkt eher irritierend. Davon abgesehen müssen für die kontextabhängige Hilfe einige Probleme bewältigt werden, wenn sie wie gewünscht funktionieren soll. Das Hilfesystem muss Regeln kennen, wann Hilfe angeboten werden soll. Die Reaktionen des Benutzers darauf sollen wieder in die Wissensbasis einfließen, damit das System daraus lernen kann. Das ist ganz schön viel Arbeit dafür, dass die Meta-Hilfe in dieser Arbeit nicht im Vordergrund steht. Deswegen gehen wir mit dem statischen Button. So.
 
 \subsection{User Interface \& Interaktion}
 
-Mockups 
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-meta-step1.png}
+   \caption{UI Mockup: Statischer Button für Meta-Hilfe}
+   \label{figure:meta-step1}
+\end{figure}
 
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-meta-step2.png}
+   \caption{UI Mockup: Meta-Hilfe}
+   \label{figure:meta-step2}
+\end{figure}
 
 \section{Synthese}
 \label{section:konzeption:synthese}
