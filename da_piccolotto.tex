@@ -305,7 +305,7 @@ Dieses Wissen wird in VizBoard auf verschiedene Art und Weise genutzt (Abbildung
 \end{figure}
 
 \subsection{Semantische Datensätze}
-\label{section:standderforschung:semantische_daten}
+\label{section:standderforschung:grundlagen:semantische_daten}
 
 % Grundlagen von RDF, RDFS, OWL. Wichtig weil später Kommentare wieder in einer Ontologie abgelegt werden müssen
 Eine Ontologie ist \enquote{an explicit specification of a conceptualization} \cite{Gruber1995} und wird benutzt um domänenspezifisches Wissen abzubilden \cite{Chandrasekaran1999}. Sie besteht aus mehreren Elementen:
@@ -318,7 +318,7 @@ Eine Ontologie ist \enquote{an explicit specification of a conceptualization} \c
 	\item Außerdem existieren noch Axiome, Regeln, Funktionen und Einschränkungen, welche die Logik einer Ontologie beschreiben.
 \end{itemize}
 
-Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortium (W3C) verschiedene Beschreibungssprachen eingeführt. Die bekanntesten sind Resource Description Framework Schema (RDFS) und Web Ontology Language (OWL). Mit diesen Sprachen lässt sich unterschiedlich viel Semantik u.\,a. in Form von Ontologien, Thesauren oder Vokabularen ausdrücken; die Komplexität der Dokumente und damit der Aufwand, sie zu erstellen, verhalten sich aber direkt proportional (siehe Abbildung~\ref{figure:semantic_spectrum}).
+Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortium (W3C) verschiedene Beschreibungssprachen eingeführt. Die bekanntesten sind Resource Description Framework (RDF), RDF Schema (RDFS) und Web Ontology Language (OWL). Mit diesen Sprachen lässt sich unterschiedlich viel Semantik u.\,a. in Form von Ontologien, Thesauren oder Vokabularen ausdrücken; die Komplexität der Dokumente und damit der Aufwand, sie zu erstellen, verhalten sich aber direkt proportional (siehe Abbildung~\ref{figure:semantic_spectrum}).
 
 \begin{figure}[htbp]
 	\centering
@@ -327,16 +327,20 @@ Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortiu
 	\label{figure:semantic_spectrum}
 \end{figure}
 
-Sprache mit wenigsten Features, aber sehr verbreitet: RDF, hier nur Tripel der Form (S, P, O).
+% rdf
 
-Klassen und andere Schemainformationen mit RDFS.
+RDF ist von den genannten die Sprache mit den wenigsten Features, sie kann nur Tripel der Form (Subjekt, Prädikat, Objekt) darstellen. Die Elemente der Tripel sind Resourcen (durch URIs gekennzeichnet), welche Objekte beschreiben. So drückt der Tripel (\texttt{http://alice.de}, \texttt{http://foaf.de/knows}, \texttt{http://bob.de}) aus, dass das Element \enquote{Alice} mit \enquote{Bob} über die Relation \enquote{knows} verbunden ist. In RDF existieren noch keine Vererbung, Klassen, Properties oder Logik.
 
-OWL bringt dann Konzepte aus der Logik wie Axiome und Funktionen.
+% rdfs
 
-Mächtigkeit: RDF < RDFS < OWL
+RDFS ist eine Erweiterung von RDF, nämlich um Klassen und Vererbung, Datenattribute und Objektattribute. Allerdings ist RDFS damit noch immer nicht so mächtig wie OWL.
+
+% owl
+
+OWL erweitert wiederum RDFS um einige Konzepte. So können beispielsweise Axiome definiert werden, Attribute können als transitiv oder symmetrisch deklariert werden, es existieren Mengenoperationen und Kardinalitäten und Wertebereiche können eingeschränkt werden. OWL existiert in zwei Versionen, da in den meisten Fällen nicht der volle Funktionsumfang benötigt wird: OWL Lite ist für Anwendungen gedacht, die kaum mehr als eine Klassenhierarchie und Attribute benötigen. OWL-DL ist auf die Logik in der Ontologie fokussiert und wird vor allem für Reasoner eingesetzt, um selbstständig Schlüsse innerhalb des vorgegebenen formalen Systems ziehen zu können. OWL 2 wurde 2009 eingeführt, dieser Standard erweitert OWL zum Beispiel um asymmetrische, reflexive und disjunkte Attribute.
 
 \subsection{Informationsvisualisierung}
-\label{section:standderforschung:informationsvisualisierung}
+\label{section:standderforschung:grundlagen:informationsvisualisierung}
 
 % InfoVis Grundlagen. Wichtig weil das die Komponenten sind, mit denen ich zu tun habe.
 
@@ -354,6 +358,8 @@ Beispiele dafür sind Balkendiagramme, Treemaps \cite{Shneiderman1992} und Paral
    \caption{Parallel Coordinates}
    \label{figure:parallel_coordinates}
 \end{figure}
+
+% visualisierungsprozess
 
 Informationsvisualisierungen können besonders bei der Exploration großer Datenmengen hilfreich sein \cite{Kohlhammer2011}. Die Wissensaneignung erfolgt dabei iterativ (Abbildung~\ref{figure:visual_analytics_process}). Zuerst werden Daten auf eine Visualisierung gemappt, deren Parameter vom Benutzer geändert werden können. Daraus lernt dieser etwas über die Daten und kann danach (\enquote{Feedback loop}) von vorne anfangen und eine andere Visualisierung wählen oder die Daten transformieren.
 
@@ -373,10 +379,12 @@ Van Wijk \cite{vanWijk2005} stellt ein ähnliches Modell für den Prozess der Wi
    \label{figure:visualization_model}
 \end{figure}
 
+% überblick über infovis
+
 Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen gegeben. Dieser orientiert sich an Keim \cite{Keim2002}, welcher Informationsvisualisierungen nach dargestellten Daten, Visualisierungs- und Interaktionstechnik klassifizierte. Die Abbildungen stammen, sofern nicht anders angegeben, aus \cite{Heer2010}.
 
 \subsubsection{Dargestellte Daten}
-\label{section:standderforschung:informationsvisualisierung:dargestellte_daten}
+\label{section:standderforschung:grundlagen:informationsvisualisierung:dargestellte_daten}
 
 \textbf{Eindimensionale Daten} sind beispielsweise Zeitreihen, also Folgen von Daten (1992, 1993, 1995...). Nach Keim können diese aber mit anderen Datenobjekten assoziiert sein. Beispiele für InfoVis eindimensionaler Daten wären demnach ein Index Chart (Abbildung~\ref{figure:index_chart}) oder eine einfache Timeline.
 
@@ -433,7 +441,7 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 % Am Schluss hat Keim noch Software/Algorithmen, aber ich sehe den Unterschied zu Multidimensionalen Daten nicht. Außerdem kann man - wenn schon mal grundlos neue Kategorien eingeführt werden - dann auch Produktionsprozesse oder what not gesondert betrachten
 
 \subsubsection{Visualisierungstechniken}
-\label{section:standderforschung:informationsvisualisierung:visualisierungstechniken}
+\label{section:standderforschung:grundlagen:informationsvisualisierung:visualisierungstechniken}
 
 % standard 2d/3d
 
@@ -476,7 +484,7 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 \end{figure}
 
 \subsubsection{Interaktionstechniken}
-\label{section:standderforschung:informationsvisualisierung:interaktionstechniken}
+\label{section:standderforschung:grundlagen:informationsvisualisierung:interaktionstechniken}
 
 % dynamische projektionen
 
@@ -529,7 +537,7 @@ Durch \textbf{Verzerrung} kann ein Bereich der Visualisierung mit hohem Detailgr
 todo: Was habe ich daraus jetzt gelernt?
 
 \subsection{User Assistance}
-\label{section:standderforschung:user_assistance}
+\label{section:standderforschung:grundlagen:user_assistance}
 
 % was ist assistance?
 
@@ -608,7 +616,7 @@ Filme? Hier gibt es eine Doktorarbeit, aber die finde ich online nicht \url{http
 
 
 \subsubsection{Sensemaking}
-\label{section:standderforschung:user_assistance:sensemaking}
+\label{section:standderforschung:grundlagen:user_assistance:sensemaking}
 
 % was ist der unterschied zwischen learning und sensemaking?
 Im vorhergehenden Abschnitt wurde der Prozess der Wissensvermittlung betrachtet. Um Wissen dauerhaft aufzunehmen, müssen Lernende den Inhalt \emph{verstehen}. Der Begriff \enquote{Understanding} (gleichbedeutend mit Sensemaking) wird angewandt, wenn das Gehirn mehr Elemente des Inhalts (z.\,B. Variablen einer Gleichung) verarbeiten muss als ins Arbeitsgedächtnis passen \cite{Sweller1998}. \emph{Verstanden} hat der Lernende dann, wenn diese Elemente zu einem sogenannten Schema (mentales Modell) verarbeitet wurden und als ein einziges Element im Arbeitsgedächtnis gehalten werden können (z\,B. eine komplexe Zahl statt drei Variablen $a$, $b$ und $i$).
@@ -664,7 +672,7 @@ Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von vers
 
 % interaktionshilfen - kommen später
 
-Über die Interaktion mit der Visualisierung wird hier noch keine Aussage gemacht, da sie sehr umfangreich sein kann und den Rahmen des Überblicks sprengen würde. In Abschnitt~\ref{section:konzeption_bedienung} wird eine Hilfestellung zur Bedienung einer Komponente erarbeitet.
+Über die Interaktion mit der Visualisierung wird hier noch keine Aussage gemacht, da sie sehr umfangreich sein kann und den Rahmen des Überblicks sprengen würde. In Abschnitt~\ref{section:konzeption:bedienung} wird eine Hilfestellung zur Bedienung einer Komponente erarbeitet.
 
 % wie wird es umgesetzt?
 
@@ -679,16 +687,14 @@ Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten s
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.75\textwidth]{images/konzeption-ueberblick.png}
-   \caption{UI Mockup des Überblicks}
+   \caption{UI Mockup: Überblick}
    \label{figure:ueberblick}
 \end{figure}
 
 \subsection{Backend}
 \label{section:konzeption:ueberblick:backend}
 
-Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein Vokabular für Informationsvisualisierungen. Deswegen ist es naheliegend, die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler in der Komponentenbeschreibung hinzufügen, dann kann das Hilfesystem die entsprechenden Daten auslesen.
-
-\textbf{Der Inhalt der Visualisierung entspricht dem Domain Assignment, das muss ich wohl noch mal nachlesen wie das genau war.}
+Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein Vokabular für Informationsvisualisierungen. Deswegen ist es naheliegend, die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler in der Komponentenbeschreibung hinzufügen, dann kann das Hilfesystem die entsprechenden Daten auslesen. Der Inhalt der Visualisierung entspricht dem Domain Assignment, welches der Komponente von der MRE mitgeschickt wird.
 
 \section{Bedienung}
 \label{section:konzeption:bedienung}
@@ -697,11 +703,16 @@ Da die Komponenten \enquote{Black Boxes} sind und von verschiedenen Entwicklern 
 
 % wieder erste möglichkeit: dev baut selbst hilfe ein. text+bilder: kein einfluss auf wortwahl, art der bilder, ausführlichkeit etc. Comics: für jede aktion eins, übelster aufwand, kann man nicht verlangen, außerdem 2. wer sagt dass ein prof. sw-entwickler das können soll?
 
-Am einfachsten würde diese umgesetzt, indem dem Komponentenentwickler eine Möglichkeit gegeben wird, Text und Bilder zu diesem Thema in die Komponentenbeschreibung einzufügen. Das hat allerdings den Nachteil, dass das Hilfesystem keinen Einfluss auf die Wortwahl, Aussehen der Bilder oder Ausführlichkeit der Erklärung hat. Wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:user_assistance}) gezeigt, können Comics außerdem eine effektivere Lösung als Text für User Assistance sein. Allerdings stellt es für den Entwickler erheblichen Mehraufwand dar, für jede mögliche Aktion verschiedene Comicpanels zu erstellen. Davon abgesehen können (und sollen) die gestalterischen Fähigkeiten dazu nicht von ihm erwartet werden und das Problem der Kontrolle über den Inhalt ist auch nicht gelöst.
+Am einfachsten würde diese umgesetzt, indem dem Komponentenentwickler eine Möglichkeit gegeben wird, Text und Bilder zu diesem Thema in die Komponentenbeschreibung einzufügen. Das hat allerdings den Nachteil, dass das Hilfesystem keinen Einfluss auf die Wortwahl, Aussehen der Bilder oder Ausführlichkeit der Erklärung hat. Wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) gezeigt, können Comics außerdem eine effektivere Lösung als Text für User Assistance sein. Allerdings stellt es für den Entwickler erheblichen Mehraufwand dar, für jede mögliche Aktion verschiedene Comicpanels zu erstellen. Davon abgesehen können (und sollen) die gestalterischen Fähigkeiten dazu nicht von ihm erwartet werden und das Problem der Kontrolle über den Inhalt ist auch nicht gelöst.
 
 % also bleibt es an uns hängen.
 
-Um mögliche Aktionen des Benutzers zu klassifizieren, wird die hierarchische Aktivitätstheorie nach Kuutti \cite{Kuutti1996} zurückgegriffen:
+\subsection{API und Komponentenbeschreibung}
+\label{section:konzeption:bedienung:api}
+
+% ### daten sammeln
+
+Die VISO enthält im Namensraum \texttt{viso:activity} Konzepte der hierarchischen Aktivitätstheorie nach Kuutti \cite{Kuutti1996}:
 
 \begin{itemize}
 	\item \textbf{Aktivitäten} stellen langfristige Ziele des Benutzers dar, die nicht unmittelbar zu Ergebnissen führen (müssen). In Bezug auf das Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wäre die Aktivität von Anna \enquote{mehr über die geografische Verteilung verschiedener Genvariationen lernen}.
@@ -709,12 +720,7 @@ Um mögliche Aktionen des Benutzers zu klassifizieren, wird die hierarchische Ak
 	\item Aktionen bestehen wiederum aus einer Kette von \textbf{Operationen}, also beispielsweise Klicks oder Drags.
 \end{itemize}
 
-Die VISO enthält diese Konzepte bereits im Namensraum \texttt{viso:activity}. Für das Hilfesystem sind Operationen und Aktionen relevant, da Aktivitäten nicht beeinflusst werden können. Aktionen einer Komponente sind beispielsweise zoomen, suchen oder filtern; Operationen sind etwa Klicks, Drags oder Multitouch-Gesten.
-
-\subsection{API und Komponentenbeschreibung}
-\label{section:konzeption:bedienung:api}
-
-% ### daten sammeln
+Für das Hilfesystem sind Operationen und Aktionen relevant, da Aktivitäten nicht beeinflusst werden können. Aktionen einer Komponente sind beispielsweise zoomen, suchen oder filtern; Operationen sind etwa Klicks, Drags oder Multitouch-Gesten.
 
 Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden CSS Selektoren (\enquote{welche Elemente}) und Operationen aus der VISO (\enquote{welche Operationen}) zur Komponentenbeschreibung hinzugefügt. Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind.
 
@@ -762,14 +768,14 @@ Das Hilfemodul bietet die erstellten Bilder danach über einen Webservice an, da
 
 Die vorgestellte Lösung hat auch Nachteile. Zunächst ist sie stark vom Document Object Model (DOM) abhängig, was eine automatische Hilfegenerierung für Komponenten ausschließt, die auf Flash, Silverlight oder ähnlichen Technologien basieren. Da Flash laut Adobe hauptsächlich für Videoauslieferung und Spiele gedacht ist \cite{Adobe2013}, Microsoft HTML5 Silverlight vorzieht \cite{Foley2010} und die JavaScript Bibliothek für Informationsvisualisierungen D3\footnote{\url{http://d3js.org/}} weiterhin beliebt ist\footnote{Mehr als 15000 Stars auf Github am 10.06.2013.}, sollte das nicht ins Gewicht fallen.
 
-Eine weitere Einschränkung ist, dass zeitabhängige Interaktionen wie zum Beispiel \enquote{MouseOver für 3 Sekunden} nicht modelliert werden können. Diese sind im Web aber ohnehin sehr unüblich.
+Eine weitere Einschränkung ist, dass zeitabhängige Interaktionen wie zum Beispiel \enquote{MouseOver für 3 Sekunden} nicht modelliert werden können. Diese sind im Web aber ohnehin eher unüblich.
 
-\subsection{User Interface \& Interaktion}
+\subsection{User Interface und Interaktion}
 \label{section:konzeption:bedienung:ui}
 
 % ### assistance anbieten
 
-Hilfestellungen zur Bedienung würde vom Benutzer wahrscheinlich am besten verstanden, wenn sie tatsächlich vorhandene, konkrete Elemente der Komponente verwendete (\enquote{Semantic Transparency} \cite{Kohlhase2009}). Um zu demonstrieren, dass nach einem Klick die Tabelle sortiert sein wird, könnten die Zeilen derselben beispielhaft ihre Position wechseln. Assistance in dieser Form kann auf zwei Arten umgesetzt werden, die beide ihre Nachteile haben. Einerseits könnte eine Beschreibungssprache für Aktionen in der Komponentenbeschreibung angeben, welche Folgen eine Operation haben wird. So könnte das Hilfesystem selbst die Tabellenzeilen beispielhaft sortieren, da es nun weiß, wie der Vorgang \enquote{sortieren} aussieht. Der große Nachteil daran ist, dass es vermutlich immer einen Komponentenentwickler geben wird, der eine nicht vorgesehene Aktion in seiner Komponente umsetzen will und sie nicht beschreiben kann. Die zweite Lösung, semantisch transparente Assistance umzusetzen, ist den Komponentenentwickler für jede Aktion eine Methode in seiner Komponente hinzufügen zu lassen, die diese demonstriert. Zur Laufzeit würde die Methode einfach vom Hilfesystem aufgerufen. Das hat allerdings den Nachteil, dass dem Komponentenentwickler erheblicher Mehraufwand aufgebürdet wird und keine Einheitlichkeit der Assistance garantiert werden kann. Aus diesen Gründen ist eine andere Lösung notwendig.
+Hilfestellungen zur Bedienung würden vom Benutzer wahrscheinlich am besten verstanden, wenn sie tatsächlich vorhandene, konkrete Elemente der Komponente verwendete (\enquote{Semantic Transparency} \cite{Kohlhase2009}). Um zu demonstrieren, dass nach einem Klick die Tabelle sortiert sein wird, könnten die Zeilen derselben beispielhaft ihre Position wechseln. Assistance in dieser Form kann auf zwei Arten umgesetzt werden, die beide ihre Nachteile haben. Einerseits könnte eine Beschreibungssprache für Aktionen in der Komponentenbeschreibung angeben, welche Folgen eine Operation haben wird. So könnte das Hilfesystem selbst die Tabellenzeilen beispielhaft sortieren, da es nun weiß, wie der Vorgang \enquote{sortieren} aussieht. Der große Nachteil daran ist, dass es vermutlich immer einen Komponentenentwickler geben wird, der eine nicht vorgesehene Aktion in seiner Komponente umsetzen will und sie nicht beschreiben kann. Die zweite Lösung, semantisch transparente Assistance umzusetzen, ist den Komponentenentwickler für jede Aktion eine Methode in seiner Komponente hinzufügen zu lassen, die diese demonstriert. Zur Laufzeit würde die Methode einfach vom Hilfesystem aufgerufen. Das hat allerdings den Nachteil, dass dem Komponentenentwickler erheblicher Mehraufwand aufgebürdet wird und keine Einheitlichkeit der Assistance garantiert werden kann. Aus diesen Gründen ist eine andere Lösung notwendig.
 
 Die Assistance wird in Form von Comics ausgeliefert, da diese wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) erwähnt, eine effektive und ansprechende Variante dafür darstellen. Aus den Grundlagen geht ebenfalls hervor, dass eine multimodale Ausgabe (akustisch-verbal und visuell) zur Lerneffektivität beiträgt. Darauf wird aber aus zwei Gründen verzichtet. Einerseits sollen beide Kanäle gleichzeitig ausgegeben werden. Das ist problematisch, weil vier Panels darzustellen wesentlich schneller möglich ist als eine verbale Erklärung für den Vorgang zu sprechen. Die Darstellung der Panels müsste sich der Audioausgabe anpassen und würde wesentlich langsamer vonstatten gehen. Eine nichtfunktionale Anforderung an die Hilfestellung ist aber, dass der Benutzer die Hilfe schnell aufnehmen und verarbeiten können soll. Zweitens wird automatische Soundausgabe gemeinhin als schlechte Usability angesehen\footnote{Hauptsächlich weil der Nutzen von Screenreadern dadurch eingeschränkt wird, aber auch weil der Benutzer automatische Wiedergabe nicht kontrollieren kann und die Audiodaten Bandbreite beanspruchen.}.
 
@@ -780,23 +786,23 @@ Die Hilfestellung zur Bedienung wird über einen ?-Button aufgerufen, den der Be
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.75\textwidth]{images/konzeption-bedienung-step1.png}
-   \caption{UI Mockup der Bedienung (Schritt 1)}
+   \caption{UI Mockup: Bedienung (Schritt~1)}
    \label{figure:bedienung-step1}
 \end{figure}
 
-Danach werden schrittweise vier Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel zeigt die ganze Komponente. Das zweite Panel startet mit dem gleichen Inhalt wie Panel 1, zoomt dann aber auf die relevanten UI Elemente. Panel 3 startet wiederum mit dem Inhalt von Panel 2, überblendet dann aber eine notwendige Operation. Das vierte Panel startet ebenfalls mit dem Inhalt aus Panel 2, zoomt aber auf eine Gesamtansicht wie in Panel 1 hinaus, sodass der Benutzer den Unterschied sehen kann. Mit den Pfeilen kann zwischen verschiedenen Operationen gewechselt werden, die dieselbe Aktion ausführen.
+Danach werden schrittweise vier Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel zeigt die ganze Komponente. Das zweite Panel startet mit dem gleichen Inhalt wie Panel~1, zoomt dann aber auf die relevanten UI Elemente. Panel~3 startet wiederum mit dem Inhalt von Panel~2, überblendet dann aber eine notwendige Operation. Das vierte Panel startet ebenfalls mit dem Inhalt aus Panel~2, zoomt aber auf eine Gesamtansicht wie in Panel~1 hinaus, sodass der Benutzer den Unterschied sehen kann. Mit den Pfeilen kann zwischen verschiedenen Operationen gewechselt werden, die dieselbe Aktion ausführen.
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-bedienung-step2.png}
-   \caption{UI Mockup der Bedienung (Schritt 2)}
+   \caption{UI Mockup: Bedienung (Schritt~2)}
    \label{figure:bedienung-step2}
 \end{figure}
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.75\textwidth]{images/konzeption-bedienung-comic.png}
-   \caption{UI Mockup des Comics}
+   \caption{UI Mockup: Comic}
    \label{figure:bedienung-comic}
 \end{figure}
 
@@ -810,7 +816,7 @@ Frage: Wie Anwendungskontext sammeln?
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.75\textwidth]{images/konzeption-reporting.png}
-   \caption{UI Mockup der Reporting-Funktion}
+   \caption{UI Mockup: Reporting-Funktion}
    \label{figure:reporting}
 \end{figure}
 
@@ -821,21 +827,19 @@ Frage: Wie Anwendungskontext sammeln?
 
 Es ist möglich, dass ein Benutzer in VizBoard auf vollständig (\enquote{Was ist ein Säurezeiger\footnote{Eine Pflanze, die nur auf Böden mit einem bestimmten ph-Wert wachsen kann.}?}) oder teilweise (\enquote{Wie ist das BIP definiert?}) unbekannte Konzepte trifft. Um das Verständnis der Daten zu fördern, müssen diese erklärt werden, weswegen sie mit einer externen Wissensbasis verlinkt sein sollen. Zu erklärende Konzepte werden vermutlich hauptsächlich in Legenden von Visualisierungen zu finden sein, können prinzipiell aber auch in Freitext vorkommen.
 
-\subsection{Backend}
+\subsection{Markup und Backend}
 \label{section:konzeption:verlinkung:backend}
 
-Um zu erklärende Konzepte für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einer dafür vorgesehenen CSS Klasse aus. So können sie über CSS Selektoren gefunden werden. Betreffen die Konzepte Achsen der Visualisierung, ist das korrespondierende DBpedia Konzept bereits im Domain Assignment enthalten. Für frei gewählte Worte müsste eine eigene Anfrage ans Data Repository oder die DBpedia gestellt werden. Von dort wird das Abstract geladen und zusammen mit einem Link präsentiert.
+Um zu erklärende Konzepte für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einer dafür vorgesehenen CSS Klasse aus. So können sie über CSS Selektoren gefunden werden. Betreffen die Konzepte Achsen der Visualisierung, ist das korrespondierende DBpedia\footnote{\url{http://dbpedia.org/}} Konzept bereits im Domain Assignment enthalten, welches die MRE der Komponente mitteilt. Für frei gewählte Worte müsste eine eigene Anfrage an das Data Repository gestellt werden, welches das entsprechende Konzept der DBpedia findet, das Abstract lädt und zurück liefert. Dann kann es zusammen mit einem Link zum Wikipedia-Artikel angezeigt werden.
 
-Todo: Noch erklären, warum DBpedia und nicht z.B. urbandictionary?
-
-\subsection{User Interface \& Interaktion}
+\subsection{User Interface und Interaktion}
 
 Hinter die entsprechend markierten DOM Elemente (siehe Abschnitt~\ref{section:konzeption:verlinkung:backend}) wird ein Fragezeichen eingefügt. Dieses kann angeklickt werden, woraufhin ein Popover mit einer kurzen Erklärung des Konzepts angezeigt wird (Abbildung~\ref{figure:verlinkung}). Das Popover enthält auch einen Link, der den entsprechenden Artikel auf Wikipedia in einem neuen Tab öffnet.
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.75\textwidth]{images/konzeption-verlinkung.png}
-   \caption{UI Mockup der Verlinkung}
+   \caption{UI Mockup: Verlinkung}
    \label{figure:verlinkung}
 \end{figure}
 
@@ -849,7 +853,7 @@ Im kompositen Infomationsvisualisierungssystem VizBoard kommunizieren Komponente
 	\item die Abhängigkeiten zwischen Komponenten wie bei der Bedienung (Abschnitt~\ref{section:konzeption:bedienung}) mit Comics erklärt werden.
 \end{enumerate}
 
-\subsection{User Interface \& Interaktion}
+\subsection{User Interface und Interaktion}
 \label{section:konzeption:kommunikation:ui}
 
 Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte einen Brief enthält. Sollten mehrere Empfänger vorhanden sein, existiert für jeden davon ein Brief. Der Pfeil wird nicht mehr gerendert, sobald der Benutzer die Hilfe zu der Kombination (Sender, Empfänger) aufgerufen hat und verschwindet, wenn ein anderer Pfeil gerendert werden muss. Ansonsten wird der Viewport mit Pfeilen zugepflastert.
@@ -857,7 +861,7 @@ Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwisch
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.75\textwidth]{images/konzeption-kommunikation-step1.png}
-   \caption{UI Mockup der Verlinkung}
+   \caption{UI Mockup: Kommunikation}
    \label{figure:kommunikation-step1}
 \end{figure}
 
@@ -866,7 +870,7 @@ Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.75\textwidth]{images/konzeption-kommunikation-step2.png}
-   \caption{UI Mockup der Verlinkung}
+   \caption{UI Mockup: Comic zur Kommunikation}
    \label{figure:kommunikation-step2}
 \end{figure}
 
@@ -932,8 +936,8 @@ Without violating encapsulation, capture and externalize an object's internal st
 
 Der Komponentenentwickler würde das Format des Mementos in der Komponentenbeschreibung definieren, nämlich welche Properties den Zustand der Komponente vollständig beschreiben. Das Hilfesystem kann diese dann über entsprechende Getter/Setter-Methoden -- welche in der API einer Komponente bereits vorgesehen sind -- verändern.
 
-\subsection{Unterstütze Funktionen}
-\label{section:konzeption:kommentare:funktionen}
+\subsection{Features}
+\label{section:konzeption:kommentare:features}
 
 % ### funktionen eines kommentars
 
@@ -961,8 +965,6 @@ Den eigenen Kommentar editieren zu können ist aus verschiedenen Gründen wichti
 	\item Der Kommentar kann beliebig editiert werden. Diese Variante ist aus Nutzersicht am Besten, aber sie muss anderen gegenüber transparent gemacht werden. Es muss sichtbar sein, dass ein Kommentar editiert wurde und wann. Im Idealfall würde auch die Originalversion eines referenzierten Kommentars mit abgespeichert, sodass diese später eingeblendet werden kann.
 \end{itemize}
 
-Todo: Kann ich hier von Idealfällen reden oder muss ich mich für JA/NEIN entscheiden? Sicher wäre es klasse, aber ich hab grad überhaupt keine Lust, mir UI und Backend für eine Versionsverwaltung von Kommentaren zu überlegen.
-
 \subsubsection{Kommentar löschen}
 
 Gründe um einen Kommentar zu löschen beinhalten unter anderem Schwachsinn (der von anderen als solcher identifiziert wurde), Beschimpfungen oder mangelnde Aktualität. Wie beim editieren von Kommentaren ist es hier notwendig, dass der Gesprächsverlauf nachvollziehbar bleibt. Die Lösungsansätze beinhalten:
@@ -973,7 +975,7 @@ Gründe um einen Kommentar zu löschen beinhalten unter anderem Schwachsinn (der
 	\item Kommentare können beliebig gelöscht werden. Diese Variante weckt keine Ängste, den eigenen Stuss nicht mehr löschen zu können. Dann muss aber etwas mit den Referenzen auf gelöschte Kommentare geschehen, da ansonsten die Nachvollziehbarkeit der Diskussion leidet. Beispielsweise könnte die referenzierte Originalversion abgespeichert und eingeblendet werden.
 \end{itemize}
 
-\subsection{User Interface \& Interaktion}
+\subsection{User Interface und Interaktion}
 \label{section:konzeption:kommentare:ui}
 
 % ### user interface & interaktion
@@ -983,7 +985,7 @@ In der Titelleiste gibt es einen Button mit einem Sprechblasen-Icon. Nach einem 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-kommentare-step1.png}
-   \caption{UI Mockup: Auge bedeutet Kommentare anzeigen, Mund bedeutet verfassen}
+   \caption{UI Mockup: Auge bedeutet Kommentare anzeigen, Mund bedeutet Kommentar verfassen}
    \label{figure:kommentare-step1}
 \end{figure}
 
@@ -1002,17 +1004,17 @@ Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt des Popovers 
 	\item Linke Spalte
 	\begin{itemize}
 		\item ID des Kommentars: Diese ist zur Referenzierung notwendig.
-		\item Avatar des Benutzers und Benutzername sollen das Vertrauen der Benutzer untereinander erhöhen und so die Qualität der Kommentare erhöhen \cite{Chiu2006}.
+		\item Avatar des Benutzers und Benutzername sollen das Vertrauen der Benutzer untereinander erhöhen und so die Qualität der Kommentare verbessern \cite{Chiu2006}.
 		\item Datum der Erstellung oder letzten Editierung, was jünger ist. Wurde editiert, ist das Datum kursiv geschrieben.
 		\item Editieren/Löschen-Buttons, falls der Kommentar selbst verfasst wurde.
 	\end{itemize}
 	\item Mittlere Spalte
 	\begin{itemize}
-		\item Kommentartext mit Referenzen (durch \#hash gekennzeichnet) und URLs (unterstrichen).
+		\item Kommentartext mit Referenzen (durch \texttt{\#hash} gekennzeichnet) und URLs (unterstrichen).
 	\end{itemize}
 	\item Rechte Spalte
 	\begin{itemize}
-		\item Voting: Ein Benutzer kann einen fremden Kommentar genau einmal up- oder downvoten. Die Anzahl der Scores wird ebenfalls angezeigt.
+		\item Voting: Ein Benutzer kann einen fremden Kommentar genau bewerten. Die Anzahl der Stimmen wird ebenfalls angezeigt.
 		\item Antworten: Eine zweite Möglichkeit als die ID des Kommentars einzutippen. Die UI wechselt zu \enquote{Kommentar verfassen} und inkludiert die ID des betreffenden Kommentars.
 		\item Bereiche anzeigen: Zeigt die vom Kommentar referenzierten Bereiche in der Visualisierung.
 	\end{itemize}
@@ -1096,15 +1098,21 @@ Kommentare können auch Metainformationen über die Daten oder Komponente enthal
 \section{Hilfception}
 \label{section:konzeption:meta-hilfe}
 
+% warum brauchen wir meta-hilfe?
+
 In diesem Konzept wurden bisher sechs unterschiedliche Hilfefunktionen erarbeitet: Überblick, Bedienung, Reporting, Verlinkung, Kommunikation und Kommentare. Diese sind zwar optisch und vom Interaktionsdesign her konsistent, bringen aber trotzdem viel zusätzliche Komplexität in die Anwendung. Um die Hilfefunktionen in vollem Umfang nutzen zu können, benötigt der Benutzer einige Informationen. Dazu gehört sowohl das Wissen, welche Hilfefunktionen existieren und wie sie aufgerufen werden, als auch konzeptionelle Dinge, wie z.\,B. dass Kommentare mit Bereichen und/oder Datenpunkten in der Visualisierung assoziiert sind. Es ist anzunehmen, dass diese Meta-Hilfe vor allem bei der ersten Nutzung von VizBoard benötigt wird. Aus diesem Grund sollte sie so unaufdringlich wie möglich gestaltet sein.
+
+% erste lösung: statischer button
 
 Es gibt nun verschiedene Lösungen für die Umsetzung der Meta-Hilfe. Die einfachste davon wäre ein Button in der rechten oberen Ecke, der bei Bedarf eine klassische Hilfefunktion aufruft, welche die verschiedenen Funktionen in Wort und Bild erklärt und ein Tutorialvideo enthält. Das größte konzeptionelle Problem dabei ist die dreifache Hilfception: Für VizBoard existiert ein Hilfesystem (einfach), welches wiederum erklärt werden muss (zweifach) und wo diese Erklärung zu finden ist, muss dem Benutzer ebenfalls mitgeteilt werden (dreifach). Das bedeutet relativ viel Zeit- und Klickaufwand, bis der Nutzer bei den gewünschten Informationen ist. Aber es hat auch Vorteile: Durch den statischen Hilfeknopf ist immer klar, wo weitergeholfen wird. Außerdem kann er gegebenenfalls für andere Sachen benutzt werden, beispielsweise könnte dort konfiguriert werden, ob der Pfeil in der Kommunkationshilfe bei jeder Nachricht angezeigt werden soll.
 
-Die Alternative zum statischen Button wäre dem Benutzer dynamisch und kontextabhängig Hilfe anzubieten, beispielsweise in Form von Notifications wie in OSX. So könnten ihm Erklärungen zu den Kommentaren angeboten werden, sobald er auf den Kommentar-Button geklickt hat oder eine allgemeine Hilfe, wenn er längere Zeit keine Aktion ausgeführt hat. Der große Vorteil daran ist, dass nur die Benutzer die Meta-Hilfe sehen, welche sie auch benötigen. Allerdings hat diese Lösung einige Nachteile. Zunächst ist es so, dass Notifications nach einer festgelegten Zeitspanne wieder verschwinden müssen, da sie sonst stören. Dadurch ist es dem Benutzer unmöglich, aus eigener Initiative zur Meta-Hilfe zu gelangen. Hinzu kommt, dass die Meta-Hilfe für die meisten Funktionen recht kurz ausfällt und nur bei Kommentaren und der Bedienung unbedingt notwendig ist. Wenn die Hinweise auf die Meta-Hilfe aber nur bei zwei von sechs Funktionen erscheinen, ist das zu inkonsistent und wirkt eher irritierend. Davon abgesehen müssen für die kontextabhängige Hilfe einige Probleme bewältigt werden, wenn sie wie gewünscht funktionieren soll. Das Hilfesystem muss Regeln kennen, wann Hilfe angeboten werden soll. Die Reaktionen des Benutzers darauf sollen bewertet werden und zusammen mit dem Anwendungskontext wieder in die Wissensbasis einfließen, damit das System daraus lernen und neue Regeln inferieren kann. Das ist ganz schön viel Arbeit dafür, dass die Meta-Hilfe in dieser Arbeit nicht im Vordergrund steht. Deswegen gehen wir mit dem statischen Button. So. In Zukunft kann das aber auch zusammen verwendet werden, kein Problem.
+% zweite lösung: kontextabhängige dynamische hilfe
 
-\subsection{User Interface \& Interaktion}
+Die Alternative zum statischen Button wäre dem Benutzer dynamisch und kontextabhängig Hilfe anzubieten, beispielsweise in Form von Notifications wie in OSX. So könnten ihm Erklärungen zu den Kommentaren angeboten werden, sobald er auf den Kommentar-Button geklickt hat oder eine allgemeine Hilfe, wenn er längere Zeit keine Aktion ausgeführt hat. Der große Vorteil daran ist, dass nur die Benutzer die Meta-Hilfe sehen, welche sie auch benötigen. Allerdings hat diese Lösung zwei Nachteile. Zunächst ist es so, dass Notifications nach einer festgelegten Zeitspanne wieder verschwinden müssen, weil sie sonst stören. Dadurch ist es dem Benutzer unmöglich, aus eigener Initiative zur Meta-Hilfe zu gelangen. Davon abgesehen müssen für die kontextabhängige Hilfe einige Probleme bewältigt werden, wenn sie wie gewünscht funktionieren soll. Das Hilfesystem muss Regeln kennen, wann Hilfe angeboten werden soll. Die Reaktionen des Benutzers darauf sollen bewertet werden und zusammen mit dem Anwendungskontext wieder in die Wissensbasis einfließen, damit das System daraus lernen und neue Regeln inferieren kann. Das würde den Rahmen dieser Arbeit sprengen und kann in zukünftigen Forschungsarbeiten behandelt werden. Dann können statische und dynamische Hilfe zusammen eingesetzt werden.
 
-Der Button für die Meta-Hilfe befindet sich in der rechten oberen Ecke des Viewports (Abbildung~\ref{figure:meta-step1}). Er ist rot, damit er vom Benutzer bemerkt wird und rund, weil er so aus dem bisher verwendeten optischen Konzept ausbricht, aber nicht fehl am Platz wirkt.
+\subsection{User Interface und Interaktion}
+
+Der Button für die Meta-Hilfe befindet sich in der rechten oberen Ecke des Viewports (Abbildung~\ref{figure:meta-step1}). Er ist rot, damit er vom Benutzer bemerkt wird und rund, weil er so aus dem bisher verwendeten optischen Konzept ausbricht und auffällt, aber nicht fehl am Platz wirkt.
 
 \begin{figure}[htbp]
    \centering
@@ -1113,7 +1121,7 @@ Der Button für die Meta-Hilfe befindet sich in der rechten oberen Ecke des View
    \label{figure:meta-step1}
 \end{figure}
 
-Nachdem der Benutzer darauf geklickt hat, wird der Viewport abgedunkelt und ein Fenster überblendet, welches Hilfe zu verschiedenen Themen enthält (Abbildung~\ref{figure:meta-step2}).
+Nachdem der Benutzer darauf geklickt hat, wird der Viewport abgedunkelt und ein Fenster überblendet, welches Hilfe zu verschiedenen Themen enthält (Abbildung~\ref{figure:meta-step2}). Von dort können ebenfalls die verschiedenen Hilfefunktionen (wie z.\,B. der Überblick) aufgerufen werden. Das Fenster wird geschlossen, sobald der Benutzer außerhalb davon klickt.
 
 \begin{figure}[htbp]
    \centering
@@ -1130,44 +1138,45 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \subsection{Markup einer Komponente}
 
 \begin{itemize}
-	\item CSS Klasse für automatische Verlinkungen
-	\item CSS Klasse für Wurzelelement der Visualisierung (Kommentare)
-	\item Datenattribut mit URI für Datenpunkte (Kommentare)
+	\item CSS Klasse, um Begriffe zur automatischen Verlinkung zu kennzeichnen
+	\item CSS Klasse, um Wurzelelement der Visualisierung zu kennzeichnen (Kommentare)
+	\item Datenattribut mit URI, um Datenpunkte zu kennzeichnen (Kommentare)
 \end{itemize}
 
 \subsection{Komponentenbeschreibung}
 
 \begin{itemize}
-	\item Graf. Repräsentation (Überblick)
-	\item CSS Selektoren zu Capabilities (Bedienung)
-	\item Operationen zu Capabilities (Bedienung)
-	\item Anzahl Sekunden zu warten vor Screenshot (Bedienung)
-	\item Boolean ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
-	\item Beispieldaten für Operation, falls sie Parameter erwartet (Bedienung)
-	\item Memento (Kommentare)
-	\item Boolean ob graf. Rep. die Position kodiert (Kommentare)
-	\item Boolean ob Komponente Datenverarbeitung durchführt (Kommentare)
-	\item Boolean ob externe Daten angezeigt werden (Kommentare)
-	\item Boolean ob Layout vollständig reproduzierbar ist (Kommentare)
+	\item VISO Konzept der grafischen Repräsentation (Überblick)
+	\item CSS Selektoren, um UI Elemente für Capabilities zu kennzeichnen (Bedienung)
+	\item VISO Operationen, um notwendige Operation auf UI Elementen anzugeben (Bedienung)
+	\item Anzahl an Sekunden, die vor einem Screenshot gewartet werden soll (Bedienung)
+	\item Boolean, ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
+	\item Beispieldaten für Operationen mit Parametern (Bedienung)
+	\item Memento der Komponente (Kommentare)
+	\item Boolean, ob die Position von Elementen ein visuelles Attribut ist (Kommentare)
+	\item Boolean, ob die Komponente Datenverarbeitung durchführt (Kommentare)
+	\item Boolean, ob die Komponente externe Daten anzeigt (Kommentare)
+	\item Boolean, ob das Layout der Komponente vollständig reproduzierbar ist (Kommentare)
 \end{itemize}
 
 \subsection{API einer Komponente}
 
 \begin{itemize}
-	\item Funktion, die Koordinaten in Datenpunkte umrechnet (Kommentare)
-	\item Deren Umkehrung (Kommentare)
+	\item Eine Funktion, um Koordinaten in Datenpunkte umzurechnen (Kommentare)
+	\item Die Umkehrung der Funktion (Datenpunkte $\to$ Koordinaten) (Kommentare)
 \end{itemize}
 
 \subsection{VISO}
 
 \begin{itemize}
-	\item Beschreibung einer graf. Repräsentation (Überblick)
-	\item Link zu Tutorialvideo (Überblick)
+	\item Beschreibung einer grafischen Repräsentation (Überblick)
+	\item Link zu Tutorialvideo (Überblick) -- gehört sowas wirklich in die VISO?
 \end{itemize}
 
 \section{Beispiel}
 \label{section:konzeption:beispiel}
-Vielleicht sollte ich ein paar InfoVis aus \cite{Heer2010} exemplarisch durchgehen um zu beweisen, dass das mein Konzept auch funktioniert? Ansonsten müsste man mir das an dieser Stelle einfach glauben, bevor es zur Implementierung geht.
+
+Vielleicht sollte ich ein oder zwei InfoVis aus \cite{Heer2010} exemplarisch durchgehen um zu beweisen, dass das mein Konzept auch funktioniert? Ansonsten müsste man mir das an dieser Stelle einfach glauben, bevor es zur Implementierung geht. Oder wäre es sowieso geschickter, wenn ich das am Ende der Implementierung mache?
 
 \section{Zusammenfassung}
 \label{section:konzeption:zusammenfassung}
