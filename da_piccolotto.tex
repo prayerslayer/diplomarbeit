@@ -75,13 +75,27 @@
 \chapter{Einleitung}
 \label{chapter:einleitung}
 
-% Hier kommt eine kurze Einführung von semantischen Daten, nehme ich an
+% Einleitung - viele semantische Daten, diese sind sehr nützlich
+
+Im Laufe der letzten Jahre wurden immer mehr semantische Daten veröffentlicht, sowohl in Community-Projekten wie der DBpedia\footnote{\url{http://dbpedia.org}} als auch als Teil der Open Data bzw. Open Government Bewegung, wie z.\,B. data.gov.uk\footnote{\url{http://data.gov.uk/data/search?q=rdf}}. Diese Datenkataloge können von großem Nutzen für jeden sein. Die DBpedia ist eine maschinenlesbare Version der Wikipedia, mit ihr können mit Hilfe der Abfragesprache SPARQL automatisch Fragen beantwortet werden, deren manuelle Recherche zu aufwändig wäre. In data.gov.uk finden sich Informationen, die für alle Steuerzahler relevant sein können, wie z.\,B. Organigramme und Gehälter von Regierungsorganisationen.
 
 % ###################################################
 \section{Motivation}
 \label{section:einleitung:motivation}
 
-% Hier wird generell eingeleitet, also vermutlich die Problematik zwischen semantischen Datensätzen und Endusern
+% Motivation - es gibt keine gute Möglichkeit, das Wissen in den Daten aufzunehmen. 
+
+% expertenwissen informatik
+
+Jedoch ist es sehr schwierig, das Wissen in den Datenkatalogen aufzunehmen. Wird wie im Falle der DBpedia eine API in Form eines SPARQL Endpoints zur Verfügung gestellt, müssen sowohl die Abfragesprache SPARQL als auch Konzepte von semantischen Daten wie z.\,B. Tripel, Klassen oder Vererbung bekannt sein, um an die Daten zu kommen. Erlaubt das Portal einen Download der Daten, stellt sich die Frage, wie sie geöffnet werden. Gängige Datenverarbeitungstools wie Excel oder Visualisierungstools wie Tableau unterstützen keine semantischen Daten. Es existieren zwar Visualisierungstools für semantische Daten wie Protégé/Jambalaya, diese stellen aber oft nur einen Graphen dar. Die Visualisierung als Netzwerk kann wie im Fall von Organigrammen angebracht sein, aber bei Daten über Aktienkurse wäre ein Liniendiagramm vielleicht besser geeignet.
+
+% expertenwissen visualisierung
+
+Selbst wenn ein Visualisierungstool für semantische Daten existierte, welches verschiedene Arten von Diagrammen unterstützte, würde ein Anwender das Wissen in den Datenkatalogen nicht angemessen vermittelt bekommen. Die Konfiguration von Diagrammen setzt Expertenwissen im Bereich der Informationsvisualisierung voraus, die in den meisten Fällen nicht gegeben ist. Wie viele Farben sind in einem Diagramm angemessen? Wie viele Balken für ein Balkendiagramm? Welche Informationen werden am Besten als Farbe kodiert, welche als Größe oder Position?
+
+% vizboard to the rescue
+
+Vizboard to the rescue! Beschreibung von VIzboard. Problem dann im nächsten abschnitt
 
 % ###################################################
 \section{Problemstellung und Zielsetzung}
