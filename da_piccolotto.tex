@@ -712,8 +712,8 @@ Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wurde deut
 \begin{enumerate}
 	\item Art der Visualisierung, z.\,B. \enquote{Balkendiagramm}
 	\item Beschreibung der Visualisierung, z.\,B. \enquote{Ein Diagramm, das durch auf der x-Achse senkrecht stehende, nicht aneinander grenzende Rechtecke die Häufigkeitsverteilung einer diskreten Variable veranschaulicht.}
-	\item Inhalt der Visualisierung, z.\,B. BIP auf der y-Achse und Länder auf der x-Achse.
-	\item Links zu Tutorials und Erklärungen
+	\item Visuelle Mappings, z.\,B. BIP auf der y-Achse und Länder auf der x-Achse.
+	\item Links zu Tutorials, Videos und Erklärungen
 	\item Vor- und Nachteile der ausgewählten Visualisierung, z.\,B. \enquote{übersichtlich, wenn wenige Farben vorhanden sind}
 \end{enumerate}
 
@@ -723,10 +723,19 @@ Eine Möglichkeit -- so ist die Beschreibung einer Komponente bereits umgesetzt 
 % was bleibt draußen?
 
 % links zu externen quellen
-Nach Grammel \cite{Grammel2012} können Links zu Tutorials und Erklärungen hilfreich sein, Endnutzern Visualisierungen zu erklären. Da externe Quellen aber nicht durch das Hilfesystem kontrolliert werden, kann es nicht sicherstellen, dass überall ein einheitliches Vokabular benutzt wird. Ein konsistentes Vokabular ist aber wichtig für effektive Hilfestellungen, weswegen dieser Punkt in dieser Form nicht umgesetzt werden kann. Was allerdings möglich ist, sind vom VizBoard-Betreiber erstellte, vertonte Animationen, die Aufbau und Vor- bzw. Nachteile grafischer Repräsentationen erklären. Da die Anzahl der Repräsentationen endlich ist und nicht alle gleich wichtig sind\footnote{Ein Balkendiagramm ist gängiger und deswegen leichter verständlich als eine Scatterplot Matrix.}, ist der nötige Aufwand gerechtfertigt.
+Nach Grammel \cite{Grammel2012} können Links zu Tutorials und Erklärungen hilfreich sein, Endnutzern Visualisierungen zu erklären. Da externe Quellen aber nicht durch das Hilfesystem kontrolliert werden, kann es nicht sicherstellen, dass überall ein einheitliches Vokabular benutzt wird. Wie bereits erwähnt ist ein konsistentes Vokabular wichtig für effektive Hilfestellungen, weswegen dieser Punkt in dieser Form nicht umgesetzt werden kann. Was allerdings möglich ist, sind vom VizBoard-Betreiber erstellte Tutorialvideos in Form von vertonten Animationen, die Aufbau und Vor- bzw. Nachteile grafischer Repräsentationen erklären. Das sind zwar viele Videos, aber die Anzahl der Repräsentationen ist endlich und nicht alle gleich wichtig\footnote{Ein Balkendiagramm ist gängiger und deswegen leichter verständlich als eine Scatterplot Matrix.}, weswegen der nötige Aufwand gerechtfertigt scheint.
 
 % vor- und nachteile
-Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von verschiedenen Visualisierungstypen und visuellen Mappings lernen sollten \cite[S. 125]{Grammel2012}. Es wäre möglich, allgemeine Eigenschaften von grafischen Repräsentationen in der VISO zu beschreiben. Diese sind abhängig von den dargestellten Daten und den visuellen Mappings. Die Eigenschaft \enquote{Übersichtlichkeit} ist bei einem Balkendiagramm mit drei Balken gegeben (Vorteil), bei 15 Balken nicht (Nachteil). Ähnlich verhält es sich mit der Farbkodierung: Ein Mensch kann bis zu acht Farben in einer Visualisierung gut unterscheiden (Vorteil) \cite{Mazza2009}, aber mehr nicht (Nachteil). Das Hilfesystem müsste dem Benutzer demnach sowohl die unterschiedlichen Vor- und Nachteile als auch deren Bedingungen präsentieren, was sehr viel Information für eine Einführung darstellt. Im schlechtesten Fall besteht auch kein Bezug zur beschriebenen Visualisierung, da keine der aufgeführten Bedingungen erfüllt ist. Aus den beschriebenen Gründen wird auf diese Funktion verzichtet.
+Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von verschiedenen Visualisierungstypen und visuellen Mappings lernen sollten \cite[S. 125]{Grammel2012}. Es wäre möglich, allgemeine Eigenschaften von grafischen Repräsentationen in der VISO zu beschreiben. Diese sind abhängig von den dargestellten Daten und den visuellen Mappings. Die Eigenschaft \enquote{Übersichtlichkeit} ist bei einem Balkendiagramm mit drei Balken gegeben (Vorteil), bei 15 Balken nicht (Nachteil). Ähnlich verhält es sich mit der Farbkodierung: Ein Mensch kann bis zu acht Farben in einer Visualisierung gut unterscheiden (Vorteil) \cite{Mazza2009}, aber mehr nicht (Nachteil). Das Hilfesystem müsste dem Benutzer demnach sowohl die unterschiedlichen Vor- und Nachteile als auch deren Bedingungen präsentieren, was sehr viel Information für eine Einführung darstellt. Im schlechtesten Fall kann der Benutzer auch keinen Bezug zur konkreten Visualisierung herstellen, weil keine der aufgeführten Bedingungen erfüllt ist. Er kann die aufgestellte Hypothese nicht am Beispiel überprüfen, was laut Grundlagen schlecht für seinen Verständnisprozess ist (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance:sensemaking}). Hinzu kommt, dass diese Erklärung einen Schritt früher im VizBoard Workflow konzeptionell mehr Sinn macht. Dort wählt der Benutzer -- von VizBoard unterstützt -- die visuellen Mappings aus.
+
+Aus den eben aufgeführten Gründen zeigt das Intro für eine Komponente folgende Informationen:
+
+\begin{itemize}
+	\item Art der Visualisierung
+	\item Beschreibung
+	\item Visuelle Mappings
+	\item Tutorialvideo, wenn vorhanden
+\end{itemize}
 
 % interaktionshilfen - kommen später
 
@@ -735,7 +744,7 @@ Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von vers
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:intro:ui}
 
-Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten sieht, wird der gesamte Viewport abgedunkelt und ein Popover neben der ersten Komponente (von links oben nach rechts unten) eingeblendet (Abbildung~\ref{figure:ueberblick}). Dort sind die im vorigen Abschnitt erläuterten Informationen zu finden: Die Art der Visualisierung (\enquote{Karte}), darunter eine Beschreibung einer Karte, Informationen zu den dargestellten Daten und zuletzt ein Tutorial-Video, wenn vorhanden. Mit den Pfeilen links und rechts kann zwischen den Beschreibungen für verschiedene Komponenten gewechselt werden. Das Popover wird geschlossen, nachdem der Benutzer außerhalb desselben einen Klick tätigt. Über die Meta-Hilfe (Abschnitt~\ref{section:konzeption:meta-hilfe}) kann es wieder aufgerufen werden.
+Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten sieht, wird der gesamte Viewport abgedunkelt und ein Popover neben der ersten Komponente (von links oben nach rechts unten) eingeblendet (Abbildung~\ref{figure:ueberblick}). Dort sind die im vorigen Abschnitt erläuterten Informationen zu finden: Die Art der Visualisierung (\enquote{Karte}), darunter eine Beschreibung einer Karte, Informationen zu den dargestellten Daten und zuletzt ein Tutorialvideo, wenn vorhanden. Mit den Pfeilen links und rechts kann zwischen den Beschreibungen für verschiedene Komponenten gewechselt werden. Das Popover wird geschlossen, nachdem der Benutzer außerhalb desselben einen Klick tätigt. Über die Meta-Hilfe (Abschnitt~\ref{section:konzeption:meta-hilfe}) kann es wieder aufgerufen werden.
 
 \begin{figure}[htbp]
    \centering
