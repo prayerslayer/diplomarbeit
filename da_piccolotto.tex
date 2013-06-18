@@ -761,11 +761,17 @@ Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:vi
 \section{Bedienung}
 \label{section:konzeption:bedienung}
 
-Da die Komponenten \enquote{Black Boxes} sind und von verschiedenen Entwicklern stammen, kann der Benutzer weder von verfügbaren möglichen Aktionen wie z.\,B. zoomen noch von einheitlicher Gestaltung der Interaktionen\footnote{Beispielsweise wann eine Interaktion durch \texttt{MouseOver} anstatt \texttt{Click} ausgeführt wird.} ausgehen. Deswegen ist eine Hilfestellung zur Bedienung notwendig.
+Da die Komponenten \enquote{Black Boxes} sind und von verschiedenen Entwicklern stammen, kann der Benutzer weder von verfügbaren möglichen Aktionen wie z.\,B. zoomen noch von einheitlicher Gestaltung der Interaktionen ausgehen. Beispielsweise wann eine Interaktion durch \texttt{MouseOver} anstatt \texttt{Click} ausgeführt wird. Deswegen ist eine Hilfestellung zur Bedienung notwendig.
 
 % wieder erste möglichkeit: dev baut selbst hilfe ein. text+bilder: kein einfluss auf wortwahl, art der bilder, ausführlichkeit etc. Comics: für jede aktion eins, übelster aufwand, kann man nicht verlangen, außerdem 2. wer sagt dass ein prof. sw-entwickler das können soll?
 
-Am einfachsten würde diese umgesetzt, indem dem Komponentenentwickler eine Möglichkeit gegeben wird, Text und Bilder zu diesem Thema in die Komponentenbeschreibung einzufügen. Das hat allerdings den Nachteil, dass das Hilfesystem keinen Einfluss auf die Wortwahl, Aussehen der Bilder oder Ausführlichkeit der Erklärung hat. Wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) gezeigt, können Comics außerdem eine effektivere Lösung als Text für User Assistance sein. Allerdings stellt es für den Entwickler erheblichen Mehraufwand dar, für jede mögliche Aktion verschiedene Comicpanels zu erstellen. Davon abgesehen können (und sollen) die gestalterischen Fähigkeiten dazu nicht von ihm erwartet werden und das Problem der Kontrolle über den Inhalt ist auch nicht gelöst.
+Die einfachste Umsetzung der Hilfe zur Bedienung ist dem Komponentenentwickler eine Möglichkeit zu geben, Text und Bilder zu diesem Thema in die Komponentenbeschreibung einzufügen. Das hat allerdings den Nachteil, dass das Hilfesystem keinen Einfluss auf die Wortwahl, Gestaltung der Bilder oder Ausführlichkeit der Erklärung hat.
+
+Hilfestellungen zur Bedienung würden vom Benutzer wahrscheinlich am besten verstanden, wenn sie tatsächlich vorhandene, konkrete Elemente der Komponente verwendete (\enquote{Semantic Transparency} \cite{Kohlhase2009}). Um zu demonstrieren, dass nach einem Klick die Tabelle sortiert sein wird, könnten die Zeilen derselben beispielhaft ihre Position wechseln. Assistance in dieser Form kann auf zwei Arten umgesetzt werden, die beide ihre Nachteile haben. Einerseits könnte eine Beschreibungssprache für Aktionen in der Komponentenbeschreibung angeben, welche Folgen eine Operation haben wird. So könnte das Hilfesystem selbst die Tabellenzeilen beispielhaft sortieren, da es nun weiß, wie der Vorgang \enquote{sortieren} aussieht. Der große Nachteil daran ist, dass es vermutlich immer einen Komponentenentwickler geben wird, der eine nicht vorgesehene Aktion in seiner Komponente umsetzen will und sie nicht beschreiben kann. Die zweite Lösung, eine semantisch transparente Assistance umzusetzen, ist den Komponentenentwickler für jede Aktion eine Methode in seiner Komponente hinzufügen zu lassen, die diese demonstriert. Zur Laufzeit würde die Methode einfach vom Hilfesystem aufgerufen. Das hat allerdings den Nachteil, dass dem Komponentenentwickler erheblicher Mehraufwand aufgebürdet wird und keine Einheitlichkeit der Assistance garantiert werden kann. Aus diesen Gründen ist eine andere Lösung notwendig.
+
+Wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) gezeigt, können Comics eine effektive und attraktive Lösung für User Assistance sein. Allerdings stellt es für den Entwickler erheblichen Mehraufwand dar, für jede mögliche Aktion verschiedene Comicpanels zu erstellen. Davon abgesehen können (und sollen) die gestalterischen Fähigkeiten dazu nicht von ihm erwartet werden und das Problem der Kontrolle über den Inhalt ist auch nicht gelöst.
+
+Aus diesem Grund werden die Comicpanels vom Hilfesystem automatisch erstellt. Es bleibt die Frage der Präsentation: Aus den Grundlagen geht hervor, dass eine multimodale Ausgabe (akustisch-verbal und visuell) zur Lerneffektivität beiträgt. Darauf wird aber aus zwei Gründen verzichtet. Einerseits sollen beide Kanäle gleichzeitig ausgegeben werden. Das ist problematisch, weil vier Panels darzustellen wesentlich schneller möglich ist als eine verbale Erklärung für den Vorgang zu sprechen. Die Darstellung der Panels müsste sich der Audioausgabe anpassen und würde wesentlich langsamer vonstatten gehen. Eine nichtfunktionale Anforderung an die Hilfestellung ist aber, dass der Benutzer die Hilfe schnell aufnehmen und verarbeiten können soll. Zweitens wird automatische Soundausgabe gemeinhin als schlechte Usability angesehen, Hauptsächlich weil der Nutzen von Screenreadern dadurch eingeschränkt wird, aber auch weil der Benutzer automatische Wiedergabe nicht kontrollieren kann und die Audiodaten Bandbreite beanspruchen.
 
 % also bleibt es an uns hängen.
 
@@ -784,7 +790,7 @@ Die VISO enthält im Namensraum \texttt{viso:activity} Konzepte der hierarchisch
 
 Für das Hilfesystem sind Operationen und Aktionen relevant, da Aktivitäten nicht beeinflusst werden können. Aktionen einer Komponente sind beispielsweise zoomen, suchen oder filtern; Operationen sind etwa Klicks, Drags oder Multitouch-Gesten.
 
-Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden CSS Selektoren (\enquote{welche Elemente}) und Operationen aus der VISO (\enquote{welche Operationen}) zur Komponentenbeschreibung hinzugefügt. Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind.
+Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden CSS Selektoren (\enquote{welche Elemente}) und Operationen aus der VISO (\enquote{welche Operationen}) zur Komponentenbeschreibung hinzugefügt. Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind. Zusätzlich ist es möglich, dass der Entwickler Zusatzinformationen in Stichworten angibt. Zum Beispiel kann eine Tabelle durch unterschiedliche Elemente nach verschiedenen Spalten \enquote{sortiert} (Aktion) werden. Dabei ist es wichtig zu wissen, welches Element nach welcher Spalte sortiert. Die erwähnten Zusätze zur Komponentenbeschreibung sollten allerdings optional sein, falls der Komponentenentwickler keine Hilfe für bestimmte Aktionen anbieten will.
 
 \subsection{Generierung der Assistance}
 \label{section:konzeption:bedienung:generierung}
@@ -793,7 +799,7 @@ Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktione
 
 % warum müssen wir bilder generieren und wie sehen die aus?
 
-Die User Assistance zur Bedienung soll ein Comic werden (die Gründe dafür werden in Abschnitt~\ref{section:konzeption:bedienung:ui} erläutert), der per Definition wiederum aus mehreren Panels besteht, die Bilder und/oder Text enthalten \cite{McCloud1994}. Die Bilder der Panels können nicht a priori gezeichnet werden, da der Inhalt der Komponenten unbekannt ist (\enquote{Black Box} Prinzip). Aus diesem Grund müssen sie automatisch generiert werden. Die einfachste Möglichkeit dafür sind Screenshots der Komponente.
+Die User Assistance zur Bedienung soll ein Comic werden, der per Definition wiederum aus mehreren Panels besteht, die Bilder und/oder Text enthalten \cite{McCloud1994}. Die Bilder der Panels können nicht a priori gezeichnet werden, da der Inhalt der Komponenten unbekannt ist (\enquote{Black Box} Prinzip). Aus diesem Grund müssen sie automatisch generiert werden. Die einfachste Möglichkeit dafür sind Screenshots der Komponente.
 
 % wie machen wir das?
 
@@ -801,14 +807,23 @@ Dazu wird ein sogenannter \enquote{Headless Browser} verwendet. Das ist ein prog
 
 % wie läuft das ab?
 
-Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. Sobald eine Komponente hinzugefügt oder upgedatet wurde, parst das CoRe die entsprechende Beschreibung und schickt eine Anfrage an das Hilfemodul\footnote{Dem \enquote{Separation of Concerns} Designprinzip folgend sollte das CoRe, welches schon für Verwaltung, Matching und Ranking der Komponenten verantwortlich ist, nicht auch noch die User Assistance generieren.}. Dieses rendert die Komponente mit Hilfe des Headless Browsers in einer CRUISe Testumgebung. Danach führt es folgende Schritte aus:
+Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. Sobald eine Komponente hinzugefügt oder upgedatet wurde, parst das CoRe die entsprechende Komponentenbeschreibung und schickt eine Anfrage an den Hilfeservice. Dieser kann ins CoRe integriert sein, sollte dem \enquote{Separation of Concerns} Designprinzip folgend aber davon getrennt sein, da es schon für Matching, Ranking und Verwaltung der Komponenten zuständig ist. Der Hilfeservice rendert die Komponente mit Hilfe des Headless Browsers in einer CRUISe Testumgebung. 
+
+% todo cruise testumgebung, was gehört da alles rein?
+% todo cruise testumgebung, wo kommen vor allen dingen die daten her?
+
+% möglicher datenursprung:
+% komponentenentwickler: gibt url an oder hängt datei an beim hochladen, von wo dare die daten holt. vorteil: notwendige daten existieren auf alle fälle. nachteil: aufwand. obwohl man eigentlich davon ausgehen kann, dass es im laufe der entwicklung der komponente IRGENDWELCHE testdatensätze mal gegeben haben wird.
+% vizboardbetreiber: stellt testdatensätze zur verfügung, die entwickler auswählen kann. vorteil: geringer aufwand für entwickler. nachteil: spezielle daten evtl nicht vorhanden.
+
+Danach führt es folgende Schritte aus:
 
 \begin{enumerate}
 	\item Erstelle einen Screenshot vom Ausgangszustand der Komponente
-	\item Für jede verfügbare Aktion tue folgendes:
+	\item Für jede verfügbare Aktion:
 	\begin{enumerate}
 		%\item Finde die Bounding Box der relevanten Elemente
-		\item Für jeden definierten CSS Selektor tue folgendes:
+		\item Für jeden definierten CSS Selektor:
 		\begin{enumerate}
 			\item Finde die Bounding Box der betroffenen Elemente und speichere sie
 			\item Hebe betroffene Elemente hervor
@@ -821,14 +836,15 @@ Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. So
 	\end{enumerate}
 \end{enumerate}
 
-Das Hilfemodul bietet die erstellten Bilder danach über einen Webservice an, damit das Hilfesystem zur Laufzeit einen Comic generieren kann.
+% todo anbieten der assistance diskutieren: bilder in smcdl einbinden, eigener webservice, core.
+Die Bilder der Comics können auf unterschiedliche Weise ans Hilfesystem ausgeliefert werden. Eine Möglichkeit ist die Bilder nach Generierung in der Komponentenbeschreibung zu definieren, so wie es bereits mit einem Screenshot der Komponente gemacht wird. Ebenso könnte ein Webservice die Bilder über eine REST API anbieten, von wo das Hilfesystem sie zur Laufzeit lädt. Dieser Webservice kann eigenständig oder im CoRe integriert sein. \textbf{Fazit?}
 
 \subsubsection{Einschränkungen}
 \label{section:konzeption:bedienung:generierung:einschraenkungen}
 
 % nachteile
 
-Die vorgestellte Lösung hat auch Nachteile. Zunächst ist sie stark vom Document Object Model (DOM) abhängig, was eine automatische Hilfegenerierung für Komponenten ausschließt, die auf Flash, Silverlight oder ähnlichen Technologien basieren. Da Flash laut Adobe hauptsächlich für Videoauslieferung und Spiele gedacht ist \cite{Adobe2013}, Microsoft HTML5 Silverlight vorzieht \cite{Foley2010} und die JavaScript Bibliothek für Informationsvisualisierungen D3\footnote{\url{http://d3js.org/}} weiterhin beliebt ist\footnote{Mehr als 15000 Stars auf Github am 10.06.2013.}, sollte das nicht ins Gewicht fallen.
+Die vorgestellte Lösung hat auch Nachteile. Zunächst ist sie vom Document Object Model (DOM) abhängig, was eine automatische Hilfegenerierung für Komponenten ausschließt, die auf Flash, Silverlight oder ähnlichen Technologien basieren. Der Trend geht aber ohnehin zu HTML/SVG-basierten Visualisierungen (z.\,B. mit D3\footnote{\url{http://d3js.org/}} oder Raphaël\footnote{\url{http://raphaeljs.com/}}): Flash ist laut Adobe hauptsächlich für Videoauslieferung und Spiele gedacht \cite{Adobe2013} und Microsoft zieht HTML5 Silverlight vor \cite{Foley2010}. Deswegen sollte dieser Nachteil nicht ins Gewicht fallen.
 
 Eine weitere Einschränkung ist, dass zeitabhängige Interaktionen wie zum Beispiel \enquote{MouseOver für 3 Sekunden} nicht modelliert werden können. Diese sind im Web aber ohnehin eher unüblich.
 
@@ -836,12 +852,6 @@ Eine weitere Einschränkung ist, dass zeitabhängige Interaktionen wie zum Beisp
 \label{section:konzeption:bedienung:ui}
 
 % ### assistance anbieten
-
-Hilfestellungen zur Bedienung würden vom Benutzer wahrscheinlich am besten verstanden, wenn sie tatsächlich vorhandene, konkrete Elemente der Komponente verwendete (\enquote{Semantic Transparency} \cite{Kohlhase2009}). Um zu demonstrieren, dass nach einem Klick die Tabelle sortiert sein wird, könnten die Zeilen derselben beispielhaft ihre Position wechseln. Assistance in dieser Form kann auf zwei Arten umgesetzt werden, die beide ihre Nachteile haben. Einerseits könnte eine Beschreibungssprache für Aktionen in der Komponentenbeschreibung angeben, welche Folgen eine Operation haben wird. So könnte das Hilfesystem selbst die Tabellenzeilen beispielhaft sortieren, da es nun weiß, wie der Vorgang \enquote{sortieren} aussieht. Der große Nachteil daran ist, dass es vermutlich immer einen Komponentenentwickler geben wird, der eine nicht vorgesehene Aktion in seiner Komponente umsetzen will und sie nicht beschreiben kann. Die zweite Lösung, semantisch transparente Assistance umzusetzen, ist den Komponentenentwickler für jede Aktion eine Methode in seiner Komponente hinzufügen zu lassen, die diese demonstriert. Zur Laufzeit würde die Methode einfach vom Hilfesystem aufgerufen. Das hat allerdings den Nachteil, dass dem Komponentenentwickler erheblicher Mehraufwand aufgebürdet wird und keine Einheitlichkeit der Assistance garantiert werden kann. Aus diesen Gründen ist eine andere Lösung notwendig.
-
-Die Assistance wird in Form von Comics ausgeliefert, da diese wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) erwähnt, eine effektive und ansprechende Variante dafür darstellen. Aus den Grundlagen geht ebenfalls hervor, dass eine multimodale Ausgabe (akustisch-verbal und visuell) zur Lerneffektivität beiträgt. Darauf wird aber aus zwei Gründen verzichtet. Einerseits sollen beide Kanäle gleichzeitig ausgegeben werden. Das ist problematisch, weil vier Panels darzustellen wesentlich schneller möglich ist als eine verbale Erklärung für den Vorgang zu sprechen. Die Darstellung der Panels müsste sich der Audioausgabe anpassen und würde wesentlich langsamer vonstatten gehen. Eine nichtfunktionale Anforderung an die Hilfestellung ist aber, dass der Benutzer die Hilfe schnell aufnehmen und verarbeiten können soll. Zweitens wird automatische Soundausgabe gemeinhin als schlechte Usability angesehen\footnote{Hauptsächlich weil der Nutzen von Screenreadern dadurch eingeschränkt wird, aber auch weil der Benutzer automatische Wiedergabe nicht kontrollieren kann und die Audiodaten Bandbreite beanspruchen.}.
-
-% jetzt mockups
 
 Die Hilfestellung zur Bedienung wird über einen ?-Button aufgerufen, den der Benutzer vielleicht von nativen Desktop-Applikationen kennt (Abbildung~\ref{figure:bedienung-step1}). Der Viewport der Komponente wird abgedunkelt und nur die Elemente, für die auch Hilfestellungen existieren, bleiben sichtbar. Über dem ?-Button erscheint ein Popover, welches die verfügbaren Aktionen noch einmal auflistet. Das Popover wird geschlossen, wenn der Benutzer irgendwo außerhalb davon klickt. Die Assistance wird entweder nach einem Klick auf ein sichtbares UI Element oder ein Element der Liste aufgerufen. So kann der Benutzer sowohl die Frage \enquote{Was macht dieser Button?} als auch \enquote{Wie kann ich Aktion XY ausführen?} beantworten.
 
@@ -852,7 +862,7 @@ Die Hilfestellung zur Bedienung wird über einen ?-Button aufgerufen, den der Be
    \label{figure:bedienung-step1}
 \end{figure}
 
-Danach werden schrittweise vier Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel zeigt die ganze Komponente. Das zweite Panel startet mit dem gleichen Inhalt wie Panel~1, zoomt dann aber auf die relevanten UI Elemente. Panel~3 startet wiederum mit dem Inhalt von Panel~2, überblendet dann aber eine notwendige Operation. Das vierte Panel startet ebenfalls mit dem Inhalt aus Panel~2, zoomt aber auf eine Gesamtansicht wie in Panel~1 hinaus, sodass der Benutzer den Unterschied sehen kann. Mit den Pfeilen kann zwischen verschiedenen Operationen gewechselt werden, die dieselbe Aktion ausführen.
+Danach werden schrittweise vier Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel zeigt die ganze Komponente. Das zweite Panel startet mit dem gleichen Inhalt wie Panel~1, zoomt dann aber auf die relevanten UI Elemente. Panel~3 startet wiederum mit dem Inhalt von Panel~2, überblendet dann aber eine notwendige Operation. Das vierte Panel startet ebenfalls mit dem Inhalt aus Panel~2, zoomt aber auf eine Gesamtansicht wie in Panel~1 hinaus, sodass der Benutzer den Unterschied sehen kann. Mit den Pfeilen kann zwischen verschiedenen Operationen gewechselt werden, die dieselbe Aktion ausführen. 
 
 \begin{figure}[htbp]
    \centering
@@ -867,6 +877,17 @@ Danach werden schrittweise vier Panels in der Komponente angezeigt (Abbildung~\r
    \caption{UI Mockup: Comic}
    \label{figure:bedienung-comic}
 \end{figure}
+
+Die Texte in den Panels werden zur Laufzeit hinzugefügt, da so beispielsweise auf die Sprache des Nutzers reagiert werden kann. Ansonsten müsste der Hilfeservice für jede unterstützte Sprache ein eigenes Bild erzeugen. Die dafür notwendigen Informationen sind:
+
+\begin{itemize}
+	\item Panel~1: Keine, Text wird zufällig aus einer Menge von Phrasen ausgewählt.
+	\item Panel~2: Welche Elemente beteiligt sind.
+	\item Panel~3: Name der Operation.
+	\item Panel~4: Name der Aktion.
+\end{itemize}
+
+Diese werden aber schon im Schritt davor (Abbildung~\ref{figure:bedienung-step2}) benötigt, müssen also sowieso bekannt sein.
 
 \section{Reporting}
 \label{section:konzeption:reporting}
@@ -887,12 +908,14 @@ Frage: Wie Anwendungskontext sammeln?
 
 % einführung - warum brauchen wir verlinkung?
 
-Es ist möglich, dass ein Benutzer in VizBoard auf vollständig (\enquote{Was ist ein Säurezeiger\footnote{Eine Pflanze, die nur auf Böden mit einem bestimmten ph-Wert wachsen kann.}?}) oder teilweise (\enquote{Wie ist das BIP definiert?}) unbekannte Konzepte trifft. Um das Verständnis der Daten zu fördern, müssen diese erklärt werden, weswegen sie mit einer externen Wissensbasis verlinkt sein sollen. Zu erklärende Konzepte werden vermutlich hauptsächlich in Legenden von Visualisierungen zu finden sein, können prinzipiell aber auch in Freitext vorkommen.
+Es ist möglich, dass ein Benutzer in VizBoard auf vollständig (\enquote{Was ist ein Säurezeiger\footnote{Eine Pflanze, die nur auf Böden mit einem bestimmten ph-Wert wachsen kann.}?}) oder teilweise (\enquote{Wie ist das BIP definiert\footnote{Der Gesamtwert aller Waren und Dienstleistungen, die innerhalb eines Jahres in einer Volkswirtschaft hergestellt wurden und dem Endverbrauch dienen.}?}) unbekannte Begriffe trifft. Um das Verständnis der Daten zu fördern, müssen diese erklärt werden, weswegen sie mit einer externen Wissensbasis verlinkt sein sollen. Zu erklärende Begriffe werden vermutlich hauptsächlich in Legenden von Visualisierungen zu finden sein, können prinzipiell aber auch in Freitext vorkommen.
 
 \subsection{Markup und Backend}
 \label{section:konzeption:verlinkung:backend}
 
-Um zu erklärende Konzepte für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einer dafür vorgesehenen CSS Klasse aus. So können sie über CSS Selektoren gefunden werden. Betreffen die Konzepte Achsen der Visualisierung, ist das korrespondierende DBpedia\footnote{\url{http://dbpedia.org/}} Konzept bereits im Domain Assignment enthalten, welches die MRE der Komponente mitteilt. Für frei gewählte Worte müsste eine eigene Anfrage an das Data Repository gestellt werden, welches das entsprechende Konzept der DBpedia findet, das Abstract lädt und zurück liefert. Dann kann es zusammen mit einem Link zum Wikipedia-Artikel angezeigt werden.
+Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einer dafür vorgesehenen CSS Klasse aus: Eine Klasse für Legenden, eine für Freitext. Diese können entweder in der Komponentenbeschreibung angegeben und so selbst gewählt werden, oder sie werden vom Vizboard-Betreiber festgelegt. Hier wird die letzte Variante umgesetzt, weil sie dem Komponentenentwickler etwas Aufwand erspart und \enquote{Kollisionen} mit bereits vorhandenen Klassen erstens unwahrscheinlich sind und zweitens einfach behoben werden können (beispielsweise mit dem Präfix \texttt{my-}). Der zu erklärende Begriff ist dann der Textinhalt des Tags mit der entsprechenden Klasse.
+
+Auf diese Weise können die erklärungsbedürftigen Konzepte über CSS Selektoren gefunden werden. Betreffen die Begriffe Legenden der Visualisierung, ist das korrespondierende Konzept bereits in Form einer URL im Domain Assignment enthalten, welches die Laufzeitumgebung der Komponente mitteilt. Für frei gewählte Begriffe muss eine eigene Anfrage an das Data Repository gestellt werden, welches das entsprechende Konzept findet, eine Beschreibung lädt und zurück liefert. Dann kann es zusammen mit einem Link zu einer Erklärung angezeigt werden.
 
 \subsection{User Interface und Interaktion}
 
@@ -918,7 +941,7 @@ Im kompositen Infomationsvisualisierungssystem VizBoard kommunizieren Komponente
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:kommunikation:ui}
 
-Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte einen Brief enthält. Sollten mehrere Empfänger vorhanden sein, existiert für jeden davon ein Brief. Der Pfeil wird nicht mehr gerendert, sobald der Benutzer die Hilfe zu der Kombination (Sender, Empfänger) aufgerufen hat und verschwindet, wenn ein anderer Pfeil gerendert werden muss. Ansonsten wird der Viewport mit Pfeilen zugepflastert.
+Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte einen Brief enthält. Sollten mehrere Empfänger vorhanden sein, existiert für jeden davon ein Brief. Der Pfeil wird nicht mehr gerendert, sobald der Benutzer die Hilfe zu der Kombination (Sender, Empfänger) aufgerufen hat und verschwindet, wenn ein anderer Pfeil gerendert werden muss. Ansonsten sind zu viele Pfeile gleichzeit im Viewport sichtbar.
 
 \begin{figure}[htbp]
    \centering
@@ -932,7 +955,7 @@ Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.75\textwidth]{images/konzeption-kommunikation-step2.png}
-   \caption{UI Mockup: Comic zur Kommunikation}
+   \caption{UI Mockup: Comic erklärt Kommunikation. Verändern des Kartenausschnittes (Aktion: Panning, Operation: Drag) bewirkt ein Update im Balkendiagramm.}
    \label{figure:kommunikation-step2}
 \end{figure}
 
@@ -953,50 +976,9 @@ Zu beachten ist allerdings, dass es Operationen geben kann, welche das User Inte
 Mit Hilfe von Kommentaren können Endnutzer andere auf beobachtete Fakten der Daten wie Ausreisser oder Trends hinweisen und so zum Verständnis beitragen.
 % wie können kommentare umgesetzt werden? dev vs us! warum machen wir es so wie geplant?
 
-Prinzipiell gibt es zwei Varianten, wie Kommentare in einer InfoVis-Komponente umgesetzt werden können. In der ersten kümmert sich die Komponente darum, wie und wann sie Kommentare lädt und anzeigt. Der Vorteil daran ist, dass die Handhabung von Kommentaren speziell auf jede Komponente angepasst wird. Allerdings kann so kein einheitliches Look \& Feel gewährleistet werden\footnote{Zwar könnten Designrichtlinien Aussehen und Interaktionen vorschreiben, sie sind aber zwecklos wenn der Komponentenentwickler sie nicht einhält.}. Außerdem erhöht diese Variante den Entwicklungsaufwand der Komponente stark.
+Prinzipiell gibt es zwei Varianten, wie Kommentare in einer InfoVis-Komponente umgesetzt werden können. In der ersten kümmert sich die Komponente darum, wie und wann sie Kommentare lädt und anzeigt. Der Vorteil daran ist, dass die Handhabung von Kommentaren speziell auf jede Komponente angepasst wird. Allerdings kann so kein einheitliches Look \& Feel gewährleistet werden. Zwar könnten Designrichtlinien Aussehen und Interaktionen vorschreiben, sie sind aber zwecklos wenn der Komponentenentwickler sie nicht einhält. Außerdem erhöht diese Variante den Entwicklungsaufwand der Komponente stark.
 
-In der zweiten Variante ist es Aufgabe des Hilfesystems, Kommentare zu verwalten und anzuzeigen. Die vorhin genannten Nachteile werden hier zu Vorteilen: Einheitliches Look \& Feel wird sichergestellt und der Komponentenentwickler hat keinen zusätzlichen Entwicklungsaufwand. Allerdings hat das Hilfesystem auf Grund des \enquote{Black Box} Prinzips keinen Zugriff auf die in der Komponente verwendeten Daten. Aus demselben Grund kommt hinzu, dass das User Interface für Kommentare sich verschiedenen Interaktionen der Komponente wie z.\,B. scrollen, Tab wechseln, zoomen etc. anpassen muss, ohne darüber informiert zu werden. Um diese Nachteile zu umgehen, wird im folgenden die API einer Komponente und die erforderliche Komponentenbeschreibung erweitert.
-
-\subsection{API und Komponentenbeschreibung}
-\label{section:konzeption:kommentare:api}
-
-% konkreter. was gibt es für kommentare, wie unterscheiden sie sich, was ergeben sich für anforderungen daraus --> keine dynamischen daten, kein unvorhersehbares layout, keine aggregation, memento definieren, 
-
-Bereiche der InfoVis, die von einem Kommentar referenziert werden können, sind entweder Flächen, die Datenpunkte enthalten können oder nicht, oder Datenpunkte selbst (Abbildung~\ref{figure:datenbereiche}). Um Kommentare in anderen Visualisierungskomponenten wiederverwenden zu können ist es sinnvoll, sie mit einer Referenz auf die visualisierten Daten anstatt auf die Komponente abzuspeichern (datenbasierte Kommentare). Damit das möglich ist, müssen drei Voraussetzungen gegeben sein:
-
-\begin{enumerate}
-	\item Die grafische Repräsentation muss Werte von Variablen auf die Position kodieren, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann. Das ist beispielsweise bei einem Scatterplot der Fall, bei einer Treemap nicht. Dort sind Größe und Farbe die visuellen Attribute.  
-	\item Die Komponente muss eine Operation bereitstellen, welche kartesische Koordinaten $(x_1,y_1)$ in Datenbereiche (2000 \$, 14. Mai 1998) transformiert sowie deren Umkehrung. Komponenten sind \enquote{Black Boxes} und es kann deswegen keine Annahme über die verwendete Skala (linear oder logarithmisch) oder andere Interna getroffen werden. Aus diesem Grund ist es nicht möglich, aus Auswahlkoordinaten $(x_1,y_1,x_2,y_2)$ direkt auf Daten zu schließen.
-	\item Die Komponente darf keine Datenverarbeitung in Form von Aggregationen o.\,ä. durchführen, da diese Daten nicht im Data Repository gespeichert sind und es folglich keine Daten enthält, die referenziert werden könnten.
-\end{enumerate}
-
-Erfüllt eine Komponente diese Bedingungen nicht vollständig, können in ihr verfasste Kommentare nur dort wieder angezeigt werden (flächenbasierte Kommentare).
-
-\begin{figure}[htbp]
-   \centering
-   \includegraphics[width=0.5\textwidth]{images/konzeption-datenbereiche.png}
-   \caption{Ein Scatterplot mit eingezeichneten Referenzierungsmöglichkeiten: Leere Bereiche (rot), nicht-leere Bereiche (grün) und einzelne Datenpunkte (orange).}
-   \label{figure:datenbereiche}
-\end{figure}
-
-Mit Datenpunkten verhält sich die Situation einfacher. Der Komponentenentwickler kann ihre URI durch ein Datenattribut im DOM (\texttt{data-*}) angeben. Dadurch ist es möglich, sie über CSS Selektoren aufzufinden, auswählbar zu machen und direkt die notwendigen Daten, nämlich deren URI, auszulesen.
-
-Wenn Kommentare angezeigt werden und von anderen Benutzern nachvollzogen werden sollen, muss das Hilfesystem die Komponente in den damals aktiven Zustand zurücksetzen können, da ansonsten die referenzierten Bereiche andere Daten enthalten. Diese Tatsache führt zu weiteren Anforderungen an die Komponente.
-
-\begin{enumerate}
-	\setcounter{enumi}{3}
-	\item Die Komponente darf keine externen Daten anzeigen, wie zum Beispiel die neuesten Tweets eines Twitter-Accounts. Diese unterliegen nicht der Kontrolle von VizBoard und können nachträglich editiert oder gelöscht werden.
-	\item Das Layout der Komponente muss vollständig reproduzierbar sein, also zum Beispiel kein Force Directed Layout \cite{Fruchterman1991}.
-	\item Die Komponente muss dem Hilfesystem einen Weg zur Verfügung stellen, mit dem Zustände (wie z.\,B. Zentrum und Zoomlevel einer Karte) gespeichert und wiederhergestellt werden können.
-\end{enumerate}
-
-Bezüglich der letzten Anforderung bietet sich ein Memento-Pattern \cite{Gamma1994} an:
-
-\begin{quote}
-Without violating encapsulation, capture and externalize an object's internal state allowing the object to be restored to this state later.
-\end{quote} 
-
-Der Komponentenentwickler würde das Format des Mementos in der Komponentenbeschreibung definieren, nämlich welche Properties den Zustand der Komponente vollständig beschreiben. Das Hilfesystem kann diese dann über entsprechende Getter/Setter-Methoden -- welche in der API einer Komponente bereits vorgesehen sind -- verändern.
+In der zweiten Variante ist es Aufgabe des Hilfesystems, Kommentare zu verwalten und anzuzeigen. Die vorhin genannten Nachteile werden hier zu Vorteilen: Einheitliches Look \& Feel wird sichergestellt und der Komponentenentwickler hat keinen zusätzlichen Entwicklungsaufwand. Allerdings hat das Hilfesystem auf Grund des \enquote{Black Box} Prinzips keinen Zugriff auf die in der Komponente verwendeten Daten. Aus demselben Grund kommt hinzu, dass das User Interface für Kommentare sich verschiedenen Interaktionen der Komponente wie z.\,B. scrollen, Tab wechseln, zoomen etc. anpassen muss, ohne darüber informiert zu werden. Im folgenden wird erläutert, wie diese Nachteile umgangen werden können.
 
 \subsection{Features}
 \label{section:konzeption:kommentare:features}
@@ -1015,11 +997,11 @@ Um Diskussionen und Konversationen zur Visualisierung zu fördern, müssen Komme
 
 \subsubsection{Voting}
 
-Erfahrungsgemäß tragen nicht alle Kommentare gleich viel zur Diskussion bei. Man denke dabei an Hinweise auf Tippfehler oder das berüchtigte \enquote{Erster!}. Deswegen ist es notwendig, dass Benutzer Kommentare anderer bewerten können\footnote{Ob dabei der Inhalt bewertet wird, steht wiederum auf einem anderen Blatt.}. Das Hilfesystem kann dann Kommentare nach den meisten Upvotes sortiert anzeigen.
+Erfahrungsgemäß tragen nicht alle Kommentare gleich viel zur Diskussion bei. Man denke dabei an Hinweise auf Tippfehler oder das berüchtigte \enquote{Erster!}. Deswegen ist es notwendig, dass Benutzer Kommentare anderer bewerten können. Das Hilfesystem kann dann Kommentare nach den meisten Upvotes sortiert anzeigen.
 
 \subsubsection{Kommentar editieren}
 
-Den eigenen Kommentar editieren zu können ist aus verschiedenen Gründen wichtig, z.\,B. wenn der Benutzer Tippfehler ausbessern oder ein paar Absätze zur Lesbarkeit einfügen will. Wichtig ist für andere, dass dies transparent geschieht und die Diskussion nachvollziehbar bleibt. Es gibt verschiedene Lösungsmöglichkeiten:
+Den eigenen Kommentar editieren zu können, ist aus verschiedenen Gründen wichtig, z.\,B. wenn der Benutzer Tippfehler ausbessern oder ein paar Absätze zur Lesbarkeit einfügen will. Wichtig ist für andere, dass dies transparent geschieht und die Diskussion nachvollziehbar bleibt. Es gibt verschiedene Lösungsmöglichkeiten:
 
 \begin{itemize}
 	\item Der Kommentar kann nicht editiert werden. So bleibt alles perfekt nachvollziehbar, aber der Benutzer kann nichts ausbessern.
@@ -1029,13 +1011,67 @@ Den eigenen Kommentar editieren zu können ist aus verschiedenen Gründen wichti
 
 \subsubsection{Kommentar löschen}
 
-Gründe um einen Kommentar zu löschen beinhalten unter anderem Schwachsinn (der von anderen als solcher identifiziert wurde), Beschimpfungen oder mangelnde Aktualität. Wie beim editieren von Kommentaren ist es hier notwendig, dass der Gesprächsverlauf nachvollziehbar bleibt. Die Lösungsansätze beinhalten:
+Gründe, um einen Kommentar zu löschen, beinhalten unter anderem Schwachsinn (der von anderen als solcher identifiziert wurde), Beschimpfungen oder mangelnde Aktualität. Wie beim Editieren von Kommentaren ist es hier notwendig, dass der Gesprächsverlauf nachvollziehbar bleibt. Die Lösungsansätze beinhalten:
 
 \begin{itemize}
 	\item Kommentare können nicht gelöscht werden. Das könnte Benutzer davon abhalten, Kommentare zu schreiben, was auch nicht Sinn der Sache ist.
-	\item Kommentare können gelöscht werden, solange keine Referenz darauf besteht. Das sieht aus als hätte ich es nicht hinbekommen. Lauwarmer Kompromiss, jawohl.
-	\item Kommentare können beliebig gelöscht werden. Diese Variante weckt keine Ängste, den eigenen Stuss nicht mehr löschen zu können. Dann muss aber etwas mit den Referenzen auf gelöschte Kommentare geschehen, da ansonsten die Nachvollziehbarkeit der Diskussion leidet. Beispielsweise könnte die referenzierte Originalversion abgespeichert und eingeblendet werden.
+	\item Kommentare können gelöscht werden, solange keine Referenz darauf besteht. So kann ein Diskussionsverlauf konsistent bleiben, allerdings ist dieser Weg aus Nutzersicht schwer verständlich.
+	\item Kommentare können beliebig gelöscht werden. Diese Variante weckt keine Ängste, den eigenen Kommentar nicht mehr löschen zu können. Es muss aber etwas mit den Referenzen auf gelöschte Kommentare geschehen, da ansonsten die Nachvollziehbarkeit der Diskussion leidet. Beispielsweise könnte die referenzierte Originalversion abgespeichert und eingeblendet werden.
 \end{itemize}
+
+\subsubsection{Bereich der Visualisierung referenzieren}
+
+Um eine gemeinsame Grundlage für eine Diskussion zu schaffen ist es notwendig, Bereiche der Visualisierung markieren zu können, über die man in einem Kommentar spricht. Diese Bereiche können entweder Flächen, die Datenpunkte enthalten oder nicht (Bereichskommentare), oder Datenpunkte selbst sein (Punktkommentare, Abbildung~\ref{figure:datenbereiche}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-datenbereiche.png}
+   \caption{Ein Scatterplot mit eingezeichneten Referenzierungsmöglichkeiten: Leere Bereiche (rot), nicht-leere Bereiche (grün) und einzelne Datenpunkte (orange).}
+   \label{figure:datenbereiche}
+\end{figure}
+
+\subsection{API und Komponentenbeschreibung}
+\label{section:konzeption:kommentare:api}
+
+% konkreter. was gibt es für kommentare, wie unterscheiden sie sich, was ergeben sich für anforderungen daraus --> keine dynamischen daten, kein unvorhersehbares layout, keine aggregation, memento definieren, 
+
+Wie im letzten Abschnitt beschrieben ist es notwendig, Bereiche einer Visualisierung markieren zu können.
+
+\subsubsection{Bereichskommentare}
+
+Um die Kommentare zu diesen Bereichen in anderen Visualisierungen wiederverwenden zu können, sollten die Daten an sich (\emph{datenbasierte Bereichskommentare}) und nicht die Fläche der Visualisierung (\emph{flächenbasierte Bereichskommentare}) referenziert werden. Damit das möglich ist, müssen drei Voraussetzungen gegeben sein:
+
+\begin{enumerate}
+	\item Die grafische Repräsentation muss Werte von Variablen auf die Position kodieren, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann. Das ist beispielsweise bei einem Scatterplot der Fall, bei einer Treemap nicht. Dort sind Größe und Farbe die visuellen Attribute.  
+	\item Die Komponente muss eine Operation bereitstellen, welche kartesische Koordinaten $(x_1,y_1)$ in Datenbereiche (2000 \$, 14. Mai 1998) transformiert sowie deren Umkehrung. Komponenten sind \enquote{Black Boxes} und es kann deswegen keine Annahme über die verwendete Skala (linear oder logarithmisch) oder andere Interna getroffen werden. Aus diesem Grund ist es nicht möglich, aus Auswahlkoordinaten $(x_1,y_1,x_2,y_2)$ direkt auf Daten zu schließen.
+	\item Die Komponente darf keine Datenverarbeitung in Form von Aggregationen o.\,ä. durchführen, da diese Daten nicht im Data Repository gespeichert sind und es folglich keine Daten enthält, die referenziert werden könnten.
+\end{enumerate}
+
+Erfüllt eine Komponente diese Bedingungen nicht vollständig, können nur flächenbasierte Bereichskommentare eingesetzt werden. Wenn datenbasierte Bereichskommentare angezeigt und von anderen Benutzern nachvollzogen werden sollen, muss das Hilfesystem die Komponente in den damals aktiven Zustand zurücksetzen können, da ansonsten die referenzierten Bereiche andere Daten enthalten. Diese Tatsache führt zu weiteren Anforderungen an die Komponente:
+
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item Die Komponente darf keine externen Daten anzeigen, wie zum Beispiel die neuesten Tweets eines Twitter-Accounts. Diese unterliegen nicht der Kontrolle von VizBoard und können nachträglich editiert oder gelöscht werden.
+	\item Das Layout der Komponente muss vollständig reproduzierbar sein, also zum Beispiel kein Force Directed Layout \cite{Fruchterman1991}.
+	\item Die Komponente muss dem Hilfesystem einen Weg zur Verfügung stellen, mit dem Zustände (wie z.\,B. Zentrum und Zoomlevel einer Karte) gespeichert und vollständig wiederhergestellt werden können.
+\end{enumerate}
+
+Bezüglich der letzten Anforderung bietet sich ein Memento-Pattern \cite{Gamma1994} an:
+
+\begin{quote}
+Without violating encapsulation, capture and externalize an object's internal state allowing the object to be restored to this state later.
+\end{quote} 
+
+Der Komponentenentwickler würde das Format des Mementos in der Komponentenbeschreibung definieren, nämlich welche Properties den Zustand der Komponente vollständig beschreiben. Das Hilfesystem kann diese dann über entsprechende Getter/Setter-Methoden -- welche in der API einer Komponente bereits vorgesehen sind -- verändern.
+
+\subsubsection{Punktkommentare}
+
+% speichern
+Mit Datenpunkten verhält sich die Situation etwas einfacher als bei Bereichen. Der Komponentenentwickler kann ihre URI durch ein Datenattribut (\texttt{data-*}) an DOM Elementen, welche einen Datenpunkt repräsentieren, angeben. Dadurch kann das Hilfesystem mit CSS Selektoren herausfinden, welche DOM Elemente welche Datenpunkte darstellen und diese auswählbar machen, sollte ein Kommentar hinzugefügt werden. Wird der Kommentar abgeschickt, muss die Komponente dem Hilfesystem zuerst mitteilen, welche Werte die visualisierten Attribute eines Datenpunkts haben. Das kann nicht automatisch aus dem DOM Element berechnet werden, weil die Skala unbekannt ist: Entspricht eine Fläche von 100~Pixel in der Treemap 10~Quadratmetern oder 1000~Hektar? Die URI des Datenpunkts sowie die Werte der Attribute werden im Kommentar gespeichert, sodass sie in anderen Visualisierungen wiederverwendet werden können.
+
+% laden
+Beim Laden von Punktkommentaren zählt das Hilfesystem erst die Anzahl von Kommentaren pro Datenpunkt und stellt diese Anzahl über dem visualisierten Datenpunkt dar. Das ist möglich, weil über die URI und CSS Selektoren die entsprechenden DOM Elemente identifiziert werden können.
+
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:kommentare:ui}
@@ -1076,7 +1112,7 @@ Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt des Popovers 
 	\end{itemize}
 	\item Rechte Spalte
 	\begin{itemize}
-		\item Voting: Ein Benutzer kann einen fremden Kommentar genau bewerten. Die Anzahl der Stimmen wird ebenfalls angezeigt.
+		\item Voting: Ein Benutzer kann einen fremden Kommentar genau einmal bewerten. Die Anzahl der Stimmen wird ebenfalls angezeigt.
 		\item Antworten: Eine zweite Möglichkeit als die ID des Kommentars einzutippen. Die UI wechselt zu \enquote{Kommentar verfassen} und inkludiert die ID des betreffenden Kommentars.
 		\item Bereiche anzeigen: Zeigt die vom Kommentar referenzierten Bereiche in der Visualisierung.
 	\end{itemize}
@@ -1116,7 +1152,7 @@ Von Kommentaren referenzierte Bereiche müssen durch einen Klick auf den Button 
 
 % welche daten enthält ein gespeichertes kommentar?
 
-Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:api} und~\ref{section:konzeption:kommentare:funktionen} nach enthält ein abgespeichertes Kommentar im DaRe folgende Daten:
+Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:api} und~\ref{section:konzeption:kommentare:features} nach enthält ein abgespeichertes Kommentar im DaRe folgende Daten:
 
 \begin{itemize}
 	\item ID des Kommentars, um darauf verweisen zu können.
@@ -1129,18 +1165,22 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:api} und
 	\item ID der Komponente, in der der Kommentar verfasst wurde. Das ist notwendig um flächenbasierte Kommentare wiederherstellen zu können. Bei datenbasierten Kommentaren kann eventuell ein Verweis auf die ursprüngliche Komponente erstellt werden.
 	\item ID des Datensatzes, der visualisiert wurde
 	\item Verfasser des Kommentars
-	\item URIs der Datatype Properties, die visualisiert wurden
+	\item URIs der Datenattribute, die visualisiert wurden
 	\item Memento der Komponente zum Zeitpunkt des Kommentars
-	\item \textit{Wenn flächenbasiert}
+	\item \textit{Für jeden Bereich, wenn flächenbasiert}
 		\begin{itemize}
 			\item Koordinaten der Auswahlrechtecke, relativ zur linken oberen Ecke der Visualisierung
 			\item Größe der Visualisierung zum Zeitpunkt des Kommentars, um die Auswahlrechtecke entsprechend skalieren zu können, falls notwendig.
 		\end{itemize}
-	\item \textit{Wenn datenbasiert}
+	\item \textit{Für jeden Bereich, wenn datenbasiert}
 		\begin{itemize}
-			\item Grenzwerte der Datatype Properties
+			\item Grenzwerte der visualisierten Datenattribute
 		\end{itemize}
-	\item URIs der referenzierten Datenpunkte
+	\item \textit{Für jeden Datenpunkt}
+		\begin{itemize}
+			\item URI
+			\item Werte der visualisierten Datenattribute
+		\end{itemize}
 \end{itemize}
 
 % wie läuft das mit speichern?
@@ -1149,15 +1189,19 @@ Hat ein Benutzer Bereiche und Datenpunkte referenziert, sowie einen Kommentar ge
 
 % wie läuft das mit laden, vor allem wenn kommentare in anderer komponente gemacht wurden?
 
-Sollen Kommentare angezeigt werden, schickt das Hilfesystem eine entsprechende Anfrage ans DaRe und empfängt die Daten aller relevanten Kommentare. Für flächenbasierte Kommentare ist nichts weiter zu tun, sie können direkt in dieser Komponente angezeigt werden. Um datenbasierte Kommentare anzuzeigen, muss das Hilfesystem zuerst die Datengrenzen in Koordinaten in der Visualisierung transformieren lassen.
+Sollen Kommentare angezeigt werden, schickt das Hilfesystem eine entsprechende Anfrage ans DaRe und empfängt die Daten aller relevanten Kommentare. Für flächenbasierte Bereichskommentare ist nichts weiter zu tun, sie können direkt in dieser Komponente gerendert werden. Um datenbasierte Bereichskommentare anzuzeigen, muss das Hilfesystem zuerst die Datengrenzen in Koordinaten in der Visualisierung transformieren lassen. Bei Punktkommentaren ist dies nicht nötig, weil das Hilfesystem über CSS Selektoren herausfinden kann, wo sie sich befinden sollen.
 
 \subsubsection{Weitere Nutzung}
 
 % wie können kommentare noch genutzt werden?
 
-Kommentare können auch Metainformationen über die Daten oder Komponente enthalten \cite{Chen2009}. Es wäre denkbar, mittels automatischer Textklassifikation \cite{Sebastiani2002} diese Kommentare zu identifizieren und als positiv oder negativ zu kategorisieren. Daraus ließe sich wiederum eine Bewertung für die Kombination (Datensatz, Komponente) berechnen\footnote{Am einfachsten ginge das indem bei Null gestartet wird und für jeden positiven Kommentar der Zähler um eins erhöht und jeden Negativen um eins verringert wird.}. Der errechnete Wert könnte in Zukunft beim Ranking einer Komponente für einen ausgewählten Datensatz berücksichtigt werden. Wenn der Aufwand dafür gerechtfertigt werden kann, ist es auch möglich, eine -- zuvor definierte -- Ontologie aus Kommentaren zu extrahieren \cite{Alani2003}. Diese könnte zum Beispiel das Qualitätsmanagement von Komponenten automatisieren.
+Kommentare können auch Metainformationen über die Daten oder Komponente enthalten \cite{Chen2009}. Es wäre denkbar, mittels automatischer Textklassifikation \cite{Sebastiani2002} diese Kommentare zu identifizieren und als positiv oder negativ zu kategorisieren. Daraus ließe sich wiederum eine Bewertung für die Kombination (Datensatz, Komponente) berechnen\footnote{Am einfachsten ginge das indem bei Null gestartet wird und für jeden positiven Kommentar der Zähler um eins erhöht und jeden Negativen um eins verringert wird.}. Der errechnete Wert könnte in Zukunft beim Ranking einer Komponente für einen ausgewählten Datensatz berücksichtigt werden. Wenn der Aufwand dafür gerechtfertigt werden kann, ist es auch möglich, eine -- zuvor definierte -- Ontologie aus Kommentaren zu extrahieren \cite{Alani2003}. Diese könnte zum Beispiel das Qualitätsmanagement von Komponenten automatisieren. Denkbar wäre, dass aus Kommentaren automatisch extrahiert wird, worüber sich die Benutzer beschweren. Ab einem Schwellwert kann dann der Komponentenentwickler informiert werden: 
 
-\section{Hilfception}
+\begin{quote}
+Lieber Entwickler, 30~\% der Menschen, die deine Komponente verwendet haben, beschweren sich über lange Ladezeiten und 42~\% über Unübersichtlichkeit. Wir empfehlen, daran etwas zu ändern. Viele Grüße, das VizBoard-Team.
+\end{quote}
+
+\section{Meta-Hilfe}
 \label{section:konzeption:meta-hilfe}
 
 % warum brauchen wir meta-hilfe?
@@ -1197,7 +1241,7 @@ Nachdem der Benutzer darauf geklickt hat, wird der Viewport abgedunkelt und ein 
 
 Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung sowie die API einer Komponente erweitert. In diesem Abschnitt werden die Änderungen zusammengefasst.
 
-\subsection{Markup einer Komponente}
+\subsubsection{Markup einer Komponente}
 
 \begin{itemize}
 	\item CSS Klasse, um Begriffe zur automatischen Verlinkung zu kennzeichnen
@@ -1205,13 +1249,14 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item Datenattribut mit URI, um Datenpunkte zu kennzeichnen (Kommentare)
 \end{itemize}
 
-\subsection{Komponentenbeschreibung}
+\subsubsection{Komponentenbeschreibung}
 
 \begin{itemize}
 	\item VISO Konzept der grafischen Repräsentation (Intro)
 	\item CSS Selektoren, um UI Elemente für Capabilities zu kennzeichnen (Bedienung)
 	\item VISO Operationen, um notwendige Operation auf UI Elementen anzugeben (Bedienung)
 	\item Anzahl an Sekunden, die vor einem Screenshot gewartet werden soll (Bedienung)
+	\item Text, der Auswirkung der Aktion näher spezifiziert (Bedienung)
 	\item Boolean, ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
 	\item Beispieldaten für Operationen mit Parametern (Bedienung)
 	\item Memento der Komponente (Kommentare)
@@ -1221,24 +1266,19 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item Boolean, ob das Layout der Komponente vollständig reproduzierbar ist (Kommentare)
 \end{itemize}
 
-\subsection{API einer Komponente}
+\subsubsection{API einer Komponente}
 
 \begin{itemize}
 	\item Eine Funktion, um Koordinaten in Datenpunkte umzurechnen (Kommentare)
 	\item Die Umkehrung der Funktion (Datenpunkte $\to$ Koordinaten) (Kommentare)
 \end{itemize}
 
-\subsection{VISO}
+\subsubsection{VISO}
 
 \begin{itemize}
 	\item Beschreibung einer grafischen Repräsentation (Intro)
-	\item Link zu Tutorialvideo (Intro) -- gehört sowas wirklich in die VISO?
+	\item Link zu Tutorialvideo (Intro)
 \end{itemize}
-
-\section{Beispiel}
-\label{section:konzeption:beispiel}
-
-Vielleicht sollte ich ein oder zwei InfoVis aus \cite{Heer2010} exemplarisch durchgehen um zu beweisen, dass das mein Konzept auch funktioniert? Ansonsten müsste man mir das an dieser Stelle einfach glauben, bevor es zur Implementierung geht. Oder wäre es sowieso geschickter, wenn ich das am Ende der Implementierung mache?
 
 \section{Zusammenfassung}
 \label{section:konzeption:zusammenfassung}
