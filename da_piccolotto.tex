@@ -674,7 +674,12 @@ Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wurde deut
 	\item Art der Visualisierung, z.\,B. \enquote{Balkendiagramm}
 	\item Beschreibung der Visualisierung, z.\,B. \enquote{Ein Diagramm, das durch auf der x-Achse senkrecht stehende, nicht aneinander grenzende Rechtecke die Häufigkeitsverteilung einer diskreten Variable veranschaulicht.}
 	\item Inhalt der Visualisierung, z.\,B. BIP auf der y-Achse und Länder auf der x-Achse.
+	\item Links zu Tutorials und Erklärungen
+	\item Vor- und Nachteile der ausgewählten Visualisierung, z.\,B. \enquote{übersichtlich, wenn wenige Farben vorhanden sind}
 \end{enumerate}
+
+% abgrenzung zu "der dev macht das"
+Eine Möglichkeit -- so ist die Beschreibung einer Komponente bereits umgesetzt -- ist den Komponentenentwickler selbst einen Text dazu schreiben zu lassen. Er fügt diesen in die Komponentenbeschreibung ein, von wo das Hilfesystem ihn dann auslesen kann. Allerdings kann auf diese Weise kein einheitliches Vokabular bezüglich Informationsvisualisierungen sichergestellt werden. Ein einheitliches Vokabular ist aber wichtig, da unterschiedliche Bezeichnungen derselben Konzepte kontraproduktiv für das Verständnis sind. Deswegen werden die Informationen direkt zu den entsprechenden Konzepten in der VISO hinzugefügt. Von dieser zentralen Stelle kann das Hilfesystem sie dann auslesen und anzeigen, sodass die verwendeten Vokabeln konsistent bleiben.
 
 % was bleibt draußen?
 
@@ -690,8 +695,7 @@ Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von vers
 
 % wie wird es umgesetzt?
 
-% abgrenzung zu "der dev macht das"
-Eine Möglichkeit, wie die Beschreibung einer Komponente umgesetzt werden kann, ist sie dem Komponentenentwickler zu überlassen. Er würde sie in die Komponentenbeschreibung einfügen, von wo das Hilfesystem sie dann auslesen kann. Allerdings kann auf diese Weise kein einheitliches Vokabular bezüglich Informationsvisualisierungen sichergestellt werden. Wie bereits erwähnt ist einheitliches Vokabular aber wichtig, da unterschiedliche Bezeichnungen derselben Konzepte kontraproduktiv für das Verständnis sind.
+
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:intro:ui}
