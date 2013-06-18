@@ -790,7 +790,7 @@ Die VISO enthält im Namensraum \texttt{viso:activity} Konzepte der hierarchisch
 
 Für das Hilfesystem sind Operationen und Aktionen relevant, da Aktivitäten nicht beeinflusst werden können. Aktionen einer Komponente sind beispielsweise zoomen, suchen oder filtern; Operationen sind etwa Klicks, Drags oder Multitouch-Gesten.
 
-Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden CSS Selektoren (\enquote{welche Elemente}) und Operationen aus der VISO (\enquote{welche Operationen}) zur Komponentenbeschreibung hinzugefügt. Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind. Zusätzlich ist es möglich, dass der Entwickler Zusatzinformationen in Stichworten angibt. Zum Beispiel kann eine Tabelle durch unterschiedliche Elemente nach verschiedenen Spalten \enquote{sortiert} (Aktion) werden. Dabei ist es wichtig zu wissen, welches Element nach welcher Spalte sortiert. Die erwähnten Zusätze zur Komponentenbeschreibung sollten allerdings optional sein, falls der Komponentenentwickler keine Hilfe für bestimmte Aktionen anbieten will.
+Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden Operationen aus der VISO (\enquote{welche Operationen}) zusammen mit CSS Selektoren (\enquote{welche Elemente}) in der Komponentenbeschreibung definiert. Äquivalente Operationen, die denselben Effekt haben, werden zusammengefasst. Zu einer Aktion (Capability) wird dann eine Liste von äquivalenten Operationen angegeben, wobei die Reihenfolge die notwendige Ausführungsreihenfolge darstellt. So können auch zusammengesetzte Operationen -- beispielsweise zuerst Menü aufrufen, dann sortieren -- abgebildet werden. Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind. Zusätzlich ist es möglich, dass der Entwickler Zusatzinformationen in Stichworten angibt. Zum Beispiel kann eine Tabelle durch unterschiedliche Elemente nach verschiedenen Spalten \enquote{sortiert} (Aktion) werden. Dabei ist es wichtig zu wissen, welches Element nach welcher Spalte sortiert. Die erwähnten Zusätze zur Komponentenbeschreibung sollten allerdings optional sein, falls der Komponentenentwickler keine Hilfe für bestimmte Aktionen anbieten will.
 
 \subsection{Generierung der Assistance}
 \label{section:konzeption:bedienung:generierung}
@@ -823,16 +823,19 @@ Danach führt es folgende Schritte aus:
 	\item Für jede verfügbare Aktion:
 	\begin{enumerate}
 		%\item Finde die Bounding Box der relevanten Elemente
-		\item Für jeden definierten CSS Selektor:
+		\item Für jede äquivalente Operation:
 		\begin{enumerate}
-			\item Finde die Bounding Box der betroffenen Elemente und speichere sie
-			\item Hebe betroffene Elemente hervor
-			\item Erstelle einen Screenshot der Komponente
-			\item Setze Zustand der betroffenen Elemente zurück
+			\item Für jede Operation:
+			\begin{itemize}
+				\item Finde die Bounding Box der betroffenen Elemente und speichere sie
+				\item Hebe betroffene Elemente hervor
+				\item Erstelle einen Screenshot der Komponente
+				\item Setze Zustand der betroffenen Elemente zurück
+			\end{itemize}
+			\item Führe Operation aus
+			\item Warte die definierte Anzahl an Sekunden
+			\item Erstelle einen Screenshot vom Ergebnis der Aktion
 		\end{enumerate}
-		\item Führe die definierte Operation auf einem beliebigen relevanten Element aus
-		\item Warte die definierte Anzahl an Sekunden
-		\item Erstelle einen Screenshot vom Ergebnis der Aktion
 	\end{enumerate}
 \end{enumerate}
 
@@ -997,7 +1000,11 @@ Um Diskussionen und Konversationen zur Visualisierung zu fördern, müssen Komme
 
 \subsubsection{Voting}
 
-Erfahrungsgemäß tragen nicht alle Kommentare gleich viel zur Diskussion bei. Man denke dabei an Hinweise auf Tippfehler oder das berüchtigte \enquote{Erster!}. Deswegen ist es notwendig, dass Benutzer Kommentare anderer bewerten können. Das Hilfesystem kann dann Kommentare nach den meisten Upvotes sortiert anzeigen.
+Erfahrungsgemäß tragen nicht alle Kommentare gleich viel zur Diskussion bei. Man denke dabei an Hinweise auf Tippfehler oder das berüchtigte \enquote{Erster!}. Deswegen ist es notwendig, dass Benutzer Kommentare anderer bewerten können.
+
+\subsubsection{Ranking}
+
+Da Kommentare in einer Liste angezeigt werden und keine Buttons zum Sortieren vorgesehen sind (Abschnitt~\ref{section:konzeption:kommentare:ui}), muss das Hilfesystem die anzuzeigenden Kommentare nach einem Algorithmus sortieren. In diesen sollten sowohl die Bewertung eines Kommentars als auch die Komponente, in der er verfasst wurde und die Daten, die er referenziert, einfließen. Möglich wäre zum Beispiel nach Bewertung zu sortieren, aber Kommentare zu bestrafen, wenn sie aus anderen Komponenten stammen oder nur teilweise die gefragten Datenattribute referenzieren. Dann wird ein festgelegter Faktor der Bewertung abgezogen (z.\,B. die Hälfte). So werden Kommentare aus der gleichen Komponente bevorzugt, aber hohe Bewertungen erscheinen trotzdem zuerst.
 
 \subsubsection{Kommentar editieren}
 
@@ -1271,6 +1278,7 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \begin{itemize}
 	\item Eine Funktion, um Koordinaten in Datenpunkte umzurechnen (Kommentare)
 	\item Die Umkehrung der Funktion (Datenpunkte $\to$ Koordinaten) (Kommentare)
+	\item Eine Funktion, um Werte von Attributen eines Datenpunkts zu erhalten (Kommentare)
 \end{itemize}
 
 \subsubsection{VISO}
