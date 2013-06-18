@@ -173,7 +173,7 @@ Aus dem Szenario (Kapitel~\ref{section:standderforschung:szenario}) lassen sich 
 Blabla
 
 \begin{itemize}
-	\item\textbf{Überblick}: Das Hilfesystem soll einen kurzen Überblick über das InfoVis-System geben und Darstellungsform sowie Inhalt jeder Komponente kurz erläutern.
+	\item\textbf{Intro}: Das Hilfesystem soll einen kurzen Überblick über das InfoVis-System geben und Darstellungsform sowie Inhalt jeder Komponente kurz erläutern.
 	\item\textbf{Bedienung}: Das Hilfesystem soll erklären können, wie eine Komponente bedient wird. Diese Informationen umfassen beispielsweise welche Operationen welche Aktionen (eventuell auf welchen Daten) ausführen.
 	\item\textbf{Reporting}: Fehler in Komponenten sollen über ein Reporting-System gemeldet werden können.
 	\item\textbf{Verlinkung}: Das Hilfesystem soll nicht-triviale Begriffe mit einer Wissensbasis‚ verlinken, sodass nicht nur auf die Begriffsbedeutung hingewiesen werden, sondern dem Benutzer auch zusätzliche Informationen zur Verfügung gestellt werden können.
@@ -663,8 +663,8 @@ yay
 
 Basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) und den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen}) wird ein Konzept zur User Assistance für das webbasierte, komposite Informationsvisualisierungssystem VizBoard erstellt. Die Ziele richten sich dabei nach der Anforderungsanalyse (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}).
 
-\section{Überblick}
-\label{section:konzeption:ueberblick}
+\section{Intro}
+\label{section:konzeption:intro}
 
 Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wurde deutlich, dass dem Endnutzer zuerst ein Überblick über die verschiedenen ausgewählten Komponenten gegeben werden muss. Dieser beinhaltet folgende Punkte.
 
@@ -682,11 +682,11 @@ Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wurde deut
 Nach Grammel \cite{Grammel2012} können Links zu Tutorials und Erklärungen hilfreich sein, Endnutzern Visualisierungen zu erklären. Da externe Quellen aber nicht durch das Hilfesystem kontrolliert werden, kann es nicht sicherstellen, dass überall ein einheitliches Vokabular benutzt wird. Ein konsistentes Vokabular ist aber wichtig für effektive Hilfestellungen, weswegen dieser Punkt in dieser Form nicht umgesetzt werden kann. Was allerdings möglich ist, sind vom VizBoard-Betreiber erstellte, vertonte Animationen, die Aufbau und Vor- bzw. Nachteile grafischer Repräsentationen erklären. Da die Anzahl der Repräsentationen endlich ist und nicht alle gleich wichtig sind\footnote{Ein Balkendiagramm ist gängiger und deswegen leichter verständlich als eine Scatterplot Matrix.}, ist der nötige Aufwand gerechtfertigt.
 
 % vor- und nachteile
-Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von verschiedenen Visualisierungstypen und visuellen Mappings lernen sollten \cite[S. 125]{Grammel2012}. Es wäre möglich, allgemeine Eigenschaften von grafischen Repräsentationen in der VISO zu beschreiben. Diese sind abhängig von den dargestellten Daten und den visuellen Mappings. Die Eigenschaft \enquote{Übersichtlichkeit} ist bei einem Balkendiagramm mit drei Balken gegeben (Vorteil), bei 15 Balken nicht (Nachteil). Ähnlich verhält es sich mit der Farbkodierung: Ein Mensch kann bis zu acht Farben in einer Visualisierung gut unterscheiden (Vorteil) \cite{Mazza2009}, aber mehr nicht (Nachteil). Das Hilfesystem müsste dem Benutzer demnach sowohl die unterschiedlichen Vor- und Nachteile als auch deren Bedingungen präsentieren, was sehr viel Information für einen Überblick darstellt. Im schlechtesten Fall besteht auch kein Bezug zur beschriebenen Visualisierung, da keine der aufgeführten Bedingungen erfüllt ist. Aus den beschriebenen Gründen wird auf diese Funktion verzichtet.
+Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von verschiedenen Visualisierungstypen und visuellen Mappings lernen sollten \cite[S. 125]{Grammel2012}. Es wäre möglich, allgemeine Eigenschaften von grafischen Repräsentationen in der VISO zu beschreiben. Diese sind abhängig von den dargestellten Daten und den visuellen Mappings. Die Eigenschaft \enquote{Übersichtlichkeit} ist bei einem Balkendiagramm mit drei Balken gegeben (Vorteil), bei 15 Balken nicht (Nachteil). Ähnlich verhält es sich mit der Farbkodierung: Ein Mensch kann bis zu acht Farben in einer Visualisierung gut unterscheiden (Vorteil) \cite{Mazza2009}, aber mehr nicht (Nachteil). Das Hilfesystem müsste dem Benutzer demnach sowohl die unterschiedlichen Vor- und Nachteile als auch deren Bedingungen präsentieren, was sehr viel Information für eine Einführung darstellt. Im schlechtesten Fall besteht auch kein Bezug zur beschriebenen Visualisierung, da keine der aufgeführten Bedingungen erfüllt ist. Aus den beschriebenen Gründen wird auf diese Funktion verzichtet.
 
 % interaktionshilfen - kommen später
 
-Über die Interaktion mit der Visualisierung wird hier noch keine Aussage gemacht, da sie sehr umfangreich sein kann und den Rahmen des Überblicks sprengen würde. In Abschnitt~\ref{section:konzeption:bedienung} wird eine Hilfestellung zur Bedienung einer Komponente erarbeitet.
+Über die Interaktion mit der Visualisierung wird hier noch keine Aussage gemacht, da sie sehr umfangreich sein kann und den Rahmen des Intros sprengen würde. In Abschnitt~\ref{section:konzeption:bedienung} wird eine Hilfestellung zur Bedienung einer Komponente erarbeitet.
 
 % wie wird es umgesetzt?
 
@@ -694,19 +694,19 @@ Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von vers
 Eine Möglichkeit, wie die Beschreibung einer Komponente umgesetzt werden kann, ist sie dem Komponentenentwickler zu überlassen. Er würde sie in die Komponentenbeschreibung einfügen, von wo das Hilfesystem sie dann auslesen kann. Allerdings kann auf diese Weise kein einheitliches Vokabular bezüglich Informationsvisualisierungen sichergestellt werden. Wie bereits erwähnt ist einheitliches Vokabular aber wichtig, da unterschiedliche Bezeichnungen derselben Konzepte kontraproduktiv für das Verständnis sind.
 
 \subsection{User Interface und Interaktion}
-\label{section:konzeption:ueberblick:ui}
+\label{section:konzeption:intro:ui}
 
 Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten sieht, wird der gesamte Viewport abgedunkelt und ein Popover neben der ersten Komponente (von links oben nach rechts unten) eingeblendet (Abbildung~\ref{figure:ueberblick}). Dort sind die im vorigen Abschnitt erläuterten Informationen zu finden: Die Art der Visualisierung (\enquote{Karte}), darunter eine Beschreibung einer Karte, Informationen zu den dargestellten Daten und zuletzt ein Tutorial-Video, wenn vorhanden. Mit den Pfeilen links und rechts kann zwischen den Beschreibungen für verschiedene Komponenten gewechselt werden. Das Popover wird geschlossen, nachdem der Benutzer außerhalb desselben einen Klick tätigt. Über die Meta-Hilfe (Abschnitt~\ref{section:konzeption:meta-hilfe}) kann es wieder aufgerufen werden.
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.75\textwidth]{images/konzeption-ueberblick.png}
-   \caption{UI Mockup: Überblick}
+   \caption{UI Mockup: Intro}
    \label{figure:ueberblick}
 \end{figure}
 
 \subsection{Backend}
-\label{section:konzeption:ueberblick:backend}
+\label{section:konzeption:intro:backend}
 
 Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein Vokabular für Informationsvisualisierungen. Deswegen ist es naheliegend, die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler in der Komponentenbeschreibung hinzufügen, dann kann das Hilfesystem die entsprechenden Daten auslesen. Der Inhalt der Visualisierung entspricht dem Domain Assignment, welches der Komponente von der MRE mitgeschickt wird.
 
@@ -1114,7 +1114,7 @@ Kommentare können auch Metainformationen über die Daten oder Komponente enthal
 
 % warum brauchen wir meta-hilfe?
 
-In diesem Konzept wurden bisher sechs unterschiedliche Hilfefunktionen erarbeitet: Überblick, Bedienung, Reporting, Verlinkung, Kommunikation und Kommentare. Diese sind zwar optisch und vom Interaktionsdesign her konsistent, bringen aber trotzdem viel zusätzliche Komplexität in die Anwendung. Um die Hilfefunktionen in vollem Umfang nutzen zu können, benötigt der Benutzer einige Informationen. Dazu gehört sowohl das Wissen, welche Hilfefunktionen existieren und wie sie aufgerufen werden, als auch konzeptionelle Dinge, wie z.\,B. dass Kommentare mit Bereichen und/oder Datenpunkten in der Visualisierung assoziiert sind. Es ist anzunehmen, dass diese Meta-Hilfe vor allem bei der ersten Nutzung von VizBoard benötigt wird. Aus diesem Grund sollte sie so unaufdringlich wie möglich gestaltet sein.
+In diesem Konzept wurden bisher sechs unterschiedliche Hilfefunktionen erarbeitet: Intro, Bedienung, Reporting, Verlinkung, Kommunikation und Kommentare. Diese sind zwar optisch und vom Interaktionsdesign her konsistent, bringen aber trotzdem viel zusätzliche Komplexität in die Anwendung. Um die Hilfefunktionen in vollem Umfang nutzen zu können, benötigt der Benutzer einige Informationen. Dazu gehört sowohl das Wissen, welche Hilfefunktionen existieren und wie sie aufgerufen werden, als auch konzeptionelle Dinge, wie z.\,B. dass Kommentare mit Bereichen und/oder Datenpunkten in der Visualisierung assoziiert sind. Es ist anzunehmen, dass diese Meta-Hilfe vor allem bei der ersten Nutzung von VizBoard benötigt wird. Aus diesem Grund sollte sie so unaufdringlich wie möglich gestaltet sein.
 
 % erste lösung: statischer button
 
@@ -1135,7 +1135,7 @@ Der Button für die Meta-Hilfe befindet sich in der rechten oberen Ecke des View
    \label{figure:meta-step1}
 \end{figure}
 
-Nachdem der Benutzer darauf geklickt hat, wird der Viewport abgedunkelt und ein Fenster überblendet, welches Hilfe zu verschiedenen Themen enthält (Abbildung~\ref{figure:meta-step2}). Von dort können ebenfalls die verschiedenen Hilfefunktionen (wie z.\,B. der Überblick) aufgerufen werden. Das Fenster wird geschlossen, sobald der Benutzer außerhalb davon klickt.
+Nachdem der Benutzer darauf geklickt hat, wird der Viewport abgedunkelt und ein Fenster überblendet, welches Hilfe zu verschiedenen Themen enthält (Abbildung~\ref{figure:meta-step2}). Von dort können ebenfalls die verschiedenen Hilfefunktionen (wie z.\,B. das Intro) aufgerufen werden. Das Fenster wird geschlossen, sobald der Benutzer außerhalb davon klickt.
 
 \begin{figure}[htbp]
    \centering
@@ -1160,7 +1160,7 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \subsection{Komponentenbeschreibung}
 
 \begin{itemize}
-	\item VISO Konzept der grafischen Repräsentation (Überblick)
+	\item VISO Konzept der grafischen Repräsentation (Intro)
 	\item CSS Selektoren, um UI Elemente für Capabilities zu kennzeichnen (Bedienung)
 	\item VISO Operationen, um notwendige Operation auf UI Elementen anzugeben (Bedienung)
 	\item Anzahl an Sekunden, die vor einem Screenshot gewartet werden soll (Bedienung)
@@ -1183,8 +1183,8 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \subsection{VISO}
 
 \begin{itemize}
-	\item Beschreibung einer grafischen Repräsentation (Überblick)
-	\item Link zu Tutorialvideo (Überblick) -- gehört sowas wirklich in die VISO?
+	\item Beschreibung einer grafischen Repräsentation (Intro)
+	\item Link zu Tutorialvideo (Intro) -- gehört sowas wirklich in die VISO?
 \end{itemize}
 
 \section{Beispiel}
