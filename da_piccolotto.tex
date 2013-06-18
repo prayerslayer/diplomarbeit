@@ -663,6 +663,45 @@ yay
 
 Basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) und den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen}) wird ein Konzept zur User Assistance für das webbasierte, komposite Informationsvisualisierungssystem VizBoard erstellt. Die Ziele richten sich dabei nach der Anforderungsanalyse (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}).
 
+\section{Einführung}
+\label{section:konzeption:einfuehrung}
+
+Blublublu
+
+\subsection{Rollenmodell}
+\label{section:konzeption:einfuehrung:rollenmodell}
+
+Bei der Konzeption spielt eine große Rolle, wer für welche Tätigkeit verantwortlich ist. Um diese Fragen klären zu können, wird an dieser Stelle ein Rollenmodell für VizBoard eingeführt (Abbildung~\ref{figure:rollenmodell}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-rollenmodell.png}
+   \caption{Rollenmodell von VizBoard}
+   \label{figure:rollenmodell}
+\end{figure}
+
+Das System VizBoard muss von jemandem betrieben werden. Der \textbf{Betreiber} bezahlt die Serverkosten und ist für Wartung und Instandhaltung von VizBoard verantwortlich. Für ihn ist wichtig, dass die anderen Parteien zufrieden sind, sodass sein System auch genutzt wird.
+
+VizBoard greift auf die VISO zurück, eine Ontologie von Wissen über Informationsvisualisierung. Der \textbf{Visualisierungsexperte} besitzt Expertenwissen in der Domäne der InfoVis und formalisiert sein es in der VISO, um VizBoard zu verbessern.
+
+Ein wichtiger Teil von VISO sind die vorhandenen Daten. Der \textbf{Datenhochlader} stellt Datensätze in unterschiedlichen Formaten (z\,B. APIs, RDF oder Excel Daten) zur Verfügung, die von Administratoren -- also letztlich dem Betreiber -- in VizBoard hochgeladen werden können.
+
+Ebenso wichtig wie die Daten sind die Komponenten, die sie visualisieren. Sie werden von \textbf{Komponentenentwicklern} geschrieben und bei VizBoard registriert. Komponentenentwickler können programmieren und kennen sich teilweise auch mit InfoVis aus.
+
+Der \textbf{Endnutzer} verwendet VizBoard, um Wissen in semantischen Datensätzen aufnehmen zu können. Er weiß weder über InfoVis noch über semantische Daten Bescheid und verfügt auch nicht über Programmierkenntnisse.
+
+\subsection{User Interface}
+\label{section:konzeption:einfuehrung:ui}
+
+Im Laufe der Konzeption werden zum besseren Verständnis einige User Interface Mockups entworfen. Diese basieren auf der Grundlage aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}). Die dort erwähnte Komposition enthält eine Karte, eine Treemap, eine Tabelle und ein Balkendiagramm (Abbildung~\ref{figure:ui-grundlage}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-ui-grundlage.png}
+   \caption{Grundlage der UI Mockups}
+   \label{figure:ui-grundlage}
+\end{figure}
+
 \section{Intro}
 \label{section:konzeption:intro}
 
@@ -692,10 +731,6 @@ Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von vers
 % interaktionshilfen - kommen später
 
 Über die Interaktion mit der Visualisierung wird hier noch keine Aussage gemacht, da sie sehr umfangreich sein kann und den Rahmen des Intros sprengen würde. In Abschnitt~\ref{section:konzeption:bedienung} wird eine Hilfestellung zur Bedienung einer Komponente erarbeitet.
-
-% wie wird es umgesetzt?
-
-
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:intro:ui}
