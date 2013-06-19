@@ -807,16 +807,21 @@ Dazu wird ein sogenannter \enquote{Headless Browser} verwendet. Das ist ein prog
 
 % wie läuft das ab?
 
-Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. Sobald eine Komponente hinzugefügt oder upgedatet wurde, parst das CoRe die entsprechende Komponentenbeschreibung und schickt eine Anfrage an den Hilfeservice. Dieser kann ins CoRe integriert sein, sollte dem \enquote{Separation of Concerns} Designprinzip folgend aber davon getrennt sein, da es schon für Matching, Ranking und Verwaltung der Komponenten zuständig ist. Der Hilfeservice rendert die Komponente mit Hilfe des Headless Browsers in einer CRUISe Testumgebung. 
+Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. Sobald eine Komponente hinzugefügt oder upgedatet wurde, parst das CoRe die entsprechende Komponentenbeschreibung und schickt eine Anfrage an den Hilfeservice. Dieser kann ins CoRe integriert sein, sollte dem \enquote{Separation of Concerns} Designprinzip folgend aber davon getrennt sein, da es schon für Matching, Ranking und Verwaltung der Komponenten zuständig ist. Der Hilfeservice rendert die Komponente mit Hilfe des Headless Browsers in einer CRUISe Testumgebung. Sie besteht aus folgenden Komponenten:
 
 % todo cruise testumgebung, was gehört da alles rein?
+
+\begin{itemize}
+	\item Laufzeitumgebung: Sie unter anderem für die Initialisierung und das Layout der Komponenten nötig.
+	\item Data Repository: Die Komponente muss Daten darstellen, diese können aus dem DaRe kommen.
+	\item Component Repository: Das CoRe ist für die Verwaltung der Komponenten zuständig und stellt u.\,a. die Komponentenbeschreibungen bereit. Diese sind notwendig um die Operationen und Aktionen auslesen zu können.
+\end{itemize}
+
 % todo cruise testumgebung, wo kommen vor allen dingen die daten her?
 
-% möglicher datenursprung:
-% komponentenentwickler: gibt url an oder hängt datei an beim hochladen, von wo dare die daten holt. vorteil: notwendige daten existieren auf alle fälle. nachteil: aufwand. obwohl man eigentlich davon ausgehen kann, dass es im laufe der entwicklung der komponente IRGENDWELCHE testdatensätze mal gegeben haben wird.
-% vizboardbetreiber: stellt testdatensätze zur verfügung, die entwickler auswählen kann. vorteil: geringer aufwand für entwickler. nachteil: spezielle daten evtl nicht vorhanden.
+Es wurde eben erklärt, dass das DaRe die (Test-)Daten für eine Komponente liefern kann. Der Komponentenentwickler gibt in der Komponentenbeschreibung den gewünschten Datensatz an, welcher bei der Generierung der Assistance geladen wird. Das kann ein \enquote{echter} Datensatz oder ein vom VizBoard-Betreiber zur Verfügung gestellter Testdatensatz sein. Es kann allerdings passieren, dass das DaRe keine passenden Daten enthält, weil die Komponente sehr spezielle Daten visualisiert (z.\,B. 3-Sterne-Hotels in Andorra). Dann sollte der Komponentenentwickler zusammen mit der Komponente Testdaten hochladen können oder eine URL angeben, unter der sie zu finden sind. Das ist zwar etwas Mehraufwand, aber es kann angenommen werden, dass im Laufe der Entwicklung einer Komponente sowieso Testdaten verwendet wurden. Sie müssen in den meisten Fällen also nicht mehr erstellt, sondern nur noch hochgeladen werden.
 
-Danach führt es folgende Schritte aus:
+Nachdem die Komponente vom Hilfeservice gerendert wurde, führt er folgende Schritte aus:
 
 \begin{enumerate}
 	\item Erstelle einen Screenshot vom Ausgangszustand der Komponente
@@ -832,10 +837,10 @@ Danach führt es folgende Schritte aus:
 				\item Erstelle einen Screenshot der Komponente
 				\item Setze Zustand der betroffenen Elemente zurück
 			\end{itemize}
-			\item Führe Operation aus
-			\item Warte die definierte Anzahl an Sekunden
-			\item Erstelle einen Screenshot vom Ergebnis der Aktion
 		\end{enumerate}
+		\item Führe Aktion aus
+		\item Warte die definierte Anzahl an Sekunden
+		\item Erstelle einen Screenshot vom Ergebnis der Aktion
 	\end{enumerate}
 \end{enumerate}
 
@@ -922,7 +927,7 @@ Auf diese Weise können die erklärungsbedürftigen Konzepte über CSS Selektore
 
 \subsection{User Interface und Interaktion}
 
-Hinter die entsprechend markierten DOM Elemente (siehe Abschnitt~\ref{section:konzeption:verlinkung:backend}) wird ein Fragezeichen eingefügt. Dieses kann angeklickt werden, woraufhin ein Popover mit einer kurzen Erklärung des Konzepts angezeigt wird (Abbildung~\ref{figure:verlinkung}). Das Popover enthält auch einen Link, der den entsprechenden Artikel auf Wikipedia in einem neuen Tab öffnet.
+Hinter die entsprechend markierten DOM Elemente (siehe Abschnitt~\ref{section:konzeption:verlinkung:backend}) wird ein Fragezeichen eingefügt. Dieses kann angeklickt werden, woraufhin ein Popover mit einer kurzen Erklärung des Konzepts angezeigt wird (Abbildung~\ref{figure:verlinkung}). Das Popover enthält auch einen Link, der zu einer Erklärung in einer externen Wissensbasis führt.
 
 \begin{figure}[htbp]
    \centering
@@ -965,7 +970,7 @@ Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf
 \subsection{Backend}
 \label{section:konzeption:kommunikation:backend}
 
-Die Kommunikation zwischen Komponenten kann über den Event Broker (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) nachvollzogen werden, da dieser zentraler Austauschpunkt für Nachrichten ist (ein Mediator nach \cite{Gamma1994}). Das Hilfesystem zeichnet Pfeile, sobald es vom Event Broker über Nachrichten informiert wird.
+Die Kommunikation zwischen Komponenten kann über den Event Broker (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) nachvollzogen werden, da dieser zentraler Austauschpunkt für Nachrichten ist. Das Hilfesystem zeichnet Pfeile, sobald es vom Event Broker über Nachrichten informiert wird.
 
 Für die Generierung des Comics muss das Konzept der User Assistance für Bedienung (Abschnitt~\ref{section:konzeption:bedienung:api}) nur leicht erweitert werden. Da Komponenten mit Operationen auf Nachrichten reagieren (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}), muss für das Ergebnis einer Operation ebenfalls ein Screenshot erstellt werden. Diese sind jetzt schon in der Komponentenbeschreibung vorhanden und können während der Panel-Generierung einfach ausgeführt werden. Sollten die Operationen Parameter erwarten, muss der Komponentenentwickler Beispieldaten in die Komponentenbeschreibung einfügen.
 
