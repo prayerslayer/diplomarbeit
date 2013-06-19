@@ -272,7 +272,7 @@ Die Laufzeitumgebung (Mashup Runtime Environment, MRE) ist für die Ausführung 
 	\label{figure:cruise_mre}
 \end{figure}
 
-Der \textbf{Application Manager} initialisiert alle anderen Module und ist für die globale Fehlerbehandlung zuständig. Für den Lebenszyklus der einzelnen Komponenten ist der \textbf{Component Manager} zuständig. Die Integration übernimmt allerdings der \textbf{Integration Manager}. Im Mashup Modell definierte Sichten und Übergänge zwischen ihnen werden vom \textbf{Screenflow Manager} interpretiert. Gerendert werden die Komponenten aber vom \textbf{Layout Manager}. Nachrichten zwischen Komponenten der Anwendung und Modulen der MRE werden durch den \textbf{Event Broker} übermittelt. Sind die Parameter von Event und Operation syntaktisch nicht äquivalent, aber semantisch aufeinander abbildbar (z.\,B. zwei gleiche Konzepte aus verschiedenen Namespaces wie \texttt{dbpedia:city} und \texttt{geonames:city}), übernimmt dies der \textbf{Mediator}. Die dynamische Anpassung der Anwendung (z.\,B. von Komponenten, Layout und Kommunikationsmodell) wird gegebenenfalls durch den \textbf{Adaptation Manager} durchgeführt. Letztlich erlaubt das \textbf{Service Access} Modul Zugriff auf Web-Dienste und Ressourcen im Backend.
+Der \textbf{Application Manager} initialisiert alle anderen Module und ist für die globale Fehlerbehandlung zuständig. Für den Lebenszyklus der einzelnen Komponenten ist der \textbf{Component Manager} zuständig. Die Integration übernimmt allerdings der \textbf{Integration Manager}. Im Mashup Modell definierte Sichten und Übergänge zwischen ihnen werden vom \textbf{Screenflow Manager} interpretiert. Gerendert werden die Komponenten aber vom \textbf{Layout Manager}. Nachrichten zwischen Komponenten der Anwendung und Modulen der MRE werden durch den \textbf{Event Broker} übermittelt. Sind die Parameter von Event und Operation syntaktisch nicht äquivalent, aber semantisch aufeinander abbildbar (z.\,B. zwei gleiche Konzepte aus verschiedenen Namespaces wie \texttt{dbpedia:city} und \texttt{geonames:city}), übernimmt dies der \textbf{Mediator}. Die dynamische Anpassung der Anwendung (z.\,B. von Komponenten, Layout und Kommunikationsmodell) wird gegebenenfalls durch den \textbf{Adaptation Manager} durchgeführt. Der \enquote{Context Service} \cite{Pietschmann2008} speichert Informationen über den Nutzungskontext, beispielsweise den Aufenthaltsort des Nutzers. Letztlich erlaubt das \textbf{Service Access} Modul Zugriff auf Web-Dienste und Ressourcen im Backend.
 
 \subsubsection{VISO}
 \label{section:standderforschung:grundlagen:cruise_vizboard:viso}
@@ -870,7 +870,7 @@ Die Hilfestellung zur Bedienung wird über einen ?-Button aufgerufen, den der Be
    \label{figure:bedienung-step1}
 \end{figure}
 
-Danach werden schrittweise vier Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel zeigt die ganze Komponente. Das zweite Panel startet mit dem gleichen Inhalt wie Panel~1, zoomt dann aber auf die relevanten UI Elemente. Panel~3 startet wiederum mit dem Inhalt von Panel~2, überblendet dann aber eine notwendige Operation. Das vierte Panel startet ebenfalls mit dem Inhalt aus Panel~2, zoomt aber auf eine Gesamtansicht wie in Panel~1 hinaus, sodass der Benutzer den Unterschied sehen kann. Mit den Pfeilen kann zwischen verschiedenen Operationen gewechselt werden, die dieselbe Aktion ausführen. 
+Danach werden schrittweise vier Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel zeigt die ganze Komponente. Das zweite Panel startet mit dem gleichen Inhalt wie Panel~1, zoomt dann aber auf die relevanten UI Elemente. Panel~3 startet wiederum mit dem Inhalt von Panel~2, überblendet dann aber eine notwendige Operation. Das vierte Panel startet ebenfalls mit dem Inhalt aus Panel~2, zoomt aber auf eine Gesamtansicht wie in Panel~1 hinaus, sodass der Benutzer den Unterschied sehen kann. Mit den Pfeilen kann zwischen verschiedenen Operationen gewechselt werden, die dieselbe Aktion ausführen. Sollte eine Aktion aus mehreren zusammenhängenden Operationen bestehen, wiederholen sich die Panels~2 und~3 demensprechend.
 
 \begin{figure}[htbp]
    \centering
@@ -900,16 +900,43 @@ Diese werden aber schon im Schritt davor (Abbildung~\ref{figure:bedienung-step2}
 \section{Reporting}
 \label{section:konzeption:reporting}
 
-Kontext mitschicken zum Bug Report sodass überprüft werden kann, ob die Komponente tatsächlich kaputt ist oder nur falsch verdrahtet wurde. Am Besten Freitext, weil es für den Anfänger-Benutzer eh nicht ersichtlich ist, was falsch läuft. Da braucht man auch keine Kategorisierung vornehmen. Der Report sollte automatisch ein Ticket in irgendeinem Support-System erstellen.
+Wie bei jeder Software können bei den Komponenten in VizBoard Fehler auftreten. Externe APIs, die sie benutzen, wie zum Beispiel von Facebook oder Twitter können sich ändern. Visualisierte Daten können Fehler in der Komponente verursachen, beispielsweise durch nicht überprüfte \texttt{null} Werte oder wenn sie ein unerwartetes Format haben. Ebenso ist es möglich, dass in VizBoard selbst noch Bugs gefunden werden. Schlimmstenfalls fallen diese Fehler erst dem Endnutzer auf, welcher sie dann melden können soll.
 
-Frage: Wie Anwendungskontext sammeln?
+Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. VizBoard-Betreiber -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Also ob es an der Komponente liegt (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API). Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
+
+\subsection{User Interface und Interaktion}
+\label{section:konzeption:reporting:ui}
+
+Der Nutzer klickt auf einen Button in der Titelleiste, beschreibt sein Problem und sendet ab (Abbildung~\ref{figure:reporting}). Das Popover kann geschlossen werden, indem irgendwo anders als ins Popover geklickt wird.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/konzeption-reporting.png}
+   \includegraphics[width=0.5\textwidth]{images/konzeption-reporting.png}
    \caption{UI Mockup: Reporting-Funktion}
    \label{figure:reporting}
 \end{figure}
+
+\subsection{Backend}
+\label{section:konzeption:reporting:backend}
+
+% was kann man über javascript vom browser auslesen?
+Informationen über den Browser befinden sich im DOM Objekt \texttt{window.navigator} und beinhalten unter anderem:
+
+\begin{itemize}
+	\item User Agent String, welcher Betriebssystem, Browser und deren Versionen enthält
+	\item Sprache des Browsers
+	\item Ob Cookies aktiviert sind
+	\item Installierte Plugins, wie Java oder Flash
+\end{itemize}
+
+% was kann man über den context service bekommen?
+% woher weiß man überhaupt, was es gibt? --> domänenspezifisches kontextmodell, ist also festgelegt.
+
+Diese und andere notwendige Informationen können mit Javascript einfach ausgelesen werden. Noch mehr Informationen über den Nutzungskontext können über den Context Service (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) bezogen werden. Dieser beinhaltet u.\,a. \textbf{WAS IST DA GENAU DRIN?}.
+
+% noch sagen dass es denkbar wäre, das direkt an ein support system anzubinden
+
+Die gesammelten Informationen über Nutzer, Browser und Anwendungskontext können an ein Support System (wie z.\,B. OSTicket\footnote{\url{http://osticket.com/}}) des VizBoard-Betreibers gesendet werden, wo automatisch ein Ticket erstellt wird.
 
 \section{Verlinkung}
 \label{section:konzeption:verlinkung}
