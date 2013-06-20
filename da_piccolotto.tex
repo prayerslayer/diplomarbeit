@@ -675,7 +675,7 @@ Bei der Konzeption spielt eine große Rolle, wer für welche Tätigkeit verantwo
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/konzeption-rollenmodell.png}
+   \includegraphics[width=0.5\textwidth]{images/konzeption-rollenmodell.png}
    \caption{Rollenmodell von VizBoard}
    \label{figure:rollenmodell}
 \end{figure}
@@ -697,7 +697,7 @@ Im Laufe der Konzeption werden zum besseren Verständnis einige User Interface M
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/konzeption-ui-grundlage.png}
+   \includegraphics[width=0.5\textwidth]{images/konzeption-ui-grundlage.png}
    \caption{Grundlage der UI Mockups}
    \label{figure:ui-grundlage}
 \end{figure}
@@ -712,7 +712,7 @@ Das User Interface für die ausgewählte Hilfefunktion wird links oder rechts de
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/konzeption-ui-basics.png}
+   \includegraphics[width=0.5\textwidth]{images/konzeption-ui-basics.png}
    \caption{Verschiedene Möglichkeiten zur Platzierung der Hilfe UI}
    \label{figure:ui-basics}
 \end{figure}
@@ -847,7 +847,7 @@ Nachdem die Komponente vom Hilfeservice gerendert wurde, führt er folgende Schr
 	\item Für jede verfügbare Aktion:
 	\begin{enumerate}
 		%\item Finde die Bounding Box der relevanten Elemente
-		\item Für jede äquivalente Operation:
+		\item Für jede Liste von äquivalenten Operationen:
 		\begin{enumerate}
 			\item Für jede Operation:
 			\begin{itemize}
@@ -880,16 +880,16 @@ Eine weitere Einschränkung ist, dass zeitabhängige Interaktionen wie zum Beisp
 
 % ### assistance anbieten
 
-Die Hilfestellung zur Bedienung wird über einen ?-Button aufgerufen, den der Benutzer vielleicht von nativen Desktop-Applikationen kennt (Abbildung~\ref{figure:bedienung-step1}). Der Viewport der Komponente wird abgedunkelt und nur die Elemente, für die auch Hilfestellungen existieren, bleiben sichtbar. Über dem ?-Button erscheint ein Popover, welches die verfügbaren Aktionen noch einmal auflistet. Das Popover wird geschlossen, wenn der Benutzer irgendwo außerhalb davon klickt. Die Assistance wird entweder nach einem Klick auf ein sichtbares UI Element oder ein Element der Liste aufgerufen. So kann der Benutzer sowohl die Frage \enquote{Was macht dieser Button?} als auch \enquote{Wie kann ich Aktion XY ausführen?} beantworten.
+Die Hilfestellung zur Bedienung wird über einen ?-Button aufgerufen, den der Benutzer vielleicht von nativen Desktop-Applikationen kennt (Abbildung~\ref{figure:bedienung-step1}). Der Viewport der Komponente wird abgedunkelt und nur die Elemente, für die auch Hilfestellungen existieren, bleiben sichtbar. Neben der Komponente erscheint eine Sidebar, welche die verfügbaren Aktionen noch einmal auflistet. Sie wird geschlossen, wenn der Benutzer irgendwo außerhalb davon oder auf den ?-Button klickt. Die Assistance wird entweder nach einem Klick auf ein sichtbares UI Element oder ein Element der Liste aufgerufen. So kann der Benutzer sowohl die Frage \enquote{Was macht dieser Button?} als auch \enquote{Wie kann ich Aktion XY ausführen?} beantworten.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/konzeption-bedienung-step1.png}
+   \includegraphics[width=0.5\textwidth]{images/konzeption-bedienung-step1.png}
    \caption{UI Mockup: Bedienung (Schritt~1)}
    \label{figure:bedienung-step1}
 \end{figure}
 
-Danach werden schrittweise vier Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel zeigt die ganze Komponente. Das zweite Panel startet mit dem gleichen Inhalt wie Panel~1, zoomt dann aber auf die relevanten UI Elemente. Panel~3 startet wiederum mit dem Inhalt von Panel~2, überblendet dann aber eine notwendige Operation. Das vierte Panel startet ebenfalls mit dem Inhalt aus Panel~2, zoomt aber auf eine Gesamtansicht wie in Panel~1 hinaus, sodass der Benutzer den Unterschied sehen kann. Mit den Pfeilen kann zwischen verschiedenen Operationen gewechselt werden, die dieselbe Aktion ausführen. Sollte eine Aktion aus mehreren zusammenhängenden Operationen bestehen, wiederholen sich die Panels~2 und~3 demensprechend.
+Danach werden schrittweise mindestens vier Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel zeigt die ganze Komponente. Das zweite Panel startet mit dem gleichen Inhalt wie Panel~1, zoomt dann aber auf die relevanten UI Elemente. Panel~3 startet wiederum mit dem Inhalt von Panel~2, überblendet dann aber eine notwendige Operation. Das vierte Panel startet ebenfalls mit dem Inhalt aus Panel~2, zoomt aber auf eine Gesamtansicht wie in Panel~1 hinaus, sodass der Benutzer den Unterschied sehen kann. Mit den Pfeilen kann zwischen verschiedenen Operationen gewechselt werden, die dieselbe Aktion ausführen. Sollte eine Aktion aus mehreren zusammenhängenden Operationen bestehen, wiederholen sich die Panels~2 und~3 demensprechend.
 
 \begin{figure}[htbp]
    \centering
@@ -921,12 +921,12 @@ Diese werden aber schon im Schritt davor (Abbildung~\ref{figure:bedienung-step2}
 
 Wie bei jeder Software können bei den Komponenten in VizBoard Fehler auftreten. Externe APIs, die sie benutzen, wie zum Beispiel von Facebook oder Twitter können sich ändern. Visualisierte Daten können Fehler in der Komponente verursachen, beispielsweise durch nicht überprüfte \texttt{null} Werte oder wenn sie ein unerwartetes Format haben. Ebenso ist es möglich, dass in VizBoard selbst noch Bugs gefunden werden. Schlimmstenfalls fallen diese Fehler erst dem Endnutzer auf, welcher sie dann melden können soll.
 
-Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. VizBoard-Betreiber -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Also ob es an der Komponente liegt (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API). Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben, und die Möglichkeit haben, die Komponente prinzipiell als gut oder schlecht zu bewerten. Letztere Funktion existiert bereits in VizBoard und wird in die Reporing UI integriert. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
+Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. VizBoard-Betreiber -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Also ob es an der Komponente liegt (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API). Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben, und die Möglichkeit haben, die Komponente prinzipiell als gut oder schlecht zu bewerten. Letztere Funktion existiert bereits in VizBoard und wird in die Reporting UI integriert. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:reporting:ui}
 
-Der Nutzer klickt auf einen Button in der Titelleiste, beschreibt sein Problem und sendet ab (Abbildung~\ref{figure:reporting}). Optional kann er außerdem eine Bewertung abgeben. Das Popover kann geschlossen werden, indem irgendwo anders als ins Popover geklickt wird.
+Der Nutzer klickt auf einen Button in der Titelleiste, beschreibt sein Problem und sendet ab (Abbildung~\ref{figure:reporting}). Optional kann er außerdem eine Bewertung abgeben. Die Sidebar kann geschlossen werden, indem irgendwo anders als in ihr geklickt wird.
 
 \begin{figure}[htbp]
    \centering
@@ -955,7 +955,7 @@ Diese und andere notwendige Informationen können mit Javascript einfach ausgele
 
 % noch sagen dass es denkbar wäre, das direkt an ein support system anzubinden
 
-Die gesammelten Informationen über Nutzer, Browser und Anwendungskontext werden ans DaRe gesendet und dort abgespeichert. Das DaRe könnte aus der vom Nutzer abgegebenen Bewertung und Textklassifikation in \enquote{positiv} oder \enquote{negativ} bestimmen, ob ein Ticket in einem Support System (wie z.\,B. OSTicket\footnote{\url{http://osticket.com/}}) des VizBoard-Betreibers erstellt werden soll. Die positiven Kommentare könnten beispielsweise für Testimonials auf der Startseite von VizBoard verwendet werden.
+Die gesammelten Informationen über Nutzer, Browser und Anwendungskontext werden ans DaRe gesendet und dort abgespeichert. Das DaRe könnte aus der vom Nutzer abgegebenen Bewertung und Textklassifikation \cite{Sebastiani2002} in \enquote{positiv} oder \enquote{negativ} bestimmen, ob ein Ticket in einem Support System (wie z.\,B. OSTicket\footnote{\url{http://osticket.com/}}) des VizBoard-Betreibers erstellt werden soll. Die positiven Kommentare könnten beispielsweise für Testimonials auf der Startseite von VizBoard verwendet werden.
 
 \section{Verlinkung}
 \label{section:konzeption:verlinkung}
@@ -971,13 +971,15 @@ Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet d
 
 Auf diese Weise können die erklärungsbedürftigen Konzepte über CSS Selektoren gefunden werden. Betreffen die Begriffe Legenden der Visualisierung, ist das korrespondierende Konzept bereits in Form einer URL im Domain Assignment enthalten, welches die Laufzeitumgebung der Komponente mitteilt. Für frei gewählte Begriffe muss eine eigene Anfrage an das Data Repository gestellt werden, welches das entsprechende Konzept findet, eine Beschreibung lädt und zurück liefert. Dann kann es zusammen mit einem Link zu einer Erklärung angezeigt werden.
 
+\textbf{Wie kommt die Beschreibung aus dem Domain Assignment, was nur eine URL zu DBpedia, Freebase oder irgendeine andere obskure Enzyklopädie ist (kein einheitliches Format!)?}
+
 \subsection{User Interface und Interaktion}
 
-Hinter die entsprechend markierten DOM Elemente (siehe Abschnitt~\ref{section:konzeption:verlinkung:backend}) wird ein Fragezeichen eingefügt. Dieses kann angeklickt werden, woraufhin ein Popover mit einer kurzen Erklärung des Konzepts angezeigt wird (Abbildung~\ref{figure:verlinkung}). Das Popover enthält auch einen Link, der zu einer Erklärung in einer externen Wissensbasis führt.
+Hinter die entsprechend markierten DOM Elemente (siehe Abschnitt~\ref{section:konzeption:verlinkung:backend}) wird ein Fragezeichen eingefügt. Dieses kann angeklickt werden, woraufhin eine Sidebar mit einer kurzen Erklärung des Konzepts angezeigt wird (Abbildung~\ref{figure:verlinkung}). Sie enthält auch einen Link, der zu einer Erklärung in einer externen Wissensbasis führt.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/konzeption-verlinkung.png}
+   \includegraphics[width=0.5\textwidth]{images/konzeption-verlinkung.png}
    \caption{UI Mockup: Verlinkung}
    \label{figure:verlinkung}
 \end{figure}
@@ -999,16 +1001,16 @@ Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwisch
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/konzeption-kommunikation-step1.png}
+   \includegraphics[width=0.5\textwidth]{images/konzeption-kommunikation-step1.png}
    \caption{UI Mockup: Kommunikation}
    \label{figure:kommunikation-step1}
 \end{figure}
 
-Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf den Brief geklickt wurde (Abbildung~\ref{figure:kommunikation-step2}). Ein Popover wird geöffnet, welches einen ähnlichen Comic wie in Abschnitt~\ref{section:konzeption:bedienung} enthält. Im Unterschied dazu enthält der Comic hier fünf Panels. Im ersten wird der Empfänger der Nachricht gezeigt, da diese Komponente auf die Nachricht reagieren muss. Das zweite Panel zeigt den Sender, der den Empfänger durch die Nachricht \enquote{kontrolliert}. Die Panels drei bis fünf zeigen wie gewohnt die relevanten UI Elemente, eine notwendige Operation und das Ergebnis (den Empfänger). Das Popover wird geschlossen, nachdem der Benutzer irgendwo anders als ins Popover klickt. Danach wird auch der Pfeil unsichtbar.
+Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf den Brief geklickt wurde (Abbildung~\ref{figure:kommunikation-step2}). Ein Fenster wird geöffnet, welches einen ähnlichen Comic wie in Abschnitt~\ref{section:konzeption:bedienung} enthält. Im Unterschied dazu enthält der Comic hier fünf Panels. Im ersten wird der Empfänger der Nachricht gezeigt, da diese Komponente auf die Nachricht reagieren muss. Das zweite Panel zeigt den Sender, der den Empfänger durch die Nachricht \enquote{kontrolliert}. Die Panels drei bis fünf zeigen wie gewohnt die relevanten UI Elemente, eine notwendige Operation und das Ergebnis (den Empfänger). Das Fenster wird geschlossen, nachdem der Benutzer irgendwo anders als in den Comic klickt. Danach wird auch der Pfeil unsichtbar.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/konzeption-kommunikation-step2.png}
+   \includegraphics[width=0.5\textwidth]{images/konzeption-kommunikation-step2.png}
    \caption{UI Mockup: Comic erklärt Kommunikation. Verändern des Kartenausschnittes (Aktion: Panning, Operation: Drag) bewirkt ein Update im Balkendiagramm.}
    \label{figure:kommunikation-step2}
 \end{figure}
@@ -1136,16 +1138,9 @@ Beim Laden von Punktkommentaren zählt das Hilfesystem erst die Anzahl von Komme
 
 % ### user interface & interaktion
 
-In der Titelleiste gibt es einen Button mit einem Sprechblasen-Icon. Nach einem Klick erscheint ein Popover mit zwei Auswahlmöglichkeiten: Auge oder Mund. Das Auge steht für \enquote{Kommentare anzeigen}, der Mund dementsprechend für \enquote{Kommentar verfassen} (Abbildung~\ref{figure:kommentare-step1}).
+In der Titelleiste gibt es zwei Buttons mit einem abgewandelten Sprechblasen-Icon, einmal ist ein Auge in der Sprechblase (Kommentare ansehen) und einmal ein Pluszeichen (Kommentar hinzufügen).
 
-\begin{figure}[htbp]
-   \centering
-   \includegraphics[width=0.5\textwidth]{images/konzeption-kommentare-step1.png}
-   \caption{UI Mockup: Auge bedeutet Kommentare anzeigen, Mund bedeutet Kommentar verfassen}
-   \label{figure:kommentare-step1}
-\end{figure}
-
-Wenn der Benutzer einen Kommentar verfassen will, wechselt der Inhalt des Popovers zu einer Textbox und einem Buttons zum Bestätigen (Abbildung~\ref{figure:kommentare-step4}). Abgebrochen wird nachdem der Benutzer außerhalb des Popovers klickt. Der Viewport der Komponente wird abgedunkelt. Der Benutzer kann nun ein oder mehrere, nicht überlappende Rechtecke erstellen oder Datenpunkte markieren (linker Balken in Abbildung~\ref{figure:kommentare-step4}). Das Hilfesystem setzt die Komponente in den Ausgangszustand zurück, sobald der Benutzer bestätigt oder abgebrochen hat.
+Wenn der Benutzer einen Kommentar verfassen will, erscheint eine Sidebar mit einer Textbox und einem Buttons zum Bestätigen (Abbildung~\ref{figure:kommentare-step4}). Abgebrochen wird nachdem der Benutzer außerhalb der Sidebar klickt. Der Benutzer kann nun ein oder mehrere, nicht überlappende Rechtecke in der Visualisierung erstellen oder Datenpunkte markieren (linker Balken in Abbildung~\ref{figure:kommentare-step4}). Das Hilfesystem setzt die Komponente in den Ausgangszustand zurück, sobald der Benutzer bestätigt oder abgebrochen hat.
 
 \begin{figure}[htbp]
    \centering
@@ -1154,7 +1149,7 @@ Wenn der Benutzer einen Kommentar verfassen will, wechselt der Inhalt des Popove
    \label{figure:kommentare-step4}
 \end{figure}
 
-Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt des Popovers zu einer Liste aller in dieser Komponente oder zu diesen Daten verfassten Kommentare (Abbildung~\ref{figure:kommentare-step2}, oben). Ein Kommentar zeigt folgende Elemente.
+Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt der Sidebar zu einer Liste aller in dieser Komponente bzw. zu diesen Daten verfassten Kommentare (Abbildung~\ref{figure:kommentare-step2}, oben). Ein Kommentar zeigt folgende Elemente.
 
 \begin{itemize}
 	\item Linke Spalte
@@ -1185,7 +1180,7 @@ Die Datenpunkte in der Visualisierung werden mit einer Anzeige, wie viele Kommen
    \label{figure:kommentare-step2}
 \end{figure}
 
-Diese Icons, welche die Anzahl an Kommentaren repräsentieren, können angeklickt werden. Das Popover enthält dann alle Kommentare, die den gewählten Datenpunkt referenzieren (Abbildung~\ref{figure:kommentare-step3c}).
+Diese Icons, welche die Anzahl an Kommentaren repräsentieren, können angeklickt werden. Die Sidebar enthält dann alle Kommentare, die den gewählten Datenpunkt referenzieren (Abbildung~\ref{figure:kommentare-step3c}).
 
 \begin{figure}[htbp]
    \centering
@@ -1317,6 +1312,7 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item Text, der Auswirkung der Aktion näher spezifiziert (Bedienung)
 	\item Boolean, ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
 	\item Beispieldaten für Operationen mit Parametern (Bedienung)
+	\item Informationen über den zu verwendenden Datensatz (Bedienung)
 	\item Memento der Komponente (Kommentare)
 	\item Boolean, ob die Position von Elementen ein visuelles Attribut ist (Kommentare)
 	\item Boolean, ob die Komponente Datenverarbeitung durchführt (Kommentare)
