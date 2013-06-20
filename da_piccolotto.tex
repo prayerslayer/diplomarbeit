@@ -272,7 +272,7 @@ Die Laufzeitumgebung (Mashup Runtime Environment, MRE) ist für die Ausführung 
 	\label{figure:cruise_mre}
 \end{figure}
 
-Der \textbf{Application Manager} initialisiert alle anderen Module und ist für die globale Fehlerbehandlung zuständig. Für den Lebenszyklus der einzelnen Komponenten ist der \textbf{Component Manager} zuständig. Die Integration übernimmt allerdings der \textbf{Integration Manager}. Im Mashup Modell definierte Sichten und Übergänge zwischen ihnen werden vom \textbf{Screenflow Manager} interpretiert. Gerendert werden die Komponenten aber vom \textbf{Layout Manager}. Nachrichten zwischen Komponenten der Anwendung und Modulen der MRE werden durch den \textbf{Event Broker} übermittelt. Sind die Parameter von Event und Operation syntaktisch nicht äquivalent, aber semantisch aufeinander abbildbar (z.\,B. zwei gleiche Konzepte aus verschiedenen Namespaces wie \texttt{dbpedia:city} und \texttt{geonames:city}), übernimmt dies der \textbf{Mediator}. Die dynamische Anpassung der Anwendung (z.\,B. von Komponenten, Layout und Kommunikationsmodell) wird gegebenenfalls durch den \textbf{Adaptation Manager} durchgeführt. Der \enquote{Context Service} \cite{Pietschmann2008} speichert Informationen über den Nutzungskontext, beispielsweise den Aufenthaltsort des Nutzers. Letztlich erlaubt das \textbf{Service Access} Modul Zugriff auf Web-Dienste und Ressourcen im Backend.
+Der \textbf{Application Manager} initialisiert alle anderen Module und ist für die globale Fehlerbehandlung zuständig. Für den Lebenszyklus der einzelnen Komponenten ist der \textbf{Component Manager} zuständig. Die Integration übernimmt allerdings der \textbf{Integration Manager}. Im Mashup Modell definierte Sichten und Übergänge zwischen ihnen werden vom \textbf{Screenflow Manager} interpretiert. Gerendert werden die Komponenten aber vom \textbf{Layout Manager}. Nachrichten zwischen Komponenten der Anwendung und Modulen der MRE werden durch den \textbf{Event Broker} übermittelt. Sind die Parameter von Event und Operation syntaktisch nicht äquivalent, aber semantisch aufeinander abbildbar (z.\,B. zwei gleiche Konzepte aus verschiedenen Namespaces wie \texttt{dbpedia:city} und \texttt{geonames:city}), übernimmt dies der \textbf{Mediator}. Die dynamische Anpassung der Anwendung (z.\,B. von Komponenten, Layout und Kommunikationsmodell) wird gegebenenfalls durch den \textbf{Adaptation Manager} durchgeführt. Der \textbf{Context Service} \cite{Pietschmann2008} speichert Informationen über den Nutzungskontext, beispielsweise den Aufenthaltsort des Nutzers. Letztlich erlaubt das \textbf{Service Access} Modul Zugriff auf Web-Dienste und Ressourcen im Backend.
 
 \subsubsection{VISO}
 \label{section:standderforschung:grundlagen:cruise_vizboard:viso}
@@ -702,6 +702,25 @@ Im Laufe der Konzeption werden zum besseren Verständnis einige User Interface M
    \label{figure:ui-grundlage}
 \end{figure}
 
+% warum sind buttons in der titelleiste
+
+Funktionen, die der Nutzer aus eigener Initiative nutzen kann und komponetenspezifisch sind (z.\,B. Kommentare), werden über Buttons in der Titelleiste der Komponente aufgerufen. Das Hilfesystem kann sie wegen des \enquote{Black Box} Prinzips nicht in der Komponente selbst platzieren. Zwar könnte man UI Elemente für die Hilfefunktionen im Komponenten-Markup vorsehen, aber durch die Nutzung der Titelleiste wird dem Entwickler Aufwand erspart.
+
+% wie sieht ui für dings grob aus?
+
+Das User Interface für die ausgewählte Hilfefunktion wird links oder rechts der Komponente in einer Sidebar dargestellt (Abbildung~\ref{figure:ui-basics},~1). Gegenüber einem Popover (2) hat sie den Vorteil, dass sie sowohl links als auch rechts funktioniert. Ein Popover kann nur über der Titelleiste angezeigt werden, ansonsten werden große Teile der Komponente verdeckt (3). Die Sidebar kann in der Größe variieren (4), da für die Kommentare vermutlich mehr Platz benötigt wird als beispielsweise für die Reportingfunktion.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-ui-basics.png}
+   \caption{Verschiedene Möglichkeiten zur Platzierung der Hilfe UI}
+   \label{figure:ui-basics}
+\end{figure}
+
+Dass die Sidebar mal links, mal rechts angezeigt wird, könnte beim Nutzer für Verwirrung sorgen. Jedoch scheint dieses Problem das kleinste zu sein, wenn man über die Alternativen nachdenkt.
+Beispielsweise könnte das Hilfesystem die Buttons in einer eigenen Button-Sidebar platzieren. Allerdings erscheint dann in 50~\% der Fälle die UI Sidebar auf der anderen Seite, was noch unerwarteter ist. Die Button-Sidebar jeweils auf der Seite zu rendern, wo auch die UI der Hilfe angezeigt werden wird, ist ebenfalls schwer vorstellbar. Erstens sind unterschiedliche User Interfaces unterschiedlich groß. Während das Reporting noch links gerendert werden könnte, könnten die Kommentare nur rechts genug Platz haben. Zweitens müsste der Nutzer jedes Mal erst die Buttons suchen, da sie abhängig von der Größe der Komponente und der Position linker oder rechter Hand sind. Das stellt nicht unerheblichen mentalen Aufwand dar.
+Zuletzt wäre es möglich, die Button-Sidebar auf beiden Seiten der Komponente anzuzeigen und eine davon zu deaktivieren. Diese Variante unterscheidet sich aber nicht viel von der eben beschriebenen, da der Benutzer dann nicht die Buttons selbst, sondern aktivierte Buttons suchen muss.
+
 \section{Intro}
 \label{section:konzeption:intro}
 
@@ -902,12 +921,12 @@ Diese werden aber schon im Schritt davor (Abbildung~\ref{figure:bedienung-step2}
 
 Wie bei jeder Software können bei den Komponenten in VizBoard Fehler auftreten. Externe APIs, die sie benutzen, wie zum Beispiel von Facebook oder Twitter können sich ändern. Visualisierte Daten können Fehler in der Komponente verursachen, beispielsweise durch nicht überprüfte \texttt{null} Werte oder wenn sie ein unerwartetes Format haben. Ebenso ist es möglich, dass in VizBoard selbst noch Bugs gefunden werden. Schlimmstenfalls fallen diese Fehler erst dem Endnutzer auf, welcher sie dann melden können soll.
 
-Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. VizBoard-Betreiber -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Also ob es an der Komponente liegt (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API). Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
+Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. VizBoard-Betreiber -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Also ob es an der Komponente liegt (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API). Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben, und die Möglichkeit haben, die Komponente prinzipiell als gut oder schlecht zu bewerten. Letztere Funktion existiert bereits in VizBoard und wird in die Reporing UI integriert. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:reporting:ui}
 
-Der Nutzer klickt auf einen Button in der Titelleiste, beschreibt sein Problem und sendet ab (Abbildung~\ref{figure:reporting}). Das Popover kann geschlossen werden, indem irgendwo anders als ins Popover geklickt wird.
+Der Nutzer klickt auf einen Button in der Titelleiste, beschreibt sein Problem und sendet ab (Abbildung~\ref{figure:reporting}). Optional kann er außerdem eine Bewertung abgeben. Das Popover kann geschlossen werden, indem irgendwo anders als ins Popover geklickt wird.
 
 \begin{figure}[htbp]
    \centering
@@ -936,7 +955,7 @@ Diese und andere notwendige Informationen können mit Javascript einfach ausgele
 
 % noch sagen dass es denkbar wäre, das direkt an ein support system anzubinden
 
-Die gesammelten Informationen über Nutzer, Browser und Anwendungskontext können an ein Support System (wie z.\,B. OSTicket\footnote{\url{http://osticket.com/}}) des VizBoard-Betreibers gesendet werden, wo automatisch ein Ticket erstellt wird.
+Die gesammelten Informationen über Nutzer, Browser und Anwendungskontext werden ans DaRe gesendet und dort abgespeichert. Das DaRe könnte aus der vom Nutzer abgegebenen Bewertung und Textklassifikation in \enquote{positiv} oder \enquote{negativ} bestimmen, ob ein Ticket in einem Support System (wie z.\,B. OSTicket\footnote{\url{http://osticket.com/}}) des VizBoard-Betreibers erstellt werden soll. Die positiven Kommentare könnten beispielsweise für Testimonials auf der Startseite von VizBoard verwendet werden.
 
 \section{Verlinkung}
 \label{section:konzeption:verlinkung}
@@ -1036,7 +1055,7 @@ Erfahrungsgemäß tragen nicht alle Kommentare gleich viel zur Diskussion bei. M
 
 \subsubsection{Ranking}
 
-Da Kommentare in einer Liste angezeigt werden und keine Buttons zum Sortieren vorgesehen sind (Abschnitt~\ref{section:konzeption:kommentare:ui}), muss das Hilfesystem die anzuzeigenden Kommentare nach einem Algorithmus sortieren. In diesen sollten sowohl die Bewertung eines Kommentars als auch die Komponente, in der er verfasst wurde und die Daten, die er referenziert, einfließen. Möglich wäre zum Beispiel nach Bewertung zu sortieren, aber Kommentare zu bestrafen, wenn sie aus anderen Komponenten stammen oder nur teilweise die gefragten Datenattribute referenzieren. Dann wird ein festgelegter Faktor der Bewertung abgezogen (z.\,B. die Hälfte). So werden Kommentare aus der gleichen Komponente bevorzugt, aber hohe Bewertungen erscheinen trotzdem zuerst.
+Da Kommentare in einer Liste angezeigt werden und keine Buttons zum Sortieren vorgesehen sind (Abschnitt~\ref{section:konzeption:kommentare:ui}), muss das Hilfesystem die anzuzeigenden Kommentare nach einem Algorithmus sortieren. In diesen sollten sowohl die Bewertung eines Kommentars als auch die Komponente, in der er verfasst wurde und die Daten, die er referenziert, einfließen. Möglich wäre zum Beispiel nach Bewertung zu sortieren, aber Kommentare zu bestrafen, wenn sie aus anderen Komponenten stammen oder nur teilweise die gefragten Datenattribute referenzieren. Dann wird nur ein festgelegter Teil der Bewertung berücksichtigt (z.\,B. die Hälfte). So werden Kommentare aus der gleichen Komponente bevorzugt, aber solche mit hohen Bewertungen erscheinen trotzdem zuerst.
 
 \subsubsection{Kommentar editieren}
 
@@ -1106,7 +1125,7 @@ Der Komponentenentwickler würde das Format des Mementos in der Komponentenbesch
 \subsubsection{Punktkommentare}
 
 % speichern
-Mit Datenpunkten verhält sich die Situation etwas einfacher als bei Bereichen. Der Komponentenentwickler kann ihre URI durch ein Datenattribut (\texttt{data-*}) an DOM Elementen, welche einen Datenpunkt repräsentieren, angeben. Dadurch kann das Hilfesystem mit CSS Selektoren herausfinden, welche DOM Elemente welche Datenpunkte darstellen und diese auswählbar machen, sollte ein Kommentar hinzugefügt werden. Wird der Kommentar abgeschickt, muss die Komponente dem Hilfesystem zuerst mitteilen, welche Werte die visualisierten Attribute eines Datenpunkts haben. Das kann nicht automatisch aus dem DOM Element berechnet werden, weil die Skala unbekannt ist: Entspricht eine Fläche von 100~Pixel in der Treemap 10~Quadratmetern oder 1000~Hektar? Die URI des Datenpunkts sowie die Werte der Attribute werden im Kommentar gespeichert, sodass sie in anderen Visualisierungen wiederverwendet werden können.
+Mit Datenpunkten verhält sich die Situation etwas einfacher als bei Bereichen. Der Komponentenentwickler kann ihre URI durch ein Datenattribut (\texttt{data-*}) an DOM Elementen, welche einen Datenpunkt repräsentieren, angeben. Dadurch kann das Hilfesystem mit CSS Selektoren herausfinden, welche DOM Elemente welche Datenpunkte darstellen und diese auswählbar machen, sollte ein Kommentar hinzugefügt werden. Wird der Kommentar abgeschickt, muss die Komponente dem Hilfesystem zuerst mitteilen, welche Werte die visualisierten Attribute eines Datenpunkts haben. Das kann nicht automatisch aus dem DOM Element berechnet werden, weil der Maßstab unbekannt ist: Entspricht eine Fläche von 100~Pixel in der Treemap 10~Quadratmetern oder 1000~Hektar? Der Maßstab kann auch nicht in der Komponentenbeschreibung angegeben werden, weil er (abhängig von der Größe der Komponente) variabel ist. Bei einer Breite von 500~Pixel wäre er z.\,B. $1:100$, bei 250~Pixel Breite aber schon $1:200$. Die URI des Datenpunkts sowie die Werte der Attribute werden im Kommentar gespeichert, sodass sie in anderen Visualisierungen wiederverwendet werden können.
 
 % laden
 Beim Laden von Punktkommentaren zählt das Hilfesystem erst die Anzahl von Kommentaren pro Datenpunkt und stellt diese Anzahl über dem visualisierten Datenpunkt dar. Das ist möglich, weil über die URI und CSS Selektoren die entsprechenden DOM Elemente identifiziert werden können.
