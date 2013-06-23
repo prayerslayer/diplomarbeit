@@ -852,7 +852,7 @@ Aus den eben aufgeführten Gründen zeigt das Intro für eine Komponente folgend
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:intro:ui}
 
-Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten sieht, wird der gesamte Viewport abgedunkelt und ein Popover neben der ersten Komponente (von links oben nach rechts unten) eingeblendet (Abbildung~\ref{figure:ueberblick}). Dort sind die im vorigen Abschnitt erläuterten Informationen zu finden: Die Art der Visualisierung (\enquote{Karte}), darunter eine Beschreibung einer Karte, Informationen zu den dargestellten Daten und zuletzt ein Tutorialvideo, wenn vorhanden. Mit den Pfeilen links und rechts kann zwischen den Beschreibungen für verschiedene Komponenten gewechselt werden. Das Popover wird geschlossen, nachdem der Benutzer außerhalb desselben einen Klick tätigt. Über die Meta-Hilfe (Abschnitt~\ref{section:konzeption:meta-hilfe}) kann es wieder aufgerufen werden.
+Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten sieht, wird der gesamte Viewport abgedunkelt und eine Sidebar neben der ersten Komponente (von links oben nach rechts unten) eingeblendet (Abbildung~\ref{figure:ueberblick}). Dort sind die im vorigen Abschnitt erläuterten Informationen zu finden: Die Art der Visualisierung (\enquote{Karte}), darunter eine Beschreibung einer Karte, Informationen zu den dargestellten Daten und zuletzt ein Tutorialvideo, wenn vorhanden. Mit den Pfeilen links und rechts kann zwischen den Beschreibungen für verschiedene Komponenten gewechselt werden. Über die Meta-Hilfe (Abschnitt~\ref{section:konzeption:meta-hilfe}) kann das Intro wieder aufgerufen werden, wenn es geschlossen wurde.
 
 \begin{figure}[htbp]
    \centering
@@ -864,7 +864,7 @@ Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten s
 \subsection{Backend}
 \label{section:konzeption:intro:backend}
 
-Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein Vokabular für Informationsvisualisierungen. Deswegen ist es naheliegend, die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler in der Komponentenbeschreibung hinzufügen, dann kann das Hilfesystem die entsprechenden Daten auslesen. Der Inhalt der Visualisierung entspricht dem Domain Assignment, welches der Komponente von der MRE mitgeschickt wird.
+Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein Vokabular für Informationsvisualisierungen. Deswegen ist es naheliegend, die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler in der Komponentenbeschreibung hinzufügen, dann kann das Hilfesystem die entsprechenden Daten auslesen. Der Inhalt der Visualisierung entspricht dem Domain Assignment, welches der Komponente von der Laufzeitumgebung mitgeschickt wird.
 
 \section{Bedienung}
 \label{section:konzeption:bedienung}
@@ -879,7 +879,7 @@ Hilfestellungen zur Bedienung würden vom Benutzer wahrscheinlich am besten vers
 
 Wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) gezeigt, können Comics eine effektive und attraktive Lösung für User Assistance sein. Allerdings stellt es für den Entwickler erheblichen Mehraufwand dar, für jede mögliche Aktion verschiedene Comicpanels zu erstellen. Davon abgesehen können (und sollen) die gestalterischen Fähigkeiten dazu nicht von ihm erwartet werden und das Problem der Kontrolle über den Inhalt ist auch nicht gelöst.
 
-Aus diesem Grund werden die Comicpanels vom Hilfesystem automatisch erstellt. Es bleibt die Frage der Präsentation: Aus den Grundlagen geht hervor, dass eine multimodale Ausgabe (akustisch-verbal und visuell) zur Lerneffektivität beiträgt. Darauf wird aber aus zwei Gründen verzichtet. Einerseits sollen beide Kanäle gleichzeitig ausgegeben werden. Das ist problematisch, weil vier Panels darzustellen wesentlich schneller möglich ist als eine verbale Erklärung für den Vorgang zu sprechen. Die Darstellung der Panels müsste sich der Audioausgabe anpassen und würde wesentlich langsamer vonstatten gehen. Eine nichtfunktionale Anforderung an die Hilfestellung ist aber, dass der Benutzer die Hilfe schnell aufnehmen und verarbeiten können soll. Zweitens wird automatische Soundausgabe gemeinhin als schlechte Usability angesehen, Hauptsächlich weil der Nutzen von Screenreadern dadurch eingeschränkt wird, aber auch weil der Benutzer automatische Wiedergabe nicht kontrollieren kann und die Audiodaten Bandbreite beanspruchen.
+Aus diesem Grund werden die Comicpanels vom Hilfesystem automatisch erstellt. Es bleibt die Frage der Präsentation: Aus den Grundlagen geht hervor, dass eine multimodale Ausgabe (akustisch-verbal und visuell) zur Lerneffektivität beiträgt. Darauf wird aber aus zwei Gründen verzichtet. Einerseits sollen beide Kanäle gleichzeitig ausgegeben werden. Das ist problematisch, weil vier Panels darzustellen wesentlich schneller möglich ist als eine verbale Erklärung für den Vorgang zu sprechen. Die Darstellung der Panels müsste sich der Audioausgabe anpassen und würde wesentlich langsamer vonstatten gehen. Eine nichtfunktionale Anforderung an die Hilfestellung ist aber, dass der Benutzer die Hilfe schnell aufnehmen und verarbeiten können soll. Zweitens wird automatische Soundausgabe gemeinhin als schlechte Usability angesehen. Hauptsächlich weil der Nutzen von Screenreadern dadurch eingeschränkt wird, aber auch weil der Benutzer automatische Wiedergabe nicht kontrollieren kann und die Audiodaten Bandbreite beanspruchen.
 
 % also bleibt es an uns hängen.
 
@@ -920,8 +920,8 @@ Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. So
 % todo cruise testumgebung, was gehört da alles rein?
 
 \begin{itemize}
-	\item Laufzeitumgebung: Sie unter anderem für die Initialisierung und das Layout der Komponenten nötig.
-	\item Data Repository: Die Komponente muss Daten darstellen, diese können aus dem DaRe kommen.
+	\item Laufzeitumgebung: Sie ist unter anderem für die Initialisierung und das Layout der Komponenten nötig.
+	\item Data Repository: Die Komponente muss Daten darstellen, welche aus dem DaRe kommen können.
 	\item Component Repository: Das CoRe ist für die Verwaltung der Komponenten zuständig und stellt u.\,a. die Komponentenbeschreibungen bereit. Diese sind notwendig um die Operationen und Aktionen auslesen zu können.
 \end{itemize}
 
@@ -952,7 +952,7 @@ Nachdem die Komponente vom Hilfeservice gerendert wurde, führt er folgende Schr
 
 % hell und dunkel unterscheiden
 
-Nachdem alle nötigen Screenshots der Komponente erstellt wurden, muss das Hilfesystem eine Kategorisierung in \enquote{helle Komponente} und \enquote{dunkle Komponente} vornehmen. Das ist nötig, damit das Hilfesystem zur Laufzeit weiß, ob es dunkle oder helle visuelle Effekte einblenden soll. Eine naive Möglichkeit dazu wäre, mit Hilfe einer Bildverarbeitungsbibliothek wie OpenCV\footnote{\url{http://opencv.willowgarage.com/wiki/}} die Screenshots zu binärisieren, also in Bilder aus schwarzen und weißen Pixeln umzuwandeln. Enthält die Mehrzahl der Bilder mehr schwarze als weiße Pixel, wird die Komponente als \enquote{dunkel} eingestuft, ansonsten als \enquote{hell}.
+Nachdem alle nötigen Screenshots der Komponente erstellt wurden, muss das Hilfesystem eine Kategorisierung in \enquote{helle Komponente} und \enquote{dunkle Komponente} vornehmen. Das ist nötig, damit das Hilfesystem zur Laufzeit weiß, ob es dunkle oder helle visuelle Effekte einblenden soll. Eine naive Möglichkeit dazu wäre mit Hilfe einer Bildverarbeitungsbibliothek wie OpenCV\footnote{\url{http://opencv.willowgarage.com/wiki/}} die Screenshots zu binärisieren, also in Bilder aus schwarzen und weißen Pixeln umzuwandeln. Enthält die Mehrzahl der Bilder mehr schwarze als weiße Pixel, wird die Komponente als \enquote{dunkel} eingestuft, ansonsten als \enquote{hell}.
 
 % todo anbieten der assistance diskutieren: bilder in smcdl einbinden, eigener webservice, core.
 Die Bilder der Comics können auf unterschiedliche Weise ans Hilfesystem ausgeliefert werden. Eine Möglichkeit ist die Bilder nach Generierung in der Komponentenbeschreibung zu definieren, so wie es bereits mit einem Screenshot der Komponente gemacht wird. Ebenso könnte ein Webservice die Bilder über eine REST API anbieten, von wo das Hilfesystem sie zur Laufzeit lädt. Dieser Webservice kann eigenständig oder im CoRe integriert sein. \textbf{Fazit?}
@@ -971,7 +971,7 @@ Eine weitere Einschränkung ist, dass zeitabhängige Interaktionen wie zum Beisp
 
 % ### assistance anbieten
 
-Die Hilfestellung zur Bedienung wird über einen ?-Button aufgerufen, den der Benutzer vielleicht von nativen Desktop-Applikationen kennt (Abbildung~\ref{figure:bedienung-step1}). Der Viewport der Komponente wird abgedunkelt und nur die Elemente, für die auch Hilfestellungen existieren, bleiben sichtbar. Neben der Komponente erscheint eine Sidebar, welche die verfügbaren Aktionen noch einmal auflistet. Sie wird geschlossen, wenn der Benutzer irgendwo außerhalb davon oder auf den ?-Button klickt. Die Assistance wird entweder nach einem Klick auf ein sichtbares UI Element oder ein Element der Liste aufgerufen. So kann der Benutzer sowohl die Frage \enquote{Was macht dieser Button?} als auch \enquote{Wie kann ich Aktion XY ausführen?} beantworten.
+Die Hilfestellung zur Bedienung wird über einen ?-Button aufgerufen, den der Benutzer vielleicht von nativen Desktop-Applikationen kennt (Abbildung~\ref{figure:bedienung-step1}). Der Viewport der Komponente wird abgedunkelt und nur die Elemente, für die auch Hilfestellungen existieren, bleiben sichtbar. Neben der Komponente erscheint eine Sidebar, welche die verfügbaren Aktionen noch einmal auflistet. Die Assistance wird entweder nach einem Klick auf ein sichtbares UI Element oder ein Element der Liste aufgerufen. So kann der Benutzer sowohl die Frage \enquote{Was macht dieser Button?} als auch \enquote{Wie kann ich Aktion XY ausführen?} beantworten.
 
 \begin{figure}[htbp]
    \centering
@@ -1017,7 +1017,7 @@ Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponente
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:reporting:ui}
 
-Der Nutzer klickt auf einen Button in der Titelleiste, beschreibt sein Problem und sendet ab (Abbildung~\ref{figure:reporting}). Optional kann er außerdem eine Bewertung abgeben. Die Sidebar kann geschlossen werden, indem irgendwo anders als in ihr geklickt wird.
+Der Nutzer klickt auf einen Button in der Titelleiste, beschreibt sein Problem und sendet ab (Abbildung~\ref{figure:reporting}). Optional kann er außerdem eine Bewertung abgeben.
 
 \begin{figure}[htbp]
    \centering
@@ -1062,7 +1062,7 @@ Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet d
 
 Auf diese Weise können die erklärungsbedürftigen Konzepte über CSS Selektoren gefunden werden. Betreffen die Begriffe Legenden der Visualisierung, ist das korrespondierende Konzept bereits in Form einer URL im Domain Assignment enthalten, welches die Laufzeitumgebung der Komponente mitteilt. Für frei gewählte Begriffe muss eine eigene Anfrage an das Data Repository gestellt werden, welches das entsprechende Konzept findet, eine Beschreibung lädt und zurück liefert. Dann kann es zusammen mit einem Link zu einer Erklärung angezeigt werden.
 
-\textbf{Wie kommt die Beschreibung aus dem Domain Assignment, was nur eine URL zu DBpedia, Freebase oder irgendeine andere obskure Enzyklopädie ist (kein einheitliches Format!)?}
+\textbf{Wie kommt die Beschreibung aus dem Domain Assignment, was nur eine URL zu DBpedia, Freebase oder irgendeine andere obskure Enzyklopädie ist (kein einheitliches Format!)? Vielleicht kann das DaRe die vorher schon fetchen und gleich mitgeben?}
 
 \subsection{User Interface und Interaktion}
 
@@ -1097,7 +1097,7 @@ Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwisch
    \label{figure:kommunikation-step1}
 \end{figure}
 
-Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf den Brief geklickt wurde (Abbildung~\ref{figure:kommunikation-step2}). Ein Fenster wird geöffnet, welches einen ähnlichen Comic wie in Abschnitt~\ref{section:konzeption:bedienung} enthält. Im Unterschied dazu enthält der Comic hier fünf Panels. Im ersten wird der Empfänger der Nachricht gezeigt, da diese Komponente auf die Nachricht reagieren muss. Das zweite Panel zeigt den Sender, der den Empfänger durch die Nachricht \enquote{kontrolliert}. Die Panels drei bis fünf zeigen wie gewohnt die relevanten UI Elemente, eine notwendige Operation und das Ergebnis (den Empfänger). Das Fenster wird geschlossen, nachdem der Benutzer irgendwo anders als in den Comic klickt. Danach wird auch der Pfeil unsichtbar.
+Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf den Brief geklickt wurde (Abbildung~\ref{figure:kommunikation-step2}). Ein Fenster wird geöffnet, welches einen ähnlichen Comic wie in Abschnitt~\ref{section:konzeption:bedienung} enthält. Im Unterschied dazu enthält der Comic hier fünf Panels. Im ersten wird der Empfänger der Nachricht gezeigt, da diese Komponente auf die Nachricht reagieren muss. Das zweite Panel zeigt den Sender, der den Empfänger durch die Nachricht \enquote{kontrolliert}. Die Panels drei bis fünf zeigen wie gewohnt die relevanten UI Elemente, eine notwendige Operation und das Ergebnis (den Empfänger). Wenn der Benutzer das Fenster schließt, wird auch der Pfeil unsichtbar.
 
 \begin{figure}[htbp]
    \centering
@@ -1202,7 +1202,7 @@ Erfüllt eine Komponente diese Bedingungen nicht vollständig, können nur fläc
 
 \begin{enumerate}
 	\setcounter{enumi}{3}
-	\item Die Komponente darf keine externen Daten anzeigen, wie zum Beispiel die neuesten Tweets eines Twitter-Accounts. Diese unterliegen nicht der Kontrolle von VizBoard und können nachträglich editiert oder gelöscht werden.
+	\item Die Komponente darf keine externen Daten anzeigen, wie zum Beispiel die neuesten Tweets eines Twitter-Accounts. Diese unterliegen nicht der Kontrolle von VizBoard und können nachträglich editiert oder gelöscht werden. \todo{Elias}
 	\item Das Layout der Komponente muss vollständig reproduzierbar sein, also zum Beispiel kein Force Directed Layout \cite{Fruchterman1991}.
 	\item Die Komponente muss dem Hilfesystem einen Weg zur Verfügung stellen, mit dem Zustände (wie z.\,B. Zentrum und Zoomlevel einer Karte) gespeichert und vollständig wiederhergestellt werden können.
 \end{enumerate}
@@ -1213,12 +1213,14 @@ Bezüglich der letzten Anforderung bietet sich ein Memento-Pattern \cite{Gamma19
 Without violating encapsulation, capture and externalize an object's internal state allowing the object to be restored to this state later.
 \end{quote} 
 
-Dazu werden zwei Methoden \texttt{getMemento()} und \texttt{setMemento(m)} zur API der Komponente hinzugefügt, mit denen das Hilfesystem den Zustand der Komponente speichern und wiederherstellen kann. Eine andere Möglichkeit wäre das Format des Mementos -- also welche Properties es ausmachen -- in der Komponentenbeschreibung anzugeben. Das Hilfesystem könnte die Werte dieser Properties bei der Wiederherstellung des Zustands setzen. Diese Variante hat aber den Nachteil, dass PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) darauf registriert sein können, die in anderen Komponenten unerwünschte Aktionen ausführen. Deswegen wird das Memento von den Properties getrennt.
+Dazu werden zwei Methoden \texttt{getMemento()} und \texttt{setMemento(m)} zur API der Komponente hinzugefügt, mit denen das Hilfesystem den Zustand der Komponente speichern und wiederherstellen kann. Eine andere Möglichkeit wäre das Format des Mementos -- also welche Properties es ausmachen -- in der Komponentenbeschreibung anzugeben. Das Hilfesystem könnte die Werte dieser Properties bei der Wiederherstellung des Zustands setzen. Diese Variante hat aber den Nachteil, dass PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) darauf registriert sein können. Sie könnten in anderen Komponenten unerwünschte Aktionen ausführen, während der Zustand der Komponente für Kommentare zurückgesetzt wird. Deswegen wird das Memento von den Properties getrennt.
+
+Außerdem nötig: Den EventBroker pausieren, sodass sich die Komponente während Kommentare angezeigt werden nicht ändert. Plus: Wie resümmieren, wenn inzwischen 5 Events ankamen?
 
 \subsubsection{Punktkommentare}
 
 % speichern
-Mit Datenpunkten verhält sich die Situation etwas einfacher als bei Bereichen. Der Komponentenentwickler kann ihre URI durch ein Datenattribut (\texttt{data-*}) an DOM Elementen, welche einen Datenpunkt repräsentieren, angeben. Dadurch kann das Hilfesystem mit CSS Selektoren herausfinden, welche DOM Elemente welche Datenpunkte darstellen und diese auswählbar machen, sollte ein Kommentar hinzugefügt werden. Wird der Kommentar abgeschickt, muss die Komponente dem Hilfesystem zuerst mitteilen, welche Werte die visualisierten Attribute eines Datenpunkts haben. Das kann nicht automatisch aus dem DOM Element berechnet werden, weil der Maßstab unbekannt ist: Entspricht eine Fläche von 100~Pixel in der Treemap 10~Quadratmetern oder 1000~Hektar? Der Maßstab kann auch nicht in der Komponentenbeschreibung angegeben werden, weil er (abhängig von der Größe der Komponente) variabel ist. Bei einer Breite von 500~Pixel wäre er z.\,B. $1:100$, bei 250~Pixel Breite aber schon $1:200$. Die URI des Datenpunkts sowie die Werte der Attribute werden im Kommentar gespeichert, sodass sie in anderen Visualisierungen wiederverwendet werden können.
+Mit Datenpunkten verhält sich die Situation etwas einfacher als bei Bereichen. Der Komponentenentwickler kann ihre URI durch ein Datenattribut (\texttt{data-*}) an DOM Elementen, welche einen Datenpunkt repräsentieren, angeben. Dadurch kann das Hilfesystem mit CSS Selektoren herausfinden, welche DOM Elemente welche Datenpunkte darstellen und diese auswählbar machen, sollte ein Kommentar hinzugefügt werden. Wird der Kommentar abgeschickt, muss die Komponente dem Hilfesystem zuerst mitteilen, welche Werte die visualisierten Attribute eines Datenpunkts haben. Das kann nicht automatisch aus dem DOM Element berechnet werden, weil der Maßstab unbekannt ist: Entspricht eine Fläche von $100\times100$~Pixel in der Treemap 10~Quadratmetern oder 1000~Hektar? Der Maßstab kann auch nicht in der Komponentenbeschreibung angegeben werden, weil er (abhängig von der Größe der Komponente) variabel ist. Bei einer Breite von 500~Pixel wäre er z.\,B. $1:100$, bei 250~Pixel Breite aber schon $1:200$. Die URI des Datenpunkts sowie die Werte der Attribute werden im Kommentar gespeichert, sodass sie in anderen Visualisierungen wiederverwendet werden können.
 
 % laden
 Beim Laden von Punktkommentaren zählt das Hilfesystem erst die Anzahl von Kommentaren pro Datenpunkt und stellt diese Anzahl über dem visualisierten Datenpunkt dar. Das ist möglich, weil über die URI und CSS Selektoren die entsprechenden DOM Elemente identifiziert werden können.
@@ -1240,7 +1242,7 @@ Wenn der Benutzer einen Kommentar verfassen will, erscheint eine Sidebar mit ein
    \label{figure:kommentare-step4}
 \end{figure}
 
-Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt der Sidebar zu einer Liste aller in dieser Komponente bzw. zu diesen Daten verfassten Kommentare (Abbildung~\ref{figure:kommentare-step2}, oben). Ein Kommentar zeigt folgende Elemente.
+Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt der Sidebar zu einer Liste aller in dieser Komponente bzw. zu diesen Daten verfassten Kommentare (Abbildung~\ref{figure:kommentare-step2}). Ein Kommentar zeigt folgende Elemente.
 
 \begin{itemize}
 	\item Linke Spalte
@@ -1262,7 +1264,7 @@ Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt der Sidebar z
 	\end{itemize}
 \end{itemize}
 
-Die Datenpunkte in der Visualisierung werden mit einer Anzeige, wie viele Kommentare dazu vorhanden sind, erweitert (Abbildung~\ref{figure:kommentare-step2}, unten).
+Die Datenpunkte in der Visualisierung werden mit einer Anzeige, wie viele Kommentare dazu vorhanden sind, erweitert (Abbildung~\ref{figure:kommentare-step2}).
 
 \begin{figure}[htbp]
    \centering
@@ -1339,11 +1341,7 @@ Sollen Kommentare angezeigt werden, schickt das Hilfesystem eine entsprechende A
 
 % wie können kommentare noch genutzt werden?
 
-Kommentare können auch Metainformationen über die Daten oder Komponente enthalten \cite{Chen2009}. Es wäre denkbar, mittels automatischer Textklassifikation \cite{Sebastiani2002} diese Kommentare zu identifizieren und als positiv oder negativ zu kategorisieren. Daraus ließe sich wiederum eine Bewertung für die Kombination (Datensatz, Komponente) berechnen\footnote{Am einfachsten ginge das indem bei Null gestartet wird und für jeden positiven Kommentar der Zähler um eins erhöht und jeden Negativen um eins verringert wird.}. Der errechnete Wert könnte in Zukunft beim Ranking einer Komponente für einen ausgewählten Datensatz berücksichtigt werden. Wenn der Aufwand dafür gerechtfertigt werden kann, ist es auch möglich, eine -- zuvor definierte -- Ontologie aus Kommentaren zu extrahieren \cite{Alani2003}. Diese könnte zum Beispiel das Qualitätsmanagement von Komponenten automatisieren. Denkbar wäre, dass aus Kommentaren automatisch extrahiert wird, worüber sich die Benutzer beschweren. Ab einem Schwellwert kann dann der Komponentenentwickler informiert werden: 
-
-\begin{quote}
-Lieber Entwickler, 30~\% der Menschen, die deine Komponente verwendet haben, beschweren sich über lange Ladezeiten und 42~\% über Unübersichtlichkeit. Wir empfehlen, daran etwas zu ändern. Viele Grüße, das VizBoard-Team.
-\end{quote}
+Kommentare können auch Metainformationen über die Daten oder Komponente enthalten \cite{Chen2009}. Es wäre denkbar, mittels automatischer Textklassifikation \cite{Sebastiani2002} diese Kommentare zu identifizieren und als positiv oder negativ zu kategorisieren. Daraus ließe sich wiederum eine Bewertung für die Kombination (Datensatz, Komponente) berechnen\footnote{Am einfachsten ginge das indem bei Null gestartet wird und für jeden positiven Kommentar der Zähler um eins erhöht und jeden Negativen um eins verringert wird.}. Der errechnete Wert könnte in Zukunft beim Ranking einer Komponente für einen ausgewählten Datensatz berücksichtigt werden. Wenn der Aufwand dafür gerechtfertigt werden kann, ist es auch möglich, eine -- zuvor definierte -- Ontologie aus Kommentaren zu extrahieren \cite{Alani2003}. Diese könnte zum Beispiel das Qualitätsmanagement von Komponenten automatisieren. Denkbar wäre, dass aus Kommentaren automatisch extrahiert wird, worüber sich die Benutzer beschweren. Ab einem Schwellwert kann dann der Komponentenentwickler informiert werden.
 
 \section{Meta-Hilfe}
 \label{section:konzeption:meta-hilfe}
@@ -1371,7 +1369,7 @@ Der Button für die Meta-Hilfe befindet sich in der rechten oberen Ecke des View
    \label{figure:meta-step1}
 \end{figure}
 
-Nachdem der Benutzer darauf geklickt hat, wird der Viewport abgedunkelt und ein Fenster überblendet, welches Hilfe zu verschiedenen Themen enthält (Abbildung~\ref{figure:meta-step2}). Von dort können ebenfalls die verschiedenen Hilfefunktionen (wie z.\,B. das Intro) aufgerufen werden. Das Fenster wird geschlossen, sobald der Benutzer außerhalb davon klickt.
+Nachdem der Benutzer darauf geklickt hat, wird der Viewport abgedunkelt und ein Fenster überblendet, welches Hilfe zu verschiedenen Themen enthält (Abbildung~\ref{figure:meta-step2}). Von dort können ebenfalls die verschiedenen Hilfefunktionen (wie z.\,B. das Intro) aufgerufen werden.
 
 \begin{figure}[htbp]
    \centering
