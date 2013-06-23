@@ -662,7 +662,7 @@ In diesem Abschnitt werden verwandte Arbeiten behandelt.
 
 \subsection{Webbasierte Mashup Plattformen}
 
-Es existieren ein paar andere Mashup-Plattformen als VizBoard.
+Es existieren ein paar andere Mashup-Plattformen als VizBoard, aber ich bin mir nicht sicher, ob die tatsächlich in meine Arbeit gehören. Ich entwickle kein Mashup.
 
 Yahoo Pipes\footnote{\url{http://pipes.yahoo.com/pipes/}}
 
@@ -788,7 +788,7 @@ Das User Interface für die ausgewählte Hilfefunktion wird links oder rechts de
 \end{figure}
 
 Dass die Sidebar mal links, mal rechts angezeigt wird, könnte beim Nutzer für Verwirrung sorgen. Jedoch scheint dieses Problem das kleinste zu sein, wenn man über die Alternativen nachdenkt.
-Beispielsweise könnte das Hilfesystem die Buttons in einer eigenen Button-Sidebar platzieren. Allerdings erscheint dann in 50~\% der Fälle die UI Sidebar auf der anderen Seite, was noch unerwarteter ist. Die Button-Sidebar jeweils auf der Seite zu rendern, wo auch die UI der Hilfe angezeigt werden wird, ist ebenfalls schwer vorstellbar. Erstens sind unterschiedliche User Interfaces unterschiedlich groß. Während das Reporting noch links gerendert werden könnte, könnten die Kommentare nur rechts genug Platz haben. Zweitens müsste der Nutzer jedes Mal erst die Buttons suchen, da sie abhängig von der Größe der Komponente und der Position linker oder rechter Hand sind. Das stellt nicht unerheblichen mentalen Aufwand dar.
+Beispielsweise könnte das Hilfesystem die Buttons in einer eigenen Button-Sidebar platzieren. Allerdings erscheint dann in 50~\% der Fälle die UI Sidebar auf der anderen Seite, was noch verwirrender ist. Die Button-Sidebar jeweils auf der Seite zu rendern, wo auch die UI der Hilfe angezeigt werden wird, ist ebenfalls schwer vorstellbar. Erstens sind unterschiedliche User Interfaces unterschiedlich groß. Während das Reporting noch links gerendert werden könnte, könnten die Kommentare nur rechts genug Platz haben. Zweitens müsste der Nutzer jedes Mal erst die Buttons suchen, da sie abhängig von der Größe der Komponente und der Position linker oder rechter Hand sind. Das stellt nicht unerheblichen mentalen Aufwand dar.
 Zuletzt wäre es möglich, die Button-Sidebar auf beiden Seiten der Komponente anzuzeigen und eine davon zu deaktivieren. Diese Variante unterscheidet sich aber nicht viel von der eben beschriebenen, da der Benutzer dann nicht die Buttons selbst, sondern aktivierte Buttons suchen muss.
 
 \section{Intro}
@@ -941,9 +941,9 @@ Die Bilder der Comics können auf unterschiedliche Weise ans Hilfesystem ausgeli
 
 % nachteile
 
-Die vorgestellte Lösung hat auch Nachteile. Zunächst ist sie vom Document Object Model (DOM) abhängig, was eine automatische Hilfegenerierung für Komponenten ausschließt, die auf Flash, Silverlight oder ähnlichen Technologien basieren. Der Trend geht aber ohnehin zu HTML/SVG-basierten Visualisierungen (z.\,B. mit D3\footnote{\url{http://d3js.org/}} oder Raphaël\footnote{\url{http://raphaeljs.com/}}): Flash ist laut Adobe hauptsächlich für Videoauslieferung und Spiele gedacht \cite{Adobe2013} und Microsoft zieht HTML5 Silverlight vor \cite{Foley2010}. Deswegen sollte dieser Nachteil nicht ins Gewicht fallen.
+Die vorgestellte Lösung hat auch Nachteile. Zunächst ist sie vom Document Object Model (DOM) abhängig, was eine automatische Hilfegenerierung für Komponenten ausschließt, die auf Flash, Silverlight oder ähnlichen Technologien basieren. Der Trend geht aber ohnehin zu HTML/SVG-basierten Visualisierungen (z.\,B. mit D3 \cite{Bostock2011} oder Raphaël\footnote{\url{http://raphaeljs.com/}}): Flash ist laut Adobe hauptsächlich für Videoauslieferung und Spiele gedacht \cite{Adobe2013} und Microsoft zieht HTML5 Silverlight vor \cite{Foley2010}. Deswegen sollte dieser Nachteil nicht ins Gewicht fallen.
 
-Eine weitere Einschränkung ist, dass zeitabhängige Interaktionen wie zum Beispiel \enquote{MouseOver für 3 Sekunden} nicht modelliert werden können. Diese sind im Web aber ohnehin eher unüblich.
+Eine weitere Einschränkung ist, dass zeitabhängige Interaktionen wie zum Beispiel \enquote{MouseOver für 3 Sekunden} nicht modelliert werden können. Diese sind im Web aber ohnehin eher unüblich und werden als schlechte Usability betrachtet, weil sie nicht sichtbar und deswegen schwer zu entdecken sind.
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:bedienung:ui}
@@ -989,7 +989,7 @@ Diese werden aber schon im Schritt davor (Abbildung~\ref{figure:bedienung-step2}
 \section{Reporting}
 \label{section:konzeption:reporting}
 
-Wie bei jeder Software können bei den Komponenten in VizBoard Fehler auftreten. Externe APIs, die sie benutzen, wie zum Beispiel von Facebook oder Twitter können sich ändern. Visualisierte Daten können Fehler in der Komponente verursachen, beispielsweise durch nicht überprüfte \texttt{null} Werte oder wenn sie ein unerwartetes Format haben. Ebenso ist es möglich, dass in VizBoard selbst noch Bugs gefunden werden. Schlimmstenfalls fallen diese Fehler erst dem Endnutzer auf, welcher sie dann melden können soll.
+Wie bei jeder Software können bei den Komponenten in VizBoard Fehler auftreten. Externe APIs, die sie benutzen, wie zum Beispiel von Facebook oder Twitter können sich ändern. Visualisierte Daten können Fehler in der Komponente verursachen, beispielsweise durch nicht überprüfte \texttt{null} Werte oder wenn sie ein unerwartetes Format haben. Ebenso ist es möglich, dass VizBoard selbst Bugs enthält. Schlimmstenfalls fallen diese Fehler erst dem Endnutzer auf, welcher sie dann melden können soll.
 
 Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. VizBoard-Betreiber -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Also ob es an der Komponente liegt (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API). Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben, und die Möglichkeit haben, die Komponente prinzipiell als gut oder schlecht zu bewerten. Letztere Funktion existiert bereits in VizBoard und wird in die Reporting UI integriert. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
 
@@ -1067,7 +1067,7 @@ Im kompositen Infomationsvisualisierungssystem VizBoard kommunizieren Komponente
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:kommunikation:ui}
 
-Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte einen Brief enthält. Sollten mehrere Empfänger vorhanden sein, existiert für jeden davon ein Brief. Der Pfeil wird nicht mehr gerendert, sobald der Benutzer die Hilfe zu der Kombination (Sender, Empfänger) aufgerufen hat und verschwindet, wenn ein anderer Pfeil gerendert werden muss. Ansonsten sind zu viele Pfeile gleichzeit im Viewport sichtbar.
+Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte einen Brief enthält. Sollten mehrere Empfänger vorhanden sein, existiert für jeden davon ein Brief. Der Pfeil wird nicht mehr gerendert, sobald der Benutzer die Hilfe zu der Kombination (Sender, Empfänger) aufgerufen hat und verschwindet, wenn ein anderer Pfeil gerendert werden muss. Ansonsten sind zu viele Pfeile gleichzeitig im Viewport sichtbar.
 
 \begin{figure}[htbp]
    \centering
@@ -1192,7 +1192,7 @@ Bezüglich der letzten Anforderung bietet sich ein Memento-Pattern \cite{Gamma19
 Without violating encapsulation, capture and externalize an object's internal state allowing the object to be restored to this state later.
 \end{quote} 
 
-Der Komponentenentwickler würde das Format des Mementos in der Komponentenbeschreibung definieren, nämlich welche Properties den Zustand der Komponente vollständig beschreiben. Das Hilfesystem kann diese dann über entsprechende Getter/Setter-Methoden -- welche in der API einer Komponente bereits vorgesehen sind -- verändern.
+Dazu werden zwei Methoden \texttt{getMemento()} und \texttt{setMemento(m)} zur API der Komponente hinzugefügt, mit denen das Hilfesystem den Zustand der Komponente speichern und wiederherstellen kann. Eine andere Möglichkeit wäre das Format des Mementos -- also welche Properties es ausmachen -- in der Komponentenbeschreibung anzugeben. Das Hilfesystem könnte die Werte dieser Properties bei der Wiederherstellung des Zustands setzen. Diese Variante hat aber den Nachteil, dass PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) darauf registriert sein können, die in anderen Komponenten unerwünschte Aktionen ausführen. Deswegen wird das Memento von den Properties getrennt.
 
 \subsubsection{Punktkommentare}
 
@@ -1383,7 +1383,6 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item Boolean, ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
 	\item Beispieldaten für Operationen mit Parametern (Bedienung)
 	\item Informationen über den zu verwendenden Datensatz (Bedienung)
-	\item Memento der Komponente (Kommentare)
 	\item Boolean, ob die Position von Elementen ein visuelles Attribut ist (Kommentare)
 	\item Boolean, ob die Komponente Datenverarbeitung durchführt (Kommentare)
 	\item Boolean, ob die Komponente externe Daten anzeigt (Kommentare)
@@ -1393,9 +1392,10 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \subsubsection{API einer Komponente}
 
 \begin{itemize}
-	\item Eine Funktion, um Koordinaten in Datenpunkte umzurechnen (Kommentare)
-	\item Die Umkehrung der Funktion (Datenpunkte $\to$ Koordinaten) (Kommentare)
-	\item Eine Funktion, um Werte von Attributen eines Datenpunkts zu erhalten (Kommentare)
+	\item Eine Methode, um Koordinaten in Datenpunkte umzurechnen (Kommentare)
+	\item Die Umkehrung der Methode (Datenpunkte $\to$ Koordinaten) (Kommentare)
+	\item Eine Methode, um Werte von Attributen eines Datenpunkts zu erhalten (Kommentare)
+	\item Zwei Methoden, um ein Memento der Komponente auslesen und wiederherstellen zu können (Kommentare)
 \end{itemize}
 
 \subsubsection{VISO}
