@@ -29,3 +29,5 @@
 *.bbl
 
 *.blg
+
+*.gz(busy)
