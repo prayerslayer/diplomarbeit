@@ -772,9 +772,13 @@ Im Laufe der Konzeption werden zum besseren Verständnis einige User Interface M
    \label{figure:ui-grundlage}
 \end{figure}
 
+\subsubsection{Aufruf}
+
 % warum sind buttons in der titelleiste
 
 Funktionen, die der Nutzer aus eigener Initiative nutzen kann und komponetenspezifisch sind (z.\,B. Kommentare), werden über Buttons in der Titelleiste der Komponente aufgerufen. Das Hilfesystem kann sie wegen des \enquote{Black Box} Prinzips nicht in der Komponente selbst platzieren. Zwar könnte man UI Elemente für die Hilfefunktionen im Komponenten-Markup vorsehen, aber durch die Nutzung der Titelleiste wird dem Entwickler Aufwand erspart.
+
+\subsubsection{Art}
 
 % wie sieht ui für dings grob aus?
 
@@ -787,9 +791,21 @@ Das User Interface für die ausgewählte Hilfefunktion wird links oder rechts de
    \label{figure:ui-basics}
 \end{figure}
 
+\subsubsection{Ort}
+
 Dass die Sidebar mal links, mal rechts angezeigt wird, könnte beim Nutzer für Verwirrung sorgen. Jedoch scheint dieses Problem das kleinste zu sein, wenn man über die Alternativen nachdenkt.
 Beispielsweise könnte das Hilfesystem die Buttons in einer eigenen Button-Sidebar platzieren. Allerdings erscheint dann in 50~\% der Fälle die UI Sidebar auf der anderen Seite, was noch verwirrender ist. Die Button-Sidebar jeweils auf der Seite zu rendern, wo auch die UI der Hilfe angezeigt werden wird, ist ebenfalls schwer vorstellbar. Erstens sind unterschiedliche User Interfaces unterschiedlich groß. Während das Reporting noch links gerendert werden könnte, könnten die Kommentare nur rechts genug Platz haben. Zweitens müsste der Nutzer jedes Mal erst die Buttons suchen, da sie abhängig von der Größe der Komponente und der Position linker oder rechter Hand sind. Das stellt nicht unerheblichen mentalen Aufwand dar.
 Zuletzt wäre es möglich, die Button-Sidebar auf beiden Seiten der Komponente anzuzeigen und eine davon zu deaktivieren. Diese Variante unterscheidet sich aber nicht viel von der eben beschriebenen, da der Benutzer dann nicht die Buttons selbst, sondern aktivierte Buttons suchen muss.
+
+\subsubsection{Farbgebung}
+
+Leicht grau = Blickführung, Dunkles Grau = No-Click-Area, Highlight = Orange weil das schon im VizBoard Farbschema so ist. Abgerundete Ecken, um sich von den harten Kanten der Komponenten abzuheben. Ebenso dunkler Hintergrund, weil Hintergrund des Viewports weiß. 
+
+Wenn Komponente dunklen Hintegrund hat, funktioniert das offensichtlich nicht mehr so gut, deswegen wird dann dasselbe Schema in hell verwendet.
+
+% todo: wieder dafür sorgen, dass im text auch steht, was auf den bildern zu sehen ist
+
+% todo: bei der generierung erwähnen, dass noch herausgefunden werden muss ob komponente hell oder dunkel ist (grob)
 
 \section{Intro}
 \label{section:konzeption:intro}
