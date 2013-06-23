@@ -655,6 +655,73 @@ Während des Verständnisprozesses ist es außerdem hilfreich, Wissen in irgende
 
 Nachdem betrachtet wurde, wie Verständnis funktioniert, stellt sich die Frage, \emph{was} vermittelt werden soll um Menschen mit wenig InfoVis-Erfahrung zu helfen. Dazu gehört laut Grammel \cite[S. 127]{Grammel2012} unter anderem das mentale Modell des Benutzers zu verwenden, beispielsweise indem dieselben Bezeichnungen verwendet werden, und zu lehren, wie Visualisierungen verwendet und interpretiert werden.
 
+\section{Verwandte Arbeiten}
+\label{section:standderforschung:verwandte_arbeiten}
+
+In diesem Abschnitt werden verwandte Arbeiten behandelt.
+
+\subsection{Webbasierte Mashup Plattformen}
+
+Es existieren ein paar andere Mashup-Plattformen als VizBoard.
+
+Yahoo Pipes\footnote{\url{http://pipes.yahoo.com/pipes/}}
+
+Apache Rave\footnote{\url{http://rave.apache.org/}}
+
+DashMash \cite{Cappiello2011}
+
+
+\subsection{Visualisierungstools}
+
+infogr.am\footnote{\url{http://infogr.am/}} ermöglicht es Benutzern, statische Infografiken und Charts zu erstellen. Die dargestellten Daten sind in einer Tabelle enthalten, die hochgeladen und online bearbeitet werden kann. Danach kann die Visualisierung veröffentlicht und in Social Networks gepostet werden. Der Webservice besitzt nur eingeschränkte Funktionalität, ist aber einfach zu benutzen und sieht gut aus, was für Endnutzer eine gute Kombination ist.
+
+Weave\footnote{\url{http://oicweave.org/}} ist eine Webapplikation, mit der Benutzer ein Mashup aus Visualisierungen erstellen können. Mögliche Datenquellen sind strukturierte Daten wie Tabellen und CSV Dateien. Benutzer können aus verschiedenen Visualisierungen wählen und diese an Daten binden. Das User Interface (Abbildung~\ref{figure:weave}) ist allerdings sehr komplex und Hilfe gibt es nur in Form einer Online-Dokumentation und einem kurzen Tutorialvideo.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/verwandte_arbeiten-weave.png}
+   \caption{Weave User Interface}
+   \label{figure:weave}
+\end{figure}
+
+Tableau\footnote{\url{http://www.tableausoftware.com/}} ist eine Desktopapplikation, mit der aus Tabellen oder Datenbanken Diagramme erstellt werden können. Dabei wird das Prinzip von \enquote{Semantic Transparency} umgesetzt, weil der Benutzer die zu visualisierenden Daten per Drag \& Drop auf dem Diagramm platziert. \textbf{Und?}
+
+\subsubsection{Sensemaking}
+
+% Sandbox \cite{Wright2006} ist ein Prototyp einer Desktopanwendung, die den Prozess des Sensemakings unterstützen soll. Dazu kann der Benutzer Informationen ähnlich Post-Its auf einer Canvas anordnen und mit Hilfe von Gesten gruppieren, Platz schaffen oder löschen. Informationsvisualisierungen kommen dabei nicht zum Einsatz.
+
+Groth und Streefkerk \cite{Groth2006} präsentieren ein generisches Annotationssystem für Informationsvisualisierungen am Beispiel einer 3D Visualisierung von Molekülen. Grundlage des Systems sind Nutzerinteraktionen wie \enquote{rotieren}, \enquote{zoomen} etc., welche geloggt und als Graph abgespeichert werden. An den Knoten des Graphen -- Zustände der InfoVis -- können beliebig viele Kommentare abgelegt werden. Es ist allerdings nicht möglich, innerhalb dieser Sichten noch einmal Elemente zu referenzieren (z.\,B. ein bestimmtes Atom), weswegen das System am besten für InfoVis mit uneingeschränkter Navigation geeignet ist.
+
+Heer et al. \cite{Heer2007} entwickelten mit sense.us einen Prototyp zur asynchronen Kollaboration mit interaktiven Visualisierungen. Benutzer können Kommentare zu Visualisierungen hinzufügen und sie mit grafischen Annotationen (z.\,B. geometrische Formen, Pfeile, Text) versehen. Die Kommentare wurden dabei nicht an die Daten selbst, sondern an die Visualisierung, hinzugefügt. Es war aber möglich Kommentare in anderen Visualisierungen zu referenzieren. Die am meisten verwendeten Annotationstypen waren Pfeile und Text.
+
+Ebenfalls erwähnenswert ist ManyEyes \cite{Viegas2007}. Benutzer können Datensätze hochladen und eine aus mehreren vorgegebenen Visualisierungen wählen. Danach können sie ähnlich wie bei sense.us die Visualisierungen kommentieren, es ist allerdings nicht möglich, die Visualisierung selbst zu annotieren. Wie bei sense.us ist immer nur eine InfoVis sichtbar.
+
+Elias und Bezerianos \cite{Elias2012} entwickelten ein Annotations- bzw. Kommentarsystem für Business Intelligence Dashboards. Dafür interviewten sie Domänenexperten und erarbeiteten sieben funktionale Anforderungen an ein annotationsgesütztes Dashboard. Herausforderungen für ihr Konzept, die auch in dieser Arbeit berücksichtigt werden sollten, waren wie mit sich änderndem Kontext (bei dynamischen Daten) umgegangen und Unabhängigkeit von Granularitäten (Jahr/Monat/Tag) gewährleistet werden soll.
+
+\subsection{User Assistance}
+
+Lim und Dey \cite{Lim2010} kategorisieren mögliche Fragestellungen von Nutzern in kontextadaptiven Anwendungen. Dabei ändert die Anwendung abhängig vom Nutzer- bzw. Nutzungskontext ihren Zustand (z.\,B. schaltet Smartphone auf lautlos) und der Benutzer will wissen, warum (z.\,B. weil er Abends in der Oper ist). Grundlage für Lims Ausführungen ist die Annahme, dass der Nutzer nur eingeschränkt Einfluss auf die Arbeitsweise des Systems hat, etwa durch Hinzufügen eigener Regeln. Das ist im letzten Schritt des VizBoard Workflows nicht gegeben, da der Benutzer die Visualisierungskomponenten selbst ausgewählt hat. Die Fragestellungen könnten aber hilfreich sein, wenn es um die Komponenten selbst geht: \enquote{Warum werden gerade diese Daten angezeigt?}
+
+Cao et al. \cite{Cao2010} untersuchten mit Hilfe der Thinking Aloud Methode \cite{vanSomeren1994} das Verhalten von Endnutzern, wenn sie Mashups erstellen, sowie deren Debugging-Strategien, wenn etwas nicht funktioniert. Dazu benutzten sie das inzwischen eingestellte Microsoft Popfly. In ihrer Studie hatten alle Probanden Probleme mit dem Konzept des Datenflusses, also welche Daten wann zwischen welchen Komponenten ausgetauscht werden.
+
+Kuttal et al. \cite{Kuttal2013} entwickelten ein System zur automatischen Fehlererkennung in Yahoo Pipes und ließen Endnutzer damit debuggen. In den danach erarbeiteten Designrichtlinien schlagen sie unter anderem vor keine technische Begriffe zu verwenden und Undo-Möglichkeiten sowie kontextuelle Hilfe anzubieten.
+
+Chowdhury et al. \cite{Chowdhury2012a} stellen eine Erweiterung von Yahoo Pipes vor, die Kompositionspattern vorschlägt und bei Bedarf in das Mashup einbaut.  Dieses \enquote{Programming by example} könnte in VizBoard benutzt werden, um die Komposition noch einmal zu überarbeiten.
+
+Einige Arbeiten, wie z.\,B. \cite{Gesell2012, Matheson2012}, befassen sich mit der Generierung von textuellen Erklärungen. In beiden Arbeiten ist eine formale Repräsentation des Erklärungsgegenstands notwendig, beispielsweise als Baum von Vorbedingungen und \enquote{Ist Teil von} Relationen oder einer Ontologie. In der Evaluation von Matheson et al. merkten einige Probanden an, dass ihre Erklärungen zu langatmig seien.
+
+% bei champin2012 klingt der titel super, aber das szenario ist irgendwie ein komplett anderes
+
+% Kurlander et al. \cite{Kurlander1996} entwickelten einen Algorithmus, mit dem aus einer Chatkonversation automatisch ein Comic erstellt wurde. So what?
+
+Webb et al. \cite{Webb2012} überprüften in einer Nutzerstudie, wie User Assistance in Form eines Comics gegenüber in Form einer PowerPoint-Präsentation angenommen wird. Comics lagen in allen Fragestellungen (Einfach zu verwenden, attraktiv, nützlich, verständlich) vorne, am Besten wurden Comics angenommen, die eine Metapher beinhalteten.
+
+Forsell und Johansson \cite{Forsell2010} führten eine Nutzerstudie durch, um aus verschiedenen Heuristiken zur Heuristischen Evaluation \cite{Nielsen1994} diejenigen herauszufiltern, welche bei Informationsvisualisierungen hilfreich sind. Darunter finden sich Support für Undo/Redo, visuelle Konsistenz und den mentalen Aufwand des Nutzers gering zu halten.
+
+Grammel \cite{Grammel2012} verfasste seine Doktorarbeit zum Thema, wie InfoVis-Anfänger Visualisierungen konstruieren. Um sie dabei zu unterstützen, schlägt er unter anderem vor, ihr mentales Modell zu verwenden (z.\,B. mit ihnen bekannten Begriffen) und es ihnen zu erleichtern, mehr über InfoVis zu lernen.
+
+Shrinivasan et al. \cite{Shrinivasan2008} entwickelten ein Framework zur Informationsvisualisierung, welches den menschlichen Verständnisprozess unterstützen soll. Es besteht aus drei verschiedenen Views: Der InfoVis selbst, einem \enquote{Knowledge View} und einem \enquote{Navigation View}. Im Knowledge View kann der Benutzer seine Hypothesen und Analysen verwalten bzw. überprüfen, der Navigation View erlaubt es ihm, zu einem beliebigen Punkt im Laufe der Interaktionen zurück zu gehen. In einer Nutzerstudie fanden die vier Probanden den Knowledge View sehr nützlich.
+
 \section{Zusammenfassung}
 \label{section:standderforschung:zusammenfassung}
 
