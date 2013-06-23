@@ -776,7 +776,12 @@ Im Laufe der Konzeption werden zum besseren Verständnis einige User Interface M
 
 % warum sind buttons in der titelleiste
 
-Funktionen, die der Nutzer aus eigener Initiative nutzen kann und komponetenspezifisch sind (z.\,B. Kommentare), werden über Buttons in der Titelleiste der Komponente aufgerufen. Das Hilfesystem kann sie wegen des \enquote{Black Box} Prinzips nicht in der Komponente selbst platzieren. Zwar könnte man UI Elemente für die Hilfefunktionen im Komponenten-Markup vorsehen, aber durch die Nutzung der Titelleiste wird dem Entwickler Aufwand erspart.
+Funktionen, die der Nutzer aus eigener Initiative nutzen kann und komponetenspezifisch sind (z.\,B. Kommentare), werden über Buttons in der Titelleiste der Komponente aufgerufen. Das Hilfesystem kann sie wegen des \enquote{Black Box} Prinzips nicht in der Komponente selbst platzieren. Zwar könnte man UI Elemente für die Hilfefunktionen im Komponenten-Markup vorsehen, aber durch die Nutzung der Titelleiste wird dem Entwickler Aufwand erspart. Die UI für die aufgerufene Hilfe kann auf folgende Arten geschlossen werden:
+
+\begin{itemize}
+	\item Klick auf den Button, der sie aufgerufen hat
+	\item Klick auf den \enquote{Schließen}-Button oben rechts
+\end{itemize}
 
 \subsubsection{Art}
 
@@ -797,15 +802,13 @@ Dass die Sidebar mal links, mal rechts angezeigt wird, könnte beim Nutzer für 
 Beispielsweise könnte das Hilfesystem die Buttons in einer eigenen Button-Sidebar platzieren. Allerdings erscheint dann in 50~\% der Fälle die UI Sidebar auf der anderen Seite, was noch verwirrender ist. Die Button-Sidebar jeweils auf der Seite zu rendern, wo auch die UI der Hilfe angezeigt werden wird, ist ebenfalls schwer vorstellbar. Erstens sind unterschiedliche User Interfaces unterschiedlich groß. Während das Reporting noch links gerendert werden könnte, könnten die Kommentare nur rechts genug Platz haben. Zweitens müsste der Nutzer jedes Mal erst die Buttons suchen, da sie abhängig von der Größe der Komponente und der Position linker oder rechter Hand sind. Das stellt nicht unerheblichen mentalen Aufwand dar.
 Zuletzt wäre es möglich, die Button-Sidebar auf beiden Seiten der Komponente anzuzeigen und eine davon zu deaktivieren. Diese Variante unterscheidet sich aber nicht viel von der eben beschriebenen, da der Benutzer dann nicht die Buttons selbst, sondern aktivierte Buttons suchen muss.
 
-\subsubsection{Farbgebung}
+\subsubsection{Optik}
 
-Leicht grau = Blickführung, Dunkles Grau = No-Click-Area, Highlight = Orange weil das schon im VizBoard Farbschema so ist. Abgerundete Ecken, um sich von den harten Kanten der Komponenten abzuheben. Ebenso dunkler Hintergrund, weil Hintergrund des Viewports weiß. 
+Visuelle Konsistenz ist wichtig, damit der Benutzer Elemente gleichen Typs erkennen kann. Deswegen hat der Bereich, in der Hilfefunktionen angezeigt werden, abgerundete Ecken. So hebt sich die UI für Hilfe von der normalen UI der Komponente, welche spitze Ecken aufweist, ab. Aus demselben Grund wird für die Hilfe UI ein dunkler Hintegrund gewählt, da der Hintergrund von VizBoard weiß ist. Um etwas hervorzuheben, wird prinzipiell die Farbe Orange benutzt, da dies im bestehenden VizBoard Farbschema so festgelegt wurde. Eine Überlagerung der Komponente mit einem leichten Grau dient der Blickführung zu einem nicht überlagerten Element. Ist die Komponente hingegen mit einem tiefen Grau überlagert, signalisiert die dunkle Fläche eine \enquote{No Click Area}, wo keine Interaktionen ausgeführt werden können. 
 
-Wenn Komponente dunklen Hintegrund hat, funktioniert das offensichtlich nicht mehr so gut, deswegen wird dann dasselbe Schema in hell verwendet.
+Offensichtlich sind die gewählten visuellen Effekte nicht mehr so nützlich, wenn eine Komponente einen dunklen Hintergrund aufweist. Schwarz mit Dunkelgrau zu überlagern macht für das menschliche Auge nur wenig Unterschied. Deswegen werden in diesem Fall dieselben Effekte mit Weiß und Hellgrau verwendet.
 
 % todo: wieder dafür sorgen, dass im text auch steht, was auf den bildern zu sehen ist
-
-% todo: bei der generierung erwähnen, dass noch herausgefunden werden muss ob komponente hell oder dunkel ist (grob)
 
 \section{Intro}
 \label{section:konzeption:intro}
@@ -922,8 +925,6 @@ Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. So
 	\item Component Repository: Das CoRe ist für die Verwaltung der Komponenten zuständig und stellt u.\,a. die Komponentenbeschreibungen bereit. Diese sind notwendig um die Operationen und Aktionen auslesen zu können.
 \end{itemize}
 
-% todo cruise testumgebung, wo kommen vor allen dingen die daten her?
-
 Es wurde eben erklärt, dass das DaRe die (Test-)Daten für eine Komponente liefern kann. Der Komponentenentwickler gibt in der Komponentenbeschreibung den gewünschten Datensatz an, welcher bei der Generierung der Assistance geladen wird. Das kann ein \enquote{echter} Datensatz oder ein vom VizBoard-Betreiber zur Verfügung gestellter Testdatensatz sein. Es kann allerdings passieren, dass das DaRe keine passenden Daten enthält, weil die Komponente sehr spezielle Daten visualisiert (z.\,B. 3-Sterne-Hotels in Andorra). Dann sollte der Komponentenentwickler zusammen mit der Komponente Testdaten hochladen können oder eine URL angeben, unter der sie zu finden sind. Das ist zwar etwas Mehraufwand, aber es kann angenommen werden, dass im Laufe der Entwicklung einer Komponente sowieso Testdaten verwendet wurden. Sie müssen in den meisten Fällen also nicht mehr erstellt, sondern nur noch hochgeladen werden.
 
 Nachdem die Komponente vom Hilfeservice gerendert wurde, führt er folgende Schritte aus:
@@ -948,6 +949,10 @@ Nachdem die Komponente vom Hilfeservice gerendert wurde, führt er folgende Schr
 		\item Erstelle einen Screenshot vom Ergebnis der Aktion
 	\end{enumerate}
 \end{enumerate}
+
+% hell und dunkel unterscheiden
+
+Nachdem alle nötigen Screenshots der Komponente erstellt wurden, muss das Hilfesystem eine Kategorisierung in \enquote{helle Komponente} und \enquote{dunkle Komponente} vornehmen. Das ist nötig, damit das Hilfesystem zur Laufzeit weiß, ob es dunkle oder helle visuelle Effekte einblenden soll. Eine naive Möglichkeit dazu wäre, mit Hilfe einer Bildverarbeitungsbibliothek wie OpenCV\footnote{\url{http://opencv.willowgarage.com/wiki/}} die Screenshots zu binärisieren, also in Bilder aus schwarzen und weißen Pixeln umzuwandeln. Enthält die Mehrzahl der Bilder mehr schwarze als weiße Pixel, wird die Komponente als \enquote{dunkel} eingestuft, ansonsten als \enquote{hell}.
 
 % todo anbieten der assistance diskutieren: bilder in smcdl einbinden, eigener webservice, core.
 Die Bilder der Comics können auf unterschiedliche Weise ans Hilfesystem ausgeliefert werden. Eine Möglichkeit ist die Bilder nach Generierung in der Komponentenbeschreibung zu definieren, so wie es bereits mit einem Screenshot der Komponente gemacht wird. Ebenso könnte ein Webservice die Bilder über eine REST API anbieten, von wo das Hilfesystem sie zur Laufzeit lädt. Dieser Webservice kann eigenständig oder im CoRe integriert sein. \textbf{Fazit?}
