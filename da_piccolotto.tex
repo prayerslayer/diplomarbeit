@@ -1190,7 +1190,7 @@ Wie im letzten Abschnitt beschrieben ist es notwendig, Bereiche einer Visualisie
 
 \subsubsection{Bereichskommentare}
 
-Um die Kommentare zu diesen Bereichen in anderen Visualisierungen wiederverwenden zu können, sollten die Daten an sich (\emph{datenbasierte Bereichskommentare}) und nicht die Fläche der Visualisierung (\emph{flächenbasierte Bereichskommentare}) referenziert werden. Damit das möglich ist, müssen drei Voraussetzungen gegeben sein:
+Um die Kommentare zu diesen Bereichen in anderen Visualisierungen wiederverwenden zu können, sollten die Daten an sich (\emph{datenbezogene Bereichskommentare}) und nicht die Fläche der Visualisierung (\emph{ortsbezogene Bereichskommentare}) referenziert werden. Damit das möglich ist, müssen drei Voraussetzungen gegeben sein:
 
 \begin{enumerate}
 	\item Die grafische Repräsentation muss Werte von Variablen auf die Position kodieren, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann. Das ist beispielsweise bei einem Scatterplot der Fall, bei einer Treemap nicht. Dort sind Größe und Farbe die visuellen Attribute.  
@@ -1198,7 +1198,7 @@ Um die Kommentare zu diesen Bereichen in anderen Visualisierungen wiederverwende
 	\item Die Komponente darf keine Datenverarbeitung in Form von Aggregationen o.\,ä. durchführen, da diese Daten nicht im Data Repository gespeichert sind und es folglich keine Daten enthält, die referenziert werden könnten.
 \end{enumerate}
 
-Erfüllt eine Komponente diese Bedingungen nicht vollständig, können nur flächenbasierte Bereichskommentare eingesetzt werden. Wenn datenbasierte Bereichskommentare angezeigt und von anderen Benutzern nachvollzogen werden sollen, muss das Hilfesystem die Komponente in den damals aktiven Zustand zurücksetzen können, da ansonsten die referenzierten Bereiche andere Daten enthalten. Diese Tatsache führt zu weiteren Anforderungen an die Komponente:
+Erfüllt eine Komponente diese Bedingungen nicht vollständig, können nur ortsbezogene Bereichskommentare eingesetzt werden. Wenn datenbezogene Bereichskommentare angezeigt und von anderen Benutzern nachvollzogen werden sollen, muss das Hilfesystem die Komponente in den damals aktiven Zustand zurücksetzen können, da ansonsten die referenzierten Bereiche andere Daten enthalten. Diese Tatsache führt zu weiteren Anforderungen an die Komponente:
 
 \begin{enumerate}
 	\setcounter{enumi}{3}
@@ -1308,17 +1308,17 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:api} und
 		\item Zeitpunkt
 		\item Kommentartext
 	\end{itemize}
-	\item ID der Komponente, in der der Kommentar verfasst wurde. Das ist notwendig um flächenbasierte Kommentare wiederherstellen zu können. Bei datenbasierten Kommentaren kann eventuell ein Verweis auf die ursprüngliche Komponente erstellt werden.
+	\item ID der Komponente, in der der Kommentar verfasst wurde. Das ist notwendig um ortsbezogene Kommentare wiederherstellen zu können. Bei datenbezogenen Kommentaren kann eventuell ein Verweis auf die ursprüngliche Komponente erstellt werden.
 	\item ID des Datensatzes, der visualisiert wurde
 	\item Verfasser des Kommentars
 	\item URIs der Datenattribute, die visualisiert wurden
 	\item Memento der Komponente zum Zeitpunkt des Kommentars
-	\item \textit{Für jeden Bereich, wenn flächenbasiert}
+	\item \textit{Für jeden Bereich, wenn ortsbezogen}
 		\begin{itemize}
 			\item Koordinaten der Auswahlrechtecke, relativ zur linken oberen Ecke der Visualisierung
 			\item Größe der Visualisierung zum Zeitpunkt des Kommentars, um die Auswahlrechtecke entsprechend skalieren zu können, falls notwendig.
 		\end{itemize}
-	\item \textit{Für jeden Bereich, wenn datenbasiert}
+	\item \textit{Für jeden Bereich, wenn datenbezogen}
 		\begin{itemize}
 			\item Grenzwerte der visualisierten Datenattribute
 		\end{itemize}
@@ -1335,7 +1335,7 @@ Hat ein Benutzer Bereiche und Datenpunkte referenziert, sowie einen Kommentar ge
 
 % wie läuft das mit laden, vor allem wenn kommentare in anderer komponente gemacht wurden?
 
-Sollen Kommentare angezeigt werden, schickt das Hilfesystem eine entsprechende Anfrage ans DaRe und empfängt die Daten aller relevanten Kommentare. Für flächenbasierte Bereichskommentare ist nichts weiter zu tun, sie können direkt in dieser Komponente gerendert werden. Um datenbasierte Bereichskommentare anzuzeigen, muss das Hilfesystem zuerst die Datengrenzen in Koordinaten in der Visualisierung transformieren lassen. Bei Punktkommentaren ist dies nicht nötig, weil das Hilfesystem über CSS Selektoren herausfinden kann, wo sie sich befinden sollen.
+Sollen Kommentare angezeigt werden, schickt das Hilfesystem eine entsprechende Anfrage ans DaRe und empfängt die Daten aller relevanten Kommentare. Für ortsbezogene Bereichskommentare ist nichts weiter zu tun, sie können direkt in dieser Komponente gerendert werden. Um datenbezogene Bereichskommentare anzuzeigen, muss das Hilfesystem zuerst die Datengrenzen in Koordinaten in der Visualisierung transformieren lassen. Bei Punktkommentaren ist dies nicht nötig, weil das Hilfesystem über CSS Selektoren herausfinden kann, wo sie sich befinden sollen.
 
 \subsubsection{Weitere Nutzung}
 
@@ -1402,10 +1402,10 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item Boolean, ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
 	\item Beispieldaten für Operationen mit Parametern (Bedienung)
 	\item Informationen über den zu verwendenden Datensatz (Bedienung)
-	\item Boolean, ob die Position von Elementen ein visuelles Attribut ist (Kommentare)
-	\item Boolean, ob die Komponente Datenverarbeitung durchführt (Kommentare)
-	\item Boolean, ob die Komponente externe Daten anzeigt (Kommentare)
-	\item Boolean, ob das Layout der Komponente vollständig reproduzierbar ist (Kommentare)
+	\item Ob die Position von Elementen ein visuelles Attribut ist (Kommentare)
+	\item Ob die Komponente Datenverarbeitung durchführt (Kommentare)
+	\item Ob die Komponente externe Daten anzeigt (Kommentare)
+	\item Ob das Layout der Komponente vollständig reproduzierbar ist (Kommentare)
 \end{itemize}
 
 \subsubsection{API einer Komponente}
