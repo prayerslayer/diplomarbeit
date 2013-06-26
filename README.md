@@ -4,4 +4,4 @@ My diploma thesis at Dresden University of Technology.
 
 ## TODO
 
-* Pfeile und Text! Geht immer.
+* Pfeile und Text: UI Mockups

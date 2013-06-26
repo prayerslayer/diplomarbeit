@@ -1188,11 +1188,11 @@ Um eine gemeinsame Grundlage für eine Diskussion zu schaffen ist es notwendig, 
 
 Wie im letzten Abschnitt beschrieben ist es notwendig, Bereiche einer Visualisierung referenzieren zu können. Um Wiederverwendung über Komponenten hinweg zu fördern, sollten die Kommentare sich möglichst auf die visualisierten Daten selbst beziehen (\emph{datenbezogene Kommentare}) und nicht auf einen Bereich der Visualisierung (\emph{ortsbezogene Kommentare}).
 
-Damit das umsetzbar ist, darf die Komponente keine externen Daten anzeigen (beispielsweise die neuesten Tweets eines Twitter-Accounts), da diese nicht im DaRe gespeichert sind. Dabei ist es unerheblich, ob die Komponente selbst externe Daten lädt oder externe Daten einer anderen Komponente anzeigt. Um den ersten Fall für das Hilfesystem erkennbar zu machen, kann die Komponentenbeschreibung erweitert werden. Für den zweiten Fall muss das Hilfesystem nach erfolgreicher Integration aller Visualisierungskomponenten selbst überprüfen, welche davon externe Daten laden und mit welchen diese über Links (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) verbunden sind.
+Komponenten, welche die Kommentarfunktion anbieten wollen, dürfen aus zwei Gründen keine externen Daten anzeigen (also beispielsweise die neuesten Tweets eines Twitter-Accounts): Erstens könnte der Kontext eines Kommentars sich ändern, etwa wenn Tweets gelöscht wurden. Die externen Daten unterliegen nicht der Kontrolle des Hilfesystems. Zweitens sind die externen Daten nicht im DaRe vorhanden, weswegen sie nicht über Komponenten hinweg wiederverwendet werden können. Dabei ist es unerheblich, ob die Komponente selbst externe Daten lädt oder externe Daten einer anderen Komponente anzeigt. Um den ersten Fall für das Hilfesystem erkennbar zu machen, kann die Komponentenbeschreibung erweitert werden. Für den zweiten Fall muss das Hilfesystem nach erfolgreicher Integration aller Visualisierungskomponenten selbst überprüfen, welche davon externe Daten laden und mit welchen diese über Links (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) verbunden sind.
 
 Prinzipiell können Kommentare in Bereichskommentare und Punktkommentare unterschieden werden.
 
-\subsubsection{Bereichskommentare}
+\subsubsection{Datenbezogene Bereichskommentare}
 
 Damit Bereichskommentare Daten referenzieren können, müssen drei Voraussetzungen gegeben sein:
 
@@ -1217,8 +1217,21 @@ Without violating encapsulation, capture and externalize an object's internal st
 \end{quote} 
 
 % memento
-Dazu werden zwei Methoden \texttt{getMemento()} und \texttt{setMemento(m)} zur API der Komponente hinzugefügt, mit denen das Hilfesystem den Zustand der Komponente speichern und wiederherstellen kann. Eine andere Möglichkeit wäre das Format des Mementos -- also welche Properties es ausmachen -- in der Komponentenbeschreibung anzugeben. Das Hilfesystem könnte die Werte dieser Properties bei der Wiederherstellung des Zustands mit Hilfe der entsprechenden Setter-Methode setzen. Diese Variante hat aber den Nachteil, dass PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) darauf registriert sein können. Sie könnten in anderen Komponenten unerwünschte Aktionen ausführen\todo{Vl feature?}, während der Zustand der Komponente für Kommentare zurückgesetzt wird. Deswegen wird das Memento insofern von Properties unabhängig gemacht, dass \texttt{setMemento(m)} im Gegensatz zu \texttt{setProperty(k,v)} kein \enquote{propertyChanged} Event feuert und PropertyLinks nicht betroffen sind.
- 
+Dazu werden zwei Methoden \texttt{getMemento()} und \texttt{setMemento(m)} zur API der Komponente hinzugefügt, mit denen das Hilfesystem den Zustand der Komponente speichern und wiederherstellen kann. Eine andere Möglichkeit wäre das Format des Mementos -- also welche Properties es ausmachen -- in der Komponentenbeschreibung anzugeben. Das Hilfesystem könnte die Werte dieser Properties bei der Wiederherstellung des Zustands mit Hilfe der entsprechenden Setter-Methode setzen. Diese Variante hat aber den Nachteil, dass PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) darauf registriert sein können. Sie könnten in anderen Komponenten unerwünschte Aktionen ausführen\todo{feature?}, während der Zustand der Komponente für Kommentare zurückgesetzt wird. Deswegen wird das Memento insofern von Properties unabhängig gemacht, dass \texttt{setMemento(m)} im Gegensatz zu \texttt{setProperty(k,v)} kein \enquote{propertyChanged} Event feuert und PropertyLinks davon nicht betroffen werden.
+
+\subsubsection{Ortsbezogene Bereichskommentare}
+
+Datenbezogene Kommentare haben den Vorteil, dass sie auch in anderen Komponenten als der ursprünglich benutzten angezeigt werden können. Sie haben die Form eines Rechtecks, da so der Implementierungsaufwand für den Komponentenentwickler minimiert wird, obwohl prinzipiell beliebige geometrische Formen möglich sind. Andere Formen von Kommentaren sind zum Beispiel Pfeile oder Text, welche in der Nutzerstudie von \cite{Heer2007} am populärsten waren. Diese werden am besten als ortsbezogene Kommentare modelliert, da bei beiden Formen nicht eindeutig ist, welche Daten sie referenzieren. Siehe das Beispiel in Abbildung~\ref{figure:ortsbezogen}: Bezieht sich der Pfeil auf den Pixel am Ende der Pfeilspitze? Oder auf den roten Balken? Was wenn der Benutzer den Pfeil nur zu kurz gezeichnet hat und den kleinen gelben links daneben meint? Welche Daten soll der Text referenzieren? Den Punkt am linken unteren Ende? Das Zentrum des Texts?
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-ortsbezogen.png}
+   \caption{Ein ortsbezogener Kommentar mit Pfeil und Text}
+   \label{figure:ortsbezogen}
+\end{figure}
+
+Ihr Vorteil ist, dass sie in allen Komponenten möglich sind, bei denen die Kommentarfunktion prinzipiell aktiviert ist. Zum Beispiel also auch bei einer Treemap, welche auf Grund ihrer visuellen Mappings keine datenbezogenen Bereichskommentare verarbeiten kann.
+
 \subsubsection{Punktkommentare}
 
 % speichern
@@ -1227,7 +1240,7 @@ Mit Datenpunkten verhält sich die Situation etwas einfacher als bei Bereichen. 
 
 % markup
 
-Zuvor muss allerdings noch geklärt werden, auf welche Weise der Komponentenentwickler die URIs im Markup sichtbar machen soll. Prinzipiell kommen dafür alle Möglichkeiten in Frage, die mit Hilfe von CSS ausgelesen werden können. Dazu gehören HTML Markup Elemente wie \texttt{id} oder Datenattribute \texttt{data-*}, aber auch Microformats\footnote{\url{http://microformats.org/}} oder RDFa \cite{W3C2012}. Microformats werden ausgeschlossen, da bei diesen das Vokabular vorgegeben ist, während bei RDFa nur die Syntax definiert wird. Eine URI ist kein gültiger Wert für die \texttt{id} eines DOM Elements, deswegen wird auch sie ausgeschlossen. RDFa hat gegenüber Datenattributen den Vorteil, dass so auch zusätzliche Informationen über den Datenpunkt (beispielsweise das Label) ins Markup integriert werden können. Auf diese Weise kann das Hilfesystem unter Umständen den einen oder anderen Aufruf des DaRes einsparen und stattdessen HTML parsen.
+Zuvor muss allerdings noch geklärt werden, auf welche Weise der Komponentenentwickler die URIs im Markup sichtbar machen soll. Prinzipiell kommen dafür alle Möglichkeiten in Frage, die mit Hilfe von CSS ausgelesen werden können. Dazu gehören HTML Markup Elemente wie \texttt{id} oder Datenattribute \texttt{data-*}, aber auch Microformats\footnote{\url{http://microformats.org/}} oder RDFa \cite{W3C2012}. Microformats werden ausgeschlossen, da bei diesen das Vokabular vorgegeben ist, während bei RDFa nur die Syntax definiert wird. Eine URI ist kein gültiger Wert für die \texttt{id} eines DOM Elements, deswegen wird auch sie ausgeschlossen. RDFa hat gegenüber Datenattributen den Vorteil, dass so auch zusätzliche Informationen über den Datenpunkt (beispielsweise das Label) ins Markup integriert werden können. Auf diese Weise kann das Hilfesystem unter Umständen den einen oder anderen Aufruf des DaRes einsparen und stattdessen HTML parsen, was zur Geschwindigkeit der Anwendung beiträgt.
 
 % laden
 Beim Laden von Punktkommentaren zählt das Hilfesystem erst die Anzahl von Kommentaren pro Datenpunkt und stellt diese Anzahl über dem visualisierten Datenpunkt dar. Das ist möglich, weil über die URI und CSS Selektoren die entsprechenden DOM Elemente identifiziert werden können.
@@ -1240,7 +1253,7 @@ Beim Laden von Punktkommentaren zählt das Hilfesystem erst die Anzahl von Komme
 
 In der Titelleiste gibt es zwei Buttons mit einem abgewandelten Sprechblasen-Icon, einmal ist ein Auge in der Sprechblase (Kommentare ansehen) und einmal ein Pluszeichen (Kommentar hinzufügen).
 
-Wenn der Benutzer einen Kommentar verfassen will, erscheint eine Sidebar mit einer Textbox und einem Buttons zum Bestätigen (Abbildung~\ref{figure:kommentare-step4}). Abgebrochen wird nachdem der Benutzer außerhalb der Sidebar klickt. Der Benutzer kann nun ein oder mehrere, nicht überlappende Rechtecke in der Visualisierung erstellen oder Datenpunkte markieren (linker Balken in Abbildung~\ref{figure:kommentare-step4}). Das Hilfesystem setzt die Komponente in den Ausgangszustand zurück, sobald der Benutzer bestätigt oder abgebrochen hat.
+Wenn der Benutzer einen Kommentar verfassen will, erscheint eine Sidebar mit einer Textbox, Controls um die Kommentarform zu ändern (Rechteck, Pfeil, Text) und einem Buttons zum Bestätigen (Abbildung~\ref{figure:kommentare-step4}). Abgebrochen wird nachdem der Benutzer außerhalb der Sidebar klickt. Der Benutzer kann nun ein oder mehrere, nicht überlappende Rechtecke in der Visualisierung erstellen oder Datenpunkte markieren (linker Balken in Abbildung~\ref{figure:kommentare-step4}). Das Hilfesystem setzt die Komponente in den Ausgangszustand zurück, sobald der Benutzer bestätigt oder abgebrochen hat.
 
 \begin{figure}[htbp]
    \centering
@@ -1305,7 +1318,7 @@ Von Kommentaren referenzierte Bereiche müssen durch einen Klick auf den Button 
 
 % welche daten enthält ein gespeichertes kommentar?
 
-Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:api} und~\ref{section:konzeption:kommentare:features} nach enthält ein abgespeichertes Kommentar im DaRe folgende Daten:
+Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:features} und~\ref{section:konzeption:kommentare:api} nach enthält ein abgespeichertes Kommentar im DaRe folgende Daten:
 
 \begin{itemize}
 	\item ID des Kommentars, um darauf verweisen zu können.
@@ -1320,12 +1333,17 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:api} und
 	\item Verfasser des Kommentars
 	\item URIs der Datenattribute, die visualisiert wurden
 	\item Memento der Komponente zum Zeitpunkt des Kommentars
-	\item \textit{Für jeden Bereich, wenn ortsbezogen}
+	\item \textit{Wenn ortsbezogene Elemente vorhanden}
 		\begin{itemize}
-			\item Koordinaten der Auswahlrechtecke, relativ zur linken oberen Ecke der Visualisierung
-			\item Größe der Visualisierung zum Zeitpunkt des Kommentars, um die Auswahlrechtecke entsprechend skalieren zu können, falls notwendig.
+			\item Größe der Visualisierung zum Zeitpunkt des Kommentars, um die Auswahlrechtecke entsprechend skalieren zu können
+			\item Für jedes Element
+			\begin{itemize}
+				\item Wenn Pfeil: ($x_1,y_1,x_2,y_2$)
+				\item Wenn Text: Text, $(x,y)$
+				\item Wenn Rechteck: ($x_1,y_1,x_2,y_2$)
+			\end{itemize}
 		\end{itemize}
-	\item \textit{Für jeden Bereich, wenn datenbezogen}
+	\item \textit{Für jedes datenbezogene Element}
 		\begin{itemize}
 			\item Grenzwerte der visualisierten Datenattribute
 		\end{itemize}
@@ -1350,7 +1368,7 @@ Sollen Kommentare angezeigt werden, schickt das Hilfesystem eine entsprechende A
 
 % event broker suspend/resume
 
-Um zu gewährleisten, dass der Benutzer störungsfrei Kommentare lesen kann, muss das Hilfesystem den Event Broker (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) veranlassen können, anfallende Events nicht weiterzuleiten (\enquote{suspend}). Ansonsten könnte der Fall eintreten, dass die Komponente aktualisiert wird, während der Benutzer Kommentare zu den Daten liest. Nachdem die Kommentar UI geschlossen wurde, kann der Event Broker die gespeicherten Events weiterleiten (\enquote{resume}). Eine andere Möglichkeit wäre diese Funktion auf Komponentenebene umzusetzen. Das würde allerdings Mehraufwand sowohl für den Komponentenentwickler, der die entsprechenden Methoden implementieren müsste, als auch für das Hilfesystem, welches jede Komponente einzeln ansprechen muss, bedeuten.
+Um zu gewährleisten, dass der Benutzer störungsfrei Kommentare lesen kann, muss das Hilfesystem den Event Broker (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) veranlassen können, anfallende Events nicht weiterzuleiten (\enquote{suspend}). Ansonsten könnte der Fall eintreten, dass die Komponente aktualisiert wird, während der Benutzer Kommentare zu den Daten liest oder eine andere Hilfe in Anspruch nimmt. Nachdem die Kommentar UI geschlossen wurde, kann der Event Broker die gespeicherten Events weiterleiten (\enquote{resume}). Eine andere Möglichkeit wäre diese Funktion auf Komponentenebene umzusetzen. Das würde allerdings Mehraufwand sowohl für den Komponentenentwickler, der die entsprechenden Methoden implementieren müste, als auch für das Hilfesystem, welches jede Komponente einzeln ansprechen muss, bedeuten.
 
 \subsubsection{Weitere Nutzung}
 
@@ -1403,7 +1421,7 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \begin{itemize}
 	\item CSS Klasse, um Begriffe zur automatischen Verlinkung zu kennzeichnen
 	\item CSS Klasse, um Wurzelelement der Visualisierung zu kennzeichnen (Kommentare)
-	\item RDFa Attribute, die Datenpunkte kennzeichnen (Kommentare)
+	\item RDFa Attribute, die Datenpunkte kennzeichnen und eventuell beschreiben (Kommentare)
 \end{itemize}
 
 \subsubsection{Komponentenbeschreibung}
