@@ -9,20 +9,18 @@ My diploma thesis at Dresden University of Technology.
 ## Anmerkungen Martin 28.6.
 
 * Generell wo möglich trennen in Hilfe, die allgemein für Mashups cool ist und Hilfe, die speziell für InfoVis ausgelegt ist
-* Auswahl von verwandten Arbeiten an Anforderungen festmachen: Welche müssen mindestens erfüllt sein?
-* Verwandte Arbeiten mehr auf Anforderungen ausrichten: Wie werden die von der Arbeit erfüllt, wie nicht, was lernen wir draus?
-* Eventuell von komponentenspezifischer Hilfe explizit abgrenzen, implizit ist das schon drin durch die Anforderungen.
-* Tableau: Polaris Paper
 
+* Überlegen: Globales Undo/Redo, ginge ja mit Mementos
 * Überlegen: Kommunikation nicht ad-hoc, wenn es passiert, sondern ähnlich wie Bedienung. Nachteil: Benutzer kapiert erst, wenn er aktiv auf den Knopp drückt. Kann man machen, dynamische Kommunikationshilfe könnte dann die Pfeile ad-hoc rendern. --> Paper Mockup.
 * Memento von Komponente doch mit Propertys lösen, scheint Feature zu sein --> Zuerst Paper Mockup abwarten
 * Martin: Hilfebutton lieber in Navigationsleiste oder Komponentenspezifisch? nein.
 * Domäne des Benutzers in Context Service (gut für Credibility von Kommentaren + UA)
+* Datenhochlader -> Data Provider
 
 ## Paper Mockup
 
 * Klären ob bei Kommentaren andere Komponenten mitändern FEATURE oder WTF ist.
-* Klären ob Pfeile nerven/verwirren, wann sie angezeigt werden sollen
+* Klären ob Pfeile nerven/verwirren und klären wann sie angezeigt werden sollen
 
 ## Capability Markup
 
