@@ -14,12 +14,9 @@ My diploma thesis at Dresden University of Technology.
 * Eventuell von komponentenspezifischer Hilfe explizit abgrenzen, implizit ist das schon drin durch die Anforderungen.
 * Tableau: Polaris Paper
 
-* Überlegen: Kommunikation nicht ad-hoc, wenn es passiert, sondern ähnlich wie Bedienung. Nachteil: Benutzer kapiert erst, wenn er aktiv auf den Knopp drückt. Kann man machen, dynamische Kommunikationshilfe könnte dann die Pfeile ad-hoc rendern.
-* Memento von Komponente doch mit Propertys lösen, scheint Feature zu sein
-* Verlinkung: 3 Varianten diskutieren (DaRe speichern, DaRe ad-hoc, selbst), konzeptionell aber sagen, dass das CoRe es auch können sollte (weil gut für alle Mashups).
-* Verlinkung: URI hinzufügen wegen Bedienung (wo dann auch eine URI zur Capability muss --> Fragestellung wozu man überhaupt eine Log Skala braucht)
-* Martin: Hilfebutton lieber in Navigationsleiste oder Komponentenspezifisch?
-* CoRe kennt viso-graphic:position, muss also nicht in Komponentenbeschreibung
+* Überlegen: Kommunikation nicht ad-hoc, wenn es passiert, sondern ähnlich wie Bedienung. Nachteil: Benutzer kapiert erst, wenn er aktiv auf den Knopp drückt. Kann man machen, dynamische Kommunikationshilfe könnte dann die Pfeile ad-hoc rendern. --> Paper Mockup.
+* Memento von Komponente doch mit Propertys lösen, scheint Feature zu sein --> Zuerst Paper Mockup abwarten
+* Martin: Hilfebutton lieber in Navigationsleiste oder Komponentenspezifisch? nein.
 * Domäne des Benutzers in Context Service (gut für Credibility von Kommentaren + UA)
 
 ## Paper Mockup
