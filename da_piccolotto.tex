@@ -1070,27 +1070,40 @@ Die gesammelten Informationen über Nutzer, Browser und Anwendungskontext werden
 
 % einführung - warum brauchen wir verlinkung?
 
-Es ist möglich, dass ein Benutzer in VizBoard auf vollständig (\enquote{Was ist ein Säurezeiger\footnote{Eine Pflanze, die nur auf Böden mit einem bestimmten ph-Wert wachsen kann.}?}) oder teilweise (\enquote{Wie ist das BIP definiert\footnote{Der Gesamtwert aller Waren und Dienstleistungen, die innerhalb eines Jahres in einer Volkswirtschaft hergestellt wurden und dem Endverbrauch dienen.}?}) unbekannte Begriffe trifft. Um das Verständnis der Daten zu fördern, müssen diese erklärt werden, weswegen sie mit einer externen Wissensbasis verlinkt sein sollen. Zu erklärende Begriffe werden vermutlich hauptsächlich in Legenden von Visualisierungen zu finden sein, können prinzipiell aber auch in Freitext vorkommen.
+Es ist möglich, dass ein Benutzer in VizBoard auf vollständig (\enquote{Was ist ein Säurezeiger\footnote{Eine Pflanze, die nur auf Böden mit einem bestimmten ph-Wert wachsen kann.}?}) oder teilweise (\enquote{Wie ist das BIP definiert\footnote{Der Gesamtwert aller Waren und Dienstleistungen, die innerhalb eines Jahres in einer Volkswirtschaft hergestellt wurden und dem Endverbrauch dienen.}?}) unbekannte Begriffe trifft. Um das Verständnis der Daten zu fördern, müssen diese erklärt werden, weswegen sie mit einer externen Wissensbasis verlinkt sein sollen. Zu erklärende Begriffe werden vermutlich hauptsächlich in Legenden von Visualisierungen zu finden sein, können aber auch in Freitexten oder in Interaktionselementen vorkommen.
 
 \subsection{Markup und Backend}
 \label{section:konzeption:verlinkung:backend}
 
-Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einer dafür vorgesehenen CSS Klasse aus: Eine Klasse für Legenden, eine für Freitext. Diese können entweder in der Komponentenbeschreibung angegeben und so selbst gewählt werden, oder sie werden vom Vizboard-Betreiber festgelegt. Hier wird die letzte Variante umgesetzt, weil sie dem Komponentenentwickler etwas Aufwand erspart und \enquote{Kollisionen} mit bereits vorhandenen Klassen erstens unwahrscheinlich sind und zweitens einfach behoben werden können (beispielsweise mit dem Präfix \texttt{my-}). Der zu erklärende Begriff ist dann der Textinhalt des Tags mit der entsprechenden Klasse.
+Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einer dafür vorgesehenen CSS Klasse aus: Eine Klasse für Legenden, eine für Freitext. Diese können entweder in der Komponentenbeschreibung angegeben und so selbst gewählt werden, oder sie werden vom Vizboard-Betreiber festgelegt. Hier wird die letzte Variante umgesetzt, weil sie dem Komponentenentwickler etwas Aufwand erspart und \enquote{Kollisionen} mit bereits vorhandenen Klassen erstens unwahrscheinlich sind und zweitens einfach behoben werden können (beispielsweise mit dem Präfix \texttt{my-}). Der zu erklärende Begriff ist dann der Textinhalt des Tags mit der entsprechenden Klasse. Bei Interaktionselementen sind die CSS Selektoren schon vorhanden (Abschnitt~\ref{section:konzeption:bedienung}) und das Konzept wird in Form einer URI in die Komponentenbeschreibung eingefügt.
 
-Auf diese Weise können die erklärungsbedürftigen Konzepte über CSS Selektoren gefunden werden. Betreffen die Begriffe Legenden der Visualisierung, ist das korrespondierende Konzept bereits in Form einer URL im Domain Assignment enthalten, welches die Laufzeitumgebung der Komponente mitteilt. Für frei gewählte Begriffe muss eine eigene Anfrage an das Data Repository gestellt werden, welches das entsprechende Konzept findet, eine Beschreibung lädt und zurück liefert. Dann kann es zusammen mit einem Link zu einer Erklärung angezeigt werden.
+Auf diese Weise können die erklärungsbedürftigen Konzepte über CSS Selektoren gefunden werden. Wie kommt das Hilfesystem aber an die Beschreibung? Die Konzepte sind im Falle von Freitext dynamisch, bei Legenden statisch, aber abhängig vom Datensatz und bei Interaktionselementen statisch in Abhängigkeit der Komponente. Es erscheint sinnvoll eine einheitliche Zugriffsschicht für Konzeptbeschreibungen zu etablieren. Dabei bietet sich im Fall von VizBoard das DaRe an, welches als einheitliche Zugriffsschicht auf Daten konzipiert ist. Bei anderen Mashups, die auf CRUISe aufbauen, sollte das CoRe diese Funktion übernehmen.
 
-\textbf{Wie kommt die Beschreibung aus dem Domain Assignment, was nur eine URL zu DBpedia, Freebase oder irgendeine andere obskure Enzyklopädie ist (kein einheitliches Format!)? Vielleicht kann das DaRe die vorher schon fetchen und gleich mitgeben?}
+Das DaRe findet das Domain Assignment eigenständig, nachdem ein Datensatz hochgeladen wurde. Danach sollte eine Beschreibung aus der externen Wissensbasis abgerufen und gespeichert werden. Das hat den Nachteil, dass möglicherweise die Aktualität der Information mangelhaft ist. Da sich aber Beschreibungen zu Konzepten wie \enquote{logarithmische Skala} kaum ändern sollten und als Beispiel die DBpedia nur ein- bis zweimal pro Jahr ein Update bekommt\footnote{\url{http://blog.dbpedia.org/category/dataset-releases/} zeigt ein bis zwei Artikel im Jahr, abgerufen am 01.07.2013}, sollte das kein Problem sein. Im Gegenzug ist das Hilfesystem unabhängig von der DBpedia verfügbar und schneller, da im Vergleich zum dynamischen Abruf der Beschreibung ein Netzwerk Round Trip eingespart wird.
+
+Im Fall von Interaktionselementen parst das Core die Komponentenbeschreibung, nachdem eine Komponente hochgeladen wurde. Dabei extrahiert es die notwendigen Konzepte und schickt diese ans DaRe, welches die Beschreibungen dazu abruft und speichert.
 
 \subsection{User Interface und Interaktion}
 
-Hinter die entsprechend markierten DOM Elemente (siehe Abschnitt~\ref{section:konzeption:verlinkung:backend}) wird ein Fragezeichen eingefügt. Dieses kann angeklickt werden, woraufhin eine Sidebar mit einer kurzen Erklärung des Konzepts angezeigt wird (Abbildung~\ref{figure:verlinkung}). Sie enthält auch einen Link, der zu einer Erklärung in einer externen Wissensbasis führt.
+Bei Legenden und Freitext wird hinter die entsprechend markierten DOM Elemente (siehe Abschnitt~\ref{section:konzeption:verlinkung:backend}) ein Fragezeichen eingefügt, um eine Interaktionsmöglichkeit anzudeuten. Dieses kann angeklickt werden, woraufhin eine Sidebar mit einer kurzen Erklärung des Konzepts angezeigt wird (Abbildung~\ref{figure:verlinkung}). Sie enthält auch einen Link, der zu einer Erklärung in einer externen Wissensbasis führt.
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-verlinkung.png}
-   \caption{UI Mockup: Verlinkung}
+   \caption{UI Mockup: Verlinkung von Legenden}
    \label{figure:verlinkung}
 \end{figure}
+
+Im Fall von Interaktionselementen wird bei \texttt{MouseOver} ein Hilfebutton eingeblendet, der den selben Effekt hat (Abbildung~\ref{figure:verlinkung-bedienung}). Das hat den Grund, dass Interaktionselemente in der Regeln nicht nur \texttt{div}, \texttt{svg:text} oder \texttt{span} Elemente sind, sondern auch z.\,B. \texttt{input} unterschiedlichen Typs sein können. So kann eine einheitliche Interaktionsgestaltung unabhängig des Elements gewährleistet werden.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-verlinkung-bedienung.png}
+   \caption{UI Mockup: Verlinkung von Interaktionselementen}
+   \label{figure:verlinkung-bedienung}
+\end{figure}
+
+Zwar wäre es wünschenswert, sowohl Legenden und Freitext als auch Interaktionselemente mit derselben UI kennzeichnen zu können. Das ist leider nicht ohne weiteres möglich. Würden Legenden und Freitext die UI der Interaktionselemente verwenden, wäre die Hilfefunktion nicht sichtbar. Wäre es andersherum, müsste der DOM auf nicht-triviale Weise manipuliert werden (Einfügen von eigenen Elternknoten usw.), was unerwünschte Auswirkungen auf CSS Selektoren des Entwicklers haben könnte.
 
 \section{Kommunikation}
 \label{section:konzeption:kommunikation}
@@ -1502,11 +1515,12 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item VISO Konzept der grafischen Repräsentation (Intro)
 	\item VISO Operationen, welche eine Aktion ausführen (Bedienung)
 	\item CSS Selektoren für jede Operation, um UI Elemente für Operation zu kennzeichnen (Bedienung)
+	\item Konzept, welches Aktion näher beschreibt (Verlinkung)
 	\item Anzahl an Sekunden, die vor einem Screenshot gewartet werden soll (Bedienung)
 	\item Text, der Auswirkung der Aktion näher spezifiziert (Bedienung)
 	\item Boolean, ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
 	\item Beispieldaten für Operationen mit Parametern (Bedienung)
-	\item Informationen über den zu verwendenden Datensatz (Bedienung)
+	\item Informationen über den zu verwendenden Testdatensatz (Bedienung)
 	\item Ob die Position von Elementen ein visuelles Attribut ist (Kommentare)
 	\item Ob die Komponente Datenverarbeitung durchführt (Kommentare)
 	\item Ob die Komponente externe Daten anzeigt (Kommentare)

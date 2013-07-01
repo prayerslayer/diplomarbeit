@@ -14,7 +14,6 @@ My diploma thesis at Dresden University of Technology.
 * Eventuell von komponentenspezifischer Hilfe explizit abgrenzen, implizit ist das schon drin durch die Anforderungen.
 * Tableau: Polaris Paper
 
-* Bedienungshilfe inkl. "?" Button an Interaktionselementen. **Ergebnis:** Klappt nur gut bei <div>, <span> usw., weil der Button dort direkt eingefügt werden kann. Bei den ganzen <input> muss mans zum Parent hinzufügen und absolut positionieren (was leicht schiefgeht). Die Alternative ist einen eigenen Parent einfügen, was aber kacke ist, weil das die CSS Selektoren vom Dev brechen kann.
 * Überlegen: Kommunikation nicht ad-hoc, wenn es passiert, sondern ähnlich wie Bedienung. Nachteil: Benutzer kapiert erst, wenn er aktiv auf den Knopp drückt. Kann man machen, dynamische Kommunikationshilfe könnte dann die Pfeile ad-hoc rendern.
 * Memento von Komponente doch mit Propertys lösen, scheint Feature zu sein
 * Verlinkung: 3 Varianten diskutieren (DaRe speichern, DaRe ad-hoc, selbst), konzeptionell aber sagen, dass das CoRe es auch können sollte (weil gut für alle Mashups).
@@ -36,7 +35,7 @@ Dann:
 <capability id="search" activity="ua:search" entity="trvl:location" operations="searchOps" wait="5s" />
 
 <!-- äquivalente operationen -->
-<operations id="searchOps" testData="new york">
+<operations id="searchOps" testData="new york" relatedConcept="dbpedia:Search">
 	<operation id="clickSearch" css="button.search" viso="a:click" />
 	<operation id="typeSearch" css="button.search" viso="a:type" which="space" />
 	<sequentialOperation id="menuSearch">
