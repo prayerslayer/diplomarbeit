@@ -869,7 +869,7 @@ Aus den eben aufgeführten Gründen zeigt das Intro für eine Komponente folgend
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:intro:ui}
 
-Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten sieht, wird der gesamte Viewport abgedunkelt und eine Sidebar neben der ersten Komponente (von links oben nach rechts unten) eingeblendet (Abbildung~\ref{figure:ueberblick}). Dort sind die im vorigen Abschnitt erläuterten Informationen zu finden: Die Art der Visualisierung (\enquote{Karte}), darunter eine Beschreibung einer Karte, Informationen zu den dargestellten Daten und zuletzt ein Tutorialvideo, wenn vorhanden. Mit den Pfeilen links und rechts kann zwischen den Beschreibungen für verschiedene Komponenten gewechselt werden. Über die Meta-Hilfe (Abschnitt~\ref{section:konzeption:meta-hilfe}) kann das Intro wieder aufgerufen werden, wenn es geschlossen wurde.
+Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten sieht, wird der gesamte Viewport abgedunkelt und eine Sidebar neben der ersten Komponente (von links oben nach rechts unten) eingeblendet (Abbildung~\ref{figure:ueberblick}). Dort sind die im vorigen Abschnitt erläuterten Informationen zu finden: Die Art der Visualisierung (\enquote{Karte}), darunter eine Beschreibung einer Karte, Informationen zu den dargestellten Daten und zuletzt ein Tutorialvideo, wenn vorhanden. So werden die Fragen \enquote{Was ist das für eine Komponente}, \enquote{Wie soll ich sie interpretieren} und \enquote{Was zeigt sie für Daten} beantwortet. Mit den Pfeilen links und rechts kann zwischen den Beschreibungen für verschiedene Komponenten gewechselt werden. Über die Meta-Hilfe (Abschnitt~\ref{section:konzeption:meta-hilfe}) kann das Intro wieder aufgerufen werden, wenn es geschlossen wurde.
 
 \begin{figure}[htbp]
    \centering
@@ -1114,7 +1114,7 @@ Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwisch
    \label{figure:kommunikation-step1}
 \end{figure}
 
-Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf den Brief geklickt wurde (Abbildung~\ref{figure:kommunikation-step2}). Ein Fenster wird geöffnet, welches einen ähnlichen Comic wie in Abschnitt~\ref{section:konzeption:bedienung} enthält. Im Unterschied dazu enthält der Comic hier fünf Panels. Im ersten wird der Empfänger der Nachricht gezeigt, da diese Komponente auf die Nachricht reagieren muss. Das zweite Panel zeigt den Sender, der den Empfänger durch die Nachricht \enquote{kontrolliert}. Die Panels drei bis fünf zeigen wie gewohnt die relevanten UI Elemente, eine notwendige Operation und das Ergebnis (den Empfänger). Wenn der Benutzer das Fenster schließt, wird auch der Pfeil unsichtbar.
+Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf den Brief geklickt wurde (Abbildung~\ref{figure:kommunikation-step2}). Ein Fenster wird geöffnet, welches einen ähnlichen Comic wie in Abschnitt~\ref{section:konzeption:bedienung} enthält. Im Unterschied dazu enthält der Comic hier fünf Panels. Im ersten wird der Empfänger der Nachricht gezeigt, da diese Komponente auf die Nachricht reagieren muss. Das zweite Panel zeigt den Sender, der den Empfänger durch die Nachricht \enquote{kontrolliert}. Die Panels drei bis fünf zeigen wie gewohnt die relevanten UI Elemente, eine notwendige Operation und das Ergebnis (den Empfänger). Auf diese Weise wird die Frage beantwortet, wie sich die angezeigten Komponenten beeinflussen und was Aktionen in anderen Komponenten bewirken. Wenn der Benutzer das Fenster schließt, wird auch der Pfeil unsichtbar.
 
 \begin{figure}[htbp]
    \centering
@@ -1398,15 +1398,61 @@ Kommentare können auch Metainformationen über die Daten oder Komponente enthal
 
 % warum brauchen wir meta-hilfe?
 
-In diesem Konzept wurden bisher sechs unterschiedliche Hilfefunktionen erarbeitet: Intro, Bedienung, Reporting, Verlinkung, Kommunikation und Kommentare. Diese sind zwar optisch und vom Interaktionsdesign her konsistent, bringen aber trotzdem viel zusätzliche Komplexität in die Anwendung. Um die Hilfefunktionen in vollem Umfang nutzen zu können, benötigt der Benutzer einige Informationen. Dazu gehört sowohl das Wissen, welche Hilfefunktionen existieren und wie sie aufgerufen werden, als auch konzeptionelle Dinge, wie z.\,B. dass Kommentare mit Bereichen und/oder Datenpunkten in der Visualisierung assoziiert sind. Es ist anzunehmen, dass diese Meta-Hilfe vor allem bei der ersten Nutzung von VizBoard benötigt wird. Aus diesem Grund sollte sie so unaufdringlich wie möglich gestaltet sein.
+In diesem Konzept wurden bisher sechs unterschiedliche Hilfefunktionen erarbeitet: Intro, Bedienung, Reporting, Verlinkung, Kommunikation und Kommentare. Diese sind zwar optisch und vom Interaktionsdesign her konsistent, bringen aber trotzdem viel zusätzliche Komplexität in die Anwendung. Um die Hilfefunktionen in vollem Umfang nutzen zu können, benötigt der Benutzer einige Informationen. Dazu gehört sowohl das Wissen, welche Hilfefunktionen existieren und wie sie aufgerufen werden, als auch konzeptionelle Dinge, wie z.\,B. dass Kommentare mit Bereichen und/oder Datenpunkten in der Visualisierung assoziiert sind. Es ist anzunehmen, dass diese Meta-Hilfe vor allem bei der ersten Nutzung von VizBoard benötigt wird. Aus diesem Grund sollte sie so unaufdringlich wie möglich gestaltet sein. Prinzipiell können Hilfestellungen unterteilt werden in dynamische Hilfe, die dem Nutzer bei Bedarf angeboten wird, und statische Hilfe, die der Nutzer selbst aufrufen muss.
 
-% erste lösung: statischer button
+\subsection{Statische Meta-Hilfe}
 
-Es gibt nun verschiedene Lösungen für die Umsetzung der Meta-Hilfe. Die einfachste davon wäre ein Button in der rechten oberen Ecke, der bei Bedarf eine klassische Hilfefunktion aufruft, welche die verschiedenen Funktionen in Wort und Bild erklärt und ein Tutorialvideo enthält. Das größte konzeptionelle Problem dabei ist die dreifache Hilfception: Für VizBoard existiert ein Hilfesystem (einfach), welches wiederum erklärt werden muss (zweifach) und wo diese Erklärung zu finden ist, muss dem Benutzer ebenfalls mitgeteilt werden (dreifach). Das bedeutet relativ viel Zeit- und Klickaufwand, bis der Nutzer bei den gewünschten Informationen ist. Aber es hat auch Vorteile: Durch den statischen Hilfeknopf ist immer klar, wo weitergeholfen wird. Außerdem kann er gegebenenfalls für andere Sachen benutzt werden, beispielsweise könnte dort konfiguriert werden, ob der Pfeil in der Kommunkationshilfe bei jeder Nachricht angezeigt werden soll.
+% statische hilfe
+
+Die einfachste Lösung für die statische Meta-Hilfe wäre ein Button in der rechten oberen Ecke, der bei Bedarf eine klassische Hilfefunktion aufruft. Dort werden die verschiedenen Funktionen in Wort und Bild erklärt und ein Tutorialvideo gezeigt. Das bedeutet relativ viel Zeit- und Klickaufwand, bis der Nutzer bei den gewünschten Informationen ist, aber es hat auch Vorteile: Durch den statischen Hilfeknopf ist immer klar, wo weitergeholfen wird. Außerdem kann er gegebenenfalls für andere Sachen benutzt werden, beispielsweise könnte dort konfiguriert werden, ob der Pfeil in der Kommunkationshilfe bei jeder Nachricht angezeigt werden soll.
+
+\subsection{Dynamische Meta-Hilfe}
 
 % zweite lösung: kontextabhängige dynamische hilfe
 
-Die Alternative zum statischen Button wäre dem Benutzer dynamisch und kontextabhängig Hilfe anzubieten, beispielsweise in Form von Notifications wie in OSX. So könnten ihm Erklärungen zu den Kommentaren angeboten werden, sobald er auf den Kommentar-Button geklickt hat oder eine allgemeine Hilfe, wenn er längere Zeit keine Aktion ausgeführt hat. Der große Vorteil daran ist, dass nur die Benutzer die Meta-Hilfe sehen, welche sie auch benötigen. Allerdings hat diese Lösung zwei Nachteile. Zunächst ist es so, dass Notifications nach einer festgelegten Zeitspanne wieder verschwinden müssen, weil sie sonst stören. Dadurch ist es dem Benutzer unmöglich, aus eigener Initiative zur Meta-Hilfe zu gelangen. Davon abgesehen müssen für die kontextabhängige Hilfe einige Probleme bewältigt werden, wenn sie wie gewünscht funktionieren soll. Das Hilfesystem muss Regeln kennen, wann Hilfe angeboten werden soll. Die Reaktionen des Benutzers darauf sollen bewertet werden und zusammen mit dem Anwendungskontext wieder in die Wissensbasis einfließen, damit das System daraus lernen und neue Regeln inferieren kann. Das würde den Rahmen dieser Arbeit sprengen und kann in zukünftigen Forschungsarbeiten behandelt werden. Dann können statische und dynamische Hilfe zusammen eingesetzt werden.
+Ein Nachteil der statischen Hilfe ist, dass sie nicht lernt und sich dem Benutzer nicht anpasst. Die dynamische Hilfe ändert das. Allerdings stellt sich die Frage, woher sie weiß, wann sie welche Hilfe anbieten soll.
+
+% user affection
+% auch argumentieren, warum sie so umgesetzt wird
+% user affection kann man nicht ohne weiteres messen, mit hmm's wird es vermutlich auch nicht wahnsinnig gut gehen
+
+Die beste Lösung wäre sicher, wenn das Hilfesystem erkennen könnte, wenn der Benutzer verwirrt oder verärgert ist. Das fällt unter den Begriff \enquote{User Affection Detection/Recognition}. Mögliche Ansätze dazu benötigen Sensoren wie EEG oder Eyetracking, die in VizBoard nicht verfügbar sind \cite{Li2005, Liao2006}. Eine andere Variante wäre Rückschlüsse auf den Gemütszustand des Benutzers mit Hidden Markov Models \cite{Rabiner1986} zu ziehen. Allerdings könnten in VizBoard nur Mausklicks und Tastaturanschläge als Beobachtungen verwendet werden, was vermutlich nicht zu zufriedenstellenden Ergebnissen führen würde.
+
+% deswegen versuchen aus interaktionsgeschichte, komposition, umgebung und nutzerinformationen regeln zu schließen --> supervised learning
+
+Eine zweite Lösungsmöglichkeit ist durch maschinelles Lernen \cite{Kotsiantis2007} von Daten über Nutzer, Komposition, Umgebung und Interaktionsgeschichte Regeln z.\,B. in Form eines Decision Trees zu finden, wann Hilfe angeboten werden soll. So kann das Hilfesystem aus vergangenen Erfahrungen mit Nutzern lernen. Der Nachteil ist allerdings, dass die Ergebnisse nicht zufriedenstellend sein werden, bis dem Hilfesystem ausreichend Trainingsdaten zur Verfügung stehen. Abbildung~\ref{figure:architektur-dynhilfe} zeigt einen Überblick des Systems.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/konzeption-architektur-dynhilfe.png}
+   \caption{Architektur der dynamischen Hilfefunktion}
+   \label{figure:architektur-dynhilfe}
+\end{figure}
+
+Der Ablauf ist wie folgt:
+
+\begin{enumerate}
+	\item Der Nutzer interagiert wie gewohnt mit dem Mashup.
+	\item Das Hilfesystem nimmt die Interaktionen des Nutzers auf.
+	\item Das Hilfesystem schickt die erfassten Daten an die Wissensbasis.
+	\item Die Wissensbasis erlernt Regeln aus den Daten, beispielsweise männliche Architekten brauchen in der Nacht Hilfe zur Kommunikation, wenn sie im Schnitt länger als 10~Sekunden zwischen Interaktionen benötigen.
+	\item Die Wissensbasis schickt den generierten Classifier an das Hilfesystem, etwa in Form eines Javascript Objekts.
+	\item Das Hilfesystem benutzt den Classifier, um den geeigneten Zeitpunkt für ein Hilfeangebot zu finden.
+	\item Das Hilfesystem bietet Hilfe an.
+	\item Der Benutzer profitiert von der Hilfe.
+\end{enumerate}
+
+Nun stellt sich die Frage, welche Daten für das maschinelle Lernen herangezogen werden sollen, d.\,h. wie der Feature Vector aussieht. Hier ist zu beachten, dass verschachtelte Attribute wie Arrays oder Mengen nicht zulässig sind. Um dem beizukommen werden Nutzerinteraktionen in Zyklen von 5 unterteilt. Da Mengen  Es erscheint sinnvoll folgende Informationen zu erfassen:
+
+\begin{itemize}
+	\item Alter, Geschlecht, Domäne und Ort des Benutzers
+	\item Zeit und Datum
+	\item Für die letzten 5~Interaktionen des Benutzers: Komponente, Operation und vergangene Zeit seit Nutzungsstart
+	\item Ob Hilfe angeboten wurde und wenn ja, welche Funktion
+	\item Ob Hilfe aufgerufen wurde und wenn ja, welche Funktion
+\end{itemize}
+
+Das Hilfesystem schickt alle 5~Interaktionen einen solchen Datensatz an die Wissensbasis, welche ihn zu den Trainingsdaten hinzufügt. Außerdem wird der Datensatz an den Classifier weitergegeben, der das letzte Attribut vorhersagt. Ist das Ergebnis ein anderes als \enquote{Nein}, bietet das Hilfesystem dem Benutzer Hilfe zur entsprechenden Funktion an.
 
 \subsection{User Interface und Interaktion}
 
@@ -1424,8 +1470,17 @@ Nachdem der Benutzer darauf geklickt hat, wird der Viewport abgedunkelt und ein 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-meta-step2.png}
-   \caption{UI Mockup: Meta-Hilfe}
+   \caption{UI Mockup: Statische Meta-Hilfe}
    \label{figure:meta-step2}
+\end{figure}
+
+Wenn das Hilfesystem dem Benutzer Hilfe anbietet, rotiert der Button, wird orange eingefärbt und in der Sidebar erscheint das entsprechende Hilfeangebot (Abbildung~\ref{figure:meta-dyn}). Der Benutzer kann es nutzen, indem er darauf klickt oder selbstständig zur Hilfefunktion navigiert. Tut er das für 5~Interaktionen nicht, wird die Sidebar wieder ausgeblendet und der Button zurück rotiert. 
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-meta-dyn.png}
+   \caption{UI Mockup: Dynamische Meta-Hilfe}
+   \label{figure:meta-dyn}
 \end{figure}
 
 \section{Synthese}
