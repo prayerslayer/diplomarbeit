@@ -8,8 +8,9 @@ My diploma thesis at Dresden University of Technology.
 
 ## Anmerkungen Martin 28.6.
 
-* Generell wo möglich trennen in Hilfe, die allgemein für Mashups cool ist und Hilfe, die speziell für InfoVis ausgelegt ist
+* Generell wo möglich trennen in Hilfe, die allgemein für Mashups cool ist und Hilfe, die speziell für InfoVis ausgelegt ist. Bedienung ohne DaRe?
 
+* Was ist mit Toggle Buttons? Auch 2-3-4fache...
 * Überlegen: Globales Undo/Redo, ginge ja mit Mementos
 * Überlegen: Kommunikation nicht ad-hoc, wenn es passiert, sondern ähnlich wie Bedienung. Nachteil: Benutzer kapiert erst, wenn er aktiv auf den Knopp drückt. Kann man machen, dynamische Kommunikationshilfe könnte dann die Pfeile ad-hoc rendern. --> Paper Mockup.
 * Memento von Komponente doch mit Propertys lösen, scheint Feature zu sein --> Zuerst Paper Mockup abwarten
