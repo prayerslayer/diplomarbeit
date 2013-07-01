@@ -881,7 +881,12 @@ Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten s
 \subsection{Backend}
 \label{section:konzeption:intro:backend}
 
-Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein Vokabular für Informationsvisualisierungen. Deswegen ist es naheliegend, die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler in der Komponentenbeschreibung hinzufügen, dann kann das Hilfesystem die entsprechenden Daten auslesen. Der Inhalt der Visualisierung entspricht dem Domain Assignment, welches der Komponente von der Laufzeitumgebung mitgeschickt wird.
+Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein Vokabular für Informationsvisualisierungen. Deswegen ist es naheliegend, die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler bereits jetzt in der Komponentenbeschreibung hinzufügen, das bedeutet das Hilfesystem kann die entsprechenden Daten auslesen. Der Inhalt der Visualisierung entspricht dem Domain Assignment, welches der Komponente von der Laufzeitumgebung mitgeschickt wird.
+
+% core erweiterung
+
+Damit das Hilfesystem aber die URIs der aktuell visualisierten Datenattribute bekommt, muss das CoRe erweitert werden. Aktuell werden die Datenattribute entsprechend dem generischen Datenschema der Komponente umbenannt \cite{Voigt2012a}, das bedeutet die URIs gehen verloren. Das Domain Assignment enthält eine URL zu einer externen Wissensbasis, kann also auch keine Rückschlüsse über die verwendeten Daten im DaRe geben. Um dem Komponentenentwickler Aufwand zu ersparen sollte deswegen das CoRe dahingehend erweitert werden, dass das ursprüngliche Mapping der MRE mitgeliefert wird.
+
 
 \section{Bedienung}
 \label{section:konzeption:bedienung}
@@ -1388,10 +1393,6 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:features
 
 Hat ein Benutzer Bereiche und Datenpunkte referenziert, sowie einen Kommentar geschrieben, sammelt das Hilfesystem die eben beschriebenen Daten der Komponente und sendet sie ans Data Repository. Das Speichern und Laden von Kommentaren liegt in dessen Verantwortung. 
 
-% core erweiterung
-
-Damit das Hilfesystem die URIs der aktuell visualisierten Datenattribute bekommt, muss jedoch das CoRe erweitert werden. Aktuell werden die Datenattribute entsprechend dem generischen Datenschema der Komponente umbenannt \cite{Voigt2012a}, das bedeutet die URIs gehen verloren. Das Domain Assignment enthält eine URL zu einer externen Wissensbasis, kann also auch keine Rückschlüsse über die verwendeten Daten im DaRe geben. Um dem Komponentenentwickler Aufwand zu ersparen sollte deswegen das CoRe dahingehend erweitert werden, dass das ursprüngliche Mapping der MRE mitgeliefert wird.
-
 % wie läuft das mit laden, vor allem wenn kommentare in anderer komponente gemacht wurden?
 
 Sollen Kommentare angezeigt werden, schickt das Hilfesystem eine entsprechende Anfrage ans DaRe und empfängt die Daten aller relevanten Kommentare. Für ortsbezogene Bereichskommentare ist nichts weiter zu tun, sie können direkt in dieser Komponente gerendert werden. Um datenbezogene Bereichskommentare anzuzeigen, muss das Hilfesystem zuerst die Datengrenzen in Koordinaten in der Visualisierung transformieren lassen. Bei Punktkommentaren ist dies nicht nötig, weil das Hilfesystem über CSS Selektoren herausfinden kann, wo sie sich befinden sollen.
@@ -1512,7 +1513,6 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \subsubsection{Komponentenbeschreibung}
 
 \begin{itemize}
-	\item VISO Konzept der grafischen Repräsentation (Intro)
 	\item VISO Operationen, welche eine Aktion ausführen (Bedienung)
 	\item CSS Selektoren für jede Operation, um UI Elemente für Operation zu kennzeichnen (Bedienung)
 	\item Konzept, welches Aktion näher beschreibt (Verlinkung)
@@ -1546,7 +1546,7 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \subsubsection{CoRe}
 
 \begin{itemize}
-	\item Ursprüngliches Mapping an MRE weiterleiten (Kommentare)
+	\item Ursprüngliches Mapping an MRE weiterleiten (Intro, Kommentare)
 \end{itemize}
 
 \subsubsection{Event Broker}

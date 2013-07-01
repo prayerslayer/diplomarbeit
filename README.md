@@ -20,8 +20,12 @@ My diploma thesis at Dresden University of Technology.
 * Verlinkung: URI hinzufügen wegen Bedienung (wo dann auch eine URI zur Capability muss --> Fragestellung wozu man überhaupt eine Log Skala braucht)
 * Martin: Hilfebutton lieber in Navigationsleiste oder Komponentenspezifisch?
 * CoRe kennt viso-graphic:position, muss also nicht in Komponentenbeschreibung
-* Überlegen, wie man mit Paper Mockups arbeiten kann
 * Domäne des Benutzers in Context Service (gut für Credibility von Kommentaren + UA)
+
+## Paper Mockup
+
+* Klären ob bei Kommentaren andere Komponenten mitändern FEATURE oder WTF ist.
+* Klären ob Pfeile nerven/verwirren, wann sie angezeigt werden sollen
 
 ## Capability Markup
 
