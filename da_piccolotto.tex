@@ -766,7 +766,7 @@ yay
 \chapter{Konzeption}
 \label{chapter:konzeption}
 
-Basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) und den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen}) wird ein Konzept zur User Assistance für das webbasierte, komposite Informationsvisualisierungssystem VizBoard erstellt. Dabei werden Hilfestellungen unterteilt in allgemeine, die jedem Mashup nützlich sein können (Abschnitte~\ref{section:konzeption:intro}, \ref{section:konzeption:bedienung}, \ref{section:konzeption:reporting}, \ref{section:konzeption:kommunikation}) und domänenspezifische, welche besonders für Informationsvisualisierungen gedacht sind (Abschnitte~\ref{section:konzeption:verlinkung}, \ref{section:konzeption:kommentare}). Die Ziele richten sich dabei nach der Anforderungsanalyse (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}).
+Basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) und den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen}) wird ein Konzept zur User Assistance für das webbasierte, komposite Informationsvisualisierungssystem VizBoard erstellt. Dabei werden Hilfestellungen unterteilt in allgemeine, die jedem Mashup nützlich sein können (Abschnitte~\ref{section:konzeption:intro}, \ref{section:konzeption:bedienung}, \ref{section:konzeption:reporting}, \ref{section:konzeption:kommunikation}, \ref{section:konzeption:history}) und domänenspezifische, welche besonders für Informationsvisualisierungen gedacht sind (Abschnitte~\ref{section:konzeption:verlinkung}, \ref{section:konzeption:kommentare}). Die Ziele richten sich dabei nach der Anforderungsanalyse (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}).
 
 \section{Einführung}
 \label{section:konzeption:einfuehrung}
@@ -967,6 +967,10 @@ Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. So
 
 Es wurde eben erklärt, dass das DaRe die (Test-)Daten für eine Komponente liefern kann. Der Komponentenentwickler gibt in der Komponentenbeschreibung den gewünschten Datensatz an, welcher bei der Generierung der Assistance geladen wird. Das kann ein \enquote{echter} Datensatz oder ein vom VizBoard-Betreiber zur Verfügung gestellter Testdatensatz sein. Es kann allerdings passieren, dass das DaRe keine passenden Daten enthält, weil die Komponente sehr spezielle Daten visualisiert (z.\,B. 3-Sterne-Hotels in Andorra). Dann sollte der Komponentenentwickler zusammen mit der Komponente Testdaten hochladen können oder eine URL angeben, unter der sie zu finden sind. Das ist zwar etwas Mehraufwand, aber es kann angenommen werden, dass im Laufe der Entwicklung einer Komponente sowieso Testdaten verwendet wurden. Sie müssen in den meisten Fällen also nicht mehr erstellt, sondern nur noch hochgeladen werden.
 
+% allgemeine mashups kommen halt ohne dare aus
+
+Die Bedienungshilfe kann für alle auf CRUISe basierenden Mashups hilfreich sein. Allerdings kann nicht davon ausgegangen werden, dass diese über ein Data Repository verfügen. Dann muss der Komponentenentwickler in jedem Fall Testdaten zur Generierung der Hilfe zur Verfügung stellen.
+
 Nachdem die Komponente vom Hilfeservice gerendert wurde, führt er folgende Schritte aus:
 
 \begin{enumerate}
@@ -995,7 +999,7 @@ Nachdem die Komponente vom Hilfeservice gerendert wurde, führt er folgende Schr
 Nachdem alle nötigen Screenshots der Komponente erstellt wurden, muss das Hilfesystem eine Kategorisierung in \enquote{helle Komponente} und \enquote{dunkle Komponente} vornehmen. Das ist nötig, damit das Hilfesystem zur Laufzeit weiß, ob es dunkle oder helle visuelle Effekte einblenden soll. Eine naive Möglichkeit dazu wäre mit Hilfe einer Bildverarbeitungsbibliothek wie OpenCV\footnote{\url{http://opencv.willowgarage.com/wiki/}} die Screenshots zu binärisieren, also in Bilder aus schwarzen und weißen Pixeln umzuwandeln. Enthält die Mehrzahl der Bilder mehr schwarze als weiße Pixel, wird die Komponente als \enquote{dunkel} eingestuft, ansonsten als \enquote{hell}.
 
 % todo anbieten der assistance diskutieren: bilder in smcdl einbinden, eigener webservice, core.
-Die Bilder der Comics können auf unterschiedliche Weise ans Hilfesystem ausgeliefert werden. Eine Möglichkeit ist die Bilder nach Generierung in der Komponentenbeschreibung zu definieren, so wie es bereits mit einem Screenshot der Komponente gemacht wird. Ebenso könnte ein Webservice die Bilder über eine REST API anbieten, von wo das Hilfesystem sie zur Laufzeit lädt. Dieser Webservice kann eigenständig oder im CoRe integriert sein. \textbf{Fazit?}
+Die Bilder der Comics können auf unterschiedliche Weise ans Hilfesystem ausgeliefert werden. Eine Möglichkeit ist die Bilder nach Generierung in der Komponentenbeschreibung zu definieren, so wie es bereits mit einem Screenshot der Komponente gemacht wird. Ebenso könnte ein Webservice die Bilder über eine REST API anbieten, von wo das Hilfesystem sie zur Laufzeit lädt. Dieser Webservice kann eigenständig oder im CoRe integriert sein.
 
 \subsubsection{Einschränkungen}
 \label{section:konzeption:bedienung:generierung:einschraenkungen}
@@ -1250,7 +1254,7 @@ Prinzipiell können Kommentare in Bereichskommentare und Punktkommentare untersc
 Damit Bereichskommentare Daten referenzieren können, müssen drei Voraussetzungen gegeben sein:
 
 \begin{enumerate}
-	\item Die grafische Repräsentation muss Werte von Variablen auf die Position kodieren, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann. Das ist beispielsweise bei einem Scatterplot der Fall, bei einer Treemap nicht. Dort sind Größe und Farbe die visuellen Attribute.\todo{CoRe?}
+	\item Die grafische Repräsentation muss Werte von Variablen auf die Position kodieren, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann. Das ist beispielsweise bei einem Scatterplot der Fall, bei einer Treemap nicht. Dort sind Größe und Farbe die visuellen Attribute.
 	\item Die Komponente muss eine Operation bereitstellen, welche kartesische Koordinaten $(x_1,y_1)$ in Datenbereiche (2000 \$, 14. Mai 1998) transformiert sowie deren Umkehrung. Komponenten sind \enquote{Black Boxes} und es kann deswegen keine Annahme über die verwendete Skala (linear oder logarithmisch) oder andere Interna getroffen werden. Aus diesem Grund ist es nicht möglich, aus Auswahlkoordinaten $(x_1,y_1,x_2,y_2)$ direkt auf Daten zu schließen.
 	\item Die Komponente darf keine Datenverarbeitung in Form von Aggregationen o.\,ä. durchführen, da diese Daten nicht im Data Repository gespeichert sind und es folglich keine Daten enthält, die referenziert werden könnten.
 \end{enumerate}
@@ -1270,7 +1274,7 @@ Without violating encapsulation, capture and externalize an object's internal st
 \end{quote} 
 
 % memento
-Dazu werden zwei Methoden \texttt{getMemento()} und \texttt{setMemento(m)} zur API der Komponente hinzugefügt, mit denen das Hilfesystem den Zustand der Komponente speichern und wiederherstellen kann. Eine andere Möglichkeit wäre das Format des Mementos -- also welche Properties es ausmachen -- in der Komponentenbeschreibung anzugeben. Das Hilfesystem könnte die Werte dieser Properties bei der Wiederherstellung des Zustands mit Hilfe der entsprechenden Setter-Methode setzen. Diese Variante hat aber den Nachteil, dass PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) darauf registriert sein können. Sie könnten in anderen Komponenten unerwünschte Aktionen ausführen\todo{feature?}, während der Zustand der Komponente für Kommentare zurückgesetzt wird. Deswegen wird das Memento insofern von Properties unabhängig gemacht, dass \texttt{setMemento(m)} im Gegensatz zu \texttt{setProperty(k,v)} kein \enquote{propertyChanged} Event feuert und PropertyLinks davon nicht betroffen werden.
+Dazu werden zwei Methoden \texttt{getMemento()} und \texttt{setMemento(m)} zur API der Komponente hinzugefügt, mit denen das Hilfesystem den Zustand der Komponente speichern und wiederherstellen kann. Eine andere Möglichkeit wäre das Format des Mementos -- also welche Properties es ausmachen -- in der Komponentenbeschreibung anzugeben. Das Hilfesystem könnte die Werte dieser Properties bei der Wiederherstellung des Zustands mit Hilfe der entsprechenden Setter-Methode setzen. Diese Variante hat aber den Nachteil, dass PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) darauf registriert sein können. Sie könnten in anderen Komponenten unerwünschte Aktionen ausführen, während der Zustand der Komponente für Kommentare zurückgesetzt wird. Deswegen wird das Memento insofern von Properties unabhängig gemacht, dass \texttt{setMemento(m)} im Gegensatz zu \texttt{setProperty(k,v)} kein \enquote{propertyChanged} Event feuert und PropertyLinks davon nicht betroffen werden.
 
 \subsubsection{Ortsbezogene Bereichskommentare}
 
@@ -1424,6 +1428,40 @@ Um zu gewährleisten, dass der Benutzer störungsfrei Kommentare lesen kann, mus
 % wie können kommentare noch genutzt werden?
 
 Kommentare können auch Metainformationen über die Daten oder Komponente enthalten \cite{Chen2009}. Es wäre denkbar, mittels automatischer Textklassifikation \cite{Sebastiani2002} diese Kommentare zu identifizieren und als positiv oder negativ zu kategorisieren. Daraus ließe sich wiederum eine Bewertung für die Kombination (Datensatz, Komponente) berechnen\footnote{Am einfachsten ginge das indem bei Null gestartet wird und für jeden positiven Kommentar der Zähler um eins erhöht und jeden Negativen um eins verringert wird.}. Der errechnete Wert könnte in Zukunft beim Ranking einer Komponente für einen ausgewählten Datensatz berücksichtigt werden. Wenn der Aufwand dafür gerechtfertigt werden kann, ist es auch möglich, eine -- zuvor definierte -- Ontologie aus Kommentaren zu extrahieren \cite{Alani2003}. Diese könnte zum Beispiel das Qualitätsmanagement von Komponenten automatisieren. Denkbar wäre, dass aus Kommentaren automatisch extrahiert wird, worüber sich die Benutzer beschweren. Ab einem Schwellwert kann dann der Komponentenentwickler informiert werden.
+
+\section{History}
+\label{section:konzeption:history}
+
+% warum undo/redo?
+
+In den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde mehrmals empfohlen, dem Benutzer Undo/Redo von getätigten Aktionen zu ermöglichen. So können unerwünschte Ergebnisse einfach rückgängig gemacht werden.
+
+In Abschnitt~\ref{section:konzeption:kommentare:api} wurde ein Memento-Pattern für Komponenten eingeführt. Damit kann das Hilfesystem Zustände von Komponenten abrufen, speichern und wiederherstellen. Es stellt sich die Frage, wann der Zustand aller Komponenten abgerufen werden soll. Nach jedem Event erscheint ausreichend, da Properties den visuellen Zustand der Komponente vollständig beschreiben sollen und falls sich dieser ändert, ein \texttt{propertyChanged} Event gefeuert wird. Das Hilfesystem ruft dann den Zustand aller Komponenten ab und speichert ihn in einen Stack. Im Falle eines Undo wird der oberste Anwendungszustand vom Stack genommen und jede Komponente wiederhergestellt. 
+
+\subsection{User Interface und Interaktion}
+\label{section:konzeption:history:ui}
+
+% wie umsetzen
+
+Die einfachste Möglichkeit für eine History, die so auch in jeder Desktopapplikation umgesetzt ist, sind zwei Buttons für Undo respektive Redo (Abbildung~\ref{figure:undo-simple}). Sie sind sofort verständlich und erfüllen ihren Zweck, allerdings wird die Interaktion umso mühsamer, je weiter zurück der zu erreichende Anwendungszustand liegt.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.25\textwidth]{images/konzeption-undo-simple.png}
+   \caption{UI Mockup: Undo/Redo Buttons}
+   \label{figure:undo-simple}
+\end{figure}
+
+Dieses Problem ist bei der Präsentation der History als Timeline nicht mehr vorhanden (Abbildung~\ref{figure:undo-timeline}). Die oberste Zeile dient als Overview des Overview/Detail Patterns und zeigt, wann (horizontale Position) welche Aktion (Farbe) auf welcher Komponente (vertikale Position) ausgeführt wurde. Die vier Zeilen darunter sind Detailansichten für jede Komponente im ausgewählten Zeitfenster. Ein Klick auf ein Rechteck, also eine Aktion, macht alle inklusive der ausgewählten rückgängig. Screenshots der Komponentenzustände wie in \cite{Heer2008} wären zwar hilfreicher und visuell ansprechender, jedoch sind programmatische Screenshots im Web keine triviale Aufgabe.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-undo-timeline.png}
+   \caption{UI Mockup: History als Timeline}
+   \label{figure:undo-timeline}
+\end{figure}
+
+Die Timeline ist zwar mächtiger als zwei Buttons, aber auch komplexer zu nutzen und wahrscheinlich nicht sofort verständlich. Dem Designprinzip und nichtfunktionalen Anforderung der \emph{Verständlichkeit} folgend wird deswegen die erste Variante gewählt.
 
 \section{Meta-Hilfe}
 \label{section:konzeption:meta-hilfe}
