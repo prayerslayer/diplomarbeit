@@ -16,7 +16,6 @@ My diploma thesis at Dresden University of Technology.
 
 ## Anmerkungen Martin 28.6.
 
-* Heer2008 in die verwandten Arbeiten
 * Überlegen: Kommunikation nicht ad-hoc, wenn es passiert, sondern ähnlich wie Bedienung. Nachteil: Benutzer kapiert erst, wenn er aktiv auf den Knopp drückt. Kann man machen, dynamische Kommunikationshilfe könnte dann die Pfeile ad-hoc rendern. --> Paper Mockup.
 * Memento von Komponente doch mit Propertys lösen, scheint Feature zu sein --> Zuerst Paper Mockup abwarten
 * Martin: Hilfebutton lieber in Navigationsleiste oder Komponentenspezifisch? nein.
