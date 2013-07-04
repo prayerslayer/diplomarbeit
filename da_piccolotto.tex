@@ -768,7 +768,7 @@ yay
 \chapter{Konzeption}
 \label{chapter:konzeption}
 
-Basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) und den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen}) wird ein Konzept zur User Assistance für das webbasierte, komposite Informationsvisualisierungssystem VizBoard erstellt. Dabei werden Hilfestellungen unterteilt in allgemeine, die jedem Mashup nützlich sein können (Abschnitte~\ref{section:konzeption:intro}, \ref{section:konzeption:bedienung}, \ref{section:konzeption:reporting}, \ref{section:konzeption:kommunikation}) und domänenspezifische, welche besonders für Informationsvisualisierungen gedacht sind (Abschnitte~\ref{section:konzeption:verlinkung}, \ref{section:konzeption:kommentare}). Die Ziele richten sich dabei nach der Anforderungsanalyse (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}).
+Basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) und den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen}) wird ein Konzept zur User Assistance für das webbasierte, komposite Informationsvisualisierungssystem VizBoard erstellt. Dabei werden Hilfestellungen unterteilt in allgemeine, die jedem Mashup nützlich sein können (Abschnitte~\ref{section:konzeption:intro}, \ref{section:konzeption:bedienung}, \ref{section:konzeption:reporting}, \ref{section:konzeption:kommunikation}, \ref{section:konzeption:history}) und domänenspezifische, welche besonders für Informationsvisualisierungen gedacht sind (Abschnitte~\ref{section:konzeption:verlinkung}, \ref{section:konzeption:kommentare}). Die Ziele richten sich dabei nach der Anforderungsanalyse (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}).
 
 \section{Einführung}
 \label{section:konzeption:einfuehrung}
@@ -940,7 +940,7 @@ Die VISO enthält im Namensraum \texttt{viso:activity} Konzepte der hierarchisch
 
 Für das Hilfesystem sind Operationen und Aktionen relevant, da Aktivitäten nicht beeinflusst werden können. Aktionen einer Komponente sind beispielsweise zoomen, suchen oder filtern; Operationen sind etwa Klicks, Drags oder Multitouch-Gesten.
 
-Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden Operationen aus der VISO (\enquote{welche Operationen}) zusammen mit CSS Selektoren (\enquote{welche Elemente}) in der Komponentenbeschreibung definiert. Äquivalente Operationen, die denselben Effekt haben, werden zusammengefasst. Sequentielle Operationen werden ebenfalls zusammengefasst, wobei die Reihenfolge im Markup die notwendige Ausführungsreihenfolge darstellt. So können auch zusammengesetzte Operationen -- beispielsweise zuerst Menü aufrufen, dann sortieren auswählen -- abgebildet werden. Parallele Operationen werden nach demselben Prinzip zusammengefasst, allerdings ist hier die Reihenfolge irrelevant, da sie gleichzeitig ausgeführt werden müssen. Auf diese Weise können zusammengesetzte Operationen der der Art STRG+T abgebildet werden. Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind. Zusätzlich ist es möglich, dass der Entwickler Zusatzinformationen in Stichworten angibt. Zum Beispiel kann eine Tabelle durch unterschiedliche Elemente nach verschiedenen Spalten \enquote{sortiert} (Aktion) werden. Dabei ist es wichtig zu wissen, welches Element nach welcher Spalte sortiert. Nach demselben Prinzip sollte auch Zusatzinformationen über die VISO Operation angegeben werden können. Vor allem bei Tastaturkürzel (z.\,B. j/k für vor/zurück) macht es Sinn, da so nicht für jede Taste eine VISO Operation erstellt werden muss. Die erwähnten Zusätze zur Komponentenbeschreibung sollten allerdings optional sein, falls der Komponentenentwickler keine Hilfe für bestimmte Aktionen anbieten will.
+Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden Operationen aus der VISO (\enquote{welche Operationen}) zusammen mit CSS Selektoren (\enquote{welche Elemente}) in der Komponentenbeschreibung definiert. Äquivalente Operationen, die denselben Effekt haben, werden zusammengefasst. Sequentielle Operationen werden ebenfalls zusammengefasst, wobei die Reihenfolge im Markup die notwendige Ausführungsreihenfolge darstellt. So können auch zusammengesetzte Operationen -- beispielsweise zuerst Menü aufrufen, dann sortieren auswählen -- abgebildet werden. Parallele Operationen werden nach demselben Prinzip zusammengefasst, allerdings ist hier die Reihenfolge irrelevant, da sie gleichzeitig ausgeführt werden müssen. Auf diese Weise können zusammengesetzte Operationen der der Art STRG+T abgebildet werden. Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind. Zusätzlich ist es möglich, dass der Entwickler Zusatzinformationen in Stichworten angibt. Zum Beispiel kann eine Tabelle durch unterschiedliche Elemente nach verschiedenen Spalten \enquote{sortiert} (Aktion) werden. Dabei ist es wichtig zu wissen, welches Element nach welcher Spalte sortiert. Nach demselben Prinzip sollte auch Zusatzinformationen über die VISO Operation angegeben werden können. Vor allem bei Tastaturkürzel (z.\,B. j/k für vor/zurück) macht es Sinn, da so nicht für jede Taste eine VISO Operation erstellt werden muss. Eine weitere Möglichkeit der Interaktion sind Toggle-Buttons, die unterschiedliche Effekte haben, je nachdem wie oft sie schon geklickt wurden. Die Komponentenbeschreibung sollte diese in Form einer VISO Operation ebenfalls berücksichtigen. Die Zusatzinformation würde bei diesen angeben, wie oft man sie betätigen muss. Die erwähnten Zusätze zur Komponentenbeschreibung sollten allerdings optional sein, falls der Komponentenentwickler keine Hilfe für bestimmte Aktionen anbieten will.
 
 \subsection{Generierung der Assistance}
 \label{section:konzeption:bedienung:generierung}
@@ -968,6 +968,10 @@ Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. So
 \end{itemize}
 
 Es wurde eben erklärt, dass das DaRe die (Test-)Daten für eine Komponente liefern kann. Der Komponentenentwickler gibt in der Komponentenbeschreibung den gewünschten Datensatz an, welcher bei der Generierung der Assistance geladen wird. Das kann ein \enquote{echter} Datensatz oder ein vom VizBoard-Betreiber zur Verfügung gestellter Testdatensatz sein. Es kann allerdings passieren, dass das DaRe keine passenden Daten enthält, weil die Komponente sehr spezielle Daten visualisiert (z.\,B. 3-Sterne-Hotels in Andorra). Dann sollte der Komponentenentwickler zusammen mit der Komponente Testdaten hochladen können oder eine URL angeben, unter der sie zu finden sind. Das ist zwar etwas Mehraufwand, aber es kann angenommen werden, dass im Laufe der Entwicklung einer Komponente sowieso Testdaten verwendet wurden. Sie müssen in den meisten Fällen also nicht mehr erstellt, sondern nur noch hochgeladen werden.
+
+% allgemeine mashups kommen halt ohne dare aus
+
+Die Bedienungshilfe kann für alle auf CRUISe basierenden Mashups hilfreich sein. Allerdings kann nicht davon ausgegangen werden, dass diese über ein Data Repository verfügen. Dann muss der Komponentenentwickler in jedem Fall Testdaten zur Generierung der Hilfe zur Verfügung stellen.
 
 Nachdem die Komponente vom Hilfeservice gerendert wurde, führt er folgende Schritte aus:
 
@@ -997,7 +1001,7 @@ Nachdem die Komponente vom Hilfeservice gerendert wurde, führt er folgende Schr
 Nachdem alle nötigen Screenshots der Komponente erstellt wurden, muss das Hilfesystem eine Kategorisierung in \enquote{helle Komponente} und \enquote{dunkle Komponente} vornehmen. Das ist nötig, damit das Hilfesystem zur Laufzeit weiß, ob es dunkle oder helle visuelle Effekte einblenden soll. Eine naive Möglichkeit dazu wäre mit Hilfe einer Bildverarbeitungsbibliothek wie OpenCV\footnote{\url{http://opencv.willowgarage.com/wiki/}} die Screenshots zu binärisieren, also in Bilder aus schwarzen und weißen Pixeln umzuwandeln. Enthält die Mehrzahl der Bilder mehr schwarze als weiße Pixel, wird die Komponente als \enquote{dunkel} eingestuft, ansonsten als \enquote{hell}.
 
 % todo anbieten der assistance diskutieren: bilder in smcdl einbinden, eigener webservice, core.
-Die Bilder der Comics können auf unterschiedliche Weise ans Hilfesystem ausgeliefert werden. Eine Möglichkeit ist die Bilder nach Generierung in der Komponentenbeschreibung zu definieren, so wie es bereits mit einem Screenshot der Komponente gemacht wird. Ebenso könnte ein Webservice die Bilder über eine REST API anbieten, von wo das Hilfesystem sie zur Laufzeit lädt. Dieser Webservice kann eigenständig oder im CoRe integriert sein. \textbf{Fazit?}
+Die Bilder der Comics können auf unterschiedliche Weise ans Hilfesystem ausgeliefert werden. Eine Möglichkeit ist die Bilder nach Generierung in der Komponentenbeschreibung zu definieren, so wie es bereits mit einem Screenshot der Komponente gemacht wird. Ebenso könnte ein Webservice die Bilder über eine REST API anbieten, von wo das Hilfesystem sie zur Laufzeit lädt. Dieser Webservice kann eigenständig oder im CoRe integriert sein.
 
 \subsubsection{Einschränkungen}
 \label{section:konzeption:bedienung:generierung:einschraenkungen}
@@ -1159,7 +1163,7 @@ Bei Legenden und Freitext wird hinter die entsprechend markierten DOM Elemente (
    \label{figure:verlinkung}
 \end{figure}
 
-Im Fall von Interaktionselementen wird bei \texttt{MouseOver} ein Hilfebutton eingeblendet, der den selben Effekt hat (Abbildung~\ref{figure:verlinkung-bedienung}). Das hat den Grund, dass Interaktionselemente in der Regeln nicht nur \texttt{div}, \texttt{svg:text} oder \texttt{span} Elemente sind, sondern auch z.\,B. \texttt{input} unterschiedlichen Typs sein können. So kann eine einheitliche Interaktionsgestaltung unabhängig des Elements gewährleistet werden.
+Im Fall von Interaktionselementen wird bei \texttt{MouseOver} derselbe Hilfebutton eingeblendet (Abbildung~\ref{figure:verlinkung-bedienung}). Das hat den Grund, dass unbekannt ist, wie die Elemente angeordnet sind. Eine ständige Anzeige des Hilfebuttons könnte andere Elemente verdecken.
 
 \begin{figure}[htbp]
    \centering
@@ -1252,7 +1256,7 @@ Prinzipiell können Kommentare in Bereichskommentare und Punktkommentare untersc
 Damit Bereichskommentare Daten referenzieren können, müssen drei Voraussetzungen gegeben sein:
 
 \begin{enumerate}
-	\item Die grafische Repräsentation muss Werte von Variablen auf die Position kodieren, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann. Das ist beispielsweise bei einem Scatterplot der Fall, bei einer Treemap nicht. Dort sind Größe und Farbe die visuellen Attribute.\todo{CoRe?}
+	\item Die grafische Repräsentation muss Werte von Variablen auf die Position kodieren, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann. Das ist beispielsweise bei einem Scatterplot der Fall, bei einer Treemap nicht. Dort sind Größe und Farbe die visuellen Attribute.
 	\item Die Komponente muss eine Operation bereitstellen, welche kartesische Koordinaten $(x_1,y_1)$ in Datenbereiche (2000 \$, 14. Mai 1998) transformiert sowie deren Umkehrung. Komponenten sind \enquote{Black Boxes} und es kann deswegen keine Annahme über die verwendete Skala (linear oder logarithmisch) oder andere Interna getroffen werden. Aus diesem Grund ist es nicht möglich, aus Auswahlkoordinaten $(x_1,y_1,x_2,y_2)$ direkt auf Daten zu schließen.
 	\item Die Komponente darf keine Datenverarbeitung in Form von Aggregationen o.\,ä. durchführen, da diese Daten nicht im Data Repository gespeichert sind und es folglich keine Daten enthält, die referenziert werden könnten.
 \end{enumerate}
@@ -1272,7 +1276,7 @@ Without violating encapsulation, capture and externalize an object's internal st
 \end{quote} 
 
 % memento
-Dazu werden zwei Methoden \texttt{getMemento()} und \texttt{setMemento(m)} zur API der Komponente hinzugefügt, mit denen das Hilfesystem den Zustand der Komponente speichern und wiederherstellen kann. Eine andere Möglichkeit wäre das Format des Mementos -- also welche Properties es ausmachen -- in der Komponentenbeschreibung anzugeben. Das Hilfesystem könnte die Werte dieser Properties bei der Wiederherstellung des Zustands mit Hilfe der entsprechenden Setter-Methode setzen. Diese Variante hat aber den Nachteil, dass PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) darauf registriert sein können. Sie könnten in anderen Komponenten unerwünschte Aktionen ausführen\todo{feature?}, während der Zustand der Komponente für Kommentare zurückgesetzt wird. Deswegen wird das Memento insofern von Properties unabhängig gemacht, dass \texttt{setMemento(m)} im Gegensatz zu \texttt{setProperty(k,v)} kein \enquote{propertyChanged} Event feuert und PropertyLinks davon nicht betroffen werden.
+Dazu werden zwei Methoden \texttt{getMemento()} und \texttt{setMemento(m)} zur API der Komponente hinzugefügt, mit denen das Hilfesystem den Zustand der Komponente speichern und wiederherstellen kann. Eine andere Möglichkeit wäre das Format des Mementos -- also welche Properties es ausmachen -- in der Komponentenbeschreibung anzugeben. Das Hilfesystem könnte die Werte dieser Properties bei der Wiederherstellung des Zustands mit Hilfe der entsprechenden Setter-Methode setzen. Diese Variante hat aber den Nachteil, dass PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) darauf registriert sein können. Sie könnten in anderen Komponenten unerwünschte Aktionen ausführen, während der Zustand der Komponente für Kommentare zurückgesetzt wird. Deswegen wird das Memento insofern von Properties unabhängig gemacht, dass \texttt{setMemento(m)} im Gegensatz zu \texttt{setProperty(k,v)} kein \enquote{propertyChanged} Event feuert und PropertyLinks davon nicht betroffen werden.
 
 \subsubsection{Ortsbezogene Bereichskommentare}
 
@@ -1427,6 +1431,59 @@ Um zu gewährleisten, dass der Benutzer störungsfrei Kommentare lesen kann, mus
 
 Kommentare können auch Metainformationen über die Daten oder Komponente enthalten \cite{Chen2009}. Es wäre denkbar, mittels automatischer Textklassifikation \cite{Sebastiani2002} diese Kommentare zu identifizieren und als positiv oder negativ zu kategorisieren. Daraus ließe sich wiederum eine Bewertung für die Kombination (Datensatz, Komponente) berechnen\footnote{Am einfachsten ginge das indem bei Null gestartet wird und für jeden positiven Kommentar der Zähler um eins erhöht und jeden Negativen um eins verringert wird.}. Der errechnete Wert könnte in Zukunft beim Ranking einer Komponente für einen ausgewählten Datensatz berücksichtigt werden. Wenn der Aufwand dafür gerechtfertigt werden kann, ist es auch möglich, eine -- zuvor definierte -- Ontologie aus Kommentaren zu extrahieren \cite{Alani2003}. Diese könnte zum Beispiel das Qualitätsmanagement von Komponenten automatisieren. Denkbar wäre, dass aus Kommentaren automatisch extrahiert wird, worüber sich die Benutzer beschweren. Ab einem Schwellwert kann dann der Komponentenentwickler informiert werden.
 
+\section{History}
+\label{section:konzeption:history}
+
+% warum undo/redo?
+
+In den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde mehrmals empfohlen, dem Benutzer Undo/Redo von getätigten Aktionen zu ermöglichen. So können unerwünschte Ergebnisse einfach rückgängig gemacht werden.
+
+In Abschnitt~\ref{section:konzeption:kommentare:api} wurde ein Memento-Pattern für Komponenten eingeführt. Damit kann das Hilfesystem Zustände von Komponenten abrufen, speichern und wiederherstellen. Im Folgenden wird davon ausgegangen, dass diese Mementos ausreichen, um eine Komponente von einem konsistenten Zustand in einen anderen konsistenten Zustand zu überführen (und beispielsweise keine Operationen ausgeführt werden müssen). Es stellt sich allerdings die Frage, wann die Mementos der Komponenten abgerufen werden sollen. Prinzipiell kann es vor oder nach einem Event (welches Operationen auslöst, die potentiell den Zustand der Komponente ändern) passieren, beide Varianten haben aber ihre Nachteile.
+
+% vorher - klappt nicht, funkt der dev dazwischen 
+
+Vor einem Event die Mementos abzurufen ist nicht möglich. Das Hilfesystem könnte eigene Event Handler auf die Operationen der aktionsrelevanten UI Elemente registrieren und so bemerken, wann eine Aktion gestartet wird, die möglicherweise zurückgesetzt werden soll. Allerdings kann das Hilfesystem frühestens Event Handler registrieren, wenn die Komponente initialisiert wurde. Zu diesem Zeitpunkt wurde der DOM geladen und Event Handler registriert. Die Event Handler des Hilfesystems würden zwangsläufig danach registriert und demnach auch nach den Handlern des Komponentenentwicklers ausgeführt. Wenn es soweit ist, könnte die Komponente schon ihren Zustand verändert haben und das Memento enthält nicht die gewünschten Attributwerte.
+
+Eine mögliche Lösung wäre den Lebenszyklus der Komponenten zu modifizieren. Es könnte ein Zustand \emph{Rendered} zwischen \emph{Integrated} und \emph{Active} eingefügt werden (Abbildung~\ref{figure:cruise-lifecycle}), bei dem der DOM der Komponente vollständig vorhanden sein, aber Event Handler noch nicht registriert sein sollen. Zu diesem Zeitpunkt könnte das Hilfesystem seine Handler vor jenen des Komponentenentwicklers registrieren, die dann auch als erstes ausgeführt würden. Problematisch ist allerdings, wenn eine Komponente zur Laufzeit DOM Elemente erstellt und Event Handler registriert. Dieses Verhalten müsste man verbieten, um sicherzustellen dass Handler des Hilfesystems immer zuerst ausgeführt werden. Das ist aber nicht wünschenswert, weil diese Vorgabe möglicherweise große Anpassungen des Komponentencodes nötig macht und oft auch gar nicht umsetzbar ist (z.\,B. wenn Tweets zur Laufzeit geladen und angezeigt werden).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/konzeption-cruise-lifecycle.png}
+   \caption{UI Mockup: Modifizierter CRUISe Komponentenlebenszyklus}
+   \label{figure:cruise-lifecycle}
+\end{figure}
+
+% nachher - klappt nicht gut
+
+Es bleibt die Möglichkeit nach einem Event Mementos abzurufen. Zunächst ist es schwierig festzustellen, wann \enquote{nach} einem Event überhaupt ist. Events können in dem Sinne kaskadieren, als dass sie Operationen auslösen, die weitere Events feuern, die wiederum Operationen ausführen, die selbst Events feuern und so weiter. Aus dem Kommunikationsmodell kann nicht eindeutig bestimmt werden, welche Events $E=\{e_i | i>0\}$ nach einem Event $e_0$ zu erwarten sind. Zwar ist bekannt, durch welche Operation $o_i$ ein Event $e_i$ ausgelöst wurde, aber nicht, wann und unter welchen Bedingungen $o_i$ $e_i$ feuert. \todo{möglich?}
+
+% rückwärts suchen kommt auch nicht gut. da können asynchrone operationen dabei sein, weswegen man nicht einfach events und operationen auf einen stack hauen und kucken kann, worauf e_i zurückzuführen ist. irgendwas sagt mir, dass ein db paper mein problem lösen könnte.
+
+\subsection{User Interface und Interaktion}
+\label{section:konzeption:history:ui}
+
+% wie umsetzen
+
+Die einfachste Möglichkeit für eine History, die so auch in jeder Desktopapplikation umgesetzt ist, sind zwei Buttons für Undo respektive Redo (Abbildung~\ref{figure:undo-simple}). Sie sind sofort verständlich und erfüllen ihren Zweck, allerdings wird die Interaktion umso mühsamer, je weiter der zu erreichende Anwendungszustand zurück liegt.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.25\textwidth]{images/konzeption-undo-simple.png}
+   \caption{UI Mockup: Undo/Redo Buttons}
+   \label{figure:undo-simple}
+\end{figure}
+
+Dieses Problem ist bei der Präsentation der History als Timeline nicht mehr vorhanden (Abbildung~\ref{figure:undo-timeline}). Die oberste Zeile dient als Overview des Overview/Detail Patterns und zeigt, wann (horizontale Position) welche Aktion (Farbe) auf welcher Komponente (vertikale Position) ausgeführt wurde. Die vier Zeilen darunter sind Detailansichten für jede Komponente im ausgewählten Zeitfenster. Ein Klick auf ein Rechteck, also eine Aktion, macht alle inklusive der ausgewählten rückgängig. Screenshots der Komponentenzustände wie in \cite{Heer2008} wären zwar hilfreicher und visuell ansprechender, jedoch sind programmatische Screenshots im Web keine triviale Aufgabe.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-undo-timeline.png}
+   \caption{UI Mockup: History als Timeline}
+   \label{figure:undo-timeline}
+\end{figure}
+
+Die Timeline ist zwar mächtiger als zwei Buttons, aber auch komplexer zu nutzen und wahrscheinlich nicht sofort verständlich. Dem Designprinzip und nichtfunktionalen Anforderung der \emph{Verständlichkeit} folgend wird deswegen die erste Variante gewählt.
+
 \section{Meta-Hilfe}
 \label{section:konzeption:meta-hilfe}
 
@@ -1468,8 +1525,8 @@ Der Ablauf ist wie folgt:
 \begin{enumerate}
 	\item Der Nutzer interagiert wie gewohnt mit dem Mashup.
 	\item Das Hilfesystem nimmt die Interaktionen des Nutzers auf.
-	\item Das Hilfesystem schickt die erfassten Daten an die Wissensbasis.
-	\item Die Wissensbasis erlernt Regeln aus den Daten, beispielsweise männliche Architekten brauchen in der Nacht Hilfe zur Kommunikation, wenn sie im Schnitt länger als 10~Sekunden zwischen Interaktionen benötigen.
+	\item Das Hilfesystem schickt die erfassten Daten an die Wissensbasis. Um die dynamische Hilfe auch für andere auf CRUISe basierende Mashups verfügbar zu machen, sollte diese im CoRe integriert sein.
+	\item Die Wissensbasis erlernt Regeln aus den Daten, beispielsweise männliche Architekten brauchen in der Nacht Hilfe zur Kommunikation, wenn sie die Komponente XY nutzen.
 	\item Die Wissensbasis schickt den generierten Classifier an das Hilfesystem, etwa in Form eines Javascript Objekts.
 	\item Das Hilfesystem benutzt den Classifier, um den geeigneten Zeitpunkt für ein Hilfeangebot zu finden.
 	\item Das Hilfesystem bietet Hilfe an.

@@ -6,12 +6,17 @@ My diploma thesis at Dresden University of Technology.
 
 * Was für einen Effekt hat Kommentar löschen, wenn die Referenzen drauf erhalten bleiben?
 
+## Probleme globales Undo
+
+* Vor Event Memento holen geht nicht gut, weil Eventlistener des Hilfesystems erst nach dem Handler der Komponente ausgeführt wird. Kann sein, dass wir was verpassen.
+* Nach Event Memento holen geht nicht, weil Events kaskadieren und nicht klar ist, wann ein Event "fertig" ist.
+* Analyse des Kommunikationsmodells bringt in der Hinsicht nix, weil zwar klar ist, durch welche Operation ein Event aufgerufen wurde, aber nicht anders herum (welche Events wirft eine Operation): Kann von vielen Bedinungen abhängen!
+* Einfachste Lösung also sicherstellen, dass unser Event Handler vor dem des Entwicklers registriert wird. Dazu müsste man aber den Component Lifecycle erweitern (zwischen Loaded und Instantiated noch eine Stufe DOMReady oder so rein), weiß nicht obs das bringt. --> Auch nicht möglich weil dynamisch DOM Elemente erzeugt werden müssen, manchmal.
+* Bleibt zur Laufzeit Rückwärtsanalyse machen und kucken, wodurch ein Event ursprünglich ausgelöst wurde. Problem: Muss 100 % sicher sein, sonst verwirrt Undo Funktion. Problem 2: Nachvollziehbarkeit überhaupt gegeben? Stichworte kaskadierende Events, asynchrone Operationen.
+
 ## Anmerkungen Martin 28.6.
 
-* Generell wo möglich trennen in Hilfe, die allgemein für Mashups cool ist und Hilfe, die speziell für InfoVis ausgelegt ist. Bedienung ohne DaRe?
-
-* Was ist mit Toggle Buttons? Auch 2-3-4fache...
-* Überlegen: Globales Undo/Redo, ginge ja mit Mementos
+* Heer2008 in die verwandten Arbeiten
 * Überlegen: Kommunikation nicht ad-hoc, wenn es passiert, sondern ähnlich wie Bedienung. Nachteil: Benutzer kapiert erst, wenn er aktiv auf den Knopp drückt. Kann man machen, dynamische Kommunikationshilfe könnte dann die Pfeile ad-hoc rendern. --> Paper Mockup.
 * Memento von Komponente doch mit Propertys lösen, scheint Feature zu sein --> Zuerst Paper Mockup abwarten
 * Martin: Hilfebutton lieber in Navigationsleiste oder Komponentenspezifisch? nein.
@@ -20,7 +25,6 @@ My diploma thesis at Dresden University of Technology.
 
 ## Paper Mockup
 
-* Klären ob bei Kommentaren andere Komponenten mitändern FEATURE oder WTF ist.
 * Klären ob Pfeile nerven/verwirren und klären wann sie angezeigt werden sollen
 
 ## Capability Markup
