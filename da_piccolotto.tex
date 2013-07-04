@@ -1436,14 +1436,33 @@ Kommentare können auch Metainformationen über die Daten oder Komponente enthal
 
 In den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde mehrmals empfohlen, dem Benutzer Undo/Redo von getätigten Aktionen zu ermöglichen. So können unerwünschte Ergebnisse einfach rückgängig gemacht werden.
 
-In Abschnitt~\ref{section:konzeption:kommentare:api} wurde ein Memento-Pattern für Komponenten eingeführt. Damit kann das Hilfesystem Zustände von Komponenten abrufen, speichern und wiederherstellen. Es stellt sich die Frage, wann der Zustand aller Komponenten abgerufen werden soll. Nach jedem Event erscheint ausreichend, da Properties den visuellen Zustand der Komponente vollständig beschreiben sollen und falls sich dieser ändert, ein \texttt{propertyChanged} Event gefeuert wird. Das Hilfesystem ruft dann den Zustand aller Komponenten ab und speichert ihn in einen Stack. Im Falle eines Undo wird der oberste Anwendungszustand vom Stack genommen und jede Komponente wiederhergestellt. 
+In Abschnitt~\ref{section:konzeption:kommentare:api} wurde ein Memento-Pattern für Komponenten eingeführt. Damit kann das Hilfesystem Zustände von Komponenten abrufen, speichern und wiederherstellen. Im Folgenden wird davon ausgegangen, dass diese Mementos ausreichen, um eine Komponente von einem konsistenten Zustand in einen anderen konsistenten Zustand zu überführen (und beispielsweise keine Operationen ausgeführt werden müssen). Es stellt sich allerdings die Frage, wann die Mementos der Komponenten abgerufen werden sollen. Prinzipiell kann es vor oder nach einem Event (welches Operationen auslöst, die potentiell den Zustand der Komponente ändern) passieren, beide Varianten haben aber ihre Nachteile.
+
+% vorher - klappt nicht, funkt der dev dazwischen 
+
+Vor einem Event die Mementos abzurufen ist nicht möglich. Das Hilfesystem könnte eigene Event Handler auf die Operationen der aktionsrelevanten UI Elemente registrieren und so bemerken, wann eine Aktion gestartet wird, die möglicherweise zurückgesetzt werden soll. Allerdings kann das Hilfesystem frühestens Event Handler registrieren, wenn die Komponente initialisiert wurde. Zu diesem Zeitpunkt wurde der DOM geladen und Event Handler registriert. Die Event Handler des Hilfesystems würden zwangsläufig danach registriert und demnach auch nach den Handlern des Komponentenentwicklers ausgeführt. Wenn es soweit ist, könnte die Komponente schon ihren Zustand verändert haben und das Memento enthält nicht die gewünschten Attributwerte.
+
+Eine mögliche Lösung wäre den Lebenszyklus der Komponenten zu modifizieren. Es könnte ein Zustand \emph{Rendered} zwischen \emph{Integrated} und \emph{Active} eingefügt werden (Abbildung~\ref{figure:cruise-lifecycle}), bei dem der DOM der Komponente vollständig vorhanden sein, aber Event Handler noch nicht registriert sein sollen. Zu diesem Zeitpunkt könnte das Hilfesystem seine Handler vor jenen des Komponentenentwicklers registrieren, die dann auch als erstes ausgeführt würden. Problematisch ist allerdings, wenn eine Komponente zur Laufzeit DOM Elemente erstellt und Event Handler registriert. Dieses Verhalten müsste man verbieten, um sicherzustellen dass Handler des Hilfesystems immer zuerst ausgeführt werden. Das ist aber nicht wünschenswert, weil diese Vorgabe möglicherweise große Anpassungen des Komponentencodes nötig macht und oft auch gar nicht umsetzbar ist (z.\,B. wenn Tweets zur Laufzeit geladen und angezeigt werden).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/konzeption-cruise-lifecycle.png}
+   \caption{UI Mockup: Modifizierter CRUISe Komponentenlebenszyklus}
+   \label{figure:cruise-lifecycle}
+\end{figure}
+
+% nachher - klappt nicht gut
+
+Es bleibt die Möglichkeit nach einem Event Mementos abzurufen. Zunächst ist es schwierig festzustellen, wann \enquote{nach} einem Event überhaupt ist. Events können in dem Sinne kaskadieren, als dass sie Operationen auslösen, die weitere Events feuern, die wiederum Operationen ausführen, die selbst Events feuern und so weiter. Aus dem Kommunikationsmodell kann nicht eindeutig bestimmt werden, welche Events $E=\{e_i | i>0\}$ nach einem Event $e_0$ zu erwarten sind. Zwar ist bekannt, durch welche Operation $o_i$ ein Event $e_i$ ausgelöst wurde, aber nicht, wann und unter welchen Bedingungen $o_i$ $e_i$ feuert. \todo{möglich?}
+
+% rückwärts suchen kommt auch nicht gut. da können asynchrone operationen dabei sein, weswegen man nicht einfach events und operationen auf einen stack hauen und kucken kann, worauf e_i zurückzuführen ist. irgendwas sagt mir, dass ein db paper mein problem lösen könnte.
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:history:ui}
 
 % wie umsetzen
 
-Die einfachste Möglichkeit für eine History, die so auch in jeder Desktopapplikation umgesetzt ist, sind zwei Buttons für Undo respektive Redo (Abbildung~\ref{figure:undo-simple}). Sie sind sofort verständlich und erfüllen ihren Zweck, allerdings wird die Interaktion umso mühsamer, je weiter zurück der zu erreichende Anwendungszustand liegt.
+Die einfachste Möglichkeit für eine History, die so auch in jeder Desktopapplikation umgesetzt ist, sind zwei Buttons für Undo respektive Redo (Abbildung~\ref{figure:undo-simple}). Sie sind sofort verständlich und erfüllen ihren Zweck, allerdings wird die Interaktion umso mühsamer, je weiter der zu erreichende Anwendungszustand zurück liegt.
 
 \begin{figure}[htbp]
    \centering
@@ -1504,8 +1523,8 @@ Der Ablauf ist wie folgt:
 \begin{enumerate}
 	\item Der Nutzer interagiert wie gewohnt mit dem Mashup.
 	\item Das Hilfesystem nimmt die Interaktionen des Nutzers auf.
-	\item Das Hilfesystem schickt die erfassten Daten an die Wissensbasis.
-	\item Die Wissensbasis erlernt Regeln aus den Daten, beispielsweise männliche Architekten brauchen in der Nacht Hilfe zur Kommunikation, wenn sie im Schnitt länger als 10~Sekunden zwischen Interaktionen benötigen.
+	\item Das Hilfesystem schickt die erfassten Daten an die Wissensbasis. Um die dynamische Hilfe auch für andere auf CRUISe basierende Mashups verfügbar zu machen, sollte diese im CoRe integriert sein.
+	\item Die Wissensbasis erlernt Regeln aus den Daten, beispielsweise männliche Architekten brauchen in der Nacht Hilfe zur Kommunikation, wenn sie die Komponente XY nutzen.
 	\item Die Wissensbasis schickt den generierten Classifier an das Hilfesystem, etwa in Form eines Javascript Objekts.
 	\item Das Hilfesystem benutzt den Classifier, um den geeigneten Zeitpunkt für ein Hilfeangebot zu finden.
 	\item Das Hilfesystem bietet Hilfe an.
