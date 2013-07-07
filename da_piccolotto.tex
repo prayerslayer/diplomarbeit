@@ -811,7 +811,7 @@ Im Laufe der Konzeption werden zum besseren Verständnis einige User Interface M
 
 \subsubsection{Aufruf}
 
-% warum sind buttons in der titelleiste
+% wo sind die buttons so
 
 Funktionen, die der Nutzer aus eigener Initiative nutzen kann und komponetenspezifisch sind (z.\,B. Kommentare), werden über Buttons in der Titelleiste der Komponente aufgerufen. Das Hilfesystem kann sie wegen des \enquote{Black Box} Prinzips nicht in der Komponente selbst platzieren. Zwar könnte man UI Elemente für die Hilfefunktionen im Komponenten-Markup vorsehen, aber durch die Nutzung der Titelleiste wird dem Entwickler Aufwand erspart. Die UI für die aufgerufene Hilfe kann auf folgende Arten geschlossen werden:
 
@@ -1526,13 +1526,32 @@ Der Ablauf ist wie folgt:
 	\item Das Hilfesystem nimmt die Interaktionen des Nutzers auf.
 	\item Das Hilfesystem schickt die erfassten Daten an die Wissensbasis. Um die dynamische Hilfe auch für andere auf CRUISe basierende Mashups verfügbar zu machen, sollte diese im CoRe integriert sein.
 	\item Die Wissensbasis erlernt Regeln aus den Daten, beispielsweise männliche Architekten brauchen in der Nacht Hilfe zur Kommunikation, wenn sie die Komponente XY nutzen.
-	\item Die Wissensbasis schickt den generierten Classifier an das Hilfesystem, etwa in Form eines Javascript Objekts.
+	\item Die Wissensbasis schickt den generierten Classifier an das Hilfesystem.
 	\item Das Hilfesystem benutzt den Classifier, um den geeigneten Zeitpunkt für ein Hilfeangebot zu finden.
 	\item Das Hilfesystem bietet Hilfe an.
 	\item Der Benutzer profitiert von der Hilfe.
 \end{enumerate}
 
-Nun stellt sich die Frage, welche Daten für das maschinelle Lernen herangezogen werden sollen, d.\,h. wie der Feature Vector aussieht. Hier ist zu beachten, dass verschachtelte Attribute wie Arrays oder Mengen nicht zulässig sind. Um dem beizukommen werden Nutzerinteraktionen in Zyklen von 5 unterteilt. Es erscheint sinnvoll folgende Informationen zu erfassen:
+Supervised Machine Learning Algorithmen gehen als Datengrundlage von einer Tabelle aus, in der die Zeilen Instanzen und die Spalten Attribute oder Facetten der Instanzen sind (Abbildung~\ref{figure:sml-daten}). Die Menge von Spalten wird \enquote{Feature Vector} genannt. 
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-sml-daten.png}
+   \caption{Datengrundlage für SML Algorithmen}
+   \label{figure:sml-daten}
+\end{figure}
+
+Je nach Algorithmus können Attribute unterschiedlichen oder festen Typs sein: Decision Trees arbeiten sowohl mit nominalen als auch ordinalen und quantitativen Variablen, während Support Vector Machines nur quantitative unterstützen. Allen Algorithmen gemein ist jedoch, dass Attribute eindimensional sein müssen und beispielsweise keine Arrays oder Mengen sein dürfen. Weil für die Meta-Hilfe verschiedene Daten herangezogen werden müssen, wird ein Decision Tree Algorithmus gewählt. Ein klassifizierender Decision Tree nimmt einen Feature Vector als Input und weist ihn einer von mehreren Kategorien zu. Im Fall der dynamischen Meta-Hilfe sind das \enquote{Keine Hilfe nötig} und die verschiedenen Hilfefunktionen (Abbildung~\ref{figure:sml-ziel}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-sml-ziel.png}
+   \caption{Klassifizierender Decision Tree Algorithmus}
+   \label{figure:sml-ziel}
+\end{figure}
+
+
+Nun stellt sich die Frage, welche Daten für das maschinelle Lernen herangezogen werden sollen, d.\,h. wie der Feature Vector aussieht. Wie bereits erwähnt sind verschachtelte Attribute wie Arrays oder Mengen nicht zulässig, d.\,h. es können nicht alle Interaktionen des Nutzers herangezogen werden (weil sie nicht eine Zelle der Tabelle passen). Darum werden die Facetten mehrerer Interaktionen, zum Beispiel in welcher Komponente sie stattfand oder welche Operation es war, zum Feature Vector hinzugefügt. Da die Anzahl von Spalten der Tabelle Einfluss auf die Laufzeit des Algorithmus hat (weniger ist besser), aber mehr Spalten potentiell mehr Erkenntnisse ermöglichen (mehr ist besser) und das Hilfeangebot nicht zu spät erfolgen darf (weniger ist besser), scheinen fünf Interaktionen ein guter Kompromiss zu sein (Abbildung~\ref{figure:sml-ziel}). Es erscheint sinnvoll folgende Informationen zu erfassen:
 
 \begin{itemize}
 	\item Alter, Geschlecht, Domäne und Ort des Benutzers
@@ -1564,7 +1583,7 @@ Nachdem der Benutzer darauf geklickt hat, wird der Viewport abgedunkelt und ein 
    \label{figure:meta-step2}
 \end{figure}
 
-Wenn das Hilfesystem dem Benutzer Hilfe anbietet, rotiert der Button, wird orange eingefärbt und in der Sidebar erscheint das entsprechende Hilfeangebot (Abbildung~\ref{figure:meta-dyn}). Der Benutzer kann es nutzen, indem er darauf klickt oder selbstständig zur Hilfefunktion navigiert. Tut er das für 5~Interaktionen nicht, wird die Sidebar wieder ausgeblendet und der Button zurück rotiert. 
+Wenn das Hilfesystem dem Benutzer Hilfe anbietet, rotiert der Button, wird orange eingefärbt und in der Sidebar erscheint das entsprechende Hilfeangebot (Abbildung~\ref{figure:meta-dyn}). Der Benutzer kann es nutzen, indem er darauf klickt oder selbstständig zur Hilfefunktion navigiert. Tut er das für 5~Interaktionen nicht oder schließt die Sidebar, wird der Button zurück rotiert. 
 
 \begin{figure}[htbp]
    \centering
@@ -1622,6 +1641,14 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 
 \begin{itemize}
 	\item Ursprüngliches Mapping an MRE weiterleiten (Intro, Kommentare)
+	\item Wissensbasis für dynamische Meta-Hilfe sowie Schnittstelle zum Zugriff darauf
+\end{itemize}
+
+\subsubsection{DaRe}
+
+\begin{itemize}
+	\item Kommentare speichern sowie eine Schnittstelle zum Abruf
+	\item Abruf und Speicherung von Konzeptbeschreibungen sowie Schnittstelle zum Zugriff
 \end{itemize}
 
 \subsubsection{Event Broker}

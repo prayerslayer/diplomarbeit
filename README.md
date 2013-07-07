@@ -14,6 +14,48 @@ My diploma thesis at Dresden University of Technology.
 * Einfachste Lösung also sicherstellen, dass unser Event Handler vor dem des Entwicklers registriert wird. Dazu müsste man aber den Component Lifecycle erweitern (zwischen Loaded und Instantiated noch eine Stufe DOMReady oder so rein), weiß nicht obs das bringt. --> Auch nicht möglich weil dynamisch DOM Elemente erzeugt werden müssen, manchmal.
 * Bleibt zur Laufzeit Rückwärtsanalyse machen und kucken, wodurch ein Event ursprünglich ausgelöst wurde. Problem: Muss 100 % sicher sein, sonst verwirrt Undo Funktion. Problem 2: Nachvollziehbarkeit überhaupt gegeben? Stichworte kaskadierende Events, asynchrone Operationen.
 
+## Anmerkungen Martin 5.7.
+
+* Allgemein: Mehr Referenzen in der Arbeit, bessere Listen.
+* Anforderungen: nach Plattform/Domänenspezifischen unterscheidbar?
+* Related Work: Mehr auch ansprechen, was Anforderungen nicht umsetzen und bessere Zusammenfassungen
+* RW in Einführung Konzeption erwähnen
+* Aufruf in Einführung anpassen, ist ja nicht nur Titelleiste jetzt
+* Ort in Einführung: Grafik für Buttonleiste
+* Optik => Implementierung?
+* Bessere Überschriften
+* Intro: Unterscheidung plattform/domänenspezifisch
+* Intro: Nicht visuelle Mappings, sondern enthaltene Daten
+* Intro: Domain Assignment genauer erklären
+* Bedienung: Beschreibungssprache besser erklären?
+* Bedienung: Auflistung der Änderungen für Komponentenbeschreibung
+* Bedienung: Beispielhaft XML?
+* Bedienung: Verweis auf Verlinkung
+* Bedienung: Zusatzinfos vs Mappings erst zur Laufzeit
+* Bedienung: Generierung überarbeiten -> Dev gibt Mappings als SPARQL Query an oder lädt halt Daten hoch
+* Bedienung: Ablauf Generierung klären
+* Bedienung: Raster der Panels erklären und was passiert, wenn Komponente zu schmal, Mindestgröße
+* Reporting: Paper Verweis
+* Reporting: Rating Repository statt DaRe
+* Kommunikation: Überarbeiten nach Paper Mockup
+* Kommunikation Backend: Lösung ist in der Komponentenbeschreibung
+* Verlinkung: Generell und was sind Beschreibungen (Text, Bilder, was wenn nur japanisch?)
+* Verlinkung: Klären wegen Aktualität der Informationen
+* Verlinkung: Auch Bedienung über Fragezeichen? Maybe. Ist schwer im Paper Mockup zu klären. Martin findets gut, also vielleicht einfach machen.
+* Kommentare: Was bringt löschen? Nachvollziehbarer Gesprächsverlauf, wenn Sortierung nicht zeitlich? Umschaltbutton?
+* Kommentare: API Referenz RW, erklären was neuartig.
+* Kommentare: Datenbezogen Bereich braucht nicht zwingend Positionskodierung, aber wenn leere Bereiche referenziert werden sollen, unbedingt (weil Position das einzige ist, was ich vom Auswahlrechteck habe).
+* Kommentare: Aggregation nicht nur von Komponenten selbst blöd, sondern dürfen auch gar nicht erst aggregiert reingegeben werden. Daten sind im DaRe. Schluss.
+* Kommentare: Anmerken dass wenn Events pausiert werden bei Kommentar angucken, auch PropertyLinks kein Problem. Blöd ist halt, dass danach alle Events nach der Reihe reingeschoben werden, aber das ist erstmal so.
+* Kommentare: URI als RDFa in Kombination mit CSS Selektor.
+* Kommentare: Icons kleiner als Text, vielleicht mit Referenz auf UX Movement erklären, dass das nicht schlecht ist.
+* Kommentare: Avatar + Benutzername kommt aus UserService
+* Kommentare: Backend klären
+* History: Klären, dass ich nicht auf Granularitätsstufe Events zurücksetzen will, sondern auf Interaktion (weil das dem mentalen Modell des Benutzers entspricht, der die einzelnen Events/Schritte gar nicht mitbekommt)
+* History: Daten kommen aus dem DaRe.
+* History: PropertyLinks benutzen um weiterzuleiten, von wo ein Event ausgelöst wurde.
+* History: Timeline vereinfachen
+
 ## Anmerkungen Martin 28.6.
 
 * Überlegen: Kommunikation nicht ad-hoc, wenn es passiert, sondern ähnlich wie Bedienung. Nachteil: Benutzer kapiert erst, wenn er aktiv auf den Knopp drückt. Kann man machen, dynamische Kommunikationshilfe könnte dann die Pfeile ad-hoc rendern. --> Paper Mockup.
