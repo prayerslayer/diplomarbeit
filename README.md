@@ -46,14 +46,12 @@ My diploma thesis at Dresden University of Technology.
 * Kommentare: API Referenz RW, erklären was neuartig.
 * Kommentare: Datenbezogen Bereich braucht nicht zwingend Positionskodierung, aber wenn leere Bereiche referenziert werden sollen, unbedingt (weil Position das einzige ist, was ich vom Auswahlrechteck habe).
 * Kommentare: Aggregation nicht nur von Komponenten selbst blöd, sondern dürfen auch gar nicht erst aggregiert reingegeben werden. Daten sind im DaRe. Schluss.
-* Kommentare: Anmerken dass wenn Events pausiert werden bei Kommentar angucken, auch PropertyLinks kein Problem. Blöd ist halt, dass danach alle Events nach der Reihe reingeschoben werden, aber das ist erstmal so.
-* Kommentare: URI als RDFa in Kombination mit CSS Selektor.
 * Kommentare: Icons kleiner als Text, vielleicht mit Referenz auf UX Movement erklären, dass das nicht schlecht ist.
 * Kommentare: Avatar + Benutzername kommt aus UserService
 * Kommentare: Backend klären
-* History: Klären, dass ich nicht auf Granularitätsstufe Events zurücksetzen will, sondern auf Interaktion (weil das dem mentalen Modell des Benutzers entspricht, der die einzelnen Events/Schritte gar nicht mitbekommt)
+* History: Klären, dass ich nicht auf Granularitätsstufe Events zurücksetzen will, sondern auf Interaktion (weil das dem mentalen Modell des Benutzers entspricht, der die einzelnen Events/Operationen ja nicht mitbekommt)
 * History: Daten kommen aus dem DaRe.
-* History: PropertyLinks benutzen um weiterzuleiten, von wo ein Event ausgelöst wurde.
+* History: PropertyLinks benutzen um weiterzuleiten, von wo ein Event ausgelöst wurde. --> Wie genau? Was steht in PL drin? Wann wird gesetzt? Wie viele sind nötig?
 * History: Timeline vereinfachen
 
 ## Anmerkungen Martin 28.6.
