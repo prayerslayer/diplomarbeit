@@ -347,7 +347,7 @@ Eine Ontologie ist \enquote{an explicit specification of a conceptualization} \c
 \begin{itemize}
 	\item Eine Klasse repräsentiert ein Konzept, eine Entität, ein Ding, beispielsweise ein \textit{Smartphone}.
 	\item Eine Instanz ist ein konkretes Objekt einer Klasse, zum Beispiel das \textit{iPhone mit der Seriennummer XYZ-ABC}.
-	\item Datenattribute beschreiben eine Instanz näher, zum Beispiel die \textit{Seriennummer} oder \textit{Bildschirmgröße} des iPhones.
+	\item Datatype Properties beschreiben eine Instanz näher, zum Beispiel die \textit{Seriennummer} oder \textit{Bildschirmgröße} des iPhones.
 	\item Objektattribute beschreiben Beziehungen zwischen Klassen und deren Instanzen, beispielsweise eine Person \textit{besitzt} ein Smartphone.
 	\item Außerdem existieren noch Axiome, Regeln, Funktionen und Einschränkungen, welche die Logik einer Ontologie beschreiben.
 \end{itemize}
@@ -367,7 +367,7 @@ RDF ist von den genannten die Sprache mit den wenigsten Features, sie kann nur T
 
 % rdfs
 
-RDFS ist eine Erweiterung von RDF, nämlich um Klassen und Vererbung, Datenattribute und Objektattribute. Allerdings ist RDFS damit noch immer nicht so mächtig wie OWL.
+RDFS ist eine Erweiterung von RDF, nämlich um Klassen und Vererbung, Datatype Properties und Objektattribute. Allerdings ist RDFS damit noch immer nicht so mächtig wie OWL.
 
 % owl
 
@@ -675,18 +675,38 @@ Nachdem betrachtet wurde, wie Verständnis funktioniert, stellt sich die Frage, 
 \section{Verwandte Arbeiten}
 \label{section:standderforschung:verwandte_arbeiten}
 
-Im Folgenden werden verwandte Arbeiten behandelt. Zuerst befasst sich Abschnitt~\ref{section:standderforschung:verwandte_arbeiten:mashups} mit Mashupplattformen. Danach geht es um Visualisierungstools und Teilaspekte davon, die das Sensemaking der Nutzer verbessern sollen. Darauf folgen Konzepte zur User Assistance in Mashups und im Allgemeinen und zuletzt wird eine Zusammenfassung gegeben.
+Im Folgenden werden verwandte Arbeiten behandelt. Zuerst befasst sich Abschnitt~\ref{section:standderforschung:verwandte_arbeiten:mashups} mit Mashup Plattformen. Darauf folgen Visualisierungstools und Teilaspekte davon, die das Sensemaking der Nutzer verbessern sollen. Danach werden verwandte Arbeiten zu User Assistance Konzepten in Mashups und im Allgemeinen vorgestellt und zuletzt eine Zusammenfassung gegeben.
 
 \subsection{Webbasierte Mashup Plattformen}
 \label{section:standderforschung:verwandte_arbeiten:mashups}
 
-Im Gegensatz zu den Visualisierungstools und Mashups werden hier generische Plattformen für Mashups behandelt.
+In diesem Abschnitt werden Mashup Plattformen vorgestellt, mit denen Endnutzer Datenquellen oder UI Komponenten kombinieren können.
 
-Yahoo Pipes\footnote{\url{http://pipes.yahoo.com/pipes/}} ist eine Mashup-Plattform von Yahoo, bei dem der Benutzer verschiedene Webservices und Operatoren kombiniert, indem er sie verdrahtet. Pipes erfüllt die funktionale Anforderung \emph{Intro}, da zwei Tutorialvideos angeboten werden und eine kurze Beschreibung zu jedem Element inklusive Link zu einem Beispiel und mehr Informationen vorhanden ist. Die \emph{Kommunikation} ist durch die Drähte sichtbar, allerdings ist die Richtung des Datenflusses nicht sofort eindeutig. Pipes erleichtert die \emph{Bedienung} indem mögliche Anknüpfungspunkte für Drähte blau eingefärbt werden. Für die Arbeit mit VizBoard ist es ebenfalls wichtig, die Kommunikation zwischen Komponenten nachvollziehen zu können, aber es sollte darauf geachtet werden, dass die Richtung des Datenflusses sofort ersichtlich ist.
+% yahoo pipes kombiniert nur datenquellen
+% gut: intro und kommunikation
+% schlecht: es können kaputte kompositionen erstellt werden (iso norm aussagekräftige fehlermeldungen)
 
-DashMash \cite{Cappiello2011} ist eine Mashup-Plattform, die besonders auf Endnutzer ausgerichtet ist. Dazu setzt es auf das \enquote{What You See Is What You Get} Prinzip und abstrahiert von Mashup-Interna wie dem Binding zwischen Datenquellen und Komponenten. Obwohl keine sichtbaren\footnote{Ein Demo-Video ist unter \url{http://home.dei.polimi.it/cappiell/demo/DemoDashMash.mov} verfügbar.} Hilfestellungen bezüglich \emph{Intro}, \emph{Bedienung} oder \emph{Kommunikation} verfügbar sind, fiel die Nutzerstudie mit 35~Teilnehmern durchweg positiv aus. Für die Hilfe in VizBoard sollte deswegen auch soweit möglich Technisches abstrahiert oder vor dem Benutzer versteckt werden.
+Yahoo Pipes\footnote{\url{http://pipes.yahoo.com/pipes/}} ist eine Mashup Plattform von Yahoo, bei dem der Benutzer verschiedene Webservices mit Hilfe von Operatoren kombiniert, indem er sie interaktiv verdrahtet.
+Pipes erfüllt die funktionale Anforderung \emph{Intro}, da zwei Tutorialvideos angeboten werden und eine kurze Beschreibung zu jedem Element inklusive Link zu einem Beispiel und mehr Informationen vorhanden ist. Die \emph{Kommunikation} ist durch die Drähte sichtbar, allerdings ist die Richtung des Datenflusses nicht sofort eindeutig. Pipes erleichtert die \emph{Bedienung} indem während der Drag \& Drop Operation mögliche Anknüpfungspunkte für Drähte blau eingefärbt werden.
+Allerdings erschwert es die Bedienung gleichermaßen, da kaputte Kompositionen erstellt werden können und Pipes keine aussagekräftigen Fehlermeldungen ausgibt.
+Für die Arbeit mit VizBoard ist es ebenfalls wichtig, die Kommunikation zwischen Komponenten nachvollziehen zu können. Da bei VizBoard der Datenfluss in beide Richtungen fließen kann, sollte darauf geachtet werden, dessen Richtung klar ersichtlich ist.
 
-Apache Rave\footnote{\url{http://rave.apache.org/}} ist eine Mashup-Plattform von Apache und Grundlage für OMELETTE \cite{Chudnovskyy2012}. OMELETTE stellt dem Benutzer verschiedene Widgets zur Verfügung, die er kombinieren kann. Zum Beispiel ein Widget für den Wasserpegel und eine Karte, die Hochwassermeldungen zeigt. Im Gegensatz zu VizBoard besteht keine Einschränkung auf eine bestimmte Domäne. Es ist möglich Widgets zu kommentieren, die \emph{Kommentare} werden aber nur im Widget Store angezeigt. Bezüglich der \emph{Bedienung} oder \emph{Kommunikation} bestehen keine Hilfestellungen. Ein \emph{Intro} wird im Widget Store in Form einer kurzen Beschreibung gegeben. % gelernt?
+% dashmash kombiniert ui elemente und datenquellen
+% gut: nutzerstudie
+% schlecht: 
+
+DashMash \cite{Cappiello2011} ist eine Mashup Plattform, die besonders auf Endnutzer ausgerichtet ist. Dazu setzt es auf das \enquote{What You See Is What You Get} Prinzip und abstrahiert von Mashup-Interna wie dem Binding zwischen Datenquellen und Komponenten. Es ist nicht möglich Erkenntnisse aus den Daten mit anderen zu teilen oder selbst Anmerkungen anderer zu lesen. Obwohl keine sichtbaren\footnote{Ein Demo-Video ist unter \url{http://home.dei.polimi.it/cappiell/demo/DemoDashMash.mov} verfügbar.} Hilfestellungen bezüglich \emph{Intro}, \emph{Bedienung} oder \emph{Kommunikation} verfügbar sind, fiel die Nutzerstudie mit 35~Teilnehmern durchweg positiv aus. Der Grund dafür ist wahrscheinlich, dass die Erklärungen am Anfang der Studie so gewählt wurden, dass die Testpersonen ein \enquote{korrektes} mentales Modell von DashMash hatten. Für die Hilfe in VizBoard sollte deswegen auch soweit möglich Technisches abstrahiert oder vor dem Benutzer versteckt werden. Des weiteren sollten Erklärungen dem mentalen Modell des Benutzers entsprechen.
+
+% omelette auch (weil datenquellen in komponenten drin)
+
+Apache Rave\footnote{\url{http://rave.apache.org/}} ist eine Mashup Plattform von Apache und Grundlage für OMELETTE \cite{Chudnovskyy2012}. OMELETTE stellt dem Benutzer verschiedene Widgets zur Verfügung, die er kombinieren kann. Zum Beispiel ein Widget zur Visualisierung des Wasserpegels und eine Karte, die Hochwassermeldungen zeigt. Im Gegensatz zu VizBoard besteht keine Einschränkung auf eine bestimmte Domäne. Es ist möglich Widgets zu kommentieren. Die \emph{Kommentare} werden aber nur im Widget Store angezeigt, da sie eher dem Feedback zum Widget als dem Verständnis des Inhalts dienen. Bezüglich der \emph{Bedienung} oder \emph{Kommunikation} bestehen keine Hilfestellungen. Ein \emph{Intro} wird im Widget Store in Form einer kurzen Beschreibung gegeben, welche der Entwickler verfasst hat. Die Hilfestellungen für den Benutzer fokussieren sich eher auf die Erstellung von Mashups als deren Nutzung \cite{Chowdhury2013}. So wird ein Pattern Recommender eingesetzt, der weitere Widgets zur Integration in die Komposotion vorschlägt sowie eine Automatic Composition Engine, die Widgets automatisch verbindet und damit Daten- und Kontrollflüsse ermöglicht.
+
+% lessons learned
+
+% man braucht gar nicht so viele hilfestellungen, wenn änderungen in der ui auf eigene interaktionen zurückgeführt werden können (nichts anderes heißt ein korrektes mentales modell zu haben)
+% es muss klar sein, wo der datenfluss hingeht
+
+In diesem Abschnitt wurden Mashup Plattformen vorgestellt, mit deren Hilfe Webservices oder UI Komponenten kombiniert werden können. Die wichtigste Erkenntnis war dabei, dass kaum Hilfestellungen nötig sind, wenn der Benutzer ein passendes mentales Modell der Anwendung hat. Dieses kann mit Hilfe von Erklärungen vermittelt werden. Bei der Entwicklung des Hilfesystems sollte deswegen ein konsistentes Modell der Anwendung verwendet und mit einheitlichen Begriffen versehen werden.
 
 \subsection{Visualisierungstools}
 \label{section:standderforschung:verwandte_arbeiten:visualisierungstools}
@@ -694,6 +714,8 @@ Apache Rave\footnote{\url{http://rave.apache.org/}} ist eine Mashup-Plattform vo
 Im Folgenden werden Visualisierungstools vorgestellt. Sie bieten mindestens multiple Sichten (ähnlich wie Mashups), sind selbst Mashups (wenn nicht anders angegeben webbasiert) oder besonders populär.
 
 % weave
+% gut: ist ein mashup
+% schlecht: user interface, keine hilfestellungen
 
 Weave\footnote{\url{http://oicweave.org/}} ist eine Webapplikation, mit der Benutzer ein Mashup aus Visualisierungen erstellen können. Mögliche Datenquellen sind strukturierte Daten wie Tabellen und CSV Dateien. Benutzer können aus verschiedenen Visualisierungen wählen und diese an Daten binden. Das User Interface (Abbildung~\ref{figure:weave}) ist allerdings sehr komplex und Hilfe gibt es nur in Form einer Online-Dokumentation und einem kurzen Tutorialvideo.
 
@@ -705,14 +727,19 @@ Weave\footnote{\url{http://oicweave.org/}} ist eine Webapplikation, mit der Benu
 \end{figure}
 
 % polaris/tableau
+% gut: interaktivität, drag & drop zeug
+% schlecht: keine verlinkung
 
 Tableau\footnote{\url{http://www.tableausoftware.com/}} ist eine Desktopapplikation, mit der aus Tabellen oder Datenbanken Diagramme erstellt werden können. Es ist der kommerzielle Nachfolger von Polaris \cite{Stolte2000} und laut Gartner \cite{Gartner2013} unter den Marktführern im Bereich Business Intelligence Platforms. Tableau setzt das Prinzip von \enquote{Semantic Transparency} um, weil der Benutzer die zu visualisierenden Daten per Drag \& Drop auf dem Diagramm platziert. Als weitere Hilfestellung zur \emph{Bedienung} erlaubt es unbegrenzt Undo/Redo, was auch bei VizBoard hilfreich sein könnte.
 
 % choosel
+% gut: drag n drop
+% schlecht: kenntnis der daten wird vorausgesetzt
 
 Choosel \cite{Grammel2010} ist ein Mashup, welches besonders in der Domäne Informationsvisualisierung unbedarfte Nutzer dabei unterstützen soll, Daten zu erforschen und Visualisierungen iterativ zu verfeinern. Die Hilfestellungen zur \emph{Bedienung} sind folgende: Es setzt auf Drag \& Drop Funktionalität, also direkte Manipulation. Mögliche Drop-Ziele werden außerdem während des Vorgangs hervorgehoben und eine Vorschau des Drop-Ergebnis wird ebenfalls angeboten. Falls im Hilfesystem für VizBoard Drag \& Drop angewendet wird, ist Choosel ein gutes Vorbild.
 
 % mosaic
+% ? ? ? 
 
 MoSaiC \cite{Schuster2011} ist ein Tool mit dem Benutzer online kollaborativ Dokumente erstellen können. Wie bei VizBoard ist die Domäne damit festgelegt. Das Tool besteht aus verschiedenen Sichten für die Rollen der Beitragenden (Collaborators) und Organisatoren (Coordinators) und ist damit komposit, es können aber keine zusätzlichen Views aufgerufen werden. Inwieweit MoSaiC den Benutzern Hilfestellungen gibt, ist nicht bekannt, da der Autor keine Screenshots oder Videos finden konnte.
 
@@ -721,41 +748,105 @@ MoSaiC \cite{Schuster2011} ist ein Tool mit dem Benutzer online kollaborativ Dok
 
 In diesem Abschnitt geht es um Teilfunktionen von Visualisierungstools, die das Sensemaking der Benutzer verbessern sollen. Hauptsächlich wird dafür eine Kommentar- bzw. Annotationsfunktion eingesetzt.
 
+% hier sind hauptsächlich kommentare - gibt es noch andere ansätze?
+
+% annotation
+% gut: einfach zu verwenden
+% schlecht: nicht geeignet wenn man keine beliebigen navigationsmöglichkeiten hat
+
 Groth und Streefkerk \cite{Groth2006} präsentieren ein generisches Annotationssystem für Informationsvisualisierungen am Beispiel einer 3D Visualisierung von Molekülen. Grundlage des Systems sind Nutzerinteraktionen wie \enquote{rotieren}, \enquote{zoomen} etc., welche geloggt und als Graph abgespeichert werden. An den Knoten des Graphen -- Zustände der InfoVis -- können beliebig viele \emph{Kommentare} abgelegt werden. Es ist allerdings nicht möglich, innerhalb dieser Sichten noch einmal Elemente zu referenzieren (z.\,B. ein bestimmtes Atom), weswegen das System am besten für InfoVis mit uneingeschränkter Navigation geeignet ist.
 
-Heer et al. \cite{Heer2007} entwickelten mit sense.us einen Prototyp zur asynchronen Kollaboration mit interaktiven Visualisierungen. Benutzer können \emph{Kommentare} zu Visualisierungen hinzufügen und sie mit grafischen Annotationen (z.\,B. geometrische Formen, Pfeile, Text) versehen. Die Kommentare wurden dabei nicht an die Daten selbst, sondern an die Visualisierung hinzugefügt. Es war aber möglich, Kommentare in anderen Visualisierungen zu referenzieren. Die am meisten verwendeten Annotationstypen waren Pfeile und Text. Das alles sollte beim Entwurf der Kommentarfunktion des Hilfesystems berücksichtigt werden.
+% sense.us
+% gut: kommentare, diskussionen, annotationen
+% schlecht: kommentare nicht an daten, kenntnis der daten wiederum vorausgesetzt
+
+Heer et al. \cite{Heer2007} entwickelten mit sense.us einen Prototyp zur asynchronen Kollaboration mit interaktiven Visualisierungen. Benutzer können \emph{Kommentare} zu Visualisierungen hinzufügen und sie mit grafischen Annotationen (z.\,B. geometrische Formen, Pfeile, Text) versehen. Die Kommentare wurden dabei aber nicht an die Daten selbst, sondern an die Visualisierung hinzugefügt. Es war möglich, Kommentare in anderen Visualisierungen zu referenzieren. Die am meisten verwendeten Annotationstypen waren Pfeile und Text. Das alles sollte beim Entwurf der Kommentarfunktion des Hilfesystems berücksichtigt werden.
+
+% manyeyes
+% gut: kommentare
+% schlecht: 
 
 Ebenfalls erwähnenswert ist ManyEyes \cite{Viegas2007}. Benutzer können Datensätze hochladen und eine aus mehreren vorgegebenen Visualisierungen wählen. Danach können sie ähnlich wie bei sense.us die Visualisierungen \emph{kommentieren}, es ist allerdings nicht möglich, die Visualisierung selbst zu annotieren. Wie bei sense.us ist im Unterschied zu VizBoard immer nur eine InfoVis sichtbar.
 
+% bi dashboards
+% gut: annotation an daten
+% schlecht: nix, eigentlich isses ziemlich geil
+
 Elias und Bezerianos \cite{Elias2012} entwickelten ein Annotations- bzw. \emph{Kommentarsystem} für Business Intelligence Dashboards. Dafür interviewten sie Domänenexperten und erarbeiteten sieben funktionale Anforderungen an ein annotationsgesütztes Dashboard, die sich beim Entwurf der Kommentarfunktion als hilfreich erweisen können. Herausforderungen für ihr Konzept, die ebenfalls in dieser Arbeit berücksichtigt werden sollten, waren wie mit sich änderndem Kontext (bei dynamischen Daten) umgegangen und Unabhängigkeit von Granularitäten (Jahr/Monat/Tag) gewährleistet werden soll.
 
-% zusammenfassung
+% lessons learned
 
-In diesem Abschnitt wurden verschiedene Ansätze vorgestellt, mit denen Kommentare und grafische Annotationen in Visualisierungstools umgesetzt werden. Dabei konnten notwendige Funktionen für ein solches Kommentar- bzw. Annotationssystem wie z.\,B. grafische Annotationen oder Referenzierungen von Kommentaren sowie mögliche Fallstricke wie etwa dynamische Kontexte identifiziert werden.
+% weave: wenn UI zu komplex wird, macht es keinen spaß
+% sense.us: es gibt annotationstypen, die sehr populär sind, aber nicht auf daten bezogen werden können (eben pfeile und text)
+% manyeyes: keine ahnung. weder sieht es gut aus noch ist es toll zu nutzen nach heutigen standards (JAVA ALERT) noch hat es viele features.
+% bi dashboards: cool wie sie das gelöst haben mit dynamischen kontext. wenn er sich ändert, wird ein snapshot vom kontext zusammen mit der annotation gespeichert. außerdem: UI für kommentare genau wie meine!!
 
 \subsection{User Assistance}
 
 Dieser Abschnitt befasst sich mit verschiedenen Ansätzen zur User Assistance, welche die Anforderungen Verständnis, Vollständigkeit oder Unaufdringlichkeit betrifft. Dazu zählen notwendige Funktionen des Hilfesystems, mögliche Fragestellungen des Nutzers oder Interaktionskonzepte.
 
+% hier auch das comic zeug: generation, UA mit screenshots,
+% außerdem trace based reasoning?
+
+% grafische history für tableau
+% gut: verständlich, einfach zu nutzen
+% schlecht: 
+
 Heer et al. \cite{Heer2008} entwickelten eine grafische History für Tableau, welche Undo und Redo erleichtern soll. Sie enthält Screenshots des Visualisierungszustands, die chronologisch wie eine Timeline angeordnet sind. Dieses Konzept trägt zur \emph{Verständlichkeit} der Anwendung bei. 
+
+% fragestellungen in kontextadaptiven anwendungen
+% gut: welche fragen tauchen auf
+% schlecht: nicht direkt für uns geeignet
+
+% aber für fragestellungen hab ich fix noch andre papers
 
 Lim und Dey \cite{Lim2010} kategorisieren mögliche Fragestellungen von Nutzern in kontextadaptiven Anwendungen. Dabei ändert die Anwendung abhängig vom Nutzer- bzw. Nutzungskontext ihren Zustand (z.\,B. schaltet Smartphone auf lautlos) und der Benutzer will wissen, warum (z.\,B. weil er Abends in der Oper ist). Grundlage für Lims Ausführungen ist die Annahme, dass der Nutzer nur eingeschränkt Einfluss auf die Arbeitsweise des Systems hat, etwa durch Hinzufügen eigener Regeln. Das ist im letzten Schritt des VizBoard Workflows nicht gegeben, da der Benutzer die Visualisierungskomponenten selbst ausgewählt hat. Die Fragestellungen könnten aber hilfreich sein, wenn es um die Komponenten selbst geht (\enquote{Warum werden gerade diese Daten angezeigt?}) und so die \emph{Verständlichkeit} und \emph{Vollständigkeit} erhöhen.
 
+% mashup debugging
+% gut: präventiv fehler erkennen, undo
+% schlecht: 
+
 Cao et al. \cite{Cao2010} untersuchten mit Hilfe der Thinking Aloud Methode \cite{vanSomeren1994} das Verhalten von Endnutzern, wenn sie Mashups erstellen, sowie deren Debugging-Strategien, wenn etwas nicht funktioniert. Dazu benutzten sie das inzwischen eingestellte Microsoft Popfly. In ihrer Studie hatten alle Probanden Probleme mit dem Konzept des Datenflusses, also welche Daten wann zwischen welchen Komponenten ausgetauscht werden. Ebenfalls mit Mashup Debugging beschäftigten sich Kuttal et al. \cite{Kuttal2013}. Sie entwickelten ein System zur automatischen Fehlererkennung in Yahoo Pipes. In den danach erarbeiteten Designrichtlinien schlagen sie unter anderem vor, keine technische Begriffe zu verwenden und Undo-Möglichkeiten sowie kontextuelle Hilfe anzubieten.
+
+% pipes erweiterung mit pattern recommendation
+% gut: recommendation
+% schlecht: bei uns einen schritt vorher
 
 Chowdhury et al. \cite{Chowdhury2012a} stellen eine Erweiterung von Yahoo Pipes vor, die Kompositionspattern vorschlägt und bei Bedarf in das Mashup einbaut.  Dieses \enquote{Programming by example} könnte in VizBoard benutzt werden, um die Komposition noch einmal zu überarbeiten.
 
+% textuelle erklärungen
+% gut: es geht
+% schlecht: sie sind langatmig
+
 Einige Arbeiten, wie z.\,B. \cite{Gesell2012, Matheson2012}, befassen sich mit der Generierung von textuellen Erklärungen. In beiden Arbeiten ist eine formale Repräsentation des Erklärungsgegenstands notwendig, beispielsweise als Baum von Vorbedingungen und \enquote{ist Teil von} Relationen oder einer Ontologie. In der Evaluation von Matheson et al. merkten einige Probanden an, dass ihre Erklärungen zu langatmig seien, was gegenläufig zur Anforderung \emph{Verständlichkeit} ist.
+
+% user assistance mit comics
+% gut: effektiv und besser als PP
+% schlecht: 
 
 Webb et al. \cite{Webb2012} überprüften in einer Nutzerstudie, wie User Assistance in Form eines Comics gegenüber in Form einer PowerPoint-Präsentation angenommen wird. Comics lagen in allen Fragestellungen (einfache Nutzung, attraktiv, nützlich, verständlich) vorne, am Besten wurden Comics angenommen, die eine Metapher beinhalteten.
 
+% heuristiken für infovis
+% gut: undo/redo, visuelle konsistenz
+% schlecht: anwendbarkeit? visuelle konsistenz haben wir ja nicht und wollen nicht.
+
 Forsell und Johansson \cite{Forsell2010} führten eine Nutzerstudie durch, um aus verschiedenen Heuristiken zur Heuristischen Evaluation \cite{Nielsen1994} diejenigen herauszufiltern, welche bei Informationsvisualisierungen hilfreich sind. Darunter finden sich Support für Undo/Redo, visuelle Konsistenz und den mentalen Aufwand des Nutzers gering zu halten. So kann die \emph{Verständlichkeit} und \emph{Unaufdringlichkeit} des Hilfesystems von VizBoard erhöht werden.
+
+% grammel phd
+% gut: vorschläge
+% schlecht: 
 
 Grammel \cite{Grammel2012} verfasste seine Doktorarbeit zum Thema, wie InfoVis-Anfänger Visualisierungen konstruieren. Um sie dabei zu unterstützen und ihr \emph{Verständnis} zu verbessern, schlägt er unter anderem vor, ihr mentales Modell zu verwenden (z.\,B. mit ihnen bekannten Begriffen), kontextuelle Hilfe anzubieten und es ihnen zu erleichtern, mehr über InfoVis zu lernen.
 
+% infovis mit sensemaking
+% gut: knowledge view
+% schlecht: nur cool wenn alle inhalte fusioniert werden können. und dann ist immer noch die frage, ob man sowas wirklich braucht. bin skeptisch mit zu viel features
+
 Shrinivasan et al. \cite{Shrinivasan2008} entwickelten ein Framework zur Informationsvisualisierung, welches den menschlichen Verständnisprozess unterstützen soll. Es besteht aus drei verschiedenen Views: Der InfoVis selbst, einem \enquote{Knowledge View} und einem \enquote{Navigation View}. Im Knowledge View kann der Benutzer seine Hypothesen und Analysen verwalten bzw. überprüfen, der Navigation View erlaubt es ihm, zu einem beliebigen Punkt im Laufe der Interaktionen zurück zu gehen. In einer Nutzerstudie fanden die vier Probanden den Knowledge View sehr nützlich. Er könnte die \emph{Unaufdringlichkeit} des Hilfesystems verbessern.
 
-% zusammenfassung
+% lessons learned
+
+% history ist wichtig. comics sind gut, v.a. weil text langatmig.
 
 In diesem Abschnitt wurden verschiedene Ansätze zur User Assistance im Allgemeinen und bei Mashups im Speziellen betrachtet. Zu den am meisten vorgeschlagenen Designrichtlinien zählen Undo/Redo und kontextuelle Hilfe. Das Konzept des Datenflusses ist möglicherweise nicht so eingängig wie gedacht. Außerdem wurde gezeigt, dass Comics mit Metaphern als User Assistance ansprechender und effektiver sind als PowerPoint-Präsentationen.
 
@@ -847,7 +938,7 @@ Offensichtlich sind die gewählten visuellen Effekte nicht mehr so nützlich, we
 
 % todo: wieder dafür sorgen, dass im text auch steht, was auf den bildern zu sehen ist
 
-\section{Intro}
+\section{Intro in die Funktionalität einer Komponente}
 \label{section:konzeption:intro}
 
 Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wurde deutlich, dass dem Endnutzer zuerst ein Überblick über die verschiedenen ausgewählten Komponenten gegeben werden muss. Dieser beinhaltet folgende Punkte.
@@ -857,7 +948,7 @@ Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wurde deut
 \begin{enumerate}
 	\item Art der Visualisierung, z.\,B. \enquote{Balkendiagramm}
 	\item Beschreibung der Visualisierung, z.\,B. \enquote{Ein Diagramm, das durch auf der x-Achse senkrecht stehende, nicht aneinander grenzende Rechtecke die Häufigkeitsverteilung einer diskreten Variable veranschaulicht.}
-	\item Visuelle Mappings, z.\,B. BIP auf der y-Achse und Länder auf der x-Achse.
+	\item Informationen über enthaltene Daten, z.\,B. BIP auf der y-Achse und Länder auf der x-Achse.
 	\item Links zu Tutorials, Videos und Erklärungen
 	\item Vor- und Nachteile der ausgewählten Visualisierung, z.\,B. \enquote{übersichtlich, wenn wenige Farben vorhanden sind}
 \end{enumerate}
@@ -878,7 +969,7 @@ Aus den eben aufgeführten Gründen zeigt das Intro für eine Komponente folgend
 \begin{itemize}
 	\item Art der Visualisierung
 	\item Beschreibung
-	\item Visuelle Mappings
+	\item Enthaltene Daten
 	\item Tutorialvideo, wenn vorhanden
 \end{itemize}
 
@@ -901,14 +992,14 @@ Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten s
 \subsection{Backend}
 \label{section:konzeption:intro:backend}
 
-Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein Vokabular für Informationsvisualisierungen. Deswegen ist es naheliegend, die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler bereits jetzt in der Komponentenbeschreibung hinzufügen, das bedeutet das Hilfesystem kann die entsprechenden Daten auslesen. Der Inhalt der Visualisierung entspricht dem Domain Assignment, welches der Komponente von der Laufzeitumgebung mitgeschickt wird.
+Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:viso}) enthält bereits ein Vokabular für Informationsvisualisierungen. Deswegen ist es naheliegend, die Beschreibung der Visualisierung in die VISO hinzuzufügen. Die Art der grafischen Repräsentation muss der Komponentenentwickler bereits jetzt in der Komponentenbeschreibung hinzufügen. Das bedeutet das Hilfesystem kann die entsprechenden Daten auslesen. Die in der Visualisierung verwendeten Daten entsprechen dem Domain Assignment, welches der Komponente von der Laufzeitumgebung mitgeschickt wird. Das Domain Assignment ist das Mapping vom während der Integration erstellten generischen Datenschema auf Konzepte, die in einer externen Wissensbasis wie der DBpedia beschrieben werden \cite{Voigt2012a}.
 
 % core erweiterung
 
-Damit das Hilfesystem aber die URIs der aktuell visualisierten Datenattribute bekommt, muss das CoRe erweitert werden. Aktuell werden die Datenattribute entsprechend dem generischen Datenschema der Komponente umbenannt \cite{Voigt2012a}, das bedeutet die URIs gehen verloren. Das Domain Assignment enthält eine URL zu einer externen Wissensbasis, kann also auch keine Rückschlüsse über die verwendeten Daten im DaRe geben. Um dem Komponentenentwickler Aufwand zu ersparen sollte deswegen das CoRe dahingehend erweitert werden, dass das ursprüngliche Mapping der MRE mitgeliefert wird.
+Damit das Hilfesystem aber die URIs der aktuell visualisierten Datatype Properties bekommt, muss das CoRe erweitert werden. Aktuell gehen die URIs bei der Transformation in das generische Datenschema verloren, weil sie umbenannt werden. Um dem Komponentenentwickler Aufwand zu ersparen sollte deswegen das CoRe dahingehend erweitert werden, dass das ursprüngliche Mapping der MRE mitgeliefert wird.
 
 
-\section{Bedienung}
+\section{Bedienung einer Komponente}
 \label{section:konzeption:bedienung}
 
 Da die Komponenten \enquote{Black Boxes} sind und von verschiedenen Entwicklern stammen, kann der Benutzer weder von verfügbaren möglichen Aktionen wie z.\,B. zoomen noch von einheitlicher Gestaltung der Interaktionen ausgehen. Beispielsweise wann eine Interaktion durch \texttt{MouseOver} anstatt \texttt{Click} ausgeführt wird. Deswegen ist eine Hilfestellung zur Bedienung notwendig.
@@ -917,7 +1008,9 @@ Da die Komponenten \enquote{Black Boxes} sind und von verschiedenen Entwicklern 
 
 Die einfachste Umsetzung der Hilfe zur Bedienung ist dem Komponentenentwickler eine Möglichkeit zu geben, Text und Bilder zu diesem Thema in die Komponentenbeschreibung einzufügen. Das hat allerdings den Nachteil, dass das Hilfesystem keinen Einfluss auf die Wortwahl, Gestaltung der Bilder oder Ausführlichkeit der Erklärung hat.
 
-Hilfestellungen zur Bedienung würden vom Benutzer wahrscheinlich am besten verstanden, wenn sie tatsächlich vorhandene, konkrete Elemente der Komponente verwendete (\enquote{Semantic Transparency} \cite{Kohlhase2009}). Um zu demonstrieren, dass nach einem Klick die Tabelle sortiert sein wird, könnten die Zeilen derselben beispielhaft ihre Position wechseln. Assistance in dieser Form kann auf zwei Arten umgesetzt werden, die beide ihre Nachteile haben. Einerseits könnte eine Beschreibungssprache für Aktionen in der Komponentenbeschreibung angeben, welche Folgen eine Operation haben wird. So könnte das Hilfesystem selbst die Tabellenzeilen beispielhaft sortieren, da es nun weiß, wie der Vorgang \enquote{sortieren} aussieht. Der große Nachteil daran ist, dass es vermutlich immer einen Komponentenentwickler geben wird, der eine nicht vorgesehene Aktion in seiner Komponente umsetzen will und sie nicht beschreiben kann. Die zweite Lösung, eine semantisch transparente Assistance umzusetzen, ist den Komponentenentwickler für jede Aktion eine Methode in seiner Komponente hinzufügen zu lassen, die diese demonstriert. Zur Laufzeit würde die Methode einfach vom Hilfesystem aufgerufen. Das hat allerdings den Nachteil, dass dem Komponentenentwickler erheblicher Mehraufwand aufgebürdet wird und keine Einheitlichkeit der Assistance garantiert werden kann. Aus diesen Gründen ist eine andere Lösung notwendig.
+Hilfestellungen zur Bedienung würden vom Benutzer wahrscheinlich am besten verstanden, wenn sie tatsächlich vorhandene, konkrete Elemente der Komponente verwendete (\enquote{Semantic Transparency} \cite{Kohlhase2009}). Um zu demonstrieren, dass nach einem Klick die Tabelle sortiert sein wird, könnten die Zeilen derselben beispielhaft ihre Position wechseln. Assistance in dieser Form kann auf zwei Arten umgesetzt werden, die beide ihre Nachteile haben.
+
+Einerseits könnten Aktionen mit Hilfe einer festgelegten Grammatik beschrieben werden. Beispielsweise würde die Aktion \enquote{sortieren} beinhalten, dass Elemente in Abhängigkeit eines Attributwerts ihre Position in der Visualisierung ändern. Dann könnte das Hilfesystem selbst die Tabellenzeilen demonstrativ sortieren, da es nun weiß, was die Aktion \enquote{sortieren} bedeutet. Der große Nachteil daran ist, dass es vermutlich immer einen Komponentenentwickler geben wird, der eine unvorgesehene Aktion in seiner Komponente umsetzen will und sie nicht beschreiben kann. Die zweite Lösung, eine semantisch transparente Assistance umzusetzen, ist den Komponentenentwickler für jede Aktion eine Methode in seiner Komponente hinzufügen zu lassen, die diese demonstriert. Zur Laufzeit würde die Methode einfach vom Hilfesystem aufgerufen. Das hat allerdings den Nachteil, dass dem Komponentenentwickler erheblicher Mehraufwand aufgebürdet wird und keine Einheitlichkeit der Assistance garantiert werden kann. Aus diesen Gründen ist eine andere Lösung notwendig.
 
 Wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) gezeigt, können Comics eine effektive und attraktive Lösung für User Assistance sein. Allerdings stellt es für den Entwickler erheblichen Mehraufwand dar, für jede mögliche Aktion verschiedene Comicpanels zu erstellen. Davon abgesehen können (und sollen) die gestalterischen Fähigkeiten dazu nicht von ihm erwartet werden und das Problem der Kontrolle über den Inhalt ist auch nicht gelöst.
 
@@ -940,7 +1033,18 @@ Die VISO enthält im Namensraum \texttt{viso:activity} Konzepte der hierarchisch
 
 Für das Hilfesystem sind Operationen und Aktionen relevant, da Aktivitäten nicht beeinflusst werden können. Aktionen einer Komponente sind beispielsweise zoomen, suchen oder filtern; Operationen sind etwa Klicks, Drags oder Multitouch-Gesten.
 
-Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden Operationen aus der VISO (\enquote{welche Operationen}) zusammen mit CSS Selektoren (\enquote{welche Elemente}) in der Komponentenbeschreibung definiert. Äquivalente Operationen, die denselben Effekt haben, werden zusammengefasst. Sequentielle Operationen werden ebenfalls zusammengefasst, wobei die Reihenfolge im Markup die notwendige Ausführungsreihenfolge darstellt. So können auch zusammengesetzte Operationen -- beispielsweise zuerst Menü aufrufen, dann sortieren auswählen -- abgebildet werden. Parallele Operationen werden nach demselben Prinzip zusammengefasst, allerdings ist hier die Reihenfolge irrelevant, da sie gleichzeitig ausgeführt werden müssen. Auf diese Weise können zusammengesetzte Operationen der der Art STRG+T abgebildet werden. Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind. Zusätzlich ist es möglich, dass der Entwickler Zusatzinformationen in Stichworten angibt. Zum Beispiel kann eine Tabelle durch unterschiedliche Elemente nach verschiedenen Spalten \enquote{sortiert} (Aktion) werden. Dabei ist es wichtig zu wissen, welches Element nach welcher Spalte sortiert. Nach demselben Prinzip sollte auch Zusatzinformationen über die VISO Operation angegeben werden können. Vor allem bei Tastaturkürzel (z.\,B. j/k für vor/zurück) macht es Sinn, da so nicht für jede Taste eine VISO Operation erstellt werden muss. Eine weitere Möglichkeit der Interaktion sind Toggle-Buttons, die unterschiedliche Effekte haben, je nachdem wie oft sie schon geklickt wurden. Die Komponentenbeschreibung sollte diese in Form einer VISO Operation ebenfalls berücksichtigen. Die Zusatzinformation würde bei diesen angeben, wie oft man sie betätigen muss. Die erwähnten Zusätze zur Komponentenbeschreibung sollten allerdings optional sein, falls der Komponentenentwickler keine Hilfe für bestimmte Aktionen anbieten will.
+Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden Operationen aus der VISO (\enquote{welche Operationen}) zusammen mit CSS Selektoren (\enquote{welche Elemente}) in der Komponentenbeschreibung definiert. Äquivalente Operationen, die denselben Effekt haben, werden zusammengefasst. Wenn eine Tabelle sowohl durch einen Klick auf den Spaltenkopf als auch über ein separates Menü sortiert werden kann, werden diese Aktionen als äquivalent zusammengefasst. Sequentielle Operationen werden ebenfalls zusammengefasst, wobei die Reihenfolge im Markup die notwendige Ausführungsreihenfolge darstellt. So können auch zusammengesetzte Operationen -- beispielsweise zuerst Menü aufrufen, dann sortieren auswählen -- abgebildet werden. Parallele Operationen werden nach demselben Prinzip zusammengefasst, allerdings ist hier die Reihenfolge irrelevant, da sie gleichzeitig ausgeführt werden müssen. Auf diese Weise können zusammengesetzte Operationen der der Art STRG+T abgebildet werden.
+
+Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind. Beispielsweise weil der Entwickler UI Elemente innerhalb von fünf Sekunden anstatt 500~Millisekunden einblenden will. Zusätzlich ist es möglich, dass der Entwickler Zusatzinformationen in Stichworten angibt. Zum Beispiel könnte bei einem Balkendiagramm die Skala \enquote{verändert} (Aktion) werden. Dabei ist es wichtig zu wissen, welche Skala verwendet werden wird, z.\,B. linear oder logarithmisch. Der Inhalt dieser Zusatzinformationen muss allerdings statisch sein, beispielsweise könnte nicht der Spaltenname einer Tabelle angegeben werden, da die enthaltenen Daten dynamisch sind. Nach demselben Prinzip sollten auch Zusatzinformationen über die VISO Operation angegeben werden können. Vor allem bei Tastaturkürzel (z.\,B. j/k für vor/zurück) macht es Sinn, da so nicht für jede Taste eine VISO Operation erstellt werden muss. Die erwähnten Zusätze zur Komponentenbeschreibung sollten allerdings optional sein, falls der Komponentenentwickler keine Hilfe für bestimmte Aktionen anbieten will.
+
+Im folgenden werden die in diesem Abschnitt vorgenommenen Änderungen an der Komponentenbeschreibung noch einmal zusammengefasst:
+\begin{itemize}
+	\item Zu den Aktionen werden VISO Operationen angegeben, welche diese ausführen. Diese können einfach, sequentiell oder parallel sein.
+	\item Zu den VISO Operationen werden CSS Selektoren angegeben, um die relevanten UI Elemente zur Laufzeit finden zu können.
+	\item Die VISO Operationen können Zusatzinformationen beinhalten, um sie besser zu definieren. Ein Beispiel ist die Taste zur Operation \enquote{tippen}.
+	\item Zu den Aktionen wird eine Anzahl von Sekunden angegeben, welche die Zeit bis zur finalen Änderung des User Interfaces angeben (beispielsweise wenn alle Animationen beendet sind).
+	\item Zu den Aktionen können Zusatzinformationen in Form von Stichworten angegeben werden, um sie näher zu beschreiben.
+\end{itemize}
 
 \subsection{Generierung der Assistance}
 \label{section:konzeption:bedienung:generierung}
@@ -964,23 +1068,19 @@ Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. So
 \begin{itemize}
 	\item Laufzeitumgebung: Sie ist unter anderem für die Initialisierung und das Layout der Komponenten nötig.
 	\item Data Repository: Die Komponente muss Daten darstellen, welche aus dem DaRe kommen können.
-	\item Component Repository: Das CoRe ist für die Verwaltung der Komponenten zuständig und stellt u.\,a. die Komponentenbeschreibungen bereit. Diese sind notwendig um die Operationen und Aktionen auslesen zu können.
+	\item Component Repository: Das CoRe enthält alle verfügbaren Komponenten und stellt sie dem Hilfeservice zur Verfügung.
 \end{itemize}
 
-Es wurde eben erklärt, dass das DaRe die (Test-)Daten für eine Komponente liefern kann. Der Komponentenentwickler gibt in der Komponentenbeschreibung den gewünschten Datensatz an, welcher bei der Generierung der Assistance geladen wird. Das kann ein \enquote{echter} Datensatz oder ein vom VizBoard-Betreiber zur Verfügung gestellter Testdatensatz sein. Es kann allerdings passieren, dass das DaRe keine passenden Daten enthält, weil die Komponente sehr spezielle Daten visualisiert (z.\,B. 3-Sterne-Hotels in Andorra). Dann sollte der Komponentenentwickler zusammen mit der Komponente Testdaten hochladen können oder eine URL angeben, unter der sie zu finden sind. Das ist zwar etwas Mehraufwand, aber es kann angenommen werden, dass im Laufe der Entwicklung einer Komponente sowieso Testdaten verwendet wurden. Sie müssen in den meisten Fällen also nicht mehr erstellt, sondern nur noch hochgeladen werden.
+Es wurde eben erklärt, dass das DaRe die (Test-)Daten für eine Komponente liefern kann. Der Komponentenentwickler gibt in der Komponentenbeschreibung den gewünschten Datensatz und die zu visualisierenden Daten in Form einer SPARQL Query an, welche die Laufzeitumgebung bei der Generierung der Assistance der Komponente zur Verfügung stellt. Das kann ein \enquote{echter} Datensatz oder ein vom VizBoard-Betreiber zur Verfügung gestellter Testdatensatz sein. Es kann allerdings passieren, dass das DaRe keine passenden Daten enthält, weil die Komponente sehr spezielle Daten visualisiert (z.\,B. 3-Sterne-Hotels in Andorra). Dann sollte der Komponentenentwickler zusammen mit der Komponente Testdaten hochladen können oder eine URL angeben, unter der sie zu finden sind. Das ist zwar etwas Mehraufwand, aber es kann angenommen werden, dass im Laufe der Entwicklung einer Komponente sowieso Testdaten verwendet wurden. Sie müssen in den meisten Fällen also nicht mehr erstellt, sondern nur noch hochgeladen werden. Die Bedienungshilfe kann für alle auf CRUISe basierenden Mashups hilfreich sein. Allerdings kann nicht davon ausgegangen werden, dass diese über ein Data Repository verfügen. Dann muss der Komponentenentwickler in jedem Fall Testdaten zur Generierung der Hilfe zur Verfügung stellen.
 
-% allgemeine mashups kommen halt ohne dare aus
-
-Die Bedienungshilfe kann für alle auf CRUISe basierenden Mashups hilfreich sein. Allerdings kann nicht davon ausgegangen werden, dass diese über ein Data Repository verfügen. Dann muss der Komponentenentwickler in jedem Fall Testdaten zur Generierung der Hilfe zur Verfügung stellen.
-
-Nachdem die Komponente vom Hilfeservice gerendert wurde, führt er folgende Schritte aus:
+Nachdem die Komponente von der Laufzeitumgebung vollständig initialisiert und integriert wurde, führt der Hilfeservice folgende Schritte aus:
 
 \begin{enumerate}
 	\item Erstelle einen Screenshot vom Ausgangszustand der Komponente
 	\item Für jede verfügbare Aktion:
 	\begin{enumerate}
 		%\item Finde die Bounding Box der relevanten Elemente
-		\item Für jede Liste von äquivalenten Operationen:
+		\item Für alle äquivalenten Operationen:
 		\begin{enumerate}
 			\item Für jede Operation:
 			\begin{itemize}
@@ -990,11 +1090,13 @@ Nachdem die Komponente vom Hilfeservice gerendert wurde, führt er folgende Schr
 				\item Setze Zustand der betroffenen Elemente zurück
 			\end{itemize}
 		\end{enumerate}
-		\item Führe Aktion aus
+		\item Führe die Aktion aus
 		\item Warte die definierte Anzahl an Sekunden
 		\item Erstelle einen Screenshot vom Ergebnis der Aktion
 	\end{enumerate}
 \end{enumerate}
+
+Falls die Operation in Schritt 2.a.i sequentiell sein sollte, muss der beschriebene Algorithmus die Bounding Box der Elemente jeder Teiloperation finden, genauso bei parallelen Operationen.
 
 % hell und dunkel unterscheiden
 
@@ -1017,7 +1119,7 @@ Eine weitere Einschränkung ist, dass zeitabhängige Interaktionen wie zum Beisp
 
 % ### assistance anbieten
 
-Die Hilfestellung zur Bedienung wird über einen ?-Button aufgerufen, den der Benutzer vielleicht von nativen Desktop-Applikationen kennt (Abbildung~\ref{figure:bedienung-step1}). Der Viewport der Komponente wird abgedunkelt und nur die Elemente, für die auch Hilfestellungen existieren, bleiben sichtbar. Neben der Komponente erscheint eine Sidebar, welche die verfügbaren Aktionen noch einmal auflistet. Die Assistance wird entweder nach einem Klick auf ein sichtbares UI Element oder ein Element der Liste aufgerufen. So kann der Benutzer sowohl die Frage \enquote{Was macht dieser Button?} als auch \enquote{Wie kann ich Aktion XY ausführen?} beantworten.
+Die Hilfestellung zur Bedienung kann über einen ?-Button in der Titelleiste aufgerufen werden, den der Benutzer vielleicht von nativen Desktop-Applikationen kennt (Abbildung~\ref{figure:bedienung-step1}). Der Viewport der Komponente wird abgedunkelt und nur die Elemente, für die auch Hilfestellungen existieren, bleiben sichtbar. Neben der Komponente erscheint eine Sidebar, welche die verfügbaren Aktionen noch einmal auflistet. Die Assistance wird entweder nach einem Klick auf ein sichtbares UI Element oder ein Element der Liste aufgerufen. So kann der Benutzer sowohl die Frage \enquote{Was macht dieser Button?} als auch \enquote{Wie kann ich Aktion XY ausführen?} beantworten. Eine zweite Möglichkeit, wie die Assistance aufgerufen werden kann, ist über einen ?-Button am Interaktionselement selbst (Abschnitt~\ref{section:konzeption:verlinkung}).
 
 \begin{figure}[htbp]
    \centering
@@ -1042,6 +1144,8 @@ Danach werden schrittweise mindestens vier Panels in der Komponente angezeigt (A
    \label{figure:bedienung-comic}
 \end{figure}
 
+Die Panels haben eine festgelegte Mindestgröße, um lesbar zu bleiben. Heer et al. \cite{Heer2008} verwenden in ihrer History, die ebenfalls Screenshots enthält, eine Seitenlänge von 120~Pixel. Die Komponente wird in ein Raster von Zellen unterteilt, die mindestens 120~$\times$~120~Pixel groß sind. In dieses Raster werden die Panels eingefügt. Sollten nicht genug Zellen im Raster vorhanden sein, wird die Bedienungshilfe in einem Fenster angezeigt.
+
 Die Texte in den Panels werden zur Laufzeit hinzugefügt, da so beispielsweise auf die Sprache des Nutzers reagiert werden kann. Ansonsten müsste der Hilfeservice für jede unterstützte Sprache ein eigenes Bild erzeugen. Die dafür notwendigen Informationen sind:
 
 \begin{itemize}
@@ -1058,12 +1162,12 @@ Diese werden aber schon im Schritt davor (Abbildung~\ref{figure:bedienung-step2}
 
 Wie bei jeder Software können bei den Komponenten in VizBoard Fehler auftreten. Externe APIs, die sie benutzen, wie zum Beispiel von Facebook oder Twitter können sich ändern. Visualisierte Daten können Fehler in der Komponente verursachen, beispielsweise durch nicht überprüfte \texttt{null} Werte oder wenn sie ein unerwartetes Format haben. Ebenso ist es möglich, dass VizBoard selbst Bugs enthält. Schlimmstenfalls fallen diese Fehler erst dem Endnutzer auf, welcher sie dann melden können soll.
 
-Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. VizBoard-Betreiber -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Also ob es an der Komponente liegt (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API). Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben, und die Möglichkeit haben, die Komponente prinzipiell als gut oder schlecht zu bewerten. Letztere Funktion existiert bereits in VizBoard und wird in die Reporting UI integriert. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
+Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. VizBoard-Betreiber -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Liegt es an der Komponente (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API)? Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben, und die Möglichkeit haben, die Komponente prinzipiell als gut oder schlecht zu bewerten. Letztere Funktion existiert bereits in VizBoard und wird in die Reporting UI integriert. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:reporting:ui}
 
-Der Nutzer klickt auf einen Button in der Titelleiste, beschreibt sein Problem und sendet ab (Abbildung~\ref{figure:reporting}). Optional kann er außerdem eine Bewertung abgeben.
+Der Nutzer klickt auf einen Button in der Titelleiste, beschreibt sein Problem und sendet ab (Abbildung~\ref{figure:reporting}). Optional kann er außerdem eine Bewertung abgeben \cite{Voigt2013b}.
 
 \begin{figure}[htbp]
    \centering
@@ -1092,7 +1196,7 @@ Diese und andere notwendige Informationen können mit Javascript einfach ausgele
 
 % noch sagen dass es denkbar wäre, das direkt an ein support system anzubinden
 
-Die gesammelten Informationen über Nutzer, Browser und Anwendungskontext werden ans DaRe gesendet und dort abgespeichert. Das DaRe könnte aus der vom Nutzer abgegebenen Bewertung und Textklassifikation \cite{Sebastiani2002} in \enquote{positiv} oder \enquote{negativ} bestimmen, ob ein Ticket in einem Support System (wie z.\,B. OSTicket\footnote{\url{http://osticket.com/}}) des VizBoard-Betreibers erstellt werden soll. Die positiven Kommentare könnten beispielsweise für Testimonials auf der Startseite von VizBoard verwendet werden.
+Das Feedback des Nutzers wird ans Rating Repository gesendet und gespeichert. Die gesammelten Informationen aus dem Context Service über Nutzer, Browser und Anwendungskontext werden im RaRe referenziert. Das RaRe könnte aus der vom Nutzer abgegebenen Bewertung und Textklassifikation \cite{Sebastiani2002} in \enquote{positiv} oder \enquote{negativ} bestimmen, ob ein Ticket in einem Support System (wie z.\,B. OSTicket\footnote{\url{http://osticket.com/}}) des VizBoard-Betreibers erstellt werden soll. Die positiven Kommentare könnten beispielsweise für Testimonials auf der Startseite von VizBoard verwendet werden.
 
 \section{Kommunikation}
 \label{section:konzeption:kommunikation}
@@ -1132,7 +1236,7 @@ Die Kommunikation zwischen Komponenten kann über den Event Broker (Abschnitt~\r
 
 Für die Generierung des Comics muss das Konzept der User Assistance für Bedienung (Abschnitt~\ref{section:konzeption:bedienung:api}) nur leicht erweitert werden. Da Komponenten mit Operationen auf Nachrichten reagieren (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}), muss für das Ergebnis einer Operation ebenfalls ein Screenshot erstellt werden. Diese sind jetzt schon in der Komponentenbeschreibung vorhanden und können während der Panel-Generierung einfach ausgeführt werden. Sollten die Operationen Parameter erwarten, muss der Komponentenentwickler Beispieldaten in die Komponentenbeschreibung einfügen.
 
-Zu beachten ist allerdings, dass es Operationen geben kann, welche das User Interface der Komponente nicht verändern. Das Konzept der Hilfestellung mit Comics fußt darauf, dass ein sichtbarer Unterschied zwischen den Zuständen vor und nach einer Interaktion bzw. Operation besteht. Ist jener nicht vorhanden, ergibt der Comic keinen Sinn mehr. Deswegen muss dem Komponentenentwickler eine Möglichkeit gegeben werden, Operationen zu identifizieren, für die keine Hilfe generiert werden soll.
+Zu beachten ist allerdings, dass es Operationen geben kann, welche das User Interface der Komponente nicht verändern. Das Konzept der Hilfestellung mit Comics fußt darauf, dass ein sichtbarer Unterschied zwischen den Zuständen vor und nach einer Interaktion bzw. Operation besteht. Ist jener nicht vorhanden, ergibt der Comic keinen Sinn mehr. Deswegen muss dem Komponentenentwickler eine Möglichkeit gegeben werden, Operationen zu identifizieren, für die keine Hilfe generiert werden soll. Das kann am einfachsten durch ein optionales Attribut in der Komponentenbeschreibung umgesetzt werden.
 
 \section{Verlinkung}
 \label{section:konzeption:verlinkung}
@@ -1144,17 +1248,17 @@ Es ist möglich, dass ein Benutzer in VizBoard auf vollständig (\enquote{Was is
 \subsection{Markup und Backend}
 \label{section:konzeption:verlinkung:backend}
 
-Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einer dafür vorgesehenen CSS Klasse aus: Eine Klasse für Legenden, eine für Freitext. Diese können entweder in der Komponentenbeschreibung angegeben und so selbst gewählt werden, oder sie werden vom Vizboard-Betreiber festgelegt. Hier wird die letzte Variante umgesetzt, weil sie dem Komponentenentwickler etwas Aufwand erspart und \enquote{Kollisionen} mit bereits vorhandenen Klassen erstens unwahrscheinlich sind und zweitens einfach behoben werden können (beispielsweise mit dem Präfix \texttt{my-}). Der zu erklärende Begriff ist dann der Textinhalt des Tags mit der entsprechenden Klasse. Bei Interaktionselementen sind die CSS Selektoren schon vorhanden (Abschnitt~\ref{section:konzeption:bedienung}) und das Konzept wird in Form einer URI in die Komponentenbeschreibung eingefügt.
+Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einer dafür vorgesehenen CSS Klasse aus: Eine Klasse für Legenden, eine für Freitext. Diese können entweder in der Komponentenbeschreibung angegeben und so selbst gewählt werden, oder sie werden vom Vizboard-Betreiber festgelegt. Hier wird die letzte Variante umgesetzt, weil sie dem Komponentenentwickler etwas Aufwand erspart und \enquote{Kollisionen} mit bereits vorhandenen Klassen erstens unwahrscheinlich sind und zweitens einfach behoben werden können (beispielsweise mit dem Präfix \texttt{my-}). Der zu erklärende Begriff ist dann der Textinhalt des Tags mit der entsprechenden Klasse. Bei Interaktionselementen sind die CSS Selektoren für die Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) schon vorhanden und das Konzept wird in Form einer URI in die Komponentenbeschreibung eingefügt.
 
-Auf diese Weise können die erklärungsbedürftigen Konzepte über CSS Selektoren gefunden werden. Wie kommt das Hilfesystem aber an die Beschreibung? Die Konzepte sind im Falle von Freitext dynamisch, bei Legenden statisch, aber abhängig vom Datensatz und bei Interaktionselementen statisch in Abhängigkeit der Komponente. Es erscheint sinnvoll eine einheitliche Zugriffsschicht für Konzeptbeschreibungen zu etablieren. Dabei bietet sich im Fall von VizBoard das DaRe an, welches als einheitliche Zugriffsschicht auf Daten konzipiert ist. Bei anderen Mashups, die auf CRUISe aufbauen, sollte das CoRe diese Funktion übernehmen.
+Auf diese Weise können die erklärungsbedürftigen Konzepte über CSS Selektoren gefunden werden. Allerdings stellt sich die Frage, wie das Hilfesystem die Beschreibung lesen kann. Die Konzepte sind im Falle von Freitext dynamisch, bei Legenden statisch, aber abhängig vom Datensatz und bei Interaktionselementen statisch in Abhängigkeit der Komponente. Es erscheint sinnvoll eine einheitliche Zugriffsschicht für Konzeptbeschreibungen zu etablieren. Dabei bietet sich im Fall von VizBoard das DaRe an, welches als einheitliche Zugriffsschicht auf Daten konzipiert ist. Bei anderen auf CRUISe aufbauenden Mashups sollte das CoRe diese Funktion übernehmen.
 
-Das DaRe findet das Domain Assignment eigenständig, nachdem ein Datensatz hochgeladen wurde. Danach sollte eine Beschreibung aus der externen Wissensbasis abgerufen und gespeichert werden. Das hat den Nachteil, dass möglicherweise die Aktualität der Information mangelhaft ist. Da sich aber Beschreibungen zu Konzepten wie \enquote{logarithmische Skala} kaum ändern sollten und als Beispiel die DBpedia nur ein- bis zweimal pro Jahr ein Update bekommt\footnote{\url{http://blog.dbpedia.org/category/dataset-releases/} zeigt ein bis zwei Artikel im Jahr, abgerufen am 01.07.2013}, sollte das kein Problem sein. Im Gegenzug ist das Hilfesystem unabhängig von der DBpedia verfügbar und schneller, da im Vergleich zum dynamischen Abruf der Beschreibung ein Netzwerk Round Trip eingespart wird.
+Das DaRe findet das Domain Assignment eigenständig, nachdem ein Datensatz hochgeladen wurde. Danach sollte eine Beschreibung aus der externen Wissensbasis abgerufen und gespeichert werden. Das hat den Nachteil, dass zum Zeitpunkt des Abrufs die Aktualität der Information möglicherweise nicht mehr gegeben ist. Da sich aber Beschreibungen zu Konzepten wie \enquote{logarithmische Skala} kaum ändern sollten und als Beispiel die DBpedia nur ein- bis zweimal pro Jahr ein Update bekommt\footnote{\url{http://blog.dbpedia.org/category/dataset-releases/} zeigt ein bis zwei Artikel im Jahr, abgerufen am 01.07.2013.}, sollte das kein Problem sein. Im Gegenzug ist das Hilfesystem unabhängig von der DBpedia verfügbar und schneller, da im Vergleich zum dynamischen Abruf der Beschreibung ein Netzwerk Round Trip eingespart wird.
 
-Im Fall von Interaktionselementen parst das Core die Komponentenbeschreibung, nachdem eine Komponente hochgeladen wurde. Dabei extrahiert es die notwendigen Konzepte und schickt diese ans DaRe, welches die Beschreibungen dazu abruft und speichert.
+Im Fall von Interaktionselementen parst das CoRe die Komponentenbeschreibung, nachdem eine Komponente hochgeladen wurde. Dabei extrahiert es die notwendigen Konzepte und schickt diese ans DaRe, welches die Beschreibungen dazu abruft und speichert.
 
 \subsection{User Interface und Interaktion}
 
-Bei Legenden und Freitext wird hinter die entsprechend markierten DOM Elemente (siehe Abschnitt~\ref{section:konzeption:verlinkung:backend}) ein Fragezeichen eingefügt, um eine Interaktionsmöglichkeit anzudeuten. Dieses kann angeklickt werden, woraufhin eine Sidebar mit einer kurzen Erklärung des Konzepts angezeigt wird (Abbildung~\ref{figure:verlinkung}). Sie enthält auch einen Link, der zu einer Erklärung in einer externen Wissensbasis führt.
+Bei Legenden und Freitext wird hinter die entsprechend markierten DOM Elemente (siehe Abschnitt~\ref{section:konzeption:verlinkung:backend}) ein Fragezeichen eingefügt, um eine Interaktionsmöglichkeit anzudeuten. Dieses kann angeklickt werden, woraufhin eine Sidebar mit einer kurzen Erklärung des Konzepts angezeigt wird (Abbildung~\ref{figure:verlinkung}), bei Interaktionselementen wird zusätzlich die Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) angezeigt. Die Sidebar enthält auch einen Link, der zu einer Erklärung in einer externen Wissensbasis führt. Zur Erklärung des Konzepts gehört auf jeden Fall eine kurze Beschreibung, wie sie im ersten Absatz von Wikipedia-Artikeln gegeben ist und idealerweise ein Bild, falls vorhanden. Ist keine Beschreibung in der Sprache des Benutzers vorhanden, wird sie auf englisch angezeigt.
 
 \begin{figure}[htbp]
    \centering
@@ -1207,7 +1311,7 @@ Erfahrungsgemäß tragen nicht alle Kommentare gleich viel zur Diskussion bei. M
 
 \subsubsection{Ranking}
 
-Da Kommentare in einer Liste angezeigt werden und keine Buttons zum Sortieren vorgesehen sind (Abschnitt~\ref{section:konzeption:kommentare:ui}), muss das Hilfesystem die anzuzeigenden Kommentare nach einem Algorithmus sortieren. In diesen sollten sowohl die Bewertung eines Kommentars als auch die Komponente, in der er verfasst wurde und die Daten, die er referenziert, einfließen. Möglich wäre zum Beispiel nach Bewertung zu sortieren, aber Kommentare zu bestrafen, wenn sie aus anderen Komponenten stammen oder nur teilweise die gefragten Datenattribute referenzieren. Dann wird nur ein festgelegter Teil der Bewertung berücksichtigt (z.\,B. die Hälfte). So werden Kommentare aus der gleichen Komponente bevorzugt, aber solche mit hohen Bewertungen erscheinen trotzdem zuerst.
+Da Kommentare in einer Liste angezeigt werden und keine Buttons zum Sortieren vorgesehen sind (Abschnitt~\ref{section:konzeption:kommentare:ui}), muss das Hilfesystem die anzuzeigenden Kommentare nach einem Algorithmus sortieren. In diesen sollten sowohl die Bewertung eines Kommentars als auch die Komponente, in der er verfasst wurde und die Daten, die er referenziert, einfließen. Möglich wäre zum Beispiel nach Bewertung zu sortieren, aber Kommentare zu bestrafen, wenn sie aus anderen Komponenten stammen oder nur teilweise die gefragten Datatype Properties referenzieren. Dann wird nur ein festgelegter Teil der Bewertung berücksichtigt (z.\,B. die Hälfte). So werden Kommentare aus der gleichen Komponente bevorzugt, aber solche mit hohen Bewertungen erscheinen trotzdem zuerst.
 
 \subsubsection{Kommentar editieren}
 
@@ -1221,7 +1325,7 @@ Den eigenen Kommentar editieren zu können, ist aus verschiedenen Gründen wicht
 
 \subsubsection{Kommentar löschen}
 
-Gründe, um einen Kommentar zu löschen, beinhalten unter anderem Schwachsinn (der von anderen als solcher identifiziert wurde), Beschimpfungen oder mangelnde Aktualität. Wie beim Editieren von Kommentaren ist es hier notwendig, dass der Gesprächsverlauf nachvollziehbar bleibt. Die Lösungsansätze beinhalten:
+Gründe, um einen Kommentar zu löschen, beinhalten unter anderem Beschimpfungen oder mangelnde Aktualität, etwa wenn eine zitierte Studie widerlegt wurde. Wie beim Editieren von Kommentaren ist es hier notwendig, dass der Gesprächsverlauf nachvollziehbar bleibt. Die Lösungsansätze beinhalten:
 
 \begin{itemize}
 	\item Kommentare können nicht gelöscht werden. Das könnte Benutzer davon abhalten, Kommentare zu schreiben, was auch nicht Sinn der Sache ist.
@@ -1247,26 +1351,24 @@ Um eine gemeinsame Grundlage für eine Diskussion zu schaffen ist es notwendig, 
 
 Wie im letzten Abschnitt beschrieben ist es notwendig, Bereiche einer Visualisierung referenzieren zu können. Um Wiederverwendung über Komponenten hinweg zu fördern, sollten die Kommentare sich möglichst auf die visualisierten Daten selbst beziehen (\emph{datenbezogene Kommentare}) und nicht auf einen Bereich der Visualisierung (\emph{ortsbezogene Kommentare}).
 
-Komponenten, welche die Kommentarfunktion anbieten wollen, dürfen aus zwei Gründen keine externen Daten anzeigen (also beispielsweise die neuesten Tweets eines Twitter-Accounts): Erstens könnte der Kontext eines Kommentars sich ändern, etwa wenn Tweets gelöscht wurden. Die externen Daten unterliegen nicht der Kontrolle des Hilfesystems. Zweitens sind die externen Daten nicht im DaRe vorhanden, weswegen sie nicht über Komponenten hinweg wiederverwendet werden können. Dabei ist es unerheblich, ob die Komponente selbst externe Daten lädt oder externe Daten einer anderen Komponente anzeigt. Um den ersten Fall für das Hilfesystem erkennbar zu machen, kann die Komponentenbeschreibung erweitert werden. Für den zweiten Fall muss das Hilfesystem nach erfolgreicher Integration aller Visualisierungskomponenten selbst überprüfen, welche davon externe Daten laden und mit welchen diese über Links (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) verbunden sind.
-
-Prinzipiell können Kommentare in Bereichskommentare und Punktkommentare unterschieden werden.
+Komponenten, welche die Kommentarfunktion anbieten wollen, dürfen aus zwei Gründen keine externen Daten anzeigen (also beispielsweise die neuesten Tweets eines Twitter-Accounts): Erstens könnte der Kontext eines Kommentars sich ändern, etwa wenn Tweets gelöscht wurden. Die externen Daten unterliegen nicht der Kontrolle des Hilfesystems. Zweitens sind die externen Daten nicht im DaRe vorhanden, weswegen sie nicht über Komponenten hinweg wiederverwendet werden können. Dabei ist es unerheblich, ob die Komponente selbst externe Daten lädt oder externe Daten einer anderen Komponente anzeigt. Um den Fall von eigenen externen Daten für das Hilfesystem erkennbar zu machen, kann die Komponentenbeschreibung erweitert werden. Für den Fall von fremden externen Daten muss das Hilfesystem nach erfolgreicher Integration aller Visualisierungskomponenten selbst überprüfen, welche davon externe Daten laden und mit welchen diese über Links (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) verbunden sind.
 
 \subsubsection{Datenbezogene Bereichskommentare}
 
 Damit Bereichskommentare Daten referenzieren können, müssen drei Voraussetzungen gegeben sein:
 
 \begin{enumerate}
-	\item Die grafische Repräsentation muss Werte von Variablen auf die Position kodieren, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann. Das ist beispielsweise bei einem Scatterplot der Fall, bei einer Treemap nicht. Dort sind Größe und Farbe die visuellen Attribute.
-	\item Die Komponente muss eine Operation bereitstellen, welche kartesische Koordinaten $(x_1,y_1)$ in Datenbereiche (2000 \$, 14. Mai 1998) transformiert sowie deren Umkehrung. Komponenten sind \enquote{Black Boxes} und es kann deswegen keine Annahme über die verwendete Skala (linear oder logarithmisch) oder andere Interna getroffen werden. Aus diesem Grund ist es nicht möglich, aus Auswahlkoordinaten $(x_1,y_1,x_2,y_2)$ direkt auf Daten zu schließen.
-	\item Die Komponente darf keine Datenverarbeitung in Form von Aggregationen o.\,ä. durchführen, da diese Daten nicht im Data Repository gespeichert sind und es folglich keine Daten enthält, die referenziert werden könnten.
+	\item Falls der Bereich leer ist, muss die grafische Repräsentation die Position als visuelles Mapping benutzen, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann.
+	\item In jedem Fall muss die Komponente eine Operation bereitstellen, welche kartesische Koordinaten $(x_1,y_1)$ in Datenbereiche (2000 \$, 14. Mai 1998) transformiert sowie deren Umkehrung. Komponenten sind \enquote{Black Boxes} und es kann deswegen keine Annahme über die verwendete Skala (linear oder logarithmisch) oder andere Interna getroffen werden. Aus diesem Grund ist es nicht möglich, aus Auswahlkoordinaten $(x_1,y_1,x_2,y_2)$ direkt auf Daten zu schließen.
+	\item Die verwendeten Daten müssen im Data Repository gespeichert sein, da ansonsten keine Daten referenziert werden können. Aus diesem Grund darf weder die Komponente selbst Datenverarbeitung in Form von Aggregationen o.\,ä. durchführen, noch dürfen die Daten selbst bereits aggregiert in der Komponente ankommen.
 \end{enumerate}
 
-Erfüllt eine Komponente diese Bedingungen nicht vollständig, können nur ortsbezogene Bereichskommentare eingesetzt werden. Wenn datenbezogene Bereichskommentare angezeigt und von anderen Benutzern nachvollzogen werden sollen, muss das Hilfesystem die Komponente in den damals aktiven Zustand zurücksetzen können, da ansonsten die referenzierten Bereiche andere Daten enthalten. Diese Tatsache führt zu weiteren Anforderungen an die Komponente:
+Erfüllt eine Komponente diese Bedingungen nicht vollständig, können nur ortsbezogene Bereichskommentare eingesetzt werden. Wenn datenbezogene Bereichskommentare angezeigt und von anderen Benutzern nachvollzogen werden sollen, muss das Hilfesystem die Komponente in den damals aktiven Zustand zurücksetzen können, da ansonsten die referenzierten Bereiche andere Daten enthalten können. Diese Tatsache führt zu weiteren Anforderungen an die Komponente:
 
 \begin{enumerate}
 	\setcounter{enumi}{3}
 	\item Das Layout der Komponente muss vollständig reproduzierbar sein, also zum Beispiel kein Force Directed Layout \cite{Fruchterman1991}.
-	\item Die Komponente muss dem Hilfesystem einen Weg zur Verfügung stellen, mit dem Zustände (wie z.\,B. Zentrum und Zoomlevel einer Karte) gespeichert und vollständig wiederhergestellt werden können.
+	\item Die Komponente muss der Laufzeitumgebung einen Weg zur Verfügung stellen, mit dem Zustände (wie z.\,B. Zentrum und Zoomlevel einer Karte) gespeichert und vollständig wiederhergestellt werden können.
 \end{enumerate}
 
 Bezüglich der letzten Anforderung bietet sich ein Memento-Pattern \cite{Gamma1994} an:
@@ -1298,7 +1400,7 @@ Mit Datenpunkten verhält sich die Situation etwas einfacher als bei Bereichen. 
 
 % markup
 
-Zuvor muss allerdings noch geklärt werden, auf welche Weise der Komponentenentwickler die URIs im Markup sichtbar machen soll. Prinzipiell kommen dafür alle Möglichkeiten in Frage, die mit Hilfe von CSS ausgelesen werden können. Dazu gehören HTML Markup Elemente wie \texttt{id} oder Datenattribute \texttt{data-*}, aber auch Microformats\footnote{\url{http://microformats.org/}} oder RDFa \cite{W3C2012}. Microformats werden ausgeschlossen, da bei diesen das Vokabular vorgegeben ist, während bei RDFa nur die Syntax definiert wird. Eine URI ist kein gültiger Wert für die \texttt{id} eines DOM Elements, deswegen wird auch sie ausgeschlossen. RDFa hat gegenüber Datenattributen den Vorteil, dass so auch zusätzliche Informationen über den Datenpunkt (beispielsweise das Label) ins Markup integriert werden können. Auf diese Weise kann das Hilfesystem unter Umständen den einen oder anderen Aufruf des DaRes einsparen und stattdessen HTML parsen, was zur Geschwindigkeit der Anwendung beiträgt.
+Zuvor muss allerdings noch geklärt werden, auf welche Weise der Komponentenentwickler die URIs im Markup sichtbar machen soll. Prinzipiell kommen dafür alle Möglichkeiten in Frage, die mit Hilfe von CSS ausgelesen werden können. Dazu gehören HTML Markup Elemente wie \texttt{id} oder Datenattribute \texttt{data-*}, aber auch Microformats\footnote{\url{http://microformats.org/}} oder RDFa \cite{W3C2012}. Microformats werden ausgeschlossen, da bei diesen das Vokabular vorgegeben ist, während bei RDFa nur die Syntax definiert wird. Eine URI ist kein gültiger Wert für die \texttt{id} eines DOM Elements, deswegen wird auch sie ausgeschlossen. RDFa hat gegenüber Datatype Propertiesn den Vorteil, dass so auch zusätzliche Informationen über den Datenpunkt (beispielsweise das Label) ins Markup integriert werden können. Auf diese Weise kann das Hilfesystem unter Umständen den einen oder anderen Aufruf des DaRes einsparen und stattdessen HTML parsen, was zur Geschwindigkeit der Anwendung beiträgt.
 
 % laden
 Beim Laden von Punktkommentaren zählt das Hilfesystem erst die Anzahl von Kommentaren pro Datenpunkt und stellt diese Anzahl über dem visualisierten Datenpunkt dar. Das ist möglich, weil über die URI in Kombination mit CSS Selektoren die entsprechenden DOM Elemente identifiziert werden können.
@@ -1309,7 +1411,7 @@ Beim Laden von Punktkommentaren zählt das Hilfesystem erst die Anzahl von Komme
 
 % ### user interface & interaktion
 
-In der Titelleiste gibt es zwei Buttons mit einem abgewandelten Sprechblasen-Icon, einmal ist ein Auge in der Sprechblase (Kommentare ansehen) und einmal ein Pluszeichen (Kommentar hinzufügen).
+In der Titelleiste gibt es zwei Buttons mit einem abgewandelten Sprechblasen-Icon, einmal ist ein Auge in der Sprechblase (Kommentare ansehen) und einmal ein Pluszeichen (Kommentar hinzufügen). Eine ständig sichtbare textuelle Beschreibung wäre offensichtlicher, kann aber aufgrund des geringen Platzangebots nur mit einem Tooltip umgesetzt werden.
 
 Wenn der Benutzer einen Kommentar verfassen will, erscheint eine Sidebar mit einer Textbox, Controls um die Kommentarform zu ändern (Rechteck, Pfeil, Text) und einem Buttons zum Bestätigen (Abbildung~\ref{figure:kommentare-step4}). Abgebrochen wird nachdem der Benutzer außerhalb der Sidebar klickt. Der Benutzer kann nun ein oder mehrere, nicht überlappende Rechtecke in der Visualisierung erstellen oder Datenpunkte markieren (linker Balken in Abbildung~\ref{figure:kommentare-step4}). Das Hilfesystem setzt die Komponente in den Ausgangszustand zurück, sobald der Benutzer bestätigt oder abgebrochen hat.
 
@@ -1326,7 +1428,7 @@ Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt der Sidebar z
 	\item Linke Spalte
 	\begin{itemize}
 		\item ID des Kommentars: Diese ist zur Referenzierung notwendig.
-		\item Avatar des Benutzers und Benutzername sollen das Vertrauen der Benutzer untereinander erhöhen und so die Qualität der Kommentare verbessern \cite{Chiu2006}.
+		\item Avatar des Benutzers und Benutzername: Diese sollen das Vertrauen der Benutzer untereinander erhöhen und so die Qualität der Kommentare verbessern \cite{Chiu2006}. Gespeichert und abgerufen werden sie in der Benutzerverwaltung von VizBoard.
 		\item Datum der Erstellung oder letzten Editierung, was jünger ist. Wurde editiert, ist das Datum kursiv geschrieben.
 		\item Editieren/Löschen-Buttons, falls der Kommentar selbst verfasst wurde.
 	\end{itemize}
@@ -1388,8 +1490,8 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:features
 	\end{itemize}
 	\item ID der Komponente, in der der Kommentar verfasst wurde. Das ist notwendig um ortsbezogene Kommentare wiederherstellen zu können. Bei datenbezogenen Kommentaren kann eventuell ein Verweis auf die ursprüngliche Komponente erstellt werden.
 	\item ID des Datensatzes, der visualisiert wurde
-	\item Verfasser des Kommentars
-	\item URIs der Datenattribute, die visualisiert wurden
+	\item ID des Verfassers
+	\item URIs der Datatype Properties, die visualisiert wurden
 	\item Memento der Komponente zum Zeitpunkt des Kommentars
 	\item \textit{Wenn ortsbezogene Elemente vorhanden}
 		\begin{itemize}
@@ -1403,12 +1505,12 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:features
 		\end{itemize}
 	\item \textit{Für jedes datenbezogene Element}
 		\begin{itemize}
-			\item Grenzwerte der visualisierten Datenattribute
+			\item Grenzwerte der visualisierten Datatype Properties. Ist ein Datatype Property nominalen Typs, besitzt also keine inhärente Ordnung (z.\,B. Länder), muss eine Menge von Datenpunkten angegeben werden.
 		\end{itemize}
 	\item \textit{Für jeden Datenpunkt}
 		\begin{itemize}
 			\item URI
-			\item Werte der visualisierten Datenattribute
+			\item Werte der visualisierten Datatype Properties
 		\end{itemize}
 \end{itemize}
 
@@ -1435,28 +1537,69 @@ Kommentare können auch Metainformationen über die Daten oder Komponente enthal
 
 % warum undo/redo?
 
-In den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde mehrmals empfohlen, dem Benutzer Undo/Redo von getätigten Aktionen zu ermöglichen. So können unerwünschte Ergebnisse einfach rückgängig gemacht werden.
-
-In Abschnitt~\ref{section:konzeption:kommentare:api} wurde ein Memento-Pattern für Komponenten eingeführt. Damit kann das Hilfesystem Zustände von Komponenten abrufen, speichern und wiederherstellen. Im Folgenden wird davon ausgegangen, dass diese Mementos ausreichen, um eine Komponente von einem konsistenten Zustand in einen anderen konsistenten Zustand zu überführen (und beispielsweise keine Operationen ausgeführt werden müssen). Es stellt sich allerdings die Frage, wann die Mementos der Komponenten abgerufen werden sollen. Prinzipiell kann es vor oder nach einem Event (welches Operationen auslöst, die potentiell den Zustand der Komponente ändern) passieren, beide Varianten haben aber ihre Nachteile.
-
-% vorher - klappt nicht, funkt der dev dazwischen 
-
-Vor einem Event die Mementos abzurufen ist nicht möglich. Das Hilfesystem könnte eigene Event Handler auf die Operationen der aktionsrelevanten UI Elemente registrieren und so bemerken, wann eine Aktion gestartet wird, die möglicherweise zurückgesetzt werden soll. Allerdings kann das Hilfesystem frühestens Event Handler registrieren, wenn die Komponente initialisiert wurde. Zu diesem Zeitpunkt wurde der DOM geladen und Event Handler registriert. Die Event Handler des Hilfesystems würden zwangsläufig danach registriert und demnach auch nach den Handlern des Komponentenentwicklers ausgeführt. Wenn es soweit ist, könnte die Komponente schon ihren Zustand verändert haben und das Memento enthält nicht die gewünschten Attributwerte.
-
-Eine mögliche Lösung wäre den Lebenszyklus der Komponenten zu modifizieren. Es könnte ein Zustand \emph{Rendered} zwischen \emph{Integrated} und \emph{Active} eingefügt werden (Abbildung~\ref{figure:cruise-lifecycle}), bei dem der DOM der Komponente vollständig vorhanden sein, aber Event Handler noch nicht registriert sein sollen. Zu diesem Zeitpunkt könnte das Hilfesystem seine Handler vor jenen des Komponentenentwicklers registrieren, die dann auch als erstes ausgeführt würden. Problematisch ist allerdings, wenn eine Komponente zur Laufzeit DOM Elemente erstellt und Event Handler registriert. Dieses Verhalten müsste man verbieten, um sicherzustellen dass Handler des Hilfesystems immer zuerst ausgeführt werden. Das ist aber nicht wünschenswert, weil diese Vorgabe möglicherweise große Anpassungen des Komponentencodes nötig macht und oft auch gar nicht umsetzbar ist (z.\,B. wenn Tweets zur Laufzeit geladen und angezeigt werden).
+In den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde mehrmals empfohlen, dem Benutzer Undo/Redo von getätigten Aktionen zu ermöglichen. So können unerwünschte Ergebnisse einfach rückgängig gemacht werden. In diesem Abschnitt wird untersucht, wie in einem CRUISe Mashup, in dem die Komponenten lose gekoppelt sind, ein kompositionsübergreifendes Undo/Redo umgesetzt werden kann. Die Granularitätsstufe entspricht dabei Nutzerinteraktionen und nicht Events oder Operationen. Das entspricht wie in den verwandten Arbeiten von Grammel \cite{Grammel2012} vorgeschlagen dem mentalen Modell des Benutzers, da für ihn Events und Operationen unsichtbar sind. Als Beispiel wird die Komposition in Abbildung~\ref{figure:dependency-graph-example} verwendet.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=\textwidth]{images/konzeption-cruise-lifecycle.png}
+   \includegraphics[width=0.75\textwidth]{images/konzeption-dependency-graph-example.png}
+   \caption{Beispielhafte Komposition}
+   \label{figure:dependency-graph-example}
+\end{figure}
+
+In Abschnitt~\ref{section:konzeption:kommentare:api} wurde ein Memento-Pattern für Komponenten eingeführt. Damit kann das Hilfesystem Zustände von Komponenten abrufen, speichern und wiederherstellen. Im Folgenden wird davon ausgegangen, dass diese Mementos ausreichen, um eine Komponente von einem konsistenten Zustand in einen anderen konsistenten Zustand zu überführen (und beispielsweise keine Operationen ausgeführt werden müssen). Es stellt sich allerdings die Frage, wann die Mementos der Komponenten abgerufen werden sollen. Prinzipiell kann es vor oder nach einem Event (welches Operationen aufruft, die potentiell den Zustand der Komponente ändern) passieren.
+
+% vorher - klappt nicht, funkt der dev dazwischen 
+
+\textbf{Vor} einem Event die Mementos abzurufen ist nicht möglich, da ein Event erst registriert wird, wenn die Nachricht im Event Broker ankommt. Zu diesem Zeitpunkt kann eine Komponente ihren Zustand bereits geändert haben. Das Hilfesystem könnte eigene Event Handler auf die Operationen der aktionsrelevanten UI Elemente registrieren und so bemerken, wann ein Event ausgelöst wird. Allerdings kann das Hilfesystem erst Event Handler registrieren, wenn die Komponente initialisiert wurde. Zu diesem Zeitpunkt wurde der DOM geladen und Event Handler des Komponentenentwicklers registriert. Die Event Handler des Hilfesystems würden zwangsläufig nach den Handlern des Entwicklers ausgeführt. Wenn es soweit ist, könnte die Komponente schon ihren Zustand verändert haben und das Memento enthält nicht die gewünschten Attributwerte.
+
+Eine mögliche Lösung wäre den Lebenszyklus der Komponenten zu modifizieren. Es könnte ein Zustand \emph{Rendered} zwischen \emph{Integrated} und \emph{Active} eingefügt werden (Abbildung~\ref{figure:cruise-lifecycle}), bei dem der DOM der Komponente vollständig vorhanden sein, aber Event Handler noch nicht registriert sein sollen. Zu diesem Zeitpunkt könnte das Hilfesystem seine Handler vor jenen des Komponentenentwicklers registrieren, die dann auch als erstes ausgeführt würden. Problematisch ist allerdings, wenn eine Komponente zur Laufzeit DOM Elemente erstellt und Event Handler registriert. Dieses Verhalten müsste man verbieten, um sicherzustellen dass Handler des Hilfesystems immer zuerst ausgeführt werden. Das ist aber nicht wünschenswert, weil diese Vorgabe möglicherweise große Anpassungen des Komponentencodes nötig macht und oft auch gar nicht umsetzbar ist.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-cruise-lifecycle.png}
    \caption{UI Mockup: Modifizierter CRUISe Komponentenlebenszyklus}
    \label{figure:cruise-lifecycle}
 \end{figure}
 
-% nachher - klappt nicht gut
+% nachher
 
-Es bleibt die Möglichkeit nach einem Event Mementos abzurufen. Zunächst ist es schwierig festzustellen, wann \enquote{nach} einem Event überhaupt ist. Events können in dem Sinne kaskadieren, als dass sie Operationen auslösen, die weitere Events feuern, die wiederum Operationen ausführen, die selbst Events feuern und so weiter. Aus dem Kommunikationsmodell kann nicht eindeutig bestimmt werden, welche Events $E=\{e_i | i>0\}$ nach einem Event $e_0$ zu erwarten sind. Zwar ist bekannt, durch welche Operation $o_i$ ein Event $e_i$ ausgelöst wurde, aber nicht, wann und unter welchen Bedingungen $o_i$ $e_i$ feuert. \todo{möglich?}
+Es bleibt die Möglichkeit \textbf{nach} einem Event Mementos abzurufen. Zunächst ist es schwierig festzustellen, wann \enquote{nach} einem Event überhaupt ist. Events können in dem Sinne kaskadieren, als dass sie Operationen aufrufen, die weitere Events feuern, die wiederum Operationen ausführen, die selbst Events feuern und so weiter. Aus dem Kommunikationsmodell kann a priori nicht eindeutig bestimmt werden, welche Events nach einem Event $e_0$ zu erwarten sind. Das ist eine Folge des \enquote{Black Box} Prinzips der Komponenten.
 
-% rückwärts suchen kommt auch nicht gut. da können asynchrone operationen dabei sein, weswegen man nicht einfach events und operationen auf einen stack hauen und kucken kann, worauf e_i zurückzuführen ist. irgendwas sagt mir, dass ein db paper mein problem lösen könnte.
+% voraussetzungen
+
+Ein Ansatz zur Lösung des Problems ist anfangs einen Abhängigkeitsgraphen aus dem Kommunikationsmodell zu generieren (Abbildung~\ref{figure:dependency-graph}). Dazu werden alle Events und Operationen der Komponenten gesammelt. Es führen Kanten von Events zu Operationen, wenn ein Link im Kommunikationsmodell besteht. Wenn ein Event von einer Operation abhängig ist (z.\,B. $e_1$ von $o_1$), wird ein Link von der Operation zum Event eingefügt. So kann das Hilfesystem bestimmen, welche Events später noch gefeuert werden könnten. Außerdem werden Nachrichten, die zwischen Komponenten ausgetauscht werden, so erweitert, dass sie zusätzlich die aufrufende Operation und einen Timestamp enthalten.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-dependency-graph.png}
+   \caption{Abhängigkeitsgraph der beispielhaften Komposition}
+   \label{figure:dependency-graph}
+\end{figure}
+
+% algorithmus
+
+Der Ablauf am Beispiel von Abbildung~\ref{figure:dependency-graph} ($e_3$ und $e_4$ werden gefeuert, weil eine Aktion in Komponente A ausgeführt wurde) ist wie folgt:
+
+\begin{enumerate}
+	\item Komponente A feuert Event $e_1$.
+	\item Das Hilfesystem registriert die Nachricht $e_1$ und bestimmt zunächst aus dem Abhängigkeitsgraphen, ob A eine unabhängige Komponente ist und ob noch weitere (auf $e_1$ zurückführende) Nachrichten zu erwarten sind. Da dies der Fall ist, fügt das Hilfesystem $e_1$ in eine neu erstellte Collection hinzu und legt ein Timeout von $t$ Millisekunden fest. Läuft es ab, fährt der Algorithmus bei Schritt 7 fort. Außerdem wird $e_1$ bis dorthin der Operation $o_4$ von C zugeordnet.
+	\item Innerhalb des Timeouts $t$ feuert Komponente C Event $e_3$.
+	\item Das Hilfesystem registriert die Nachricht $e_3$ und überprüft, ob C eine unabhängige Komponente ist und ob noch weitere Nachrichten zu erwarten sind. Das ist der Fall, also liest das Hilfesystem aus der Nachricht, welche Operation sie geschickt hat ($o_4$). Aus allen $o_4$ zugeordneten Nachrichten wird weiters die Quelle, also aufrufende Komponente, gelesen und eine Collection gesucht, in der diese enthalten ist. Findet das Hilfesystem eine, fügt es $e_3$ dieser hinzu und setzt den Timer auf~0 zurück. In diesem Beispiel ist das der Fall. Würde das Hilfesystem keine Collection finden, erstellte es eine neue und führe fort wie in Schritt~2.
+	\item Innerhalb des Timeouts $t$ feuert Komponente C Event $e_4$.
+	\item Analog zu Schritt~4. Hier sind allerdings keine weiteren Events mehr zu erwarten, weswegen das Hilfesystem kein Timeout mehr setzen muss und gleich zum nächsten Schritt übergehen kann.
+	\item Das Hilfesystem markiert die Collection als geschlossen und entfernt die Assoziation zwischen enthaltenen Nachrichten und den Operationen der Komponenten. Da die zustandsverändernde Operation von Komponente D erst aufgerufen werden muss, legt es ein Timeout $t_D$ fest, nach dessen die Mementos der Komponenten abgerufen werden können.
+\end{enumerate}
+
+% anmerkungen
+
+Abbildung~\ref{figure:dependency-graph-diagram} zeigt ein Ablaufdiagramm des Algorithmus. Ein noch nicht betrachteter Punkt sind asynchrone Operationen (z.\,B. \texttt{setTimeout()} oder \texttt{XMLHttpRequest}s in Javascript). Die Reihenfolge der Nachrichten spielt im vorgestellten Algorithmus keine Rolle\todo{proof?}, weswegen asynchrone Operationen wie synchrone behandelt werden, solange sie innerhalb des Timeouts $t$ ein Event feuern. Das festgelegte Timeout ist keine gute Designentscheidung, wenn es um Zugriffe auf externe APIs geht. Es kann nicht davon ausgegangen werden, dass sie innerhalb des Timeouts beantwortet werden. Aus diesem Grund wird bei der History -- wie bei den Kommentaren (Abschnitt~\ref{section:konzeption:kommentare}) auch -- ausgeschlossen, dass Komponenten externe Daten laden können.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/konzeption-dependency-graph-diagram.png}
+   \caption{Ablaufdiagramm des History Algorithmus}
+   \label{figure:dependency-graph-diagram}
+\end{figure}
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:history:ui}
@@ -1613,13 +1756,12 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item CSS Selektoren für jede Operation, um UI Elemente für Operation zu kennzeichnen (Bedienung)
 	\item Konzept, welches Aktion näher beschreibt (Verlinkung)
 	\item Anzahl an Sekunden, die vor einem Screenshot gewartet werden soll (Bedienung)
-	\item Text, der Auswirkung der Aktion näher spezifiziert (Bedienung)
-	\item Boolean, ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
-	\item Beispieldaten für Operationen mit Parametern (Bedienung)
-	\item Informationen über den zu verwendenden Testdatensatz (Bedienung)
-	\item Ob die Position von Elementen ein visuelles Attribut ist (Kommentare)
+	\item Text in Stichworten, der Aktion näher beschreibt (Bedienung)
+	\item Ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
+	\item Beispieldaten für Parameter, falls von Operation benötigt (Bedienung)
+	\item Testdatensatz: Entweder ID eines DaRe Datensatzes mit SPARQL Query für Mappings oder Informationen über einen hochgeladenen Datensatz (Bedienung)
 	\item Ob die Komponente Datenverarbeitung durchführt (Kommentare)
-	\item Ob die Komponente externe Daten anzeigt (Kommentare)
+	\item Ob die Komponente externe Daten lädt (Kommentare)
 	\item Ob das Layout der Komponente vollständig reproduzierbar ist (Kommentare)
 \end{itemize}
 
@@ -1628,6 +1770,7 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \begin{itemize}
 	\item Eine Methode, um Koordinaten in Datenpunkte umzurechnen (Kommentare)
 	\item Die Umkehrung der Methode (Datenpunkte $\to$ Koordinaten) (Kommentare)
+	\item Eine Methode, welche Attribute zu URIs von Datenpunkten ausgibt (Kommentare)
 \end{itemize}
 
 \subsubsection{VISO}
@@ -1648,7 +1791,7 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 
 \begin{itemize}
 	\item Kommentare speichern sowie eine Schnittstelle zum Abruf
-	\item Abruf und Speicherung von Konzeptbeschreibungen sowie Schnittstelle zum Zugriff
+	\item Abruf und Speicherung von Konzeptbeschreibungen sowie Schnittstelle zum Zugriff (Bedienung, Verlinkung)
 \end{itemize}
 
 \subsubsection{Event Broker}
@@ -1656,6 +1799,12 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \begin{itemize}
 	\item Methode, welche Weiterleitung von Events pausiert (Kommentare)
 	\item Methode, welche Weiterleitung von Events wieder aufnimmt (Kommentare)
+\end{itemize}
+
+\subsubsection{Context Service}
+
+\begin{itemize}
+	\item Domäne des Benutzers (Meta-Hilfe)
 \end{itemize}
 
 \section{Zusammenfassung}
