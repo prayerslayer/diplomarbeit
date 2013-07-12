@@ -8,11 +8,10 @@ My diploma thesis at Dresden University of Technology.
 
 ## Anmerkungen Martin 5.7.
 
-* Trace-Based Reasoning in dynMetaHilfe erwähnen
+* Synthese überprüfen, ob wirklich alles drinsteht
 * Ordentliche Kommentare/Annotationen Nomenklatur
-* Allgemein: Mehr Referenzen in der Arbeit, bessere Listen.
+* Allgemein: Mehr Referenzen ins RW in der Arbeit, bessere Listen.
 * Anforderungen: nach Plattform/Domänenspezifischen unterscheidbar?
-* Related Work: Mehr auch ansprechen, was Anforderungen nicht umsetzen und bessere Zusammenfassungen
 * Intro: Unterscheidung plattform/domänenspezifisch
 * Kommunikation: Überarbeiten nach Paper Mockup
 * Kommentare: Umschaltbutton für Highest Ranked und Newest.

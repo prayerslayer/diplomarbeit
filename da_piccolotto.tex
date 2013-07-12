@@ -961,7 +961,7 @@ Offensichtlich sind die gewählten visuellen Effekte nicht mehr so nützlich, we
 \section{Intro in die Funktionalität einer Komponente}
 \label{section:konzeption:intro}
 
-Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wurde deutlich, dass dem Endnutzer zuerst ein Überblick über die verschiedenen ausgewählten Komponenten gegeben werden muss. Dieser beinhaltet folgende Punkte.
+Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) und den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde deutlich, dass dem Endnutzer zuerst ein Überblick über die verschiedenen ausgewählten Komponenten gegeben werden muss, sodass ihm die Struktur der kompositen InfoVis klar wird. Diese beinhaltet folgende Punkte.
 
 % was kommt rein?
 
@@ -1022,7 +1022,7 @@ Damit das Hilfesystem aber die URIs der aktuell visualisierten Datatype Properti
 \section{Bedienung einer Komponente}
 \label{section:konzeption:bedienung}
 
-Da die Komponenten \enquote{Black Boxes} sind und von verschiedenen Entwicklern stammen, kann der Benutzer weder von verfügbaren möglichen Aktionen wie z.\,B. zoomen noch von einheitlicher Gestaltung der Interaktionen ausgehen. Beispielsweise wann eine Interaktion durch \texttt{MouseOver} anstatt \texttt{Click} ausgeführt wird. Deswegen ist eine Hilfestellung zur Bedienung notwendig.
+In den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde festgestellt, dass das Hilfesystem den Benutzer über das Verhalten der InfoVis aufklären muss. Da die Komponenten \enquote{Black Boxes} sind und von verschiedenen Entwicklern stammen, kann der Benutzer weder von verfügbaren möglichen Aktionen wie z.\,B. zoomen noch von einheitlicher Gestaltung der Interaktionen ausgehen. Beispielsweise wann eine Interaktion durch \texttt{MouseOver} anstatt \texttt{Click} ausgeführt wird. Deswegen ist eine Hilfestellung zur Bedienung notwendig.
 
 % wieder erste möglichkeit: dev baut selbst hilfe ein. text+bilder: kein einfluss auf wortwahl, art der bilder, ausführlichkeit etc. Comics: für jede aktion eins, übelster aufwand, kann man nicht verlangen, außerdem 2. wer sagt dass ein prof. sw-entwickler das können soll?
 
@@ -1263,7 +1263,7 @@ Zu beachten ist allerdings, dass es Operationen geben kann, welche das User Inte
 
 % einführung - warum brauchen wir verlinkung?
 
-Es ist möglich, dass ein Benutzer in VizBoard auf vollständig (\enquote{Was ist ein Säurezeiger\footnote{Eine Pflanze, die nur auf Böden mit einem bestimmten ph-Wert wachsen kann.}?}) oder teilweise (\enquote{Wie ist das BIP definiert\footnote{Der Gesamtwert aller Waren und Dienstleistungen, die innerhalb eines Jahres in einer Volkswirtschaft hergestellt wurden und dem Endverbrauch dienen.}?}) unbekannte Begriffe trifft. Um das Verständnis der Daten zu fördern, müssen diese erklärt werden, weswegen sie mit einer externen Wissensbasis verlinkt sein sollen. Zu erklärende Begriffe werden vermutlich hauptsächlich in Legenden von Visualisierungen zu finden sein, können aber auch in Freitexten oder in Interaktionselementen vorkommen.
+Ein Punkt, der in den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) kaum behandelt wurde, ist dass der Benutzer mehr Informationen über die visualisierten Daten benötigen könnte. Er könnte auf vollständig (\enquote{Was ist ein Säurezeiger\footnote{Eine Pflanze, die nur auf Böden mit einem bestimmten ph-Wert wachsen kann.}?}) oder teilweise (\enquote{Wie ist das BIP definiert\footnote{Der Gesamtwert aller Waren und Dienstleistungen, die innerhalb eines Jahres in einer Volkswirtschaft hergestellt wurden und dem Endverbrauch dienen.}?}) unbekannte Begriffe treffen. Um das Verständnis der Daten zu fördern, müssen diese erklärt werden, weswegen sie mit einer externen Wissensbasis verlinkt sein sollen. Zu erklärende Begriffe werden vermutlich hauptsächlich in Legenden von Visualisierungen zu finden sein, können aber auch in Freitexten oder in Interaktionselementen vorkommen.
 
 \subsection{Markup und Backend}
 \label{section:konzeption:verlinkung:backend}
@@ -1303,7 +1303,7 @@ Zwar wäre es wünschenswert, sowohl Legenden und Freitext als auch Interaktions
 
 % allgemeines zu kommentaren. woraus bestehen sie, was müssen sie können.
 
-Mit Hilfe von Kommentaren können Endnutzer andere auf beobachtete Fakten der Daten wie Ausreisser oder Trends hinweisen und so zum Verständnis beitragen.
+Kommentare und Annotationen waren in den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) eine populäre Variante, um das Verständnis der Daten zu fördern. Mit Hilfe von Kommentaren können Endnutzer andere auf beobachtete Fakten der Daten wie Ausreisser oder Trends hinweisen und so zum Verständnis beitragen.
 % wie können kommentare umgesetzt werden? dev vs us! warum machen wir es so wie geplant?
 
 Prinzipiell gibt es zwei Varianten, wie Kommentare in einer InfoVis-Komponente umgesetzt werden können. In der ersten kümmert sich die Komponente darum, wie und wann sie Kommentare lädt und anzeigt. Der Vorteil daran ist, dass die Handhabung von Kommentaren speziell auf jede Komponente angepasst wird. Allerdings kann so kein einheitliches Look \& Feel gewährleistet werden. Zwar könnten Designrichtlinien Aussehen und Interaktionen vorschreiben, sie sind aber zwecklos wenn der Komponentenentwickler sie nicht einhält. Außerdem erhöht diese Variante den Entwicklungsaufwand der Komponente stark.
@@ -1662,7 +1662,6 @@ Die einfachste Lösung für die statische Meta-Hilfe wäre ein Button in der rec
 \subsection{Dynamische Meta-Hilfe}
 
 % zweite lösung: kontextabhängige dynamische hilfe
-
 Ein Nachteil der statischen Hilfe ist, dass sie nicht lernt und sich dem Benutzer nicht anpasst. Die dynamische Hilfe ändert das. Allerdings stellt sich die Frage, woher sie weiß, wann sie welche Hilfe anbieten soll.
 
 % user affection
@@ -1673,7 +1672,7 @@ Die beste Lösung wäre sicher, wenn das Hilfesystem erkennen könnte, wenn der 
 
 % deswegen versuchen aus interaktionsgeschichte, komposition, umgebung und nutzerinformationen regeln zu schließen --> supervised learning
 
-Eine zweite Lösungsmöglichkeit ist durch maschinelles Lernen \cite{Kotsiantis2007} von Daten über Nutzer, Komposition, Umgebung und Interaktionsgeschichte Regeln z.\,B. in Form eines Decision Trees zu finden, wann Hilfe angeboten werden soll. So kann das Hilfesystem aus vergangenen Erfahrungen mit Nutzern lernen. Der Nachteil ist allerdings, dass die Ergebnisse nicht zufriedenstellend sein werden, bis dem Hilfesystem ausreichend Trainingsdaten zur Verfügung stehen. Abbildung~\ref{figure:architektur-dynhilfe} zeigt einen Überblick des Systems.
+Eine zweite Lösungsmöglichkeit ist das Konzept von Trace-Based Reasoning \cite{Cordier2013} anzuwenden. Durch maschinelles Lernen \cite{Kotsiantis2007} von Daten über Nutzer, Komposition, Umgebung und Interaktionsgeschichte werden Regeln z.\,B. in Form eines Decision Trees gefunden, wann Hilfe angeboten werden soll. So kann das Hilfesystem aus vergangenen Erfahrungen mit Nutzern lernen. Der Nachteil ist allerdings, dass die Ergebnisse nicht zufriedenstellend sein werden, bis dem Hilfesystem ausreichend Trainingsdaten zur Verfügung stehen. Abbildung~\ref{figure:architektur-dynhilfe} zeigt einen Überblick des Systems.
 
 \begin{figure}[htbp]
    \centering
