@@ -670,7 +670,13 @@ Klein \cite{Klein2006a} beschreibt in seinem Data/Frame-Modell (Abbildung~\ref{f
 
 Während des Verständnisprozesses ist es außerdem hilfreich, Wissen in irgendeiner Form externalisieren zu können, beispielsweise mit Hilfe einer Mind Map \cite{Qu2005, Novak2007, Umapathy2010}. Andere Menschen können dadurch auf bereits durchgeführte Verständnisprozesse anderer aufbauen, wobei die Struktur aber wichtiger ist als der tatsächliche Inhalt \cite{Fisher2012}.
 
-Nachdem betrachtet wurde, wie Verständnis funktioniert, stellt sich die Frage, \emph{was} vermittelt werden soll um Menschen mit wenig InfoVis-Erfahrung zu helfen. Dazu gehört laut Grammel \cite[S. 127]{Grammel2012} unter anderem das mentale Modell des Benutzers zu verwenden, beispielsweise indem dieselben Bezeichnungen verwendet werden, und zu lehren, wie Visualisierungen verwendet und interpretiert werden.
+Nachdem betrachtet wurde, wie Verständnis funktioniert, stellt sich die Frage, \emph{was} vermittelt werden soll um Menschen mit wenig InfoVis-Erfahrung zu helfen. Dazu gehört laut Grammel \cite[S. 127]{Grammel2012} unter anderem das mentale Modell des Benutzers zu verwenden, beispielsweise indem dieselben Bezeichnungen verwendet werden, und zu lehren, wie Visualisierungen verwendet und interpretiert werden.  Liu und Stasko \cite{Liu2010} schlagen folgende Definition für ein mentales Modell im Bereich der Informationsvisualisierung vor, wobei vor allem der erste Punkt über Struktur und Verhalten für ein Hilfesystem wichtig erscheint:
+
+\begin{quote}
+A mental model is a functional analogue representation to an external interactive visualization system with the following characteristics:
+	\begin{itemize}		\item The structural and behavioral properties of external systems are preserved in mental models.		\item A mental model can preserve schematic, semantic or item-specific information about the underlying data.		\item Given a problem, a mental model of an interactive visualization can be constructed and simulated in working memory for reasoning.
+	\end{itemize}
+\end{quote}
 
 \section{Verwandte Arbeiten}
 \label{section:standderforschung:verwandte_arbeiten}
@@ -698,6 +704,8 @@ Für die Arbeit mit VizBoard ist es ebenfalls wichtig, die Kommunikation zwische
 DashMash \cite{Cappiello2011} ist eine Mashup Plattform, die besonders auf Endnutzer ausgerichtet ist. Dazu setzt es auf das \enquote{What You See Is What You Get} Prinzip und abstrahiert von Mashup-Interna wie dem Binding zwischen Datenquellen und Komponenten. Es ist nicht möglich Erkenntnisse aus den Daten mit anderen zu teilen oder selbst Anmerkungen anderer zu lesen. Obwohl keine sichtbaren\footnote{Ein Demo-Video ist unter \url{http://home.dei.polimi.it/cappiell/demo/DemoDashMash.mov} verfügbar.} Hilfestellungen bezüglich \emph{Intro}, \emph{Bedienung} oder \emph{Kommunikation} verfügbar sind, fiel die Nutzerstudie mit 35~Teilnehmern durchweg positiv aus. Der Grund dafür ist wahrscheinlich, dass die Erklärungen am Anfang der Studie so gewählt wurden, dass die Testpersonen ein \enquote{korrektes} mentales Modell von DashMash hatten. Für die Hilfe in VizBoard sollte deswegen auch soweit möglich Technisches abstrahiert oder vor dem Benutzer versteckt werden. Des weiteren sollten Erklärungen dem mentalen Modell des Benutzers entsprechen.
 
 % omelette auch (weil datenquellen in komponenten drin)
+% gut: einfache interaktion (widget hinzufügen und das wars
+% schlecht: hilfestellungen hauptsächlich für erstellung als nutzung
 
 Apache Rave\footnote{\url{http://rave.apache.org/}} ist eine Mashup Plattform von Apache und Grundlage für OMELETTE \cite{Chudnovskyy2012}. OMELETTE stellt dem Benutzer verschiedene Widgets zur Verfügung, die er kombinieren kann. Zum Beispiel ein Widget zur Visualisierung des Wasserpegels und eine Karte, die Hochwassermeldungen zeigt. Im Gegensatz zu VizBoard besteht keine Einschränkung auf eine bestimmte Domäne. Es ist möglich Widgets zu kommentieren. Die \emph{Kommentare} werden aber nur im Widget Store angezeigt, da sie eher dem Feedback zum Widget als dem Verständnis des Inhalts dienen. Bezüglich der \emph{Bedienung} oder \emph{Kommunikation} bestehen keine Hilfestellungen. Ein \emph{Intro} wird im Widget Store in Form einer kurzen Beschreibung gegeben, welche der Entwickler verfasst hat. Die Hilfestellungen für den Benutzer fokussieren sich eher auf die Erstellung von Mashups als deren Nutzung \cite{Chowdhury2013}. So wird ein Pattern Recommender eingesetzt, der weitere Widgets zur Integration in die Komposotion vorschlägt sowie eine Automatic Composition Engine, die Widgets automatisch verbindet und damit Daten- und Kontrollflüsse ermöglicht.
 
@@ -706,7 +714,7 @@ Apache Rave\footnote{\url{http://rave.apache.org/}} ist eine Mashup Plattform vo
 % man braucht gar nicht so viele hilfestellungen, wenn änderungen in der ui auf eigene interaktionen zurückgeführt werden können (nichts anderes heißt ein korrektes mentales modell zu haben)
 % es muss klar sein, wo der datenfluss hingeht
 
-In diesem Abschnitt wurden Mashup Plattformen vorgestellt, mit deren Hilfe Webservices oder UI Komponenten kombiniert werden können. Die wichtigste Erkenntnis war dabei, dass kaum Hilfestellungen nötig sind, wenn der Benutzer ein passendes mentales Modell der Anwendung hat. Dieses kann mit Hilfe von Erklärungen vermittelt werden. Bei der Entwicklung des Hilfesystems sollte deswegen ein konsistentes Modell der Anwendung verwendet und mit einheitlichen Begriffen versehen werden.
+In diesem Abschnitt wurden Mashup Plattformen vorgestellt, mit deren Hilfe Webservices oder UI Komponenten kombiniert werden können. Die wichtigste Erkenntnis war dabei, dass kaum Hilfestellungen nötig sind, wenn der Benutzer ein passendes mentales Modell der Anwendung hat. Dieses kann mit Hilfe von Erklärungen vermittelt werden. Erklärungen des Hilfesystems sollten deswegen ein konsistentes Modell der Anwendung und einheitliche Begriffe verwenden.
 
 \subsection{Visualisierungstools}
 \label{section:standderforschung:verwandte_arbeiten:visualisierungstools}
@@ -730,13 +738,13 @@ Weave\footnote{\url{http://oicweave.org/}} ist eine Webapplikation, mit der Benu
 % gut: interaktivität, drag & drop zeug
 % schlecht: keine verlinkung
 
-Tableau\footnote{\url{http://www.tableausoftware.com/}} ist eine Desktopapplikation, mit der aus Tabellen oder Datenbanken Diagramme erstellt werden können. Es ist der kommerzielle Nachfolger von Polaris \cite{Stolte2000} und laut Gartner \cite{Gartner2013} unter den Marktführern im Bereich Business Intelligence Platforms. Tableau setzt das Prinzip von \enquote{Semantic Transparency} um, weil der Benutzer die zu visualisierenden Daten per Drag \& Drop auf dem Diagramm platziert. Als weitere Hilfestellung zur \emph{Bedienung} erlaubt es unbegrenzt Undo/Redo, was auch bei VizBoard hilfreich sein könnte.
+Tableau\footnote{\url{http://www.tableausoftware.com/}} ist eine Desktopapplikation, mit der aus Tabellen oder Datenbanken Diagramme erstellt werden können. Es ist der kommerzielle Nachfolger von Polaris \cite{Stolte2000} und laut Gartner \cite{Gartner2013} unter den Marktführern im Bereich Business Intelligence Platforms. Tableau setzt das Prinzip von \enquote{Semantic Transparency} um, indem der Benutzer die zu visualisierenden Daten per Drag \& Drop auf dem Diagramm platziert. Die Software muss keine umfassenden Hilfestellungen zur \emph{Bedienung} anbieten, da der Benutzer hauptsächlich Daten an das Diagramm bindet und den Diagrammtyp wechselt. Jede Aktion hat einen sofort sichtbaren Effekt, welcher mit der Undo-Funktion rückgängig gemacht werden kann. Diese drei Eigenschaften von Tableau (Semantic Transparency, Effekt sofort sichtbar, Undo/Redo) machen es sehr interaktiv, ohne dabei den Benutzer zu frustrieren. Allerdings geht Tableau davon aus, dass der Benutzer die Daten und damit verbundenen Konzepte kennt und bietet diesbezüglich keine Hilfestellungen an.
 
 % choosel
 % gut: drag n drop
 % schlecht: kenntnis der daten wird vorausgesetzt
 
-Choosel \cite{Grammel2010} ist ein Mashup, welches besonders in der Domäne Informationsvisualisierung unbedarfte Nutzer dabei unterstützen soll, Daten zu erforschen und Visualisierungen iterativ zu verfeinern. Die Hilfestellungen zur \emph{Bedienung} sind folgende: Es setzt auf Drag \& Drop Funktionalität, also direkte Manipulation. Mögliche Drop-Ziele werden außerdem während des Vorgangs hervorgehoben und eine Vorschau des Drop-Ergebnis wird ebenfalls angeboten. Falls im Hilfesystem für VizBoard Drag \& Drop angewendet wird, ist Choosel ein gutes Vorbild.
+Choosel \cite{Grammel2010} ist ein Mashup, welches besonders in der Domäne Informationsvisualisierung unbedarfte Nutzer dabei unterstützen soll, Daten zu erforschen und Visualisierungen iterativ zu verfeinern. Dabei setzt es auf direkte Manipulation in Form einer erweiterten Drag \& Drop Funktion. Mögliche Drop-Ziele werden während des Vorgangs hervorgehoben und eine Vorschau des Drop-Ergebnisses wird  angeboten. Wie Tableau setzt Choosel voraus, dass der Benutzer die verwendeten Daten kennt. Im Gegensatz zu VizBoard sind bei Choosel die verfügbaren Komponenten festgelegt und stammen vom selben Entwickler. Falls im Hilfesystem für VizBoard Drag \& Drop angewendet wird, ist Choosel ein gutes Vorbild.
 
 % mosaic
 % ? ? ? 
@@ -766,7 +774,7 @@ Heer et al. \cite{Heer2007} entwickelten mit sense.us einen Prototyp zur asynchr
 % gut: kommentare
 % schlecht: 
 
-Ebenfalls erwähnenswert ist ManyEyes \cite{Viegas2007}. Benutzer können Datensätze hochladen und eine aus mehreren vorgegebenen Visualisierungen wählen. Danach können sie ähnlich wie bei sense.us die Visualisierungen \emph{kommentieren}, es ist allerdings nicht möglich, die Visualisierung selbst zu annotieren. Wie bei sense.us ist im Unterschied zu VizBoard immer nur eine InfoVis sichtbar.
+Ebenfalls erwähnenswert ist ManyEyes \cite{Viegas2007}. Benutzer können Datensätze hochladen und eine aus mehreren vorgegebenen Visualisierungen wählen. Danach können sie ähnlich wie bei sense.us die Visualisierungen \emph{kommentieren}. Wie bei sense.us können bestimmte Elemente oder Bereiche einer Visualisierung mit Kommentaren versehen werden, diese werden aber nicht visualisierungsübergreifend wiederverwendet.
 
 % bi dashboards
 % gut: annotation an daten
