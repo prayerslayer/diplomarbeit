@@ -17,6 +17,8 @@ Meta-Hilfe: Interaction Trace-based Reasoning (Champin, Cordier)
 
 ## Anmerkungen Martin 5.7.
 
+* Ordentliche Kommentare/Annotationen Nomenklatur
+* History: Verweis auf RW, erklären warum DOM kopieren schlecht
 * Allgemein: Mehr Referenzen in der Arbeit, bessere Listen.
 * Anforderungen: nach Plattform/Domänenspezifischen unterscheidbar?
 * Related Work: Mehr auch ansprechen, was Anforderungen nicht umsetzen und bessere Zusammenfassungen

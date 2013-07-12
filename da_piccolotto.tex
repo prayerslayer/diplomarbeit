@@ -754,15 +754,13 @@ MoSaiC \cite{Schuster2011} ist ein Tool mit dem Benutzer online kollaborativ Dok
 \subsubsection{Sensemaking}
 \label{section:standderforschung:verwandte_arbeiten:sensemaking}
 
-In diesem Abschnitt geht es um Teilfunktionen von Visualisierungstools, die das Sensemaking der Benutzer verbessern sollen. Hauptsächlich wird dafür eine Kommentar- bzw. Annotationsfunktion eingesetzt.
-
-% hier sind hauptsächlich kommentare - gibt es noch andere ansätze?
+Dieser Abschnitt befasst sich mit Teilfunktionen von Visualisierungstools, die das Sensemaking der Benutzer verbessern sollen. Hauptsächlich wird dafür eine Kommentar- bzw. Annotationsfunktion eingesetzt.
 
 % annotation
 % gut: einfach zu verwenden
 % schlecht: nicht geeignet wenn man keine beliebigen navigationsmöglichkeiten hat
 
-Groth und Streefkerk \cite{Groth2006} präsentieren ein generisches Annotationssystem für Informationsvisualisierungen am Beispiel einer 3D Visualisierung von Molekülen. Grundlage des Systems sind Nutzerinteraktionen wie \enquote{rotieren}, \enquote{zoomen} etc., welche geloggt und als Graph abgespeichert werden. An den Knoten des Graphen -- Zustände der InfoVis -- können beliebig viele \emph{Kommentare} abgelegt werden. Es ist allerdings nicht möglich, innerhalb dieser Sichten noch einmal Elemente zu referenzieren (z.\,B. ein bestimmtes Atom), weswegen das System am besten für InfoVis mit uneingeschränkter Navigation geeignet ist.
+Groth und Streefkerk \cite{Groth2006} präsentieren ein generisches Annotationssystem für Informationsvisualisierungen am Beispiel einer 3D Visualisierung von Molekülen. Grundlage des Systems sind Nutzerinteraktionen wie \enquote{rotieren}, \enquote{zoomen} etc., welche geloggt und als Graph abgespeichert werden. An den Knoten des Graphen -- Zustände der InfoVis -- können beliebig viele \emph{Kommentare} abgelegt werden. Es ist allerdings nicht möglich, innerhalb dieser Sichten noch einmal Elemente zu referenzieren (z.\,B. ein bestimmtes Atom), weswegen das System am besten für InfoVis mit uneingeschränkten Navigationsmöglichkeiten geeignet ist. Zum Beispiel einer Karte, wo mit Hilfe der Interaktionen Pan \& Zoom theoretisch ein beliebiger Punkt auf der Welt den Viewport ausfüllen kann und so eindeutig ist, worauf sich der Kommentar bezieht.
 
 % sense.us
 % gut: kommentare, diskussionen, annotationen
@@ -780,83 +778,104 @@ Ebenfalls erwähnenswert ist ManyEyes \cite{Viegas2007}. Benutzer können Datens
 % gut: annotation an daten
 % schlecht: nix, eigentlich isses ziemlich geil
 
-Elias und Bezerianos \cite{Elias2012} entwickelten ein Annotations- bzw. \emph{Kommentarsystem} für Business Intelligence Dashboards. Dafür interviewten sie Domänenexperten und erarbeiteten sieben funktionale Anforderungen an ein annotationsgesütztes Dashboard, die sich beim Entwurf der Kommentarfunktion als hilfreich erweisen können. Herausforderungen für ihr Konzept, die ebenfalls in dieser Arbeit berücksichtigt werden sollten, waren wie mit sich änderndem Kontext (bei dynamischen Daten) umgegangen und Unabhängigkeit von Granularitäten (Jahr/Monat/Tag) gewährleistet werden soll.
+Elias und Bezerianos \cite{Elias2012} entwickelten ein Annotations- bzw. \emph{Kommentarsystem} für Business Intelligence Dashboards.
+Dafür interviewten sie Domänenexperten und erarbeiteten sieben funktionale Anforderungen an ein annotationsgestütztes Dashboard. Dazu gehört, dass Kommentare mehrere Datenpunkte und Charts referenzieren können. Sie beschreiben außerdem ihr Handling von Annotationen und Kommentaren bei dynamischem Kontext sowie von unterschiedlichen Granularitätsstufen (Jahr/Monat/Tag). 
+Diese Erkenntnisse können für VizBoard ebenfalls nützlich sein.
 
-% lessons learned
+% infovis mit sensemaking
+% gut: knowledge view
+% schlecht: nur cool wenn alle inhalte fusioniert werden können. und dann ist immer noch die frage, ob man sowas wirklich braucht. bin skeptisch mit zu viel features
+
+Shrinivasan et al. \cite{Shrinivasan2008} entwickelten ein Framework zur Informationsvisualisierung, welches den analytischen Denkprozess unterstützen soll.
+Es besteht aus drei verschiedenen Views: Den InfoVis selbst, einem \enquote{Knowledge View} und einem \enquote{Navigation View}. Im Knowledge View kann der Benutzer seine Hypothesen und Analysen externalisieren, verwalten und überprüfen, sowie mit Zuständen der InfoVis verlinken. Der Navigation View erlaubt es ihm, zu einem beliebigen Punkt im Laufe der Interaktionen zurück zu gehen.
+In VizBoard könnte ein Variante des Knowledge Views dazu verwendet werden eine nutzergenerierte, strukturierte Zusammenfassung eines Datensatzes zu erstellen, mit dessen Hilfe der Verständnisprozess zukünftiger Benutzer unterstützt wird. Ein Navigation View könnte zusätzlich die \emph{Bedienung} in VizBoard verbessern.
+
+% lessons learned 
 
 % weave: wenn UI zu komplex wird, macht es keinen spaß
 % sense.us: es gibt annotationstypen, die sehr populär sind, aber nicht auf daten bezogen werden können (eben pfeile und text)
 % manyeyes: keine ahnung. weder sieht es gut aus noch ist es toll zu nutzen nach heutigen standards (JAVA ALERT) noch hat es viele features.
 % bi dashboards: cool wie sie das gelöst haben mit dynamischen kontext. wenn er sich ändert, wird ein snapshot vom kontext zusammen mit der annotation gespeichert. außerdem: UI für kommentare genau wie meine!!
 
+In diesem Abschnitt wurden verschiedene Visualisierungstools und Ansätze, um das Sensemaking in ihnen zu verbessern, vorgestellt. Dabei zeigte sich am Beispiel Tableau, dass wenig Hilfestellungen nötig sind, sofern der Benutzer einfach Systemzustände als Effekt eigener Interaktionen identifizieren kann und die Anwendung einfache Rücksetzmöglichkeiten bietet. Im Fall von VizBoard ist die Situation etwas anders, da mehrere Views gleichzeitig sichtbar sind (bei Tableau ist es immer nur ein Diagramm) und der Systemzustand sich unabhängig von einer Nutzerinteraktion verändern kann (durch Komponenten, die Daten externer Webservices laden). Die Rücksetzmöglichkeit ist aber auch Teil von Shneidermans Mantra \cite{Shneiderman1996} und der ISO Norm~9241-110 \enquote{Grundsätze der Dialoggestaltung}, weswegen sie auf alle Fälle umgesetzt werden sollte.
+
+Um den Verständnisprozess des Benutzers zu unterstützen, verwenden die meisten Systeme grafische Annotationen in Kombination mit Kommentaren. Im Fall von \cite{Elias2012} konnten die Kommentare den Benutzern helfen, neue Diagrammtypen zu verstehen. Probanden in sense.us fanden sowohl eigene als auch fremde Kommentare hilfreich. In Tableau ist es wie in \cite{Elias2012} möglich, Kommentare an Datenpunkten zu erstellen. Die Nützlichkeit von Kommentaren scheint damit außer Frage zu stehen und sie sollten auch in VizBoard implementiert werden. Dabei ist die Arbeit von Elias et al. ein guter Startpunkt, wobei aber zu beachten ist, dass die Visualisierungskomponenten bei VizBoard von fremden Entwicklern stammen und \enquote{Black Boxes} sind. Von keiner der Arbeiten aufgegriffen wurde die Möglichkeit, dass dem Benutzer Teile der Daten oder der darin verwendeten Konzepte unklar sind.
+
 \subsection{User Assistance}
 
-Dieser Abschnitt befasst sich mit verschiedenen Ansätzen zur User Assistance, welche die Anforderungen Verständnis, Vollständigkeit oder Unaufdringlichkeit betrifft. Dazu zählen notwendige Funktionen des Hilfesystems, mögliche Fragestellungen des Nutzers oder Interaktionskonzepte.
+Dieser Abschnitt befasst sich mit verschiedenen Ansätzen zur User Assistance, welche die Anforderungen Verständnis, Vollständigkeit oder Unaufdringlichkeit betrifft. Dazu zählen notwendige Funktionen des Hilfesystems, mögliche Fragestellungen des Nutzers oder Interaktionskonzepte. Zunächst werden Ansätze vorgestellt, die behandeln, was dem Benutzer erklärt werden muss. Darauf folgen Konzepte zur Präsentation der Erklärung und zuletzt zur Reduktion von notwendigen Erklärungen (beispielsweise durch kluge Interaktionstechniken).
 
-% hier auch das comic zeug: generation, UA mit screenshots,
-% außerdem trace based reasoning?
-
-% grafische history für tableau
-% gut: verständlich, einfach zu nutzen
-% schlecht: 
-
-Heer et al. \cite{Heer2008} entwickelten eine grafische History für Tableau, welche Undo und Redo erleichtern soll. Sie enthält Screenshots des Visualisierungszustands, die chronologisch wie eine Timeline angeordnet sind. Dieses Konzept trägt zur \emph{Verständlichkeit} der Anwendung bei. 
+% was man erklären muss
 
 % fragestellungen in kontextadaptiven anwendungen
 % gut: welche fragen tauchen auf
 % schlecht: nicht direkt für uns geeignet
 
-% aber für fragestellungen hab ich fix noch andre papers
+Lim und Dey \cite{Lim2009} kategorisieren mögliche Fragestellungen von Nutzern in kontextadaptiven Anwendungen. Dabei ändert die Anwendung abhängig vom Nutzer- bzw. Nutzungskontext ihren Zustand (z.\,B. schaltet Smartphone auf lautlos) und der Benutzer will wissen, warum (z.\,B. weil er Abends in der Oper ist). Grundlage für Lims Ausführungen ist die Annahme, dass der Nutzer nur eingeschränkt Einfluss auf die Arbeitsweise des Systems hat, etwa durch Hinzufügen eigener Regeln. Das ist im letzten Schritt des VizBoard Workflows nicht gegeben, da der Benutzer die Visualisierungskomponenten selbst ausgewählt hat. Die Fragestellungen könnten aber hilfreich sein, wenn es um die Komponenten selbst geht (\enquote{Warum werden gerade diese Daten angezeigt?}) und so die \emph{Verständlichkeit} und \emph{Vollständigkeit} erhöhen.
 
-Lim und Dey \cite{Lim2010} kategorisieren mögliche Fragestellungen von Nutzern in kontextadaptiven Anwendungen. Dabei ändert die Anwendung abhängig vom Nutzer- bzw. Nutzungskontext ihren Zustand (z.\,B. schaltet Smartphone auf lautlos) und der Benutzer will wissen, warum (z.\,B. weil er Abends in der Oper ist). Grundlage für Lims Ausführungen ist die Annahme, dass der Nutzer nur eingeschränkt Einfluss auf die Arbeitsweise des Systems hat, etwa durch Hinzufügen eigener Regeln. Das ist im letzten Schritt des VizBoard Workflows nicht gegeben, da der Benutzer die Visualisierungskomponenten selbst ausgewählt hat. Die Fragestellungen könnten aber hilfreich sein, wenn es um die Komponenten selbst geht (\enquote{Warum werden gerade diese Daten angezeigt?}) und so die \emph{Verständlichkeit} und \emph{Vollständigkeit} erhöhen.
-
-% mashup debugging
-% gut: präventiv fehler erkennen, undo
+% mashup debugging strategien
+% gut: kam raus dass datenfluss evtl nicht so klar ist
 % schlecht: 
 
-Cao et al. \cite{Cao2010} untersuchten mit Hilfe der Thinking Aloud Methode \cite{vanSomeren1994} das Verhalten von Endnutzern, wenn sie Mashups erstellen, sowie deren Debugging-Strategien, wenn etwas nicht funktioniert. Dazu benutzten sie das inzwischen eingestellte Microsoft Popfly. In ihrer Studie hatten alle Probanden Probleme mit dem Konzept des Datenflusses, also welche Daten wann zwischen welchen Komponenten ausgetauscht werden. Ebenfalls mit Mashup Debugging beschäftigten sich Kuttal et al. \cite{Kuttal2013}. Sie entwickelten ein System zur automatischen Fehlererkennung in Yahoo Pipes. In den danach erarbeiteten Designrichtlinien schlagen sie unter anderem vor, keine technische Begriffe zu verwenden und Undo-Möglichkeiten sowie kontextuelle Hilfe anzubieten.
+Abgesehen von allgemeinen Fragestellungen wäre es wichtig zu wissen, ob bestimmte Mashupkonzepte besondere Beachtung finden müssen. Cao et al. \cite{Cao2010} untersuchten mit Hilfe der Thinking Aloud Methode \cite{vanSomeren1994} das Verhalten von Endnutzern, wenn sie Mashups erstellen, sowie deren Debuggingstrategien, wenn etwas nicht funktioniert. Dazu benutzten sie das inzwischen eingestellte Microsoft Popfly. In ihrer Studie hatten alle Probanden Probleme mit dem Konzept des Datenflusses, also welche Daten wann zwischen welchen Komponenten ausgetauscht werden. In VizBoard sollte überlegt werden, den Datenfluss explizit anzuzeigen und damit die \emph{Verständlichkeit} zu verbessern.
 
-% pipes erweiterung mit pattern recommendation
-% gut: recommendation
-% schlecht: bei uns einen schritt vorher
+% grammel phd & mental models
+% gut: vorschläge
+% schlecht: 
 
-Chowdhury et al. \cite{Chowdhury2012a} stellen eine Erweiterung von Yahoo Pipes vor, die Kompositionspattern vorschlägt und bei Bedarf in das Mashup einbaut.  Dieses \enquote{Programming by example} könnte in VizBoard benutzt werden, um die Komposition noch einmal zu überarbeiten.
+VizBoard ist ein Mashup von Informationsvisualisierungen, weswegen häufige Hindernisse für Endnutzer in diesem Bereich identifiziert werden müssen. Grammel \cite{Grammel2012} verfasste seine Doktorarbeit zum Thema, wie InfoVis-Anfänger Visualisierungen konstruieren. Um sie dabei zu unterstützen und ihr \emph{Verständnis} zu verbessern, schlägt er unter anderem vor, ihr mentales Modell zu verwenden (z.\,B. mit ihnen bekannten Begriffen), kontextuelle Hilfe anzubieten und es ihnen zu erleichtern, mehr über InfoVis zu lernen. Was genau ein mentales Modell bei InfoVis ausmacht, untersuchten Liu et al. \cite{Liu2010}. Demzufolge ist es besonders wichtig, die Struktur und das Verhalten der kompositen InfoVis zu erklären.
+
+% wie man erklären kann
 
 % textuelle erklärungen
 % gut: es geht
 % schlecht: sie sind langatmig
 
-Einige Arbeiten, wie z.\,B. \cite{Gesell2012, Matheson2012}, befassen sich mit der Generierung von textuellen Erklärungen. In beiden Arbeiten ist eine formale Repräsentation des Erklärungsgegenstands notwendig, beispielsweise als Baum von Vorbedingungen und \enquote{ist Teil von} Relationen oder einer Ontologie. In der Evaluation von Matheson et al. merkten einige Probanden an, dass ihre Erklärungen zu langatmig seien, was gegenläufig zur Anforderung \emph{Verständlichkeit} ist.
+Erklärungen können nicht nur Bilder oder Videos sein, sondern auch texbasiert. Einige Arbeiten, wie z.\,B. \cite{Gesell2012, Matheson2012}, befassen sich mit der Generierung von textuellen Erklärungen. In beiden Arbeiten ist eine formale Repräsentation des Erklärungsgegenstands notwendig, beispielsweise als Baum von Vorbedingungen und \enquote{ist Teil von} Relationen oder einer Ontologie. In der Evaluation von Matheson et al. merkten einige Probanden an, dass deren Erklärungen zu langatmig seien, was gegenläufig zur Anforderung \emph{Verständlichkeit} ist.
+
+% erklärung mit screenshots
+% gut: visuell
+% schlecht: nicht automatisch
+
+Um kontextuelle Hilfe mit Bildern einfach umsetzen zu können, entwickelten Yeh et al. \cite{Yeh2011} ein Tool für Entwickler, Lehrer oder den technischen Support. Mit dieser Software sollen sie einfach Screenshots einer Anwendung erstellen und Kommentare sowie grafische Annotationen hinzufügen können. Eine Nutzerstudie wurde nicht durchgeführt, dennoch erscheint dieser Ansatz geeignet, um einfache Ursache-Wirkung Relationen zu veranschaulichen. Um in VizBoard die \emph{Einheitlichkeit} der Hilfe zu gewährleisten, müsste die Generierung aber automatisiert werden.
 
 % user assistance mit comics
 % gut: effektiv und besser als PP
 % schlecht: 
 
-Webb et al. \cite{Webb2012} überprüften in einer Nutzerstudie, wie User Assistance in Form eines Comics gegenüber in Form einer PowerPoint-Präsentation angenommen wird. Comics lagen in allen Fragestellungen (einfache Nutzung, attraktiv, nützlich, verständlich) vorne, am Besten wurden Comics angenommen, die eine Metapher beinhalteten.
+Ein ähnlicher Ansatz von Hilfe mit Bildern ist der Einsatz von Comics. Webb et al. \cite{Webb2012} überprüften in einer Nutzerstudie, wie User Assistance in Form eines Comics gegenüber einer PowerPoint-Präsentation angenommen wird. Comics lagen in allen Fragestellungen (einfache Nutzung, attraktiv, nützlich, verständlich) vorne, am Besten wurden Comics angenommen, die eine Metapher beinhalteten. Da von Komponentenentwicklern nicht erwartet werden kann, einen Comic zu erstellen, müsste dieser generiert werden. Damit befassten sich unter anderem schon \cite{Kurlander1996, Shamir2006, Chan2009, Wen2012} mit unterschiedlichen Kontexten, es ist also möglich.
+
+% kontextuelle hilfe im web
+
+Um auf Webseiten kontextuelle Hilfe anbieten zu können, entwickelten Chilana et al. LemonAid \cite{Chilana2012}. Dabei wählen Benutzer ein beliebiges UI Element aus und bekommen dann eine Liste von Fragen und Antworten dazu angezeigt. Beispielsweise könnte ein HTML \texttt{input} Element ausgewählt werden, in das die Telefonnummer eingetragen werden muss. LemonAid erklärt, warum die Telefonnummer unverzichtbar ist, indem es auf die entsprechende FAQ Seite verweist. Da VizBoard webbasiert ist, kann dasselbe Interaktionspattern auch dort angewendet werden. Visualisierungskomponenten können UI Elemente aber dynamisch erzeugen, darauf müsste Rücksicht genommen werden.  
+
+% wie man bedarf an erklärungen reduzieren kann
 
 % heuristiken für infovis
 % gut: undo/redo, visuelle konsistenz
 % schlecht: anwendbarkeit? visuelle konsistenz haben wir ja nicht und wollen nicht.
 
-Forsell und Johansson \cite{Forsell2010} führten eine Nutzerstudie durch, um aus verschiedenen Heuristiken zur Heuristischen Evaluation \cite{Nielsen1994} diejenigen herauszufiltern, welche bei Informationsvisualisierungen hilfreich sind. Darunter finden sich Support für Undo/Redo, visuelle Konsistenz und den mentalen Aufwand des Nutzers gering zu halten. So kann die \emph{Verständlichkeit} und \emph{Unaufdringlichkeit} des Hilfesystems von VizBoard erhöht werden.
+Erklärungen zur Bedienung sind nötig, wenn der Benutzer nicht weiß, wie er eine Aktion ausführen kann (\enquote{Gulf of Execution} nach Norman \cite{Norman1986}). Der Bedarf an Erklärungen kann somit reduziert werden, wenn es die Anwendung nicht zu diesem Gulf of Execution kommen lässt. Zu diesem Zweck wurden einige Richtlinien zur User Interface Gestaltung entwickelt. Dazu gehören unter anderem die ISO9241-110, Sheidermans Mantra \cite{Shneiderman1996} oder die Heuristiken nach Nielsen \cite{Nielsen1994}. Forsell und Johansson \cite{Forsell2010} führten eine Nutzerstudie durch, um aus diesen verschiedenen Richtlinien bzw. Heuristiken zur Heuristischen Evaluation \cite{Nielsen1994} diejenigen herauszufiltern, welche bei Informationsvisualisierungen hilfreich sind. Darunter finden sich Support für Undo/Redo, visuelle Konsistenz und den mentalen Aufwand des Nutzers gering zu halten. So kann die \emph{Verständlichkeit} und \emph{Unaufdringlichkeit} des Hilfesystems von VizBoard erhöht werden.
 
-% grammel phd
-% gut: vorschläge
+% mashup debugging
+% gut: präventiv fehler erkennen, undo
 % schlecht: 
 
-Grammel \cite{Grammel2012} verfasste seine Doktorarbeit zum Thema, wie InfoVis-Anfänger Visualisierungen konstruieren. Um sie dabei zu unterstützen und ihr \emph{Verständnis} zu verbessern, schlägt er unter anderem vor, ihr mentales Modell zu verwenden (z.\,B. mit ihnen bekannten Begriffen), kontextuelle Hilfe anzubieten und es ihnen zu erleichtern, mehr über InfoVis zu lernen.
+Mit Designrichtlinien im weitesten Sinne beschäftigten sich auch Kuttal et al. \cite{Kuttal2013}. Ein Nachteil von Yahoo Pipes war, dass kaputte Mashups entstehen können. Also entwickelten sie ein System zur automatischen Fehlererkennung in Yahoo Pipes, welches auch gleichzeitig die Fehlermeldungen verständlicher formulierte. In der Nutzerstudie zeigte sich, dass Benutzer mit dem System erfolgreicher Mashups erstellen konnten als ohne. Die Autoren stellen in ihrer Arbeit auch Designrichtlinien vor und raten dazu, keine technische Begriffe zu verwenden und Undo-Möglichkeiten sowie kontextuelle Hilfe anzubieten. Das deckt sich mit den Empfehlungen bisher betrachteter verwandter Arbeiten.
 
-% infovis mit sensemaking
-% gut: knowledge view
-% schlecht: nur cool wenn alle inhalte fusioniert werden können. und dann ist immer noch die frage, ob man sowas wirklich braucht. bin skeptisch mit zu viel features
+% grafische history für tableau
+% gut: verständlich, einfach zu nutzen
+% schlecht: 
 
-Shrinivasan et al. \cite{Shrinivasan2008} entwickelten ein Framework zur Informationsvisualisierung, welches den menschlichen Verständnisprozess unterstützen soll. Es besteht aus drei verschiedenen Views: Der InfoVis selbst, einem \enquote{Knowledge View} und einem \enquote{Navigation View}. Im Knowledge View kann der Benutzer seine Hypothesen und Analysen verwalten bzw. überprüfen, der Navigation View erlaubt es ihm, zu einem beliebigen Punkt im Laufe der Interaktionen zurück zu gehen. In einer Nutzerstudie fanden die vier Probanden den Knowledge View sehr nützlich. Er könnte die \emph{Unaufdringlichkeit} des Hilfesystems verbessern.
+Um die Undo-Funktionalität in Tableau zu verbessern entwickelten Heer et al. \cite{Heer2008} eine grafische History für Tableau. Sie zeigt Screenshots des Visualisierungszustands, die chronologisch wie eine Timeline angeordnet sind. Ein Klick auf einen Screenshot setzt die Visualisierung in den angezeigten Zustand zurück. Dieses Konzept könnte zur \emph{Verständlichkeit} von VizBoard beitragen, wenn es umsetzbar ist.
 
 % lessons learned
 
-% history ist wichtig. comics sind gut, v.a. weil text langatmig.
+% was muss erklärt werden: struktur und verhalten von infovis
+% wie kann erklärt werden: kontextuelle hilfe mit bildern scheint gute möglichkeit
+% wie kann weniger erklärt werden: visuelle konsistenz, undo/redo, 
 
-In diesem Abschnitt wurden verschiedene Ansätze zur User Assistance im Allgemeinen und bei Mashups im Speziellen betrachtet. Zu den am meisten vorgeschlagenen Designrichtlinien zählen Undo/Redo und kontextuelle Hilfe. Das Konzept des Datenflusses ist möglicherweise nicht so eingängig wie gedacht. Außerdem wurde gezeigt, dass Comics mit Metaphern als User Assistance ansprechender und effektiver sind als PowerPoint-Präsentationen.
+In diesem Abschnitt wurden verschiedene Ansätze zur User Assistance im Allgemeinen und bei Mashups sowie InfoVis im Speziellen betrachtet. Zu der Frage, was erklärt werden muss, konnte als Antwort die Struktur und das Verhalten der Anwendung identifiziert werden, da diese Teil des mentalen Modells des Benutzers sind. Es wurde außerdem gezeigt, dass textuelle Erklärungen langatmig und deswegen visuelle Hilfestellungen besser geeignet sein können. Dazu können Screenshots oder Comics verwendet werden. Die Herausforderung bei VizBoard wäre in diesem Fall, dass sie automatisch generiert werden müssten. Um die Interaktion mit VizBoard besser zu gestalten, kann auf Designrichtlinien für Informationsvisualisierungen zurückgegriffen werden. Diese beinhalten unter anderem visuelle Konsistenz, Undo/Redo, zusätzliche Informationen anzeigen oder den mentalen Aufwand des Benutzers zu reduzieren. Bei VizBoard sind viele der Richtlinien abhängig von den Komponentenentwicklern, aber einige können auch durch das Hilfesystem umgesetzt werden.
 
 \section{Zusammenfassung}
 \label{section:standderforschung:zusammenfassung}
