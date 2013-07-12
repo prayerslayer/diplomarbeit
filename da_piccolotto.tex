@@ -110,7 +110,7 @@ Diese Probleme zu lösen ist das Ziel des Forschungsprojekts VizBoard. Es setzt 
 
 % problem liegt im letzten teil
 
-% welche probleme? Visualisierungen auseinanderhalten und einordnen können (intro), visualisierungen bedienen können (bedienung), fragen über daten stellen können (kommentare), konzept der zusammenarbeit von komponenten verstehen (kommunikation), fehler melden können (reporting), unbekannte konzepte beschrieben bekommen (verlinkung)
+% welche probleme? Visualisierungen auseinanderhalten und einordnen können (intro), visualisierungen bedienen können (bedienung), fragen über daten stellen können (kommentare), konzept der zusammenarbeit von komponenten verstehen (kommunikation), fehler melden können (Feedback), unbekannte konzepte beschrieben bekommen (verlinkung)
 
 Am Ende des VizBoard Workflows angekommen, wird dem Benutzer ein Mashup aus verschiedenen Informationsvisualisierungskomponenten präsentiert, welche miteinander kommunizieren können und so zusammenarbeiten. Beispielsweise aktualisiert sich das Balkendiagramm dem aktuellen Ausschnitt der Karte entsprechend.
 
@@ -179,7 +179,7 @@ Damit bekommt Anna einen Überblick über die verfügbaren Visualisierungen und 
 
 % Was heißt GDP? Wie wird das berechnet? Was soll die Spitze bei 1990? Woher kommt die? Diese eine Komponente scheint kaputt zu sein, wo kann ich mich beschweren?
 
-In der Tabelle findet sie auch eine Spalte \enquote{SNP}. Anna weiß zwar, dass sie die Abkürzung schon einmal gesehen hat, kennt aber im Moment ihre Bedeutung nicht. Praktischerweise ist der Spaltenkopf mit der Wikipedia verlinkt und sie wird sofort auf die entsprechende Seite weitergeleitet. Anna erinnert sich, dass \enquote{SNP} \enquote{Single-nucleotide polymorphism} bedeutet und sie bekommt auch gleich zusätzliche Informationen zu diesem Thema. Sie widmet sich weiter der Tabelle und stellt fest, dass die Ortsbezeichnung \enquote{Kopenhagen} nicht mit der Markierung in der Karte übereinstimmt. Außerdem ist sie erstaunt, wie hoch die Verbreitung eines bestimmten SNPs dort ist und würde gerne die Ursache dafür wissen. In der Hilfe zur Tabelle wurde sie auch über die Möglichkeit, Kommentare an den Daten vorzunehmen, aufgeklärt. Anna kommentiert sowohl die falschen Geokoordinaten als auch ihre Frage über die Verbreitung des SNPs, sodass sie später über Antworten informiert wird. Nun kann Anna sich mit der vierten Visualisierung, dem Balkendiagramm, beschäftigen. Allerdings reagiert es auf keine Mausklicks und macht auch sonst nicht den Eindruck, die Daten akkurat darzustellen. Anna meldet die kaputte Visualisierung über die eingebaute Reporting-Funktion und schließt das Fenster, um sich den anderen drei Visualisierungskomponenten zuzuwenden.
+In der Tabelle findet sie auch eine Spalte \enquote{SNP}. Anna weiß zwar, dass sie die Abkürzung schon einmal gesehen hat, kennt aber im Moment ihre Bedeutung nicht. Praktischerweise ist der Spaltenkopf mit der Wikipedia verlinkt und sie wird sofort auf die entsprechende Seite weitergeleitet. Anna erinnert sich, dass \enquote{SNP} \enquote{Single-nucleotide polymorphism} bedeutet und sie bekommt auch gleich zusätzliche Informationen zu diesem Thema. Sie widmet sich weiter der Tabelle und stellt fest, dass die Ortsbezeichnung \enquote{Kopenhagen} nicht mit der Markierung in der Karte übereinstimmt. Außerdem ist sie erstaunt, wie hoch die Verbreitung eines bestimmten SNPs dort ist und würde gerne die Ursache dafür wissen. In der Hilfe zur Tabelle wurde sie auch über die Möglichkeit, Kommentare an den Daten vorzunehmen, aufgeklärt. Anna kommentiert sowohl die falschen Geokoordinaten als auch ihre Frage über die Verbreitung des SNPs, sodass sie später über Antworten informiert wird. Nun kann Anna sich mit der vierten Visualisierung, dem Balkendiagramm, beschäftigen. Allerdings reagiert es auf keine Mausklicks und macht auch sonst nicht den Eindruck, die Daten akkurat darzustellen. Anna meldet die kaputte Visualisierung über die eingebaute Feedback-Funktion und schließt das Fenster, um sich den anderen drei Visualisierungskomponenten zuzuwenden.
 
 % ###################################################
 \section{Anforderungsanalyse}
@@ -195,7 +195,7 @@ Blabla
 \begin{itemize}
 	\item\textbf{Intro}: Das Hilfesystem soll einen kurzen Überblick über das InfoVis-System geben und Darstellungsform sowie Inhalt jeder Komponente kurz erläutern.
 	\item\textbf{Bedienung}: Das Hilfesystem soll erklären können, wie eine Komponente bedient wird. Diese Informationen umfassen beispielsweise welche Operationen welche Aktionen (eventuell auf welchen Daten) ausführen.
-	\item\textbf{Reporting}: Fehler in Komponenten sollen über ein Reporting-System gemeldet werden können.
+	\item\textbf{Feedback}: Fehler in Komponenten sollen über ein Feedback-System gemeldet werden können.
 	\item\textbf{Verlinkung}: Das Hilfesystem soll nicht-triviale Begriffe mit einer Wissensbasis‚ verlinken, sodass nicht nur auf die Begriffsbedeutung hingewiesen werden, sondern dem Benutzer auch zusätzliche Informationen zur Verfügung gestellt werden können.
 	\item\textbf{Kommunikation}: Das Hilfesystem soll erklären können, wie gegebene Komponenten miteinander kommunizieren.
 	\item\textbf{Kommentare}: Der Benutzer soll die Möglichkeit haben Daten zu kommentieren und Bereiche der Visualisierung zu markieren und mit ebenfalls mit einem Kommentar zu versehen, sodass auch auf fehlende Daten hingewiesen werden kann.
@@ -886,7 +886,7 @@ yay
 \chapter{Konzeption}
 \label{chapter:konzeption}
 
-Basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) und den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen}) wird ein Konzept zur User Assistance für das webbasierte, komposite Informationsvisualisierungssystem VizBoard erstellt. Dabei werden Hilfestellungen unterteilt in allgemeine, die jedem Mashup nützlich sein können (Abschnitte~\ref{section:konzeption:intro}, \ref{section:konzeption:bedienung}, \ref{section:konzeption:reporting}, \ref{section:konzeption:kommunikation}, \ref{section:konzeption:history}) und domänenspezifische, welche besonders für Informationsvisualisierungen gedacht sind (Abschnitte~\ref{section:konzeption:verlinkung}, \ref{section:konzeption:kommentare}). Die Ziele richten sich dabei nach der Anforderungsanalyse (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}).
+Basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}), den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen}) und den Erkenntnissen aus den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wird ein Konzept zur User Assistance für das webbasierte, komposite Informationsvisualisierungssystem VizBoard erstellt. Dabei werden Hilfestellungen unterteilt in allgemeine, die jedem auf CRUISe basierenden Mashup nützlich sein können (Abschnitte~\ref{section:konzeption:intro}, \ref{section:konzeption:bedienung}, \ref{section:konzeption:feedback}, \ref{section:konzeption:kommunikation}, \ref{section:konzeption:history}, \ref{section:konzeption:meta-hilfe}) und domänenspezifische, welche besonders für Informationsvisualisierungen gedacht sind (Abschnitte~\ref{section:konzeption:verlinkung}, \ref{section:konzeption:kommentare}). Die Ziele richten sich dabei nach der Anforderungsanalyse (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}).
 
 \section{Einführung}
 \label{section:konzeption:einfuehrung}
@@ -918,7 +918,7 @@ Der \textbf{Endnutzer} verwendet VizBoard, um Wissen in semantischen Datensätze
 \subsection{User Interface}
 \label{section:konzeption:einfuehrung:ui}
 
-Im Laufe der Konzeption werden zum besseren Verständnis einige User Interface Mockups entworfen. Diese basieren auf der Grundlage aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}). Die dort erwähnte Komposition enthält eine Karte, eine Treemap, eine Tabelle und ein Balkendiagramm (Abbildung~\ref{figure:ui-grundlage}).
+Im Laufe der Konzeption werden zum besseren Verständnis einige User Interface Mockups entworfen. Diese basieren auf der Grundlage aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}). Die dort erwähnte Komposition enthält eine Karte, eine Treemap, eine Tabelle und ein Balkendiagramm (Abbildung~\ref{figure:ui-grundlage}). In den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) war die visuelle Konsistenz eine Designrichtlinie, welche das Bedürfnis nach Hilfestellungen verringern kann. Aus diesem Grund wird im folgenden ein Styleguide für das Hilfesystem beschrieben.
 
 \begin{figure}[htbp]
    \centering
@@ -927,22 +927,11 @@ Im Laufe der Konzeption werden zum besseren Verständnis einige User Interface M
    \label{figure:ui-grundlage}
 \end{figure}
 
-\subsubsection{Aufruf}
-
-% wo sind die buttons so
-
-Funktionen, die der Nutzer aus eigener Initiative nutzen kann und komponetenspezifisch sind (z.\,B. Kommentare), werden über Buttons in der Titelleiste der Komponente aufgerufen. Das Hilfesystem kann sie wegen des \enquote{Black Box} Prinzips nicht in der Komponente selbst platzieren. Zwar könnte man UI Elemente für die Hilfefunktionen im Komponenten-Markup vorsehen, aber durch die Nutzung der Titelleiste wird dem Entwickler Aufwand erspart. Die UI für die aufgerufene Hilfe kann auf folgende Arten geschlossen werden:
-
-\begin{itemize}
-	\item Klick auf den Button, der sie aufgerufen hat
-	\item Klick auf den \enquote{Schließen}-Button oben rechts
-\end{itemize}
-
 \subsubsection{Art}
 
 % wie sieht ui für dings grob aus?
 
-Das User Interface für die ausgewählte Hilfefunktion wird links oder rechts der Komponente in einer Sidebar dargestellt (Abbildung~\ref{figure:ui-basics},~1). Gegenüber einem Popover (2) hat sie den Vorteil, dass sie sowohl links als auch rechts funktioniert. Ein Popover kann nur über der Titelleiste angezeigt werden, ansonsten werden große Teile der Komponente verdeckt (3). Die Sidebar kann in der Größe variieren (4), da für die Kommentare vermutlich mehr Platz benötigt wird als beispielsweise für die Reportingfunktion.
+Das User Interface für die ausgewählte Hilfefunktion wird links oder rechts der Komponente in einer Sidebar dargestellt (Abbildung~\ref{figure:ui-basics},~1). Gegenüber einem Popover (2) hat sie den Vorteil, dass sie sowohl links als auch rechts funktioniert. Ein Popover kann nur über der Titelleiste angezeigt werden, ansonsten werden große Teile der Komponente verdeckt (3). Die Sidebar kann in der Größe variieren (4), da für die Kommentare vermutlich mehr Platz benötigt wird als beispielsweise für die Feedbackfunktion.
 
 \begin{figure}[htbp]
    \centering
@@ -954,16 +943,20 @@ Das User Interface für die ausgewählte Hilfefunktion wird links oder rechts de
 \subsubsection{Ort}
 
 Dass die Sidebar mal links, mal rechts angezeigt wird, könnte beim Nutzer für Verwirrung sorgen. Jedoch scheint dieses Problem das kleinste zu sein, wenn man über die Alternativen nachdenkt.
-Beispielsweise könnte das Hilfesystem die Buttons in einer eigenen Button-Sidebar platzieren. Allerdings erscheint dann in 50~\% der Fälle die UI Sidebar auf der anderen Seite, was noch verwirrender ist. Die Button-Sidebar jeweils auf der Seite zu rendern, wo auch die UI der Hilfe angezeigt werden wird, ist ebenfalls schwer vorstellbar. Erstens sind unterschiedliche User Interfaces unterschiedlich groß. Während das Reporting noch links gerendert werden könnte, könnten die Kommentare nur rechts genug Platz haben. Zweitens müsste der Nutzer jedes Mal erst die Buttons suchen, da sie abhängig von der Größe der Komponente und der Position linker oder rechter Hand sind. Das stellt nicht unerheblichen mentalen Aufwand dar.
-Zuletzt wäre es möglich, die Button-Sidebar auf beiden Seiten der Komponente anzuzeigen und eine davon zu deaktivieren. Diese Variante unterscheidet sich aber nicht viel von der eben beschriebenen, da der Benutzer dann nicht die Buttons selbst, sondern aktivierte Buttons suchen muss.
+Beispielsweise könnte das Hilfesystem die Buttons in einer eigenen Button-Sidebar platzieren (Abbildung~\ref{figure:ui-buttonleiste}). Allerdings erscheint dann in 50~\% der Fälle die UI Sidebar auf der anderen Seite, was noch verwirrender ist (Abbildung~\ref{figure:ui-buttonleiste}, 1 und 2). Zwar wäre es möglich, die Button-Sidebar auf beiden Seiten der Komponente anzuzeigen und eine davon zu deaktivieren (Abbildung~\ref{figure:ui-buttonleiste}, 3). Diese Variante unterscheidet sich aber nicht viel von der eben beschriebenen, da der Benutzer dann nicht die Buttons selbst, sondern aktivierte Buttons suchen muss.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-ui-buttonleiste.png}
+   \caption{Alternative zu Buttons in der Titelleiste}
+   \label{figure:ui-buttonleiste}
+\end{figure}
 
 \subsubsection{Optik}
 
-Visuelle Konsistenz ist wichtig, damit der Benutzer Elemente gleichen Typs erkennen kann. Deswegen hat der Bereich, in der Hilfefunktionen angezeigt werden, abgerundete Ecken. So hebt sich die UI für Hilfe von der normalen UI der Komponente, welche spitze Ecken aufweist, ab. Aus demselben Grund wird für die Hilfe UI ein dunkler Hintegrund gewählt, da der Hintergrund von VizBoard weiß ist. Um etwas hervorzuheben, wird prinzipiell die Farbe Orange benutzt, da dies im bestehenden VizBoard Farbschema so festgelegt wurde. Eine Überlagerung der Komponente mit einem leichten Grau dient der Blickführung zu einem nicht überlagerten Element. Ist die Komponente hingegen mit einem tiefen Grau überlagert, signalisiert die dunkle Fläche eine \enquote{No Click Area}, wo keine Interaktionen ausgeführt werden können. 
+Visuelle Konsistenz ist wichtig, damit der Benutzer Elemente gleichen Typs erkennen kann (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}). Deswegen hat der Bereich, in der Hilfefunktionen angezeigt werden, abgerundete Ecken. So hebt sich die UI für Hilfe von der normalen UI der Komponente, welche spitze Ecken aufweist, ab. Aus demselben Grund wird für die Hilfe UI ein dunkler Hintergrund gewählt, da der Hintergrund von VizBoard weiß ist. Um etwas hervorzuheben, wird prinzipiell die Farbe Orange benutzt, da dies im bestehenden VizBoard Farbschema so festgelegt wurde. Eine Überlagerung der Komponente mit einem leichten Grau dient der Blickführung zu einem nicht überlagerten Element. Ist die Komponente hingegen mit einem tiefen Grau überlagert, signalisiert die dunkle Fläche eine \enquote{No Click Area}, wo keine Interaktionen ausgeführt werden können. 
 
 Offensichtlich sind die gewählten visuellen Effekte nicht mehr so nützlich, wenn eine Komponente einen dunklen Hintergrund aufweist. Schwarz mit Dunkelgrau zu überlagern macht für das menschliche Auge nur wenig Unterschied. Deswegen werden in diesem Fall dieselben Effekte mit Weiß und Hellgrau verwendet.
-
-% todo: wieder dafür sorgen, dass im text auch steht, was auf den bildern zu sehen ist
 
 \section{Intro in die Funktionalität einer Komponente}
 \label{section:konzeption:intro}
@@ -1184,27 +1177,27 @@ Die Texte in den Panels werden zur Laufzeit hinzugefügt, da so beispielsweise a
 
 Diese werden aber schon im Schritt davor (Abbildung~\ref{figure:bedienung-step2}) benötigt, müssen also sowieso bekannt sein.
 
-\section{Reporting}
-\label{section:konzeption:reporting}
+\section{Feedback zu einer Komponente}
+\label{section:konzeption:feedback}
 
 Wie bei jeder Software können bei den Komponenten in VizBoard Fehler auftreten. Externe APIs, die sie benutzen, wie zum Beispiel von Facebook oder Twitter können sich ändern. Visualisierte Daten können Fehler in der Komponente verursachen, beispielsweise durch nicht überprüfte \texttt{null} Werte oder wenn sie ein unerwartetes Format haben. Ebenso ist es möglich, dass VizBoard selbst Bugs enthält. Schlimmstenfalls fallen diese Fehler erst dem Endnutzer auf, welcher sie dann melden können soll.
 
-Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. VizBoard-Betreiber -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Liegt es an der Komponente (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API)? Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben, und die Möglichkeit haben, die Komponente prinzipiell als gut oder schlecht zu bewerten. Letztere Funktion existiert bereits in VizBoard und wird in die Reporting UI integriert. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
+Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. VizBoard-Betreiber -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Liegt es an der Komponente (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API)? Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben, und die Möglichkeit haben, die Komponente prinzipiell als gut oder schlecht zu bewerten. Letztere Funktion existiert bereits in VizBoard und wird in die Feedback UI integriert. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
 
 \subsection{User Interface und Interaktion}
-\label{section:konzeption:reporting:ui}
+\label{section:konzeption:feedback:ui}
 
-Der Nutzer klickt auf einen Button in der Titelleiste, beschreibt sein Problem und sendet ab (Abbildung~\ref{figure:reporting}). Optional kann er außerdem eine Bewertung abgeben \cite{Voigt2013b}.
+Der Nutzer klickt auf einen Button in der Titelleiste, beschreibt sein Problem und sendet ab (Abbildung~\ref{figure:feedback}). Optional kann er außerdem eine Bewertung abgeben \cite{Voigt2013b}.
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-reporting.png}
-   \caption{UI Mockup: Reporting-Funktion}
-   \label{figure:reporting}
+   \caption{UI Mockup: Feedback-Funktion}
+   \label{figure:feedback}
 \end{figure}
 
 \subsection{Backend}
-\label{section:konzeption:reporting:backend}
+\label{section:konzeption:feedback:backend}
 
 % was kann man über javascript vom browser auslesen?
 Informationen über den Browser befinden sich im DOM Objekt \texttt{window.navigator} und beinhalten unter anderem:
@@ -1225,7 +1218,7 @@ Diese und andere notwendige Informationen können mit Javascript einfach ausgele
 
 Das Feedback des Nutzers wird ans Rating Repository gesendet und gespeichert. Die gesammelten Informationen aus dem Context Service über Nutzer, Browser und Anwendungskontext werden im RaRe referenziert. Das RaRe könnte aus der vom Nutzer abgegebenen Bewertung und Textklassifikation \cite{Sebastiani2002} in \enquote{positiv} oder \enquote{negativ} bestimmen, ob ein Ticket in einem Support System (wie z.\,B. OSTicket\footnote{\url{http://osticket.com/}}) des VizBoard-Betreibers erstellt werden soll. Die positiven Kommentare könnten beispielsweise für Testimonials auf der Startseite von VizBoard verwendet werden.
 
-\section{Kommunikation}
+\section{Kommunikation zwischen Komponenten}
 \label{section:konzeption:kommunikation}
 
 Im kompositen Infomationsvisualisierungssystem VizBoard kommunizieren Komponenten miteinander, indem sie Nachrichten austauschen (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}). Dieser Vorgang ist für den Benutzer nicht sichtbar und kann für Verwirrung sorgen, wenn andere Komponenten auf Interaktionen reagieren, die dort nicht getätigt wurden. Dem wird beigekommen, indem 
@@ -1265,7 +1258,7 @@ Für die Generierung des Comics muss das Konzept der User Assistance für Bedien
 
 Zu beachten ist allerdings, dass es Operationen geben kann, welche das User Interface der Komponente nicht verändern. Das Konzept der Hilfestellung mit Comics fußt darauf, dass ein sichtbarer Unterschied zwischen den Zuständen vor und nach einer Interaktion bzw. Operation besteht. Ist jener nicht vorhanden, ergibt der Comic keinen Sinn mehr. Deswegen muss dem Komponentenentwickler eine Möglichkeit gegeben werden, Operationen zu identifizieren, für die keine Hilfe generiert werden soll. Das kann am einfachsten durch ein optionales Attribut in der Komponentenbeschreibung umgesetzt werden.
 
-\section{Verlinkung}
+\section{Verlinkung von unbekannten Konzepten}
 \label{section:konzeption:verlinkung}
 
 % einführung - warum brauchen wir verlinkung?
@@ -1305,7 +1298,7 @@ Im Fall von Interaktionselementen wird bei \texttt{MouseOver} derselbe Hilfebutt
 
 Zwar wäre es wünschenswert, sowohl Legenden und Freitext als auch Interaktionselemente mit derselben UI kennzeichnen zu können. Das ist leider nicht ohne weiteres möglich. Würden Legenden und Freitext die UI der Interaktionselemente verwenden, wäre die Hilfefunktion nicht sichtbar. Wäre es andersherum, müsste der DOM auf nicht-triviale Weise manipuliert werden (Einfügen von eigenen Elternknoten usw.), was unerwünschte Auswirkungen auf CSS Selektoren des Entwicklers haben könnte.
 
-\section{Kommentare}
+\section{Kommentare/Annotationen in Visualisierungen}
 \label{section:konzeption:kommentare}
 
 % allgemeines zu kommentaren. woraus bestehen sie, was müssen sie können.
@@ -1642,7 +1635,7 @@ Die einfachste Möglichkeit für eine History, die so auch in jeder Desktopappli
    \label{figure:undo-simple}
 \end{figure}
 
-Dieses Problem ist bei der Präsentation der History als Timeline nicht mehr vorhanden (Abbildung~\ref{figure:undo-timeline}). Die oberste Zeile dient als Overview des Overview/Detail Patterns und zeigt, wann (horizontale Position) welche Aktion (Farbe) auf welcher Komponente (vertikale Position) ausgeführt wurde. Die vier Zeilen darunter sind Detailansichten für jede Komponente im ausgewählten Zeitfenster. Ein Klick auf ein Rechteck, also eine Aktion, macht alle inklusive der ausgewählten rückgängig. Screenshots der Komponentenzustände wie in \cite{Heer2008} wären zwar hilfreicher und visuell ansprechender, jedoch sind programmatische Screenshots im Web keine triviale Aufgabe.
+Dieses Problem ist bei der Präsentation der History als Timeline nicht mehr vorhanden (Abbildung~\ref{figure:undo-timeline}). Die oberste Zeile dient als Overview des Overview/Detail Patterns und zeigt, wann (horizontale Position) welche Aktion (Farbe) auf welcher Komponente (vertikale Position) ausgeführt wurde. Die vier Zeilen darunter sind Detailansichten für jede Komponente im ausgewählten Zeitfenster. Ein Klick auf ein Rechteck, also eine Aktion, macht alle inklusive der ausgewählten rückgängig. Screenshots der Komponentenzustände wie in \cite{Heer2008} (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wären zwar hilfreicher und visuell ansprechender, jedoch sind programmatische Screenshots im Web nicht möglich. Eine Alternative wäre den DOM der Visualisierung zu kopieren und in der Timeline einzufügen. Allerdings kann nicht davon ausgegangen werden, dass das CSS der Komponente sie entsprechend skaliert.
 
 \begin{figure}[htbp]
    \centering
@@ -1658,7 +1651,7 @@ Die Timeline ist zwar mächtiger als zwei Buttons, aber auch komplexer zu nutzen
 
 % warum brauchen wir meta-hilfe?
 
-In diesem Konzept wurden bisher sieben unterschiedliche Hilfefunktionen erarbeitet: Intro, Bedienung, Reporting, Verlinkung, Kommunikation, Kommentare und History. Diese sind zwar optisch und vom Interaktionsdesign her konsistent, bringen aber trotzdem viel zusätzliche Komplexität in die Anwendung. Um die Hilfefunktionen in vollem Umfang nutzen zu können, benötigt der Benutzer einige Informationen. Dazu gehört sowohl das Wissen, welche Hilfefunktionen existieren und wie sie aufgerufen werden, als auch konzeptionelle Dinge, wie z.\,B. dass Kommentare mit Bereichen und/oder Datenpunkten in der Visualisierung assoziiert sind. Es ist anzunehmen, dass diese Meta-Hilfe vor allem bei der ersten Nutzung von VizBoard benötigt wird. Aus diesem Grund sollte sie so unaufdringlich wie möglich gestaltet sein. Prinzipiell können Hilfestellungen unterteilt werden in dynamische Hilfe, die dem Nutzer bei Bedarf angeboten wird, und statische Hilfe, die der Nutzer selbst aufrufen muss.
+In diesem Konzept wurden bisher sieben unterschiedliche Hilfefunktionen erarbeitet: Intro, Bedienung, Feedback, Verlinkung, Kommunikation, Kommentare und History. Diese sind zwar optisch und vom Interaktionsdesign her konsistent, bringen aber trotzdem viel zusätzliche Komplexität in die Anwendung. Um die Hilfefunktionen in vollem Umfang nutzen zu können, benötigt der Benutzer einige Informationen. Dazu gehört sowohl das Wissen, welche Hilfefunktionen existieren und wie sie aufgerufen werden, als auch konzeptionelle Dinge, wie z.\,B. dass Kommentare mit Bereichen und/oder Datenpunkten in der Visualisierung assoziiert sind. Es ist anzunehmen, dass diese Meta-Hilfe vor allem bei der ersten Nutzung von VizBoard benötigt wird. Aus diesem Grund sollte sie so unaufdringlich wie möglich gestaltet sein. Prinzipiell können Hilfestellungen unterteilt werden in dynamische Hilfe, die dem Nutzer bei Bedarf angeboten wird, und statische Hilfe, die der Nutzer selbst aufrufen muss.
 
 \subsection{Statische Meta-Hilfe}
 

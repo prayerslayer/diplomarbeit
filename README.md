@@ -6,27 +6,13 @@ My diploma thesis at Dresden University of Technology.
 
 * Was für einen Effekt hat Kommentar löschen, wenn die Referenzen drauf erhalten bleiben?
 
-## Notes wegen RW
-
-Überblick: Welche Fragen, welche davon gewählt, Grundlage, warum.
-Bedienung: Comic Generation, UA mit Screenshots, welche Fragen
-Kommunikation: Welche Fragen
-History: Beispiel Tableau (Heer2008) oder andre Mashups, unterschiede rausstreichen
-Meta-Hilfe: Interaction Trace-based Reasoning (Champin, Cordier)
-
-
 ## Anmerkungen Martin 5.7.
 
+* Trace-Based Reasoning in dynMetaHilfe erwähnen
 * Ordentliche Kommentare/Annotationen Nomenklatur
-* History: Verweis auf RW, erklären warum DOM kopieren schlecht
 * Allgemein: Mehr Referenzen in der Arbeit, bessere Listen.
 * Anforderungen: nach Plattform/Domänenspezifischen unterscheidbar?
 * Related Work: Mehr auch ansprechen, was Anforderungen nicht umsetzen und bessere Zusammenfassungen
-* RW in Einführung Konzeption erwähnen
-* Aufruf in Einführung anpassen, ist ja nicht nur Titelleiste jetzt
-* Ort in Einführung: Grafik für Buttonleiste
-* Optik => Implementierung?
-* Bessere Überschriften
 * Intro: Unterscheidung plattform/domänenspezifisch
 * Kommunikation: Überarbeiten nach Paper Mockup
 * Kommentare: Umschaltbutton für Highest Ranked und Newest.
