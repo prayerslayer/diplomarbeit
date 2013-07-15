@@ -958,6 +958,69 @@ Visuelle Konsistenz ist wichtig, damit der Benutzer Elemente gleichen Typs erken
 
 Offensichtlich sind die gewählten visuellen Effekte nicht mehr so nützlich, wenn eine Komponente einen dunklen Hintergrund aufweist. Schwarz mit Dunkelgrau zu überlagern macht für das menschliche Auge nur wenig Unterschied. Deswegen werden in diesem Fall dieselben Effekte mit Weiß und Hellgrau verwendet.
 
+\subsection{Nutzerstudie}
+
+Das entworfene Konzept wurde mit einer formativen Nutzerstudie evaluiert und danach entsprechend überarbeitet. Die wichtigste zu beantwortende Frage war dabei, ob die Kommunikationshilfe statisch (d.\,h. nach Klick auf einen Button) oder dynamisch (d.\,h. sobald eine Nachricht zwischen Komponenten ausgetauscht wurde) aufgerufen werden soll. Dazu wurde ein Paper Mockup \cite{Virzi1996} erstellt (Abbildung~\ref{figure:paper-mockup}). Er besteht aus einem Balkendiagramm, einer Karte und einer Tabelle. Als Datengrundlage wurden NBA Spieler gewählt. Die Balken des Balkendiagramms konnten ausgewählt werden, woraufhin sich die Tabelle und die Karte anpassten.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/konzeption-paper-mockup.png}
+   \caption{Die ersten zwei Seiten des Paper Mockups}
+   \label{figure:paper-mockup}
+\end{figure}
+
+\subsubsection{Teilnehmer}
+
+Die Nutzerstudie wurde mit fünf Teilnehmern zwischen 23 und 25~Jahren durchgeführt (Tabelle~\ref{table:mockup:teilnehmer}). Dabei waren 60~\% der Personen männlich. Auf die Vertrautheit mit Computern, webbasierten User Interfaces oder semantischen Daten wurde dabei keine Rücksicht genommen, weil sie nicht relevant sind.
+
+\begin{table}[htbp]
+	\centering
+    \begin{tabular}{c|c|c|c}
+    Teilnehmer   & Geschlecht & Alter & Domäne      \\
+    \hline
+    Teilnehmer 1 & W          & 23    & Zahnmedizin \\ %anna
+    Teilnehmer 2 & M          & 25    & Informatik  \\ %fabi
+    Teilnehmer 3 & M          & 23    & Informatik  \\ %kirsche
+    Teilnehmer 4 & W          & 25    & Zahnmedizin \\ %karo
+    Teilnehmer 5 & ~          & ~     & ~           \\
+    \end{tabular}
+    \label{table:mockup:teilnehmer}
+    \caption{Teilnehmer der Nutzerstudie}
+\end{table}
+
+\subsubsection{Ablauf}
+
+% einführung
+
+Zuerst wurde den Teilnehmern eine einführende Erklärung gegeben, wie sie später das Intro (Abschnitt~\ref{section:konzeption:intro}) übernehmen soll. Dabei wurde der Typ des Diagramms erklärt (wenn notwendig) und die enthaltenen Daten erwähnt. Über die Kommunikation zwischen Komponenten wurde keine Aussage gemacht, die Teilnehmer konnten allerdings einfach schließen, dass diese in irgendeiner Form stattfinden musste. 
+
+% ablauf
+
+Nach der Einführung sollten die Testpersonen die Anwendung benutzen, wobei zwei mögliche Fragestellungen erwähnt wurden, denen sie nachgehen konnten. MouseOver-Interaktionen wurden explizit beschrieben, da sie im Paper Mockup nicht sichtbar sind. Die Probanden wurden gebeten, während der Nutzung ihre Gedanken laut mitzuteilen (\enquote{Thinking Aloud} Methode \cite{vanSomeren1994}). Im Laufe des Tests wurden die Teilnehmer beispielsweise gefragt, warum sie bestimmte Dinge annahmen, ob die gezeigten Informationen ausreichen, welche Interaktionsmöglichkeiten sie in einer Situation sahen oder ob eine alternative Interaktion beziehungsweise ein verändertes User Interface besser geeignet wäre. Wenn sie eine Funktion nicht von selbst wählten (etwa einen Kommentar zu verfassen), wurden sie darauf hingewiesen, sodass jeder Teilnehmer alle Funktionen benutzte.
+
+Um die Hauptfrage bezüglich der Kommunikationshilfe zu klären, wurde die dynamische Kommunikationshilfe drei der fünf Teilnehmer gezeigt. Die anderen zwei testeten die statische Kommunikationshilfe. Alle Teilnehmer wurden am Ende gefragt, ob ihnen die Alternative mehr geholfen hätte.
+
+\subsubsection{Einschränkungen}
+
+% generelle nachteile von thinking aloud
+% sehr kleiner mockup
+% kein hover, kein scrollen, kein zoomen...
+
+Die gewählte Methode weist gewisse Einschränkungen auf, denen man sich bei der Auswertung bewusst sein sollte. Einerseits werden Teilnehmer bei \enquote{Thinking Aloud} doppelt belastet. Sie müssen sowohl ein unbekanntes User Interface benutzen, was mentalen Aufwand darstellt, und gleichzeitig ihre Gedanken formulieren. Das kann zu Inkonsistenzen in ihren Äußerungen führen.
+
+Andererseits war der Mockup sehr klein, er beinhaltete nur drei Komponenten und zwei Kommunikationskanäle. Gerade letztere konnten die Teilnehmer auch ohne Hilfe beobachten, da sich der \enquote{Bildschirm} nur langsam und schrittweise änderte. Aussagen, welche die Kommunikationshilfe für relativ unnötig befinden, sollten bedacht interpretiert werden, da solche Abhängigkeiten bei 8~Komponenten und 14~Kommunikationskanälen nicht mehr offensichtlich sind.
+
+Zuletzt liegt es in der Natur des Paper Mockups, dass Interaktionen wie MouseOver, scrollen, zoomen oder draggen nur mit viel Aufwand umgesetzt werden können. Da dies im beschriebenen Mockup nicht der Fall war, konnte die Wirksamkeit dieser Interaktionen nicht überprüft werden.
+
+\subsubsection{Ergebnisse}
+
+% Dass Comic = Beschreibung nicht offensichtlich. Mehr beschreiben, in Zukunft vielleicht auch schickeret Panel-Layout, sodass er als Comic und nicht als Reihe von Bildern identifiziert wird.
+% Statische Hilfe hat gewonnen, aber siehe Einschränkungen. Vielleicht macht man in Zukunft einen Threshold, ab dem dynamische Komm.hilfe verwendet wird? Kann man ja in einer weiteren Nutzerstudie austesten, wo die Grenze liegt.
+% Dass Kommentare Annotationen enthalten können, war nicht ohne Erklärung klar. Auch nicht, wie man sie hinzufügt --> Ins Intro.
+% Voting war nicht klar, Assoziationen mit Email und Facebook teilen.
+% Animation von Mauszeiger in Comics: Ausblick.
+% Auswahlhilfe für Annotationen: Ausblick.
+
 \section{Intro in die Funktionalität einer Komponente}
 \label{section:konzeption:intro}
 
@@ -1148,7 +1211,7 @@ Die Hilfestellung zur Bedienung kann über einen ?-Button in der Titelleiste auf
    \label{figure:bedienung-step1}
 \end{figure}
 
-Danach werden schrittweise mindestens vier Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel zeigt die ganze Komponente. Das zweite Panel startet mit dem gleichen Inhalt wie Panel~1, zoomt dann aber auf die relevanten UI Elemente. Panel~3 startet wiederum mit dem Inhalt von Panel~2, überblendet dann aber eine notwendige Operation. Das vierte Panel startet ebenfalls mit dem Inhalt aus Panel~2, zoomt aber auf eine Gesamtansicht wie in Panel~1 hinaus, sodass der Benutzer den Unterschied sehen kann. Mit den Pfeilen kann zwischen verschiedenen Operationen gewechselt werden, die dieselbe Aktion ausführen. Sollte eine Aktion aus mehreren zusammenhängenden Operationen bestehen, wiederholen sich die Panels~2 und~3 demensprechend.
+Danach werden schrittweise mindestens drei Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel startet mit der ganzen Komponente, zoomt dann aber auf die relevanten UI Elemente. Panel~2 startet wiederum mit dem Inhalt von Panel~1, überblendet dann aber eine notwendige Operation. Das dritte Panel startet mit dem Inhalt aus Panel~1, zoomt aber auf eine Gesamtansicht wie anfangs hinaus, sodass der Benutzer den Unterschied sehen kann. Mit den Pfeilen kann zwischen verschiedenen Operationen gewechselt werden, die dieselbe Aktion ausführen. Sollte eine Aktion aus mehreren zusammenhängenden Operationen bestehen, wiederholen sich die Panels~1 und~2 dementsprechend. Falls mehrere gleichwertige Operationen eine Aktion ausführen, so können die Panels~1 und~2 gescrollt werden.
 
 \begin{figure}[htbp]
    \centering
@@ -1164,7 +1227,7 @@ Danach werden schrittweise mindestens vier Panels in der Komponente angezeigt (A
    \label{figure:bedienung-comic}
 \end{figure}
 
-Die Panels haben eine festgelegte Mindestgröße, um lesbar zu bleiben. Heer et al. \cite{Heer2008} verwenden in ihrer History, die ebenfalls Screenshots enthält, eine Seitenlänge von 120~Pixel. Die Komponente wird in ein Raster von Zellen unterteilt, die mindestens 120~$\times$~120~Pixel groß sind. In dieses Raster werden die Panels eingefügt. Sollten nicht genug Zellen im Raster vorhanden sein, wird die Bedienungshilfe in einem Fenster angezeigt.
+Die Panels haben eine festgelegte Mindestgröße, um lesbar zu bleiben. Heer et al. \cite{Heer2008} verwenden in ihrer History, die ebenfalls Screenshots enthält, eine Seitenlänge von 120~Pixel. Falls die Komponente nicht breit genug sein sollte, um die nötige Anzahl von 120~Pixel großen Panels in einer Zeile anzuzeigen, wird die Bedienungshilfe in einem Fenster angezeigt. So können unterschiedliche, alternative Operationen immer gescrollt werden.
 
 Die Texte in den Panels werden zur Laufzeit hinzugefügt, da so beispielsweise auf die Sprache des Nutzers reagiert werden kann. Ansonsten müsste der Hilfeservice für jede unterstützte Sprache ein eigenes Bild erzeugen. Die dafür notwendigen Informationen sind:
 
@@ -1231,22 +1294,31 @@ Im kompositen Infomationsvisualisierungssystem VizBoard kommunizieren Komponente
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:kommunikation:ui}
 
-Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte einen Brief enthält. Sollten mehrere Empfänger vorhanden sein, existiert für jeden davon ein Brief. Der Pfeil wird nicht mehr gerendert, sobald der Benutzer die Hilfe zu der Kombination (Sender, Empfänger) aufgerufen hat und verschwindet, wenn ein anderer Pfeil gerendert werden muss. Ansonsten sind zu viele Pfeile gleichzeitig im Viewport sichtbar.
+Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte ein Fragezeichen enthält. Das Fragezeichen wurde gewählt, da es konsistent mit dem Rest der Hilfe ist und ein Brief in der Nutzerstudie Assoziationen mit \enquote{Email} oder \enquote{in sozialen Netzwerken teilen} weckte. Sollten mehrere Empfänger vorhanden sein, existiert für jeden davon ein Fragezeichen. Die Kommunikationshilfe wird gleichzeitig mit der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) aufgerufen, da in der Nutzerstudie dynamisch gerenderte Pfeile eher verwirrten als weiterhalfen.
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-kommunikation-step1.png}
-   \caption{UI Mockup: Kommunikation}
+   \caption{UI Mockup: Kommunikationshilfe}
    \label{figure:kommunikation-step1}
 \end{figure}
 
-Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf den Brief geklickt wurde (Abbildung~\ref{figure:kommunikation-step2}). Ein Fenster wird geöffnet, welches einen ähnlichen Comic wie in Abschnitt~\ref{section:konzeption:bedienung} enthält. Im Unterschied dazu enthält der Comic hier fünf Panels. Im ersten wird der Empfänger der Nachricht gezeigt, da diese Komponente auf die Nachricht reagieren muss. Das zweite Panel zeigt den Sender, der den Empfänger durch die Nachricht \enquote{kontrolliert}. Die Panels drei bis fünf zeigen wie gewohnt die relevanten UI Elemente, eine notwendige Operation und das Ergebnis (den Empfänger). Auf diese Weise wird die Frage beantwortet, wie sich die angezeigten Komponenten beeinflussen und was Aktionen in anderen Komponenten bewirken. Wenn der Benutzer das Fenster schließt, wird auch der Pfeil unsichtbar.
+Wenn eine Akion ausgewählt wird, wird die Anzahl der gezeigten Pfeile entsprechend eingegrenzt (Abbildung~\ref{figure:kommunikation-step2}).
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-kommunikation-step2.png}
-   \caption{UI Mockup: Comic erklärt Kommunikation. Verändern des Kartenausschnittes (Aktion: Panning, Operation: Drag) bewirkt ein Update im Balkendiagramm.}
+   \caption{UI Mockup: Kommunikationshilfe mit eingeschränkten Optionen}
    \label{figure:kommunikation-step2}
+\end{figure}
+
+Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf das Fragezeichen geklickt wurde (Abbildung~\ref{figure:kommunikation-step3}). Ein Fenster wird geöffnet, welches den gleichen Comic wie in Abschnitt~\ref{section:konzeption:bedienung} enthält. Auf diese Weise wird die Frage beantwortet, wie sich die angezeigten Komponenten beeinflussen und was Aktionen in anderen Komponenten bewirken. Wenn der Benutzer das Fenster schließt, wird auch der Pfeil unsichtbar.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-kommunikation-step3.png}
+   \caption{UI Mockup: Comic erklärt Kommunikation. Verändern des Kartenausschnittes (Aktion: Panning, Operation: Drag) bewirkt ein Update im Balkendiagramm.}
+   \label{figure:kommunikation-step3}
 \end{figure}
 
 \subsection{Backend}
@@ -1298,12 +1370,13 @@ Im Fall von Interaktionselementen wird bei \texttt{MouseOver} derselbe Hilfebutt
 
 Zwar wäre es wünschenswert, sowohl Legenden und Freitext als auch Interaktionselemente mit derselben UI kennzeichnen zu können. Das ist leider nicht ohne weiteres möglich. Würden Legenden und Freitext die UI der Interaktionselemente verwenden, wäre die Hilfefunktion nicht sichtbar. Wäre es andersherum, müsste der DOM auf nicht-triviale Weise manipuliert werden (Einfügen von eigenen Elternknoten usw.), was unerwünschte Auswirkungen auf CSS Selektoren des Entwicklers haben könnte.
 
-\section{Kommentare/Annotationen in Visualisierungen}
+\section{Kommentare in Visualisierungen}
 \label{section:konzeption:kommentare}
 
 % allgemeines zu kommentaren. woraus bestehen sie, was müssen sie können.
 
-Kommentare und Annotationen waren in den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) eine populäre Variante, um das Verständnis der Daten zu fördern. Mit Hilfe von Kommentaren können Endnutzer andere auf beobachtete Fakten der Daten wie Ausreisser oder Trends hinweisen und so zum Verständnis beitragen.
+Kommentare waren in den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) eine populäre Variante, um das Verständnis der Daten zu fördern. Mit Hilfe von Kommentaren können Endnutzer andere auf beobachtete Fakten der Daten wie Ausreisser oder Trends hinweisen und so zum Verständnis beitragen. Der Begriff \enquote{Kommentartext} referenziert hier den Text, welcher von Benutzern geschrieben wird, und \enquote{Annotation} die Markierung in der Visualisierung. Ein \enquote{Kommentar} ist die Kombination aus beliebigen Annotationen und einem Kommentartext.
+
 % wie können kommentare umgesetzt werden? dev vs us! warum machen wir es so wie geplant?
 
 Prinzipiell gibt es zwei Varianten, wie Kommentare in einer InfoVis-Komponente umgesetzt werden können. In der ersten kümmert sich die Komponente darum, wie und wann sie Kommentare lädt und anzeigt. Der Vorteil daran ist, dass die Handhabung von Kommentaren speziell auf jede Komponente angepasst wird. Allerdings kann so kein einheitliches Look \& Feel gewährleistet werden. Zwar könnten Designrichtlinien Aussehen und Interaktionen vorschreiben, sie sind aber zwecklos wenn der Komponentenentwickler sie nicht einhält. Außerdem erhöht diese Variante den Entwicklungsaufwand der Komponente stark.
@@ -1331,7 +1404,9 @@ Erfahrungsgemäß tragen nicht alle Kommentare gleich viel zur Diskussion bei. M
 
 \subsubsection{Ranking}
 
-Da Kommentare in einer Liste angezeigt werden und keine Buttons zum Sortieren vorgesehen sind (Abschnitt~\ref{section:konzeption:kommentare:ui}), muss das Hilfesystem die anzuzeigenden Kommentare nach einem Algorithmus sortieren. In diesen sollten sowohl die Bewertung eines Kommentars als auch die Komponente, in der er verfasst wurde und die Daten, die er referenziert, einfließen. Möglich wäre zum Beispiel nach Bewertung zu sortieren, aber Kommentare zu bestrafen, wenn sie aus anderen Komponenten stammen oder nur teilweise die gefragten Datatype Properties referenzieren. Dann wird nur ein festgelegter Teil der Bewertung berücksichtigt (z.\,B. die Hälfte). So werden Kommentare aus der gleichen Komponente bevorzugt, aber solche mit hohen Bewertungen erscheinen trotzdem zuerst.
+% TODO zwei buttons um neueste und höchst bewertetste anzuzeigen
+
+Da Diskussionen und Konversationen nicht durch das User Interface eingeschränkt werden sollen, ist es nötig, Kommentare nach Datum sortieren zu können. So kann der Gesprächsverlauf nachvollzogen werden. Wenn Benutzer aber nicht an der Konversation teilnehmen, sondern schnell eine Antwort auf ihre Fragen haben wollen, bietet es sich an, nach Bewertung sortieren zu können.
 
 \subsubsection{Kommentar editieren}
 
@@ -1353,14 +1428,14 @@ Gründe, um einen Kommentar zu löschen, beinhalten unter anderem Beschimpfungen
 	\item Kommentare können beliebig gelöscht werden. Diese Variante weckt keine Ängste, den eigenen Kommentar nicht mehr löschen zu können. Es muss aber etwas mit den Referenzen auf gelöschte Kommentare geschehen, da ansonsten die Nachvollziehbarkeit der Diskussion leidet. Beispielsweise könnte die referenzierte Originalversion abgespeichert und eingeblendet werden.
 \end{itemize}
 
-\subsubsection{Bereich der Visualisierung referenzieren}
+\subsubsection{Visualisierung annotieren}
 
 Um eine gemeinsame Grundlage für eine Diskussion zu schaffen ist es notwendig, Bereiche der Visualisierung markieren zu können, über die man in einem Kommentar spricht. Diese Bereiche können entweder Flächen, die Datenpunkte enthalten oder nicht (Bereichskommentare), oder Datenpunkte selbst sein (Punktkommentare, Abbildung~\ref{figure:datenbereiche}).
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-datenbereiche.png}
-   \caption{Ein Scatterplot mit eingezeichneten Referenzierungsmöglichkeiten: Leere Bereiche (rot), nicht-leere Bereiche (grün) und einzelne Datenpunkte (orange).}
+   \caption{Ein Scatterplot mit eingezeichneten Annotationsmöglichkeiten: Leere Bereiche (rot), nicht-leere Bereiche (grün) und einzelne Datenpunkte (orange).}
    \label{figure:datenbereiche}
 \end{figure}
 
@@ -1369,7 +1444,7 @@ Um eine gemeinsame Grundlage für eine Diskussion zu schaffen ist es notwendig, 
 
 % konkreter. was gibt es für kommentare, wie unterscheiden sie sich, was ergeben sich für anforderungen daraus --> keine dynamischen daten, kein unvorhersehbares layout, keine aggregation, memento definieren, 
 
-Wie im letzten Abschnitt beschrieben ist es notwendig, Bereiche einer Visualisierung referenzieren zu können. Um Wiederverwendung über Komponenten hinweg zu fördern, sollten die Kommentare sich möglichst auf die visualisierten Daten selbst beziehen (\emph{datenbezogene Kommentare}) und nicht auf einen Bereich der Visualisierung (\emph{ortsbezogene Kommentare}).
+Um Wiederverwendung über Komponenten hinweg zu fördern, sollten Kommentare sich möglichst auf die visualisierten Daten selbst beziehen (\emph{datenbezogene Kommentare}) und nicht auf einen Bereich der Visualisierung (\emph{ortsbezogene Kommentare}).
 
 Komponenten, welche die Kommentarfunktion anbieten wollen, dürfen aus zwei Gründen keine externen Daten anzeigen (also beispielsweise die neuesten Tweets eines Twitter-Accounts): Erstens könnte der Kontext eines Kommentars sich ändern, etwa wenn Tweets gelöscht wurden. Die externen Daten unterliegen nicht der Kontrolle des Hilfesystems. Zweitens sind die externen Daten nicht im DaRe vorhanden, weswegen sie nicht über Komponenten hinweg wiederverwendet werden können. Dabei ist es unerheblich, ob die Komponente selbst externe Daten lädt oder externe Daten einer anderen Komponente anzeigt. Um den Fall von eigenen externen Daten für das Hilfesystem erkennbar zu machen, kann die Komponentenbeschreibung erweitert werden. Für den Fall von fremden externen Daten muss das Hilfesystem nach erfolgreicher Integration aller Visualisierungskomponenten selbst überprüfen, welche davon externe Daten laden und mit welchen diese über Links (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) verbunden sind.
 
@@ -1410,8 +1485,6 @@ Datenbezogene Kommentare haben den Vorteil, dass sie auch in anderen Komponenten
    \label{figure:ortsbezogen}
 \end{figure}
 
-Ihr Vorteil ist, dass sie in allen Komponenten möglich sind, bei denen die Kommentarfunktion prinzipiell aktiviert ist. Zum Beispiel also auch bei einer Treemap, welche auf Grund ihrer visuellen Mappings keine datenbezogenen Bereichskommentare verarbeiten kann.
-
 \subsubsection{Punktkommentare}
 
 % speichern
@@ -1433,11 +1506,11 @@ Beim Laden von Punktkommentaren zählt das Hilfesystem erst die Anzahl von Komme
 
 In der Titelleiste gibt es zwei Buttons mit einem abgewandelten Sprechblasen-Icon, einmal ist ein Auge in der Sprechblase (Kommentare ansehen) und einmal ein Pluszeichen (Kommentar hinzufügen). Eine ständig sichtbare textuelle Beschreibung wäre offensichtlicher, kann aber aufgrund des geringen Platzangebots nur mit einem Tooltip umgesetzt werden.
 
-Wenn der Benutzer einen Kommentar verfassen will, erscheint eine Sidebar mit einer Textbox, Controls um die Kommentarform zu ändern (Rechteck, Pfeil, Text) und einem Buttons zum Bestätigen (Abbildung~\ref{figure:kommentare-step4}). Abgebrochen wird nachdem der Benutzer außerhalb der Sidebar klickt. Der Benutzer kann nun ein oder mehrere, nicht überlappende Rechtecke in der Visualisierung erstellen oder Datenpunkte markieren (linker Balken in Abbildung~\ref{figure:kommentare-step4}). Das Hilfesystem setzt die Komponente in den Ausgangszustand zurück, sobald der Benutzer bestätigt oder abgebrochen hat.
+Wenn der Benutzer einen Kommentar verfassen will, erscheint eine Sidebar mit einer Textbox, Controls um die Annotationsform zu ändern (Auswahl, Rechteck, Pfeil, Text) und einem Button zum Bestätigen (Abbildung~\ref{figure:kommentare-step4}). Der Benutzer kann nun ein oder mehrere Rechtecke in der Visualisierung oder Datenpunkte markieren (linker Balken in Abbildung~\ref{figure:kommentare-step4}). Das Hilfesystem setzt die Komponente in den Ausgangszustand zurück, sobald der Benutzer bestätigt oder abgebrochen hat.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/konzeption-kommentare-step4.png}
+   \includegraphics[width=0.75\textwidth]{images/konzeption-kommentare-step4.png}
    \caption{UI Mockup: Kommentar hinzufügen}
    \label{figure:kommentare-step4}
 \end{figure}
@@ -1451,42 +1524,41 @@ Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt der Sidebar z
 		\item Avatar des Benutzers und Benutzername: Diese sollen das Vertrauen der Benutzer untereinander erhöhen und so die Qualität der Kommentare verbessern \cite{Chiu2006}. Gespeichert und abgerufen werden sie in der Benutzerverwaltung von VizBoard.
 		\item Datum der Erstellung oder letzten Editierung, was jünger ist. Wurde editiert, ist das Datum kursiv geschrieben.
 		\item Editieren/Löschen-Buttons, falls der Kommentar selbst verfasst wurde.
-	\end{itemize}
-	\item Mittlere Spalte
-	\begin{itemize}
-		\item Kommentartext mit Referenzen (durch \texttt{\#hash} gekennzeichnet) und URLs (unterstrichen).
+		\item Antworten: Eine zweite Möglichkeit als die ID des Kommentars einzutippen. Die UI wechselt zu \enquote{Kommentar verfassen} und inkludiert die ID des betreffenden Kommentars.
+		\item Annotationen anzeigen: Zeigt die Annotationen des Kommentars in der Visualisierung.
+		\item Voting: Ein Benutzer kann einen fremden Kommentar genau einmal bewerten. Die Anzahl der Stimmen wird ebenfalls angezeigt. Anstatt \enquote{upvote/downvote} wird hier die Wortkombination \enquote{agree/disagree} verwendet, da bei der Nutzerstudie ersteres selten mit \enquote{bewerten} und manchmal mit \enquote{scrollen} assoziiert wurde.
 	\end{itemize}
 	\item Rechte Spalte
 	\begin{itemize}
-		\item Voting: Ein Benutzer kann einen fremden Kommentar genau einmal bewerten. Die Anzahl der Stimmen wird ebenfalls angezeigt.
-		\item Antworten: Eine zweite Möglichkeit als die ID des Kommentars einzutippen. Die UI wechselt zu \enquote{Kommentar verfassen} und inkludiert die ID des betreffenden Kommentars.
-		\item Bereiche anzeigen: Zeigt die vom Kommentar referenzierten Bereiche in der Visualisierung.
+		\item Kommentartext mit Referenzen (durch \texttt{\#hash} gekennzeichnet) und URLs (unterstrichen).
 	\end{itemize}
 \end{itemize}
 
-Die Datenpunkte in der Visualisierung werden mit einer Anzeige, wie viele Kommentare dazu vorhanden sind, erweitert (Abbildung~\ref{figure:kommentare-step2}).
+Referenzen auf andere Kommentare können angeklickt werden. Dann wird der gewählte Kommentar in der Sidebar angezeigt und die Titelleiste enthält einen Zurück-Button, mit dem der vorherige Zustand wiederhergestellt werden kann.
+
+Die Datenpunkte in der Visualisierung werden mit einer Anzeige, wie viele Kommentare dazu vorhanden sind, erweitert (Abbildung~\ref{figure:kommentare-step2}). Sie sind oben rechts platziert, um so an iOS Badges zu erinnern und damit Assoziationen zu einem Hinweis zu wecken.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/konzeption-kommentare-step2.png}
+   \includegraphics[width=0.75\textwidth]{images/konzeption-kommentare-step2.png}
    \caption{UI Mockup: Anzeige aller Kommentare}
    \label{figure:kommentare-step2}
 \end{figure}
 
-Diese Icons, welche die Anzahl an Kommentaren repräsentieren, können angeklickt werden. Die Sidebar enthält dann alle Kommentare, die den gewählten Datenpunkt referenzieren (Abbildung~\ref{figure:kommentare-step3c}).
+Diese Badges können angeklickt werden. Die Sidebar enthält dann alle Kommentare, die sich auf den gewählten Datenpunkt beziehen (Abbildung~\ref{figure:kommentare-step3c}).
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/konzeption-kommentare-step3c.png}
+   \includegraphics[width=0.75\textwidth]{images/konzeption-kommentare-step3c.png}
    \caption{UI Mockup: Alle Kommentare zum ausgewählten Datenpunkt}
    \label{figure:kommentare-step3c}
 \end{figure}
 
-Von Kommentaren referenzierte Bereiche müssen durch einen Klick auf den Button \enquote{Show} angezeigt werden. Der Viewport der Visualisierung wird dann abgedunkelt und nur die vom ausgewählten Kommentar referenzierten Bereiche bzw. Datenpunkte bleiben sichtbar (Abbildung~\ref{figure:kommentare-step3a}).
+Annotationen eines Kommentars müssen durch einen Klick auf den Button \enquote{show annotations} angezeigt werden. Der Viewport der Visualisierung wird dann abgedunkelt und nur die Annotationen des ausgewählten Kommentars bleiben sichtbar (Abbildung~\ref{figure:kommentare-step3a}).
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/konzeption-kommentare-step3a.png}
+   \includegraphics[width=0.75\textwidth]{images/konzeption-kommentare-step3a.png}
    \caption{UI Mockup: Ausgewählter Kommentar mit referenziertem Bereich und Datenpunkten}
    \label{figure:kommentare-step3a}
 \end{figure}
@@ -1502,18 +1574,17 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:features
 
 \begin{itemize}
 	\item ID des Kommentars, um darauf verweisen zu können.
-	\item \textit{Für jede Version des Kommentars}
-	\begin{itemize}
-		\item Versionsnummer
-		\item Zeitpunkt
-		\item Kommentartext
-	\end{itemize}
 	\item ID der Komponente, in der der Kommentar verfasst wurde. Das ist notwendig um ortsbezogene Kommentare wiederherstellen zu können. Bei datenbezogenen Kommentaren kann eventuell ein Verweis auf die ursprüngliche Komponente erstellt werden.
 	\item ID des Datensatzes, der visualisiert wurde
 	\item ID des Verfassers
 	\item URIs der Datatype Properties, die visualisiert wurden
 	\item Memento der Komponente zum Zeitpunkt des Kommentars
-	\item \textit{Wenn ortsbezogene Elemente vorhanden}
+	\item \textit{Für jede Version des Kommentars}
+	\begin{itemize}
+		\item Versionsnummer
+		\item Zeitpunkt
+		\item Kommentartext
+		\item \textit{Wenn ortsbezogene Elemente vorhanden}
 		\begin{itemize}
 			\item Größe der Visualisierung zum Zeitpunkt des Kommentars, um die Auswahlrechtecke entsprechend skalieren zu können
 			\item Für jedes Element
@@ -1532,6 +1603,7 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:features
 			\item URI
 			\item Werte der visualisierten Datatype Properties
 		\end{itemize}
+	\end{itemize}
 \end{itemize}
 
 % wie läuft das mit speichern?
@@ -1659,6 +1731,8 @@ In diesem Konzept wurden bisher sieben unterschiedliche Hilfefunktionen erarbeit
 
 Die einfachste Lösung für die statische Meta-Hilfe wäre ein Button in der rechten oberen Ecke, der bei Bedarf eine klassische Hilfefunktion aufruft. Dort werden die verschiedenen Funktionen in Wort und Bild erklärt und ein Tutorialvideo gezeigt. Das bedeutet relativ viel Zeit- und Klickaufwand, bis der Nutzer bei den gewünschten Informationen ist, aber es hat auch Vorteile: Durch den statischen Hilfeknopf ist immer klar, wo weitergeholfen wird. Außerdem kann er gegebenenfalls für andere Sachen benutzt werden, beispielsweise könnte dort konfiguriert werden, ob der Pfeil in der Kommunkationshilfe bei jeder Nachricht angezeigt werden soll.
 
+In der Nutzerstudie war die Kommentarfunktion nicht offensichtlich. Die Teilnehmer hatten Probleme sie aufzurufen, zu benutzen und die möglichen Funktionen zu erkennen. Deswegen sollte das Intro (Abschnitt~\ref{section:konzeption:intro}) am Ende zusätzlich das notwendigste für die Nutzung der Kommentarfunktion erklären. Dazu gehört zum Beispiel, wie Kommentare angezeigt oder geschrieben werden (inklusive möglicher Annotationen) und dass sie bewertet werden können. Außerdem sollte das Intro auf die statische Meta-Hilfe hinweisen.
+
 \subsection{Dynamische Meta-Hilfe}
 
 % zweite lösung: kontextabhängige dynamische hilfe
@@ -1723,7 +1797,7 @@ Nun stellt sich die Frage, welche Daten für das maschinelle Lernen herangezogen
 	\item Ob Hilfe aufgerufen wurde und wenn ja, welche Funktion
 \end{itemize}
 
-Das Hilfesystem schickt alle 5~Interaktionen einen solchen Datensatz an die Wissensbasis, welche ihn zu den Trainingsdaten hinzufügt. Außerdem wird der Datensatz an den Classifier weitergegeben, der das letzte Attribut vorhersagt. Ist das Ergebnis ein anderes als \enquote{Nein}, bietet das Hilfesystem dem Benutzer Hilfe zur entsprechenden Funktion an.
+Das Hilfesystem schickt alle 5~Interaktionen einen solchen Datensatz an die Wissensbasis, welche ihn zu den Trainingsdaten hinzufügt. Außerdem wird der Datensatz an den Classifier weitergegeben, der das letzte Attribut vorhersagt. Ist das Ergebnis ein anderes als \enquote{Keine Hilfe nötig}, bietet das Hilfesystem dem Benutzer Hilfe zur entsprechenden Funktion an.
 
 \subsection{User Interface und Interaktion}
 

@@ -6,15 +6,29 @@ My diploma thesis at Dresden University of Technology.
 
 * Was für einen Effekt hat Kommentar löschen, wenn die Referenzen drauf erhalten bleiben?
 
+## Ergebnisse Paper Mockup
+
+* Kommunikationshilfe statisch DONE
+* Besser erklären: Comic = Hilfe DONE
+* Besser erklären: "show" und ob überhaupt Annotationen vorhanden DONE
+* Besser erklären: Brief != share, vl lieber Fragezeichen (ist konsistent mit Rest der Anwendung) DONE
+* Besser erklären: Icon für Text = ABC statt fettes A. DONE
+* Besser erklären: Annotationsmöglichkeiten --> Die vl in einführende Hilfe packen DONE
+* Besser erklären: Up/Down = Voting DONE
+* Besser erklären: Icon Kommentare angucken
+* Überlegen: Sidebar woanders platzieren ("da wo frei" -> Was wenn nirgends frei?)
+* Überlegen: Auswahlhilfen für Bereiche --> Lieber in Ausblick.
+* Machen: No-Click-Area ist weg, wenn Arrow/Text ausgewählt
+* Überlegen: Statt Up/Down +/- oder Like/Dislike? DONE
+* Überlegen: Panels 1-2 aus Kommunikationshilfe streichen DONE
+* Überlegen: Bedienungshilfe animieren mit Maus --> Ausblick
+
 ## Anmerkungen Martin 5.7.
 
 * Synthese überprüfen, ob wirklich alles drinsteht
-* Ordentliche Kommentare/Annotationen Nomenklatur
 * Allgemein: Mehr Referenzen ins RW in der Arbeit, bessere Listen.
-* Anforderungen: nach Plattform/Domänenspezifischen unterscheidbar?
 * Intro: Unterscheidung plattform/domänenspezifisch
 * Kommunikation: Überarbeiten nach Paper Mockup
-* Kommentare: Umschaltbutton für Highest Ranked und Newest.
 * Kommentare: API Referenz RW, erklären was neuartig.
 * History: Timeline vereinfachen
 
