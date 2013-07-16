@@ -5,21 +5,13 @@ My diploma thesis at Dresden University of Technology.
 ## TODO
 
 * Was für einen Effekt hat Kommentar löschen, wenn die Referenzen drauf erhalten bleiben?
+* Wie ist das Handling mit der Timeline, wenn periodisch Events gefeuert werden (von einer Uhrzeit-Komponente)? Hat man gerade Undo gemacht, würde dann ja der ganze Redo-Stack gelöscht, was wahrscheinlich nicht so geil ist. Ausschließen erscheint aber auch nicht dolle. Nach Undo pausieren ebenfalls nicht. Am Besten wäre es, den Redo-Stack zu erweitern und erst bei Nutzerinteraktion zu löschen. 
 
 ## Ergebnisse Paper Mockup
 
-* Kommunikationshilfe statisch DONE
-* Besser erklären: Comic = Hilfe DONE
-* Besser erklären: "show" und ob überhaupt Annotationen vorhanden DONE
-* Besser erklären: Brief != share, vl lieber Fragezeichen (ist konsistent mit Rest der Anwendung) DONE
-* Besser erklären: Icon für Text = ABC statt fettes A. DONE
-* Besser erklären: Annotationsmöglichkeiten --> Die vl in einführende Hilfe packen DONE
-* Besser erklären: Up/Down = Voting DONE
 * Besser erklären: Icon Kommentare angucken
 * Überlegen: Auswahlhilfen für Bereiche --> Lieber in Ausblick.
 * Machen: No-Click-Area ist weg, wenn Arrow/Text ausgewählt
-* Überlegen: Statt Up/Down +/- oder Like/Dislike? DONE
-* Überlegen: Panels 1-2 aus Kommunikationshilfe streichen DONE
 * Überlegen: Bedienungshilfe animieren mit Maus --> Ausblick
 
 ## Anmerkungen Martin 5.7.

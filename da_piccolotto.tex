@@ -982,7 +982,7 @@ Die Nutzerstudie wurde mit fünf Teilnehmern zwischen 23 und 25~Jahren durchgef�
     Teilnehmer 2 & M          & 25    & Informatik  \\ %fabi
     Teilnehmer 3 & M          & 23    & Informatik  \\ %kirsche
     Teilnehmer 4 & W          & 25    & Zahnmedizin \\ %karo
-    Teilnehmer 5 & ~          & ~     & ~           \\
+    Teilnehmer 5 & M          & 25    & Informatik  \\ %sebastian
     \end{tabular}
     \label{table:mockup:teilnehmer}
     \caption{Teilnehmer der Nutzerstudie}
@@ -992,11 +992,11 @@ Die Nutzerstudie wurde mit fünf Teilnehmern zwischen 23 und 25~Jahren durchgef�
 
 % einführung
 
-Zuerst wurde den Teilnehmern eine einführende Erklärung gegeben, wie sie später das Intro (Abschnitt~\ref{section:konzeption:intro}) übernehmen soll. Dabei wurde der Typ des Diagramms erklärt (wenn notwendig) und die enthaltenen Daten erwähnt. Über die Kommunikation zwischen Komponenten wurde keine Aussage gemacht, die Teilnehmer konnten allerdings einfach schließen, dass diese in irgendeiner Form stattfinden musste. 
+Zuerst wurde den Teilnehmern eine einführende Erklärung gegeben, wie sie später das Intro (Abschnitt~\ref{section:konzeption:intro}) übernehmen soll. Dabei wurde der Typ des Diagramms erklärt (wenn notwendig) und die enthaltenen Daten erwähnt. Über die Kommunikation zwischen Komponenten wurde keine Aussage gemacht, einige Teilnehmer konnten allerdings einfach schließen, dass diese in irgendeiner Form stattfinden musste. 
 
 % ablauf
 
-Nach der Einführung sollten die Testpersonen die Anwendung benutzen, wobei zwei mögliche Fragestellungen erwähnt wurden, denen sie nachgehen konnten. MouseOver-Interaktionen wurden explizit beschrieben, da sie im Paper Mockup nicht sichtbar sind. Die Probanden wurden gebeten, während der Nutzung ihre Gedanken laut mitzuteilen (\enquote{Thinking Aloud} Methode \cite{vanSomeren1994}). Im Laufe des Tests wurden die Teilnehmer beispielsweise gefragt, warum sie bestimmte Dinge annahmen, ob die gezeigten Informationen ausreichen, welche Interaktionsmöglichkeiten sie in einer Situation sahen oder ob eine alternative Interaktion beziehungsweise ein verändertes User Interface besser geeignet wäre. Wenn sie eine Funktion nicht von selbst wählten (etwa einen Kommentar zu verfassen), wurden sie darauf hingewiesen, sodass jeder Teilnehmer alle Funktionen benutzte.
+Nach der Einführung sollten die Testpersonen die Anwendung benutzen, wobei zwei mögliche Fragestellungen erwähnt wurden, denen sie nachgehen konnten. MouseOver-Interaktionen wurden explizit beschrieben, da sie im Paper Mockup nicht sichtbar sind. Die Probanden wurden gebeten, während der Nutzung ihre Gedanken laut mitzuteilen (\enquote{Thinking Aloud} Methode \cite{vanSomeren1994}). Im Laufe des Tests wurden die Teilnehmer beispielsweise gefragt, warum sie bestimmte Dinge annahmen, ob die gezeigten Informationen ausreichen, welche Interaktionsmöglichkeiten sie in einer Situation sahen, welche Veränderungen sie erwarteten oder ob eine alternative Interaktion beziehungsweise ein verändertes User Interface besser geeignet wäre. Wenn sie eine Funktion nicht von selbst wählten (etwa einen Kommentar zu verfassen), wurden sie darauf hingewiesen, sodass jeder Teilnehmer alle Funktionen benutzte.
 
 \begin{figure}[htbp]
    \centering
@@ -1011,20 +1011,23 @@ Um die Hauptfrage bezüglich der Kommunikationshilfe zu klären, wurde die dynam
 
 % generelle nachteile von thinking aloud
 % sehr kleiner mockup
-% kein hover, kein scrollen, kein zoomen...
+% kein hover, kein scrollen, kein zoomen, keine transparenz...
 
 Die gewählte Methode weist gewisse Einschränkungen auf, denen man sich bei der Auswertung bewusst sein sollte. Einerseits werden Teilnehmer bei \enquote{Thinking Aloud} doppelt belastet. Sie müssen sowohl ein unbekanntes User Interface benutzen, was mentalen Aufwand darstellt, und gleichzeitig ihre Gedanken formulieren. Das kann zu Inkonsistenzen in ihren Äußerungen führen.
 
-Andererseits war der Mockup sehr klein, er beinhaltete nur drei Komponenten und zwei Kommunikationskanäle. Gerade letztere konnten die Teilnehmer auch ohne Hilfe beobachten, da sich der \enquote{Bildschirm} nur langsam und schrittweise änderte. Aussagen, welche die Kommunikationshilfe für relativ unnötig befinden, sollten bedacht interpretiert werden, da solche Abhängigkeiten bei 8~Komponenten und 14~Kommunikationskanälen nicht mehr offensichtlich sind.
+Andererseits war der Mockup sehr klein, er beinhaltete nur drei Komponenten und zwei Kommunikationskanäle. Gerade letztere konnten die Teilnehmer auch ohne Hilfe verstehen, da sich der \enquote{Bildschirm} nur langsam und schrittweise änderte. Außerdem bezogen sich die Äußerungen und Vorschläge nur auf die vorgestellten Komponenten, ohne Alternativen zu berücksichtigen (beispielsweise Scatterplots, Parallel Coordinates etc.).
 
 Zuletzt liegt es in der Natur des Paper Mockups, dass Interaktionen wie MouseOver, scrollen, zoomen oder draggen nur mit viel Aufwand umgesetzt werden können. Da dies im beschriebenen Mockup nicht der Fall war, konnte die Wirksamkeit dieser Interaktionen nicht überprüft werden.
 
 \subsubsection{Ergebnisse}
 
-% Dass Comic = Beschreibung nicht offensichtlich. Mehr beschreiben, in Zukunft vielleicht auch schickeret Panel-Layout, sodass er als Comic und nicht als Reihe von Bildern identifiziert wird.
+% Dass Comic = Beschreibung nicht offensichtlich. Mehr beschreiben, in Zukunft vielleicht auch schickeret Panel-Layout, sodass er als Comic und nicht als Reihe von Bildern identifiziert wird. Basti meinte auch, dass Pfeile als letzter Schritt markiert werden sollten, weil er das so als entweder/oder sah. Weiters meinen einige, dass Panels 3-5 ausreichen. Basti sagt, dass zeitlicher Abstand, also quasi Reihenfolge besser deutlich gemacht werden sollte.
 % Statische Hilfe hat gewonnen, aber siehe Einschränkungen. Vielleicht macht man in Zukunft einen Threshold, ab dem dynamische Komm.hilfe verwendet wird? Kann man ja in einer weiteren Nutzerstudie austesten, wo die Grenze liegt.
 % Dass Kommentare Annotationen enthalten können, war nicht ohne Erklärung klar. Auch nicht, wie man sie hinzufügt --> Ins Intro.
-% Voting war nicht klar, Assoziationen mit scrollen.
+% Auge-Icon versteht irgendwie keiner.
+% Voting war nicht klar, Assoziationen mit scrollen. Was mich vor allem bei Typen wundert, die vermutlich täglich bei StackOverflow reinschauen (müssen).
+% Wie mit Kommentaren umgehen, die keine Annotationen enthalten? Basti: Badge an Visualisierung.
+% Kommentar-Badges ohne Toggle Button? Ich find ja nicht, weil die übelst ablenken können (Scatterplot)
 % Brief-Icon war nicht klar, Assoziationen mit Email und Facebook
 % Animation von Mauszeiger in Comics: Ausblick.
 % Auswahlhilfe für Annotationen: Ausblick.
@@ -1322,7 +1325,7 @@ Wenn eine Akion ausgewählt wird, wird die Anzahl der gezeigten Pfeile entsprech
    \label{figure:kommunikation-step2}
 \end{figure}
 
-Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf das Fragezeichen geklickt wurde (Abbildung~\ref{figure:kommunikation-step3}). Ein Fenster wird geöffnet, welches den gleichen Comic wie in Abschnitt~\ref{section:konzeption:bedienung} enthält. Auf diese Weise wird die Frage beantwortet, wie sich die angezeigten Komponenten beeinflussen und was Aktionen in anderen Komponenten bewirken. Wenn der Benutzer das Fenster schließt, wird auch der Pfeil unsichtbar.
+Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf das Fragezeichen geklickt wurde (Abbildung~\ref{figure:kommunikation-step3}). Ein Fenster wird geöffnet, welches den gleichen Comic wie in Abschnitt~\ref{section:konzeption:bedienung} enthält. Auf diese Weise wird die Frage beantwortet, wie sich die angezeigten Komponenten beeinflussen und was Aktionen in anderen Komponenten bewirken.
 
 \begin{figure}[htbp]
    \centering
@@ -1694,7 +1697,9 @@ Der Ablauf am Beispiel von Abbildung~\ref{figure:dependency-graph} ($e_3$ und $e
 
 % anmerkungen
 
-Abbildung~\ref{figure:dependency-graph-diagram} zeigt ein Ablaufdiagramm des Algorithmus. Ein noch nicht betrachteter Punkt sind asynchrone Operationen (z.\,B. \texttt{setTimeout()}). Die Reihenfolge der Nachrichten spielt im vorgestellten Algorithmus keine Rolle\todo{proof?}, weswegen asynchrone Operationen wie synchrone behandelt werden, solange sie innerhalb des Timeouts $t$ ein Event feuern. Das festgelegte Timeout ist keine gute Designentscheidung, wenn es um Zugriffe auf externe APIs geht. Es kann nicht davon ausgegangen werden, dass sie innerhalb des Timeouts beantwortet werden. Aus diesem Grund wird bei der History -- wie bei den Kommentaren (Abschnitt~\ref{section:konzeption:kommentare}) auch -- ausgeschlossen, dass Komponenten externe Daten laden können. Für das Timeout $t_D$, welches auf die Ausführung der Operation der letzten beteiligten Komponente wartet, kann der Wert aus der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) herangezogen werden, wenn vorhanden. Dieser teilt dem Hilfeservice, der die Comic Panels generiert, mit, wann die Zustandsveränderung der Komponente abgeschlossen ist.
+Abbildung~\ref{figure:dependency-graph-diagram} zeigt ein Ablaufdiagramm des Algorithmus. Ein noch nicht betrachteter Punkt sind asynchrone Operationen (z.\,B. \texttt{setTimeout()}). Die Reihenfolge der Nachrichten spielt im vorgestellten Algorithmus keine Rolle\todo{proof?}, weswegen asynchrone Operationen wie synchrone behandelt werden, solange sie innerhalb des Timeouts $t$ ein Event feuern. Das festgelegte Timeout ist aber keine gute Designentscheidung, wenn es um Zugriffe auf externe APIs geht. Es kann nicht davon ausgegangen werden, dass sie innerhalb des Timeouts beantwortet werden. Aus diesem Grund wird bei der History -- wie bei den Kommentaren (Abschnitt~\ref{section:konzeption:kommentare}) auch -- ausgeschlossen, dass Komponenten externe Daten laden können.
+
+Für das Timeout $t_D$, welches auf die Ausführung der Operation der letzten beteiligten Komponente wartet, kann der Wert aus der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) herangezogen werden, wenn vorhanden. Dieser teilt dem Hilfeservice, der die Comic Panels generiert, mit, wann die Zustandsveränderung der Komponente abgeschlossen ist. Ansonsten wird ein durch Tests bestimmter Standardwert verwendet.
 
 \begin{figure}[htbp]
    \centering
@@ -1707,6 +1712,12 @@ Außerdem ist zu beachten, dass für die korrekte Arbeitsweise des vorgestellten
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:history:ui}
+
+% mögliche stolpersteine
+
+Bevor konkrete visuelle Umsetzungen der History präsentiert werden, muss diskutiert werden, wie mit von Komponenten (anstatt vom Benutzer) ausgelösten Aktionen umgegangen wird. Beispielsweise wäre eine Uhrzeit-Komponente denkbar, die jede volle Minute ein \texttt{minutePassed} Event auslöst. Klassische Implementierungen einer History löschen den Redo-Stack, wenn nach einem Undo eine neue (nicht in der History vorhandene) Aktion ausgeführt wird. Im Falle der Uhrzeit-Komponente wäre das äußerst ungünstig, da sie spätestens nach einer Minute unerwünschterweise den Redo-Stack löschen würde. Derartige Komponenten von der History auszuschließen ist jedoch nicht möglich, da sie alle Komponenten unterstützen muss -- das erwarten Endnutzer von einer History. Events nach einem Undo zu pausieren ist ebenfalls nicht möglich, da dann überhaupt keine neuen Aktionen mehr ausgeführt werden können. Deswegen sollten neue, durch Komponenten ausgelöste Aktionen, nach einem Undo weiter auf den Redo-Stack gelegt werden. Dieser kann gelöscht werden, sobald der Benutzer eine Aktion ausführt. Der im vorhergehenden Abschnitt vorgestellte Algorithmus kann eine Nutzeraktion aber nicht von einer Komponentenaktion unterscheiden. 
+
+% what to do? ich würde sagen, trotzdem event handler auf relevante ui elemente registrieren. die bekommt das hilfesystem dann ungefähr zeitgleich mit dem event mit und kann sie zuordnen. wobei das auch wieder nicht ganz eindeutig ist, weil ich ja einfach $("button").click() machen kann. aber das ist halt so.
 
 % wie umsetzen
 
