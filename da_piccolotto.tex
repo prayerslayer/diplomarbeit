@@ -971,7 +971,7 @@ Das entworfene Konzept wurde mit einer formativen Nutzerstudie evaluiert und dan
 
 \subsubsection{Teilnehmer}
 
-Die Nutzerstudie wurde mit fünf Teilnehmern zwischen 23 und 25~Jahren durchgeführt (Tabelle~\ref{table:mockup:teilnehmer}). Dabei waren 60~\% der Personen männlich. Auf die Vertrautheit mit Computern, webbasierten User Interfaces oder semantischen Daten wurde dabei keine Rücksicht genommen, weil sie nicht relevant sind.
+Die Nutzerstudie wurde mit fünf Teilnehmern zwischen 23 und 25~Jahren durchgeführt (Tabelle~\ref{table:mockup:teilnehmer}). Dabei waren 60~\% der Personen männlich. Auf die Vertrautheit mit Computern, webbasierten User Interfaces oder semantischen Daten wurde bei der Auswahl keine Rücksicht genommen, weil sie nicht relevant sind.
 
 \begin{table}[htbp]
 	\centering
@@ -998,6 +998,13 @@ Zuerst wurde den Teilnehmern eine einführende Erklärung gegeben, wie sie spät
 
 Nach der Einführung sollten die Testpersonen die Anwendung benutzen, wobei zwei mögliche Fragestellungen erwähnt wurden, denen sie nachgehen konnten. MouseOver-Interaktionen wurden explizit beschrieben, da sie im Paper Mockup nicht sichtbar sind. Die Probanden wurden gebeten, während der Nutzung ihre Gedanken laut mitzuteilen (\enquote{Thinking Aloud} Methode \cite{vanSomeren1994}). Im Laufe des Tests wurden die Teilnehmer beispielsweise gefragt, warum sie bestimmte Dinge annahmen, ob die gezeigten Informationen ausreichen, welche Interaktionsmöglichkeiten sie in einer Situation sahen oder ob eine alternative Interaktion beziehungsweise ein verändertes User Interface besser geeignet wäre. Wenn sie eine Funktion nicht von selbst wählten (etwa einen Kommentar zu verfassen), wurden sie darauf hingewiesen, sodass jeder Teilnehmer alle Funktionen benutzte.
 
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/konzeption-paper-mockup-anna.jpg}
+   \caption{Eine Teilnehmerin der Nutzerstudie}
+   \label{figure:paper-mockup-anna}
+\end{figure}
+
 Um die Hauptfrage bezüglich der Kommunikationshilfe zu klären, wurde die dynamische Kommunikationshilfe drei der fünf Teilnehmer gezeigt. Die anderen zwei testeten die statische Kommunikationshilfe. Alle Teilnehmer wurden am Ende gefragt, ob ihnen die Alternative mehr geholfen hätte.
 
 \subsubsection{Einschränkungen}
@@ -1017,7 +1024,8 @@ Zuletzt liegt es in der Natur des Paper Mockups, dass Interaktionen wie MouseOve
 % Dass Comic = Beschreibung nicht offensichtlich. Mehr beschreiben, in Zukunft vielleicht auch schickeret Panel-Layout, sodass er als Comic und nicht als Reihe von Bildern identifiziert wird.
 % Statische Hilfe hat gewonnen, aber siehe Einschränkungen. Vielleicht macht man in Zukunft einen Threshold, ab dem dynamische Komm.hilfe verwendet wird? Kann man ja in einer weiteren Nutzerstudie austesten, wo die Grenze liegt.
 % Dass Kommentare Annotationen enthalten können, war nicht ohne Erklärung klar. Auch nicht, wie man sie hinzufügt --> Ins Intro.
-% Voting war nicht klar, Assoziationen mit Email und Facebook teilen.
+% Voting war nicht klar, Assoziationen mit scrollen.
+% Brief-Icon war nicht klar, Assoziationen mit Email und Facebook
 % Animation von Mauszeiger in Comics: Ausblick.
 % Auswahlhilfe für Annotationen: Ausblick.
 
@@ -1049,12 +1057,14 @@ Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von vers
 
 Aus den eben aufgeführten Gründen zeigt das Intro für eine Komponente folgende Informationen:
 
-\begin{itemize}
+\begin{enumerate}
 	\item Art der Visualisierung
 	\item Beschreibung
 	\item Enthaltene Daten
 	\item Tutorialvideo, wenn vorhanden
-\end{itemize}
+\end{enumerate}
+
+Davon ist Punkt~3 spezifisch für die Domäne der Informationsvisualisierung, da CRUISe Komponenten keine Daten visualisieren müssen. Die anderen Punkte sind für alle auf CRUISe basierenden Mashups hilfreich.
 
 % interaktionshilfen - kommen später
 
@@ -1359,7 +1369,7 @@ Bei Legenden und Freitext wird hinter die entsprechend markierten DOM Elemente (
    \label{figure:verlinkung}
 \end{figure}
 
-Im Fall von Interaktionselementen wird bei \texttt{MouseOver} derselbe Hilfebutton eingeblendet (Abbildung~\ref{figure:verlinkung-bedienung}). Das hat den Grund, dass unbekannt ist, wie die Elemente angeordnet sind. Eine ständige Anzeige des Hilfebuttons könnte andere Elemente verdecken.
+Im Fall von Interaktionselementen wird bei \texttt{MouseOver} derselbe Hilfebutton eingeblendet (Abbildung~\ref{figure:verlinkung-bedienung}). Das hat den Grund, dass unbekannt ist, wie die Elemente angeordnet sind. Eine ständige Anzeige des Hilfebuttons könnte andere Elemente verdecken. Nachdem der Benutzer den Button gedrückt hat, werden falls vorhanden sowohl die Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) als auch die ausgehende Kommunikation (Abschnitt~\ref{section:konzeption:kommunikation}) bei der betreffenden Aktion eingeblendet.
 
 \begin{figure}[htbp]
    \centering
@@ -1664,7 +1674,7 @@ Ein Ansatz zur Lösung des Problems ist anfangs einen Abhängigkeitsgraphen aus 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-dependency-graph.png}
-   \caption{Abhängigkeitsgraph der beispielhaften Komposition}
+   \caption{Abhängigkeitsgraph der beispielhaften Komposition mit möglichem Ablauf der Events und Operationen}
    \label{figure:dependency-graph}
 \end{figure}
 
@@ -1677,14 +1687,14 @@ Der Ablauf am Beispiel von Abbildung~\ref{figure:dependency-graph} ($e_3$ und $e
 	\item Das Hilfesystem registriert die Nachricht $e_1$ und bestimmt zunächst aus dem Abhängigkeitsgraphen, ob A eine unabhängige Komponente ist und ob noch weitere (auf $e_1$ zurückführende) Nachrichten zu erwarten sind. Da dies der Fall ist, fügt das Hilfesystem $e_1$ in eine neu erstellte Collection hinzu und legt ein Timeout von $t$ Millisekunden fest. Läuft es ab, fährt der Algorithmus bei Schritt 7 fort. Außerdem wird $e_1$ bis dorthin der Operation $o_4$ von C zugeordnet.
 	\item Innerhalb des Timeouts $t$ feuert Komponente C Event $e_3$.
 	\item Das Hilfesystem registriert die Nachricht $e_3$ und überprüft, ob C eine unabhängige Komponente ist und ob noch weitere Nachrichten zu erwarten sind. Das ist der Fall, also liest das Hilfesystem aus der Nachricht, welche Operation sie geschickt hat ($o_4$). Aus allen $o_4$ zugeordneten Nachrichten wird weiters die Quelle, also aufrufende Komponente, gelesen und eine Collection gesucht, in der diese enthalten ist. Findet das Hilfesystem eine, fügt es $e_3$ dieser hinzu und setzt den Timer auf~0 zurück. In diesem Beispiel ist das der Fall. Würde das Hilfesystem keine Collection finden, erstellte es eine neue und führe fort wie in Schritt~2.
-	\item Innerhalb des Timeouts $t$ feuert Komponente C Event $e_4$.
+	\item Innerhalb des Timeouts $t$ feuert Komponente~C Event $e_4$.
 	\item Analog zu Schritt~4. Hier sind allerdings keine weiteren Events mehr zu erwarten, weswegen das Hilfesystem kein Timeout mehr setzen muss und gleich zum nächsten Schritt übergehen kann.
 	\item Das Hilfesystem markiert die Collection als geschlossen und entfernt die Assoziation zwischen enthaltenen Nachrichten und den Operationen der Komponenten. Da die zustandsverändernde Operation von Komponente D erst aufgerufen werden muss, legt es ein Timeout $t_D$ fest, nach dessen die Mementos der Komponenten abgerufen werden können.
 \end{enumerate}
 
 % anmerkungen
 
-Abbildung~\ref{figure:dependency-graph-diagram} zeigt ein Ablaufdiagramm des Algorithmus. Ein noch nicht betrachteter Punkt sind asynchrone Operationen (z.\,B. \texttt{setTimeout()} oder \texttt{XMLHttpRequest}s in Javascript). Die Reihenfolge der Nachrichten spielt im vorgestellten Algorithmus keine Rolle\todo{proof?}, weswegen asynchrone Operationen wie synchrone behandelt werden, solange sie innerhalb des Timeouts $t$ ein Event feuern. Das festgelegte Timeout ist keine gute Designentscheidung, wenn es um Zugriffe auf externe APIs geht. Es kann nicht davon ausgegangen werden, dass sie innerhalb des Timeouts beantwortet werden. Aus diesem Grund wird bei der History -- wie bei den Kommentaren (Abschnitt~\ref{section:konzeption:kommentare}) auch -- ausgeschlossen, dass Komponenten externe Daten laden können.
+Abbildung~\ref{figure:dependency-graph-diagram} zeigt ein Ablaufdiagramm des Algorithmus. Ein noch nicht betrachteter Punkt sind asynchrone Operationen (z.\,B. \texttt{setTimeout()}). Die Reihenfolge der Nachrichten spielt im vorgestellten Algorithmus keine Rolle\todo{proof?}, weswegen asynchrone Operationen wie synchrone behandelt werden, solange sie innerhalb des Timeouts $t$ ein Event feuern. Das festgelegte Timeout ist keine gute Designentscheidung, wenn es um Zugriffe auf externe APIs geht. Es kann nicht davon ausgegangen werden, dass sie innerhalb des Timeouts beantwortet werden. Aus diesem Grund wird bei der History -- wie bei den Kommentaren (Abschnitt~\ref{section:konzeption:kommentare}) auch -- ausgeschlossen, dass Komponenten externe Daten laden können. Für das Timeout $t_D$, welches auf die Ausführung der Operation der letzten beteiligten Komponente wartet, kann der Wert aus der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) herangezogen werden, wenn vorhanden. Dieser teilt dem Hilfeservice, der die Comic Panels generiert, mit, wann die Zustandsveränderung der Komponente abgeschlossen ist.
 
 \begin{figure}[htbp]
    \centering
@@ -1692,6 +1702,8 @@ Abbildung~\ref{figure:dependency-graph-diagram} zeigt ein Ablaufdiagramm des Alg
    \caption{Ablaufdiagramm des History Algorithmus}
    \label{figure:dependency-graph-diagram}
 \end{figure}
+
+Außerdem ist zu beachten, dass für die korrekte Arbeitsweise des vorgestellten Algorithmus jede Operation ein Event feuern \textbf{muss}, sei es auch nur \enquote{Operation ausgeführt}. Ansonsten könnte eine Komponente ihren Zustand verändern, ohne dass es der Event Broker und damit das Hilfesystem merkt. Die Undo-Reihenfolge wäre dann nicht mehr korrekt. Das impliziert weiterhin, dass Zustandsveränderungen nur mit Operationen durchgeführt werden dürfen. Diese Forderung ist großteils schon umgesetzt, da \texttt{setProperty(p,v)} eine Operation ist, die \texttt{propertyChanged} Events feuert.
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:history:ui}
@@ -1707,16 +1719,16 @@ Die einfachste Möglichkeit für eine History, die so auch in jeder Desktopappli
    \label{figure:undo-simple}
 \end{figure}
 
-Dieses Problem ist bei der Präsentation der History als Timeline nicht mehr vorhanden (Abbildung~\ref{figure:undo-timeline}). Die oberste Zeile dient als Overview des Overview/Detail Patterns und zeigt, wann (horizontale Position) welche Aktion (Farbe) auf welcher Komponente (vertikale Position) ausgeführt wurde. Die vier Zeilen darunter sind Detailansichten für jede Komponente im ausgewählten Zeitfenster. Ein Klick auf ein Rechteck, also eine Aktion, macht alle inklusive der ausgewählten rückgängig. Screenshots der Komponentenzustände wie in \cite{Heer2008} (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wären zwar hilfreicher und visuell ansprechender, jedoch sind programmatische Screenshots im Web nicht möglich. Eine Alternative wäre den DOM der Visualisierung zu kopieren und in der Timeline einzufügen. Allerdings kann nicht davon ausgegangen werden, dass das CSS der Komponente sie entsprechend skaliert.
+Dieses Problem ist bei der Präsentation der History als Timeline nicht mehr vorhanden (Abbildung~\ref{figure:undo-timeline-simple}). Mementos nach zusammenhängenden Zustandsveränderungen (wie im vorhergehenden Abschnitt beschrieben) werden gruppiert und als Balken auf der Timeline aufgetragen. Die obere Zeile dient als Overview des Overview/Detail Patterns. Ein Klick auf einen Balken, also eine Menge von Komponentenzuständen, setzt die Komposition den ausgewählten Zustand zurück. Screenshots der Komponentenzustände wie in \cite{Heer2008} (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wären zwar hilfreicher und visuell ansprechender, jedoch sind programmatische Screenshots im Web nicht möglich. Eine Alternative wäre den DOM der Visualisierung zu kopieren und in der Timeline einzufügen. Allerdings kann nicht davon ausgegangen werden, dass das CSS der Komponente sie entsprechend skaliert.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/konzeption-undo-timeline.png}
+   \includegraphics[width=0.75\textwidth]{images/konzeption-undo-timeline-simple.png}
    \caption{UI Mockup: History als Timeline}
-   \label{figure:undo-timeline}
+   \label{figure:undo-timeline-simple}
 \end{figure}
 
-Die Timeline ist zwar mächtiger als zwei Buttons, aber auch komplexer zu nutzen und wahrscheinlich nicht sofort verständlich. Dem Designprinzip und nichtfunktionalen Anforderung der \emph{Verständlichkeit} folgend wird deswegen die erste Variante gewählt.
+Die Timeline ist komplexer zu nutzen als zwei Buttons, aber auch mächtiger. Aufgrund des Designprinzips und nichtfunktionalen Anforderung der \emph{Verständlichkeit} sollte aber darauf geachtet werden, den Benutzer nicht zu überfordern. In \cite{Piccolotto2012} wurde eine vergleichbare Timeline umgesetzt und konnte in der Nutzerstudie mit fünf Teilnehmern von allen benutzt werden, was ihren Einsatz rechtfertigt.
 
 \section{Meta-Hilfe}
 \label{section:konzeption:meta-hilfe}
@@ -1897,7 +1909,13 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \subsubsection{Context Service}
 
 \begin{itemize}
-	\item Domäne des Benutzers (Meta-Hilfe)
+	\item Domäne des Benutzers (Kommentare, Meta-Hilfe)
+\end{itemize}
+
+\subsubsection{CRUISe}
+
+\begin{itemize}
+	\item Jede Operation muss ein Event feuern und Zustandsveränderungen dürfen nur mit Operationen durchgeführt werden (History).
 \end{itemize}
 
 \section{Zusammenfassung}
