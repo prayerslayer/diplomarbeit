@@ -6,7 +6,6 @@ My diploma thesis at Dresden University of Technology.
 
 * Bei jeder Entscheidung für oder gegen was die entsprechende Anforderung angeben
 * Was für einen Effekt hat Kommentar löschen, wenn die Referenzen drauf erhalten bleiben?
-* Synthese überprüfen, ob wirklich alles drinsteht
 
 ## Ergebnisse Paper Mockup
 

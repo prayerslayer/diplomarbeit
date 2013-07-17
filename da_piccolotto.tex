@@ -1172,7 +1172,7 @@ Die VISO enthält im Namensraum \texttt{viso:activity} Konzepte der hierarchisch
 
 Für das Hilfesystem sind Operationen und Aktionen relevant, da Aktivitäten nicht beeinflusst werden können. Aktionen einer Komponente sind beispielsweise zoomen, suchen oder filtern; Operationen sind etwa Klicks, Drags oder Multitouch-Gesten.
 
-Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden Operationen aus der VISO (\enquote{welche Operationen}) zusammen mit CSS Selektoren (\enquote{welche Elemente}) in der Komponentenbeschreibung definiert. Äquivalente Operationen, die denselben Effekt haben, werden zusammengefasst. Wenn eine Tabelle sowohl durch einen Klick auf den Spaltenkopf als auch über ein separates Menü sortiert werden kann, werden diese Aktionen als äquivalent zusammengefasst. Sequentielle Operationen werden ebenfalls zusammengefasst, wobei die Reihenfolge im Markup die notwendige Ausführungsreihenfolge darstellt. So können auch zusammengesetzte Operationen -- beispielsweise zuerst Menü aufrufen, dann sortieren auswählen -- abgebildet werden. Parallele Operationen werden nach demselben Prinzip zusammengefasst, allerdings ist hier die Reihenfolge irrelevant, da sie gleichzeitig ausgeführt werden müssen. Auf diese Weise können zusammengesetzte Operationen der der Art STRG+T abgebildet werden.
+Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden Operationen aus der VISO (\enquote{welche Operationen}) zusammen mit CSS Selektoren (\enquote{welche Elemente}) in der Komponentenbeschreibung definiert. Äquivalente Operationen, welche dieselbe Aktion ausführen, werden zusammengefasst. Wenn eine Tabelle sowohl durch einen Klick auf den Spaltenkopf als auch über ein separates Menü sortiert werden kann, werden diese Aktionen als äquivalent zusammengefasst. Sequentielle Operationen werden ebenfalls zusammengefasst, wobei die Reihenfolge im Markup die notwendige Ausführungsreihenfolge darstellt. So können auch zusammengesetzte Operationen, wie beispielsweise für ein HTML \texttt{select} Element nötig, abgebildet werden. Parallele Operationen werden nach demselben Prinzip zusammengefasst, allerdings ist hier die Reihenfolge irrelevant, da sie gleichzeitig ausgeführt werden müssen. Auf diese Weise können zusammengesetzte Operationen der der Art STRG+T abgebildet werden.
 
 Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind. Beispielsweise weil der Entwickler UI Elemente innerhalb von fünf Sekunden anstatt 500~Millisekunden einblenden will. Zusätzlich ist es möglich, dass der Entwickler Zusatzinformationen in Stichworten angibt. Zum Beispiel könnte bei einem Balkendiagramm die Skala \enquote{verändert} (Aktion) werden. Dabei ist es wichtig zu wissen, welche Skala verwendet werden wird, z.\,B. linear oder logarithmisch. Der Inhalt dieser Zusatzinformationen muss allerdings statisch sein, beispielsweise könnte nicht der Spaltenname einer Tabelle angegeben werden, da die enthaltenen Daten dynamisch sind. Nach demselben Prinzip sollten auch Zusatzinformationen über die VISO Operation angegeben werden können. Vor allem bei Tastaturkürzel (z.\,B. j/k für vor/zurück) macht es Sinn, da so nicht für jede Taste eine VISO Operation erstellt werden muss. Die erwähnten Zusätze zur Komponentenbeschreibung sollten allerdings optional sein, falls der Komponentenentwickler keine Hilfe für bestimmte Aktionen anbieten will.
 
@@ -1201,8 +1201,6 @@ Dazu wird ein sogenannter \enquote{Headless Browser} verwendet. Das ist ein prog
 % wie läuft das ab?
 
 Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. Sobald eine Komponente hinzugefügt oder upgedatet wurde, parst das CoRe die entsprechende Komponentenbeschreibung und schickt eine Anfrage an den Hilfeservice. Dieser kann ins CoRe integriert sein, sollte dem \enquote{Separation of Concerns} Designprinzip folgend aber davon getrennt sein, da es schon für Matching, Ranking und Verwaltung der Komponenten zuständig ist. Der Hilfeservice rendert die Komponente mit Hilfe des Headless Browsers in einer CRUISe Testumgebung. Sie besteht aus folgenden Komponenten:
-
-% todo cruise testumgebung, was gehört da alles rein?
 
 \begin{itemize}
 	\item Laufzeitumgebung: Sie ist unter anderem für die Initialisierung und das Layout der Komponenten nötig.
@@ -1241,7 +1239,8 @@ Falls die Operation in Schritt 2.a.i sequentiell sein sollte, muss der beschrieb
 
 Nachdem alle nötigen Screenshots der Komponente erstellt wurden, muss das Hilfesystem eine Kategorisierung in \enquote{helle Komponente} und \enquote{dunkle Komponente} vornehmen. Das ist nötig, damit das Hilfesystem zur Laufzeit weiß, ob es dunkle oder helle visuelle Effekte einblenden soll. Eine naive Möglichkeit dazu wäre mit Hilfe einer Bildverarbeitungsbibliothek wie OpenCV\footnote{\url{http://opencv.willowgarage.com/wiki/}} die Screenshots zu binärisieren, also in Bilder aus schwarzen und weißen Pixeln umzuwandeln. Enthält die Mehrzahl der Bilder mehr schwarze als weiße Pixel, wird die Komponente als \enquote{dunkel} eingestuft, ansonsten als \enquote{hell}.
 
-% todo anbieten der assistance diskutieren: bilder in smcdl einbinden, eigener webservice, core.
+% anbieten der assistance diskutieren: bilder in smcdl einbinden, eigener webservice, core.
+
 Die Bilder der Comics können auf unterschiedliche Weise ans Hilfesystem ausgeliefert werden. Eine Möglichkeit ist die Bilder nach Generierung in der Komponentenbeschreibung zu definieren, so wie es bereits mit einem Screenshot der Komponente gemacht wird. Ebenso könnte ein Webservice die Bilder über eine REST API anbieten, von wo das Hilfesystem sie zur Laufzeit lädt. Dieser Webservice kann eigenständig oder im CoRe integriert sein.
 
 \subsubsection{Einschränkungen}
@@ -1288,10 +1287,9 @@ Die Panels haben eine festgelegte Mindestgröße, um lesbar zu bleiben. Heer et 
 Die Texte in den Panels werden zur Laufzeit hinzugefügt, da so beispielsweise auf die Sprache des Nutzers reagiert werden kann. Ansonsten müsste der Hilfeservice für jede unterstützte Sprache ein eigenes Bild erzeugen. Die dafür notwendigen Informationen sind:
 
 \begin{itemize}
-	\item Panel~1: Keine, Text wird zufällig aus einer Menge von Phrasen ausgewählt.
-	\item Panel~2: Welche Elemente beteiligt sind.
-	\item Panel~3: Name der Operation.
-	\item Panel~4: Name der Aktion.
+	\item Panel~1: Welche Elemente beteiligt sind.
+	\item Panel~2: Name der Operation.
+	\item Panel~3: Name der Aktion.
 \end{itemize}
 
 Diese werden aber schon im Schritt davor (Abbildung~\ref{figure:bedienung-step2}) benötigt, müssen also sowieso bekannt sein.
@@ -1380,7 +1378,7 @@ Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf
 \subsection{Backend}
 \label{section:konzeption:kommunikation:backend}
 
-Die Kommunikation zwischen Komponenten kann über den Event Broker (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) nachvollzogen werden, da dieser zentraler Austauschpunkt für Nachrichten ist. Das Hilfesystem zeichnet Pfeile, sobald es vom Event Broker über Nachrichten informiert wird.
+Die Kommunikation zwischen Komponenten kann über den Event Broker (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) nachvollzogen werden, da dieser zentraler Austauschpunkt für Nachrichten ist. Das Hilfesystem zeichnet Pfeile, sobald es vom Event Broker über Nachrichten informiert wird und die dynamische Kommunikationshilfe aktiviert ist.
 
 Für die Generierung des Comics muss das Konzept der User Assistance für Bedienung (Abschnitt~\ref{section:konzeption:bedienung:api}) nur leicht erweitert werden. Da Komponenten mit Operationen auf Nachrichten reagieren (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}), muss für das Ergebnis einer Operation ebenfalls ein Screenshot erstellt werden. Diese sind jetzt schon in der Komponentenbeschreibung vorhanden und können während der Panel-Generierung einfach ausgeführt werden. Sollten die Operationen Parameter erwarten, muss der Komponentenentwickler Beispieldaten in die Komponentenbeschreibung einfügen.
 
@@ -1400,7 +1398,7 @@ Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet d
 
 Auf diese Weise können die erklärungsbedürftigen Konzepte über CSS Selektoren gefunden werden. Allerdings stellt sich die Frage, wie das Hilfesystem die Beschreibung lesen kann. Die Konzepte sind im Falle von Freitext dynamisch, bei Legenden statisch, aber abhängig vom Datensatz und bei Interaktionselementen statisch in Abhängigkeit der Komponente. Es erscheint sinnvoll eine einheitliche Zugriffsschicht für Konzeptbeschreibungen zu etablieren. Dabei bietet sich im Fall von VizBoard das DaRe an, welches als einheitliche Zugriffsschicht auf Daten konzipiert ist. Bei anderen auf CRUISe aufbauenden Mashups sollte das CoRe diese Funktion übernehmen.
 
-Das DaRe findet das Domain Assignment eigenständig, nachdem ein Datensatz hochgeladen wurde. Danach sollte eine Beschreibung aus der externen Wissensbasis abgerufen und gespeichert werden. Das hat den Nachteil, dass zum Zeitpunkt des Abrufs die Aktualität der Information möglicherweise nicht mehr gegeben ist. Da sich aber Beschreibungen zu Konzepten wie \enquote{logarithmische Skala} kaum ändern sollten und als Beispiel die DBpedia nur ein- bis zweimal pro Jahr ein Update bekommt\footnote{\url{http://blog.dbpedia.org/category/dataset-releases/} zeigt ein bis zwei Artikel im Jahr, abgerufen am 01.07.2013.}, sollte das kein Problem sein. Im Gegenzug ist das Hilfesystem unabhängig von der DBpedia verfügbar und schneller, da im Vergleich zum dynamischen Abruf der Beschreibung ein Netzwerk Round Trip eingespart wird.
+Das DaRe findet das Domain Assignment eigenständig, nachdem ein Datensatz hochgeladen wurde. Danach sollte eine Beschreibung aus der externen Wissensbasis abgerufen und gespeichert werden. Das hat den Nachteil, dass die Informationen zum Zeitpunkt der Anzeige möglicherweise nicht mehr aktuell sind. Da sich aber Beschreibungen zu Konzepten wie \enquote{logarithmische Skala} kaum ändern sollten und als Beispiel die DBpedia nur ein- bis zweimal pro Jahr ein Update bekommt\footnote{\url{http://blog.dbpedia.org/category/dataset-releases/} zeigt ein bis zwei Artikel im Jahr, abgerufen am 01.07.2013.}, sollte das kein Problem sein. Im Gegenzug ist das Hilfesystem unabhängig von der DBpedia verfügbar und schneller, da im Vergleich zum dynamischen Abruf der Beschreibung ein Netzwerk Round Trip eingespart wird.
 
 Im Fall von Interaktionselementen parst das CoRe die Komponentenbeschreibung, nachdem eine Komponente hochgeladen wurde. Dabei extrahiert es die notwendigen Konzepte und schickt diese ans DaRe, welches die Beschreibungen dazu abruft und speichert.
 
@@ -1459,8 +1457,6 @@ Um Diskussionen und Konversationen zur Visualisierung zu fördern, müssen Komme
 Erfahrungsgemäß tragen nicht alle Kommentare gleich viel zur Diskussion bei. Man denke dabei an Hinweise auf Tippfehler oder das berüchtigte \enquote{Erster!}. Deswegen ist es notwendig, dass Benutzer Kommentare anderer bewerten können.
 
 \subsubsection{Ranking}
-
-% TODO zwei buttons um neueste und höchst bewertetste anzuzeigen
 
 Da Diskussionen und Konversationen nicht durch das User Interface eingeschränkt werden sollen, ist es nötig, Kommentare nach Datum sortieren zu können. So kann der Gesprächsverlauf nachvollzogen werden. Wenn Benutzer aber nicht an der Konversation teilnehmen, sondern schnell eine Antwort auf ihre Fragen haben wollen, bietet es sich an, nach Bewertung sortieren zu können.
 
@@ -1672,7 +1668,7 @@ Sollen Kommentare angezeigt werden, schickt das Hilfesystem eine entsprechende A
 
 % event broker suspend/resume
 
-Um zu gewährleisten, dass der Benutzer störungsfrei Kommentare lesen kann, muss das Hilfesystem den Event Broker (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) veranlassen können, anfallende Events nicht weiterzuleiten (\enquote{suspend}). Ansonsten könnte der Fall eintreten, dass die Komponente aktualisiert wird, während der Benutzer Kommentare zu den Daten liest oder eine andere Hilfe in Anspruch nimmt. Nachdem die Kommentar UI geschlossen wurde, kann der Event Broker die gespeicherten Events weiterleiten (\enquote{resume}). Sie werden einfach in Reihenfolge weitergegeben. Das hat den Nachteil, dass sich das User Interface mehrmals schnell ändern könnte, bis alle pausierten Events abgearbeitet sind. Eine andere Möglichkeit wäre die Pausierungsfunktion auf Komponentenebene umzusetzen. Das würde allerdings Mehraufwand sowohl für den Komponentenentwickler, der die entsprechenden Methoden implementieren müste, als auch für das Hilfesystem, welches jede Komponente einzeln ansprechen muss, bedeuten.
+Um zu gewährleisten, dass der Benutzer störungsfrei Kommentare lesen kann, muss das Hilfesystem den Event Broker (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) veranlassen können, anfallende Events nicht weiterzuleiten (\enquote{suspend}) und in einer FIFO Warteschlange zwischenzulagern. Ansonsten könnte der Fall eintreten, dass die Komponente aktualisiert wird, während der Benutzer Kommentare zu den Daten liest oder eine andere Hilfe in Anspruch nimmt. Diese Funktion ist in Grundzügen bereits für das Handling von PropertyLinks vorhanden \cite[S. 161]{Pietschmann2012}. Nachdem die Kommentar UI geschlossen wurde, kann der Event Broker die gespeicherten Events weiterleiten (\enquote{resume}). Sie werden einfach in Reihenfolge weitergegeben. Das hat den Nachteil, dass sich das User Interface mehrmals schnell ändern könnte, bis alle pausierten Events abgearbeitet sind. Eine andere Möglichkeit wäre die Pausierungsfunktion auf Komponentenebene umzusetzen. Das würde allerdings Mehraufwand sowohl für den Komponentenentwickler, der die entsprechenden Methoden implementieren müste, als auch für das Hilfesystem, welches jede Komponente einzeln ansprechen muss, bedeuten.
 
 \subsubsection{Weitere Nutzung}
 
@@ -1754,7 +1750,7 @@ Für das Timeout $t_D$, welches auf die Ausführung der Operation der letzten be
    \label{figure:dependency-graph-diagram}
 \end{figure}
 
-Außerdem ist zu beachten, dass für die korrekte Arbeitsweise des vorgestellten Algorithmus jede Operation ein Event feuern \textbf{muss}, sei es auch nur \enquote{Operation ausgeführt}. Ansonsten könnte eine Komponente ihren Zustand verändern, ohne dass es der Event Broker und damit das Hilfesystem merkt. Die Undo-Reihenfolge wäre dann nicht mehr korrekt. Das impliziert weiterhin, dass Zustandsveränderungen nur mit Operationen durchgeführt werden dürfen. Diese Forderung ist großteils schon umgesetzt, da \texttt{setProperty(p,v)} eine Operation ist, die \texttt{propertyChanged} Events feuert.
+Außerdem ist zu beachten, dass für die korrekte Arbeitsweise des vorgestellten Algorithmus jede Operation ein Event feuern \textbf{muss}, sei es auch nur \enquote{Operation ausgeführt}. Ansonsten könnte eine Komponente ihren Zustand verändern, ohne dass es der Event Broker und damit das Hilfesystem merkt. Die Undo-Reihenfolge wäre dann nicht mehr korrekt. Das impliziert weiterhin, dass Zustandsveränderungen nur mit Operationen durchgeführt werden dürfen. Diese Forderung ist großteils schon umgesetzt, da zum Beispiel \texttt{setProperty(p,v)} eine Operation ist, die \texttt{propertyChanged} Events feuert.
 
 % mögliche stolpersteine
 
@@ -1815,7 +1811,7 @@ Der vorgestellte Code hat einige offensichtliche Schwachstellen. Beispielsweise 
 	\item Attribute, welche ebenfalls skaliert werden müssen (\texttt{x}, \texttt{y}).
 \end{itemize}
 
-Hinzu kommt, dass sowohl alle möglichen Elemente, also auch Polygone, Polylinien und so weiter als auch deren Transformationen (verschieben, rotieren, skalieren, verzerren etc.) korrekt skaliert werden müssen. Außerdem ist der Vorgang wahrscheinlich sehr langsam, da der Browser nach jedem Update eines layoutrelevanten CSS Attributs (wie Breite oder Höhe) das Layout neu berechnen muss (\enquote{Reflow}) und währenddessen das User Interface blockiert. Dennoch erscheint die Aufgabe zwar nicht einfach, aber lösbar.
+Hinzu kommt, dass sowohl alle möglichen Elemente, also auch ClipPaths, Polygone, Polylinien und so weiter als auch deren Transformationen (verschieben, rotieren, skalieren, verzerren etc.) korrekt skaliert werden müssen. Außerdem ist der Vorgang wahrscheinlich sehr langsam, da der Browser nach jedem Update eines layoutrelevanten CSS Attributs (wie Breite oder Höhe) das Layout neu berechnen muss (\enquote{Reflow}) und währenddessen das User Interface blockiert. Der Vorgang erscheint zwar nicht einfach, aber lösbar und sollte dennoch möglichst vermieden werden.
 
 % noch cooler ist es, wenn gleich der entwickler alles relativ schreibt
 
@@ -1857,7 +1853,7 @@ In diesem Konzept wurden bisher sieben unterschiedliche Hilfefunktionen erarbeit
 
 % statische hilfe
 
-Die einfachste Lösung für die statische Meta-Hilfe wäre ein Button in der rechten oberen Ecke, der bei Bedarf eine klassische Hilfefunktion aufruft. Dort werden die verschiedenen Funktionen in Wort und Bild erklärt und ein Tutorialvideo gezeigt. Das bedeutet relativ viel Zeit- und Klickaufwand, bis der Nutzer bei den gewünschten Informationen ist, aber es hat auch Vorteile: Durch den statischen Hilfeknopf ist immer klar, wo weitergeholfen wird. Außerdem kann er gegebenenfalls für andere Sachen benutzt werden, beispielsweise könnte dort konfiguriert werden, ob der Pfeil in der Kommunkationshilfe bei jeder Nachricht angezeigt werden soll.
+Die einfachste Lösung für die statische Meta-Hilfe wäre ein Button in der rechten oberen Ecke, der bei Bedarf eine klassische Hilfefunktion aufruft. Dort werden die verschiedenen Funktionen in Wort und Bild erklärt und ein Tutorialvideo gezeigt. Das bedeutet relativ viel Zeit- und Klickaufwand, bis der Nutzer bei den gewünschten Informationen ist, aber es hat auch Vorteile: Durch den statischen Hilfeknopf ist immer klar, wo weitergeholfen wird. Außerdem kann er gegebenenfalls für andere Sachen benutzt werden, beispielsweise könnte dort konfiguriert werden, ob der Pfeil in der Kommunikationshilfe bei jeder Nachricht angezeigt werden soll.
 
 In der Nutzerstudie war die Kommentarfunktion nicht offensichtlich. Die Teilnehmer hatten Probleme sie aufzurufen, zu benutzen und die möglichen Funktionen zu erkennen. Deswegen sollte das Intro (Abschnitt~\ref{section:konzeption:intro}) am Ende zusätzlich das notwendigste für die Nutzung der Kommentarfunktion erklären. Dazu gehört zum Beispiel, wie Kommentare angezeigt oder geschrieben werden (inklusive möglicher Annotationen) und dass sie bewertet werden können. Außerdem sollte das Intro auf die statische Meta-Hilfe hinweisen.
 
@@ -1964,8 +1960,8 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \subsubsection{Markup einer Komponente}
 
 \begin{itemize}
-	\item CSS Klasse, um Begriffe zur automatischen Verlinkung zu kennzeichnen
-	\item CSS Klasse, um Wurzelelement der Visualisierung zu kennzeichnen (Kommentare)
+	\item CSS Klassen (Legende und Freitext), um Begriffe zur automatischen Verlinkung zu kennzeichnen.
+	\item CSS Klasse, um Wurzelelement der Visualisierung zu kennzeichnen (Kommentare, History)
 	\item RDFa Attribute, die Datenpunkte kennzeichnen und eventuell beschreiben (Kommentare)
 \end{itemize}
 
@@ -1979,7 +1975,8 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item Anzahl an Sekunden, die vor einem Screenshot gewartet werden soll (Bedienung)
 	\item Text in Stichworten, der Aktion näher beschreibt (Bedienung)
 	\item Ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
-	\item Beispieldaten für Parameter, falls von Operation benötigt (Bedienung)
+	\item Optionale Zusatzinformationen zur VISO Operation, beispielsweise welche Taste gedrückt werden muss (Bedienung)
+	\item Beispieldaten für Parameter, falls von Operation benötigt (Kommunikation)
 	\item Testdatensatz: Entweder ID eines DaRe Datensatzes mit SPARQL Query für Mappings oder Informationen über einen hochgeladenen Datensatz (Bedienung)
 	\item Ob die Komponente Datenverarbeitung durchführt (Kommentare)
 	\item Ob die Komponente externe Daten lädt (Kommentare)
@@ -2017,10 +2014,20 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \end{itemize}
 
 \subsubsection{Event Broker}
-\todo{vorhanden?}
+
 \begin{itemize}
 	\item Methode, welche Weiterleitung von Events pausiert (Kommentare)
 	\item Methode, welche Weiterleitung von Events wieder aufnimmt (Kommentare)
+\end{itemize}
+
+\subsubsection{Event Nachricht}
+
+Es müssen folgende Attribute enthalten sein:
+
+\begin{itemize}
+	\item Aufrufende Operation,
+	\item Timestamp,
+	\item eindeutige ID, beispielsweise eine fortlaufende Nummer.
 \end{itemize}
 
 \subsubsection{Context Service}
