@@ -5,8 +5,8 @@ My diploma thesis at Dresden University of Technology.
 ## TODO
 
 * Bei jeder Entscheidung für oder gegen was die entsprechende Anforderung angeben
-* History: Angeben, dass das schon irgendwie klappen wird mit CSS neu berechnen. Keiner sagt, es wäre einfach. Aber ich seh auch keinen Grund, warum es nicht ginge. Dh. wir machen eine State History mit Komponenten"screenshots" wie in Heer2008. Implementieren geh ich die aber nicht.
 * Was für einen Effekt hat Kommentar löschen, wenn die Referenzen drauf erhalten bleiben?
+* Synthese überprüfen, ob wirklich alles drinsteht
 
 ## Ergebnisse Paper Mockup
 
@@ -17,18 +17,11 @@ My diploma thesis at Dresden University of Technology.
 
 ## Anmerkungen Martin 5.7.
 
-* Synthese überprüfen, ob wirklich alles drinsteht
 * Allgemein: Mehr Referenzen ins RW in der Arbeit, bessere Listen.
-* History: Timeline vereinfachen
 
 ## Anmerkungen Martin 28.6.
 
 * Datenhochlader -> Data Provider
-* Überprüfen ob Methoden für suspend/resume nicht schon vorhanden (dachte nämlich schon wegen dynamischem Austausch von Komponenten)
-
-## Paper Mockup
-
-* Klären ob Pfeile nerven/verwirren und klären wann sie angezeigt werden sollen
 
 ## Capability Markup
 

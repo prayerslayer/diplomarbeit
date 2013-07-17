@@ -990,6 +990,7 @@ Visuelle Konsistenz ist wichtig, damit der Benutzer Elemente gleichen Typs erken
 Offensichtlich sind die gewählten visuellen Effekte nicht mehr so nützlich, wenn eine Komponente einen dunklen Hintergrund aufweist. Schwarz mit Dunkelgrau zu überlagern macht für das menschliche Auge nur wenig Unterschied. Deswegen werden in diesem Fall dieselben Effekte mit Weiß und Hellgrau verwendet.
 
 \subsection{Nutzerstudie}
+\label{section:konzeption:einleitung:nutzerstudie}
 
 Das entworfene Konzept wurde mit einer formativen Nutzerstudie evaluiert und danach entsprechend überarbeitet. Die wichtigste zu beantwortende Frage war dabei, ob die Kommunikationshilfe statisch (d.\,h. nach Klick auf einen Button) oder dynamisch (d.\,h. sobald eine Nachricht zwischen Komponenten ausgetauscht wurde) aufgerufen werden soll. Dazu wurde ein Paper Mockup \cite{Virzi1996} erstellt (Abbildung~\ref{figure:paper-mockup}). Er besteht aus einem Balkendiagramm, einer Karte und einer Tabelle. Als Datengrundlage wurden NBA Spieler gewählt. Die Balken des Balkendiagramms konnten ausgewählt werden, woraufhin sich die Tabelle und die Karte anpassten.
 
@@ -1052,6 +1053,7 @@ Zuletzt liegt es in der Natur des Paper Mockups, dass Interaktionen wie MouseOve
 
 \subsubsection{Ergebnisse}
 
+
 % Dass Comic = Beschreibung nicht offensichtlich. Mehr beschreiben, in Zukunft vielleicht auch schickeret Panel-Layout, sodass er als Comic und nicht als Reihe von Bildern identifiziert wird. Basti meinte auch, dass Pfeile als letzter Schritt markiert werden sollten, weil er das so als entweder/oder sah. Weiters meinen einige, dass Panels 3-5 ausreichen. Basti sagt, dass zeitlicher Abstand, also quasi Reihenfolge besser deutlich gemacht werden sollte.
 % Statische Hilfe hat gewonnen, aber siehe Einschränkungen. Vielleicht macht man in Zukunft einen Threshold, ab dem dynamische Komm.hilfe verwendet wird? Kann man ja in einer weiteren Nutzerstudie austesten, wo die Grenze liegt.
 % Dass Kommentare Annotationen enthalten können, war nicht ohne Erklärung klar. Auch nicht, wie man sie hinzufügt --> Ins Intro.
@@ -1062,6 +1064,16 @@ Zuletzt liegt es in der Natur des Paper Mockups, dass Interaktionen wie MouseOve
 % Brief-Icon war nicht klar, Assoziationen mit Email und Facebook
 % Animation von Mauszeiger in Comics: Ausblick.
 % Auswahlhilfe für Annotationen: Ausblick.
+
+Nur einer der Teilnehmer konnte sofort erkennen, dass die vier Panels der Bedienungshilfe einen Comic und dieser wiederum eine Anleitung darstellte. Das sollte zusätzlich mit Text beschrieben werden. Außerdem könnte ein ansprechenderes Layout der Panels dazu führen, dass sie eher als Comic und weniger als vier unabhängige Bilder wahrgenommen werden. Einer der Teilnehmer merkte zusätzlich an, dass nicht ganz klar ist, ob der durch die Pfeile der statischen Kommunikationshilfe angedeutete Nachrichtenaustausch immer, nacheinander oder gleichzeitig stattfindet. Nachdem das für das Hilfesystem auch nicht eindeutig ist, kann in dieser Hinsicht leider nicht viel getan werden. Alle Teilnehmer waren sich einig, dass die letzten drei Panels des Comics auch ausreichen würden, da die Information in den ersten beiden redundant ist: Durch die Auswahl des Pfeils ist klar, um welche Komponenten es geht.
+
+Es gab keinen eindeutigen Sieger bezüglich der Frage, ob die Kommunikationshilfe statisch oder dynamisch angeboten werden soll. Zwei bevorzugten die statische Variante, zwei fanden beide in Ordnung. Diese Anmerkungen kamen allerdings nach einer sehr übersichtlichen Situation im Mashup. In einer zusätzlichen Nutzerstudie sollten Grenzwerte für die Anzahl an Komponenten und Kommunikationskanälen bestimmt werden, bei denen die Kommunikation nicht mehr ohne weiteres nachvollzogen werden kann. Das Hilfesystem kann dann beim Start der kompositen Anwendung entscheiden, ob zusätzlich die dynamische Kommunikationshilfe eingesetzt werden muss.
+
+Den Teilnehmern war nicht allein aufgrund der UI klar, dass Kommentare Annotationen enthalten können und wie diese hinzugefügt oder angezeigt werden. Die Kommentare sollten deswegen am Ende des Intros zusätzlich erklärt werden. Dasselbe Problem war bei der Bewertungsfunktion von Kommentaren zu beobachten. Die abstrakten, von StackOverflow\footnote{\url{http://stackoverflow.com}} inspirierten Icons wurden auch von den Informatikern teilweise mit \enquote{scrollen} anstatt \enquote{bewerten} assoziiert. Deswegen sollte noch einmal explizit mit Text beschrieben werden, dass sie eine Bewertungsfunktion darstellen und welche Semantik sich hinter ihnen verbirgt (\enquote{agree/disagree}). Eine weitere Erkenntnis daraus ist, dass Scrollmöglichkeiten immer explizit dargestellt werden sollten. Das kann entweder in Form einer Scrollbar oder wie im Metro User Interface von Windows Phone~7 mit angeschnittenen Interaktionselementen passieren.
+
+Von zwei Teilnehmern kam der Vorschlag, die Anzahl der Kommentare immer darzustellen und nicht über einen Button in der Titelleiste zu toggeln. Hier ist aber zu beachten, dass die Komponenten im Paper Mockup sehr einfach gehalten waren und sehr eingeschränktes Interaktionspotential boten. Bei einem großen Scatterplot oder Parallel Coordinates ist diese Variante nicht mehr praktikabel.
+
+Weitere Vorschläge, die hier den Rahmen sprengen würden und in weiteren Arbeiten behandelt werden können, beinhalten zusätzlich einen Mauszeiger im Comic zu animieren oder Vorschläge für mögliche Auswahlrechtecke bei den Annotationen anzubieten.
 
 \section{Intro in die Funktionalität einer Komponente}
 \label{section:konzeption:intro}
@@ -1338,7 +1350,7 @@ Im kompositen Infomationsvisualisierungssystem VizBoard kommunizieren Komponente
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:kommunikation:ui}
 
-Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte ein Fragezeichen enthält. Das Fragezeichen wurde gewählt, da es konsistent mit dem Rest der Hilfe ist und ein Brief in der Nutzerstudie Assoziationen mit \enquote{Email} oder \enquote{in sozialen Netzwerken teilen} weckte. Sollten mehrere Empfänger vorhanden sein, existiert für jeden davon ein Fragezeichen. Die Kommunikationshilfe wird gleichzeitig mit der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) aufgerufen, da in der Nutzerstudie dynamisch gerenderte Pfeile eher verwirrten als weiterhalfen.
+Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte ein Fragezeichen enthält. Das Fragezeichen wurde gewählt, da es konsistent mit dem Rest der Hilfe ist und ein Brief in der Nutzerstudie Assoziationen mit \enquote{Email} oder \enquote{in sozialen Netzwerken teilen} weckte. Sollten mehrere Empfänger vorhanden sein, existiert für jeden davon ein Fragezeichen. Die Kommunikationshilfe wird gleichzeitig mit der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) aufgerufen, solange weniger als $x$ Komponenten im Mashup vorhanden sind (Abschnitt~\ref{section:konzeption:einleitung:nutzerstudie}). Ansonsten wird zusätzlich bei jeder Nachricht ein entsprechender Pfeil eingeblendet und nach kurzer Zeit (ca. 200-500~ms) wieder ausgeblendet.
 
 \begin{figure}[htbp]
    \centering
@@ -2005,7 +2017,7 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \end{itemize}
 
 \subsubsection{Event Broker}
-
+\todo{vorhanden?}
 \begin{itemize}
 	\item Methode, welche Weiterleitung von Events pausiert (Kommentare)
 	\item Methode, welche Weiterleitung von Events wieder aufnimmt (Kommentare)
