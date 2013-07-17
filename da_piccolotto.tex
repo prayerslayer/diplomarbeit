@@ -26,6 +26,34 @@
 
 \usepackage{mmthesis}
 \usepackage{listings}
+\usepackage{color}
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  %commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  %numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{gray},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
 % \usepackage{showkeys} % used to show labels
 \addbibresource{library.bib} % put name of bib file here with extension
 
@@ -674,7 +702,10 @@ Nachdem betrachtet wurde, wie Verständnis funktioniert, stellt sich die Frage, 
 
 \begin{quote}
 A mental model is a functional analogue representation to an external interactive visualization system with the following characteristics:
-	\begin{itemize}		\item The structural and behavioral properties of external systems are preserved in mental models.		\item A mental model can preserve schematic, semantic or item-specific information about the underlying data.		\item Given a problem, a mental model of an interactive visualization can be constructed and simulated in working memory for reasoning.
+	\begin{itemize}
+		\item The structural and behavioral properties of external systems are preserved in mental models.
+		\item A mental model can preserve schematic, semantic or item-specific information about the underlying data.
+		\item Given a problem, a mental model of an interactive visualization can be constructed and simulated in working memory for reasoning.
 	\end{itemize}
 \end{quote}
 
@@ -971,10 +1002,11 @@ Das entworfene Konzept wurde mit einer formativen Nutzerstudie evaluiert und dan
 
 \subsubsection{Teilnehmer}
 
-Die Nutzerstudie wurde mit fünf Teilnehmern zwischen 23 und 25~Jahren durchgeführt (Tabelle~\ref{table:mockup:teilnehmer}). Dabei waren 60~\% der Personen männlich. Auf die Vertrautheit mit Computern, webbasierten User Interfaces oder semantischen Daten wurde bei der Auswahl keine Rücksicht genommen, weil sie nicht relevant sind.
+Die Nutzerstudie wurde mit fünf Teilnehmern zwischen 23 und 25~Jahren durchgeführt (Tabelle~\ref{table:mockup:teilnehmer}). Dabei waren 60~\% der Personen männlich. Bei der Auswahl der Probanden wurde darauf geachtet, dass auch andere Domänen außer Informatik vertreten sind.
 
 \begin{table}[htbp]
 	\centering
+	\label{table:mockup:teilnehmer}
     \begin{tabular}{c|c|c|c}
     Teilnehmer   & Geschlecht & Alter & Domäne      \\
     \hline
@@ -984,11 +1016,10 @@ Die Nutzerstudie wurde mit fünf Teilnehmern zwischen 23 und 25~Jahren durchgef�
     Teilnehmer 4 & W          & 25    & Zahnmedizin \\ %karo
     Teilnehmer 5 & M          & 25    & Informatik  \\ %sebastian
     \end{tabular}
-    \label{table:mockup:teilnehmer}
     \caption{Teilnehmer der Nutzerstudie}
 \end{table}
 
-\subsubsection{Ablauf}
+\subsubsection{Methode}
 
 % einführung
 
@@ -1642,7 +1673,7 @@ Kommentare können auch Metainformationen über die Daten oder Komponente enthal
 
 % warum undo/redo?
 
-In den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde mehrmals empfohlen, dem Benutzer Undo/Redo von getätigten Aktionen zu ermöglichen. So können unerwünschte Ergebnisse einfach rückgängig gemacht werden. In diesem Abschnitt wird untersucht, wie in einem CRUISe Mashup, in dem die Komponenten lose gekoppelt sind, ein kompositionsübergreifendes Undo/Redo umgesetzt werden kann. Die Granularitätsstufe entspricht dabei Nutzerinteraktionen und nicht Events oder Operationen. Das entspricht wie in den verwandten Arbeiten von Grammel \cite{Grammel2012} vorgeschlagen dem mentalen Modell des Benutzers, da für ihn Events und Operationen unsichtbar sind. Als Beispiel wird die Komposition in Abbildung~\ref{figure:dependency-graph-example} verwendet.
+In den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde mehrmals empfohlen, dem Benutzer Undo/Redo von getätigten Aktionen zu ermöglichen. So können unerwünschte Ergebnisse einfach rückgängig gemacht werden. In diesem Abschnitt wird untersucht, wie in einem CRUISe Mashup, in dem die Komponenten lose gekoppelt sind, ein kompositionsübergreifendes Undo/Redo umgesetzt werden kann. Die Granularitätsstufe entspricht dabei Nutzerinteraktionen beziehungsweise zusammenhängenden anstatt einzelnen Events oder Operationen. Das sollte sich wie in den verwandten Arbeiten von Grammel \cite{Grammel2012} vorgeschlagen mit dem mentalen Modell des Benutzers decken, da für ihn Events und Operationen unsichtbar sind. Als Beispiel wird die Komposition in Abbildung~\ref{figure:dependency-graph-example} verwendet.
 
 \begin{figure}[htbp]
    \centering
@@ -1670,6 +1701,8 @@ Eine mögliche Lösung wäre den Lebenszyklus der Komponenten zu modifizieren. E
 
 Es bleibt die Möglichkeit \textbf{nach} einem Event Mementos abzurufen. Zunächst ist es schwierig festzustellen, wann \enquote{nach} einem Event überhaupt ist. Events können in dem Sinne kaskadieren, als dass sie Operationen aufrufen, die weitere Events feuern, die wiederum Operationen ausführen, die selbst Events feuern und so weiter. Aus dem Kommunikationsmodell kann a priori nicht eindeutig bestimmt werden, welche Events nach einem Event $e_0$ zu erwarten sind. Das ist eine Folge des \enquote{Black Box} Prinzips der Komponenten.
 
+\subsection{Backend}
+
 % voraussetzungen
 
 Ein Ansatz zur Lösung des Problems ist anfangs einen Abhängigkeitsgraphen aus dem Kommunikationsmodell zu generieren (Abbildung~\ref{figure:dependency-graph}). Dazu werden alle Events und Operationen der Komponenten gesammelt. Es führen Kanten von Events zu Operationen, wenn ein Link im Kommunikationsmodell besteht. Wenn ein Event von einer Operation abhängig ist (z.\,B. $e_1$ von $o_1$), wird ein Link von der Operation zum Event eingefügt. So kann das Hilfesystem bestimmen, welche Events später noch gefeuert werden könnten. Außerdem werden Nachrichten, die zwischen Komponenten ausgetauscht werden, so erweitert, dass sie zusätzlich die aufrufende Operation und einen Timestamp enthalten.
@@ -1680,6 +1713,7 @@ Ein Ansatz zur Lösung des Problems ist anfangs einen Abhängigkeitsgraphen aus 
    \caption{Abhängigkeitsgraph der beispielhaften Komposition mit möglichem Ablauf der Events und Operationen}
    \label{figure:dependency-graph}
 \end{figure}
+
 
 % algorithmus
 
@@ -1710,18 +1744,87 @@ Für das Timeout $t_D$, welches auf die Ausführung der Operation der letzten be
 
 Außerdem ist zu beachten, dass für die korrekte Arbeitsweise des vorgestellten Algorithmus jede Operation ein Event feuern \textbf{muss}, sei es auch nur \enquote{Operation ausgeführt}. Ansonsten könnte eine Komponente ihren Zustand verändern, ohne dass es der Event Broker und damit das Hilfesystem merkt. Die Undo-Reihenfolge wäre dann nicht mehr korrekt. Das impliziert weiterhin, dass Zustandsveränderungen nur mit Operationen durchgeführt werden dürfen. Diese Forderung ist großteils schon umgesetzt, da \texttt{setProperty(p,v)} eine Operation ist, die \texttt{propertyChanged} Events feuert.
 
+% mögliche stolpersteine
+
+Bevor konkrete visuelle Umsetzungen der History präsentiert werden, muss diskutiert werden, wie mit von Komponenten (anstatt vom Benutzer) ausgelösten Aktionen umgegangen wird. Beispielsweise wäre eine Uhrzeit-Komponente denkbar, die jede volle Minute ein \texttt{minutePassed} Event auslöst. Klassische Implementierungen einer History löschen den Redo-Stack, wenn nach einem Undo eine neue, nicht in der History vorhandene Aktion ausgeführt wird. Im Falle der Uhrzeit-Komponente wäre das äußerst ungünstig, da sie spätestens nach einer Minute unerwünschterweise den Redo-Stack löschen würde. Derartige Komponenten von der History auszuschließen ist jedoch keine Option, da sie alle Komponenten unterstützen muss -- das erwarten Endnutzer von einer History. Events nach einem Undo zu pausieren ist ebenfalls nicht möglich, da dann überhaupt keine neuen Aktionen mehr ausgeführt werden können. Deswegen sollten neue, durch Komponenten ausgelöste Aktionen, nach einem Undo weiter auf den Redo-Stack gelegt werden. Dieser kann gelöscht werden, sobald der Benutzer eine Aktion ausführt. Der im vorhergehenden Abschnitt vorgestellte Algorithmus kann eine Nutzeraktion aber nicht von einer Komponentenaktion unterscheiden.
+
+Um dem beizukommen, kann das Hilfesystem eigene Eventhandler auf aktionsrelevanten UI Elementen registrieren. Abbildung~\ref{figure:undo-ablauf} verdeutlicht die Funktionsweise: Zuerst wird eine Nachricht $e_1$ an den Event Broker gesendet (1). Dieser fügt sie einer Collection hinzu (2). Danach wird der Eventhandler des Hilfesystems aufgerufen (3). Das Hilfesystem weiß, zu welcher Komponente, Aktion und Operation der Eventhandler gehört (Abschnitt~\ref{section:konzeption:bedienung:api}) und kann in den Collections des Event Brokers nach entsprechenden Nachrichten suchen, diese markieren (4) und den Redo-Stack löschen, falls nötig.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-undo-ablauf.png}
+   \caption{Erkennung von Nutzerinteraktionen}
+   \label{figure:undo-ablauf}
+\end{figure}
+
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:history:ui}
 
-% mögliche stolpersteine
+% unterscheidung verschiedener historys und festlegung, was wir haben
 
-Bevor konkrete visuelle Umsetzungen der History präsentiert werden, muss diskutiert werden, wie mit von Komponenten (anstatt vom Benutzer) ausgelösten Aktionen umgegangen wird. Beispielsweise wäre eine Uhrzeit-Komponente denkbar, die jede volle Minute ein \texttt{minutePassed} Event auslöst. Klassische Implementierungen einer History löschen den Redo-Stack, wenn nach einem Undo eine neue (nicht in der History vorhandene) Aktion ausgeführt wird. Im Falle der Uhrzeit-Komponente wäre das äußerst ungünstig, da sie spätestens nach einer Minute unerwünschterweise den Redo-Stack löschen würde. Derartige Komponenten von der History auszuschließen ist jedoch nicht möglich, da sie alle Komponenten unterstützen muss -- das erwarten Endnutzer von einer History. Events nach einem Undo zu pausieren ist ebenfalls nicht möglich, da dann überhaupt keine neuen Aktionen mehr ausgeführt werden können. Deswegen sollten neue, durch Komponenten ausgelöste Aktionen, nach einem Undo weiter auf den Redo-Stack gelegt werden. Dieser kann gelöscht werden, sobald der Benutzer eine Aktion ausführt. Der im vorhergehenden Abschnitt vorgestellte Algorithmus kann eine Nutzeraktion aber nicht von einer Komponentenaktion unterscheiden. 
+Heer et al. \cite{Heer2008} unterscheiden zwei Modelle einer History: State und Action. Bei einer State History sind die Knoten Applikationszustände und die Kanten Aktionen, bei einer Action History ist es umgekehrt. Undo in einer Action History bedeutet in Reihenfolge inverse Aktionen auszuführen, in einer State History ist es die Wiederherstellung eines gespeicherten Zustands. Der im vorangehenden Abschnitt vorgestellte Algorithmus, welcher zu gegebener Zeit Mementos der Komponenten abruft, speichert und wiederherstellt, macht die hier behandelte History zu einer State History. Um die State History einfach bedienen zu können, sollten die verschiedenen States erkennbar dargestellt werden.
 
-% what to do? ich würde sagen, trotzdem event handler auf relevante ui elemente registrieren. die bekommt das hilfesystem dann ungefähr zeitgleich mit dem event mit und kann sie zuordnen. wobei das auch wieder nicht ganz eindeutig ist, weil ich ja einfach $("button").click() machen kann. aber das ist halt so.
+\subsubsection{Umsetzung einer webbasierten State History}
 
-% wie umsetzen
+% eigentlich können wir ja die bedienungshilfe dynamisch aufrufen? not. eh schon wenig zeit und dann können operationen noch beliebig lang dauern.
 
-Die einfachste Möglichkeit für eine History, die so auch in jeder Desktopapplikation umgesetzt ist, sind zwei Buttons für Undo respektive Redo (Abbildung~\ref{figure:undo-simple}). Sie sind sofort verständlich und erfüllen ihren Zweck, allerdings wird die Interaktion umso mühsamer, je weiter der zu erreichende Anwendungszustand zurück liegt.
+Prinzipiell kann der in Abschnitt~\ref{section:konzeption:bedienung:generierung} vorgestellte Algorithmus zur Generierung von Screenshots auch dynamisch aufgerufen werden. Alle notwendigen Informationen sind bekannt: Der geladene Datensatz, die Mappings, die betroffenen Komponenten, die ausgeführten Aktionen und Operationen. Das Hilfesystem könnte beim Start der kompositen Ansicht den Generierungsservice mit denselben Komponenten und Daten initialisieren. Nach jeder registrierten Operation würde es diese Daten an den Generierungsservice schicken, der einen Screenshot der Applikation in diesem Zustand zurück gibt. Jedoch sollte es nie länger als zwei Sekunden dauern, bis ein Screenshot in der History verfügbar ist. Von der Tatsache abgesehen, dass dieser Vorgang zeitkritisch ist, ist er leider auch nicht umsetzbar: Wegen des \enquote{Black Box} Prinzips der Komponenten können Zustandsveränderungen beliebig lange dauern. Deren obere Grenze ist zwar bekannt (Abschnitt~\ref{section:konzeption:bedienung:api}), aber der Generierungsservice müsste die Zeit trotzdem abwarten, bevor ein Screenshot erstellt werden kann. Diese Zeit muss von den veranschlagten zwei Sekunden abgezogen werden, um die verfügbare Rechen- und Transferzeit zu erhalten.  Es erscheint unwahrscheinlich, dass der beschriebene Vorgang in so kurzer Zeit abgearbeitet werden kann. Des weiteren könnte die History einen fehlerhaften Screenshot enthalten, wenn ein Screenshot frühzeitig angefertigt würde.
+
+% aber wenigstens können wir den DOM kopieren? sorta, yes.
+
+Eine andere Variante, um an realitätsgetreue Abbildungen von Komponentenzuständen zu gelangen, wäre ihren DOM zu kopieren und verkleinert in der History anzuzeigen. Problematisch sind dabei CSS Regeln mit absoluten Einheiten, wie zum Beispiel Pixel oder Punkt. Eine Lösung dafür wäre zur Laufzeit das CSS einer Komponente in relative Einheiten zu transformieren. Folgender naiver Algorithmus in Pseudocode (Listing~\ref{code:relative-css}) wäre ein erster Ansatz:
+
+\begin{lstlisting}[language=Java,
+				  title=Naiver Algorithmus um relative CSS Einheiten zu forcieren,
+				  label=code:relative-css]
+function relativeCSS(parent) {
+	var p_width = parent.width(),
+		p_height= parent.height();
+	
+	parent.children().each( function(i,child) {
+		var width = this.width(),
+			height= this.height(),
+			w_ratio = width/p_width,
+			h_ratio = height/p_height;
+			
+		this.width(w_ratio+"%");
+		this.height(h_ratio+"%");
+			
+		relativeCSS(child);
+	});
+}
+\end{lstlisting}
+
+Der vorgestellte Code hat einige offensichtliche Schwachstellen. Beispielsweise gibt es 
+
+\begin{itemize}
+	\item Elemente ohne definierte Breite oder Höhe (\texttt{svg:g}), 
+	\item mit besonderer Größendefinition (\texttt{svg:circle}) oder
+	\item Attribute, welche ebenfalls skaliert werden müssen (\texttt{x}, \texttt{y}).
+\end{itemize}
+
+Hinzu kommt, dass sowohl alle möglichen Elemente, also auch Polygone, Polylinien und so weiter als auch deren Transformationen (verschieben, rotieren, skalieren, verzerren etc.) korrekt skaliert werden müssen. Außerdem ist der Vorgang wahrscheinlich sehr langsam, da der Browser nach jedem Update eines layoutrelevanten CSS Attributs (wie Breite oder Höhe) das Layout neu berechnen muss (\enquote{Reflow}) und währenddessen das User Interface blockiert. Dennoch erscheint die Aufgabe zwar nicht einfach, aber lösbar.
+
+% noch cooler ist es, wenn gleich der entwickler alles relativ schreibt
+
+Noch besser als CSS zur Laufzeit zu transformieren wäre, wenn der Komponentenentwickler von vornherein relative Einheiten verwendete. Das wäre ohnehin zu bevorzugen, da Komponenten theoretisch beliebig ihre Größe ändern können. Dennoch sollte es kein Muss-Kriterium für den Komponentenentwickler sein, da es längere Entwicklungszeiten nötig macht und den Aufwand erhöht. Um  relative CSS Einheiten zu forcieren, wird deren Nutzung angenommen. Andernfalls muss der Komponentenentwickler in der Komponentenbeschreibung das Gegenteil angeben, sodass das CSS der Komponente zur Laufzeit transformiert wird.
+
+\subsubsection{Visuelle Repräsentation der State History}
+
+% timeline mit bildern
+
+Wie in \cite{Heer2008} besteht die State History aus Bildern der Komponenten mit einer Seitenlänge von mindestens 120~Pixel (Abbildung~\ref{figure:undo-graphical}). Nach einem Klick auf einen Zustand wird die Komposition in diesen zurückgesetzt.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/konzeption-undo-graphical.png}
+   \caption{UI Mockup: Grafische History}
+   \label{figure:undo-graphical}
+\end{figure}
+
+% simple buttons als alternative
+
+Sollte sich die dynamische Transformation von CSS Regeln als nicht praktikabel herausstellen, werden zwei Buttons für Undo und Redo eingesetzt (Abbildung~\ref{figure:undo-simple}), wenn Komponenten ohne relatives CSS in der Komposition vorhanden sind. Diese Art der History ist auch in jeder Desktopapplikation vorhanden. Die Buttons sind sofort verständlich und erfüllen ihren Zweck, allerdings wird die Interaktion umso mühsamer, je weiter der zu erreichende Anwendungszustand zurück liegt.
 
 \begin{figure}[htbp]
    \centering
@@ -1730,16 +1833,6 @@ Die einfachste Möglichkeit für eine History, die so auch in jeder Desktopappli
    \label{figure:undo-simple}
 \end{figure}
 
-Dieses Problem ist bei der Präsentation der History als Timeline nicht mehr vorhanden (Abbildung~\ref{figure:undo-timeline-simple}). Mementos nach zusammenhängenden Zustandsveränderungen (wie im vorhergehenden Abschnitt beschrieben) werden gruppiert und als Balken auf der Timeline aufgetragen. Die obere Zeile dient als Overview des Overview/Detail Patterns. Ein Klick auf einen Balken, also eine Menge von Komponentenzuständen, setzt die Komposition den ausgewählten Zustand zurück. Screenshots der Komponentenzustände wie in \cite{Heer2008} (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wären zwar hilfreicher und visuell ansprechender, jedoch sind programmatische Screenshots im Web nicht möglich. Eine Alternative wäre den DOM der Visualisierung zu kopieren und in der Timeline einzufügen. Allerdings kann nicht davon ausgegangen werden, dass das CSS der Komponente sie entsprechend skaliert.
-
-\begin{figure}[htbp]
-   \centering
-   \includegraphics[width=0.75\textwidth]{images/konzeption-undo-timeline-simple.png}
-   \caption{UI Mockup: History als Timeline}
-   \label{figure:undo-timeline-simple}
-\end{figure}
-
-Die Timeline ist komplexer zu nutzen als zwei Buttons, aber auch mächtiger. Aufgrund des Designprinzips und nichtfunktionalen Anforderung der \emph{Verständlichkeit} sollte aber darauf geachtet werden, den Benutzer nicht zu überfordern. In \cite{Piccolotto2012} wurde eine vergleichbare Timeline umgesetzt und konnte in der Nutzerstudie mit fünf Teilnehmern von allen benutzt werden, was ihren Einsatz rechtfertigt.
 
 \section{Meta-Hilfe}
 \label{section:konzeption:meta-hilfe}
@@ -1820,7 +1913,7 @@ Nun stellt sich die Frage, welche Daten für das maschinelle Lernen herangezogen
 	\item Ob Hilfe aufgerufen wurde und wenn ja, welche Funktion
 \end{itemize}
 
-Das Hilfesystem schickt alle 5~Interaktionen einen solchen Datensatz an die Wissensbasis, welche ihn zu den Trainingsdaten hinzufügt. Außerdem wird der Datensatz an den Classifier weitergegeben, der das letzte Attribut vorhersagt. Ist das Ergebnis ein anderes als \enquote{Keine Hilfe nötig}, bietet das Hilfesystem dem Benutzer Hilfe zur entsprechenden Funktion an.
+Das Hilfesystem schickt alle fünf Interaktionen einen solchen Datensatz an die Wissensbasis, welche ihn zu den Trainingsdaten hinzufügt. Außerdem wird der Datensatz an den Classifier weitergegeben, der das letzte Attribut vorhersagt. Ist das Ergebnis ein anderes als \enquote{Keine Hilfe nötig}, bietet das Hilfesystem dem Benutzer Hilfe zur entsprechenden Funktion an.
 
 \subsection{User Interface und Interaktion}
 
@@ -1879,6 +1972,7 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item Ob die Komponente Datenverarbeitung durchführt (Kommentare)
 	\item Ob die Komponente externe Daten lädt (Kommentare)
 	\item Ob das Layout der Komponente vollständig reproduzierbar ist (Kommentare)
+	\item Ob die Komponente beliebig skalierbar ist oder deren CSS zur Laufzeit transformiert werden muss (History)
 \end{itemize}
 
 \subsubsection{API einer Komponente}

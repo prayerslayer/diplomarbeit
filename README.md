@@ -4,8 +4,9 @@ My diploma thesis at Dresden University of Technology.
 
 ## TODO
 
+* Bei jeder Entscheidung für oder gegen was die entsprechende Anforderung angeben
+* History: Angeben, dass das schon irgendwie klappen wird mit CSS neu berechnen. Keiner sagt, es wäre einfach. Aber ich seh auch keinen Grund, warum es nicht ginge. Dh. wir machen eine State History mit Komponenten"screenshots" wie in Heer2008. Implementieren geh ich die aber nicht.
 * Was für einen Effekt hat Kommentar löschen, wenn die Referenzen drauf erhalten bleiben?
-* Wie ist das Handling mit der Timeline, wenn periodisch Events gefeuert werden (von einer Uhrzeit-Komponente)? Hat man gerade Undo gemacht, würde dann ja der ganze Redo-Stack gelöscht, was wahrscheinlich nicht so geil ist. Ausschließen erscheint aber auch nicht dolle. Nach Undo pausieren ebenfalls nicht. Am Besten wäre es, den Redo-Stack zu erweitern und erst bei Nutzerinteraktion zu löschen. 
 
 ## Ergebnisse Paper Mockup
 
