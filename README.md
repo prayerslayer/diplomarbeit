@@ -9,7 +9,6 @@ My diploma thesis at Dresden University of Technology.
 
 ## Ergebnisse Paper Mockup
 
-* Besser erklären: Icon Kommentare angucken
 * Überlegen: Auswahlhilfen für Bereiche --> Lieber in Ausblick.
 * Machen: No-Click-Area ist weg, wenn Arrow/Text ausgewählt
 * Überlegen: Bedienungshilfe animieren mit Maus --> Ausblick
