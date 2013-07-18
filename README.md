@@ -4,7 +4,6 @@ My diploma thesis at Dresden University of Technology.
 
 ## TODO
 
-* Was für einen Effekt hat Kommentar löschen, wenn die Referenzen drauf erhalten bleiben?
 
 ## Ergebnisse Paper Mockup
 
