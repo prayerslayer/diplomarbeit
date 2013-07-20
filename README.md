@@ -2,47 +2,81 @@
 
 My diploma thesis at Dresden University of Technology.
 
+## Implementierung
+
+**Zeit**: 14 Wochen ab 22.7.
+
+Zuerst:
+
+1. Szenario mit Komponenten überlegen
+2. Komponentenbeschreibung der Komponenten erstellen (wie in Konzept)
+3. SVN Branch von allem erstellen, programmieren anfangen
+
+Implementierungsablauf:
+
+1. CoRe: Uploadprozess erweitern, dass er neue SMCDL lesen kann
+2. CoRe: Neue SMCDL Daten in MCDO übertragen
+3. Hilfeservice: Integration von MRE, DaRe und CoRe
+4. Hilfeservice: Schnittstelle um Hilfegenerierung für Komponente anzustoßen
+5. Hilfeservice: Hilfegenerierung
+6. Hilfeservice: Schnittstelle um Hilfepanels auszugeben
+7. Hilfesystem: Grundlegendes Frontend (Backbone + jQuery wär nice)
+8. Komponente: Titelleiste um Buttons erweitern. Aufruf HS?
+9. Hilfesystem: Frontend für Bedienung schreiben
+
+=== bedienungshilfe fertig ===
+
+10. Hilfesystem: Irgendwie an Kommunikationsmodell (Event Broker?) kommen, analysieren, Frontend für Kommunikation schreiben
+
+=== kommunikationshilfe fertig ===
+
+11. DaRe: Kommentare Backend schreiben
+12. DaRe: REST API für Kommentare
+13. Hilfesystem: Kommentar schreiben Frontend
+14. Hilfesystem: Kommentar anzeigen Frontend
+
+=== kommentare fertig ===
+
+
 ## TODO
 
-* Was für einen Effekt hat Kommentar löschen, wenn die Referenzen drauf erhalten bleiben?
+* Problem für "eindeutige ID ist super" benennen?
 
-## Probleme globales Undo
+## Ergebnisse Paper Mockup
 
-* Vor Event Memento holen geht nicht gut, weil Eventlistener des Hilfesystems erst nach dem Handler der Komponente ausgeführt wird. Kann sein, dass wir was verpassen.
-* Nach Event Memento holen geht nicht, weil Events kaskadieren und nicht klar ist, wann ein Event "fertig" ist.
-* Analyse des Kommunikationsmodells bringt in der Hinsicht nix, weil zwar klar ist, durch welche Operation ein Event aufgerufen wurde, aber nicht anders herum (welche Events wirft eine Operation): Kann von vielen Bedinungen abhängen!
-* Einfachste Lösung also sicherstellen, dass unser Event Handler vor dem des Entwicklers registriert wird. Dazu müsste man aber den Component Lifecycle erweitern (zwischen Loaded und Instantiated noch eine Stufe DOMReady oder so rein), weiß nicht obs das bringt. --> Auch nicht möglich weil dynamisch DOM Elemente erzeugt werden müssen, manchmal.
-* Bleibt zur Laufzeit Rückwärtsanalyse machen und kucken, wodurch ein Event ursprünglich ausgelöst wurde. Problem: Muss 100 % sicher sein, sonst verwirrt Undo Funktion. Problem 2: Nachvollziehbarkeit überhaupt gegeben? Stichworte kaskadierende Events, asynchrone Operationen.
+* Überlegen: Auswahlhilfen für Bereiche --> Lieber in Ausblick.
+* Machen: No-Click-Area ist weg, wenn Arrow/Text ausgewählt
+* Überlegen: Bedienungshilfe animieren mit Maus --> Ausblick
 
-## Anmerkungen Martin 28.6.
+## Ausblick
 
-* Heer2008 in die verwandten Arbeiten
-* Überlegen: Kommunikation nicht ad-hoc, wenn es passiert, sondern ähnlich wie Bedienung. Nachteil: Benutzer kapiert erst, wenn er aktiv auf den Knopp drückt. Kann man machen, dynamische Kommunikationshilfe könnte dann die Pfeile ad-hoc rendern. --> Paper Mockup.
-* Memento von Komponente doch mit Propertys lösen, scheint Feature zu sein --> Zuerst Paper Mockup abwarten
-* Martin: Hilfebutton lieber in Navigationsleiste oder Komponentenspezifisch? nein.
-* Domäne des Benutzers in Context Service (gut für Credibility von Kommentaren + UA)
+* Bedienungshilfe mit Maus animieren
+* Auswahlhilfen für Annotationsbereiche
+* CSS von Komponente im CoRe auf relative Einheiten trimmen (schwierig weil man nicht weiß, was skaliert werden muss und was nicht)
+* Aktionen abhängig von Aktionen (Suche -> Anzeige) wär auch gut, würde mehr High-Level erklärung ermöglichen
+
+## Kleinscheiss
+
+* Bessere Listen
 * Datenhochlader -> Data Provider
-
-## Paper Mockup
-
-* Klären ob Pfeile nerven/verwirren und klären wann sie angezeigt werden sollen
 
 ## Capability Markup
 
 Jetzt:
 
-<capability id="search" activity="ua:search" entity="trvl:location"/>
+    <capability id="search" activity="ua:search" entity="trvl:location"/>
+    <event dependsOn="search"/>
 
 Dann:
 
-<!-- aktion -->
-<capability id="search" activity="ua:search" entity="trvl:location" operations="searchOps" wait="5s" />
+    <!-- aktion -->
+    <capability id="search" activity="ua:search" entity="trvl:location" operations="searchOps" wait="5s" />
 
-<!-- äquivalente operationen -->
-<operations id="searchOps" testData="new york" relatedConcept="dbpedia:Search">
-	<operation id="clickSearch" css="button.search" viso="a:click" />
-	<operation id="typeSearch" css="button.search" viso="a:type" which="space" />
-	<sequentialOperation id="menuSearch">
+    <!-- äquivalente operationen -->
+    <operations id="searchOps" testData="new york" relatedConcept="dbpedia:Search">
+	    <operation id="clickSearch" css="button.search" viso="a:click" />
+	    <operation id="typeSearch" css="button.search" viso="a:type" which="space" />
+	    <sequentialOperation id="menuSearch">
 		<operation id="clickMenu" css="div.menu" viso="a:click" />
 		<operation id="clickMenuSearch" css="div.menu > div.search" viso="a:click" />
 	</sequentialOperation>
@@ -50,4 +84,4 @@ Dann:
 		<operation id="pressStrg" viso="a:type" which="strg" />
 		<operation id="pressA" viso="a:type" which="a"
 	</parallelOperation>
-</operations>
+    </operations>
