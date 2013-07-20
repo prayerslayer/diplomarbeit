@@ -39,9 +39,9 @@ Implementierungsablauf:
 
 
 ## TODO
+
 * Problem für "eindeutige ID ist super" benennen?
-* History: Properties beschreiben Komp.zustand, wenn sich Zustand ändert, ändern sich auch Props und ich krieg ein propChanged Event.
-* History: Link zw. Op und Ev bringt in Komp.beschr. nicht viel, lieber Eventnachricht ordentlich ausstatten. Nochmal genau erklären, was Hilfesystem macht wenn Nutzerinteraktion (ev.operation löschen, evtl neue Box).
+
 ## Ergebnisse Paper Mockup
 
 * Überlegen: Auswahlhilfen für Bereiche --> Lieber in Ausblick.

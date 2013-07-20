@@ -1741,33 +1741,35 @@ Es bleibt die Möglichkeit \textbf{nach} einem Event Mementos abzurufen. Zunäch
 
 % voraussetzungen
 
-Ein Ansatz zur Lösung des Problems ist anfangs einen Abhängigkeitsgraphen aus dem Kommunikationsmodell zu generieren (Abbildung~\ref{figure:dependency-graph}). Dazu werden alle Events und Operationen der Komponenten gesammelt. Es führen Kanten von Events zu Operationen, wenn ein Link im Kommunikationsmodell besteht. Wenn ein Event von einer Operation abhängig ist (z.\,B. $e_1$ von $o_1$), wird ein Link von der Operation zum Event eingefügt. Dem Hilfesystem ist das bekannt, weil in der Komponentenbeschreibung Events abhängig von Aktionen beschrieben zu den Aktionen Operationen So kann das Hilfesystem bestimmen, welche Events später noch gefeuert werden könnten. Außerdem werden Nachrichten, die zwischen Komponenten ausgetauscht werden, so erweitert, dass sie zusätzlich die aufrufende Operation und einen Timestamp enthalten.
+Ein Ansatz zur Lösung des Problems ist die aufrufende Methode in die Eventnachricht zu schreiben. Das muss der Komponentenentwickler übernehmen. So kann das Hilfesystem bzw. der Event Broker zur Laufzeit Eventkaskaden erkennen, da das Ziel einer Nachricht (CRUISe Operation) denselben Wert enthält wie die aufrufende Methode einer anderen Nachricht. Zusätzlich zur aufrufenden Methode muss noch ein Timestamp, eine eindeutige Event ID und die Instanz-ID der Komponente angegeben in einer Nachricht enthalten sein, was aber der Event Broker übernehmen kann.
+
+% algorithmus
+
+Der Ablauf des Algorithmus wird anhand der Situation in Abbildung~\ref{figure:dependency-graph} erklärt. Sie zeigt einen beispielhaften Ablauf, wo $e_3$ und $e_4$ gefeuert wurden und $o_3$ bzw. $o_4$ aufrufen, weil eine ursprünglich eine Aktion in Komponente A ausgeführt wurde.
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-dependency-graph.png}
-   \caption{Abhängigkeitsgraph der beispielhaften Komposition mit möglichem Ablauf der Events und Operationen}
+   \caption{Möglicher Ablauf der Events in der beispielhaften Komposition}
    \label{figure:dependency-graph}
 \end{figure}
 
-
-% algorithmus
-
-Abbildung~\ref{figure:dependency-graph} zeigt einen beispielhaften Ablauf. $e_3$ und $e_4$ werden gefeuert, weil eine Aktion in Komponente A ausgeführt wurde. Der Algorithmus funktioniert wie folgt:
+Der Algorithmus funktioniert wie folgt:
 
 \begin{enumerate}
 	\item Komponente A feuert Event $e_1$.
-	\item Das Hilfesystem registriert die Nachricht $e_1$ und bestimmt zunächst aus dem Abhängigkeitsgraphen, ob A eine unabhängige Komponente ist und ob noch weitere (auf $e_1$ zurückführende) Nachrichten zu erwarten sind. Da dies der Fall ist, fügt das Hilfesystem $e_1$ in eine neu erstellte Collection hinzu und legt ein Timeout von $t$ Millisekunden fest. Läuft es ab, fährt der Algorithmus bei Schritt 7 fort. Außerdem wird $e_1$ bis dorthin der Operation $o_4$ von C zugeordnet.
+	\item Das Hilfesystem registriert die Nachricht $e_1$ und sucht nach einer Collection mit einer Nachricht $e_i$, die der Vorgänger von $e_1 $ sein könnte. Da keine vorhanden ist, fügt das Hilfesystem $e_1$ in eine neu erstellte Collection hinzu und legt ein Timeout von $t$ Millisekunden fest. Läuft es ab, fährt der Algorithmus bei Schritt 7 fort. Außerdem wird $e_1$ bis dorthin der Methode $o_2$ von C zugeordnet.
 	\item Innerhalb des Timeouts $t$ feuert Komponente C Event $e_3$.
-	\item Das Hilfesystem registriert die Nachricht $e_3$ und überprüft, ob C eine unabhängige Komponente ist und ob noch weitere Nachrichten zu erwarten sind. Das ist der Fall, also liest das Hilfesystem aus der Nachricht, welche Operation sie geschickt hat ($o_4$). Aus allen $o_4$ zugeordneten Nachrichten wird weiters die Quelle, also aufrufende Komponente, gelesen und eine Collection gesucht, in der diese enthalten ist. Findet das Hilfesystem eine, fügt es $e_3$ dieser hinzu und setzt den Timer auf~0 zurück. In diesem Beispiel ist das der Fall. Würde das Hilfesystem keine Collection finden, erstellte es eine neue und führe fort wie in Schritt~2.
+	\item Das Hilfesystem registriert die Nachricht $e_3$ und überprüft, ob es eine Collection mit einem Vorgänger dafür gibt. Das ist der Fall, also liest das Hilfesystem aus der Nachricht, welche Methode sie geschickt hat ($o_2$). Danach wird eine Collection gesucht, welche eine der $o_2$ zugeordneten Nachrichten enthält. Findet das Hilfesystem eine, fügt es $e_3$ dieser hinzu und setzt den Timer auf~0 zurück. In diesem Beispiel ist das der Fall. Würde das Hilfesystem keine Collection finden, führe es fort wie in Schritt~2.
 	\item Innerhalb des Timeouts $t$ feuert Komponente~C Event $e_4$.
-	\item Analog zu Schritt~4. Hier sind allerdings keine weiteren Events mehr zu erwarten (Komponente C bietet nur zwei Events und das zweite wurde eben registriert), weswegen das Hilfesystem kein Timeout mehr setzen muss und gleich zum nächsten Schritt übergehen kann.
-	\item Nachdem das Timeout abgelaufen ist oder alle möglichen Events registriert wurden, markiert das Hilfesystem die Collection als geschlossen und entfernt die Assoziation zwischen enthaltenen Nachrichten sowie den Operationen der Komponenten. Da die zustandsverändernde Operation von Komponente D erst aufgerufen werden muss, legt es ein Timeout $t_D$ fest, nach dessen die Mementos der Komponenten abgerufen werden können.
+	\item $e_4$ wird gleich wie $e_3$ in Schritt~4 behandelt.
+	\item Das Timeout $t$ läuft ab.
+	\item Das Hilfesystem markiert die Collection als geschlossen und entfernt die Assoziation zwischen enthaltenen Nachrichten sowie den Methoden der Komponenten. Da die zustandsverändernde Operation von Komponente D erst aufgerufen werden muss, legt es ein Timeout $t_D$ fest, nach dessen Ablauf die Mementos der Komponenten abgerufen werden können.
 \end{enumerate}
 
 % anmerkungen
 
-Abbildung~\ref{figure:dependency-graph-diagram} zeigt ein Ablaufdiagramm des Algorithmus. Ein noch nicht betrachteter Punkt sind asynchrone Operationen (z.\,B. \texttt{setTimeout()}). Die Reihenfolge der Nachrichten spielt im vorgestellten Algorithmus keine Rolle\todo{proof?}, weswegen asynchrone Operationen wie synchrone behandelt werden, solange sie innerhalb des Timeouts $t$ ein Event feuern. Das festgelegte Timeout ist aber keine gute Designentscheidung, wenn es um Zugriffe auf externe APIs geht. Es kann nicht davon ausgegangen werden, dass sie innerhalb des Timeouts beantwortet werden. Aus diesem Grund wird bei der History -- wie bei den Kommentaren (Abschnitt~\ref{section:konzeption:kommentare}) auch -- ausgeschlossen, dass Komponenten externe Daten laden können.
+Ein noch nicht betrachteter Punkt sind asynchrone Operationen (z.\,B. \texttt{setTimeout()}). Die Reihenfolge der Nachrichten spielt im vorgestellten Algorithmus keine Rolle\todo{proof?}, weswegen asynchrone Operationen wie synchrone behandelt werden, solange sie innerhalb des Timeouts $t$ ein Event feuern. Das festgelegte Timeout ist aber keine gute Designentscheidung, wenn es um Zugriffe auf externe APIs geht. Es kann nicht davon ausgegangen werden, dass sie innerhalb des Timeouts beantwortet werden. Aus diesem Grund wird bei der History -- wie bei den Kommentaren (Abschnitt~\ref{section:konzeption:kommentare}) auch -- ausgeschlossen, dass Komponenten externe Daten laden können.
 
 Für das Timeout $t_D$, welches auf die Ausführung der Operation der letzten beteiligten Komponente wartet, kann der Wert aus der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) herangezogen werden, wenn vorhanden. Dieser teilt dem Hilfeservice, der die Comic Panels generiert, mit, wann die Zustandsveränderung der Komponente abgeschlossen ist. Ansonsten wird ein durch Tests bestimmter Standardwert verwendet.
 
@@ -1778,13 +1780,13 @@ Für das Timeout $t_D$, welches auf die Ausführung der Operation der letzten be
    \label{figure:dependency-graph-diagram}
 \end{figure}
 
-Außerdem ist zu beachten, dass für die korrekte Arbeitsweise des vorgestellten Algorithmus jedes Event eine Nachricht senden \textbf{muss}, sei es auch nur \enquote{Operation ausgeführt}. Ansonsten könnte eine Komponente ihren Zustand verändern, ohne dass es der Event Broker und damit das Hilfesystem merkt. Die Undo-Reihenfolge wäre dann nicht mehr korrekt. Das impliziert weiterhin, dass Zustandsveränderungen nur mit Operationen durchgeführt werden dürfen. Diese Forderung ist großteils schon umgesetzt, da zum Beispiel \texttt{setProperty(p,v)} eine Operation ist, die \texttt{propertyChanged} Events feuert.
+Außerdem ist zu beachten, dass für die korrekte Arbeitsweise des vorgestellten Algorithmus jedes Event eine Nachricht senden \textbf{muss}, sei es auch nur \enquote{Methode ausgeführt}. Ansonsten könnte eine Komponente ihren Zustand verändern, ohne dass es der Event Broker und damit das Hilfesystem merkt. Die Undo-Reihenfolge wäre dann nicht mehr korrekt. Das impliziert weiterhin, dass Zustandsveränderungen ein Event feuern müssen. Diese Forderung ist schon umgesetzt, da zum Beispiel \texttt{setProperty(p,v)} eine Operation ist, die \texttt{propertyChanged} Events feuert und die Menge an Properties den Zustand einer Komponente vollständig beschreiben.
 
 % mögliche stolpersteine
 
 Bevor konkrete visuelle Umsetzungen der History präsentiert werden, muss diskutiert werden, wie mit von Komponenten (anstatt vom Benutzer) ausgelösten Aktionen umgegangen wird. Beispielsweise wäre eine Uhrzeit-Komponente denkbar, die jede volle Minute ein \texttt{minutePassed} Event auslöst. Klassische Implementierungen einer History löschen den Redo-Stack, wenn nach einem Undo eine neue, nicht in der History vorhandene Aktion ausgeführt wird. Im Falle der Uhrzeit-Komponente wäre das äußerst ungünstig, da sie spätestens nach einer Minute unerwünschterweise den Redo-Stack löschen würde. Derartige Komponenten von der History auszuschließen ist jedoch keine Option, da sie alle Komponenten unterstützen muss -- das erwarten Endnutzer von einer History. Events nach einem Undo zu pausieren ist ebenfalls nicht möglich, da dann überhaupt keine neuen Aktionen mehr ausgeführt werden können. Deswegen sollten neue, durch Komponenten ausgelöste Aktionen, nach einem Undo weiter auf den Redo-Stack gelegt werden. Dieser kann gelöscht werden, sobald der Benutzer eine Aktion ausführt. Der im vorhergehenden Abschnitt vorgestellte Algorithmus kann eine Nutzeraktion aber nicht von einer Komponentenaktion unterscheiden.
 
-Um dem beizukommen, kann das Hilfesystem eigene Eventhandler auf aktionsrelevanten UI Elementen registrieren. Diese sind in Folge der Erweiterungen durch die Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) bekannt. Abbildung~\ref{figure:undo-ablauf} verdeutlicht die Funktionsweise: Zuerst wird eine Nachricht $e_1$ an den Event Broker gesendet (1). Dieser fügt sie einer Collection hinzu (2). Danach wird der Eventhandler des Hilfesystems aufgerufen (3). Das Hilfesystem weiß, zu welcher Komponente, Aktion und Operation der Eventhandler gehört (Abschnitt~\ref{section:konzeption:bedienung:api}) und kann in den Collections des Event Brokers nach entsprechenden Nachrichten suchen, diese markieren (4) und den Redo-Stack löschen, falls nötig.
+Um dem beizukommen, kann das Hilfesystem eigene Eventhandler auf aktionsrelevanten UI Elementen registrieren. Diese sind in Folge der Erweiterungen durch die Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) bekannt. Abbildung~\ref{figure:undo-ablauf} verdeutlicht die Funktionsweise: Zuerst wird eine Nachricht $e_1$ an den Event Broker gesendet (1). Dieser fügt sie einer Collection hinzu (2). Danach wird der Eventhandler des Hilfesystems aufgerufen (3). Das Hilfesystem weiß, zu welcher Komponente, Aktion und Operation der Eventhandler gehört (Abschnitt~\ref{section:konzeption:bedienung:api}) und kann in den Collections des Event Brokers nach entsprechenden Nachrichten suchen. Von diesen wird die aufrufende Methode gelöscht und sie werden in eine neue Collection eingefügt (4). Danach kann das Hilfesystem den Redo-Stack löschen, falls nötig.
 
 \begin{figure}[htbp]
    \centering
