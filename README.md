@@ -21,7 +21,7 @@ Implementierungsablauf:
 5. Hilfeservice: Hilfegenerierung
 6. Hilfeservice: Schnittstelle um Hilfepanels auszugeben
 7. Hilfesystem: Grundlegendes Frontend (Backbone + jQuery wär nice)
-8. Komponente: Titelleiste um Buttons erweitern. Aufruf HS?
+8. Komponente: Titelleiste um Buttons erweitern (GenericUIC.js) Aufruf HS?
 9. Hilfesystem: Frontend für Bedienung schreiben
 
 === bedienungshilfe fertig ===
@@ -42,12 +42,6 @@ Implementierungsablauf:
 
 * Problem für "eindeutige ID ist super" benennen?
 
-## Ergebnisse Paper Mockup
-
-* Überlegen: Auswahlhilfen für Bereiche --> Lieber in Ausblick.
-* Machen: No-Click-Area ist weg, wenn Arrow/Text ausgewählt
-* Überlegen: Bedienungshilfe animieren mit Maus --> Ausblick
-
 ## Ausblick
 
 * Bedienungshilfe mit Maus animieren
@@ -58,7 +52,6 @@ Implementierungsablauf:
 ## Kleinscheiss
 
 * Bessere Listen
-* Datenhochlader -> Data Provider
 
 ## Capability Markup
 
