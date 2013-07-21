@@ -40,6 +40,7 @@ Implementierungsablauf:
 
 ## TODO
 
+* Bessere Listen
 * Problem für "eindeutige ID ist super" benennen?
 
 ## Ausblick
@@ -48,10 +49,6 @@ Implementierungsablauf:
 * Auswahlhilfen für Annotationsbereiche
 * CSS von Komponente im CoRe auf relative Einheiten trimmen (schwierig weil man nicht weiß, was skaliert werden muss und was nicht)
 * Aktionen abhängig von Aktionen (Suche -> Anzeige) wär auch gut, würde mehr High-Level erklärung ermöglichen
-
-## Kleinscheiss
-
-* Bessere Listen
 
 ## Capability Markup
 

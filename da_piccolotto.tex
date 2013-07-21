@@ -674,9 +674,6 @@ Die naheliegendste Möglichkeit für visuelle User Assistance sind Bilder. Illus
 
 Animationen im Sinne von kurzen Videos mit abstrahiertem Inhalt können ebenfalls ein geeigneter Weg sein um Wissen zu vermitteln, sofern die erwähnten Designprinzipien eingehalten werden \cite{Mayer2002a}. Allerdings ist es möglich, dass Benutzer mit wenig Vorwissen weniger davon profitieren also solche mit viel Vorwissen \cite{Kalyuga2008}. Wenn Animationen eingesetzt werden, sollte den Benutzern Kontrolle über die Geschwindigkeit der Animation gegeben und wichtige Teile gekennzeichnet werden \cite{Wong2011}. Bei Web User Interfaces besteht die Möglichkeit konkrete Elemente der InfoVis für die Animation heranzuziehen. Das würde dem Prinzip der \enquote{Semantic Transparency} \cite{Kohlhase2009} entsprechen, wonach Benutzer möglichst direkt auf den für ihre Ziele relevanten UI-Elementen arbeiten sollen.
 
-Filme? Hier gibt es eine Doktorarbeit, aber die finde ich online nicht \url{http://search.proquest.com/docview/1286857518}. Ansonsten scheint sich damit niemand so richtig zu beschäftigen und eigentlich ist es mir auch wurscht weil Tutorialvideos einen immer so aus dem Arbeitskontext reissen. Ich könnte es mit einer Quelle ausschließen, wenn ich die wieder finden würde... Da steht sinngemäß drin, dass Hilfe gut ist, wenn man fix wieder in den Arbeitskontext zurückkommt.
-
-
 \subsubsection{Sensemaking}
 \label{section:standderforschung:grundlagen:user_assistance:sensemaking}
 
@@ -916,11 +913,19 @@ In diesem Abschnitt wurden verschiedene Ansätze zur User Assistance im Allgemei
 \section{Zusammenfassung}
 \label{section:standderforschung:zusammenfassung}
 
+In diesem Abschnitt wird eine Zusammenfassung des Kapitels gegeben, welches aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}), der Anforderungsanalyse (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}), den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen}) und den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) besteht.
+
 % szenario
+
+Im Szenario wurde eine mögliche Situation anschaulich gemacht und Problemstellungen aufgezeigt. Dazu gehört unter anderem, dass der Benutzer nicht weiß, wie er Komponenten bedienen kann oder wie sie miteinander kommunizieren. Eine weitere Hilfestellung ist, dass in den Daten enthaltene Konzepte erklärt werden sollen. 
 
 % anforderungsanalyse
 
+Auf Basis des Szenarios wurde eine Anforderungsanalyse durchgeführt. Funktionale Anforderungen beinhalten die zu leistenden Hilfestellungen, unter anderem wie erwähnt zur Bedienung, Kommunikation oder Verlinkung. Als nichtfunktionale Anforderungen wurden unter anderem die Korrektheit, Vollständigkeit, Wiederverwendbarkeit und Verständlichkeit der Hilfestellung selbst und die Unaufdringlichkeit der Präsentation identifiziert.
+
 % grundlagen: cruise, semantische daten, infovis, user assistance
+
+Danach wurde in den Grundlagen ein Überblick über die CRUISe Mashup Plattform gegeben, auf der EDYRA und VizBoard aufbauen. Es wurde aufgeführt, dass Properties den Zustand einer Komponente vollständig beschreiben und Komponenten über Links zwischen Events und Operationen miteinander Nachrichten austauschen. Darauf folge eine kurze Einführung in semantische Daten. Dort wurden die wichtigsten Konzepte (Klassen, Instanzen und Properties) erläutert sowie gängige Beschreibungssprachen (RDF, RDFS, OWL) aufgezeigt. Im Abschnitt über Informationsvisualisierungen wurde der Begriff als \enquote{the use of computer-supported, interactive, visual representations of abstract data to amplify cognition} definiert. Mit Hilfe einer Klassifikation anhand der dargestellten Daten, Visualisierungs- und Interaktionstechnik einer InfoVis konnte ein Überblick über selbige gegeben werden. Zuletzt wurden in diesem Abschnitt die Begriffe \enquote{User Assistance} und \enquote{Sensemaking} erklärt. User Assistance ist eine Hilfestellung für den Benutzer, der sein Ziel aber auch ohne sie erfüllen kann. Sensemaking meint den menschlichen Verständnisprozess. Es wurde beispielsweise festgestellt, dass das Medium selbst keinen Einfluss auf die Lernfähigkeit einer Person hat und möglichst gleichzeitig multimodal erklärt werden sollte. In der Domäne InfoVis müssen besonders das Verhalten und die Struktur einer Visualisierung erklärt werden, um das mentale Modell des Benutzers anzusprechen.
 
 % verwandte arbeiten: mashups, visualisierungstools, user assistance
 
@@ -932,6 +937,8 @@ In diesem Abschnitt wurden verschiedene Ansätze zur User Assistance im Allgemei
 % kommentare, weil entweder haben die leute die komponenten selbst geschrieben oder sie wurden nicht an den daten selbst (sondern der visualisierung) gespeichert und konnten nicht wiederverwendet werden
 % history, weil komponenten black boxes, is bei choosel zb nicht so gewesen.
 % meta-hilfe... keine ahnung. zwar wird tbr für arme eingesetzt, aber ob das jetzt so wissenschaftlichen mehrwert bietet?
+
+Nach den Grundlagen folgte ein Überblick über verwandte Arbeiten. Dieser wurde in webbasierte Mashup Plattformen, Visualisierungstools und Konzepte zur User Assistance eingeteilt. Nach der Betrachtung von Mashups konnte am Beispiel von DashMash festgestellt werden, dass kaum Hilfestellungen nötig sind, wenn der Benutzer ein passendes mentales Modell der Anwendung hat. Das lässt darauf schließen, dass Erklärungen in VizBoard besonders Rücksicht auf jenes Modell nehmen sollten. Die Visualisierungstools setzten zur Unterstützung des Benutzers auf Undo/Redo, wobei aber im Unterschied zu VizBoard die Anwendung von denselben Entwicklern geschrieben wurde wie die Visualisierungen und somit mehr Kontrolle darüber möglich war. Ein Teilabschnitt über Visualisierungstools befasste sich mit Konzepten, welche das Sensemaking von Daten verbessern sollen. Das populärste davon war Benutzern zu erlauben, Kommentare und Annotationen zu erstellen. Diese wurden aber entweder nicht an den Daten selbst gespeichert und waren kaum wiederverwendbar (sense.us \cite{Heer2007}, ManyEyes \cite{Viegas2007}) oder die Entwickler des Kommentarsystems schrieben auch die Visualisierungen (Business Intelligence Dashboard \cite{Elias2012}). Dann konnten sie Annahmen über die vorhandenen Visualisierungen treffen und die Darstellung und Interaktion der Kommentare entsprechend anpassen. Im Abschnitt über User Assistance waren Undo/Redo, visuelle Konsistenz und das mentale Modell des Benutzers zu verwenden, wiederkehrende Vorschläge. Es wurde außerdem gezeigt, dass Hilfestellungen mit Hilfe von Bildern gegeben werden können, beispielsweise in Form von Screenshots oder Comics. Letztere konnten in unterschiedlichen Kontexten (Chats \cite{Kurlander1996}, Storytelling \cite{Chan2009,Wen2012} usw.) bereits automatisch generiert werden, weswegen das bei VizBoard kein Hindernis sein sollte. Beachtenswert ist, dass kaum eine der vorgestellten Arbeiten berücksichtigte, dass in den Daten enthaltene Konzepte (wie z.\,B. BIP, Yen usw.) dem Benutzer unbekannt sein könnten.
 
 % ###################################################
 \chapter{Konzeption}
