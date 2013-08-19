@@ -2020,7 +2020,7 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item Nähere Beschreibung einer Aktion durch Freitext oder Referenz auf Datenvariable (Bedienung)
 	\item Ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
 	\item Optionale Zusatzinformationen zur VISO Operation, beispielsweise welche Taste gedrückt werden muss (Bedienung)
-	\item Beispieldaten für Parameter, falls von Operation benötigt (Kommunikation)
+	\item Beispieldaten für Parameter, falls von VISO Operation benötigt (Kommunikation). Das ist beispielsweise bei einer Drag Operation nötig.
 	\item Testdatensatz: Entweder ID eines DaRe Datensatzes mit SPARQL Query für Mappings oder Informationen über einen hochgeladenen Datensatz (Bedienung)
 	\item Ob die Komponente Datenverarbeitung durchführt (Kommentare)
 	\item Ob die Komponente externe Daten lädt (Kommentare)
@@ -2091,6 +2091,32 @@ Für die History müssen folgende Attribute enthalten sein:
 
 \chapter{Implementierung}
 \label{chapter:implementierung}
+
+\section{Kommentare}
+
+\subsection{Backend}
+
+\begin{itemize}
+	\item Dreimal im Prinzip dasselbe schreiben nervt, wär irgendwie gut gewesen einmal ein Metamodell erstellen zu können, aus dem dann automatisch ein RDFS, ein Java Klassendiagramm und ein JSON Schema generiert würde, inklusive Transformationen zwischen Instanzen der Modelle (Objekten).
+	\item Architekturentscheidung: Kommentare werden in eigenem Datensatz gehalten, weil aus den eigentlichen Datensätzen laden die Komponenten. Zukünftige Verbesserung: Für jeden DaRe Datensatz einen eigenen Kommentardatensatz zwecks Lastverteilung.
+\end{itemize}
+
+\section{Bedienung und Kommunikation}
+
+\subsection{Backend}
+
+\begin{itemize}
+	\item HTML Datei, die Phantom ausführt, wird von CoRe generiert. Warum? includeJS ist asynchron und eine falsche Reihenfolge der Skripts macht sie kaputt. Abspeichern und mit injectJS einbinden geht auch nicht, weil Phantom immer die Same-Origin Policy beachtet.
+	\item AssistanceService holt sich die Bilder vom AssistanceGenerator, weil letzterer sonst wissen müsste, wie die Ordnerstruktur vom Service aussieht. Information Hiding.
+\end{itemize}
+
+\subsection{Frontend}
+
+\begin{itemize}
+	\item Warum jQuery + D3 + Backbone + MarionetteJS? 1. Ich hab schon mal was mit Backbone gemacht. 2. ExtJS arbeitet auf höherer Abstraktionsebene, man denkt dort in Panels, Listen, Fenstern und nicht in DIVs. Ich muss aber möglichst DOM-nah arbeiten, weil ich keine Annahmen über die Komponenten treffen kann. 3. Wegen 2. ist jQuery ExtJS vorzuziehen, DOM Manipulationen gehen hier schneller. 4. Meine UI ist jetzt nicht sehr kompliziert; runde Ecken und dunkler Hintergrund. Das kann man einfach "from scratch" bauen. Und weil ich nicht die Styles von Ext mit !importants überschreiben will, nehm ich gleich ein andres Framework. 5. Marionette nimmt ein bisschen Boilerplate Code weg und macht verschachtelte Views einfacher. 6. jQuery und D3 sind nötig, weil jQuery nur bedingt mit SVG umgehen kann (addClass(), width()...) und D3 sozusagen Markup-agnostisch ist. jQuery ist aber besser für Event Binding, weil D3 ja eigentlich Daten in Markup verwandelt. Mit ein bisschen Liebe (lies: jQuery Plugins) kann man später aber D3 auch sicher entfernen, denke ich.
+	\item Algorithmus fürs Highlighting der relevanten Elemente einer Aktion: Dunkle Folie drüber (div.vizboard-ground), VizRoot klonen, Elemente aus Klon löschen, Elemente aus Original durchgehen (Selektor), diese klonen und in VizRoot Klon einfügen. So ist man unabhängig von der eigentlichen DOM Struktur. Wenn der Selektor jetzt hunderte Elemente trifft, könnte das aber teuer werden, zugegeben. Dann hat man aber immer noch die Möglichkeit mit DocumentFragment zu arbeiten, wenn D3 bzw. jQuery das nicht eh intern benutzen.
+	
+\end{itemize}
 
 %#####################################################
 \printbibliography[title=Literaturverzeichnis]

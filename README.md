@@ -2,6 +2,11 @@
 
 My diploma thesis at Dresden University of Technology.
 
+# TODO
+
+* Layout überlegen für Panels, wenn Anleitungen unterschiedlich lang sind: Mal 3 Panels, mal fünf?
+* Überlegen, was alles so für die Positionierung nötig ist: HTML margins, paddings, positions, SVG x's, y's, widths, transforms --> das alles muss nämlich beim highlight berücksichtigt werden, zumindest konzeptionell
+
 ## Implementierung
 
 **Zeit**: 14 Wochen ab 22.7.
@@ -39,9 +44,20 @@ Implementierungsablauf:
 
 
 ## TODO
+### Integration
+* GenericUIC.js erweitern für Standardtoolbar?
+* Wie Aufruf, wenn Hilfesystem in Backbone geschrieben?
 
+### Kommentare
+* CommentBackend: Was ist mit Arrays und Objekten beim Memento? Hab ich in meinem Key-Value Schema ursprünglich nicht vorgesehen. Variante 1: Values können wieder Key-Values sein (wie JSON). Variante 2: Arrays und Objekte werden als JSON String serialisiert und beim laden ge-eval()-t. Problem bei beiden ist, dass Infos verloren gehen, weil Regexes, functions und what not nicht serialisiert werden.
+* CommentBackend: hasCommentId einfügen um Comments einzeln rauszuholen. Solange ich das nicht brauch: Nicht machen.
+* CommentBackend: double statt float -.-
+### Konzept
+* Konzept: Wie gehe ich damit um, dass die Hilfe für Komponenten potenziell unterschiedliche Labels hat als was der Benutzer gerade sieht? Variante 1: Labels haben eigene CSS Klasse, die ich in der Hilfe auf "visibility:none" setze. Variante 2: Hilfe wird erst generiert, wenn der Benutzer Komponenten und Datensatz ausgewählt hat.
+* Was wenn Komponenten selbst komposit? Eigentlich reichen mehrere visualization roots, oder?
+* Wie ActivityActions Ontologie ansprechen? In der MCDL.owl ist die nicht importiert.
+### Arbeit
 * Bessere Listen
-* Problem für "eindeutige ID ist super" benennen?
 
 ## Ausblick
 
@@ -49,29 +65,3 @@ Implementierungsablauf:
 * Auswahlhilfen für Annotationsbereiche
 * CSS von Komponente im CoRe auf relative Einheiten trimmen (schwierig weil man nicht weiß, was skaliert werden muss und was nicht)
 * Aktionen abhängig von Aktionen (Suche -> Anzeige) wär auch gut, würde mehr High-Level erklärung ermöglichen
-
-## Capability Markup
-
-Jetzt:
-
-    <capability id="search" activity="ua:search" entity="trvl:location"/>
-    <event dependsOn="search"/>
-
-Dann:
-
-    <!-- aktion -->
-    <capability id="search" activity="ua:search" entity="trvl:location" operations="searchOps" wait="5s" />
-
-    <!-- äquivalente operationen -->
-    <operations id="searchOps" testData="new york" relatedConcept="dbpedia:Search">
-	    <operation id="clickSearch" css="button.search" viso="a:click" />
-	    <operation id="typeSearch" css="button.search" viso="a:type" which="space" />
-	    <sequentialOperation id="menuSearch">
-		<operation id="clickMenu" css="div.menu" viso="a:click" />
-		<operation id="clickMenuSearch" css="div.menu > div.search" viso="a:click" />
-	</sequentialOperation>
-	<parallelOperation id="blublu" css=".vis">
-		<operation id="pressStrg" viso="a:type" which="strg" />
-		<operation id="pressA" viso="a:type" which="a"
-	</parallelOperation>
-    </operations>
