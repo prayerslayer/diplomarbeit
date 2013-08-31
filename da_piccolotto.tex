@@ -2092,32 +2092,83 @@ Für die History müssen folgende Attribute enthalten sein:
 \chapter{Implementierung}
 \label{chapter:implementierung}
 
-\section{Kommentare}
+In den folgenden Abschnitten wird die prototypische Implementierung der Konzepte Bedienung (Abschnitt~\ref{section:konzeption:bedienung}), Kommunikation (Abschnitt~\ref{section:konzeption:kommunikation}) und Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) beschrieben. Sie sind aufgeilt in Frontend und Backend.
 
-\subsection{Backend}
+\section{Frontend}
+ % frontend ist ja für alle mehr oder weniger gleich, zumindest die grundlage. deswegen zuerst.
+
+% welche libraries?
+Das Frontend der implementierten Konzepte wurde mit Backbone.js\footnote{\url{http://backbonejs.org/}}, einem populären Javascript MV* Framework, und dessen Erweiterung Marionette.js\footnote{\url{http://marionettejs.com/}} geschrieben. Des weiteren kamen die Bibliotheken jQuery\footnote{\url{http://jquery.com/}} (wird von Backbone verwendet), jQuery UI\footnote{\url{http://jqueryui.com/}} und D3 \cite{Bostock2011} zum Einsatz.
+% warum diese?
+
+% 1 - extjs ist zu abstrakt. ich muss ja haupsächlich dom knoten suchen, kopieren, klasse setzen etc.
+Zunächst muss begründet werden, warum ein anderes Javascript Framework als das in CRUISe bereits eingesetzte ExtJS\footnote{\url{http://www.sencha.com/products/extjs}} gewählt wurde. Hier müssen zwei Einsatzzwecke unterschieden werden: Als MVC Framework, welches verschiedene Views und Models definiert und strukturiert, sowie als Bibliothek für generische DOM Operationen. Für letzteres wird jQuery eingesetzt, da ExtJS einen höheren Abstraktionsgrad vom DOM aufweist. In ExtJS denkt der Entwickler nicht in \texttt{div}s oder \texttt{span}s, sondern in generischen Komponenten wie Listen, Panels und Dialogen. Als MVC Framework wird Backbone unter anderem deswegen eingesetzt, weil in der Einführung des Konzepts (Abschnitt~\ref{section:konzeption:einfuehrung}) ein visueller Unterschied zwischen Hilfesystem und Komponenten gefordert wurde. CRUISe Komponenten verwenden bereits die generischen ExtJS Styles, weswegen das Frontend eigene Styles für das recht komplexe, von ExtJS generierte Markup definieren müsste. Dies erschien zu viel Aufwand zu sein. Von der Einheitlichkeit der Codebase abgesehen gab es auch keinen Grund, ExtJS zu verwenden, weil das User Interface des Frontends recht einfach aufgebaut ist.
+
+% wenn schon kein extjs, warum gerade backbone und nicht knockback, spine oder eins von den andern tausend?
+Warum ausgerechnet Backbone.js? Einerseits hab ich schon mal was damit gemacht, zweitens ist es sehr populär (siehe Backbone Website, wer es alles verwendet) und hat gute Dokumentation. Wegen Popularität findet man auch viel auf StackOverflow, was man auch nicht unterschätzen darf.
+
+% marionettejs macht backbone code lesbarer und einfacher zu warten
+Marionette.js erweitert Backbone um verschiedene Konzepte (z.\,B. Regionen und unterschiedliche Views) und automatisiert oft vorkommende Anweisungen (wie zum Beispiel einen View rendern und in den DOM einfügen). Der Code ist dadurch lesbarer und einfacher zu warten.
+
+% und was hat d3 hier zu suchen?
+D3 wird hauptsächlich beim Hinzufügen von Annotationen eingesetzt, wo ein SVG Element über die Komponente gelegt wird, in welchem der Benutzer seine Annotationen zeichnen kann. Außerdem kann D3 im Gegensatz zu jQuery sowohl mit HTML- als auch mit SVG Elementen umgehen. In jQuery funktionieren einige Methoden, die im Frontend gebraucht werden (z.\,B. \texttt{.width()}, \texttt{.addClass()} oder jQuery UIs \texttt{.position()}), nicht für DOM Elemente mit SVG Namespace. Zwar existiert SVG Plugin\footnote{\url{https://github.com/kbwood/svg}} für jQuery, dieses weist aber eine unnötig komplizierte API auf und unterstützt nur jQuery 1.7\footnote{Aktuelle Version zum Zeitpunkt der Entwicklung: 2.0.3.}. Deswegen wird für die Größenbestimmung oder Positionierung von SVG Elementen D3 verwendet, da es ohnehin schon eingesetzt wird.
+
+\subsection{Kommentare}
+
+Hier ist glaub ich nur der AddAnnotationView interessant, der Rest ist recht straightforward.
+
+Im AddAnnotationView sind leider alle vier Werkzeuge zusammen anstatt 1 View pro Werkzeug. Grund: Alle müssen sichtbar sein (ausblenden einzelner Views nicht möglich), aufeinander abgestimmt (wie steht fest, welcher aktiv ist?) und funktionieren (kann zB nicht einzelne Views auf Gruppen arbeiten lassen, weil Gruppen keine pointer-events bekommen, wenn nix drin is).
+
+\subsection{Bedienung und Kommunikation}
 
 \begin{itemize}
-	\item Dreimal im Prinzip dasselbe schreiben nervt, wär irgendwie gut gewesen einmal ein Metamodell erstellen zu können, aus dem dann automatisch ein RDFS, ein Java Klassendiagramm und ein JSON Schema generiert würde, inklusive Transformationen zwischen Instanzen der Modelle (Objekten).
-	\item Architekturentscheidung: Kommentare werden in eigenem Datensatz gehalten, weil aus den eigentlichen Datensätzen laden die Komponenten. Zukünftige Verbesserung: Für jeden DaRe Datensatz einen eigenen Kommentardatensatz zwecks Lastverteilung.
+	\item Algorithmus fürs Highlighting der relevanten Elemente einer Aktion: Dunkle Folie drüber (div.vizboard-ground), VizRoot klonen, Elemente aus Klon löschen, Elemente aus Original durchgehen (Selektor), diese klonen und in VizRoot Klon einfügen. So ist man unabhängig von der eigentlichen DOM Struktur. Wenn der Selektor jetzt hunderte Elemente trifft, könnte das aber teuer werden, zugegeben. Dann hat man aber immer noch die Möglichkeit mit DocumentFragment zu arbeiten, wenn D3 bzw. jQuery das nicht eh intern benutzen.
+	\item data-vizboard-copy Attribut um Selektor auf originale Komponente fahren und trotzdem die Kopien in vizboard-rootcopy finden zu können. Das ist wichtig für Selektoren wie nth-child-of(odd) oder "ancestor child". Ich kopier ja nur die Elemente, die von den Selektoren getroffen werden, nicht alles ringsrum.
 \end{itemize}
 
-\section{Bedienung und Kommunikation}
+\section{Backend}
 
-\subsection{Backend}
+\subsection{Kommentare}
+
+Troloyolo.
+
+\subsubsection{Repository}
+
+In der Konzeption der Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) wurde das Data Repository als geeigneter Speicherort identifiziert. Dieses enthält durch Metainformationen erweiterte semantische Datensätze, die im Frontend von Komponenten geladen und visualisiert werden können. Aus diesem Grund wurde für Kommentare ein eigener Datensatz angelegt, sodass sie von \enquote{regulären} Daten getrennt sind.
+
+Zwischen Front- und Backend wird ein Kommentar auf verschiedene Weise serialisiert (Abbildung~\ref{figure:kommentare-backend}). Das webbasierte Frontend kann JSON am besten verarbeiten, das DaRe Backend ist in Java geschrieben und arbeitet mit einem Jena TDB Triplestore, wo Kommentare letztendlich abgelegt werden. Zwar könnte das Backend direkt zwischen JSON und RDFS umsetzen, so ist es aber möglich bestehende Java-Bibliotheken für verschiedene Zwecke (wie z.\,B. Textklassifikation) einzusetzen.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/implementierung-kommentare-backend.png}
+   \caption{Verschiedene Repräsentationen eines Kommentars}
+   \label{figure:kommentare-backend}
+\end{figure}
+
+\subsubsection{Architektur}
+
+Weiß nicht ob ich das behandeln soll. Hier kann ich maximal ein Klassendiagramm hinknallen und so komplex ist ja alles dann nicht. Ein CommentBackend für die Schnittstelle zu Jena (speichern/laden), ein CommentRequestHandler fürs HTTP Request Handling (GET/POST/PUT) und dazwischen eigentlich nur der CommentConverter, der zwischen Jena, Java und JSON konvertiert.
+
+\subsubsection{REST API}
+
+Um Kommentare dem Frontend zur Verfügung zu stellen bot sich eine REST API an, da kein Zustand gespeichert werden muss. Es wurden vier Methoden implementiert:
+
+\begin{itemize}
+	\item \texttt{GET dare/comment} gibt alle Kommentare aus. Sind \texttt{property} (für visualisierte Properties) oder \texttt{component} (für Komponenten) Parameter im Querystring vorhanden, wird nach diesen gefiltert und Kommentare gesucht, die mindestens ein Kriterium erfüllen.
+	\item \texttt{GET dare/comment/\{id\}} gibt Kommentar mit ID \texttt{id} aus.
+	\item \texttt{POST dare/comment} nimmt ein Kommentar in \texttt{application/json} entgegen und speichert es ab.
+	\item \texttt{PUT dare/comment/\{id\}} nimmt ebenfalls ein Kommentar in JSON entgegen und aktualisiert die Daten des Kommentars mit ID \texttt{id}. Wenn etwas verändert wurde, antwortet der Server mit Status \texttt{200 OK}, ansonsten \texttt{304 Not Modified}. So ist sie wie von RFC 2616 \cite{W3C:rfc2616} gefordert idempotent: Kommen mehrere Male gleiche Daten an, verändert sich der Zustand des Kommentars im Backend nicht.
+\end{itemize}
+
+\subsection{Bedienung und Kommunikation}
+
+TODO Bild
 
 \begin{itemize}
 	\item HTML Datei, die Phantom ausführt, wird von CoRe generiert. Warum? includeJS ist asynchron und eine falsche Reihenfolge der Skripts macht sie kaputt. Abspeichern und mit injectJS einbinden geht auch nicht, weil Phantom immer die Same-Origin Policy beachtet.
 	\item AssistanceService holt sich die Bilder vom AssistanceGenerator, weil letzterer sonst wissen müsste, wie die Ordnerstruktur vom Service aussieht. Information Hiding.
 \end{itemize}
 
-\subsection{Frontend}
-
-\begin{itemize}
-	\item Warum jQuery + D3 + Backbone + MarionetteJS? 1. Ich hab schon mal was mit Backbone gemacht. 2. ExtJS arbeitet auf höherer Abstraktionsebene, man denkt dort in Panels, Listen, Fenstern und nicht in DIVs. Ich muss aber möglichst DOM-nah arbeiten, weil ich keine Annahmen über die Komponenten treffen kann. 3. Wegen 2. ist jQuery ExtJS vorzuziehen, DOM Manipulationen gehen hier schneller. 4. Meine UI ist jetzt nicht sehr kompliziert; runde Ecken und dunkler Hintergrund. Das kann man einfach "from scratch" bauen. Und weil ich nicht die Styles von Ext mit !importants überschreiben will, nehm ich gleich ein andres Framework. 5. Marionette nimmt ein bisschen Boilerplate Code weg und macht verschachtelte Views einfacher. 6. jQuery und D3 sind nötig, weil jQuery nur bedingt mit SVG umgehen kann (addClass(), width()...) und D3 sozusagen Markup-agnostisch ist. jQuery ist aber besser für Event Binding, weil D3 ja eigentlich Daten in Markup verwandelt. Mit ein bisschen Liebe (lies: jQuery Plugins) kann man später aber D3 auch sicher entfernen, denke ich.
-	\item Algorithmus fürs Highlighting der relevanten Elemente einer Aktion: Dunkle Folie drüber (div.vizboard-ground), VizRoot klonen, Elemente aus Klon löschen, Elemente aus Original durchgehen (Selektor), diese klonen und in VizRoot Klon einfügen. So ist man unabhängig von der eigentlichen DOM Struktur. Wenn der Selektor jetzt hunderte Elemente trifft, könnte das aber teuer werden, zugegeben. Dann hat man aber immer noch die Möglichkeit mit DocumentFragment zu arbeiten, wenn D3 bzw. jQuery das nicht eh intern benutzen.
-	\item data-vizboard-copy Attribut um Selektor auf originale Komponente fahren und trotzdem die Kopien in vizboard-rootcopy finden zu können. Das ist wichtig für Selektoren wie nth-child-of(odd) oder "ancestor child". Ich kopier ja nur die Elemente, die von den Selektoren getroffen werden, nicht alles ringsrum.
-	\item Im AddAnnotationView sind leider alle vier Werkzeuge zusammen anstatt 1 View pro Werkzeug. Grund: Alle müssen sichtbar sein (ausblenden einzelner Views nicht möglich), aufeinander abgestimmt (wie steht fest, welcher aktiv ist?) und funktionieren (kann zB nicht einzelne Views auf Gruppen arbeiten lassen, weil Gruppen keine pointer-events bekommen, wenn nix drin is).
-\end{itemize}
 
 %#####################################################
 \printbibliography[title=Literaturverzeichnis]
