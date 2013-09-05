@@ -2108,7 +2108,7 @@ Zunächst muss begründet werden, warum ein anderes Javascript Framework als das
 Warum ausgerechnet Backbone.js? Einerseits hab ich schon mal was damit gemacht, zweitens ist es sehr populär (siehe Backbone Website, wer es alles verwendet) und hat gute Dokumentation. Wegen Popularität findet man auch viel auf StackOverflow, was man auch nicht unterschätzen darf.
 
 % marionettejs macht backbone code lesbarer und einfacher zu warten
-Marionette.js erweitert Backbone um verschiedene Konzepte (z.\,B. Regionen und unterschiedliche Views) und automatisiert oft vorkommende Anweisungen (wie zum Beispiel einen View rendern und in den DOM einfügen). Der Code ist dadurch lesbarer und einfacher zu warten.
+Marionette.js erweitert Backbone um verschiedene Konzepte (z.\,B. Regionen und unterschiedliche Views für Items, Collections und Bäume) und automatisiert oft vorkommende Anweisungen (wie zum Beispiel einen View rendern und in den DOM einfügen). Der Code ist dadurch lesbarer und einfacher zu warten.
 
 % und was hat d3 hier zu suchen?
 D3 wird hauptsächlich beim Hinzufügen von Annotationen eingesetzt, wo ein SVG Element über die Komponente gelegt wird, in welchem der Benutzer seine Annotationen zeichnen kann. Außerdem kann D3 im Gegensatz zu jQuery sowohl mit HTML- als auch mit SVG Elementen umgehen. In jQuery funktionieren einige Methoden, die im Frontend gebraucht werden (z.\,B. \texttt{.width()}, \texttt{.addClass()} oder jQuery UIs \texttt{.position()}), nicht für DOM Elemente mit SVG Namespace. Zwar existiert SVG Plugin\footnote{\url{https://github.com/kbwood/svg}} für jQuery, dieses weist aber eine unnötig komplizierte API auf und unterstützt nur jQuery 1.7\footnote{Aktuelle Version zum Zeitpunkt der Entwicklung: 2.0.3.}. Deswegen wird für die Größenbestimmung oder Positionierung von SVG Elementen D3 verwendet, da es ohnehin schon eingesetzt wird.
@@ -2136,7 +2136,7 @@ Troloyolo.
 
 In der Konzeption der Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) wurde das Data Repository als geeigneter Speicherort identifiziert. Dieses enthält durch Metainformationen erweiterte semantische Datensätze, die im Frontend von Komponenten geladen und visualisiert werden können. Aus diesem Grund wurde für Kommentare ein eigener Datensatz angelegt, sodass sie von \enquote{regulären} Daten getrennt sind.
 
-Zwischen Front- und Backend wird ein Kommentar auf verschiedene Weise serialisiert (Abbildung~\ref{figure:kommentare-backend}). Das webbasierte Frontend kann JSON am besten verarbeiten, das DaRe Backend ist in Java geschrieben und arbeitet mit einem Jena TDB Triplestore, wo Kommentare letztendlich abgelegt werden. Zwar könnte das Backend direkt zwischen JSON und RDFS umsetzen, so ist es aber möglich bestehende Java-Bibliotheken für verschiedene Zwecke (wie z.\,B. Textklassifikation) einzusetzen.
+Zwischen Front- und Backend wird ein Kommentar auf verschiedene Weise serialisiert (Abbildung~\ref{figure:kommentare-backend}). Das webbasierte Frontend kann JSON am besten verarbeiten, das DaRe Backend ist in Java geschrieben und arbeitet mit einem Jena TDB Triplestore, wo Kommentare letztendlich abgelegt werden. Zwar könnte das Backend direkt zwischen JSON und RDFS umsetzen, so ist es aber möglich, in Zukunft bestehende Java-Bibliotheken für verschiedene Zwecke (wie z.\,B. Textklassifikation) einzusetzen.
 
 \begin{figure}[htbp]
    \centering
@@ -2147,28 +2147,55 @@ Zwischen Front- und Backend wird ein Kommentar auf verschiedene Weise serialisie
 
 \subsubsection{Architektur}
 
-Weiß nicht ob ich das behandeln soll. Hier kann ich maximal ein Klassendiagramm hinknallen und so komplex ist ja alles dann nicht. Ein CommentBackend für die Schnittstelle zu Jena (speichern/laden), ein CommentRequestHandler fürs HTTP Request Handling (GET/POST/PUT) und dazwischen eigentlich nur der CommentConverter, der zwischen Jena, Java und JSON konvertiert.
+Die Architektur des Backends für Kommentare orientiert sich an den verschiedenen notwendigen Serialisierungen eines Kommentars (siehe vorhergehender Abschnitt). Abbildung~\ref{figure:kommentare-backend-architektur} zeigt die Architektur am Beispiel eines \texttt{GET} Requests des Frontends. Braun eingefärbte Kästchen stellen Java Klassen im Backend dar.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/implementierung-kommentare-backend-architektur.png}
+   \caption{Architektur des Kommentar Backends}
+   \label{figure:kommentare-backend-architektur}
+\end{figure}
+
+Folgende Schritte werden durchlaufen:
+
+\begin{enumerate}
+	\item Das Frontend sendet einen \texttt{GET} Request an das Backend, welcher vom Comment Request Handler behandelt wird.
+	\item Der Request Handler ruft die Methode des Comment Backends auf, welche Kommentare im Datensatz sucht.
+	\item Das Comment Backend startet eine Jena TDB Transaktion.
+	\item Mit Hilfe der Jena API erstellt das Comment Backend eine semantische Repräsentation der Kommentare.
+	\item Das Comment Backend übergibt die RDFS Kommentare dem Comment Converter.
+	\item Der Comment Converter konvertiert diese in eine Liste von Java Objekten.
+	\item Das Comment Backend gibt diese Liste zurück an den Request Handler.
+	\item Dieser ruft noch einmal den Converter auf, um eine JSON Repräsentation der Kommentare zu bekommen.
+	\item Der Converter konvertiert Java Objekte in einen JSON String.
+	\item Der Request Handler sendet den JSON String an das Frontend.
+\end{enumerate}
 
 \subsubsection{REST API}
 
 Um Kommentare dem Frontend zur Verfügung zu stellen bot sich eine REST API an, da kein Zustand gespeichert werden muss. Es wurden vier Methoden implementiert:
 
 \begin{itemize}
-	\item \texttt{GET dare/comment} gibt alle Kommentare aus. Sind \texttt{property} (für visualisierte Properties) oder \texttt{component} (für Komponenten) Parameter im Querystring vorhanden, wird nach diesen gefiltert und Kommentare gesucht, die mindestens ein Kriterium erfüllen.
+	\item \texttt{GET dare/comment} gibt alle Kommentare aus. Sind \texttt{property} (für visualisierte Properties) oder \texttt{component} (für Komponenten) Query Parameter vorhanden, wird nach diesen gefiltert und Kommentare gesucht, die mindestens ein Kriterium erfüllen.
 	\item \texttt{GET dare/comment/\{id\}} gibt Kommentar mit ID \texttt{id} aus.
-	\item \texttt{POST dare/comment} nimmt ein Kommentar in \texttt{application/json} entgegen und speichert es ab.
-	\item \texttt{PUT dare/comment/\{id\}} nimmt ebenfalls ein Kommentar in JSON entgegen und aktualisiert die Daten des Kommentars mit ID \texttt{id}. Wenn etwas verändert wurde, antwortet der Server mit Status \texttt{200 OK}, ansonsten \texttt{304 Not Modified}. So ist sie wie von RFC 2616 \cite{W3C:rfc2616} gefordert idempotent: Kommen mehrere Male gleiche Daten an, verändert sich der Zustand des Kommentars im Backend nicht.
+	\item \texttt{POST dare/comment} nimmt ein Kommentar in \texttt{application/json} entgegen, speichert es ab und antwortet im Erfolgsfall mit Statuscode \texttt{201 Created}.
+	\item \texttt{PUT dare/comment/vote/\{id\}} nimmt ein JSON Objekt entgegen und setzt die Anzahl an angegebenen Stimmen. Ist kein \texttt{Authorization} Header vorhanden, antwortet die Methode mit \texttt{401 Unauthorized}. Hat der Benutzer schon einmal diese Anzahl an Stimmen abgegeben, ist die Antwort \texttt{403 Forbidden} und ansonsten \texttt{200 OK}. Auf diese Weise ist \texttt{PUT} wie von RFC 2616 \cite{W3C:rfc2616} gefordert idempotent.
 \end{itemize}
+
+Die beiden \texttt{GET} Methoden nehmen optional einen HTTP \texttt{Authorization} Header entgegen, der die Benutzer ID (ohne Passwort) angibt. Dann enthalten zurückgelieferte Kommentare Informationen, ob dieser Benutzer schon gevotet hat und wenn ja, wie.
+
+Bei der Methode \texttt{PUT dare/comment/vote} überprüft das DaRe nur die Existenz eines \texttt{Authorization} Headers und erstellt einen neuen Benutzer im Backend, wenn dieser unbekannt ist. Die Methode \texttt{POST} kann ohne Credentials aufgerufen werden. In der Praxis müsste der Header Benutzer ID und Passwort enthalten, sodass das DaRe diese Daten überprüfen kann, indem es eine entsprechende Anfrage an die REST API des User Services stellt. Auf diese Weise würde verhindert, dass beliebige Personen Kommentare erzeugen oder bewerten können. Da die Benutzerinformationen im \texttt{Authorization} Header mit Base64 \cite{Josefsson2006} kodiert und nicht verschlüsselt o.\,ä. werden, sollte die Kommunikation zwischen DaRe und Frontend außerdem mit Transport Layer Security gesichert sein.
 
 \subsection{Bedienung und Kommunikation}
 
-TODO Bild
+Abbildung~\ref{figure:bedienung-backend} zeigt, wie die Bilder für das Hilfesystem im Backend generiert werden. Sobald der Entwickler eine neue Komponente samt Beschreibung in SMCDL Format hochlädt, validiert das CoRe diese und transformiert sie in eine Ontologie (MCDO). Danach startet das CoRe den Generierungsservice (Assistance Generator). Dieser erstellt eine JSON Datei mit den notwendigen Informationen aus der SMCDL, beispielsweise welche Aktionen (Capabilities) wie ausgeführt werden, und eine HTML Datei, die alle notwendigen Resourcen, wie etwa Stylesheets und Skripte, enthält. Die JSON und HTML Datei wird an PhantomJS übergeben, welches die Informationen einliest und Screenshots der Komponente erstellt. Testdaten werden von einer in der SMCDL angegebenen URL geladen (siehe Abschnitt~\ref{section:konzeption:bedienung:api}). Die bereits bestehende SOAP API des CoRe wurde so erweitert, dass das Hilfesystem auf die URLs der Bilder zugreifen kann.
 
-\begin{itemize}
-	\item HTML Datei, die Phantom ausführt, wird von CoRe generiert. Warum? includeJS ist asynchron und eine falsche Reihenfolge der Skripts macht sie kaputt. Abspeichern und mit injectJS einbinden geht auch nicht, weil Phantom immer die Same-Origin Policy beachtet.
-	\item AssistanceService holt sich die Bilder vom AssistanceGenerator, weil letzterer sonst wissen müsste, wie die Ordnerstruktur vom Service aussieht. Information Hiding.
-\end{itemize}
-
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/implementierung-bedienung-backend.png}
+   \caption{Generierung der Bilder für das Hilfesystem}
+   \label{figure:bedienung-backend}
+\end{figure}
 
 %#####################################################
 \printbibliography[title=Literaturverzeichnis]
