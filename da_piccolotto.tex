@@ -2095,6 +2095,7 @@ Für die History müssen folgende Attribute enthalten sein:
 In den folgenden Abschnitten wird die prototypische Implementierung der Konzepte Bedienung (Abschnitt~\ref{section:konzeption:bedienung}), Kommunikation (Abschnitt~\ref{section:konzeption:kommunikation}) und Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) beschrieben. Sie sind aufgeilt in Frontend und Backend.
 
 \section{Frontend}
+\label{section:implementierung:frontend}
  % frontend ist ja für alle mehr oder weniger gleich, zumindest die grundlage. deswegen zuerst.
 
 % welche libraries?
@@ -2114,12 +2115,48 @@ Marionette.js erweitert Backbone um verschiedene Konzepte (z.\,B. Regionen und u
 D3 wird hauptsächlich beim Hinzufügen von Annotationen eingesetzt, wo ein SVG Element über die Komponente gelegt wird, in welchem der Benutzer seine Annotationen zeichnen kann. Außerdem kann D3 im Gegensatz zu jQuery sowohl mit HTML- als auch mit SVG Elementen umgehen. In jQuery funktionieren einige Methoden, die im Frontend gebraucht werden (z.\,B. \texttt{.width()}, \texttt{.addClass()} oder jQuery UIs \texttt{.position()}), nicht für DOM Elemente mit SVG Namespace. Zwar existiert SVG Plugin\footnote{\url{https://github.com/kbwood/svg}} für jQuery, dieses weist aber eine unnötig komplizierte API auf und unterstützt nur jQuery 1.7\footnote{Aktuelle Version zum Zeitpunkt der Entwicklung: 2.0.3.}. Deswegen wird für die Größenbestimmung oder Positionierung von SVG Elementen D3 verwendet, da es ohnehin schon eingesetzt wird.
 
 \subsection{Kommentare}
+\label{section:implementierung:frontend:kommentare}
 
-Hier ist glaub ich nur der AddAnnotationView interessant, der Rest ist recht straightforward.
+Auf Abbildung~\ref{figure:write-comment} ist zu sehen, wie ein Kommentar verfasst wird. Um den Bereich um die Visualisierung herum abzudunkeln, wird ein SVG Element in die Komponente eingefügt. Es enthält eine Maske\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Clipping_and_masking}}, welche die Visualisierung freistellt.
 
-Im AddAnnotationView sind leider alle vier Werkzeuge zusammen anstatt 1 View pro Werkzeug. Grund: Alle müssen sichtbar sein (ausblenden einzelner Views nicht möglich), aufeinander abgestimmt (wie steht fest, welcher aktiv ist?) und funktionieren (kann zB nicht einzelne Views auf Gruppen arbeiten lassen, weil Gruppen keine pointer-events bekommen, wenn nix drin is).
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/implementierung-write-comment.png}
+   \caption{User Interface um einen Kommentar zu verfassen}
+   \label{figure:write-comment}
+\end{figure}
+
+Auf diesem SVG Element kann der Benutzer wie in gängigen Zeichenprogrammen üblich Rechtecke und Pfeile zeichnen. Um Text hinzuzufügen, muss er zuerst auf den Visualisierungsbereich klicken und damit die Koordinaten festlegen, an denen der Text erscheinen soll. Danach öffnet sich ein Texteingabedialog und nachdem der Benutzer bestätigt hat, wird der Text ins SVG Element gezeichnet. Der Text kann später editiert oder wie alle Annotationen auch gelöscht werden.
+
+Selektionen verhalten sich etwas anders als Text, Rechtecke und Pfeile, da sie nicht mit SVG Elementen dargestellt werden. Um zu bestimmen, wann sich die Maus über einem Datenpunkt befindet, wird ein \texttt{mousemove} Event Handler eingesetzt. In diesem werden die aktuellen Mauskoordinaten sowie alle Bounding Boxes der Datenpunkte abgefragt und dann verglichen, ob sich die Koordinaten innerhalb einer Bounding Box befinden. Analog dazu arbeitet der \texttt{click} Handler, welcher Datenpunkte selektiert oder deselektiert. Die Event Handler können nicht auf den Datenpunkten selbst registriert werden, weil diese keine Mausevents auslösen können, da sich das SVG Element über ihnen befindet. Das hat allerdings den praktischen Nebeneffekt, dass vom Entwickler vorgesehene Mausevents in der Visualisierung ebenfalls nicht ausgelöst werden, solange die \enquote{Kommentar schreiben} UI aktiv ist.
+
+Nachdem der Benutzer den Kommentar bestätigt hat, werden die Koordinaten und Dimensionen der Annotationen in relative Einheiten (zur Größe der Visualisierung) umgerechnet und an das Kommentar Backend (siehe Abschnitt~\ref{section:implementierung:backend:kommentare}) gesendet.
+
+\subsubsection{Einschränkungen}
+
+Die Lösung, \texttt{mouseover} über Datenpunkten mit Hilfe der Bounding Box festzustellen funktioniert zwar, hat aber einen Nachteil: Da die Bounding Box immer rechteckig ist, können \enquote{false positives} auftreten (Abbildung~\ref{figure:kommentar-bbox}). Variante A ist der Idealfall; die Bounding Box ist gleich groß wie der Datenpunkt. Das ändert sich allerdings, wenn der Datenpunkt transformiert wird (45$^\circ$ Rotation in Variante B) oder eine nicht-eckige Form hat (Kreis in Variante C).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/implementierung-kommentar-bbox.png}
+   \caption{Genauigkeit der Bounding Box eines Elements}
+   \label{figure:kommentar-bbox}
+\end{figure}
+
+Das könnte beispielsweise umgangen werden, indem eine Art \enquote{Toggle} Button in der Mitte der Bounding Box platziert wird, welche sich immer über der Mitte des Elements befindet. \textbf{Wie sag ich hier jetzt, dass direkte Manipulation cooler ist?}
+
+Eine andere Möglichkeit ist eine Funktion in die API einer Komponente hinzuzufügen, welche zwei Koordinaten auf einen Boolean abbildet und dem Hilfesystem so mitteilt, ob die Maus über der Repräsentation eines Datenpunkts liegt oder nicht. Aufgrund des Ziels der \textit{Minimalität} sollte davon aber möglichst abgesehen werden.
 
 \subsection{Bedienung und Kommunikation}
+
+Highlighting Algorithmus:
+
+\begin{enumerate}
+	\item Dunkel eingefärbtes, teilweise transparentes \texttt{div} über Komponente legen.
+	\item Ein SVG Element in dieses einfügen, da die relevanten UI Elemente SVG oder HTML Elemente sein können.
+	\item Mittels in SMCDL angegebenen CSS Selektor alle für die Assistance relevanten UI Elemente finden und in das div kopieren, wenn sie HTML ELemente sind und ins SVG kopieren, wenn sie SVG Elemente sind. Positionierungstechnisch ist bei SVG das Problem schon gelöst, weil der ganze visuelle Zustand im Markup ist und mitkopiert wurde. Für HTML Elemente setze ich position absolute sowie left und top. Weiters wird für jeden Selektor im Original und in der Kopie eine ID vergeben, die als Datenattribut \texttt{data-vizboard-copy} gespeichert wird. Das ist notwendig, sodass beim Highlight über ein Element in der Liste der CSS Selektor auf die originale Komponente gefahren werden kann UND die Kopien im Overlay gefunden werden.
+	\item 
+\end{enumerate}
 
 \begin{itemize}
 	\item Algorithmus fürs Highlighting der relevanten Elemente einer Aktion: Dunkle Folie drüber (div.vizboard-ground), VizRoot klonen, Elemente aus Klon löschen, Elemente aus Original durchgehen (Selektor), diese klonen und in VizRoot Klon einfügen. So ist man unabhängig von der eigentlichen DOM Struktur. Wenn der Selektor jetzt hunderte Elemente trifft, könnte das aber teuer werden, zugegeben. Dann hat man aber immer noch die Möglichkeit mit DocumentFragment zu arbeiten, wenn D3 bzw. jQuery das nicht eh intern benutzen.
@@ -2127,9 +2164,10 @@ Im AddAnnotationView sind leider alle vier Werkzeuge zusammen anstatt 1 View pro
 \end{itemize}
 
 \section{Backend}
+\label{section:implementierung:backend}
 
 \subsection{Kommentare}
-
+\label{section:implementierung:backend:kommentare}
 Troloyolo.
 
 \subsubsection{Repository}
