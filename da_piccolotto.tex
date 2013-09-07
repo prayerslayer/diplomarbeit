@@ -2103,10 +2103,19 @@ Das Frontend der implementierten Konzepte wurde mit Backbone.js\footnote{\url{ht
 % warum diese?
 
 % 1 - extjs ist zu abstrakt. ich muss ja haupsächlich dom knoten suchen, kopieren, klasse setzen etc.
-Zunächst muss begründet werden, warum ein anderes Javascript Framework als das in CRUISe bereits eingesetzte ExtJS\footnote{\url{http://www.sencha.com/products/extjs}} gewählt wurde. Hier müssen zwei Einsatzzwecke unterschieden werden: Als MVC Framework, welches verschiedene Views und Models definiert und strukturiert, sowie als Bibliothek für generische DOM Operationen. Für letzteres wird jQuery eingesetzt, da ExtJS einen höheren Abstraktionsgrad vom DOM aufweist. In ExtJS denkt der Entwickler nicht in \texttt{div}s oder \texttt{span}s, sondern in generischen Komponenten wie Listen, Panels und Dialogen. Als MVC Framework wird Backbone unter anderem deswegen eingesetzt, weil in der Einführung des Konzepts (Abschnitt~\ref{section:konzeption:einfuehrung}) ein visueller Unterschied zwischen Hilfesystem und Komponenten gefordert wurde. CRUISe Komponenten verwenden bereits die generischen ExtJS Styles, weswegen das Frontend eigene Styles für das recht komplexe, von ExtJS generierte Markup definieren müsste. Dies erschien zu viel Aufwand zu sein. Von der Einheitlichkeit der Codebase abgesehen gab es auch keinen Grund, ExtJS zu verwenden, weil das User Interface des Frontends recht einfach aufgebaut ist.
+Zunächst muss begründet werden, warum ein anderes Javascript Framework als das in CRUISe bereits eingesetzte ExtJS\footnote{\url{http://www.sencha.com/products/extjs}} gewählt wurde. Hier müssen zwei Einsatzzwecke unterschieden werden:
+
+\begin{enumerate}
+	\item Als MVC Framework, welches verschiedene Views und Models definiert und strukturiert, sowie
+	\item als Bibliothek für generische DOM Operationen.
+\end{enumerate}
+
+Für letzteres wird jQuery eingesetzt, da ExtJS mehr vom DOM abstrahiert als jQuery. Mit ExtJS denkt der Entwickler nicht in \texttt{div}s oder \texttt{span}s, sondern in generischen Komponenten wie Listen, Panels und Dialogen.
+
+Als MVC Framework wird Backbone unter anderem deswegen eingesetzt, weil in der Einführung des Konzepts (Abschnitt~\ref{section:konzeption:einfuehrung}) ein visueller Unterschied zwischen Hilfesystem und Komponenten gefordert wurde. CRUISe Komponenten verwenden bereits die generischen ExtJS Styles, weswegen das Frontend eigene Styles für das recht komplexe, von ExtJS generierte Markup definieren müsste. Dies erschien zu viel Aufwand zu sein. Von der Einheitlichkeit der Codebase abgesehen gab es auch keinen Grund, ExtJS zu verwenden, weil das User Interface des Frontends recht einfach aufgebaut ist.
 
 % wenn schon kein extjs, warum gerade backbone und nicht knockback, spine oder eins von den andern tausend?
-Warum ausgerechnet Backbone.js? Einerseits hab ich schon mal was damit gemacht, zweitens ist es sehr populär (siehe Backbone Website, wer es alles verwendet) und hat gute Dokumentation. Wegen Popularität findet man auch viel auf StackOverflow, was man auch nicht unterschätzen darf.
+Nun stellt sich noch die Frage, warum gerade Backbone.js und nicht eines der vielen anderen Frameworks\footnote{Für eine Übersicht der Wichtigsten sei auf \url{http://todomvc.com/} verwiesen, wo 33~Javascript MV* Frameworks aufgelistet sind.} gewählt wurde. Einerseits hat der Autor damit bereits grundlegende Erfahrung gesammelt, die Einarbeitungszeit entfiel. Andererseits ist es gut dokumentiert und sehr populär, weswegen im Internet viele Informationen zu finden sind.
 
 % marionettejs macht backbone code lesbarer und einfacher zu warten
 Marionette.js erweitert Backbone um verschiedene Konzepte (z.\,B. Regionen und unterschiedliche Views für Items, Collections und Bäume) und automatisiert oft vorkommende Anweisungen (wie zum Beispiel einen View rendern und in den DOM einfügen). Der Code ist dadurch lesbarer und einfacher zu warten.
@@ -2149,19 +2158,7 @@ Eine andere Möglichkeit ist eine Funktion in die API einer Komponente hinzuzuf�
 
 \subsection{Bedienung und Kommunikation}
 
-Highlighting Algorithmus:
-
-\begin{enumerate}
-	\item Dunkel eingefärbtes, teilweise transparentes \texttt{div} über Komponente legen.
-	\item Ein SVG Element in dieses einfügen, da die relevanten UI Elemente SVG oder HTML Elemente sein können.
-	\item Mittels in SMCDL angegebenen CSS Selektor alle für die Assistance relevanten UI Elemente finden und in das div kopieren, wenn sie HTML ELemente sind und ins SVG kopieren, wenn sie SVG Elemente sind. Positionierungstechnisch ist bei SVG das Problem schon gelöst, weil der ganze visuelle Zustand im Markup ist und mitkopiert wurde. Für HTML Elemente setze ich position absolute sowie left und top. Weiters wird für jeden Selektor im Original und in der Kopie eine ID vergeben, die als Datenattribut \texttt{data-vizboard-copy} gespeichert wird. Das ist notwendig, sodass beim Highlight über ein Element in der Liste der CSS Selektor auf die originale Komponente gefahren werden kann UND die Kopien im Overlay gefunden werden.
-	\item 
-\end{enumerate}
-
-\begin{itemize}
-	\item Algorithmus fürs Highlighting der relevanten Elemente einer Aktion: Dunkle Folie drüber (div.vizboard-ground), VizRoot klonen, Elemente aus Klon löschen, Elemente aus Original durchgehen (Selektor), diese klonen und in VizRoot Klon einfügen. So ist man unabhängig von der eigentlichen DOM Struktur. Wenn der Selektor jetzt hunderte Elemente trifft, könnte das aber teuer werden, zugegeben. Dann hat man aber immer noch die Möglichkeit mit DocumentFragment zu arbeiten, wenn D3 bzw. jQuery das nicht eh intern benutzen.
-	\item data-vizboard-copy Attribut um Selektor auf originale Komponente fahren und trotzdem die Kopien in vizboard-rootcopy finden zu können. Das ist wichtig für Selektoren wie nth-child-of(odd) oder "ancestor child". Ich kopier ja nur die Elemente, die von den Selektoren getroffen werden, nicht alles ringsrum.
-\end{itemize}
+Um für die Interaktion wichtige UI Elemente hervorzuheben, werden diese eingefärbt und der Rest der Komponente abgedunkelt. Der Algorithmus dafür ist wie folgt: Zuerst wird ein teilweise transparentes, dunkles \texttt{div} in die Komponente eingefügt, um den dunklen Hintergrund herzustellen. Danach wird ein weiteres \texttt{div} erstellt, die \enquote{Rootcopy}. Diese hat dieselbe Größe und Position wie die Komponente. In die Rootcopy wird wiederum ein \texttt{svg} Element eingefügt, welches sie ausfüllt. Das hat den Grund, dass relevante UI Elemente auch SVG \texttt{rect}s oder ähnliches sein können. Sie werden vom Browser nur gerendert, wenn sie sich auch in einem \texttt{svg} befinden. Danach werden alle von einem CSS Selektor getroffenen Elemente kopiert (entweder in die Rootcopy selbst oder ins \texttt{svg}) und gleich positioniert. Bei SVG Elementen ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt. Das geschieht mit jQuerys \texttt{.css()} Methode, welche das \texttt{style} Attribut des DOM Elements setzt und so wegen maximaler Spezifität alle anderen vorhandenen Regeln überschreibt. Bei jedem durch Selektor $s_i$ getroffenen Element und dessen Kopie wird außerdem ein Attribut \texttt{data-vizboard-copy} auf \texttt{copy<i>} gesetzt. Der Grund dafür ist die Verbindung zwischen Aktionen und UI Elementen: Bei \texttt{mouseover} über einer Aktion werden alle dafür relevanten UI Elemente hervorgehoben. Um diese zu finden, kann der Selektor nicht in der Rootcopy ausgeführt werden: Selektoren wie \texttt{:nth-child(odd)} oder \texttt{div.parent > div.content .relevant} würden falsche Ergebnisse liefern. Aus diesem Grund werden die Selektoren in der Komponente ausgeführt und die Kopien der Elemente mit den Originalen über das Attribut \texttt{data-vizboard-copy} verbunden, sodass sie bei \texttt{mouseover} einfach gefunden werden können.
 
 \section{Backend}
 \label{section:implementierung:backend}
@@ -2189,7 +2186,7 @@ Die Architektur des Backends für Kommentare orientiert sich an den verschiedene
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=\textwidth]{images/implementierung-kommentare-backend-architektur.png}
+   \includegraphics[width=0.75\textwidth]{images/implementierung-kommentare-backend-architektur.png}
    \caption{Architektur des Kommentar Backends}
    \label{figure:kommentare-backend-architektur}
 \end{figure}
