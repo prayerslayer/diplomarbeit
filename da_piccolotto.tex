@@ -103,67 +103,48 @@
 \chapter{Einleitung}
 \label{chapter:einleitung}
 
-% Einleitung - viele semantische Daten, diese sind sehr nützlich
+% Grundlage der Arbeit ist ein komposites Infovis-System, also sollte vielleicht erst erläutert werden, warum man das überhaupt braucht --> immer mehr daten, aus denen man erkenntnisse gewinnen kann.
 
-Im Laufe der letzten Jahre wurden immer mehr semantische Daten veröffentlicht, sowohl in Community-Projekten wie der DBpedia\footnote{\url{http://dbpedia.org}} als auch als Teil der Open Data bzw. Open Government Bewegung, wie z.\,B. data.gov.uk\footnote{\url{http://data.gov.uk/data/search?q=rdf}}. Diese Datenkataloge können von großem Nutzen für jeden sein. Die DBpedia ist eine maschinenlesbare Version der Wikipedia, mit ihr können mit Hilfe der Abfragesprache SPARQL automatisch Fragen beantwortet werden, deren manuelle Recherche zu aufwändig wäre. In data.gov.uk finden sich Informationen, die für alle Steuerzahler im Vereinigten Königreich relevant sein können, wie z.\,B. Organigramme und Gehälter von Regierungsorganisationen.
+Im Laufe der letzten Jahre wurden immer mehr Daten veröffentlicht und im Internet auffindbar gemacht. Dazu gehören sowohl Fotos und Statusupdates in sozialen Netzwerken, als auch semantische Daten, die von Community-Projekten wie der DBpedia oder Regierungsorganisationen bereitgestellt werden. Die DBpedia ist eine maschinenlesbare Version der Wikipedia, mit ihr können mit Hilfe der Abfragesprache SPARQL automatisch Fragen beantwortet werden, deren manuelle Recherche zu aufwändig wäre. In data.gov.uk finden sich Informationen, die für alle Steuerzahler im Vereinigten Königreich relevant sein können, wie z.\,B. Organigramme und Gehälter von Regierungsorganisationen. Aus diesen frei verfügbaren Daten können viele Erkenntnisse gewonnen werden.
 
 % ###################################################
 \section{Motivation}
 \label{section:einleitung:motivation}
 
-% Motivation - es gibt keine gute Möglichkeit, das Wissen in den Daten aufzunehmen. 
+% InfoVis sind gut, weil man Patterns, Ausreisser und Trends in Daten schneller erkennen kann, sie also das Verständnis der Daten fördern.
 
-% expertenwissen informatik
+In roher Form können Menschen diese Daten aber nur sehr schwer verarbeiten: Ein Computer kann mehrere Megabyte Text innerhalb von Sekunden lesen und im Arbeitsspeicher halten, ein Mensch benötigt viel Zeit und vergisst große Teile wieder. Hier setzen dem Sprichtwort \enquote{Ein Bild sagt mehr als tausend Worte} folgend Informationsvisualisierungen an. Sie bereiten Daten visuell auf, beispielsweise in Form von Diagrammen, und machen so die enthaltenen Informationen für Menschen einfacher zugänglich. So können in den Daten enthaltene Muster, Ausreisser, Zusammenhänge und Trends leicher erkannt werden.
 
-Jedoch ist es sehr schwierig, das Wissen in den Datenkatalogen aufzunehmen. Wird wie im Falle der DBpedia eine API in Form eines SPARQL Endpoints zur Verfügung gestellt, müssen sowohl die Abfragesprache SPARQL als auch Konzepte von semantischen Daten wie z.\,B. Tripel, Klassen oder Vererbung bekannt sein, um an die Daten zu kommen. Erlaubt das Portal einen Download der Daten, stellt sich die Frage, wie sie geöffnet werden. Gängige Datenverarbeitungstools wie Excel oder Visualisierungstools wie Tableau unterstützen keine semantischen Daten. Es existieren zwar Visualisierungstools für semantische Daten wie Protégé/Jambalaya, diese stellen aber oft nur einen Graphen dar. Die Visualisierung als Netzwerk kann wie im Fall von Organigrammen angebracht sein, aber bei Daten über Aktienkurse wäre ein Liniendiagramm vielleicht besser geeignet.
+% Komposite InfoVis sind für den Benutzer gut, weil der mehr als eine Sicht auf die Daten hat. Für den Systembetreiber sind sie gut, weil...? Jeder macht, was er am besten kann?
 
-% expertenwissen visualisierung
+Bei komplexen Daten, die mehrere Variablen unterschiedlichen Typs beinhalten, ist es sinnvoll mehrere Informationsvisualisierungen zu kombinieren. Sie bieten verschiedene Sichten auf den Datensatz, beispielsweise eine Karte für die enthaltenen Länder und ein Balkendiagramm für die Entwicklung des BIP in den letzten Jahren. Auf diese Weise wird der Erkenntnisgewinn gefördert, da zum Beispiel sichtbar wird, dass Länder mit geringem BIP in ähnlichen Regionen liegen.
 
-Selbst wenn ein Visualisierungstool für semantische Daten existierte, welches verschiedene Arten von Diagrammen unterstützt, würde ein Anwender das Wissen in den Datenkatalogen nicht angemessen vermittelt bekommen. Die Konfiguration von Diagrammen setzt Expertenwissen im Bereich der Informationsvisualisierung voraus, die in den meisten Fällen nicht gegeben ist. Wie viele Farben können in einem Diagramm unterschieden werden? Wie viele Balken sind zu viele für ein Balkendiagramm? Welche Informationen werden am Besten als Farbe kodiert, welche als Größe oder Position?
+% komposite infovis sind mashups. die infovis stammen von verschiedenen entwicklern, schauen verschieden aus, haben verschiedene interaktionsmetaphern, unterschiedliches look and feel, unterschiedliche funktionen
 
-% vizboard to the rescue
+Diese verschiedenen, kombinierten Informationsvisualisierungen stellen ein sogenanntes Mashup von User Interfaces dar. Dessen einzelne Komponenten können dabei von unterschiedlichen, unabhängigen Entwicklern erstellt werden. Das ist sinnvoll, da auf diese Weise die Anzahl an vorhandenen Komponenten und damit der Nutzen für den Anwender maximiert werden kann. Diese Strategie bringt aber auch Nachteile für den Anwender mit sich. Da die Komponenten von unterschiedlichen Entwicklern gebaut werden, können sie unterschiedlich aussehen: Was bei einer Komponente eine Auswahl signalisiert, ist bei der anderen normale Hintergrundfarbe. Die Komponenten verfügen möglicherweise über unterschiedliche Interaktionsmetaphern: Beim Balkendiagramm von Entwickler A müssen die Buttons geklickt werden, beim Liniendiagramm von Entwickler B reicht ein \texttt{mouseover}. Aus diesen und anderen Gründen muss dem Anwender eine einheitliche, universelle Hilfestellung angeboten werden.
 
-Diese Probleme zu lösen ist das Ziel des Forschungsprojekts VizBoard. Es setzt einen Prozess aus fünf Schritten ein (Abbildung~\ref{figure:vizboard_workflow}): Zuerst wird ein Datensatz hochgeladen (1), danach Konzepte zur Visualisierung ausgewählt (3), Daten im Detail und Visualisierungen gewählt (5), Visualisierungen konfiguriert (7) und schließlich werden die Visualisierungen angezeigt (9).
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.75\textwidth]{images/vizboard_workflow.png}
-	\caption{VizBoard Workflow}
-	\label{figure:vizboard_workflow}
-\end{figure}
 
 % ###################################################
 \section{Problemstellung und Zielsetzung}
 \label{section:einleitung:problemstellung}
 
-% problem liegt im letzten teil
-
 % welche probleme? Visualisierungen auseinanderhalten und einordnen können (intro), visualisierungen bedienen können (bedienung), fragen über daten stellen können (kommentare), konzept der zusammenarbeit von komponenten verstehen (kommunikation), fehler melden können (Feedback), unbekannte konzepte beschrieben bekommen (verlinkung)
 
-Am Ende des VizBoard Workflows angekommen, wird dem Benutzer ein Mashup aus verschiedenen Informationsvisualisierungskomponenten präsentiert, welche miteinander kommunizieren können und so zusammenarbeiten. Beispielsweise aktualisiert sich das Balkendiagramm dem aktuellen Ausschnitt der Karte entsprechend.
-
-Einen unerfahrenen Nutzer, der den Inhalt der Daten verstehen will, stellt diese Situation vor einige Probleme. Zunächst wird er von mehreren verschiedenen Fenstern \enquote{überrumpelt}, die er alle nach der Reihe inspizieren muss. Er muss herausfinden, was sie darstellen und wie sie interpretiert werden sollen. Außerdem werden keine Angaben über die Bedienung gemacht: Welche Elemente lösen Aktionen aus und welche? Wie werden sie aktiviert? Gibt es Alternativen? Während er herumprobiert, um das alles herauszufinden, ändert sich die UI in anderen Komponenten -- ohne dass explizit mit ihnen interagiert wurde. Wann und nach welchen Regeln passiert das? Wenn der Benutzer die Daten inspiziert, werden einige Fragen auftauchen. Was bedeutet ein bestimmter Begriff? Wie ist diese Metrik definiert? Warum fällt sie in diesem einen Jahr so deutlich ab? 
+Einem Anwender, der ein Mashup aus Informationsvisualisierungen nutzen will, stellen sich einige Fragen. Zunächst sieht er mehrere unterschiedliche Komponenten und muss diese nach der Reihe inspizieren und einordnen: Welche Daten stellen sie dar, wie sind diese kodiert und wie müssen sie interpretiert werden? Außerdem ist unklar, welche Funktionen die Komponenten zur Verfügung stellen und wie diese aufgerufen werden: Kann die Tabelle sortiert werden und wenn ja, wie? Welche Operation auf welchen Elementen führt welche Sortierreihenfolge aus? Welchen Alternativen gibt es? Möglicherweise tauschen Komponenten untereinander Nachrichten aus, um gegenseitig ihr User Interface zu aktualisieren. Dieser Vorgang ist für den Benutzer unsichtbar und seine Auswirkungen wahrscheinlich irritierend. Warum aktualisiert sich die Karte, wenn die Interaktion im Balkendiagramm stattfindet? Während der Inspektion der Daten werden sich dem Anwender weitere Fragen stellen: Was bedeutet ein bestimmter Begriff, wie ist eine Metrik definiert und warum fällt sie so plötzlich ab?
 
 % ziel der arbeit: hilfesystem konzept, prototypisch umsetzen, aber quasi "real-world" prototyp. kein paper mockup.
 
-Ziel dieser Arbeit ist die Entwicklung eines Konzepts für ein semantik-gestütztes Hilfesystem für VizBoard, welches unerfahrenen Nutzer den Umgang mit dem Visualisierungs-Mashup erleichtert. Dadurch soll deren Verständnisprozess möglichst nicht unterbrochen werden, sodass sie möglichst schnell die Erkenntnisse finden, die sie gesucht haben. Das erarbeitete Konzept soll prototypisch umgesetzt und in CRUISe, welches die Basis für VizBoard ist, integriert werden.
+Ziel dieser Arbeit ist die Entwicklung eines Konzepts für ein semantik-gestütztes Hilfesystem für VizBoard, ein komposites Informationsvisualisierungssystem auf Basis der Mashupplattform CRUISe. Das Konzept soll die eben beschriebenen Probleme lösen, den Aufwand für Komponentenentwickler so gering wie möglich halten und auf alle Komponenten anwendbar sein. Das Konzept soll prototypisch umgesetzt und in CRUISe integriert werden.
 
-% teilziele der arbeit
-% szenario
-% anforderungsanalyse
-% grundlagen zu den betroffenen themen, also infovis, semantische daten, user assistance
-% schauen was andere so gemacht haben und wie es genutzt werden kann
-% konzept erstellen
-% prototypen implementieren
-% evaluation mit nutzerstudie
+Daraus leiten sich die folgenden Teilziele der Arbeit ab: % Welche teilziele? Erstmal gucken, was es so für infovis gibt, was man so über assistance wissen muss. und sonst so?
 
-Daraus leiten sich die folgenden Teilziele der Arbeit ab: Jop. Genau.
 
 % ###################################################
 \section{Aufbau der Arbeit}
 \label{section:einleitung:aufbau}
 
 % Aufbau der Arbeit erklären, kommt zum Schluss
+Zunächst wird die Aufgabenstellung noch einmal an einem beispielhaften Szenario verdeutlicht und daraus Anforderungen an das Konzept abgeleitet. Da für die Entwicklung des Konzepts Kenntnisse der betroffenen Themengebiete nötig sind, werden in den Grundlagen CRUISe und VizBoard, semantische Daten, Informationsvisualisierungen und User Assistance eingeführt. Danach werden in den verwandten Arbeiten die Vor- und Nachteile bestehender Lösungen betrachtet und Schlussfolgerungen für das Konzept gezogen, welches in Kapitel XY vorgestellt wird. In Kapitel XYZ wird auf die Umsetzung des Prototypen eingegangen und evaluiert. Danach wird die Arbeit mit einer Zusammenfassung und einem Ausblick geschlossen.
 
 % ###################################################
 \chapter{Stand der Forschung und Technik}
