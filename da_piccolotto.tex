@@ -2102,7 +2102,7 @@ Nun stellt sich noch die Frage, warum gerade Backbone.js und nicht eines der vie
 Marionette.js erweitert Backbone um verschiedene Konzepte (z.\,B. Regionen und unterschiedliche Views für Items, Collections und Bäume) und automatisiert oft vorkommende Anweisungen (wie zum Beispiel einen View rendern und in den DOM einfügen). Der Code ist dadurch lesbarer und einfacher zu warten.
 
 % und was hat d3 hier zu suchen?
-D3 wird hauptsächlich beim Hinzufügen von Annotationen eingesetzt, wo ein SVG Element über die Komponente gelegt wird, in welchem der Benutzer seine Annotationen zeichnen kann. Außerdem kann D3 im Gegensatz zu jQuery sowohl mit HTML- als auch mit SVG Elementen umgehen. In jQuery funktionieren einige Methoden, die im Frontend gebraucht werden (z.\,B. \texttt{.width()}, \texttt{.addClass()} oder jQuery UIs \texttt{.position()}), nicht für DOM Elemente mit SVG Namespace. Zwar existiert SVG Plugin\footnote{\url{https://github.com/kbwood/svg}} für jQuery, dieses weist aber eine unnötig komplizierte API auf und unterstützt nur jQuery 1.7\footnote{Aktuelle Version zum Zeitpunkt der Entwicklung: 2.0.3.}. Deswegen wird für die Größenbestimmung oder Positionierung von SVG Elementen D3 verwendet, da es ohnehin schon eingesetzt wird.
+D3 wird hauptsächlich beim Hinzufügen von Annotationen eingesetzt, wo ein SVG Element über die Komponente gelegt wird, in welchem der Benutzer seine Annotationen zeichnen kann. Außerdem kann D3 im Gegensatz zu jQuery sowohl mit HTML- als auch mit SVG Elementen umgehen. In jQuery funktionieren einige Methoden, die im Frontend gebraucht werden (z.\,B. \texttt{.width()}, \texttt{.addClass()} oder jQuery UIs \texttt{.position()}), nicht für DOM Elemente mit SVG Namespace. Zwar existiert ein SVG Plugin\footnote{\url{https://github.com/kbwood/svg}} für jQuery, dieses weist aber eine unnötig komplizierte API auf und unterstützt nur jQuery 1.7\footnote{Aktuelle Version zum Zeitpunkt der Entwicklung: 2.0.3.}. Deswegen wird für die Größenbestimmung oder Positionierung von SVG Elementen D3 verwendet, da es ohnehin schon eingesetzt wird.
 
 \subsection{Kommentare}
 \label{section:implementierung:frontend:kommentare}
@@ -2133,9 +2133,7 @@ Die Lösung, \texttt{mouseover} über Datenpunkten mit Hilfe der Bounding Box fe
    \label{figure:kommentar-bbox}
 \end{figure}
 
-Das könnte beispielsweise umgangen werden, indem eine Art \enquote{Toggle} Button in der Mitte der Bounding Box platziert wird, welche sich immer über der Mitte des Elements befindet. \textbf{Wie sag ich hier jetzt, dass direkte Manipulation cooler ist?}
-
-Eine andere Möglichkeit ist eine Funktion in die API einer Komponente hinzuzufügen, welche zwei Koordinaten auf einen Boolean abbildet und dem Hilfesystem so mitteilt, ob die Maus über der Repräsentation eines Datenpunkts liegt oder nicht. Aufgrund des Ziels der \textit{Minimalität} sollte davon aber möglichst abgesehen werden.
+Eine Möglichkeit, diese Einschränkung zu umgehen, ist eine weitere Funktion in die API einer Komponente hinzuzufügen. Sie teilt dem Hilfesystem mit, ob ein Punkt $(x,y)$ innerhalb eines Datenpunkts liegt oder nicht. Diese Funktion kann optional genutzt werden: Ist sie implementiert, verwendet sie das Hilfesystem. Ansonsten arbeitet es wie bisher mit Bounding Boxes.
 
 \subsection{Bedienung und Kommunikation}
 
@@ -2200,7 +2198,7 @@ Um Kommentare dem Frontend zur Verfügung zu stellen bot sich eine REST API an, 
 
 Die beiden \texttt{GET} Methoden nehmen optional einen HTTP \texttt{Authorization} Header entgegen, der die Benutzer ID (ohne Passwort) angibt. Dann enthalten zurückgelieferte Kommentare Informationen, ob dieser Benutzer schon gevotet hat und wenn ja, wie.
 
-Bei der Methode \texttt{PUT dare/comment/vote} überprüft das DaRe nur die Existenz eines \texttt{Authorization} Headers und erstellt einen neuen Benutzer im Backend, wenn dieser unbekannt ist. Die Methode \texttt{POST} kann ohne Credentials aufgerufen werden. In der Praxis müsste der Header Benutzer ID und Passwort enthalten, sodass das DaRe diese Daten überprüfen kann, indem es eine entsprechende Anfrage an die REST API des User Services stellt. Auf diese Weise würde verhindert, dass beliebige Personen Kommentare erzeugen oder bewerten können. Da die Benutzerinformationen im \texttt{Authorization} Header mit Base64 \cite{Josefsson2006} kodiert und nicht verschlüsselt o.\,ä. werden, sollte die Kommunikation zwischen DaRe und Frontend außerdem mit Transport Layer Security gesichert sein.
+Bei der Methode \texttt{PUT dare/comment/vote} überprüft das DaRe nur die Existenz eines \texttt{Authorization} Headers und erstellt einen neuen Benutzer im Kommentar Backend, wenn dieser unbekannt ist. Die Methode \texttt{POST} kann ohne Credentials aufgerufen werden. In der Praxis müsste der Header Benutzer ID und Passwort enthalten, sodass das DaRe diese Daten überprüfen kann, indem es eine entsprechende Anfrage an die REST API des User Services stellt. Auf diese Weise würde verhindert, dass beliebige Personen Kommentare erzeugen oder bewerten können. Da die Benutzerinformationen im \texttt{Authorization} Header mit Base64 \cite{Josefsson2006} kodiert und nicht verschlüsselt o.\,ä. werden, sollte die Kommunikation zwischen DaRe und Frontend außerdem mit Transport Layer Security gesichert sein.
 
 \subsection{Bedienung und Kommunikation}
 
@@ -2212,6 +2210,10 @@ Abbildung~\ref{figure:bedienung-backend} zeigt, wie die Bilder für das Hilfesys
    \caption{Generierung der Bilder für das Hilfesystem}
    \label{figure:bedienung-backend}
 \end{figure}
+
+Um die verschiedenen Operationen auszuführen, wird zunächst jQuery eingesetzt, um die notwendigen Elemente zu finden. Für die Simulation von Klicks und Doppelklicks bietet PhantomJS bereits mit der Methode \texttt{sendEvent()} eine Schnittstelle. Scrolls werden mit Hilfe von programmatisch erzeugten WheelEvents\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent}} simuliert. Außerdem unterstützt die Hilfegenerierung noch Drags, welche mit einer Kombination von \texttt{mousedown}, \texttt{mousemove} und \texttt{mouseup} Events simuliert werden.
+
+Die Operationen müssen hintereinander isoliert ausgeführt werden. Gegebenenfalls muss das Hilfesystem nach einer Operation warten, etwa auf das Ende einer Animation (siehe Abschnitt XY). Dabei darf es allerdings nicht blockieren, da ansonsten die Animation nicht ausgeführt wird. Busy Waiting kommt als Lösung deswegen nicht in Frage. Eine weitere Möglichkeit wären Timeouts. Diese machen den Kontrollfluss im Sourcecode schwer nachvollziehbar. Außerdem muss durch die asynchrone Ausführung irgendwie verhindert werden, dass PhantomJS vorzeitig beendet wird. Aus diesen Gründen bieten sich Promises\footnote{\url{http://wiki.commonjs.org/wiki/Promises/A}} zur Koordination von asynchronen, nicht blockierenden Methoden an. Dafür wird die Bibliothek Q eingesetzt.
 
 %#####################################################
 \printbibliography[title=Literaturverzeichnis]
