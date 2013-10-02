@@ -1806,7 +1806,7 @@ Außerdem ist zu beachten, dass für die korrekte Arbeitsweise des vorgestellten
 
 % mögliche stolpersteine
 
-Bevor konkrete visuelle Umsetzungen der History präsentiert werden, muss diskutiert werden, wie mit von Komponenten (anstatt vom Benutzer) ausgelösten Aktionen umgegangen wird. Beispielsweise wäre eine Uhrzeit-Komponente denkbar, die jede volle Minute ein \texttt{minutePassed} Event auslöst. Klassische Implementierungen einer History löschen den Redo-Stack, wenn nach einem Undo eine neue, nicht in der History vorhandene Aktion ausgeführt wird. Im Falle der Uhrzeit-Komponente wäre das äußerst ungünstig, da sie spätestens nach einer Minute unerwünschterweise den Redo-Stack löschen würde. Derartige Komponenten von der History auszuschließen ist jedoch keine Option, da sie aufgrund des Ziels der \textit{Universalität} alle Komponenten unterstützen muss. Events nach einem Undo zu pausieren ist ebenfalls nicht möglich, da dann überhaupt keine neuen Aktionen mehr ausgeführt werden können. Deswegen sollten neue, durch Komponenten ausgelöste Aktionen, nach einem Undo weiter auf den Redo-Stack gelegt werden. Dieser kann gelöscht werden, sobald der Benutzer eine Aktion ausführt. Der im vorhergehenden Abschnitt vorgestellte Algorithmus kann eine Nutzeraktion aber nicht in allen Fällen von einer Komponentenaktion unterscheiden. Zwar gibt es in der SMCDL ein Attribut \texttt{trigger}, welches angibt, ob ein Event durch Nutzerinteraktion, infolge einer Operation oder interner Logik ausgelöst wird. Dieses ist jedoch optional und außerdem muss es nicht immer festgelegt sein: Es ist möglich, dass ein Event sowohl durch eine Operation als auch durch Nutzerinteraktion ausgelöst wird.
+Bevor konkrete visuelle Umsetzungen der History präsentiert werden, muss diskutiert werden, wie mit von Komponenten (anstatt vom Benutzer) ausgelösten Aktionen umgegangen wird. Beispielsweise wäre eine Uhrzeit-Komponente denkbar, die jede volle Minute ein \texttt{minutePassed} Event auslöst. Klassische Implementierungen einer History löschen den Redo-Stack, wenn nach einem Undo eine neue, nicht in der History vorhandene Aktion ausgeführt wird. Im Falle der Uhrzeit-Komponente wäre das äußerst ungünstig, da sie spätestens nach einer Minute unerwünschterweise den Redo-Stack löschen würde. Derartige Komponenten von der History auszuschließen ist jedoch keine Option, da sie aufgrund des Ziels der \textit{Universalität} alle Komponenten unterstützen muss. Events nach einem Undo zu pausieren ist ebenfalls nicht möglich, da dann überhaupt keine neuen Aktionen mehr ausgeführt werden können. Deswegen sollten neue, durch Komponenten ausgelöste Aktionen, nach einem Undo weiter auf den Redo-Stack gelegt werden. Dieser kann gelöscht werden, sobald der Benutzer eine Aktion ausführt. Der im vorhergehenden Abschnitt vorgestellte Algorithmus kann eine Nutzeraktion aber nicht in allen Fällen von einer Komponentenaktion unterscheiden. Zwar gibt es in der SMCDL ein Attribut \texttt{trigger}, welches angibt, ob ein Event durch Nutzerinteraktion, infolge einer Operation oder interner Logik ausgelöst wird \cite[S. 98]{Pietschmann2012}. Dieses ist jedoch optional und außerdem muss es nicht immer festgelegt sein: Es ist möglich, dass ein Event sowohl durch eine Operation als auch durch Nutzerinteraktion ausgelöst wird.
 
 Um dem beizukommen, kann das Hilfesystem eigene Eventhandler auf aktionsrelevanten UI Elementen registrieren. Diese sind in Folge der Erweiterungen durch die Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) bekannt. Abbildung~\ref{figure:undo-ablauf} verdeutlicht die Funktionsweise: Zuerst wird eine Nachricht $e_1$ an den Event Broker gesendet (1). Dieser fügt sie einer Collection hinzu (2). Danach wird der Eventhandler des Hilfesystems aufgerufen (3). Das Hilfesystem weiß, zu welcher Komponente, Aktion und Operation der Eventhandler gehört (Abschnitt~\ref{section:konzeption:bedienung:api}) und kann in den Collections des Event Brokers nach entsprechenden Nachrichten suchen. Von diesen wird die aufrufende Methode gelöscht und sie werden in eine neue Collection eingefügt (4). Danach kann das Hilfesystem den Redo-Stack löschen, falls nötig.
 
@@ -2088,6 +2088,8 @@ Für die History müssen folgende Attribute enthalten sein:
 \section{Zusammenfassung}
 \label{section:konzeption:zusammenfassung}
 
+\todo[inline]{Hier fehlt Text.}
+
 \chapter{Implementierung}
 \label{chapter:implementierung}
 
@@ -2098,7 +2100,7 @@ In den folgenden Abschnitten wird die prototypische Implementierung der Konzepte
  % frontend ist ja für alle mehr oder weniger gleich, zumindest die grundlage. deswegen zuerst.
 
 % welche libraries?
-Das Frontend der implementierten Konzepte wurde mit Backbone.js\footnote{\url{http://backbonejs.org/}}, einem populären Javascript MV* Framework, und dessen Erweiterung Marionette.js\footnote{\url{http://marionettejs.com/}} geschrieben. Des weiteren kamen die Bibliotheken jQuery\footnote{\url{http://jquery.com/}} (wird von Backbone verwendet), jQuery UI\footnote{\url{http://jqueryui.com/}} und D3 \cite{Bostock2011} zum Einsatz.
+Das Frontend der implementierten Konzepte wurde mit Backbone.js\footnote{\url{http://backbonejs.org/}}, einem populären Javascript MV* Framework, und dessen Erweiterung Marionette.js\footnote{\url{http://marionettejs.com/}} geschrieben. Des weiteren kamen die Bibliotheken jQuery\footnote{\url{http://jquery.com/}} (von Backbone verwendet), jQuery UI\footnote{\url{http://jqueryui.com/}} und D3 \cite{Bostock2011} zum Einsatz.
 % warum diese?
 
 % 1 - extjs ist zu abstrakt. ich muss ja haupsächlich dom knoten suchen, kopieren, klasse setzen etc.
@@ -2120,29 +2122,41 @@ Nun stellt sich noch die Frage, warum gerade Backbone.js und nicht eines der vie
 Marionette.js erweitert Backbone um verschiedene Konzepte (z.\,B. Regionen und unterschiedliche Views für Items, Collections und Bäume) und automatisiert oft vorkommende Anweisungen (wie zum Beispiel einen View rendern und in den DOM einfügen). Der Code ist dadurch lesbarer und einfacher zu warten.
 
 % und was hat d3 hier zu suchen?
-D3 wird hauptsächlich beim Hinzufügen von Annotationen eingesetzt, wo ein SVG Element über die Komponente gelegt wird, in welchem der Benutzer seine Annotationen zeichnen kann. Außerdem kann D3 im Gegensatz zu jQuery sowohl mit HTML- als auch mit SVG Elementen umgehen. In jQuery funktionieren einige Methoden, die im Frontend gebraucht werden (z.\,B. \texttt{.width()}, \texttt{.addClass()} oder jQuery UIs \texttt{.position()}), nicht für DOM Elemente mit SVG Namespace. Zwar existiert ein SVG Plugin\footnote{\url{https://github.com/kbwood/svg}} für jQuery, dieses weist aber eine unnötig komplizierte API auf und unterstützt nur jQuery 1.7\footnote{Aktuelle Version zum Zeitpunkt der Entwicklung: 2.0.3.}. Deswegen wird für die Größenbestimmung oder Positionierung von SVG Elementen D3 verwendet, da es ohnehin schon eingesetzt wird.
+D3 wird hauptsächlich beim Hinzufügen von Annotationen eingesetzt, wo ein SVG Element über die Komponente gelegt wird, in welchem der Benutzer seine Annotationen zeichnen kann. Außerdem kann D3 im Gegensatz zu jQuery sowohl mit HTML- als auch mit SVG Elementen umgehen. jQuery unterstützt einige Methoden, die im Frontend gebraucht werden (z.\,B. \texttt{.width()}, \texttt{.addClass()} oder jQuery UIs \texttt{.position()}), nicht für DOM Elemente mit SVG Namespace. Zwar existiert ein SVG Plugin\footnote{\url{https://github.com/kbwood/svg}} für jQuery, dieses weist aber eine unnötig komplizierte API auf. Deswegen wird für die Größenbestimmung oder Positionierung von SVG Elementen D3 verwendet, da es ohnehin schon eingesetzt wird.
+
+\subsection{Architektur}
+\label{section:implementierung:frontend:architektur}
+
+Das Assistance Subsystem arbeitet unabhängig vom Rest der Thin Server Runtime (TSR) Module (Abbildung~\ref{figure:cruise-architektur-assistance}). Nachdem alle Komponenten integriert wurden, wird es vom Application Manager falls erwünscht gestartet.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/implementierung-cruise-architektur.png}
+   \caption{Architektur von CRUISe mit Assistance}
+   \label{figure:cruise-architektur-assistance}
+\end{figure}
 
 \subsection{Kommentare}
 \label{section:implementierung:frontend:kommentare}
 
-Auf Abbildung~\ref{figure:write-comment} ist zu sehen, wie ein Kommentar verfasst wird. Um den Bereich um die Visualisierung herum abzudunkeln, wird ein SVG Element in die Komponente eingefügt. Es enthält eine Maske\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Clipping_and_masking}}, welche die Visualisierung freistellt.
+Auf Abbildung~\ref{figure:ui-write-comment} ist zu sehen, wie ein Kommentar verfasst wird. Um den Bereich um die Visualisierung herum abzudunkeln, wird ein SVG Element in die Komponente eingefügt. Es enthält eine Maske\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Clipping_and_masking}}, welche die Visualisierung freistellt.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/implementierung-write-comment.png}
+   \includegraphics[width=0.75\textwidth]{images/implementierung-ui-write-comment.png}
    \caption{User Interface um einen Kommentar zu verfassen}
-   \label{figure:write-comment}
+   \label{figure:ui-write-comment}
 \end{figure}
 
 Auf diesem SVG Element kann der Benutzer wie in gängigen Zeichenprogrammen üblich Rechtecke und Pfeile zeichnen. Um Text hinzuzufügen, muss er zuerst auf den Visualisierungsbereich klicken und damit die Koordinaten festlegen, an denen der Text erscheinen soll. Danach öffnet sich ein Texteingabedialog und nachdem der Benutzer bestätigt hat, wird der Text ins SVG Element gezeichnet. Der Text kann später editiert oder wie alle Annotationen auch gelöscht werden.
 
-Selektionen verhalten sich etwas anders als Text, Rechtecke und Pfeile, da sie nicht mit SVG Elementen dargestellt werden. Um zu bestimmen, wann sich die Maus über einem Datenpunkt befindet, wird ein \texttt{mousemove} Event Handler eingesetzt. In diesem werden die aktuellen Mauskoordinaten sowie alle Bounding Boxes der Datenpunkte abgefragt und dann verglichen, ob sich die Koordinaten innerhalb einer Bounding Box befinden. Analog dazu arbeitet der \texttt{click} Handler, welcher Datenpunkte selektiert oder deselektiert. Die Event Handler können nicht auf den Datenpunkten selbst registriert werden, weil diese keine Mausevents auslösen können, da sich das SVG Element über ihnen befindet. Das hat allerdings den praktischen Nebeneffekt, dass vom Entwickler vorgesehene Mausevents in der Visualisierung ebenfalls nicht ausgelöst werden, solange die \enquote{Kommentar schreiben} UI aktiv ist.
+Selektionen verhalten sich etwas anders als Text, Rechtecke und Pfeile, da sie nicht mit SVG Elementen dargestellt werden. Um zu bestimmen, wann sich die Maus über einem Datenpunkt befindet, wird ein \texttt{mousemove} Event Handler eingesetzt. In diesem werden die aktuellen Mauskoordinaten sowie alle Bounding Boxes der Datenpunkte abgefragt und dann verglichen, ob sich die Koordinaten innerhalb einer Bounding Box befinden. Analog dazu arbeitet der \texttt{click} Handler, welcher Datenpunkte selektiert oder deselektiert. Die Event Handler können nicht auf den Datenpunkten selbst registriert werden, weil diese keine Mausevents auslösen, da sich das SVG Element über ihnen befindet. Das hat allerdings den praktischen Nebeneffekt, dass vom Entwickler vorgesehene Mausevents in der Visualisierung ebenfalls nicht ausgelöst werden, solange die \enquote{Kommentar schreiben} UI aktiv ist.
 
 Nachdem der Benutzer den Kommentar bestätigt hat, werden die Koordinaten und Dimensionen der Annotationen in relative Einheiten (zur Größe der Visualisierung) umgerechnet und an das Kommentar Backend (siehe Abschnitt~\ref{section:implementierung:backend:kommentare}) gesendet.
 
 \subsubsection{Einschränkungen}
 
-Die Lösung, \texttt{mouseover} über Datenpunkten mit Hilfe der Bounding Box festzustellen funktioniert zwar, hat aber einen Nachteil: Da die Bounding Box immer rechteckig ist, können \enquote{false positives} auftreten (Abbildung~\ref{figure:kommentar-bbox}). Variante A ist der Idealfall; die Bounding Box ist gleich groß wie der Datenpunkt. Das ändert sich allerdings, wenn der Datenpunkt transformiert wird (45$^\circ$ Rotation in Variante B) oder eine nicht-eckige Form hat (Kreis in Variante C).
+Die Lösung, \texttt{mouseover} über Datenpunkten mit Hilfe der Bounding Box festzustellen funktioniert zwar, hat aber einen Nachteil: Da die Bounding Box immer rechteckig ist, können \enquote{false positives} auftreten (Abbildung~\ref{figure:kommentar-bbox}). Variante A ist der Idealfall; die Bounding Box ist gleich groß wie die Repräsentation des Datenpunkts. Das ändert sich allerdings, wenn die Repräsentation transformiert wird (45$^\circ$ Rotation in Variante B) oder eine nicht-eckige Form hat (Kreis in Variante C).
 
 \begin{figure}[htbp]
    \centering
@@ -2153,9 +2167,55 @@ Die Lösung, \texttt{mouseover} über Datenpunkten mit Hilfe der Bounding Box fe
 
 Eine Möglichkeit, diese Einschränkung zu umgehen, ist eine weitere Funktion in die API einer Komponente hinzuzufügen. Sie teilt dem Hilfesystem mit, ob ein Punkt $(x,y)$ innerhalb eines Datenpunkts liegt oder nicht. Diese Funktion kann optional genutzt werden: Ist sie implementiert, verwendet sie das Hilfesystem. Ansonsten arbeitet es wie bisher mit Bounding Boxes.
 
-\subsection{Bedienung und Kommunikation}
+\subsection{Bedienung}
 
-Um für die Interaktion wichtige UI Elemente hervorzuheben, werden diese eingefärbt und der Rest der Komponente abgedunkelt. Der Algorithmus dafür ist wie folgt: Zuerst wird ein teilweise transparentes, dunkles \texttt{div} in die Komponente eingefügt, um den dunklen Hintergrund herzustellen. Danach wird ein weiteres \texttt{div} erstellt, die \enquote{Rootcopy}. Diese hat dieselbe Größe und Position wie die Komponente. In die Rootcopy wird wiederum ein \texttt{svg} Element eingefügt, welches sie ausfüllt. Das hat den Grund, dass relevante UI Elemente auch SVG \texttt{rect}s oder ähnliches sein können. Sie werden vom Browser nur gerendert, wenn sie sich auch in einem \texttt{svg} befinden. Danach werden alle von einem CSS Selektor getroffenen Elemente kopiert (entweder in die Rootcopy selbst oder ins \texttt{svg}) und gleich positioniert. Bei SVG Elementen ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt. Das geschieht mit jQuerys \texttt{.css()} Methode, welche das \texttt{style} Attribut des DOM Elements setzt und so wegen maximaler Spezifität alle anderen vorhandenen Regeln überschreibt. Bei jedem durch Selektor $s_i$ getroffenen Element und dessen Kopie wird außerdem ein Attribut \texttt{data-vizboard-copy} auf \texttt{copy<i>} gesetzt. Der Grund dafür ist die Verbindung zwischen Aktionen und UI Elementen: Bei \texttt{mouseover} über einer Aktion werden alle dafür relevanten UI Elemente hervorgehoben. Um diese zu finden, kann der Selektor nicht in der Rootcopy ausgeführt werden: Selektoren wie \texttt{:nth-child(odd)} oder \texttt{div.parent > div.content .relevant} würden falsche Ergebnisse liefern. Aus diesem Grund werden die Selektoren in der Komponente ausgeführt und die Kopien der Elemente mit den Originalen über das Attribut \texttt{data-vizboard-copy} verbunden, sodass sie bei \texttt{mouseover} einfach gefunden werden können.
+Um für die Interaktion wichtige UI Elemente hervorzuheben, werden diese eingefärbt und der Rest der Komponente abgedunkelt (Abbildung~\ref{figure:ui-howto-step1}). Die Kreise unten links und oben rechts sind abgeschnitten, da die Datenpunkte sich an der Grenze des dargestellten Datenbereichs befinden und von der SVG Maske abgeschnitten werden.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-howto-step1.png}
+   \caption{Assistance zur Bedienung, Schritt 1}
+   \label{figure:ui-howto-step1}
+\end{figure}
+
+Der Algorithmus, um diesen Zustand herbeizufüren, ist wie folgt: Zuerst wird ein teilweise transparentes, dunkles \texttt{div} in die Komponente eingefügt, um den dunklen Hintergrund herzustellen. Danach wird ein weiteres \texttt{div} erstellt, die \enquote{Rootcopy}. Diese hat dieselbe Größe und Position wie die Komponente. In die Rootcopy wird wiederum ein \texttt{svg} Element eingefügt, welches sie ausfüllt. Das hat den Grund, dass relevante UI Elemente auch SVG \texttt{rect}s oder ähnliches sein können. Sie werden vom Browser nur gerendert, wenn sie sich auch in einem \texttt{svg} befinden. Danach werden alle von einem CSS Selektor getroffenen Elemente kopiert (entweder in die Rootcopy selbst oder ins \texttt{svg}) und gleich positioniert. Bei SVG Elementen ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt. Das geschieht mit jQuerys \texttt{.css()} Methode, welche das \texttt{style} Attribut des DOM Elements setzt und so wegen maximaler Spezifität alle anderen vorhandenen Regeln überschreibt. Bei jedem durch Selektor $s_i$ getroffenen Element und dessen Kopie wird außerdem ein Attribut \texttt{data-vizboard-copy} auf \texttt{copy<i>} gesetzt. Der Grund dafür ist die Verbindung zwischen Aktionen und UI Elementen: Bei \texttt{mouseover} über einer Aktion werden alle dafür relevanten UI Elemente hervorgehoben. Um diese zu finden, kann der Selektor nicht in der Rootcopy ausgeführt werden: Selektoren wie \texttt{:nth-child(odd)} oder \texttt{div.parent > div.content .relevant} würden falsche Ergebnisse liefern. Aus diesem Grund werden die Selektoren bei \texttt{mouseover} in der Komponente ausgeführt und die Kopien der Elemente über das Attribut \texttt{data-vizboard-copy} gefunden.
+
+\subsubsection{Einschränkungen}
+
+In diesem Abschnitt werdne die Grenzen der gewählten Strategien, um Elemente hervorzuheben, aufgezeigt. Abbildung~\ref{figure:ui-howto-step2} zeigt den nächsten Schritt von Abbildung~\ref{figure:ui-howto-step1}. Positiv zu bewerten ist, dass die Bilder quadratisch sind und so die Panels ausfüllen. Allerdings ist das Ergebnis der Aktion (der Kreis ist orange gefüllt) im dritten Panel nur sehr schwer zu erkennen. Unter Umständen sollte doch wieder wie im Konzept ursprünglich vorgesehen, aber nach der formativen Nutzerstudie verworfen, ein viertes Panel am Anfang eingefügt werden. Dieses soll den Ursprungszustand der Komponente darstellen und so ähnlich wie bei einem Suchbild zum Vergleich dienen. Eine andere Möglichkeit wäre die Panels zu vergrößern, was aber nur in Maßen möglich ist und nicht sehr viel Wirkung zeigen wird.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-howto-step2.png}
+   \caption{Assistance zur Bedienung, Schritt 2}
+   \label{figure:ui-howto-step2}
+\end{figure}
+
+In Abbildung~\ref{figure:ui-howto-step2-bad} ist ein schlechtes Beispiel zu sehen. Das relevante Element ist so groß wie die Komponente selbst und hat mit mehr als~6.5 ein recht extremes Seitenverhältnis, weswegen sie das quadratische Panel nur unzureichend ausfüllt. Die dargestellte Komponente ist außerdem so programmiert, dass sie ihren Zustand kaum merklich verändert.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/implementierung-ui-howto-step2-bad.png}
+   \caption{Assistance zur Bedienung, Schritt 2}
+   \label{figure:ui-howto-step2-bad}
+\end{figure}
+
+Eine mögliche Lösung wäre das quadratische Panel immer zu füllen. Dann stellt sich allerdings die Frage, welcher Ausschnitt des Bilds gezeigt und wie dieser bestimmt und gefunden werden soll. Füllt man beispielsweise von links, sähe man in diesem Beispiel in allen Bildern hauptsächlich graue Fläche.
+
+Dem Problem könnte auch beigekommen werden, wenn die Panels das Seitenverhältnis ihrer Bilder annähmen. Allerdings ist das Layout der Panels dann unvorhersehbar.
+
+Ein Kompromiss könnte sein, die Panels quadratisch zu lassen und die Bilder füllend darzustellen, aber es dem Benutzer zu ermöglichen, innerhalb der Panels zu scrollen.
+
+\subsection{Kommunikation}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-communication.png}
+   \caption{Assistance zur Kommunikation}
+   \label{figure:ui-communication}
+\end{figure}
+
+% hier? screenshot. Und? Wat.
 
 \section{Backend}
 \label{section:implementierung:backend}
@@ -2229,9 +2289,30 @@ Abbildung~\ref{figure:bedienung-backend} zeigt, wie die Bilder für das Hilfesys
    \label{figure:bedienung-backend}
 \end{figure}
 
+\subsubsection{SMCDL}
+
+% was ich da dazu reingetan hab
+
+\subsubsection{MCDO}
+
+% was ich da dazu reingetan hab
+
+\subsubsection{PhantomJS}
+
+% phantomjs wird vom assistancegenerator (java) gestartet
+% vorher html datei erstellen (skeleton.html)
+% und notwendige infos so rausschreiben, dass sie phantom lesen kann (mcdl.json)
+
 Um die verschiedenen Operationen auszuführen, wird zunächst jQuery eingesetzt, um die notwendigen Elemente zu finden. Für die Simulation von Klicks und Doppelklicks bietet PhantomJS bereits mit der Methode \texttt{sendEvent()} eine Schnittstelle. Scrolls werden mit Hilfe von programmatisch erzeugten WheelEvents\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent}} simuliert. Außerdem unterstützt die Hilfegenerierung noch Drags, welche mit einer Kombination von \texttt{mousedown}, \texttt{mousemove} und \texttt{mouseup} Events simuliert werden.
 
-Die Operationen müssen hintereinander isoliert ausgeführt werden. Gegebenenfalls muss das Hilfesystem nach einer Operation warten, etwa auf das Ende einer Animation (siehe Abschnitt XY). Dabei darf es allerdings nicht blockieren, da ansonsten die Animation nicht ausgeführt wird. Busy Waiting kommt als Lösung deswegen nicht in Frage. Eine weitere Möglichkeit wären Timeouts. Diese machen den Kontrollfluss im Sourcecode schwer nachvollziehbar. Außerdem muss durch die asynchrone Ausführung irgendwie verhindert werden, dass PhantomJS vorzeitig beendet wird. Aus diesen Gründen bieten sich Promises\footnote{\url{http://wiki.commonjs.org/wiki/Promises/A}} zur Koordination von asynchronen, nicht blockierenden Methoden an. Dafür wird die Bibliothek Q eingesetzt.
+Die Operationen müssen hintereinander isoliert ausgeführt werden. Gegebenenfalls muss das Hilfesystem nach einer Operation warten, etwa auf das Ende einer Animation (siehe Abschnitt~\ref{section:konzeption:bedienung}). Dabei darf es allerdings nicht blockieren, da ansonsten die Animation nicht ausgeführt wird. Busy Waiting kommt als Lösung deswegen nicht in Frage. Eine weitere Möglichkeit wären Timeouts. Diese machen den Kontrollfluss im Sourcecode schwer nachvollziehbar. Außerdem muss durch die asynchrone Ausführung irgendwie verhindert werden, dass PhantomJS vorzeitig beendet wird. Aus diesen Gründen bieten sich Promises\footnote{\url{http://wiki.commonjs.org/wiki/Promises/A}} zur Koordination von asynchronen, nicht blockierenden Methoden an. Dafür wird die Bibliothek Q\footnote{\url{https://github.com/kriskowal/q}} eingesetzt.
+
+\subsubsection{API}
+
+% bilder liegen in CoRe/assistanceImgs
+% ordnerstruktur
+% Format des SOAP requests
+
 
 %#####################################################
 \printbibliography[title=Literaturverzeichnis]
