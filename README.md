@@ -3,9 +3,28 @@
 My diploma thesis at Dresden University of Technology.
 
 # TODO
+* Howto Hilfe, manchmal erste zwei Panels falsch -> schwer reproduzierbar
+* Studie: Versteckte Funktion, transitive Verbindungen..? --> Nutzer verstehen (und besser) die Bedienung. Für Entwickler aufzeigen, wie unterschiedlich der Aufwand im Vergleich zu vorher bzw. ohne Assistance ist.
+* Studie: SUS Fragebogen
+* Testdaten
+* Events pausieren während Hilfe! --> Martin sagte, das wär schon drin, is aber nicht? -> Gregor
+* Assistance --> Timmah
+	* Dataset ID
+	* Label von DV
+	* Originale Mappings
+	* Visualized Properties müssen eine Kombination aus Datensatz ID, Klasse und Property sein. Und nicht vom generischen Datenschema, sondern von den Original URIs. Die bekomme ich über Tims Schnittstelle*, die Komponente lädt das Mapping dann bei der Initialisierung selbst.
 
-* Layout überlegen für Panels, wenn Anleitungen unterschiedlich lang sind: Mal 3 Panels, mal fünf? --> In Instructions nur kürzeste, in Kommunikation mehrere Zeilen (weil da ja tatsächlich verschiedene Aktionen erklärt werden).
-* Überlegen, was alles so für die Positionierung nötig ist: HTML margins, paddings, positions, SVG x's, y's, widths, transforms --> das alles muss nämlich beim highlight berücksichtigt werden, zumindest konzeptionell
+
+## Arbeit
+* Bessere Listen
+* 3 Sachen: Bessere Bedienung für Nutzer, besseres Datenverständnis für Nutzer, weniger Entwicklungsaufwand für Dev
+* Homogenität des Konzepts betonen (Aussehen, Bedienung, Metaphern…)
+* Konzept: Wie gehe ich damit um, dass die Hilfe für Komponenten potenziell unterschiedliche Labels hat als was der Benutzer gerade sieht? Variante 1: Labels haben eigene CSS Klasse, die ich in der Hilfe auf "visibility:none" setze. Variante 2: Hilfe wird erst generiert, wenn der Benutzer Komponenten und Datensatz ausgewählt hat. --> verstecken
+* Was wenn Komponenten selbst komposit? Eigentlich reichen mehrere visualization roots, oder?
+* CSS Klassen --> Datenattribute, weil ich will ja keine CSS Styles drauf tun
+* Überarbeiten wie Howto Hilfe aussieht, generiert wird etc.
+* Überarbeiten wie Comment Backend arbeitet (Memento=JSON)
+* Rechtfertigen warum ich nicht überall RDFa nehm
 
 ## Implementierung
 
@@ -14,7 +33,7 @@ My diploma thesis at Dresden University of Technology.
 Zuerst:
 
 1. Szenario mit Komponenten überlegen
-2. Komponentenbeschreibung der Komponenten erstellen (wie in Konzept)
+2. --Komponentenbeschreibung der Komponenten erstellen (wie in Konzept)--
 3. --SVN Branch von allem erstellen, programmieren anfangen--
 
 Implementierungsablauf:
@@ -23,11 +42,11 @@ Implementierungsablauf:
 2. --CoRe: Neue SMCDL Daten in MCDO übertragen--
 3. -Hilfeservice: Integration von MRE, DaRe und CoRe-
 4. --Hilfeservice: Schnittstelle um Hilfegenerierung für Komponente anzustoßen--
-5. Hilfeservice: Hilfegenerierung
+5. --Hilfeservice: Hilfegenerierung--
 6. --Hilfeservice: Schnittstelle um Hilfepanels auszugeben--
 7. --Hilfesystem: Grundlegendes Frontend (Backbone + jQuery wär nice)--
-8. Komponente: Titelleiste um Buttons erweitern (GenericUIC.js) Aufruf HS?
-9. Hilfesystem: Frontend für Bedienung schreiben
+8. --Komponente: Titelleiste um Buttons erweitern (GenericUIC.js) Aufruf HS?--
+9. --Hilfesystem: Frontend für Bedienung schreiben--
 
 === bedienungshilfe fertig ===
 
@@ -37,32 +56,22 @@ Implementierungsablauf:
 
 11. --DaRe: Kommentare Backend schreiben--
 12. --DaRe: REST API für Kommentare--
-13. Hilfesystem: Kommentar schreiben Frontend
-14. Hilfesystem: Kommentar anzeigen Frontend
+13. --Hilfesystem: Kommentar schreiben Frontend--
+14. --Hilfesystem: Kommentar anzeigen Frontend--
 
 === kommentare fertig ===
 
+## Einschränkungen
 
-## TODO
-### Integration
-* GenericUIC.js erweitern für Standardtoolbar?
-* Wie Aufruf, wenn Hilfesystem in Backbone geschrieben?
-
-### Kommentare
-* CommentBackend: Votes!
-* CommentBackend: Was ist mit Arrays und Objekten beim Memento? Hab ich in meinem Key-Value Schema ursprünglich nicht vorgesehen. Variante 1: Values können wieder Key-Values sein (wie JSON). Variante 2: Arrays und Objekte werden als JSON String serialisiert und beim laden ge-eval()-t. Problem bei beiden ist, dass Infos verloren gehen, weil Regexes, functions und what not nicht serialisiert werden.
-* CommentBackend: hasCommentId einfügen um Comments einzeln rauszuholen. Solange ich das nicht brauch: Nicht machen.
-* CommentBackend: double statt float -.-
-### Konzept
-* Homogenität des Konzepts betonen (Aussehen, Bedienung, Metaphern…)
-* Konzept: Wie gehe ich damit um, dass die Hilfe für Komponenten potenziell unterschiedliche Labels hat als was der Benutzer gerade sieht? Variante 1: Labels haben eigene CSS Klasse, die ich in der Hilfe auf "visibility:none" setze. Variante 2: Hilfe wird erst generiert, wenn der Benutzer Komponenten und Datensatz ausgewählt hat. --> verstecken
-* Was wenn Komponenten selbst komposit? Eigentlich reichen mehrere visualization roots, oder?
-* Wie ActivityActions Ontologie ansprechen? In der MCDL.owl ist die nicht importiert.
-### Arbeit
-* Bessere Listen
+### Howto
+* CSS Transforms? Die Klassen nehm ich zwar mit beim Kopieren, aber wie die mit andren Styles interagieren… Keine Ahnung. --> Problem mit Styles, die inherited werden. Die DOM Struktur ist in der Rootcopy ja anders. Vielleicht sollte man doch ohne abdunkeln und kopieren arbeiten.
+* Hintergrund setzen funktioniert nur, wenns wirklich am "obersten" Div klappt. Wenn drunter was den background überschreibt, krieg ich das nicht mit.
+* Hintergrund kann nicht abgedunkelt werden, wenn ein relevantes Element viewportfüllend ist - ist halt so.
+* Problem wenn das Seitenverhältnis des Elements nicht annähernd quadratisch, aber riesengroß ist. Siehe timeline-band
 
 ## Ausblick
 
+* Legende gleich bei Integration angeben
 * Bedienungshilfe mit Maus animieren
 * Auswahlhilfen für Annotationsbereiche
 * CSS von Komponente im CoRe auf relative Einheiten trimmen (schwierig weil man nicht weiß, was skaliert werden muss und was nicht)
