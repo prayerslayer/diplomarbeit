@@ -1170,7 +1170,7 @@ Damit das Hilfesystem aber die URIs der aktuell visualisierten Datatype Properti
 \section{Bedienung einer Komponente}
 \label{section:konzeption:bedienung}
 
-In den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde festgestellt, dass das Hilfesystem den Benutzer über das Verhalten der InfoVis aufklären muss. Da die Komponenten \enquote{Black Boxes} sind und von verschiedenen Entwicklern stammen, kann der Benutzer weder von verfügbaren möglichen Aktionen wie z.\,B. zoomen noch von einheitlicher Gestaltung der Interaktionen ausgehen. Beispielsweise wann eine Interaktion durch \texttt{MouseOver} anstatt \texttt{Click} ausgeführt wird. Deswegen ist eine Hilfestellung zur Bedienung notwendig.
+In den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde festgestellt, dass das Hilfesystem den Benutzer über das Verhalten der InfoVis aufklären muss. Da die Komponenten \enquote{Black Boxes} sind und von verschiedenen Entwicklern stammen, kann der Benutzer weder von verfügbaren möglichen Aktionen wie z.\,B. zoomen noch von einheitlicher Gestaltung der Interaktionen ausgehen. Beispielsweise wann eine Interaktion durch \texttt{MouseOver} anstatt \texttt{Click} ausgeführt wird. Zusätzlich sind die verschiedenen Komponenten wahrscheinlich visuell inkonsistent, einmal gelerntes kann nur schwer wiederverwendet werden. Deswegen ist eine Hilfestellung zur Bedienung notwendig.
 
 % wieder erste möglichkeit: dev baut selbst hilfe ein. text+bilder: kein einfluss auf wortwahl, art der bilder, ausführlichkeit etc. Comics: für jede aktion eins, übelster aufwand, kann man nicht verlangen, außerdem 2. wer sagt dass ein prof. sw-entwickler das können soll?
 
@@ -1182,7 +1182,7 @@ Einerseits könnten Aktionen mit Hilfe einer festgelegten Grammatik beschrieben 
 
 Wie in den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) gezeigt, können Comics eine effektive und attraktive Lösung für User Assistance sein. Allerdings stellt es für den Entwickler erheblichen Mehraufwand dar, für jede mögliche Aktion verschiedene Comicpanels zu erstellen. Davon abgesehen können (und sollen) die gestalterischen Fähigkeiten dazu nicht von ihm erwartet werden (\emph{Minimalität}) und das Problem der Kontrolle über den Inhalt ist auch nicht gelöst (\emph{Korrektheit}, \emph{Vollständigkeit}, \emph{Verständlichkeit}).
 
-Aus diesem Grund werden die Comicpanels vom Hilfesystem automatisch erstellt. Es bleibt die Frage der Präsentation: Aus den Grundlagen geht hervor, dass eine multimodale Ausgabe (akustisch-verbal und visuell) zur Lerneffektivität beiträgt. Darauf wird aber aus zwei Gründen verzichtet. Einerseits sollen beide Kanäle gleichzeitig ausgegeben werden. Das ist problematisch, weil vier Panels darzustellen wesentlich schneller möglich ist als eine verbale Erklärung für den Vorgang zu sprechen. Die Darstellung der Panels müsste sich der Audioausgabe anpassen und würde wesentlich langsamer vonstatten gehen. Eine nichtfunktionale Anforderung an die Hilfestellung ist aber, dass der Benutzer die Hilfe schnell aufnehmen und verarbeiten können soll. Zweitens wird automatische Soundausgabe gemeinhin als schlechte Usability angesehen. Hauptsächlich weil der Nutzen von Screenreadern dadurch eingeschränkt wird, aber auch weil der Benutzer automatische Wiedergabe nicht kontrollieren kann und die Audiodaten Bandbreite beanspruchen.
+Aus diesem Grund werden die Comicpanels vom Hilfesystem automatisch erstellt. Es bleibt die Frage der Präsentation: Aus den Grundlagen geht hervor, dass eine multimodale Ausgabe (akustisch-verbal und visuell) zur Lerneffektivität beiträgt. Darauf wird aber aus zwei Gründen verzichtet. Einerseits sollen beide Kanäle gleichzeitig ausgegeben werden. Das ist problematisch, weil vier Panels darzustellen wesentlich schneller möglich ist als eine verbale Erklärung für den Vorgang zu sprechen. Die Darstellung der Panels müsste sich der Audioausgabe anpassen und würde wesentlich langsamer vonstatten gehen. Eine nichtfunktionale Anforderung an die Hilfestellung ist aber, dass der Benutzer die Hilfe schnell aufnehmen und verarbeiten können soll. Zweitens wird automatische Soundausgabe gemeinhin als schlechte Usability angesehen. Hauptsächlich weil der Nutzen von Screenreadern dadurch eingeschränkt wird, aber auch weil der Benutzer automatische Wiedergabe nicht kontrollieren kann und die Audiodaten möglicherweise unerwünscht Bandbreite beanspruchen.
 
 % also bleibt es an uns hängen.
 
@@ -1195,23 +1195,34 @@ Die VISO enthält im Namensraum \texttt{viso:activity} Konzepte der hierarchisch
 
 \begin{itemize}
 	\item \textbf{Aktivitäten} stellen langfristige Ziele des Benutzers dar, die nicht unmittelbar zu Ergebnissen führen (müssen). In Bezug auf das Szenario (Abschnitt~\ref{section:standderforschung:szenario}) wäre die Aktivität von Anna \enquote{mehr über die geografische Verteilung verschiedener Genvariationen lernen}.
-	\item \textbf{Aktionen} sind Teilziele der Aktivität. Im Szenario sind das \enquote{VizBoard aufrufen}, \enquote{Komponenten auswählen} etc.
+	\item \textbf{Aktionen} sind Teilziele der Aktivität. Im Szenario sind das \enquote{VizBoard aufrufen}, \enquote{Komponenten auswählen}, \enquote{Tabelle sortieren} etc.
 	\item Aktionen bestehen wiederum aus einer Kette von \textbf{Operationen}, also beispielsweise Klicks oder Drags.
 \end{itemize}
 
 Für das Hilfesystem sind Operationen und Aktionen relevant, da Aktivitäten nicht beeinflusst werden können. Aktionen einer Komponente sind beispielsweise zoomen, suchen oder filtern; Operationen sind etwa Klicks, Drags oder Multitouch-Gesten.
 
-Die Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Es fehlen aber noch Informationen darüber, welche Operationen auf welchen Elementen die Aktion ausführen. Um dem beizukommen, werden Operationen aus der VISO (\enquote{welche Operationen}) zusammen mit CSS Selektoren (\enquote{welche Elemente}) in der Komponentenbeschreibung definiert. Äquivalente Operationen, welche dieselbe Aktion ausführen, werden zusammengefasst. Wenn eine Tabelle sowohl durch einen Klick auf den Spaltenkopf als auch über ein separates Menü sortiert werden kann, werden diese Aktionen als äquivalent zusammengefasst. Sequentielle Operationen werden ebenfalls zusammengefasst, wobei die Reihenfolge im Markup die notwendige Ausführungsreihenfolge darstellt. So können auch zusammengesetzte Operationen, wie beispielsweise für ein HTML \texttt{select} Element nötig, abgebildet werden. Parallele Operationen werden nach demselben Prinzip zusammengefasst, allerdings ist hier die Reihenfolge irrelevant, da sie gleichzeitig ausgeführt werden müssen. Auf diese Weise können zusammengesetzte Operationen der der Art STRG+T abgebildet werden.
+Die CRUISe Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Diese können entweder mit (UI Capability) oder ohne Nutzerinteraktion (System Capability) ausgeführt werden. Für die Bedienungshilfe sind erster Linie UI Capabilities interessant. Allerdings wird sich bei der Hilfe zur Kommunikation (Abschnitt~\ref{section:konzeption:kommunikation} zeigen, dass System Capabilities ebenfalls behandelt werden müssen. Im Folgenden werden zunächst UI Capabilities beschrieben.
 
-Außerdem kann der Komponentenentwickler eine Anzahl von Sekunden definieren, die bei der Generierung der Panels gewartet werden soll. Das ist beispielsweise sinnvoll, wenn längere Animationen zu erwarten sind. Beispielsweise weil der Entwickler UI Elemente innerhalb von fünf Sekunden anstatt 500~Millisekunden einblenden will. Zusätzlich ist es möglich, dass der Entwickler Zusatzinformationen in Stichworten angibt. Zum Beispiel könnte bei einem Balkendiagramm die Skala \enquote{verändert} (Aktion) werden. Dabei ist es wichtig zu wissen, welche Skala verwendet werden wird, z.\,B. linear oder logarithmisch. Der Inhalt dieser Zusatzinformationen kann statischer Freitext oder eine Referenz auf eine Datenvariable im Schema der Komponente sein, deren Label zur Laufzeit mit Hilfe des Mappings zwischen Daten und Schema der Komponente angezeigt würde. Nach demselben Prinzip sollten auch Zusatzinformationen über die VISO Operation angegeben werden können. Vor allem bei Tastaturkürzel (z.\,B. j/k für vor/zurück) macht es Sinn, da so nicht für jede Taste eine VISO Operation erstellt werden muss. Die erwähnten Zusätze zur Komponentenbeschreibung sollten allerdings optional sein, falls der Komponentenentwickler keine Hilfe für bestimmte Aktionen anbieten will.
+\subsubsection{UI Capabilities}
+
+In der Komponentenbeschreibung fehlen Informationen darüber, welche Operationen auf welchen Elementen eine Aktion ausführen. Um dem beizukommen, werden Operationen aus der VISO (\enquote{welche Operationen}) zusammen mit CSS Selektoren (\enquote{welche Elemente}) in der Komponentenbeschreibung definiert. Aktionen können oft auf verschiedene Weise ausgeführt werden, haben also so gesehen eine Menge von äquivalenten Operationen. Wenn beispielsweise eine Tabelle sowohl durch einen Klick auf den Spaltenkopf als auch über ein separates Menü sortiert werden kann, werden diese Aktionen als äquivalent zusammengefasst. Sequentielle Operationen werden ebenfalls zusammengefasst, wobei die Reihenfolge im Markup die notwendige Ausführungsreihenfolge darstellt. So können auch zusammengesetzte Operationen, wie beispielsweise für ein HTML \texttt{select} Element nötig, abgebildet werden. Parallele Operationen werden nach demselben Prinzip zusammengefasst, allerdings ist hier die Reihenfolge irrelevant, da sie gleichzeitig ausgeführt werden müssen. Auf diese Weise können zusammengesetzte Operationen der der Art STRG+T abgebildet werden.
+
+Außerdem kann der Komponentenentwickler eine Wartezeit definieren, die bei der Generierung der Panels beachtet werden soll. Zum Beispiel ist das sinnvoll, wenn längere Animationen zu erwarten sind. Der Entwickler könnte UI Elemente innerhalb von fünf Sekunden anstatt 500~Millisekunden einblenden wollen. Zusätzlich zur Wartezeit ist es möglich, dass der Entwickler Zusatzinformationen in Stichworten angibt. Zum Beispiel könnte bei einem Balkendiagramm die Skala \enquote{verändert} (Aktion) werden. Dabei ist es wichtig zu wissen, welche Skala verwendet werden wird, z.\,B. linear oder logarithmisch. Der Inhalt dieser Zusatzinformationen kann statischer Freitext oder eine Referenz auf eine Datenvariable im Schema der Komponente sein, deren Label zur Laufzeit mit Hilfe des Mappings zwischen Daten und Schema der Komponente angezeigt würde. Nach demselben Prinzip sollten auch Zusatzinformationen über die VISO Operation angegeben werden können. Vor allem bei Tastaturkürzel (z.\,B. j/k für vor/zurück) macht es Sinn, da so nicht für jede Taste eine VISO Operation erstellt werden muss. Die erwähnten Zusätze zur Komponentenbeschreibung sollten allerdings optional sein, falls der Komponentenentwickler keine Hilfe für bestimmte Aktionen anbieten will.
+
+\subsubsection{System Capabilities}
+
+System Capabilities unterscheiden sich von UI Capabilities dadurch, dass sie nicht durch Nutzerinteraktionen ausgeführt werden können. Sie werden an CRUISe Operationen annotiert, welche wiederum als Reaktion auf Events ausgeführt werden. Deswegen ist es nicht sinnvoll, hier VISO Operationen anzugeben. Stattdessen sollten in diesem Fall Beispieldaten aufgeführt werden, anhand derer die Operation im Kontext des Testdatensatzes ordnungsgemäß ausgeführt werden kann. Andere Annotationen wie z.\,B. die Wartezeit können beibehalten werden.
+
+\subsubsection{Zusammenfassung}
 
 Im folgenden werden die in diesem Abschnitt vorgenommenen Änderungen an der Komponentenbeschreibung noch einmal zusammengefasst:
 \begin{itemize}
-	\item Zu den Aktionen werden VISO Operationen angegeben, welche diese ausführen. Diese können einfach, sequentiell oder parallel sein.
+	\item Zu den Aktionen werden VISO Operationen angegeben, welche diese ausführen. Diese können atomar, sequentiell oder parallel sein.
 	\item Zu den VISO Operationen werden CSS Selektoren angegeben, um die relevanten UI Elemente zur Laufzeit finden zu können.
-	\item Die VISO Operationen können Zusatzinformationen beinhalten, um sie besser zu definieren. Ein Beispiel ist die Taste zur Operation \enquote{tippen}.
+	\item Die VISO Operationen können Zusatzinformationen beinhalten, um sie genauer und verständlicher zu definieren. Ein Beispiel ist die Taste zur Operation \enquote{tippen}.
 	\item Zu den Aktionen wird eine Anzahl von Sekunden angegeben, welche die Zeit bis zur finalen Änderung des User Interfaces angeben (beispielsweise wenn alle Animationen beendet sind).
 	\item Zu den Aktionen können Zusatzinformationen in Form Freitext oder Referenzen auf Datenvariablen angegeben werden, um sie näher zu beschreiben.
+	\item Falls die Aktion eine System Capability ist, werden Beispieldaten angegeben, mit denen eine CRUISe Operation ordnungsgemäß ausgeführt werden kann.
 \end{itemize}
 
 \subsection{Generierung der Assistance}
@@ -1225,7 +1236,7 @@ Die User Assistance zur Bedienung soll ein Comic werden, der per Definition wied
 
 % wie machen wir das?
 
-Dazu wird ein sogenannter \enquote{Headless Browser} verwendet. Das ist ein programmierbarer Browser ohne grafische Benutzeroberfläche, der z.\,B. Screenshots einer Seite abspeichern oder Testskripte ausführen kann. Beispiele sind unter anderem PhantomJS\footnote{\url{http://phantomjs.org/}}, HTMLUnit\footnote{\url{http://htmlunit.sourceforge.net/}} oder Ghost\footnote{\url{http://jeanphix.me/Ghost.py/}}.
+Dazu wird ein sogenannter \enquote{Headless Browser} eingesetzt. Das ist ein programmierbarer Browser ohne grafische Benutzeroberfläche, der z.\,B. Screenshots einer Seite abspeichern oder Testskripte ausführen kann. Beispiele sind unter anderem PhantomJS\footnote{\url{http://phantomjs.org/}}, HTMLUnit\footnote{\url{http://htmlunit.sourceforge.net/}} oder Ghost\footnote{\url{http://jeanphix.me/Ghost.py/}}.
 
 % wie läuft das ab?
 
@@ -1233,17 +1244,16 @@ Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. So
 
 \begin{itemize}
 	\item Laufzeitumgebung: Sie ist unter anderem für die Initialisierung und das Layout der Komponenten nötig.
-	\item Data Repository: Die Komponente muss Daten darstellen, welche aus dem DaRe kommen können.
+	\item Data Repository: Die Komponente muss Daten darstellen, welche aus dem DaRe kommen können (aber nicht müssen).
 	\item Component Repository: Das CoRe enthält alle verfügbaren Komponenten und stellt sie dem Hilfeservice zur Verfügung.
 \end{itemize}
 
-Es wurde eben erklärt, dass das DaRe die (Test-)Daten für eine Komponente liefern kann. Der Komponentenentwickler gibt in der Komponentenbeschreibung den gewünschten Datensatz und die zu visualisierenden Daten in Form einer SPARQL Query an, welche die Laufzeitumgebung bei der Generierung der Assistance der Komponente zur Verfügung stellt. Das kann ein \enquote{echter} Datensatz oder ein vom VizBoard-Betreiber zur Verfügung gestellter Testdatensatz sein. Es kann allerdings passieren, dass das DaRe keine passenden Daten enthält, weil die Komponente sehr spezielle Daten visualisiert (z.\,B. 3-Sterne-Hotels in Andorra). Dann sollte der Komponentenentwickler zusammen mit der Komponente Testdaten hochladen können oder eine URL angeben, unter der sie zu finden sind. Das ist zwar etwas Mehraufwand, aber es kann angenommen werden, dass im Laufe der Entwicklung einer Komponente sowieso Testdaten verwendet wurden. Sie müssen in den meisten Fällen also nicht mehr erstellt, sondern nur noch hochgeladen werden. Die Bedienungshilfe kann für alle auf CRUISe basierenden Mashups hilfreich sein. Allerdings kann nicht davon ausgegangen werden, dass diese über ein Data Repository verfügen. Dann muss der Komponentenentwickler in jedem Fall Testdaten zur Generierung der Hilfe zur Verfügung stellen.
+Es wurde eben erklärt, dass das DaRe die (Test-)Daten für eine Komponente liefern kann. Der Komponentenentwickler gibt in der Komponentenbeschreibung den gewünschten Datensatz und die zu visualisierenden Daten in Form einer SPARQL Query an, welche die Laufzeitumgebung bei der Generierung der Assistance der Komponente zur Verfügung stellt. Das kann ein \enquote{echter} Datensatz oder ein vom VizBoard-Betreiber zur Verfügung gestellter Testdatensatz sein. Es kann allerdings passieren, dass das DaRe keine passenden Daten enthält, weil die Komponente sehr spezielle Daten visualisiert (z.\,B. 3-Sterne-Hotels in Andorra). Dann sollte der Komponentenentwickler zusammen mit der Komponente Testdaten hochladen können oder eine URL angeben, unter der sie zu finden sind. Das ist zwar etwas Mehraufwand, aber es kann angenommen werden, dass im Laufe der Entwicklung einer Komponente sowieso Testdaten verwendet wurden. Sie müssen in den meisten Fällen also nicht mehr erstellt, sondern nur noch zur Verfügung gestellt werden. Die Bedienungshilfe kann für alle auf CRUISe basierenden Mashups hilfreich sein. Allerdings kann nicht davon ausgegangen werden, dass diese über ein Data Repository verfügen. Dann muss der Komponentenentwickler in jedem Fall Testdaten zur Generierung der Hilfe zur Verfügung stellen.
 
 Nachdem die Komponente von der Laufzeitumgebung vollständig initialisiert und integriert wurde, führt der Hilfeservice folgende Schritte aus:
 
 \begin{enumerate}
-	\item Erstelle einen Screenshot vom Ausgangszustand der Komponente
-	\item Für jede verfügbare Aktion:
+	\item Für jede verfügbare UI Capability:
 	\begin{enumerate}
 		%\item Finde die Bounding Box der relevanten Elemente
 		\item Für alle äquivalenten Operationen:
@@ -1262,7 +1272,16 @@ Nachdem die Komponente von der Laufzeitumgebung vollständig initialisiert und i
 	\end{enumerate}
 \end{enumerate}
 
-Falls die Operation in Schritt 2.a.i sequentiell sein sollte, muss der beschriebene Algorithmus die Bounding Box der Elemente jeder Teiloperation finden, genauso bei parallelen Operationen.
+Falls die Operation in Schritt 2.a.i sequentiell sein sollte, muss der beschriebene Algorithmus die Bounding Box der Elemente jeder Teiloperation finden, genauso bei parallelen Operationen. Für System Capabilities wird derselbe Algorithmus verwendet, allerdings entfällt der Teil mit VISO Operationen. Stattdessen wird einfach die CRUISe Operation ausgeführt.
+
+\begin{enumerate}
+	\item Für jede verfügbare System Capability:
+	\begin{enumerate}
+		\item Führe die CRUISe Operation mit Beispieldaten aus
+		\item Warte die definierte Anzahl an Sekunden
+		\item Erstelle einen Screenshot vom Ergebnis der Aktion
+	\end{enumerate}
+\end{enumerate}
 
 % hell und dunkel unterscheiden
 
@@ -1295,7 +1314,7 @@ Die Hilfestellung zur Bedienung kann über einen ?-Button in der Titelleiste auf
    \label{figure:bedienung-step1}
 \end{figure}
 
-Danach werden schrittweise mindestens drei Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel startet mit der ganzen Komponente, zoomt dann aber auf die relevanten UI Elemente. Panel~2 startet wiederum mit dem Inhalt von Panel~1, überblendet dann aber eine notwendige Operation. Das dritte Panel startet mit dem Inhalt aus Panel~1, zoomt aber auf eine Gesamtansicht wie anfangs hinaus, sodass der Benutzer den Unterschied sehen kann. Mit den Pfeilen kann zwischen verschiedenen Operationen gewechselt werden, die dieselbe Aktion ausführen. Sollte eine Aktion aus mehreren zusammenhängenden Operationen bestehen, wiederholen sich die Panels~1 und~2 dementsprechend. Falls mehrere gleichwertige Operationen eine Aktion ausführen, so können die Panels~1 und~2 gescrollt werden.
+Danach wird die kürzeste Operationsfolge für die ausgewählte Aktion erklärt. Es werden schrittweise mindestens drei Panels in der Komponente angezeigt (Abbildung~\ref{figure:bedienung-step2}). Der Inhalt der Panels ist in Abbildung~\ref{figure:bedienung-comic} zu sehen. Das erste Panel startet mit der ganzen Komponente, zoomt dann aber auf das erste relevante UI Element. Panel~2 startet wiederum mit dem Inhalt von Panel~1, überblendet dann aber eine notwendige Operation. Das dritte Panel startet mit dem Inhalt aus Panel~1, zoomt aber auf eine Gesamtansicht wie anfangs hinaus, sodass der Benutzer den Unterschied sehen kann. Sollte eine Aktion aus mehreren zusammenhängenden Operationen bestehen (sequentielle VISO Operation), wiederholen sich die Panels~1 und~2 dementsprechend. Falls mehrere gleichwertige Operationen (parallele VISO Operation) eine Aktion ausführen, so können die Panels~1 und~2 gescrollt werden.
 
 \begin{figure}[htbp]
    \centering
@@ -1423,11 +1442,11 @@ Ein Punkt, der in den verwandten Arbeiten (Abschnitt~\ref{section:standderforsch
 \subsection{Markup und Backend}
 \label{section:konzeption:verlinkung:backend}
 
-Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einer dafür vorgesehenen CSS Klasse aus: Eine Klasse für Legenden, eine für Freitext. Diese können entweder in der Komponentenbeschreibung angegeben und so selbst gewählt werden, oder sie werden vom Vizboard-Betreiber festgelegt. Hier wird die letzte Variante umgesetzt, weil sie dem Komponentenentwickler etwas Aufwand erspart und \enquote{Kollisionen} mit bereits vorhandenen Klassen erstens unwahrscheinlich sind und zweitens einfach behoben werden können (beispielsweise mit dem Präfix \texttt{my-}). Der zu erklärende Begriff ist dann der Textinhalt des Tags mit der entsprechenden Klasse. Bei Interaktionselementen sind die CSS Selektoren für die Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) schon vorhanden und das Konzept wird in Form einer URI in die Komponentenbeschreibung eingefügt.
+Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einem dafür vorgesehenen Datenattribut aus: Eines für Legenden, eines für Freitext. Diese können entweder in der Komponentenbeschreibung angegeben und so selbst gewählt werden, oder sie werden vom Vizboard-Betreiber festgelegt. Hier wird die letzte Variante umgesetzt, weil sie dem Komponentenentwickler etwas Aufwand erspart und \enquote{Kollisionen} mit bereits vorhandenen Klassen erstens unwahrscheinlich sind und zweitens einfach behoben werden können (beispielsweise mit dem Präfix \texttt{my-}). Der zu erklärende Begriff ist dann der Textinhalt des Tags mit der entsprechenden Klasse. Bei Interaktionselementen sind die CSS Selektoren für die Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) schon vorhanden und das Konzept wird in Form einer URI in die Komponentenbeschreibung eingefügt.
 
 Auf diese Weise können die erklärungsbedürftigen Konzepte über CSS Selektoren gefunden werden. Allerdings stellt sich die Frage, wie das Hilfesystem die Beschreibung lesen kann. Die Konzepte sind im Falle von Freitext dynamisch, bei Legenden statisch, aber abhängig vom Datensatz und bei Interaktionselementen statisch in Abhängigkeit der Komponente. Es erscheint sinnvoll eine einheitliche Zugriffsschicht für Konzeptbeschreibungen zu etablieren. Dabei bietet sich im Fall von VizBoard das DaRe an, welches als einheitliche Zugriffsschicht auf Daten konzipiert ist. Bei anderen auf CRUISe aufbauenden Mashups sollte das CoRe diese Funktion übernehmen.
 
-Das DaRe findet das Domain Assignment eigenständig, nachdem ein Datensatz hochgeladen wurde. Danach sollte eine Beschreibung aus der externen Wissensbasis abgerufen und gespeichert werden. Das hat den Nachteil, dass die Informationen zum Zeitpunkt der Anzeige möglicherweise nicht mehr aktuell sind. Da sich aber Beschreibungen zu Konzepten wie \enquote{logarithmische Skala} kaum ändern sollten und als Beispiel die DBpedia nur ein- bis zweimal pro Jahr ein Update bekommt\footnote{\url{http://blog.dbpedia.org/category/dataset-releases/} zeigt ein bis zwei Artikel im Jahr, abgerufen am 01.07.2013.}, sollte das kein Problem sein. Im Gegenzug ist das Hilfesystem unabhängig von der DBpedia verfügbar und schneller, da im Vergleich zum dynamischen Abruf der Beschreibung ein Netzwerk Round Trip eingespart wird.
+Das DaRe findet das Domain Assignment eigenständig, nachdem ein Datensatz hochgeladen wurde. Danach sollte eine Beschreibung aus der externen Wissensbasis abgerufen und gespeichert werden. Das hat den Nachteil, dass die Informationen zum Zeitpunkt der Anzeige möglicherweise nicht mehr aktuell sind. Da sich aber Beschreibungen zu Konzepten wie \enquote{logarithmische Skala} kaum ändern sollten und als Beispiel die DBpedia nur ein- bis zweimal pro Jahr ein Update bekommt\footnote{\url{http://blog.dbpedia.org/category/dataset-releases/} zeigt ein bis zwei Artikel im Jahr, abgerufen am 01.07.2013.}, sollte das kein Problem sein. Im Gegenzug ist das Hilfesystem unabhängig von der DBpedia verfügbar und schneller, da im Vergleich zum dynamischen Abruf der Beschreibung ein Network Round Trip eingespart wird.
 
 Im Fall von Interaktionselementen parst das CoRe die Komponentenbeschreibung, nachdem eine Komponente hochgeladen wurde. Dabei extrahiert es die notwendigen Konzepte und schickt diese ans DaRe, welches die Beschreibungen dazu abruft und speichert.
 
@@ -1506,7 +1525,7 @@ Gründe, um einen Kommentar zu löschen, beinhalten unter anderem Beschimpfungen
 \begin{itemize}
 	\item Kommentare können nicht gelöscht werden. Das könnte Benutzer davon abhalten, Kommentare zu schreiben, was auch nicht Sinn der Sache ist.
 	\item Kommentare können gelöscht werden, solange keine Referenz darauf besteht. So kann ein Diskussionsverlauf konsistent bleiben, allerdings ist dieser Weg aus Nutzersicht schwer verständlich.
-	\item Kommentare können beliebig gelöscht werden. Diese Variante weckt keine Ängste, den eigenen Kommentar nicht mehr löschen zu können. Es muss aber etwas mit den Referenzen auf gelöschte Kommentare geschehen, da ansonsten die Nachvollziehbarkeit der Diskussion leidet. Beispielsweise könnte die referenzierte Originalversion abgespeichert und eingeblendet werden.
+	\item Kommentare können beliebig gelöscht werden. Diese Variante weckt keine Bedenken, den eigenen Kommentar nicht mehr löschen zu können. Es muss aber etwas mit den Referenzen auf gelöschte Kommentare geschehen, da ansonsten die Nachvollziehbarkeit der Diskussion leidet. Beispielsweise könnte die referenzierte Originalversion abgespeichert und eingeblendet werden.
 \end{itemize}
 
 \subsubsection{Visualisierung annotieren}
@@ -1516,7 +1535,7 @@ Um eine gemeinsame Grundlage für eine Diskussion zu schaffen ist es notwendig, 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-datenbereiche.png}
-   \caption{Ein Scatterplot mit eingezeichneten Annotationsmöglichkeiten: Leere Bereiche (rot), nicht-leere Bereiche (grün) und einzelne Datenpunkte (orange).}
+   \caption{Ein Scatterplot mit eingezeichneten Annotationsmöglichkeiten: Leere Bereiche (A), nicht-leere Bereiche (B) und einzelne Datenpunkte (C).}
    \label{figure:datenbereiche}
 \end{figure}
 
@@ -1527,7 +1546,9 @@ Um eine gemeinsame Grundlage für eine Diskussion zu schaffen ist es notwendig, 
 
 Um \emph{Wiederverwendbarkeit} über Komponenten hinweg zu fördern, sollten Kommentare sich möglichst auf die visualisierten Daten selbst beziehen (datenbezogene Kommentare) und nicht auf einen Bereich der Visualisierung (ortsbezogene Kommentare).
 
-Komponenten, welche die Kommentarfunktion anbieten wollen, dürfen aus zwei Gründen keine externen Daten anzeigen (also beispielsweise die neuesten Tweets eines Twitter-Accounts): Erstens könnte der Kontext eines Kommentars sich ändern, etwa wenn Tweets gelöscht wurden. Die externen Daten unterliegen nicht der Kontrolle des Hilfesystems. Zweitens sind die externen Daten nicht im DaRe vorhanden, weswegen sie nicht über Komponenten hinweg wiederverwendet werden können. Dabei ist es unerheblich, ob die Komponente selbst externe Daten lädt oder externe Daten einer anderen Komponente anzeigt. Um den Fall von eigenen externen Daten für das Hilfesystem erkennbar zu machen, kann die Komponentenbeschreibung erweitert werden. Für den Fall von fremden externen Daten muss das Hilfesystem nach erfolgreicher Integration aller Visualisierungskomponenten selbst überprüfen, welche davon externe Daten laden und mit welchen diese über Links (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) verbunden sind.
+Komponenten, welche die Kommentarfunktion anbieten wollen, dürfen aus zwei Gründen keine externen Daten anzeigen (also beispielsweise die neuesten Tweets eines Twitter-Accounts): Erstens könnte der Kontext eines Kommentars sich ändern, etwa wenn Tweets gelöscht wurden. Die externen Daten unterliegen nicht der Kontrolle des Hilfesystems. Zweitens sind die externen Daten nicht im DaRe vorhanden, weswegen sie nicht über Komponenten hinweg wiederverwendet werden können. Dabei ist es unerheblich, ob die Komponente selbst externe Daten lädt oder externe Daten einer anderen Komponente anzeigt.
+
+Um den Fall von eigenen externen Daten für das Hilfesystem beliebiger CRUISe Mashupts erkennbar zu machen, kann die Komponentenbeschreibung erweitert werden. Für den Fall von fremden externen Daten muss das Hilfesystem nach erfolgreicher Integration aller Visualisierungskomponenten selbst überprüfen, welche davon externe Daten laden und mit welchen diese über Links (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) verbunden sind. Im Fall von VizBoard wird festgelegt, dass Daten nur aus dem DaRe kommen.
 
 \subsubsection{Datenbezogene Bereichskommentare}
 
@@ -1539,15 +1560,14 @@ Damit Bereichskommentare Daten referenzieren können, müssen drei Voraussetzung
 	\item Die verwendeten Daten müssen im Data Repository gespeichert sein, da ansonsten keine Daten referenziert werden können. Aus diesem Grund darf weder die Komponente selbst Datenverarbeitung in Form von Aggregationen o.\,ä. durchführen, noch dürfen die Daten selbst bereits aggregiert in der Komponente ankommen.
 \end{enumerate}
 
-Erfüllt eine Komponente diese Bedingungen nicht vollständig, können nur ortsbezogene Bereichskommentare eingesetzt werden. Wenn datenbezogene Bereichskommentare angezeigt und von anderen Benutzern nachvollzogen werden sollen, muss das Hilfesystem die Komponente in den damals aktiven Zustand zurücksetzen können, da ansonsten die referenzierten Bereiche andere Daten enthalten können. Diese Tatsache führt zu weiteren Anforderungen an die Komponente:
+Erfüllt eine Komponente diese Bedingungen nicht vollständig, können nur ortsbezogene Bereichskommentare eingesetzt werden. Wenn datenbezogene Bereichskommentare angezeigt und von anderen Benutzern nachvollzogen werden sollen, muss das Hilfesystem die Komponente in den damals aktiven Zustand zurücksetzen können, da ansonsten die referenzierten Bereiche andere Daten enthalten können. Diese Tatsache führt zu einer weiteren Anforderung an die Komponente:
 
 \begin{enumerate}
 	\setcounter{enumi}{3}
-	\item Das Layout der Komponente muss vollständig reproduzierbar sein, also zum Beispiel kein Force Directed Layout \cite{Fruchterman1991}.
 	\item Die Komponente muss der Laufzeitumgebung einen Weg zur Verfügung stellen, mit dem Zustände (wie z.\,B. Zentrum und Zoomlevel einer Karte) gespeichert und vollständig wiederhergestellt werden können.
 \end{enumerate}
 
-Bezüglich der letzten Anforderung bietet sich ein Memento-Pattern \cite{Gamma1994} an:
+Diesbezüglich bietet sich ein Memento-Pattern \cite{Gamma1994} an:
 
 \begin{quote}
 Without violating encapsulation, capture and externalize an object's internal state allowing the object to be restored to this state later.
@@ -1574,7 +1594,7 @@ Mit Datenpunkten verhält sich die Situation etwas einfacher als bei Bereichen. 
 
 % markup
 
-Zuvor muss allerdings noch geklärt werden, auf welche Weise der Komponentenentwickler die URIs im Markup sichtbar machen soll. Prinzipiell kommen dafür alle Möglichkeiten in Frage, die mit Hilfe von CSS ausgelesen werden können. Dazu gehören HTML Markup Elemente wie \texttt{id} oder Datenattribute \texttt{data-*}, aber auch Microformats\footnote{\url{http://microformats.org/}} oder RDFa \cite{W3C2012}. Microformats werden ausgeschlossen, da bei diesen das Vokabular vorgegeben ist, während bei RDFa nur die Syntax definiert wird. Eine URI ist kein gültiger Wert für die \texttt{id} eines DOM Elements, deswegen wird auch sie ausgeschlossen. RDFa hat gegenüber Datatype Propertiesn den Vorteil, dass so auch zusätzliche Informationen über den Datenpunkt (beispielsweise das Label) ins Markup integriert werden können. Auf diese Weise kann das Hilfesystem unter Umständen den einen oder anderen Aufruf des DaRes einsparen und stattdessen HTML parsen, was zur Geschwindigkeit der Anwendung beiträgt.
+Zuvor muss allerdings noch geklärt werden, auf welche Weise der Komponentenentwickler die URIs im Markup sichtbar machen soll. Prinzipiell kommen dafür alle Möglichkeiten in Frage, die mit Hilfe von CSS Selektoren gefunden werden können. Dazu gehören HTML Markup Elemente wie \texttt{id} oder Datenattribute \texttt{data-*}, aber auch Microformats\footnote{\url{http://microformats.org/}} oder RDFa \cite{W3C2012}. Microformats werden ausgeschlossen, da bei diesen das Vokabular vorgegeben ist, während bei RDFa nur die Syntax definiert wird. Eine URI ist kein gültiger Wert für die \texttt{id} eines DOM Elements, deswegen wird auch sie ausgeschlossen. RDFa hat gegenüber Datenattributen den Vorteil, dass so auch zusätzliche Informationen über den Datenpunkt (beispielsweise das Label) ins Markup integriert werden können. Auf diese Weise kann das Hilfesystem unter Umständen den einen oder anderen Aufruf des DaRes einsparen und stattdessen HTML parsen, was zur Geschwindigkeit der Anwendung beiträgt.
 
 % laden
 Beim Laden von Punktkommentaren zählt das Hilfesystem erst die Anzahl von Kommentaren pro Datenpunkt und stellt diese Anzahl über dem visualisierten Datenpunkt dar. Das ist möglich, weil über die URI in Kombination mit CSS Selektoren die entsprechenden DOM Elemente identifiziert werden können.
@@ -1596,13 +1616,13 @@ Wenn der Benutzer einen Kommentar verfassen will, erscheint eine Sidebar mit ein
    \label{figure:kommentare-step4}
 \end{figure}
 
-Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt der Sidebar zu einer Liste aller in dieser Komponente bzw. zu diesen Daten verfassten Kommentare (Abbildung~\ref{figure:kommentare-step2}). Ein Kommentar zeigt folgende Elemente.
+Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt der Sidebar zu einer Liste aller zu diesen Daten verfassten Kommentare (Abbildung~\ref{figure:kommentare-step2}). Ein Kommentar zeigt folgende Elemente.
 
 \begin{itemize}
 	\item Linke Spalte
 	\begin{itemize}
 		\item ID des Kommentars: Diese ist zur Referenzierung notwendig.
-		\item Avatar des Benutzers und Benutzername: Diese sollen das Vertrauen der Benutzer untereinander erhöhen und so die Qualität der Kommentare verbessern \cite{Chiu2006}. Gespeichert und abgerufen werden sie in der Benutzerverwaltung von VizBoard.
+		\item Avatar des Benutzers und Benutzername: Diese sollen das Vertrauen der Benutzer untereinander erhöhen und so die Qualität der Kommentare verbessern \cite{Chiu2006}. Gespeichert und abgerufen werden sie im UserService von CRUISe.
 		\item Datum der Erstellung oder letzten Editierung, was jünger ist. Wurde editiert, ist das Datum kursiv geschrieben.
 		\item Editieren/Löschen-Buttons, falls der Kommentar selbst verfasst wurde.
 		\item Antworten: Eine zweite Möglichkeit als die ID des Kommentars einzutippen. Die UI wechselt zu \enquote{Kommentar verfassen} und inkludiert die ID des betreffenden Kommentars.
@@ -1667,8 +1687,7 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:features
 		\item Kommentartext
 		\item \textit{Wenn ortsbezogene Elemente vorhanden}
 		\begin{itemize}
-			\item Größe der Visualisierung zum Zeitpunkt des Kommentars, um die Auswahlrechtecke entsprechend skalieren zu können
-			\item Für jedes Element
+			\item Für jedes Element (in relativen Einheiten)
 			\begin{itemize}
 				\item Wenn Pfeil: ($x_1,y_1,x_2,y_2$)
 				\item Wenn Text: Text, $(x,y)$
@@ -1703,7 +1722,7 @@ Um zu gewährleisten, dass der Benutzer störungsfrei Kommentare lesen kann, mus
 
 % wie können kommentare noch genutzt werden?
 
-Kommentare können auch Metainformationen über die Daten oder Komponente enthalten \cite{Chen2009}. Es wäre denkbar, mittels automatischer Textklassifikation \cite{Sebastiani2002} diese Kommentare zu identifizieren und als positiv oder negativ zu kategorisieren. Daraus ließe sich wiederum eine Bewertung für die Kombination (Datensatz, Komponente) berechnen\footnote{Am einfachsten ginge das indem bei Null gestartet wird und für jeden positiven Kommentar der Zähler um eins erhöht und jeden Negativen um eins verringert wird.}. Der errechnete Wert könnte in Zukunft beim Ranking einer Komponente für einen ausgewählten Datensatz berücksichtigt werden. Wenn der Aufwand dafür gerechtfertigt werden kann, ist es auch möglich, eine -- zuvor definierte -- Ontologie aus Kommentaren zu extrahieren \cite{Alani2003}. Diese könnte zum Beispiel das Qualitätsmanagement von Komponenten automatisieren. Denkbar wäre, dass aus Kommentaren automatisch extrahiert wird, worüber sich die Benutzer beschweren. Ab einem Schwellwert kann dann der Komponentenentwickler informiert werden.
+Kommentare können auch Metainformationen über die Daten oder Komponente enthalten \cite{Chen2009}. Es wäre denkbar, mittels automatischer Textklassifikation \cite{Sebastiani2002} diese Kommentare zu identifizieren und als positiv oder negativ zu kategorisieren. Daraus ließe sich wiederum eine Bewertung für die Kombination (Datensatz, Komponente) berechnen\footnote{Am einfachsten ginge das indem bei Null gestartet wird und für jeden positiven Kommentar der Zähler um eins erhöht und für jeden Negativen um eins verringert wird.}. Der errechnete Wert könnte in Zukunft beim Ranking einer Komponente für einen ausgewählten Datensatz berücksichtigt werden. Wenn der Aufwand dafür gerechtfertigt werden kann, ist es auch möglich, eine zuvor definierte Ontologie aus Kommentaren zu extrahieren \cite{Alani2003}. Diese könnte zum Beispiel das Qualitätsmanagement von Komponenten automatisieren. Denkbar wäre, dass aus Kommentaren automatisch extrahiert wird, worüber sich die Benutzer beschweren. Ab einem Schwellwert kann dann der Komponentenentwickler informiert werden.
 
 \section{History}
 \label{section:konzeption:history}
@@ -1826,11 +1845,11 @@ Der vorgestellte Algorithmus hat einige offensichtliche Schwachstellen. Beispiel
 
 \begin{itemize}
 	\item Elemente ohne definierte Breite oder Höhe (\texttt{svg:g}), 
-	\item mit besonderer Größendefinition (\texttt{svg:circle}) oder
+	\item mit nicht-rechteckiger Größendefinition (\texttt{svg:circle}, \texttt{svg:path}) oder
 	\item Attribute, welche ebenfalls skaliert werden müssen (\texttt{margin}, \texttt{x}).
 \end{itemize}
 
-Hinzu kommt, dass sowohl alle möglichen Elemente, also auch ClipPaths, Polygone, Polylinien und so weiter als auch deren Transformationen (verschieben, rotieren, skalieren, verzerren etc.) korrekt skaliert werden müssen. Außerdem ist der Vorgang wahrscheinlich sehr langsam, da der Browser nach jedem Update eines layoutrelevanten CSS Attributs (wie Breite oder Höhe) das Layout neu berechnen muss (\enquote{Reflow}) und währenddessen das User Interface blockiert. Der Vorgang erscheint zwar nicht einfach, aber lösbar und sollte dennoch möglichst vermieden werden.
+Hinzu kommt, dass sowohl alle möglichen Elemente, also auch Clip Paths, Polygone, Polylinien und so weiter als auch deren Transformationen (verschieben, rotieren, skalieren, verzerren etc.) korrekt skaliert werden müssen. Außerdem ist der Vorgang möglicherweise sehr langsam, wenn der Browser nach jedem Update eines layoutrelevanten CSS Attributs (wie Breite oder Höhe) das Layout neu berechnen muss (\enquote{Reflow}) und währenddessen das User Interface blockiert. Der Vorgang erscheint zwar nicht einfach, aber lösbar und sollte dennoch möglichst vermieden werden.
 
 % noch cooler ist es, wenn gleich der entwickler alles relativ schreibt
 
@@ -1920,7 +1939,7 @@ Supervised Machine Learning Algorithmen gehen als Datengrundlage von einer Tabel
    \label{figure:sml-daten}
 \end{figure}
 
-Je nach Algorithmus können Attribute unterschiedlichen oder festen Typs sein: Decision Trees arbeiten sowohl mit nominalen als auch ordinalen und quantitativen Variablen, während Support Vector Machines nur quantitative unterstützen. Allen Algorithmen gemein ist jedoch, dass Attribute eindimensional sein müssen und beispielsweise keine Arrays oder Mengen sein dürfen. Weil für die Meta-Hilfe verschiedene Daten herangezogen werden müssen, wird ein Decision Tree Algorithmus gewählt. Ein klassifizierender Decision Tree nimmt einen Feature Vector als Input und weist ihn einer von mehreren Kategorien zu. Im Fall der dynamischen Meta-Hilfe sind das \enquote{Keine Hilfe nötig} und die verschiedenen Hilfefunktionen (Abbildung~\ref{figure:sml-ziel}).
+Je nach Algorithmus können Attribute unterschiedlichen oder festen Typs sein: Decision Trees arbeiten sowohl mit nominalen als auch ordinalen und quantitativen Variablen, während Support Vector Machines nur quantitative Daten unterstützen. Allen Algorithmen gemein ist jedoch, dass Attribute eindimensional sein müssen und beispielsweise keine Arrays oder Mengen sein dürfen. Weil für die Meta-Hilfe verschiedene Daten herangezogen werden müssen, wird ein Decision Tree Algorithmus gewählt. Ein klassifizierender Decision Tree nimmt einen Feature Vector als Input und weist ihn einer von mehreren Kategorien zu. Im Fall der dynamischen Meta-Hilfe sind das \enquote{Keine Hilfe nötig} und die verschiedenen Hilfefunktionen (Abbildung~\ref{figure:sml-ziel}).
 
 \begin{figure}[htbp]
    \centering
@@ -1985,64 +2004,63 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 \subsubsection{Markup einer Komponente}
 
 \begin{itemize}
-	\item CSS Klassen (Legende und Freitext), um Begriffe zur automatischen Verlinkung zu kennzeichnen.
-	\item CSS Klasse, um Wurzelelement der Visualisierung zu kennzeichnen (Kommentare, History)
-	\item RDFa Attribute, die Datenpunkte kennzeichnen und eventuell beschreiben (Kommentare)
+	\item Datenattribute (Legende und Freitext), um Begriffe zur automatischen Verlinkung zu kennzeichnen.
+	\item Datenattribut, um Wurzelelement der Visualisierung zu kennzeichnen (Kommentare, History).
+	\item RDFa Attribute, die Datenpunkte kennzeichnen und eventuell beschreiben (Kommentare).
 \end{itemize}
 
 \subsubsection{Komponentenbeschreibung}
 
 \begin{itemize}
-	\item Welche Properties das Memento ausmachen (Kommentare, History)
-	\item VISO Operationen, welche eine Aktion ausführen (Bedienung)
-	\item CSS Selektoren für jede Operation, um UI Elemente für Operation zu kennzeichnen (Bedienung)
-	\item Konzept, welches Aktion näher beschreibt (Verlinkung)
-	\item Anzahl an Sekunden, die vor einem Screenshot gewartet werden soll (Bedienung)
-	\item Nähere Beschreibung einer Aktion durch Freitext oder Referenz auf Datenvariable (Bedienung)
-	\item Ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung)
-	\item Optionale Zusatzinformationen zur VISO Operation, beispielsweise welche Taste gedrückt werden muss (Bedienung)
+	\item Annotation, ob eine Property Teil des Mementos ist (Kommentare, History).
+	\item VISO Operationen, welche eine Aktion ausführen (Bedienung).
+	\item CSS Selektoren für jede Operation, um UI Elemente für Operation zu kennzeichnen (Bedienung).
+	\item Konzept, welches Aktion näher beschreibt (Verlinkung).
+	\item Anzahl an Sekunden, die vor einem Screenshot gewartet werden soll (Bedienung).
+	\item Nähere Beschreibung einer Aktion durch Freitext oder Referenz auf Datenvariable (Bedienung).
+	\item Ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung).
+	\item Optionale Zusatzinformationen zur VISO Operation, beispielsweise welche Taste gedrückt werden muss (Bedienung).
 	\item Beispieldaten für Parameter, falls von VISO Operation benötigt (Kommunikation). Das ist beispielsweise bei einer Drag Operation nötig.
-	\item Testdatensatz: Entweder ID eines DaRe Datensatzes mit SPARQL Query für Mappings oder Informationen über einen hochgeladenen Datensatz (Bedienung)
-	\item Ob die Komponente Datenverarbeitung durchführt (Kommentare)
-	\item Ob die Komponente externe Daten lädt (Kommentare)
-	\item Ob das Layout der Komponente vollständig reproduzierbar ist (Kommentare)
-	\item Ob die Komponente beliebig skalierbar ist oder deren CSS zur Laufzeit transformiert werden muss (History)
+	\item Testdatensatz: Entweder ID eines DaRe Datensatzes mit SPARQL Query für Mappings oder Informationen über einen hochgeladenen Datensatz (Bedienung).
+	\item Ob die Komponente Datenverarbeitung durchführt (Kommentare).
+	\item Ob die Komponente externe Daten lädt (Kommentare).
+	\item Ob die Komponente beliebig skalierbar ist oder deren CSS zur Laufzeit transformiert werden muss (History).
 \end{itemize}
 
 \subsubsection{API einer Komponente}
 
 \begin{itemize}
-	\item Eine Methode, um Koordinaten in Datenpunkte umzurechnen (Kommentare)
-	\item Die Umkehrung der Methode (Datenpunkte $\to$ Koordinaten) (Kommentare)
-	\item Eine Methode, welche Attribute zu URIs von Datenpunkten ausgibt (Kommentare)
+	\item Eine Methode, um Koordinaten in Datenpunkte umzurechnen (Kommentare).
+	\item Die Umkehrung der Methode (Datenpunkte $\to$ Koordinaten) (Kommentare).
+	\item Eine Methode, welche Attribute zu URIs von Datenpunkten ausgibt (Kommentare).
 \end{itemize}
 
 \subsubsection{VISO}
 
 \begin{itemize}
-	\item Beschreibung einer grafischen Repräsentation (Intro)
-	\item Link zu Tutorialvideo (Intro)
+	\item Beschreibung einer grafischen Repräsentation (Intro).
+	\item Link zu Tutorialvideo (Intro).
 \end{itemize}
 
 \subsubsection{CoRe}
 
 \begin{itemize}
-	\item Ursprüngliches Mapping an MRE weiterleiten (Intro, Kommentare)
-	\item Wissensbasis für dynamische Meta-Hilfe sowie Schnittstelle zum Zugriff darauf
+	\item Ursprüngliches Mapping an MRE weiterleiten (Intro, Kommentare).
+	\item Wissensbasis für dynamische Meta-Hilfe sowie Schnittstelle zum Zugriff darauf.
 \end{itemize}
 
 \subsubsection{DaRe}
 
 \begin{itemize}
-	\item Kommentare speichern sowie eine Schnittstelle zum Abruf
-	\item Abruf und Speicherung von Konzeptbeschreibungen sowie Schnittstelle zum Zugriff (Bedienung, Verlinkung)
+	\item Kommentare speichern sowie eine Schnittstelle zum Abruf.
+	\item Abruf und Speicherung von Konzeptbeschreibungen sowie Schnittstelle zum Zugriff (Bedienung, Verlinkung).
 \end{itemize}
 
 \subsubsection{Event Broker}
 
 \begin{itemize}
-	\item Methode, welche Weiterleitung von Events pausiert (Kommentare)
-	\item Methode, welche Weiterleitung von Events wieder aufnimmt (Kommentare)
+	\item Methode, welche Weiterleitung von Events pausiert (Kommentare).
+	\item Methode, welche Weiterleitung von Events wieder aufnimmt (Kommentare).
 \end{itemize}
 
 \subsubsection{Event Nachricht}
@@ -2058,13 +2076,13 @@ Für die History müssen folgende Attribute enthalten sein:
 \subsubsection{Context Service}
 
 \begin{itemize}
-	\item Alter, Aufenthaltsort, Geschlecht, Domäne des Benutzers (Kommentare, Meta-Hilfe)
+	\item Alter, Aufenthaltsort, Geschlecht, Domäne des Benutzers (Kommentare, Meta-Hilfe).
 \end{itemize}
 
 \subsubsection{CRUISe}
 
 \begin{itemize}
-	\item Jedes Event muss eine Nachricht schicken (History)
+	\item Jedes Event muss eine Nachricht schicken (History).
 \end{itemize}
 
 \section{Zusammenfassung}
