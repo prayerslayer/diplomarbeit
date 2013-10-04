@@ -3,7 +3,9 @@
 My diploma thesis at Dresden University of Technology.
 
 # TODO
-* Howto Hilfe, manchmal erste zwei Panels falsch -> schwer reproduzierbar
+* Howto Hilfe, manchmal erste zwei Panels falsch -> schwer reproduzierbar, passiert nur manchmal.
+* umgang mit nominalen properties! -> array möglicher werte
+* Rootcopy algo: 1) Styles von Kindelementen fixieren 2) Styles von Originalobjekt übernehmen
 * Studie: Versteckte Funktion, transitive Verbindungen..? --> Nutzer verstehen (und besser) die Bedienung. Für Entwickler aufzeigen, wie unterschiedlich der Aufwand im Vergleich zu vorher bzw. ohne Assistance ist.
 * Studie: SUS Fragebogen
 * Testdaten
@@ -64,7 +66,6 @@ Implementierungsablauf:
 ## Einschränkungen
 
 ### Howto
-* CSS Transforms? Die Klassen nehm ich zwar mit beim Kopieren, aber wie die mit andren Styles interagieren… Keine Ahnung. --> Problem mit Styles, die inherited werden. Die DOM Struktur ist in der Rootcopy ja anders. Vielleicht sollte man doch ohne abdunkeln und kopieren arbeiten.
 * Hintergrund setzen funktioniert nur, wenns wirklich am "obersten" Div klappt. Wenn drunter was den background überschreibt, krieg ich das nicht mit.
 * Hintergrund kann nicht abgedunkelt werden, wenn ein relevantes Element viewportfüllend ist - ist halt so.
 * Problem wenn das Seitenverhältnis des Elements nicht annähernd quadratisch, aber riesengroß ist. Siehe timeline-band

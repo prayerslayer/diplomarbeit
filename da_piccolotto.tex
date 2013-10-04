@@ -2093,7 +2093,7 @@ Für die History müssen folgende Attribute enthalten sein:
 \chapter{Implementierung}
 \label{chapter:implementierung}
 
-In den folgenden Abschnitten wird die prototypische Implementierung der Konzepte Bedienung (Abschnitt~\ref{section:konzeption:bedienung}), Kommunikation (Abschnitt~\ref{section:konzeption:kommunikation}) und Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) beschrieben. Sie sind aufgeilt in Frontend und Backend.
+In den folgenden Abschnitten wird die prototypische Implementierung der Konzepte Bedienung (Abschnitt~\ref{section:konzeption:bedienung}), Kommunikation (Abschnitt~\ref{section:konzeption:kommunikation}) und Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) beschrieben. Sie sind aufgeilt in Frontend (Abschnitt~\ref{section:implementierung:frontend}) und Backend (Abschnitt~\ref{section:implementierung:backend}).
 
 \section{Frontend}
 \label{section:implementierung:frontend}
@@ -2139,6 +2139,8 @@ Das Assistance Subsystem arbeitet unabhängig vom Rest der Thin Server Runtime (
 \subsection{Kommentare}
 \label{section:implementierung:frontend:kommentare}
 
+Im Folgenden wird auf die Implementierung der Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) eingegangen. Sie erlauben es Benutzern, Erkenntnisse untereinander auszutauschen.
+
 Auf Abbildung~\ref{figure:ui-write-comment} ist zu sehen, wie ein Kommentar verfasst wird. Um den Bereich um die Visualisierung herum abzudunkeln, wird ein SVG Element in die Komponente eingefügt. Es enthält eine Maske\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Clipping_and_masking}}, welche die Visualisierung freistellt.
 
 \begin{figure}[htbp]
@@ -2165,11 +2167,14 @@ Die Lösung, \texttt{mouseover} über Datenpunkten mit Hilfe der Bounding Box fe
    \label{figure:kommentar-bbox}
 \end{figure}
 
-Eine Möglichkeit, diese Einschränkung zu umgehen, ist eine weitere Funktion in die API einer Komponente hinzuzufügen. Sie teilt dem Hilfesystem mit, ob ein Punkt $(x,y)$ innerhalb eines Datenpunkts liegt oder nicht. Diese Funktion kann optional genutzt werden: Ist sie implementiert, verwendet sie das Hilfesystem. Ansonsten arbeitet es wie bisher mit Bounding Boxes.
+Eine Möglichkeit, um diese Einschränkung zu umgehen, ist eine weitere Funktion in die API einer Komponente hinzuzufügen. Sie teilt dem Hilfesystem mit, ob ein Punkt $(x,y)$ innerhalb eines Datenpunkts liegt oder nicht. Diese Funktion kann optional genutzt werden: Ist sie implementiert, verwendet sie das Hilfesystem. Ansonsten arbeitet es wie bisher mit Bounding Boxes.
 
 \subsection{Bedienung}
+\label{section:implementierung:frontend:bedienung}
 
-Um für die Interaktion wichtige UI Elemente hervorzuheben, werden diese eingefärbt und der Rest der Komponente abgedunkelt (Abbildung~\ref{figure:ui-howto-step1}). Die Kreise unten links und oben rechts sind abgeschnitten, da die Datenpunkte sich an der Grenze des dargestellten Datenbereichs befinden und von der SVG Maske abgeschnitten werden.
+Dieser Abschnitt befasst sich mit der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}). Mit ihr lernen Benutzer, wie sie Aktionen in Komponenten ausführen können.
+
+Dafür wird die Komponente zunächst abgedunkelt und wichtige UI Elemente hervorgehoben (Abbildung~\ref{figure:ui-howto-step1}). Die Kreise unten links und oben rechts sind abgeschnitten, da die Datenpunkte sich an der Grenze des dargestellten Datenbereichs befinden und von der SVG Maske abgeschnitten werden.
 
 \begin{figure}[htbp]
    \centering
@@ -2178,25 +2183,41 @@ Um für die Interaktion wichtige UI Elemente hervorzuheben, werden diese eingef�
    \label{figure:ui-howto-step1}
 \end{figure}
 
-Der Algorithmus, um diesen Zustand herbeizufüren, ist wie folgt: Zuerst wird ein teilweise transparentes, dunkles \texttt{div} in die Komponente eingefügt, um den dunklen Hintergrund herzustellen. Danach wird ein weiteres \texttt{div} erstellt, die \enquote{Rootcopy}. Diese hat dieselbe Größe und Position wie die Komponente. In die Rootcopy wird wiederum ein \texttt{svg} Element eingefügt, welches sie ausfüllt. Das hat den Grund, dass relevante UI Elemente auch SVG \texttt{rect}s oder ähnliches sein können. Sie werden vom Browser nur gerendert, wenn sie sich auch in einem \texttt{svg} befinden. Danach werden alle von einem CSS Selektor getroffenen Elemente kopiert (entweder in die Rootcopy selbst oder ins \texttt{svg}) und gleich positioniert. Bei SVG Elementen ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt. Das geschieht mit jQuerys \texttt{.css()} Methode, welche das \texttt{style} Attribut des DOM Elements setzt und so wegen maximaler Spezifität alle anderen vorhandenen Regeln überschreibt. Bei jedem durch Selektor $s_i$ getroffenen Element und dessen Kopie wird außerdem ein Attribut \texttt{data-vizboard-copy} auf \texttt{copy<i>} gesetzt. Der Grund dafür ist die Verbindung zwischen Aktionen und UI Elementen: Bei \texttt{mouseover} über einer Aktion werden alle dafür relevanten UI Elemente hervorgehoben. Um diese zu finden, kann der Selektor nicht in der Rootcopy ausgeführt werden: Selektoren wie \texttt{:nth-child(odd)} oder \texttt{div.parent > div.content .relevant} würden falsche Ergebnisse liefern. Aus diesem Grund werden die Selektoren bei \texttt{mouseover} in der Komponente ausgeführt und die Kopien der Elemente über das Attribut \texttt{data-vizboard-copy} gefunden.
+Der Algorithmus, um diesen Zustand herbeizuführen, ist wie folgt: 
+
+\begin{enumerate}
+	\item Es wird ein teilweise transparentes, dunkles \texttt{div} in die Komponente eingefügt, um den dunklen Hintergrund herzustellen.
+	\item Danach wird ein weiteres \texttt{div} erstellt, die \enquote{Rootcopy}. Diese hat dieselbe Größe und Position wie die Komponente.
+	\item In die Rootcopy wird wiederum ein \texttt{svg} Element eingefügt, welches sie ausfüllt. Das hat den Grund, dass relevante UI Elemente auch SVG \texttt{rect}s oder ähnliches sein können. Sie werden vom Browser nur gerendert, wenn sie sich auch in einem \texttt{svg} befinden.
+	\item Damit Kopien in der Rootcopy möglichst gleich aussehen wie die Originale, werden in der Komponente gesetzte CSS Styles auf die Rootcopy übertragen.
+	\item Danach werden alle von einem CSS Selektor getroffenen Elemente entweder in die Rootcopy selbst oder ins \texttt{svg} kopiert und gleich wie die Originale positioniert. Bei SVG Elementen ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt. Das geschieht mit jQuerys \texttt{.css()} Methode, welche das \texttt{style} Attribut des DOM Elements setzt und so wegen maximaler Spezifität alle anderen vorhandenen Regeln überschreibt.
+	\item Bei jedem durch Selektor $s_i$ getroffenen Element und dessen Kopie wird außerdem ein Attribut \texttt{data-vizboard-copy} auf \texttt{copy<i>} gesetzt. Der Grund dafür ist die Verbindung zwischen Aktionen und UI Elementen: Bei \texttt{mouseover} über einer Aktion in der Liste werden alle dafür relevanten UI Elemente hervorgehoben. Um diese zu finden, kann der Selektor nicht in der Rootcopy ausgeführt werden: Selektoren wie \texttt{:nth-child(odd)} oder \texttt{div.parent > div.content .relevant} würden falsche Ergebnisse liefern. Aus diesem Grund werden die Selektoren bei \texttt{mouseover} in der Komponente ausgeführt und die Kopien der Elemente über den Wert von \texttt{data-vizboard-copy} gefunden.
+	\item Die relevanten UI Elemente müssen nicht leer sein, weswegen dort gesetzte Styles auch bei Kindknoten sichtbar sein könnten, z.\,B. wenn eine CSS Property auf \texttt{inherit} gesetzt ist. Aus diesem Grund werden bestimmte CSS Properties (\texttt{border}, \texttt{color}, \texttt{background}) in den Kopien auf die Werte der Originale fixiert.
+	\item Für eine Aktion relevante UI Elemente können andere relevante UI Elemente enthalten. Damit diese nicht mehrfach in der Rootcopy vorhanden sind, wird für jedes Original einer Kopie überprüft, ob es Knoten mit dem Attribut \texttt{data-vizboard-copy} enthält. Falls ja, wird ein CSS Selektor aus dem Knoten generiert und alle davon getroffenen Elemente in der Kopie gelöscht.
+\end{enumerate}
 
 \subsubsection{Einschränkungen}
 
-In diesem Abschnitt werdne die Grenzen der gewählten Strategien, um Elemente hervorzuheben, aufgezeigt. Abbildung~\ref{figure:ui-howto-step2} zeigt den nächsten Schritt von Abbildung~\ref{figure:ui-howto-step1}. Positiv zu bewerten ist, dass die Bilder quadratisch sind und so die Panels ausfüllen. Allerdings ist das Ergebnis der Aktion (der Kreis ist orange gefüllt) im dritten Panel nur sehr schwer zu erkennen. Unter Umständen sollte doch wieder wie im Konzept ursprünglich vorgesehen, aber nach der formativen Nutzerstudie verworfen, ein viertes Panel am Anfang eingefügt werden. Dieses soll den Ursprungszustand der Komponente darstellen und so ähnlich wie bei einem Suchbild zum Vergleich dienen. Eine andere Möglichkeit wäre die Panels zu vergrößern, was aber nur in Maßen möglich ist und nicht sehr viel Wirkung zeigen wird.
+% highlight
+
+In diesem Abschnitt werden die Grenzen der gewählten Strategien zur Darstellung der Bedienungshilfe aufgezeigt. Zunächst ist es so, dass die Komponente nicht abgedunkelt werden kann, wenn das relevante UI Element zu groß ist. Die Styles zur Hervorhebung werden außerdem an der Wurzel des UI Elements gesetzt. Falls diese von Kindknoten überschrieben werden, ist kein Effekt sichtbar. Außerdem ist es möglich, dass die Komponente über ihrer abgedunkelten Kopie sichtbar ist, wenn das Attribut \texttt{z-index} entsprechend gesetzt ist. Um das zu verhindern, könnte den Komponentenentwicklern von CRUISe ein Maximalwert des Attributs vorgeschrieben werden, welcher nach der Registrierung einer Komponente überprüft wird. Der Maximalwert des Attributs beträgt in den meisten Browsern 2.147.483.647 \cite{Puidokas2009}, also könnte den Entwicklern immer noch ein Bereich von Null bis zwei Milliarden zur Verfügung gestellt werden.
+
+% panels
+Auch die Darstellung von Panels unterliegt gewissen Einschränkungen. Abbildung~\ref{figure:ui-howto-step2} zeigt die Bedienungshilfe für ein Liniendiagramm. Positiv zu bewerten ist, dass die Bilder quadratisch sind und so die Panels ausfüllen. Allerdings ist das Ergebnis der Aktion (der Kreis ist orange gefüllt) im dritten Panel nur sehr schwer zu erkennen. Unter Umständen sollte doch wieder wie im Konzept ursprünglich vorgesehen, aber nach der formativen Nutzerstudie verworfen, ein viertes Panel am Anfang eingefügt werden. Dieses sollte den Ursprungszustand der Komponente darstellen und so ähnlich wie bei einem Suchbild zum Vergleich dienen. Eine andere Möglichkeit wäre die Panels zu vergrößern, was aber nur in Maßen möglich ist und nicht sehr viel Wirkung zeigen wird.
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/implementierung-ui-howto-step2.png}
-   \caption{Assistance zur Bedienung, Schritt 2}
+   \caption{Assistance zur Bedienung, Liniendiagramm}
    \label{figure:ui-howto-step2}
 \end{figure}
 
-In Abbildung~\ref{figure:ui-howto-step2-bad} ist ein schlechtes Beispiel zu sehen. Das relevante Element ist so groß wie die Komponente selbst und hat mit mehr als~6.5 ein recht extremes Seitenverhältnis, weswegen sie das quadratische Panel nur unzureichend ausfüllt. Die dargestellte Komponente ist außerdem so programmiert, dass sie ihren Zustand kaum merklich verändert.
+In Abbildung~\ref{figure:ui-howto-step2-bad} ist die SIMILE Timeline\footnote{\url{http://www.simile-widgets.org/timeline/}} als Negativbeispiel zu sehen. Das relevante Element ist so groß wie die Komponente selbst und hat mit mehr als~6.5 ein recht extremes Seitenverhältnis, weswegen sie das quadratische Panel nur unzureichend ausfüllt. Die dargestellte Komponente ist außerdem so programmiert, dass sie ihren Zustand kaum merklich verändert.
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=\textwidth]{images/implementierung-ui-howto-step2-bad.png}
-   \caption{Assistance zur Bedienung, Schritt 2}
+   \caption{Assistance zur Bedienung, SIMILE Timeline}
    \label{figure:ui-howto-step2-bad}
 \end{figure}
 
@@ -2207,6 +2228,9 @@ Dem Problem könnte auch beigekommen werden, wenn die Panels das Seitenverhältn
 Ein Kompromiss könnte sein, die Panels quadratisch zu lassen und die Bilder füllend darzustellen, aber es dem Benutzer zu ermöglichen, innerhalb der Panels zu scrollen.
 
 \subsection{Kommunikation}
+\label{section:implementierung:frontend:kommunikation}
+
+Im Folgenden wird auf die Hilfe zur Kommunikation zwischen Komponenten (Abschnitt~\ref{section:konzeption:kommunikation}) eingegangen. Sie ist im Prinzip eine Erweiterung der Bedienungshilfe (Abschnitt~\ref{section:implementierung:frontend:bedienung}), da sie jeweils das Panel mit dem Ergebnis einer Aktion in einer Komponente zeigt (Abbildung~\ref{figure:ui-communication}).
 
 \begin{figure}[htbp]
    \centering
@@ -2215,7 +2239,14 @@ Ein Kompromiss könnte sein, die Panels quadratisch zu lassen und die Bilder fü
    \label{figure:ui-communication}
 \end{figure}
 
-% hier? screenshot. Und? Wat.
+Die Kommunikationshilfe wurde in den CapView von EDYRA \cite{Radeck2013} integriert, da dieser bereits Verbindungen zwischen Komponenten anzeigen kann (Abbildung~\ref{figure:ui-capview}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-capview.png}
+   \caption{Erweiterter CapView}
+   \label{figure:ui-capview}
+\end{figure}
 
 \section{Backend}
 \label{section:implementierung:backend}
@@ -2291,11 +2322,15 @@ Abbildung~\ref{figure:bedienung-backend} zeigt, wie die Bilder für das Hilfesys
 
 \subsubsection{SMCDL}
 
-% was ich da dazu reingetan hab
+
+% atomicoperation, sequentialoperation, paralleloperation zu capability genauer erklären
+% exampledata zu operationcapability
+% attribute: generateAssistance, wait, loadsExternalData, doesDataProcessing, hasRelativeStyle
 
 \subsubsection{MCDO}
 
-% was ich da dazu reingetan hab
+% was ich da dazu reingetan hab... eigentlich nur eine semantische repräsentation der smcdl, weiß nicht ob ich hier große worte verlieren soll.
+% eher schon über die activity-operations ontologie sprechen
 
 \subsubsection{PhantomJS}
 
@@ -2311,7 +2346,9 @@ Die Operationen müssen hintereinander isoliert ausgeführt werden. Gegebenenfal
 
 % bilder liegen in CoRe/assistanceImgs
 % ordnerstruktur
-% Format des SOAP requests
+% Format des SOAP requests für bilder
+
+% format soap request für scale of measurement
 
 
 %#####################################################
