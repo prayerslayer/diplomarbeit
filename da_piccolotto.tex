@@ -33,27 +33,44 @@
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
   breaklines=true,                 % sets automatic line breaking
   captionpos=b,                    % sets the caption-position to bottom
-  %commentstyle=\color{mygreen},    % comment style
-  deletekeywords={...},            % if you want to delete keywords from the given language
   escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
   extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
   frame=single,                    % adds a frame around the code
+  firstnumber=1,
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
   keywordstyle=\color{blue},       % keyword style
   language=Octave,                 % the language of the code
   morekeywords={*,...},            % if you want to add more keywords to the set
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-  numbersep=5pt,                   % how far the line-numbers are from the code
+  numbersep=8pt,                   % how far the line-numbers are from the code
   %numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  numberfirstline=false,
   rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
   showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
   showstringspaces=false,          % underline spaces within strings only
   showtabs=false,                  % show tabs within strings adding particular underscores
-  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
-  stringstyle=\color{gray},     % string literal style
+  stepnumber=5,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{gray},     		% string literal style
   tabsize=2,                       % sets default tabsize to 2 spaces
   title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
+\colorlet{punct}{red!60!black}
+\definecolor{delim}{RGB}{20,105,176}
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    showstringspaces=false,
+    breaklines=true,
+    literate=
+     *{:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+
+
 % \usepackage{showkeys} % used to show labels
 \addbibresource{library.bib} % put name of bib file here with extension
 
@@ -2136,6 +2153,28 @@ Das Assistance Subsystem arbeitet unabhängig vom Rest der Thin Server Runtime (
    \label{figure:cruise-architektur-assistance}
 \end{figure}
 
+\subsection{API einer Komponente}
+\label{section:implementierung:frontend:api}
+
+Wie in der Konzeption (Abschnitt~\ref{chapter:konzeption}) erläutert, musste die API einer Komponente um zusätzliche Funktionalität erweitert werden. Diese umfasst folgende Methoden:
+
+\begin{itemize}
+	\item \texttt{loadTestdata( data )} lädt Testdaten in die Komponente. Diese werden als String übergeben, um kein Serialisierungsformat (z.\,B. JSON oder XML) vorzuschreiben. Das Parsen des Strings ist der Komponente überlassen.
+	\item \texttt{coordinatesToData( x1, y1, x2, y2 )} wandelt das durch die vier Koordinaten angegebene Rechteck in Grenzwerte von Properties um. Dabei wird ein JSON Array von Objekten mit Attributen \texttt{uri}, \texttt{from} und \texttt{to} zurückgegeben. Für jede in der Komponente dargestellte Property findet sich ein durch die URI gekennzeichnetes Objekt im Array. Weist eine Property ein nominales Scale of Measurement auf, sind \texttt{from} und \texttt{to} identisch und enthalten ein Array von möglichen Werten.
+	\item \texttt{dataToCoordinates( p1, p2 ... )} wandelt von \texttt{coordinatesToData} erhaltene \enquote{Grenzpunkte} wieder in Koordinaten um. Dabei liefert die Methode ein Objekt mit den Attributen \texttt{x1}, \texttt{x2}, \texttt{y1} und \texttt{y2} zurück.
+	\item \texttt{getVisualizedProperties()} liefert ein Array mit den URIs der in der Komponente visualisierten Properties zurück. Das ist notwendig, damit das Hilfesystem Kommentare für Komponenten laden kann.
+	\item \texttt{getDataFromResource()} gibt die Werte der dargestellten Properties eines Datenpunkts zurück.
+\end{itemize}
+
+Außerdem wurde das Markup einer Komponente entsprechend erweitert. Die Visualisierung in der Komponente wird mit einem Datenattribut \texttt{data-vizboard-visualization} gekennzeichnet. Das Visualisierungselement muss genau so groß sein wie der dargestellte Datenbereich und die Repräsentationen der Datenpunkte enthalten. Abbildung~\ref{figure:ui-visualization} zeigt ein Beispiel. Damit das Hilfesystem die Repräsentationen der Datenpunkte finden kann, wird deren URI mit dem RDFa Attribut \texttt{resource} annotiert.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-visualization.png}
+   \caption{Visualisierungselement in einem Liniendiagramm}
+   \label{figure:ui-visualization}
+\end{figure}
+
 \subsection{Kommentare}
 \label{section:implementierung:frontend:kommentare}
 
@@ -2200,7 +2239,7 @@ Der Algorithmus, um diesen Zustand herbeizuführen, ist wie folgt:
 
 % highlight
 
-In diesem Abschnitt werden die Grenzen der gewählten Strategien zur Darstellung der Bedienungshilfe aufgezeigt. Zunächst ist es so, dass die Komponente nicht abgedunkelt werden kann, wenn das relevante UI Element zu groß ist. Die Styles zur Hervorhebung werden außerdem an der Wurzel des UI Elements gesetzt. Falls diese von Kindknoten überschrieben werden, ist kein Effekt sichtbar. Außerdem ist es möglich, dass die Komponente über ihrer abgedunkelten Kopie sichtbar ist, wenn das Attribut \texttt{z-index} entsprechend gesetzt ist. Um das zu verhindern, könnte den Komponentenentwicklern von CRUISe ein Maximalwert des Attributs vorgeschrieben werden, welcher nach der Registrierung einer Komponente überprüft wird. Der Maximalwert des Attributs beträgt in den meisten Browsern 2.147.483.647 \cite{Puidokas2009}, also könnte den Entwicklern immer noch ein Bereich von Null bis zwei Milliarden zur Verfügung gestellt werden.
+In diesem Abschnitt werden die Grenzen der gewählten Strategien zur Darstellung der Bedienungshilfe aufgezeigt. Zunächst ist es so, dass die Komponente nicht abgedunkelt werden kann, wenn das relevante UI Element zu groß ist. Die Styles zur Hervorhebung werden außerdem an der Wurzel des UI Elements gesetzt. Falls diese von Kindknoten überschrieben werden, ist kein Effekt sichtbar. Außerdem ist es möglich, dass die Komponente über ihrer abgedunkelten Kopie sichtbar ist, wenn das Attribut \texttt{z-index} entsprechend gesetzt ist. Um das zu verhindern, könnte den Komponentenentwicklern von CRUISe ein Maximalwert des Attributs vorgeschrieben werden, welcher nach der Registrierung einer Komponente überprüft wird. Dieser beträgt in den meisten Browsern 2.147.483.647 \cite{Puidokas2009}, also könnte den Entwicklern immer noch ein Bereich von Null bis zwei Milliarden zur Verfügung gestellt werden.
 
 % panels
 Auch die Darstellung von Panels unterliegt gewissen Einschränkungen. Abbildung~\ref{figure:ui-howto-step2} zeigt die Bedienungshilfe für ein Liniendiagramm. Positiv zu bewerten ist, dass die Bilder quadratisch sind und so die Panels ausfüllen. Allerdings ist das Ergebnis der Aktion (der Kreis ist orange gefüllt) im dritten Panel nur sehr schwer zu erkennen. Unter Umständen sollte doch wieder wie im Konzept ursprünglich vorgesehen, aber nach der formativen Nutzerstudie verworfen, ein viertes Panel am Anfang eingefügt werden. Dieses sollte den Ursprungszustand der Komponente darstellen und so ähnlich wie bei einem Suchbild zum Vergleich dienen. Eine andere Möglichkeit wäre die Panels zu vergrößern, was aber nur in Maßen möglich ist und nicht sehr viel Wirkung zeigen wird.
@@ -2251,9 +2290,12 @@ Die Kommunikationshilfe wurde in den CapView von EDYRA \cite{Radeck2013} integri
 \section{Backend}
 \label{section:implementierung:backend}
 
+Die folgenden Abschnitte behandeln das Backend des Prototypen. Sie teilen sich in Kommentare (Abschnitt~\ref{section:implementierung:backend:kommentare}) und Bedienung und Kommunikation (Abschnitt~\ref{section:implementierung:backend:bedienung}).
+
 \subsection{Kommentare}
 \label{section:implementierung:backend:kommentare}
-Troloyolo.
+
+Das Backend der Kommentare wurde ins Data Respository integriert, da dieses in der Konzeption (Abschnitt~\ref{section:konzeption:kommentare}) als geeigneter Speicherort identifiziert wurde. Im Folgenden wird auf die Art der Persistierung, die Architektur und die REST API desselben eingegangen.
 
 \subsubsection{Repository}
 
@@ -2270,7 +2312,15 @@ Zwischen Front- und Backend wird ein Kommentar auf verschiedene Weise serialisie
 
 \subsubsection{Architektur}
 
-Die Architektur des Backends für Kommentare orientiert sich an den verschiedenen notwendigen Serialisierungen eines Kommentars (siehe vorhergehender Abschnitt). Abbildung~\ref{figure:kommentare-backend-architektur} zeigt die Architektur am Beispiel eines \texttt{GET} Requests des Frontends. Braun eingefärbte Kästchen stellen Java Klassen im Backend dar.
+Die Architektur des Backends für Kommentare orientiert sich an den verschiedenen notwendigen Serialisierungen eines Kommentars (siehe vorhergehender Abschnitt). Sie besteht aus drei Klassen, die dem \enquote{Separation of Concerns} Prinzip folgend genau eine Zuständigkeit haben:
+
+\begin{itemize}
+	\item Der \textbf{CommentRequestHandler} nimmt HTTP Requests entgegen und leitet sie an das CommentBackend weiter.
+	\item Das \textbf{CommentBackend} stellt das Interface zum Triplestore dar, in dem die Kommentare abgelegt werden.
+	\item Der \textbf{CommentConverter} setzt zwischen verschiedenen Serialisierungen eines Kommentars (JSON, RDFS, Java) um.
+\end{itemize}
+
+Abbildung~\ref{figure:kommentare-backend-architektur} zeigt die Architektur am Beispiel eines \texttt{GET} Requests des Frontends. Braun eingefärbte Kästchen stellen Java Klassen im Backend dar.
 
 \begin{figure}[htbp]
    \centering
@@ -2310,18 +2360,94 @@ Die beiden \texttt{GET} Methoden nehmen optional einen HTTP \texttt{Authorizatio
 Bei der Methode \texttt{PUT dare/comment/vote} überprüft das DaRe nur die Existenz eines \texttt{Authorization} Headers und erstellt einen neuen Benutzer im Kommentar Backend, wenn dieser unbekannt ist. Die Methode \texttt{POST} kann ohne Credentials aufgerufen werden. In der Praxis müsste der Header Benutzer ID und Passwort enthalten, sodass das DaRe diese Daten überprüfen kann, indem es eine entsprechende Anfrage an die REST API des User Services stellt. Auf diese Weise würde verhindert, dass beliebige Personen Kommentare erzeugen oder bewerten können. Da die Benutzerinformationen im \texttt{Authorization} Header mit Base64 \cite{Josefsson2006} kodiert und nicht verschlüsselt o.\,ä. werden, sollte die Kommunikation zwischen DaRe und Frontend außerdem mit Transport Layer Security gesichert sein.
 
 \subsection{Bedienung und Kommunikation}
+\label{section:implementierung:backend:bedienung}
 
-Abbildung~\ref{figure:bedienung-backend} zeigt, wie die Bilder für das Hilfesystem im Backend generiert werden. Sobald der Entwickler eine neue Komponente samt Beschreibung in SMCDL Format hochlädt, validiert das CoRe diese und transformiert sie in eine Ontologie (MCDO). Danach startet das CoRe den Generierungsservice (Assistance Generator). Dieser erstellt eine JSON Datei mit den notwendigen Informationen aus der SMCDL, beispielsweise welche Aktionen (Capabilities) wie ausgeführt werden, und eine HTML Datei, die alle notwendigen Resourcen, wie etwa Stylesheets und Skripte, enthält. Die JSON und HTML Datei wird an PhantomJS übergeben, welches die Informationen einliest und Screenshots der Komponente erstellt. Testdaten werden von einer in der SMCDL angegebenen URL geladen (siehe Abschnitt~\ref{section:konzeption:bedienung:api}). Die bereits bestehende SOAP API des CoRe wurde so erweitert, dass das Hilfesystem auf die URLs der Bilder zugreifen kann.
+Das Backend zur Generierung und Auslieferung der Bilder für die User Assistance wurde im CoRe integriert. Die folgenden Abschnitte behandeln seine Architektur, die Erweiterungen der SMCDL, den Generierungsalgorithmus und die zur Verfügung gestellte API.
+
+\subsubsection{Architektur}
+
+Abbildung~\ref{figure:bedienung-backend} zeigt, wie die Bilder für das Hilfesystem im Backend generiert werden. Sobald der Entwickler eine neue Komponente samt Beschreibung in SMCDL Format hochlädt, validiert das CoRe diese und transformiert sie in eine Ontologie (MCDO). Danach startet das CoRe den Generierungsservice (Assistance Generator). Dieser erstellt eine JSON Datei mit den notwendigen Informationen aus der SMCDL, beispielsweise welche Aktionen (Capabilities) wie ausgeführt werden, und eine HTML Datei, die alle notwendigen Resourcen, wie etwa Stylesheets und Skripte, enthält. Die JSON und HTML Datei wird an PhantomJS übergeben, welches die Informationen einliest und Screenshots der Komponente erstellt. Testdaten werden von einer in der SMCDL angegebenen URL geladen (siehe Abschnitt~\ref{section:konzeption:bedienung:api}). Die bereits bestehende SOAP API des CoRe wurde so erweitert, dass das Hilfesystem auf die URLs der Bilder zugreifen kann. Dafür ist der Assistance Service zuständig.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/implementierung-bedienung-backend.png}
+   \includegraphics[width=0.5\textwidth]{images/implementierung-bedienung-backend.png}
    \caption{Generierung der Bilder für das Hilfesystem}
    \label{figure:bedienung-backend}
 \end{figure}
 
 \subsubsection{SMCDL}
 
+Die SMCDL wurde erweitert, sodass Entwickler die wichtigen Interaktionen in ihrer Komponente annotieren können. Dazu wurden Tags für atomare, sequentielle und parallele Operationen eingefügt. Mit Hilfe des Attributs \texttt{generateAssistance} signalisiert der Entwickler, dass für die entsprechende Capability Hilfe generiert werden soll. Das optionale Attribut \texttt{wait} teilt dem Hilfeservice mit, wie lange er nach dem Ausführen der Operationen warten soll, bevor er einen Screenshot erstellt.
+
+Eine atomare Operation besteht aus einem Tag mit folgenden Attributen (Listing~\ref{code:smcdl-ui}):
+
+\begin{itemize}
+	\item \texttt{id} ist zur Unterscheidung von anderen Operationen nötig.
+	\item \texttt{element} gibt einen CSS Selektor an, mit dem die relevanten UI Elemente gefunden werden können.
+	\item \texttt{type} gibt die VISO Operation an. Zur Zeit werden die Mausoperationen Klick, Doppelklick, Move, Drag und Scroll unterstützt.
+	\item \texttt{modifier} konkretisiert die Operation, indem es z.\,B. angibt, welche Maustaste verwendet werden soll.
+\end{itemize}
+
+Um zusätzlich beispielsweise angeben zu können, wie weit der Hilfeservice scrollen soll, kann der atomaren Operation ein JSON Objekt mit den Attributen \texttt{dx} und \texttt{dy} zur Verfügung gestellt werden (Listing~\ref{code:smcdl-system}). Dieses ist in einem Tag \texttt{exampledata} im Tag der Operation enthalten. Im Kontext von Klickoperationen geben diese Informationen den Abstand vom Zentrum des Elements an.
+
+\lstset{language=XML}
+\begin{lstlisting}[caption={SMCDL für UI Capability}, label=code:smcdl-ui]
+<capability
+	id="capPan"
+	activity="actions:Pan"
+	entity="travel:Event"
+	wait="2s"
+	generateAssistance="true">
+	
+	<atomicoperation
+		id="panByDblClick"
+		element="div.background"
+		type="op:DoubleClick"
+		modifier="op:LeftButton">
+		<exampledata>{ 'dx': -500, 'dy': 0 }</exampledata>
+	</atomicoperation>
+</capability>
+\end{lstlisting}
+
+Falls die Capability nicht vom Benutzer (UI Capability), sondern von der Komponente ausgeführt wird (System Capability), enthält der \texttt{capability} Tag Beispieldaten, die an die entsprechende Operation der Komponente weitergegeben werden.
+
+\lstset{language=XML}
+\begin{lstlisting}[caption={SMCDL für System Capability}, label=code:smcdl-system]
+<operation
+	name="highlightPoint">
+	
+	<capability
+		id="capHighlight"
+		activity="action:brushAction"
+		entity="travel:Event"
+		provider="system"
+		generateAssistance="true">
+		
+		<exampledata>{ 'uri': 'http://mmt.inf.tu-dresden/vizBoard/SimileTimelineTestData#event1' }</exampledata>
+	</capability>
+	
+	<parameter
+		name="uri"
+		type="xs:string" />
+	
+</operation>
+\end{lstlisting}
+
+Damit die Komponente während der Hilfegenerierung auch tatsächlich Daten anzeigt, muss der Komponentenentwickler in der SMCDL eine URL zu Testdaten angeben (Listing~\ref{code:smcdl-testdata}).
+
+\lstset{language=XML}
+\begin{lstlisting}[ caption={SMCDL für Testdaten}, label=code:smcdl-testdata ]
+<testdata>
+	<url>http://entwicklerseite.com/testdata/Testdata.json</url>
+</testdata>
+\end{lstlisting}
+
+Um anzugeben, welche Properties einer Komponente Teil ihres Mementos sind, kann der Entwickler diese mit einem Attribut \texttt{isMemento} versehen (Listing~\ref{code:smcdl-memento}).
+
+\lstset{language=XML}
+\begin{lstlisting}[ caption={SMCDL für Memento}, label=code:smcdl-memento ]
+<property name="highlighted" required="false" isMemento="true" type="xs:string" />
+\end{lstlisting}
 
 % atomicoperation, sequentialoperation, paralleloperation zu capability genauer erklären
 % exampledata zu operationcapability
@@ -2332,23 +2458,48 @@ Abbildung~\ref{figure:bedienung-backend} zeigt, wie die Bilder für das Hilfesys
 % was ich da dazu reingetan hab... eigentlich nur eine semantische repräsentation der smcdl, weiß nicht ob ich hier große worte verlieren soll.
 % eher schon über die activity-operations ontologie sprechen
 
+\todo[inline]{Muss ich hier echt was schreiben? Das ist ja voll fad. Ich könnte höchstens über die activity-operations Ontologie reden, wo die Konzepte der VISO Operationen drin sind. Aber das ist auch nicht so viel, dass es einen eigenen Abschnitt rechtfertigen würde.}
+
 \subsubsection{PhantomJS}
 
 % phantomjs wird vom assistancegenerator (java) gestartet
 % vorher html datei erstellen (skeleton.html)
 % und notwendige infos so rausschreiben, dass sie phantom lesen kann (mcdl.json)
 
-Um die verschiedenen Operationen auszuführen, wird zunächst jQuery eingesetzt, um die notwendigen Elemente zu finden. Für die Simulation von Klicks und Doppelklicks bietet PhantomJS bereits mit der Methode \texttt{sendEvent()} eine Schnittstelle. Scrolls werden mit Hilfe von programmatisch erzeugten WheelEvents\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent}} simuliert. Außerdem unterstützt die Hilfegenerierung noch Drags, welche mit einer Kombination von \texttt{mousedown}, \texttt{mousemove} und \texttt{mouseup} Events simuliert werden.
+Bevor der Assistance Generator die PhantomJS Binary startet, erzeugt er eine Datei \texttt{mcdl.json}. Dort werden alle zur Generierung wichtigen Informationen gespeichert, zum Beispiel die Capabilities, Testdaten und das Memento der Komponente. Außerdem wird eine Datei \texttt{skeleton.html} erstellt, welche alle Abhängigkeiten der Komponente enthält. Wenn keine Abhängigkeit von jQuery angegeben wurde, wird es ebenfalls geladen. Diese Dateien werden zusammen mit anderen Informationen (z.\,B. dem Pfad zu den Dateien) an PhantomJS weitergegeben, welches das Generierungsskript \texttt{generate.js} startet.
 
-Die Operationen müssen hintereinander isoliert ausgeführt werden. Gegebenenfalls muss das Hilfesystem nach einer Operation warten, etwa auf das Ende einer Animation (siehe Abschnitt~\ref{section:konzeption:bedienung}). Dabei darf es allerdings nicht blockieren, da ansonsten die Animation nicht ausgeführt wird. Busy Waiting kommt als Lösung deswegen nicht in Frage. Eine weitere Möglichkeit wären Timeouts. Diese machen den Kontrollfluss im Sourcecode schwer nachvollziehbar. Außerdem muss durch die asynchrone Ausführung irgendwie verhindert werden, dass PhantomJS vorzeitig beendet wird. Aus diesen Gründen bieten sich Promises\footnote{\url{http://wiki.commonjs.org/wiki/Promises/A}} zur Koordination von asynchronen, nicht blockierenden Methoden an. Dafür wird die Bibliothek Q\footnote{\url{https://github.com/kriskowal/q}} eingesetzt.
+Das Skript liest die Informationen der \texttt{mcdl.json} ein und führt folgenden Algorithmus aus:
+
+\begin{enumerate}
+	\item Zunächst wird der Konstruktor der Komponente sowie die Operationen \texttt{enable} und \texttt{show} aufgerufen.
+	\item Danach wird ein Memento vom initialen Zustand der Komponente abgerufen, um sie später vor den Screenshots für eine Capability zurücksetzen zu können.
+	\item Die Testdaten der Komponente werden geladen.
+	\item Es werden sequentiell für alle Capabilities Screenshots generiert. Um diese Form der Verarbeitung sicherzustellen, werden Promises\footnote{\url{http://wiki.commonjs.org/wiki/Promises/A}} mit der Bibliothek Q\footnote{\url{https://github.com/kriskowal/q}} verwendet.
+\end{enumerate}
+
+Nachdem die Generierung der Screenshots abgeschlossen ist, wird der Assistance Service informiert. Er kopiert die Bilder ins öffentliche Verzeichnis (siehe nächster Abschnitt).
 
 \subsubsection{API}
 
-% bilder liegen in CoRe/assistanceImgs
-% ordnerstruktur
-% Format des SOAP requests für bilder
+Damit das Frontend des Hilfesystems auf die generierten Bilder zugreifen kann, wurde die SOAP API des CoRe entsprechend erweitert. Die Methode \texttt{getImagesByComponentAndCapability} nimmt eine \texttt{componentId} und eine \texttt{capabilityId} entgegen und antwortet mit den Pfaden zu den gewünschten Bildern im JSON Format (Listing~\ref{code:soap-images}). Diese sind relativ zum öffentlich zugänglichen CoRe Ordner des Servers. Das Attribut \texttt{bbox} gibt dabei die Bounding Box der relevanten Elemente relativ zur Größe des Bildes in der Form $[ x, y, w, h ]$ an.
 
-% format soap request für scale of measurement
+\lstset{language=json}
+\begin{lstlisting}[caption={Antwort des SOAP Interfaces}, label=code:soap-images]
+{
+	"result": "/assistanceImgs/<hash>/capPan/result.png",
+	"operations": {
+		"dragBand": {
+			"type": "atomic",
+			"id": "dragBand",
+			"bbox": [
+				0,
+				0,
+				100,
+				69.167 ],
+			"url": "/assistanceImgs/<hash>/capPan/dragBand-0x0x100x69.167.png"
+	}
+}
+\end{lstlisting}
 
 
 %#####################################################

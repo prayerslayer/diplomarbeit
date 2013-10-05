@@ -5,7 +5,8 @@ My diploma thesis at Dresden University of Technology.
 # TODO
 * Howto Hilfe, manchmal erste zwei Panels falsch -> schwer reproduzierbar, passiert nur manchmal.
 * umgang mit nominalen properties! -> array möglicher werte
-* Rootcopy algo: 1) Styles von Kindelementen fixieren 2) Styles von Originalobjekt übernehmen
+* Pfade starten mit /assistanceImgs/, damit Frontend keine unnötigen Annahmen drüber machen muss
+* Den Scale of Measurement Req wieder rausnehmen. Bei nominalen Attributen kommt einfach ein Array von möglichen Werten.
 * Studie: Versteckte Funktion, transitive Verbindungen..? --> Nutzer verstehen (und besser) die Bedienung. Für Entwickler aufzeigen, wie unterschiedlich der Aufwand im Vergleich zu vorher bzw. ohne Assistance ist.
 * Studie: SUS Fragebogen
 * Testdaten
@@ -77,3 +78,8 @@ Implementierungsablauf:
 * Auswahlhilfen für Annotationsbereiche
 * CSS von Komponente im CoRe auf relative Einheiten trimmen (schwierig weil man nicht weiß, was skaliert werden muss und was nicht)
 * Aktionen abhängig von Aktionen (Suche -> Anzeige) wär auch gut, würde mehr High-Level erklärung ermöglichen
+
+# Checkliste
+* Schreibweise von zusammgesetzten Wörtern: Javabibliothek, Java Bibliothek oder Java-Bibliothek? Was mit Akronymen (VISO, HTTP…)? VISO Operation oder VISO-Operation? HTTP Request oder HTTP-Request?
+* Möglichst Aktiv statt Passiv verwenden.
+* Immer brav zurück referenzieren wenn möglich.
