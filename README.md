@@ -83,3 +83,4 @@ Implementierungsablauf:
 * Schreibweise von zusammgesetzten Wörtern: Javabibliothek, Java Bibliothek oder Java-Bibliothek? Was mit Akronymen (VISO, HTTP…)? VISO Operation oder VISO-Operation? HTTP Request oder HTTP-Request?
 * Möglichst Aktiv statt Passiv verwenden.
 * Immer brav zurück referenzieren wenn möglich.
+* Referenzen schön und einheitlich. Vornamen abkürzen, DOIs raus.
