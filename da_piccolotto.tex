@@ -2486,20 +2486,59 @@ Damit das Frontend des Hilfesystems auf die generierten Bilder zugreifen kann, w
 \lstset{language=json}
 \begin{lstlisting}[caption={Antwort des SOAP Interfaces}, label=code:soap-images]
 {
-	"result": "/assistanceImgs/<hash>/capPan/result.png",
+	"result": "/assistanceImgs/<id>/capPan/result.png",
 	"operations": {
 		"dragBand": {
 			"type": "atomic",
 			"id": "dragBand",
-			"bbox": [
-				0,
-				0,
-				100,
-				69.167 ],
-			"url": "/assistanceImgs/<hash>/capPan/dragBand-0x0x100x69.167.png"
+			"bbox": [ 0,	0, 100, 69.167 ],
+			"url": "/assistanceImgs/<id>/capPan/dragBand-0x0x100x69.167.png"
 	}
 }
 \end{lstlisting}
+
+\subsection{Zusammenfassung}
+\label{section:implementierung:zusammenfassung}
+
+%#####################################################
+
+\chapter{Evaluation}
+\label{chapter:evaluation}
+
+\section{Entwicklungsaufwand}
+\label{section:evaluation:entwicklungsaufwand}
+
+% hier geht es im prinzip um den unterschied vorher+selber machen vs nachher+mein system
+
+% manche sachen kann ein dev alleine gar nicht umsetzen, dazu gehört einheitliches look & feel, interaktion, vokabular. theoretisch wäre es möglich, sich mit ALLEN ANDEREN abzusprechen, praktisch macht das bestimmt keiner.
+
+%TODO hier stellt sich schon mal die frage, wie ich selbst eine hilfe für die timeline umgesetzt hätte. um zu zeigen, dass man scrollen kann, hätte ich whs cursor:move über der timeline und am anfang eine animation, die vom jahre 0 bis centerDate geht. zum anklicken von events nur cursor:pointer.
+
+% zu vergleichen, wie groß der aufwand wäre, meine bedienungshilfe umzusetzen, ist wahrscheinlich nicht so zielführend. allein schon, weil meine ja auf universalität ausgelegt ist, während die des entwicklers das nicht muss.
+
+% nur die zeit zu vergleichen ist auch nicht ganz so dolle, weil ich ein problem hab, wenn der dev seine hilfe kürzer UND besser hinbekommt. nur eines davon ist okay, aber nicht beides. deswegen sollte ich auch die qualität der hilfe überprüfen.
+
+% vorschlag: irgendwen (marcus? fabi?) fragen, ob er maximal ne stunde zeit hat, um eine hilfe für die festgelegte komponente (timeline?) zu konzipieren. ich setz es dann um, messe die zeit dafür und in der studie später wird außerdem überprüft, welche hilfe besser ist. das wäre der korrekte wissenschaftliche weg, aber meine konfidenz, dass meine hilfe zumindest schneller ist, ist eigentlich sehr hoch. deswegen würde die zeit ausreichen.
+
+\section{Nutzerstudie}
+\label{section:evaluation:nutzerstudie}
+
+%TODO wichtig: vor studie komponenten verunterschiedlichen. andere farben, wenn möglich andre interaktionen, alles anders.
+
+\subsection{Methode}
+
+% ein paar aufgaben, zwischen 3 und 5, die nicht ganz offensichtlich sind. abhängigkeiten zwischen komponenten wären eine variante (zb highlight in linechart nur über tabelle) oder versteckte funktionen (doppelklick to pan, anyone?). 3 aufgaben mind., zwei ist ne komische zahl.
+% zeitlimit 2 minuten pro aufgabe
+% vorher grob erklären, dann und währenddessen keine fragen
+% effektivität und effizienz messen (wie effizienz?), für joy of use SUS fragebogen danach
+
+\subsection{Teilnehmer}
+
+% je 5 leute kontroll- und treatment-group
+% bei starbucks gegen 5 € kaffee gutschein eintauschen. bei 15 min. studie sind das immerhin 20 €/h!
+
+\subsection{Ergebnisse}
+
 
 
 %#####################################################
