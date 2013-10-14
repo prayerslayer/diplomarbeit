@@ -1436,7 +1436,7 @@ Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-kommunikation-step3.png}
-   \caption{UI Mockup: Comic erklärt Kommunikation. Verändern des Kartenausschnittes (Aktion: Panning, Operation: Drag) bewirkt ein Update im Balkendiagramm.}
+   \caption{UI Mockup: Comic erklärt Kommunikation. Verändern des Kartenausschnittes (Akßtion: Panning, Operation: Drag) bewirkt ein Update im Balkendiagramm.}
    \label{figure:kommunikation-step3}
 \end{figure}
 
@@ -2241,7 +2241,12 @@ Der Algorithmus, um diesen Zustand herbeizuführen, ist wie folgt:
 
 In diesem Abschnitt werden die Grenzen der gewählten Strategien zur Darstellung der Bedienungshilfe aufgezeigt. Zunächst ist es so, dass die Komponente nicht abgedunkelt werden kann, wenn das relevante UI Element zu groß ist. Die Styles zur Hervorhebung werden außerdem an der Wurzel des UI Elements gesetzt. Falls diese von Kindknoten überschrieben werden, ist kein Effekt sichtbar. Außerdem ist es möglich, dass die Komponente über ihrer abgedunkelten Kopie sichtbar ist, wenn das Attribut \texttt{z-index} entsprechend gesetzt ist. Um das zu verhindern, könnte den Komponentenentwicklern von CRUISe ein Maximalwert des Attributs vorgeschrieben werden, welcher nach der Registrierung einer Komponente überprüft wird. Dieser beträgt in den meisten Browsern 2.147.483.647 \cite{Puidokas2009}, also könnte den Entwicklern immer noch ein Bereich von Null bis zwei Milliarden zur Verfügung gestellt werden.
 
+% performance
+
+Ein weiteres Problem der vorgestellten und implementierten Bedienungshilfe ist Performance. War das Markup der Komponente tief verschachtelt, dauerte die Generierung der Kopien der relevanten UI Elemente bis zu 15 Sekunden. Das war bei der ExtJS Tabelle mit Testdaten von 60~Filmen in 6~Spalten der Fall, mit größeren Datensätzen würde es noch viel länger dauern. Nach einer Inspektion mit den Chrome Developer Tools stellte sich heraus, dass eine Kombination aus exzessivem \enquote{Layout Thrashing} und häufiger Garbage Collection das Problem war. Das Layout Thrashing hatte folgende Auslöser: Zunächst musste für jedes der relevanten Elemente die sichtbare Bounding Box berechnet werden, wofür Zugriff auf die Offsets nötig ist. Dafür wird ein aktuelles Layout benötigt, der Browser muss es also berechnen. Danach wird die Kopie in den DOM eingefügt, was das Layout invalidiert und es somit beim nächsten Element erneut berechnet werden muss. Zum Teil kann der Algorithmus bestimmt optimiert werden, aber nachdem Datensätze in VizBoard beliebig groß und Komponenten in CRUISe beliebig verschachtelt sein können, sollte auf diese Art der Darstellung verzichtet werden. Stattdessen sollten relevante UI Elemente in ihrer normalen Umgebung hervorgehoben werden, ohne aufwändige Erstellung von Kopien.
+
 % panels
+
 Auch die Darstellung von Panels unterliegt gewissen Einschränkungen. Abbildung~\ref{figure:ui-howto-step2} zeigt die Bedienungshilfe für ein Liniendiagramm. Positiv zu bewerten ist, dass die Bilder quadratisch sind und so die Panels ausfüllen. Allerdings ist das Ergebnis der Aktion (der Kreis ist orange gefüllt) im dritten Panel nur sehr schwer zu erkennen. Unter Umständen sollte doch wieder wie im Konzept ursprünglich vorgesehen, aber nach der formativen Nutzerstudie verworfen, ein viertes Panel am Anfang eingefügt werden. Dieses sollte den Ursprungszustand der Komponente darstellen und so ähnlich wie bei einem Suchbild zum Vergleich dienen. Eine andere Möglichkeit wäre die Panels zu vergrößern, was aber nur in Maßen möglich ist und nicht sehr viel Wirkung zeigen wird.
 
 \begin{figure}[htbp]
@@ -2260,11 +2265,7 @@ In Abbildung~\ref{figure:ui-howto-step2-bad} ist die SIMILE Timeline\footnote{\u
    \label{figure:ui-howto-step2-bad}
 \end{figure}
 
-Eine mögliche Lösung wäre das quadratische Panel immer zu füllen. Dann stellt sich allerdings die Frage, welcher Ausschnitt des Bilds gezeigt und wie dieser bestimmt und gefunden werden soll. Füllt man beispielsweise von links, sähe man in diesem Beispiel in allen Bildern hauptsächlich graue Fläche.
-
-Dem Problem könnte auch beigekommen werden, wenn die Panels das Seitenverhältnis ihrer Bilder annähmen. Allerdings ist das Layout der Panels dann unvorhersehbar.
-
-Ein Kompromiss könnte sein, die Panels quadratisch zu lassen und die Bilder füllend darzustellen, aber es dem Benutzer zu ermöglichen, innerhalb der Panels zu scrollen.
+Eine mögliche Lösung wäre das quadratische Panel immer zu füllen. Dann stellt sich allerdings die Frage, welcher Ausschnitt des Bilds gezeigt und wie dieser bestimmt und gefunden werden soll. Füllt man beispielsweise von links, sähe man in diesem Beispiel in allen Bildern hauptsächlich graue Fläche. Dem Problem könnte auch beigekommen werden, wenn die Panels das Seitenverhältnis ihrer Bilder annähmen. Allerdings ist das Layout der Panels dann unvorhersehbar. Ein Kompromiss könnte sein, die Panels quadratisch zu lassen und die Bilder füllend darzustellen, aber es dem Benutzer zu ermöglichen, innerhalb der Panels zu scrollen. Da aber hier die Interaktion etwas kompliziert würde, sollte zunächst ein passender Layoutalgorithmus versucht werden. Dass ein ansprechenderes Layout als aneinandergereihte Quadrat nötig ist, wurde schon in der formativen Nutzerstudie klar. Dieses sollte außerdem das Seitenverhältnis der einzelnen Bilder möglichst beibehalten.
 
 \subsection{Kommunikation}
 \label{section:implementierung:frontend:kommunikation}
@@ -2486,13 +2487,14 @@ Damit das Frontend des Hilfesystems auf die generierten Bilder zugreifen kann, w
 \lstset{language=json}
 \begin{lstlisting}[caption={Antwort des SOAP Interfaces}, label=code:soap-images]
 {
-	"result": "/assistanceImgs/<id>/capPan/result.png",
+	"result": "assistanceImgs/<id>/capPan/result.png",
 	"operations": {
 		"dragBand": {
 			"type": "atomic",
 			"id": "dragBand",
+			"label": "Drag",
 			"bbox": [ 0,	0, 100, 69.167 ],
-			"url": "/assistanceImgs/<id>/capPan/dragBand-0x0x100x69.167.png"
+			"url": "assistanceImgs/<id>/capPan/dragBand-0x0x100x69.167.png"
 	}
 }
 \end{lstlisting}
@@ -2505,20 +2507,15 @@ Damit das Frontend des Hilfesystems auf die generierten Bilder zugreifen kann, w
 \chapter{Evaluation}
 \label{chapter:evaluation}
 
-\section{Entwicklungsaufwand}
-\label{section:evaluation:entwicklungsaufwand}
+Nachdem basierend auf dem Szenario, den Grundlagen und dem Konzept ein Prototyp entwickelt wurde, wird in diesem Abschnitt dessen Tauglichkeit überprüft. Das Hilfesystem soll drei Aufgaben erfüllen:
 
-% hier geht es im prinzip um den unterschied vorher+selber machen vs nachher+mein system
+\begin{enumerate}
+	\item Es soll dem Benutzer erleichtern, Komponenten verschiedener Entwickler zu bedienen (Abschnitte \ref{section:konzeption:intro}, \ref{section:konzeption:bedienung}, \ref{section:konzeption:feedback}, \ref{section:konzeption:kommunikation}, \ref{section:konzeption:history}, \ref{section:konzeption:meta-hilfe}).
+	\item Es soll dem Benutzer helfen, die in den Komponenten dargestellten Informationen zu verstehen und Erkenntnisse zu gewinnen (Abschnitte \ref{section:konzeption:verlinkung}, \ref{section:konzeption:kommentare}).
+	\item Gleichzeitig soll dem Komponentenentwickler die Möglichkeit gegeben werden, seine Komponenten schnell und einfach in das Hilfesystem zu integrieren.
+\end{enumerate}
 
-% manche sachen kann ein dev alleine gar nicht umsetzen, dazu gehört einheitliches look & feel, interaktion, vokabular. theoretisch wäre es möglich, sich mit ALLEN ANDEREN abzusprechen, praktisch macht das bestimmt keiner.
-
-%TODO hier stellt sich schon mal die frage, wie ich selbst eine hilfe für die timeline umgesetzt hätte. um zu zeigen, dass man scrollen kann, hätte ich whs cursor:move über der timeline und am anfang eine animation, die vom jahre 0 bis centerDate geht. zum anklicken von events nur cursor:pointer.
-
-% zu vergleichen, wie groß der aufwand wäre, meine bedienungshilfe umzusetzen, ist wahrscheinlich nicht so zielführend. allein schon, weil meine ja auf universalität ausgelegt ist, während die des entwicklers das nicht muss.
-
-% nur die zeit zu vergleichen ist auch nicht ganz so dolle, weil ich ein problem hab, wenn der dev seine hilfe kürzer UND besser hinbekommt. nur eines davon ist okay, aber nicht beides. deswegen sollte ich auch die qualität der hilfe überprüfen.
-
-% vorschlag: irgendwen (marcus? fabi?) fragen, ob er maximal ne stunde zeit hat, um eine hilfe für die festgelegte komponente (timeline?) zu konzipieren. ich setz es dann um, messe die zeit dafür und in der studie später wird außerdem überprüft, welche hilfe besser ist. das wäre der korrekte wissenschaftliche weg, aber meine konfidenz, dass meine hilfe zumindest schneller ist, ist eigentlich sehr hoch. deswegen würde die zeit ausreichen.
+Im nächsten Abschnitt wird untersucht, ob Aufgabe~1 erfüllt wird. Abschnitt~\ref{section:evaluation:entwicklungsaufwand} behandelt Aufgabe~3. Da Aufgabe~2 im Prototypen durch Kommentare umgesetzt wird, kann für sie keine qualitative Evaluation durchgeführt werden. Maximal würde das Leseverständnis der Testpersonen überprüft. Durch die Implementierung im Prototypen wurde aber die Machbarkeit dieser Aufgabe des Konzepts nachgewiesen.
 
 \section{Nutzerstudie}
 \label{section:evaluation:nutzerstudie}
@@ -2540,6 +2537,104 @@ Damit das Frontend des Hilfesystems auf die generierten Bilder zugreifen kann, w
 \subsection{Ergebnisse}
 
 
+
+\section{Entwicklungsaufwand}
+\label{section:evaluation:entwicklungsaufwand}
+
+Wie einführend erwähnt ist ein Ziel des vorgestellten Konzepts, Komponenten mit möglichst wenig Aufwand in das Hilfesystem integrieren zu können. Unter Aufwand fällt hier sowohl zeitlicher Aufwand für Planung und Umsetzung als auch Entwicklungsaufwand in Form von Lines of Code (LOC). Je größer die Codebase einer Komponente, desto höher ist der Wartungsaufwand im Laufe der Zeit.
+
+Nun ist es nicht möglich, alle verschiedenen Varianten einer Hilfefunktion zu analysieren und zu vergleichen, weswegen beispielhaft nur ein Konzept umgesetzt wird. Als Testobjekt wird die SIMILE Timeline\footnote{\url{http://www.simile-widgets.org/timeline/}} (Abbildung~\ref{figure:simile-timeline}) eingesetzt, da sie mehr Interaktionen als nur \enquote{Auswahl} bietet.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/evaluation-simile-timeline.png}
+   \caption{SIMILE Timeline}
+   \label{figure:simile-timeline}
+\end{figure}
+
+\subsection{Eigenes Hilfekonzept}
+\label{section:evaluation:entwicklungsaufwand:eigeneskonzept}
+
+Da der Autor der Arbeit sich in den Grundlagen schon mit der Präsentation und dem Aufbau von Hilfefunktionen und Erklärungen beschäftigt hat, ist er keine geeignete Testperson. Aus diesem Grund wurde ein befreundeter Medieninformatikstudent gefragt, auf welche Weise er die verschiedenen möglichen Interaktionen der SIMILE Timeline einem Benutzer erklären würde. Er entschied sich für ein animiertes GIF, welches am Anfang eingeblendet wird. Die Konzeption dauerte 11~Minuten. Der Autor hat danach die entsprechenden Bilder und die Animation erstellt (Abbildung~\ref{figure:entwicklung-gif}). Das dauerte insgesamt 22~Minuten.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/evaluation-entwicklung-gif.png}
+   \caption{Frames des animierten GIFs}
+   \label{figure:entwicklung-gif}
+\end{figure}
+
+Die Integration in die Komponente dauerte weitere 10~Minuten und benötigte 8~Zeilen (Listing~\ref{code:integration-gif}).
+
+\lstset{language=Java}
+\begin{lstlisting}[caption={Integration des GIFs}, label=code:integration-gif]
+var help = $( document.createElement( "img" ) );
+help.attr( "src", "images/help.gif" )
+	.attr( "width", this.width )
+	.attr( "height", this.height );
+help.on( "click", function() {
+	$( this ).remove();
+});
+$( this.body.el.dom ).append( help );
+\end{lstlisting}
+
+\subsection{Vorgestelltes Hilfekonzept}
+\label{section:evaluation:entwicklungsaufwand:konzept}
+
+Für die Integration der Komponente in das vorgestellte Hilfekonzept müssen zunächst die notwendigen Informationen in die SMCDL Datei eingefügt werden. Dabei ist hauptsächlich die Beschreibung der Capabilities relevant (Listing~\ref{code:integration-capability}). Der Tippaufwand beträgt 5~Minuten, für die anderen Annotationen werden noch einmal 5~Minuten veranschlagt. Die SMCDL ist danach um 40~Zeilen länger.
+
+Falls die Komponente auch Kommentare unterstützen soll, müssen danach das Wurzelelement der Visualisierung sowie die enthaltenen Ressourcen mit einem Datenattribut versehen werden. In den meisten Fällen ist das eine zusätzliche Zeile Sourcecode.
+
+\subsection{Auswertung}
+\label{section:evaluation:entwicklungsaufwand:auswertung}
+
+
+
+\newpage % needed because of changing pagenumbering and missing backmatter
+%\backmatter % no numbering (letters) of appendices, if backmatter activated
+\pagenumbering{roman}
+
+\appendix
+\chapter{Anhang}
+
+\lstset{language=XML}
+\begin{lstlisting}[caption={Beschreibung der Capabilities}, label=code:integration-capability]
+<capability
+	id="capPan"
+	activity="action:Pan"
+	entity="world:Movie"
+	generateAssistance="true">
+	
+	<atomicoperation
+		id="dblClick"
+		element="div.timeline-band"
+		type="op:DoubleClick"
+		modifier="op:LeftButton" />
+	
+	<atomicoperation
+		id="drag"
+		element="div.timeline-band"
+		type="op:Drag" />
+	
+	<atomicoperation
+		id="scroll"
+		element="div.timeline-band"
+		type="op:Scroll" />
+</capability>
+
+<capability
+	id="capSelect"
+	activity="action:Select"
+	entity="world:Movie"
+	generateAssistance="true">
+	
+	<atomicoperation
+		id="click"
+		element="div.timeline-event-label"
+		type="op:Click"
+		modifier="op:LeftButton" />
+</capability>
+\end{lstlisting}
 
 %#####################################################
 \printbibliography[title=Literaturverzeichnis]
