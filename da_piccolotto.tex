@@ -2353,23 +2353,23 @@ Dazu wird das schwarze Fragezeichen in der Methode \texttt{drawPath} im Connecti
 \section{Backend}
 \label{section:implementierung:backend}
 
-Die folgenden Abschnitte behandeln das Backend des Prototypen. Sie teilen sich in Kommentare (Abschnitt~\ref{section:implementierung:backend:kommentare}) und Bedienung und Kommunikation (Abschnitt~\ref{section:implementierung:backend:bedienung}).
+Die folgenden Abschnitte behandeln das Backend des Prototypen. Sie adressieren Kommentare (Abschnitt~\ref{section:implementierung:backend:kommentare}) und Bedienung und Kommunikation (Abschnitt~\ref{section:implementierung:backend:bedienung}). Das Backend ist sowohl im CoRe (Bedienung/Kommunikation) als auch im DaRe (Kommentare) angesiedelt.
 
 \subsection{Kommentare}
 \label{section:implementierung:backend:kommentare}
 
-Das Backend der Kommentare wurde ins Data Respository integriert, da dieses in der Konzeption (Abschnitt~\ref{section:konzeption:kommentare}) als geeigneter Speicherort identifiziert wurde. Im Folgenden wird auf die Art der Persistierung, die Architektur und die REST API desselben eingegangen.
+Das Backend der Kommentare wurde ins Data Repository integriert, da dort bereits Datensätze gespeichert werden und eine entsprechende Infrastruktur existiert. Im Folgenden wird auf die Art der Persistierung, die Architektur und die REST API desselben eingegangen.
 
 \subsubsection{Repository}
 
-In der Konzeption der Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) wurde das Data Repository als geeigneter Speicherort identifiziert. Dieses enthält durch Metainformationen erweiterte semantische Datensätze, die im Frontend von Komponenten geladen und visualisiert werden können. Aus diesem Grund wurde für Kommentare ein eigener Datensatz angelegt, sodass sie von \enquote{regulären} Daten getrennt sind.
+In der Konzeption der Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) wurde das Data Repository als geeigneter Speicherort identifiziert. Dieses enthält durch Metainformationen erweiterte semantische Datensätze, die im Frontend von Komponenten geladen und visualisiert werden können. Aus diesem Grund wurde für Kommentare ein eigenes Modell angelegt, sodass sie von \enquote{regulären} Daten getrennt sind.
 
-Zwischen Front- und Backend wird ein Kommentar auf verschiedene Weise serialisiert (Abbildung~\ref{figure:kommentare-backend}). Das webbasierte Frontend kann JSON am besten verarbeiten, das DaRe Backend ist in Java geschrieben und arbeitet mit einem Jena TDB Triplestore, wo Kommentare letztendlich abgelegt werden. Zwar könnte das Backend direkt zwischen JSON und RDFS umsetzen, so ist es aber möglich, in Zukunft bestehende Java-Bibliotheken für verschiedene Zwecke (wie z.\,B. Textklassifikation) einzusetzen.
+Zwischen Front- und Backend wird ein Kommentar auf verschiedene Weise serialisiert (Abbildung~\ref{figure:kommentare-backend}). Das webbasierte Frontend kann JSON am besten verarbeiten, das DaRe Backend ist in Java geschrieben und arbeitet mit einem Jena TDB Triplestore, wo Kommentare letztendlich abgelegt werden. Zwar könnte das Backend ausschließlich zwischen JSON und RDF konvertieren, aber so ist es möglich bestehende Java-Bibliotheken für verschiedene Zwecke (wie z.\,B. Textklassifikation) einzusetzen.
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.75\textwidth]{images/implementierung-kommentare-backend.png}
-   \caption{Verschiedene Repräsentationen eines Kommentars}
+   \caption{Verschiedene Serialisierungen eines Kommentars}
    \label{figure:kommentare-backend}
 \end{figure}
 
@@ -2407,15 +2407,18 @@ Folgende Schritte werden durchlaufen:
 	\item Der Request Handler sendet den JSON String an das Frontend.
 \end{enumerate}
 
+Es spricht natürlich nichts dagegen in solchen Fällen ein Kommentar direkt von RDF in JSON zu konvertieren, ohne den Umweg über Java. Im Prototyp wurde darauf aber verzichtet, da es nur zusätzliche Schreibarbeit dargestellt und keinen merkbaren Nutzen gebracht hätte.
+
 \subsubsection{REST API}
 
-Um Kommentare dem Frontend zur Verfügung zu stellen bot sich eine REST API an, da kein Zustand gespeichert werden muss. Es wurden vier Methoden implementiert:
+Um Kommentare dem Frontend zur Verfügung zu stellen, bot sich eine REST API an, da kein Zustand gespeichert werden muss. Eine SOAP Schnittstelle kam nicht in Frage, da das DaRe bereits ein REST Schnittstelle anbietet und einfach ergänzt werden konnte. Es wurden vier Methoden implementiert:
 
 \begin{itemize}
 	\item \texttt{GET dare/comment} gibt alle Kommentare aus. Sind \texttt{property} (für visualisierte Properties) oder \texttt{component} (für Komponenten) Query Parameter vorhanden, wird nach diesen gefiltert und Kommentare gesucht, die mindestens ein Kriterium erfüllen.
 	\item \texttt{GET dare/comment/\{id\}} gibt Kommentar mit ID \texttt{id} aus.
 	\item \texttt{POST dare/comment} nimmt ein Kommentar in \texttt{application/json} entgegen, speichert es ab und antwortet im Erfolgsfall mit Statuscode \texttt{201 Created}.
 	\item \texttt{PUT dare/comment/vote/\{id\}} nimmt ein JSON Objekt entgegen und setzt die Anzahl an angegebenen Stimmen. Ist kein \texttt{Authorization} Header vorhanden, antwortet die Methode mit \texttt{401 Unauthorized}. Hat der Benutzer schon einmal diese Anzahl an Stimmen abgegeben, ist die Antwort \texttt{403 Forbidden} und ansonsten \texttt{200 OK}. Auf diese Weise ist \texttt{PUT} wie von RFC 2616 \cite{W3C:rfc2616} gefordert idempotent.
+	\item \texttt{DELETE dare/comment/\{id\}} löscht den Kommentar mit ID \texttt{id} aus dem Datensatz. Der \texttt{Authorization} Header muss den Benutzer enthalten, der den Kommentar erstellt hat.
 \end{itemize}
 
 Die beiden \texttt{GET} Methoden nehmen optional einen HTTP \texttt{Authorization} Header entgegen, der die Benutzer ID (ohne Passwort) angibt. Dann enthalten zurückgelieferte Kommentare Informationen, ob dieser Benutzer schon gevotet hat und wenn ja, wie.
@@ -2425,33 +2428,35 @@ Bei der Methode \texttt{PUT dare/comment/vote} überprüft das DaRe nur die Exis
 \subsection{Bedienung und Kommunikation}
 \label{section:implementierung:backend:bedienung}
 
-Das Backend zur Generierung und Auslieferung der Bilder für die User Assistance wurde im CoRe integriert. Die folgenden Abschnitte behandeln seine Architektur, die Erweiterungen der SMCDL, den Generierungsalgorithmus und die zur Verfügung gestellte API.
+Das Backend zur Generierung und Auslieferung der Bilder für die User Assistance wurde im CoRe integriert, da dort Komponenten registriert und gespeichert werden. Die folgenden Abschnitte behandeln seine Architektur, die Erweiterungen der SMCDL, den Generierungsalgorithmus und die zur Verfügung gestellte API.
 
 \subsubsection{Architektur}
 
-Abbildung~\ref{figure:bedienung-backend} zeigt, wie die Bilder für das Hilfesystem im Backend generiert werden. Sobald der Entwickler eine neue Komponente samt Beschreibung in SMCDL Format hochlädt, validiert das CoRe diese und transformiert sie in eine Ontologie (MCDO). Danach startet das CoRe den Generierungsservice (Assistance Generator). Dieser erstellt eine JSON Datei mit den notwendigen Informationen aus der SMCDL, beispielsweise welche Aktionen (Capabilities) wie ausgeführt werden, und eine HTML Datei, die alle notwendigen Resourcen, wie etwa Stylesheets und Skripte, enthält. Die JSON und HTML Datei wird an PhantomJS übergeben, welches die Informationen einliest und Screenshots der Komponente erstellt. Testdaten werden von einer in der SMCDL angegebenen URL geladen (siehe Abschnitt~\ref{section:konzeption:bedienung:api}). Die bereits bestehende SOAP API des CoRe wurde so erweitert, dass das Hilfesystem auf die URLs der Bilder zugreifen kann. Dafür ist der Assistance Service zuständig.
+Abbildung~\ref{figure:bedienung-backend} zeigt, wie die Bilder für das Hilfesystem im Backend generiert werden. Sobald der Entwickler eine neue Komponente im CoRe registriert, validiert das CoRe diese und transformiert sie in ein semantisches Modell (MCDO). Danach startet das CoRe den Generierungsservice (Assistance Generator). Dieser erstellt eine JSON Datei mit den notwendigen Informationen aus der SMCDL, beispielsweise welche Aktionen (Capabilities) wie ausgeführt werden, und eine HTML Datei, die alle notwendigen Resourcen, wie etwa Stylesheets und Skripte, enthält. Die JSON und HTML Datei wird an PhantomJS übergeben, welches die Informationen einliest und Screenshots der Komponente erstellt. Testdaten werden von einer in der SMCDL angegebenen URL geladen (siehe Abschnitt~\ref{section:konzeption:bedienung:api}). Die bereits bestehende SOAP API des CoRe wurde so erweitert, dass das Hilfesystem auf die URLs der Bilder zugreifen kann. Dafür ist der Assistance Service zuständig.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/implementierung-bedienung-backend.png}
+   \includegraphics[width=0.75\textwidth]{images/implementierung-bedienung-backend.png}
    \caption{Generierung der Bilder für das Hilfesystem}
    \label{figure:bedienung-backend}
 \end{figure}
 
+Auf die einzelnen Bestandteile des Vorgangs wird im Folgenden näher eingegangen.
+
 \subsubsection{SMCDL}
 
-Die SMCDL wurde erweitert, sodass Entwickler die wichtigen Interaktionen in ihrer Komponente annotieren können. Dazu wurden Tags für atomare, sequentielle und parallele Operationen eingefügt. Mit Hilfe des Attributs \texttt{generateAssistance} signalisiert der Entwickler, dass für die entsprechende Capability Hilfe generiert werden soll. Das optionale Attribut \texttt{wait} teilt dem Hilfeservice mit, wie lange er nach dem Ausführen der Operationen warten soll, bevor er einen Screenshot erstellt.
+Die SMCDL wurde erweitert, sodass Entwickler die wichtigen Interaktionen in ihrer Komponente annotieren können. Dazu wurden Elemente für atomare, sequentielle und parallele Operationen eingefügt. Mit Hilfe des Attributs \texttt{generateAssistance} signalisiert der Entwickler, dass für die entsprechende Capability Hilfe generiert werden soll. Das optionale Attribut \texttt{wait} teilt dem Hilfeservice mit, wie lange nach dem Ausführen der VISO Operationen gewartet werden soll, bevor er einen Screenshot erstellt. VISO Operationen entsprechen Nutzeraktionen wie klicken, draggen oder scrollen und sind nicht mit CRUISe Operationen einer Komponente zu verwechseln.
 
-Eine atomare Operation besteht aus einem Tag mit folgenden Attributen (Listing~\ref{code:smcdl-ui}):
+Eine atomare Operation besteht aus einem Element mit folgenden Attributen (Listing~\ref{code:smcdl-ui}):
 
 \begin{itemize}
 	\item \texttt{id} ist zur Unterscheidung von anderen Operationen nötig.
-	\item \texttt{element} gibt einen CSS Selektor an, mit dem die relevanten UI Elemente gefunden werden können.
+	\item \texttt{element} gibt einen CSS Selektor an, mit dem die UI Elemente gefunden werden können. welche die Aktion auslösen.
 	\item \texttt{type} gibt die VISO Operation an. Zur Zeit werden die Mausoperationen Klick, Doppelklick, Move, Drag und Scroll unterstützt.
 	\item \texttt{modifier} konkretisiert die Operation, indem es z.\,B. angibt, welche Maustaste verwendet werden soll.
 \end{itemize}
 
-Um zusätzlich beispielsweise angeben zu können, wie weit der Hilfeservice scrollen soll, kann der atomaren Operation ein JSON Objekt mit den Attributen \texttt{dx} und \texttt{dy} zur Verfügung gestellt werden (Listing~\ref{code:smcdl-system}). Dieses ist in einem Tag \texttt{exampledata} im Tag der Operation enthalten. Im Kontext von Klickoperationen geben diese Informationen den Abstand vom Zentrum des Elements an.
+Um zusätzlich angeben zu können, wie weit der Hilfeservice scrollen soll, kann der atomaren Operation ein JSON Objekt mit den Attributen \texttt{dx} und \texttt{dy} zur Verfügung gestellt werden (Listing~\ref{code:smcdl-system}). Dafür wurde das Element \texttt{exampledata} so angepasst, dass es in einer VISO Operation enthalten sein kann. Im Kontext von Klickoperationen geben diese Informationen den Abstand vom Zentrum des Elements an.
 
 \lstset{language=XML}
 \begin{lstlisting}[caption={SMCDL für UI Capability}, label=code:smcdl-ui]
@@ -2471,6 +2476,8 @@ Um zusätzlich beispielsweise angeben zu können, wie weit der Hilfeservice scro
 	</atomicoperation>
 </capability>
 \end{lstlisting}
+
+Falls der Entwickler keine Hilfe wünscht, müssen keine Elemente außer \texttt{capability} und dessen Attribute \texttt{id}, \texttt{activity} und \texttt{entity} angegeben werden. Soll für diese Capability Hilfe generiert werden, müssen \texttt{generateAssistance} und die \texttt{atomicoperation} ohne \texttt{exampledata} unbedingt angegeben werden. 
 
 Falls die Capability nicht vom Benutzer (UI Capability), sondern von der Komponente ausgeführt wird (System Capability), enthält der \texttt{capability} Tag Beispieldaten, die an die entsprechende Operation der Komponente weitergegeben werden.
 
@@ -2496,7 +2503,7 @@ Falls die Capability nicht vom Benutzer (UI Capability), sondern von der Kompone
 </operation>
 \end{lstlisting}
 
-Damit die Komponente während der Hilfegenerierung auch tatsächlich Daten anzeigt, muss der Komponentenentwickler in der SMCDL eine URL zu Testdaten angeben (Listing~\ref{code:smcdl-testdata}).
+Damit die Komponente während der Hilfegenerierung auch tatsächlich Daten anzeigt, muss der Komponentenentwickler in der SMCDL eine URL zu Testdaten angeben (Listing~\ref{code:smcdl-testdata}). Dafür wurde ein weiteres Element \texttt{testdata} hinzugefügt. Es kann entweder eine \texttt{url} zu Testdaten enthalten, welche vor der Hilfegenerierung abgerufen werden, oder aus einer Datensatz ID des DaRe (\texttt{darefileid}) und einer SPARQL Query (\texttt{mapping}) bestehen, welche die zu ladenden Daten definieren.
 
 \lstset{language=XML}
 \begin{lstlisting}[ caption={SMCDL für Testdaten}, label=code:smcdl-testdata ]
@@ -2505,25 +2512,51 @@ Damit die Komponente während der Hilfegenerierung auch tatsächlich Daten anzei
 </testdata>
 \end{lstlisting}
 
-Um anzugeben, welche Properties einer Komponente Teil ihres Mementos sind, kann der Entwickler diese mit einem Attribut \texttt{isMemento} versehen (Listing~\ref{code:smcdl-memento}).
+Zur Laufzeit und während der Hilfegenerierung muss das Hilfesystem Komponenten in zuvor gespeicherte Zustände zurücksetzen können. Dazu wird das Memento verwendet, welches eine Menge von Propertys ist, deren Werte gespeichert werden müssen. Um anzugeben, welche Properties einer Komponente Teil ihres Mementos sind, kann der Entwickler diese mit einem Attribut \texttt{isMemento} versehen (Listing~\ref{code:smcdl-memento}). Sie unterscheiden sich von \texttt{required} Propertys, die zur Initialisierung der Komponente unbedingt gesetzt sein müssen, weil bei Mementos eben das nicht der Fall ist: Eine Property \texttt{sorted}, welche angibt wonach eine Tabelle aktuell sortiert ist, muss bei der Initialisierung nicht bekannt, aber dennoch Teil des Mementos sein.
 
 \lstset{language=XML}
 \begin{lstlisting}[ caption={SMCDL für Memento}, label=code:smcdl-memento ]
 <property name="highlighted" required="false" isMemento="true" type="xs:string" />
 \end{lstlisting}
 
-% atomicoperation, sequentialoperation, paralleloperation zu capability genauer erklären
-% exampledata zu operationcapability
-% attribute: generateAssistance, wait, loadsExternalData, doesDataProcessing, hasRelativeStyle
+Im Konzept wurde festgelegt, dass Komponenten keine externen Daten laden oder selbst Datenverarbeitung durchführen dürfen, falls sie Kommentare unterstützen wollen. Für die History ist es notwendig zu wissen, ob das CSS einer Komponente auf relativen Einheiten basiert. Diese Informationen werden am Wurzelelement in der SMCDL als Attribute angegeben (Listing~\ref{code:smcdl-zusatz}).
 
-\subsubsection{MCDO}
+\lstset{language=XML}
+\begin{lstlisting}[ caption={SMCDL für Zusatzinformationen}, label=code:smcdl-zusatz ]
+<component
+	id="http://cruise/ui/SimileTimeline"
+	name="SimileTimeline"
+	version="1.0"
+	isUI="true"
+	doesDataProcessing="false"
+	loadsExternalData="false"
+	hasRelativeStyle="false">
+\end{lstlisting}
 
-% was ich da dazu reingetan hab... eigentlich nur eine semantische repräsentation der smcdl, weiß nicht ob ich hier große worte verlieren soll.
-% eher schon über die activity-operations ontologie sprechen
+Die vorgestellten zusätzlichen Elemente und Attribute der SMCDL wurden zusätzlich auch als semantische Konzepte in der MCDO modelliert. Im nächsten Abschnitt wird gesondert auf die VISO Operationen eingegangen, da diese die größte Neuerung darstellen.
 
-\todo[inline]{Muss ich hier echt was schreiben? Das ist ja voll fad. Ich könnte höchstens über die activity-operations Ontologie reden, wo die Konzepte der VISO Operationen drin sind. Aber das ist auch nicht so viel, dass es einen eigenen Abschnitt rechtfertigen würde.}
+\subsubsection{VISO Operationen}
 
-\subsubsection{PhantomJS}
+Um Nutzeraktionen semantisch darstellen zu können, wurde eine kleine Ontologie dafür erstellt (Abbildung~\ref{figure:activity-ops}), welche hauptsächlich Desktopinteraktionen nachempfunden ist. Sie besteht aus den zwei Klassen Operation und Modifier, wobei eine Operation eine Aktion beschreibt (z.\,B. klicken) und der optionale Modifier die Details liefert (z.\,B. welche Maustaste). Jede der Klassen hat Subklassen für jedes Eingabegerät, momentan Maus und Tastatur. Soll die Ontologie in Zukunft auch Touchinteraktionen beschreiben, müssen zwei Klassen \texttt{TouchOperation} und \texttt{TouchModifier} eingefügt werden. \texttt{TouchOperation} würde die Geste beschreiben, also etwa Touch, Pinch oder Swipe. Ein \texttt{TouchModifier} könnte etwa die Anzahl der verwendeten Finger festlegen.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/implementierung-activity-ops.png}
+   \caption{Die \texttt{activity-operations} Ontologie}
+   \label{figure:activity-ops}
+\end{figure}
+
+Folgende Instanzen sind aktuell in der Ontologie vorhanden:
+
+\begin{itemize}
+	\item MouseOperation: Click, DoubleClick, Move, Scroll, Drag.
+	\item MouseModifier: LeftButton, MouseWheel, RightButton.
+	\item KeyboardOperation: TypeOperation
+	\item KeyboardModifier: AltKey, BackspaceKey, ReturnKey, CommandKey, ControlKey, ShiftKey, SpaceKey.
+\end{itemize}
+
+
+\subsubsection{Assistance Generator \& PhantomJS}
 
 % phantomjs wird vom assistancegenerator (java) gestartet
 % vorher html datei erstellen (skeleton.html)
@@ -2531,20 +2564,31 @@ Um anzugeben, welche Properties einer Komponente Teil ihres Mementos sind, kann 
 
 Bevor der Assistance Generator die PhantomJS Binary startet, erzeugt er eine Datei \texttt{mcdl.json}. Dort werden alle zur Generierung wichtigen Informationen gespeichert, zum Beispiel die Capabilities, Testdaten und das Memento der Komponente. Außerdem wird eine Datei \texttt{skeleton.html} erstellt, welche alle Abhängigkeiten der Komponente enthält. Wenn keine Abhängigkeit von jQuery angegeben wurde, wird es ebenfalls geladen. Diese Dateien werden zusammen mit anderen Informationen (z.\,B. dem Pfad zu den Dateien) an PhantomJS weitergegeben, welches das Generierungsskript \texttt{generate.js} startet.
 
-Das Skript liest die Informationen der \texttt{mcdl.json} ein und führt folgenden Algorithmus aus:
+Das Skript liest die Informationen der \texttt{mcdl.json} ein und führt den in \texttt{generate.js} enthaltenen Algorithmus aus:
 
 \begin{enumerate}
 	\item Zunächst wird der Konstruktor der Komponente sowie die Operationen \texttt{enable} und \texttt{show} aufgerufen.
-	\item Danach wird ein Memento vom initialen Zustand der Komponente abgerufen, um sie später vor den Screenshots für eine Capability zurücksetzen zu können.
-	\item Die Testdaten der Komponente werden geladen.
-	\item Es werden sequentiell für alle Capabilities Screenshots generiert. Um diese Form der Verarbeitung sicherzustellen, werden Promises\footnote{\url{http://wiki.commonjs.org/wiki/Promises/A}} mit der Bibliothek Q\footnote{\url{https://github.com/kriskowal/q}} verwendet.
+	\item Danach wird ein Memento vom initialen Zustand der Komponente abgerufen, um diesen später wiederherstellen zu können.
+	\item Die Testdaten der Komponente werden geladen, indem selbige aus der \texttt{mcdl.json} über die Methode \texttt{loadTestdata} an die Komponente gegeben werden.
+	\item Es werden sequentiell für alle Capabilities Screenshots generiert. Die Größe der Bilder entspricht dabei den in der SMCDL angegebenen \texttt{default} Werten für Breite und Höhe einer Komponente. Es wird nacheinander jeweils die erste atomare Operation jeder (UI) Capability behandelt. Für den Prototypen wurde hier auf sequentielle und parallele Operationen verzichtet, sie stellen aber nur eine Erweiterung des umgesetzten Prinzips dar und können bei Bedarf einfach implementiert werden.
 \end{enumerate}
 
-Nachdem die Generierung der Screenshots abgeschlossen ist, wird der Assistance Service informiert. Er kopiert die Bilder ins öffentliche Verzeichnis (siehe nächster Abschnitt).
+Ist die aktuell Behandelte eine UI Capability, werden die dazugehörigen UI Elemente mit dem CSS Selektor aus der SMCDL gefunden, hervorgehoben und die Bounding Box des ersten Elements abgefragt. Danach wird ein Screenshot der Komponente erstellt und als PNG Datei abgespeichert. Der Dateiname setzt sich aus der ID der Operation und der Bounding Box im Format \texttt{XxYxWxH} zusammen, also beispielsweise \texttt{clickButton-12.5x12.5x50x50.png}. Das Bild wird in einem Ordner, der nach der ID der Capability benannt ist, abgelegt (z.\,B. capSelect in Abbildung~\ref{figure:ordner}). Danach wird das CSS der hervorgehobenen DOM Elemente zurückgesetzt und die VISO Operation (also z.\,B. ein Klick) auf dem ersten der Elemente ausgeführt. Das Hilfesystem wartet die angegebene Anzahl von Sekunden, bevor es ein letztes Bild \texttt{result.png} erstellt und im Ordner der Komponente ablegt.
+
+Handelt es sich um eine System Capability, sind keine UI Elemente beteiligt. In diesem Fall wird nur die CRUISe Operation mit den angegebenen Beispieldaten ausgeführt und danach ein Screenshot \texttt{result.png} erstellt.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/implementierung-ordner.png}
+   \caption{Beispielhafte Ordnerstruktur einer Komponente im Assistance Generator}
+   \label{figure:ordner}
+\end{figure}
+
+Nachdem die Generierung der Screenshots abgeschlossen ist, wird der Assistance Service darüber informiert, wo der Ordner mit den Bildern der behandelten Komponente liegt. Er kopiert die Bilder ins öffentliche Verzeichnis (siehe nächster Abschnitt), von wo sie für das Frontend erreichbar sind.
 
 \subsubsection{API}
 
-Damit das Frontend des Hilfesystems auf die generierten Bilder zugreifen kann, wurde die SOAP API des CoRe entsprechend erweitert. Die Methode \texttt{getImagesByComponentAndCapability} nimmt eine \texttt{componentId} und eine \texttt{capabilityId} entgegen und antwortet mit den Pfaden zu den gewünschten Bildern im JSON Format (Listing~\ref{code:soap-images}). Diese sind relativ zum öffentlich zugänglichen CoRe Ordner des Servers. Das Attribut \texttt{bbox} gibt dabei die Bounding Box der relevanten Elemente relativ zur Größe des Bildes in der Form $[ x, y, w, h ]$ an.
+Damit das Frontend des Hilfesystems auf die generierten Bilder zugreifen kann, wurde die SOAP API des CoRe entsprechend erweitert. Die Methode \texttt{getImagesByComponentAndCapability} nimmt eine \texttt{componentId} und eine \texttt{capabilityId} entgegen und antwortet mit den Pfaden zu den gewünschten Bildern im JSON Format (Listing~\ref{code:soap-images}). Diese sind relativ zum öffentlich zugänglichen CoRe Ordner des Servers. Das Attribut \texttt{bbox} gibt dabei die Bounding Box der relevanten Elemente relativ zur Größe des Bildes in der Form $[ x, y, w, h ]$ an. Sie wird aus dem Dateinamen des Bildes extrahiert und ist notwendig, um im Frontend auf den gewünschten Teilbereich zoomen zu können.
 
 \lstset{language=json}
 \begin{lstlisting}[caption={Antwort des SOAP Interfaces}, label=code:soap-images]
