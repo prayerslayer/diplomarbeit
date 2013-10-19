@@ -624,7 +624,7 @@ Rech et al. \cite{Rech2007} beschreiben intelligente Assistance in der Softwaree
 	\item Assistance generieren
 	\begin{itemize}
 		\item Für wen ist die Assistance gedacht?
-		\item Was soll durch Assistance erweitert werden?
+		\item Was soll durch Assistance erleichtert werden?
 		\item Für welchen Prozess/Vorgang ist die Assistance gedacht?
 		\item Was ist die Zielumgebung der Assistance?
 	\end{itemize}
@@ -676,11 +676,11 @@ Animationen im Sinne von kurzen Videos mit abstrahiertem Inhalt können ebenfall
 \label{section:standderforschung:grundlagen:user_assistance:sensemaking}
 
 % was ist der unterschied zwischen learning und sensemaking?
-Im vorhergehenden Abschnitt wurde der Prozess der Wissensvermittlung betrachtet. Um Wissen dauerhaft aufzunehmen, müssen Lernende den Inhalt \emph{verstehen}. Der Begriff \enquote{Understanding} (gleichbedeutend mit Sensemaking) wird angewandt, wenn das Gehirn mehr Elemente des Inhalts (z.\,B. Variablen einer Gleichung) verarbeiten muss als ins Arbeitsgedächtnis passen \cite{Sweller1998}. \emph{Verstanden} hat der Lernende dann, wenn diese Elemente zu einem sogenannten Schema (mentales Modell) verarbeitet wurden und als ein einziges Element im Arbeitsgedächtnis gehalten werden können (z\,B. eine komplexe Zahl statt drei Variablen $a$, $b$ und $i$).
+Im vorhergehenden Abschnitt wurde der Prozess der Wissensvermittlung betrachtet. Um Wissen dauerhaft aufzunehmen, müssen Lernende den Inhalt \emph{verstehen}. Der Begriff \enquote{Understanding} (gleichbedeutend mit Sensemaking) wird angewandt, wenn das Gehirn mehr Elemente des Inhalts (z.\,B. Variablen einer Gleichung) verarbeiten muss als ins Arbeitsgedächtnis passen \cite{Sweller1998}. \emph{Verstanden} hat der Lernende dann, wenn diese Elemente zu einem sogenannten Schema (mentalen Modell) verarbeitet wurden und als ein einziges Element im Arbeitsgedächtnis gehalten werden können (z\,B. eine komplexe Zahl statt drei Variablen $a$, $b$ und $i$).
 
 % wie funktioniert der prozess der wissensaneignung?
 
-Klein \cite{Klein2006a} beschreibt in seinem Data/Frame-Modell (Abbildung~\ref{figure:data_frame_model}), wie dieser Prozess funktioniert. \enquote{Data} beschreibt dabei die Elemente des Inhalts und \enquote{Frame} das mentale Modell oder Schema. Ähnlich dem Visual Analytics Process (Abschnitt~\ref{section:standderforschung:grundlagen:informationsvisualisierung}) ist Sensemaking ein iterativer Prozess, aber ohne wirklichen Anfang oder Ende. Der Lernende startet mit einem Frame, versucht die Daten einzupassen und nimmt Anpassungen vor bzw. verwirft ein Frame, wenn es nicht weiter durch Daten gestützt wird. Dabei sollte der Lernende möglichst selbstständig einer Lösung kommen, nicht zu viele Daten gleichzeitig sehen und während des Prozesses keine Hypothesen aufstellen müssen, die nicht überprüft werden können \cite{Klein2006}.
+Klein \cite{Klein2006a} beschreibt in seinem Data/Frame-Modell (Abbildung~\ref{figure:data_frame_model}), wie dieser Prozess funktioniert. \enquote{Data} beschreibt dabei die Elemente des Inhalts und \enquote{Frame} das mentale Modell oder Schema. Ähnlich dem Visual Analytics Process (Abschnitt~\ref{section:standderforschung:grundlagen:informationsvisualisierung}) ist Sensemaking ein iterativer Prozess, aber ohne wirklichen Anfang oder Ende. Der Lernende startet mit einem Frame, versucht die Daten einzupassen und nimmt Anpassungen vor bzw. verwirft ein Frame, wenn es nicht weiter durch Daten gestützt wird. Dabei sollte der Lernende möglichst selbstständig zu einer Lösung kommen, nicht zu viele Daten gleichzeitig sehen und während des Prozesses keine Hypothesen aufstellen müssen, die nicht überprüft werden können \cite{Klein2006}.
 
 \begin{figure}[htbp]
    \centering
@@ -2117,7 +2117,7 @@ In den folgenden Abschnitten wird die prototypische Implementierung der Konzepte
  % frontend ist ja für alle mehr oder weniger gleich, zumindest die grundlage. deswegen zuerst.
 
 % welche libraries?
-Das Frontend der implementierten Konzepte wurde mit Backbone.js\footnote{\url{http://backbonejs.org/}}, einem populären Javascript MV* Framework, und dessen Erweiterung Marionette.js\footnote{\url{http://marionettejs.com/}} geschrieben. Des weiteren kamen die Bibliotheken jQuery\footnote{\url{http://jquery.com/}} (von Backbone verwendet), jQuery UI\footnote{\url{http://jqueryui.com/}} und D3 \cite{Bostock2011} zum Einsatz.
+Das Frontend der implementierten Konzepte wurde mit Backbone.js\footnote{\url{http://backbonejs.org/}}, einem populären Javascript MVC Framework, und dessen Erweiterung Marionette.js\footnote{\url{http://marionettejs.com/}} geschrieben. Des Weiteren kamen die Bibliotheken jQuery\footnote{\url{http://jquery.com/}} (von Backbone verwendet), jQuery UI\footnote{\url{http://jqueryui.com/}} und D3 \cite{Bostock2011} zum Einsatz.
 % warum diese?
 
 % 1 - extjs ist zu abstrakt. ich muss ja haupsächlich dom knoten suchen, kopieren, klasse setzen etc.
@@ -2128,23 +2128,23 @@ Zunächst muss begründet werden, warum ein anderes Javascript Framework als das
 	\item als Bibliothek für generische DOM Operationen.
 \end{enumerate}
 
-Für letzteres wird jQuery eingesetzt, da ExtJS mehr vom DOM abstrahiert als jQuery. Mit ExtJS denkt der Entwickler nicht in \texttt{div}s oder \texttt{span}s, sondern in generischen Komponenten wie Listen, Panels und Dialogen.
+Für letzteres wird jQuery eingesetzt, da ExtJS mehr vom DOM abstrahiert als jQuery. Mit ExtJS denkt der Entwickler nicht in \texttt{div}s oder \texttt{span}s, sondern in generischen Komponenten wie Listen, Panels und Dialogen. Nicht alle UI Konzepte können damit umgesetzt werden. Beispielsweise werden für Kommentare an einzelnen Ressourcen eine Art Badge angezeigt, was einem \texttt{div} mit runden Ecken entspricht. Davon abgesehen ist jQuery bereits in der TSR Codebase vorhanden.
 
-Als MVC Framework wird Backbone unter anderem deswegen eingesetzt, weil in der Einführung des Konzepts (Abschnitt~\ref{section:konzeption:einfuehrung}) ein visueller Unterschied zwischen Hilfesystem und Komponenten gefordert wurde. CRUISe Komponenten verwenden bereits die generischen ExtJS Styles, weswegen das Frontend eigene Styles für das recht komplexe, von ExtJS generierte Markup definieren müsste. Dies erschien zu viel Aufwand zu sein. Von der Einheitlichkeit der Codebase abgesehen gab es auch keinen Grund, ExtJS zu verwenden, weil das User Interface des Frontends recht einfach aufgebaut ist.
+Als MVC Framework wird Backbone unter anderem deswegen eingesetzt, weil in der Einführung des Konzepts (Abschnitt~\ref{section:konzeption:einfuehrung}) ein visueller Unterschied zwischen Hilfesystem und Komponenten gefordert wurde. CRUISe Komponenten verwenden bereits die generischen ExtJS Styles, weswegen das Frontend eigene Styles für das recht komplexe, von ExtJS generierte Markup definieren müsste. Dies erschien zu viel Aufwand zu sein. Von der Einheitlichkeit der Codebase abgesehen gab es auch keinen Grund, ExtJS zu verwenden, weil die UI des Hilfe Frontends recht einfach aufgebaut ist.
 
 % wenn schon kein extjs, warum gerade backbone und nicht knockback, spine oder eins von den andern tausend?
-Nun stellt sich noch die Frage, warum gerade Backbone.js und nicht eines der vielen anderen Frameworks\footnote{Für eine Übersicht der Wichtigsten sei auf \url{http://todomvc.com/} verwiesen, wo 33~Javascript MV* Frameworks aufgelistet sind.} gewählt wurde. Einerseits hat der Autor damit bereits grundlegende Erfahrung gesammelt, die Einarbeitungszeit entfiel. Andererseits ist es gut dokumentiert und sehr populär, weswegen im Internet viele Informationen zu finden sind.
+Nun stellt sich noch die Frage, warum gerade Backbone.js und nicht eines der vielen anderen Frameworks\footnote{Für eine Übersicht der Wichtigsten sei auf \url{http://todomvc.com/} verwiesen, wo 33~Javascript MVC Frameworks aufgelistet sind.} gewählt wurde. Einerseits hat der Autor damit bereits grundlegende Erfahrung gesammelt, sodass die Einarbeitungszeit entfiel. Andererseits ist es gut dokumentiert und sehr populär, weswegen im Internet viele Informationen zu finden sind.
 
 % marionettejs macht backbone code lesbarer und einfacher zu warten
-Marionette.js erweitert Backbone um verschiedene Konzepte (z.\,B. Regionen und unterschiedliche Views für Items, Collections und Bäume) und automatisiert oft vorkommende Anweisungen (wie zum Beispiel einen View rendern und in den DOM einfügen). Der Code ist dadurch lesbarer und einfacher zu warten.
+Marionette.js erweitert Backbone um verschiedene Konzepte (z.\,B. Regionen und unterschiedliche Views für Items, Collections und Bäume) und automatisiert oft vorkommende Anweisungen, wie zum Beispiel einen View zu rendern und in den DOM einzufügen. Der Code ist dadurch kürzer, lesbarer und einfacher zu warten.
 
 % und was hat d3 hier zu suchen?
-D3 wird hauptsächlich beim Hinzufügen von Annotationen eingesetzt, wo ein SVG Element über die Komponente gelegt wird, in welchem der Benutzer seine Annotationen zeichnen kann. Außerdem kann D3 im Gegensatz zu jQuery sowohl mit HTML- als auch mit SVG Elementen umgehen. jQuery unterstützt einige Methoden, die im Frontend gebraucht werden (z.\,B. \texttt{.width()}, \texttt{.addClass()} oder jQuery UIs \texttt{.position()}), nicht für DOM Elemente mit SVG Namespace. Zwar existiert ein SVG Plugin\footnote{\url{https://github.com/kbwood/svg}} für jQuery, dieses weist aber eine unnötig komplizierte API auf. Deswegen wird für die Größenbestimmung oder Positionierung von SVG Elementen D3 verwendet, da es ohnehin schon eingesetzt wird.
+D3 wird hauptsächlich beim Hinzufügen von Annotationen eingesetzt, wo ein SVG-Element über die Komponente gelegt wird, in welchem der Benutzer seine Annotationen zeichnen kann. Außerdem kann D3 im Gegensatz zu jQuery sowohl mit HTML- als auch mit SVG-Elementen umgehen. Einige Methoden, die im Frontend gebraucht werden, unterstützt jQuery nicht für DOM Elemente mit SVG Namespace (Beispiele dafür sind \texttt{.width()}, \texttt{.addClass()} oder jQuery UIs \texttt{.position()}). Zwar existiert ein SVG Plugin\footnote{\url{https://github.com/kbwood/svg}} für jQuery, dieses weist aber eine unnötig komplizierte API auf. Deswegen wird für die Größenbestimmung oder Positionierung von SVG Elementen D3 verwendet, da es ohnehin schon eingesetzt wird.
 
-\subsection{Architektur}
+\subsection{Clientseitige Architektur}
 \label{section:implementierung:frontend:architektur}
 
-Das Assistance Subsystem arbeitet unabhängig vom Rest der Thin Server Runtime (TSR) Module (Abbildung~\ref{figure:cruise-architektur-assistance}). Nachdem alle Komponenten integriert wurden, wird es vom Application Manager falls erwünscht gestartet.
+Das Assistance Subsystem arbeitet unabhängig vom Rest der Thin Server Runtime (Abbildung~\ref{figure:cruise-architektur-assistance}). Nachdem alle Komponenten integriert wurden, wird es vom Application Manager falls erwünscht gestartet.
 
 \begin{figure}[htbp]
    \centering
@@ -2153,20 +2153,64 @@ Das Assistance Subsystem arbeitet unabhängig vom Rest der Thin Server Runtime (
    \label{figure:cruise-architektur-assistance}
 \end{figure}
 
+Um es zu konfigurieren, wird beim Start ein Objekt mit folgenden Informationen übergeben:
+
+\begin{itemize}
+	\item \texttt{comment\_url}: Die URL zum Kommentar Backend (Abschnitt~\ref{section:implementierung:backend:kommentare}).
+	\item \texttt{core\_url}: Die URL zum CoRe Service.
+	\item \texttt{dataset\_id}: Die ID des geladenen Datensatzes, notwendig für Kommentare.
+	\item \texttt{user\_id}: Die ID des angemeldeten Benutzers.
+	\item \texttt{user\_name}: Der Benutzername des angemeldeten Nutzers.
+	\item \texttt{components}: Ein Array mit Informationen zu jeder Komponente.
+\end{itemize}
+
+Die notwendigen Informationen zu einer Komponente sind folgende:
+
+\begin{itemize}
+	\item \texttt{component\_id}: Die URI der Komponente.
+	\item \texttt{component}: Die ID des DOM Elements, in dem sich die Komponente befindet.
+	\item \texttt{visualization}: Die ID des DOM Elements, welches die Visualisierung enthält.
+	\item \texttt{visualized\_properties}: Ein Array der dargestellten Properties.
+	\item \texttt{data\_annotations\_enabled}: Ob datenbezogene Bereichskommentare zulässig sind.
+	\item \texttt{reference}: Eine Referenz zur Instanz der Komponente, um die API aufrufen zu können.
+	\item \texttt{memento}: Ein Array der Properties, welche das Memento der Komponente ausmachen.
+	\item \texttt{capabilities}: Ein Array von Objekten mit Informationen über jede Capability.
+\end{itemize}
+
+Für jede Capability müssen folgende Informationen angegeben werden:
+
+\begin{itemize}
+	\item \texttt{capability}: Die ID der Capability.
+	\item \texttt{action}: Ein Label, welches die Capability beschreibt, z.\,B. \enquote{sort a movie (Studio)}.
+	\item \texttt{component}: Die ID des DOM Elements, in dem sich die Komponente befindet.
+	\item \texttt{operation}: Die ID einer atomaren VISO Operation dieser Capability.
+	\item \texttt{elements}: Der CSS Selektor, welcher die DOM Elemente für diese Capability findet.
+\end{itemize}
+
+Alle diese Informationen werden vom ApplicationManager aus den SMCDLs der Komponenten gelesen, nachdem diese erfolgreich integriert wurden. Um festzustellen, ob eine Komponente datenbezogene Bereichskommentare unterstützt, wird ein Request ans CoRe gesendet, der die Kodierung der visuellen Attribute aller Properties zurückgibt. Findet sich darunter mindestens einmal die Position oder Breite beziehungsweise Höhe -- also etwas, was sich entlang der X- oder Y-Achse messen lässt -- so werden die angesprochenen Kommentare unterstützt. Für die Generierung eines passenden Labels wird der \texttt{LabelGenerator} von EDYRA herangezogen.
+
+
 \subsection{API einer Komponente}
 \label{section:implementierung:frontend:api}
 
-Wie in der Konzeption (Abschnitt~\ref{chapter:konzeption}) erläutert, musste die API einer Komponente um zusätzliche Funktionalität erweitert werden. Diese umfasst folgende Methoden:
+Wie in der Konzeption (Abschnitt~\ref{chapter:konzeption}) erläutert, muss die API einer Komponente um zusätzliche Funktionalität erweitert werden, um Kommentare zu unterstützen und Hilfegenerierung möglich zu machen. Das ist hauptsächlich deswegen nötig, weil die Komponente eine \enquote{Black Box} ist und das Hilfesystem keine Annahmen über die Art der Darstellung von Informationen machen kann. Allerdings sind die meisten Methoden optional: Möchte der Komponentenentwickler keine Kommentare unterstützen, sollen sie einfach nicht implementiert werden.
 
 \begin{itemize}
-	\item \texttt{loadTestdata( data )} lädt Testdaten in die Komponente. Diese werden als String übergeben, um kein Serialisierungsformat (z.\,B. JSON oder XML) vorzuschreiben. Das Parsen des Strings ist der Komponente überlassen.
-	\item \texttt{coordinatesToData( x1, y1, x2, y2 )} wandelt das durch die vier Koordinaten angegebene Rechteck in Grenzwerte von Properties um. Dabei wird ein JSON Array von Objekten mit Attributen \texttt{uri}, \texttt{from} und \texttt{to} zurückgegeben. Für jede in der Komponente dargestellte Property, welche mit den visuellen Attributen Breite, Höhe oder Position kodiert ist, findet sich ein durch die URI gekennzeichnetes Objekt im Array. Weist eine Property ein nominales Scale of Measurement auf, sind \texttt{from} und \texttt{to} identisch und enthalten ein Array von möglichen Werten.
-	\item \texttt{dataToCoordinates( p1, p2 ... )} wandelt von \texttt{coordinatesToData} erhaltene \enquote{Grenzpunkte} wieder in Koordinaten um. Dazu liefert die Methode ein Objekt mit den Attributen \texttt{x1}, \texttt{x2}, \texttt{y1} und \texttt{y2} zurück.
-	\item \texttt{getVisualizedProperties()} liefert ein Array mit den URIs der in der Komponente visualisierten Properties zurück. Das ist notwendig, damit das Hilfesystem Kommentare für Komponenten laden kann.
+	\item \texttt{loadTestdata( data )} lädt Testdaten in die Komponente. Diese Methode muss als einzige unbedingt implementiert werden. Die Testdaten werden als String übergeben, um kein Serialisierungsformat (z.\,B. JSON oder XML) vorzuschreiben. Das Parsen des Strings ist der Komponente überlassen. Nachdem in der Regel bereits eine interne Methode besteht, die Daten in die Komponente lädt, stellt die Implementierung von \texttt{loadTestdata} kaum Mehraufwand dar.
+	\item \texttt{coordinatesToData( x1, y1, x2, y2 )} wandelt das durch die vier Koordinaten angegebene Rechteck in Grenzwerte von Properties um. Dabei wird ein JSON Array von Objekten mit Attributen \texttt{uri}, \texttt{from} und \texttt{to} zurückgegeben. Für jede in der Komponente dargestellte Property, welche mit den visuellen Attributen Breite, Höhe oder Position kodiert ist, findet sich ein durch die URI gekennzeichnetes Objekt im Array (siehe Abbildung~\ref{figure:coordinatesToData}). Weist eine Property ein nominales Scale of Measurement auf, sind \texttt{from} und \texttt{to} identisch und enthalten ein Array von möglichen Werten.
+	\item \texttt{dataToCoordinates( p1, p2 ... )} wandelt von \texttt{coordinatesToData} erhaltene datenbezogene \enquote{Grenzpunkte} wieder in Koordinaten um. Dazu liefert die Methode ein Objekt mit den Attributen \texttt{x1}, \texttt{x2}, \texttt{y1} und \texttt{y2} zurück.
+	\item \texttt{getVisualizedProperties()} liefert ein Array mit den URIs der in der Komponente visualisierten Propertys zurück. Das ist notwendig, damit das Hilfesystem Kommentare für Komponenten laden kann. Diese Propertys bestehen zur Zeit aus der Kombination von Datensatz ID, URI der Klasse der Property (rdfs:domain) und URI der Property. So sind sie eindeutig identifizierbar. Jedoch wäre es möglich, dass eine andere Property owl:sameAs implementiert. Diese identischen Propertys können nicht gefunden werden. Deswegen sollte in Zukunft kein einzelner String, sondern ein Objekt für jede Property geliefert werden, sodass das Backend nach identischen Propertys suchen kann.
 	\item \texttt{getDataFromResource()} gibt die Werte der dargestellten Properties eines Datenpunkts zurück.
 \end{itemize}
 
-Außerdem wurde das Markup einer Komponente entsprechend erweitert. Die Visualisierung in der Komponente wird mit einem Datenattribut \texttt{data-vizboard-visualization} gekennzeichnet. Das Visualisierungselement muss genau so groß sein wie der dargestellte Datenbereich und die Repräsentationen der Datenpunkte enthalten. Abbildung~\ref{figure:ui-visualization} zeigt ein Beispiel. Damit das Hilfesystem die Repräsentationen der Datenpunkte finden kann, wird deren URI mit dem RDFa Attribut \texttt{resource} annotiert.
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/implementierung-coordinatesToData.png}
+   \caption{Die Methode \texttt{coordinatesToData}}
+   \label{figure:coordinatesToData}
+\end{figure}
+
+Außerdem wurde das Markup einer Komponente entsprechend erweitert. Die Visualisierung in der Komponente wird mit einem Datenattribut \texttt{data-vizboard-visualization} gekennzeichnet. Das Visualisierungselement muss genau so groß sein wie der dargestellte Datenbereich und die Repräsentationen der Datenpunkte enthalten. Abbildung~\ref{figure:ui-visualization} zeigt ein Beispiel. Damit das Hilfesystem die Repräsentationen der Datenpunkte finden kann, wird deren kodierte URI mit dem RDFa Attribut \texttt{resource} annotiert (siehe Listing~\ref{code:visualization-markup}).
 
 \begin{figure}[htbp]
    \centering
@@ -2175,12 +2219,23 @@ Außerdem wurde das Markup einer Komponente entsprechend erweitert. Die Visualis
    \label{figure:ui-visualization}
 \end{figure}
 
+\lstset{language=HTML}
+\begin{lstlisting}[caption={Markup einer Visualisierung}, label=code:visualization-markup]
+<svg>
+	<g data-vizboard-visualization="true">
+		<rect class="bg" x="0" y="0" width="100" height="100"/>
+		<circle class="datapoint" cx="0" cy="90" resource="http%3A%2F%2Fsomeuri1"/>
+		<circle class="datapoint" cx="100" cy="0" resource="http%3A%2F%2Fsomeuri2"/>
+	</g>
+</svg>
+\end{lstlisting}
+
 \subsection{Kommentare}
 \label{section:implementierung:frontend:kommentare}
 
 Im Folgenden wird auf die Implementierung der Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) eingegangen. Sie erlauben es Benutzern, Erkenntnisse untereinander auszutauschen.
 
-Auf Abbildung~\ref{figure:ui-write-comment} ist zu sehen, wie ein Kommentar verfasst wird. Um den Bereich um die Visualisierung herum abzudunkeln, wird ein SVG Element in die Komponente eingefügt. Es enthält eine Maske\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Clipping_and_masking}}, welche die Visualisierung freistellt.
+Kommentare werden über Buttons in der Titelleiste einer Komponente aufgerufen. Unterstützt eine Komponente keine Kommentare, sind die Buttons inaktiv. In Abbildung~\ref{figure:ui-write-comment} ist zu sehen, wie ein Kommentar verfasst wird. Um den Bereich um die Visualisierung herum abzudunkeln, wird ein SVG-Element in die Komponente eingefügt. Es enthält eine Maske\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Clipping_and_masking}}, welche die Visualisierung freistellt.
 
 \begin{figure}[htbp]
    \centering
@@ -2213,7 +2268,7 @@ Eine Möglichkeit, um diese Einschränkung zu umgehen, ist eine weitere Funktion
 
 Dieser Abschnitt befasst sich mit der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}). Mit ihr lernen Benutzer, wie sie Aktionen in Komponenten ausführen können.
 
-Dafür wird die Komponente zunächst abgedunkelt und wichtige UI Elemente hervorgehoben (Abbildung~\ref{figure:ui-howto-step1}). Die Kreise unten links und oben rechts sind abgeschnitten, da die Datenpunkte sich an der Grenze des dargestellten Datenbereichs befinden und von der SVG Maske abgeschnitten werden.
+Dafür wird die Komponente zunächst abgedunkelt und für Aktionen notwendige UI Elemente hervorgehoben (Abbildung~\ref{figure:ui-howto-step1}). Die Kreise unten links und oben rechts sind abgeschnitten, weil die Datenpunkte sich an der Grenze des dargestellten Datenbereichs befinden und von der SVG Maske abgeschnitten werden.
 
 \begin{figure}[htbp]
    \centering
@@ -2222,28 +2277,35 @@ Dafür wird die Komponente zunächst abgedunkelt und wichtige UI Elemente hervor
    \label{figure:ui-howto-step1}
 \end{figure}
 
-Der Algorithmus, um diesen Zustand herbeizuführen, ist wie folgt: 
+Der Algorithmus, um alle eine Aktion auslösenden UI Elemente in ein anderes \texttt{div} zu kopieren, ist wie folgt: 
 
 \begin{enumerate}
 	\item Es wird ein teilweise transparentes, dunkles \texttt{div} in die Komponente eingefügt, um den dunklen Hintergrund herzustellen.
 	\item Danach wird ein weiteres \texttt{div} erstellt, die \enquote{Rootcopy}. Diese hat dieselbe Größe und Position wie die Komponente.
-	\item In die Rootcopy wird wiederum ein \texttt{svg} Element eingefügt, welches sie ausfüllt. Das hat den Grund, dass relevante UI Elemente auch SVG \texttt{rect}s oder ähnliches sein können. Sie werden vom Browser nur gerendert, wenn sie sich auch in einem \texttt{svg} befinden.
+	\item In die Rootcopy wird wiederum ein \texttt{svg} Element eingefügt, welches sie ausfüllt. Das hat den Grund, dass aktionsauslösende UI Elemente auch SVG \texttt{rect}s oder ähnliches sein können. Sie werden vom Browser nur gerendert, wenn sie sich auch in einem \texttt{svg} befinden.
 	\item Damit Kopien in der Rootcopy möglichst gleich aussehen wie die Originale, werden in der Komponente gesetzte CSS Styles auf die Rootcopy übertragen.
-	\item Danach werden alle von einem CSS Selektor getroffenen Elemente entweder in die Rootcopy selbst oder ins \texttt{svg} kopiert und gleich wie die Originale positioniert. Bei SVG Elementen ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt. Das geschieht mit jQuerys \texttt{.css()} Methode, welche das \texttt{style} Attribut des DOM Elements setzt und so wegen maximaler Spezifität alle anderen vorhandenen Regeln überschreibt.
-	\item Bei jedem durch Selektor $s_i$ getroffenen Element und dessen Kopie wird außerdem ein Attribut \texttt{data-vizboard-copy} auf \texttt{copy<i>} gesetzt. Der Grund dafür ist die Verbindung zwischen Aktionen und UI Elementen: Bei \texttt{mouseover} über einer Aktion in der Liste werden alle dafür relevanten UI Elemente hervorgehoben. Um diese zu finden, kann der Selektor nicht in der Rootcopy ausgeführt werden: Selektoren wie \texttt{:nth-child(odd)} oder \texttt{div.parent > div.content .relevant} würden falsche Ergebnisse liefern. Aus diesem Grund werden die Selektoren bei \texttt{mouseover} in der Komponente ausgeführt und die Kopien der Elemente über den Wert von \texttt{data-vizboard-copy} gefunden.
-	\item Die relevanten UI Elemente müssen nicht leer sein, weswegen dort gesetzte Styles auch bei Kindknoten sichtbar sein könnten, z.\,B. wenn eine CSS Property auf \texttt{inherit} gesetzt ist. Aus diesem Grund werden bestimmte CSS Properties (\texttt{border}, \texttt{color}, \texttt{background}) in den Kopien auf die Werte der Originale fixiert.
-	\item Für eine Aktion relevante UI Elemente können andere relevante UI Elemente enthalten. Damit diese nicht mehrfach in der Rootcopy vorhanden sind, wird für jedes Original einer Kopie überprüft, ob es Knoten mit dem Attribut \texttt{data-vizboard-copy} enthält. Falls ja, wird ein CSS Selektor aus dem Knoten generiert und alle davon getroffenen Elemente in der Kopie gelöscht.
+	\item Danach werden alle von einem CSS Selektor getroffenen Elemente entweder in die Rootcopy selbst oder ins \texttt{svg} kopiert und gleich wie die Originale positioniert. Bei SVG-Elementen ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt.
+	\item Bei jedem durch Selektor $s_i$ getroffenen Element und dessen Kopie wird außerdem ein Attribut \texttt{data-vizboard-copy} auf \texttt{copy<i>} gesetzt. Der Grund dafür ist die Verbindung zwischen Aktionen und UI Elementen: Bei \texttt{mouseover} über einer Aktion in der Liste werden alle dafür notwendigen UI Elemente hervorgehoben. Um diese zu finden, kann der Selektor nicht in der Rootcopy ausgeführt werden: Selektoren wie z.\,B. \texttt{:nth-child(odd)} würden falsche Ergebnisse liefern. Aus diesem Grund werden die Selektoren bei \texttt{mouseover} in der Komponente ausgeführt und die Kopien der Elemente über den Wert von \texttt{data-vizboard-copy} gefunden (siehe Abbildung~\ref{figure:rootcopy}).
+	\item Die aktionsauslösenden UI Elemente müssen nicht leer sein, weswegen dort gesetzte Styles auch bei Kindknoten sichtbar sein könnten, z.\,B. wenn eine CSS Property auf \texttt{inherit} gesetzt ist. Aus diesem Grund werden bestimmte CSS Properties (\texttt{border}, \texttt{color}, \texttt{background}) in den Kopien auf die Werte der Originale fixiert.
+	\item Aktionsauslösende UI Elemente können andere aktionsauslösende UI Elemente enthalten. Das wäre beispielsweise der Fall, wenn das anonyme \texttt{div} in Abbildung~\ref{figure:rootcopy}, welches die \texttt{div.bar} enthält, eine dritte Aktion auslösen würde. Damit diese nicht mehrfach in der Rootcopy vorhanden sind, wird für jedes Original einer Kopie überprüft, ob es Knoten mit dem Attribut \texttt{data-vizboard-copy} enthält. Falls ja, wird ein CSS Selektor aus dem Knoten generiert und alle davon getroffenen Elemente in der Kopie gelöscht.
 \end{enumerate}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/implementierung-rootcopy.png}
+   \caption{Die CSS Selektoren würden in der Rootcopy falsche Treffer liefern, da sowohl die Reihenfolge als auch die Elternknoten der DOM Elemente verändert sind. Deswegen werden Originale und Kopien über das Attribut \texttt{data-vizboard-copy} verknüpft und auffindbar gemacht.}
+   \label{figure:rootcopy}
+\end{figure}
 
 \subsubsection{Einschränkungen}
 
 % highlight
 
-In diesem Abschnitt werden die Grenzen der gewählten Strategien zur Darstellung der Bedienungshilfe aufgezeigt. Zunächst ist es so, dass die Komponente nicht abgedunkelt werden kann, wenn das relevante UI Element zu groß ist. Die Styles zur Hervorhebung werden außerdem an der Wurzel des UI Elements gesetzt. Falls diese von Kindknoten überschrieben werden, ist kein Effekt sichtbar. Außerdem ist es möglich, dass die Komponente über ihrer abgedunkelten Kopie sichtbar ist, wenn das Attribut \texttt{z-index} entsprechend gesetzt ist. Um das zu verhindern, könnte den Komponentenentwicklern von CRUISe ein Maximalwert des Attributs vorgeschrieben werden, welcher nach der Registrierung einer Komponente überprüft wird. Dieser beträgt in den meisten Browsern 2.147.483.647 \cite{Puidokas2009}, also könnte den Entwicklern immer noch ein Bereich von Null bis zwei Milliarden zur Verfügung gestellt werden.
+In diesem Abschnitt werden die Grenzen der gewählten Strategien zur Darstellung der Bedienungshilfe aufgezeigt. Zunächst ist es so, dass die Komponente nicht abgedunkelt werden kann, wenn das relevante UI Element zu groß ist. Die Styles zur Hervorhebung werden außerdem an der Wurzel des UI Elements gesetzt. Falls diese von Kindknoten überschrieben werden, ist kein Effekt sichtbar. Außerdem ist es möglich, dass die Komponente über ihrer abgedunkelten Kopie sichtbar ist, wenn das Attribut \texttt{z-index} entsprechend gesetzt ist. Um das zu verhindern, könnte den Komponentenentwicklern von CRUISe ein Maximalwert des Attributs vorgeschrieben werden, welcher nach der Registrierung einer Komponente überprüft wird. Dieser beträgt in den meisten Browsern 2.147.483.647 \cite{Puidokas2009}, also könnte den Entwicklern immer noch ein Bereich von Null bis zwei Milliarden zur Verfügung gestellt werden. Momentan wird der \texttt{z-index} von Kopien auf 0 gesetzt und von Originalen nicht verändert.
 
 % performance
 
-Ein weiteres Problem der vorgestellten und implementierten Bedienungshilfe ist Performance. War das Markup der Komponente tief verschachtelt, dauerte die Generierung der Kopien der relevanten UI Elemente bis zu 15 Sekunden. Das war bei einer ExtJS Tabelle mit Testdaten von 60~Filmen in 6~Spalten der Fall, mit größeren Datensätzen würde es noch viel länger dauern. Nach einer Inspektion mit den Chrome Developer Tools stellte sich heraus, dass eine Kombination aus exzessivem \enquote{Layout Thrashing} und häufiger Garbage Collection das Problem war. Das Layout Thrashing hatte folgende Auslöser: Zunächst musste für jedes der relevanten Elemente die sichtbare Bounding Box berechnet werden, wofür Zugriff auf die Offsets nötig ist. Dafür wird ein aktuelles Layout benötigt, der Browser muss es also berechnen. Danach wird die Kopie in den DOM eingefügt, was das Layout invalidiert und es somit beim nächsten Element erneut berechnet werden muss. Zum Teil kann der Algorithmus bestimmt optimiert werden, aber nachdem Datensätze in VizBoard beliebig groß und Komponenten in CRUISe beliebig verschachtelt sein können, sollte auf diese Art der Darstellung verzichtet werden. Stattdessen sollten relevante UI Elemente in ihrer normalen Umgebung hervorgehoben werden, ohne aufwändige Erstellung von Kopien.
+Ein weiteres Problem der vorgestellten und implementierten Bedienungshilfe ist Performance. War das Markup der Komponente tief verschachtelt, dauerte die Generierung von Kopien der aktionsauslösenden UI Elemente bis zu 15 Sekunden. Das war bei einer ExtJS Tabelle mit Testdaten von 60~Filmen in 6~Spalten der Fall, mit größeren Datensätzen würde es noch viel länger dauern. Nach einer Inspektion mit den Chrome Developer Tools stellte sich heraus, dass eine Kombination aus exzessivem \enquote{Layout Thrashing} und häufiger Garbage Collection das Problem war. Das Layout Thrashing hatte folgende Auslöser: Zunächst musste für jedes der  Elemente die sichtbare Bounding Box berechnet werden, wofür Zugriff auf die Offsets nötig ist. Dafür wird ein aktuelles Layout benötigt, der Browser muss es also berechnen. Danach wird die Kopie in den DOM eingefügt, was das Layout invalidiert und es somit beim nächsten Element erneut berechnet werden muss. Zum Teil kann der Algorithmus bestimmt optimiert werden, aber nachdem Datensätze in VizBoard beliebig groß und Komponenten in CRUISe beliebig verschachtelt sein können, sollte auf diese Art der Darstellung verzichtet werden. Stattdessen sollten aktionsauslösende UI Elemente in ihrer normalen Kontext hervorgehoben werden, ohne aufwändige Erstellung von Kopien.
 
 % panels
 
@@ -2265,27 +2327,27 @@ In Abbildung~\ref{figure:ui-howto-step2-bad} ist die SIMILE Timeline\footnote{\u
    \label{figure:ui-howto-step2-bad}
 \end{figure}
 
-Eine mögliche Lösung wäre das quadratische Panel immer zu füllen. Dann stellt sich allerdings die Frage, welcher Ausschnitt des Bilds gezeigt und wie dieser bestimmt und gefunden werden soll. Füllt man beispielsweise von links, sähe man in diesem Beispiel in allen Bildern hauptsächlich graue Fläche. Dem Problem könnte auch beigekommen werden, wenn die Panels das Seitenverhältnis ihrer Bilder annähmen. Allerdings ist das Layout der Panels dann unvorhersehbar. Ein Kompromiss könnte sein, die Panels quadratisch zu lassen und die Bilder füllend darzustellen, aber es dem Benutzer zu ermöglichen, innerhalb der Panels zu scrollen. Da aber hier die Interaktion etwas kompliziert würde, sollte zunächst ein passender Layoutalgorithmus versucht werden. Er sollte sowohl das Seitenverhältnis der einzelnen Bilder möglichst beibehalten, als auch einem Comic ähneln. Dass ein ansprechenderes Layout als aneinandergereihte Quadrate nötig ist, wurde schon in der formativen Nutzerstudie klar. 
+Eine mögliche Lösung wäre, das quadratische Panel immer zu füllen. Dann stellt sich allerdings die Frage, welcher Ausschnitt des Bilds gezeigt und wie dieser bestimmt und gefunden werden soll. Füllt man beispielsweise von links, sähe man in diesem Beispiel in allen Bildern hauptsächlich graue Fläche. Dem Problem könnte auch beigekommen werden, wenn die Panels das Seitenverhältnis ihrer Bilder annähmen. Allerdings ist das Layout der Panels dann unvorhersehbar. Ein Kompromiss könnte sein, die Panels quadratisch zu lassen und die Bilder füllend darzustellen, aber es dem Benutzer zu ermöglichen, innerhalb der Panels zu scrollen. Da aber hier die Interaktion etwas kompliziert würde, sollte zunächst ein passender Layoutalgorithmus versucht werden. Er sollte sowohl das Seitenverhältnis der einzelnen Bilder möglichst beibehalten, als auch einem Comic ähneln. Dass ein ansprechenderes Layout als aneinandergereihte Quadrate nötig ist, wurde schon in der formativen Nutzerstudie klar. 
 
 \subsection{Kommunikation}
 \label{section:implementierung:frontend:kommunikation}
 
-Im Folgenden wird auf die Hilfe zur Kommunikation zwischen Komponenten (Abschnitt~\ref{section:konzeption:kommunikation}) eingegangen. Sie ist im Prinzip eine Erweiterung der Bedienungshilfe (Abschnitt~\ref{section:implementierung:frontend:bedienung}), da sie jeweils das Panel mit dem Ergebnis einer Aktion in einer Komponente zeigt (Abbildung~\ref{figure:ui-communication}).
-
-\begin{figure}[htbp]
-   \centering
-   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-communication.png}
-   \caption{Assistance zur Kommunikation}
-   \label{figure:ui-communication}
-\end{figure}
-
-Die Kommunikationshilfe wurde in den CapView von EDYRA \cite{Radeck2013} integriert, da dieser bereits Verbindungen zwischen Komponenten anzeigen kann (Abbildung~\ref{figure:ui-capview}).
+Im Folgenden wird auf die Hilfe zur Kommunikation zwischen Komponenten (Abschnitt~\ref{section:konzeption:kommunikation}) eingegangen. Sie ist im Prinzip eine Erweiterung der Bedienungshilfe (Abschnitt~\ref{section:implementierung:frontend:bedienung}), da sie jeweils das Panel mit dem Ergebnis einer Aktion in einer Komponente zeigt. Die Kommunikationshilfe wurde in den CapView von EDYRA \cite{Radeck2013} integriert, da dieser bereits Verbindungen zwischen Komponenten anzeigen kann (Abbildung~\ref{figure:ui-capview}).
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/implementierung-ui-capview.png}
    \caption{Erweiterter CapView}
    \label{figure:ui-capview}
+\end{figure}
+
+Dazu wird das schwarze Fragezeichen in der Methode \texttt{drawPath} im ConnectionManager des CapView, welche die Verbindungen zwischen Capabilities von Komponenten zeichnet, erstellt und hinzugefügt. In Abbildung~\ref{figure:ui-communication} ist die Kommunikationshilfe zwischen SIMILE Timeline und Liniendiagramm zu sehen.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-communication.png}
+   \caption{Assistance zur Kommunikation}
+   \label{figure:ui-communication}
 \end{figure}
 
 \section{Backend}
@@ -2520,9 +2582,34 @@ Im nächsten Abschnitt wird untersucht, ob Aufgabe~1 erfüllt wird. Abschnitt~\r
 \section{Nutzerstudie}
 \label{section:evaluation:nutzerstudie}
 
-%TODO wichtig: vor studie komponenten verunterschiedlichen. andere farben, wenn möglich andre interaktionen, alles anders.
+Das Hilfesystem soll die Effektivität und Effizienz der Nutzung eines Mashups erhöhen. Ziel ist nun zu überprüfen, wie das Hilfesystem angenommen wird und ob es verständlich genug ist. Zehn Teilnehmer verwenden dieselbe Mashup Komposition, wobei je fünf die Hilfe benutzen (Treatment Group) und fünf ohne Hilfe auskommen müssen (Control Group). Jeder Teilnehmer muss fünf Fragen beantworten, deren Lösung mehr oder weniger offensichtlich ist. Wenn die Bedienungshilfe verständlich und tatsächlich hilfreich ist, müssten mehr Teilnehmer der Treatment Group die Fragen korrekt beantworten als Teilnehmer der Control Group (Effektivität). Außerdem müssten sie die Antworten schneller finden (Effizienz), weil sie kürzer nach Funktionen suchen müssen.
 
-\subsection{Methode}
+\subsection{Mashupkomposition}
+
+Die Teilnehmer benutzten ein Mashup aus drei Komponenten (Abbildung~\ref{figure:objekt}): Eine SIMILE Timeline, ein Liniendiagramm und eine Tabelle. 
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/evaluation-objekt.png}
+   \caption{Objekt der Nutzerstudie}
+   \label{figure:objekt}
+\end{figure}
+
+Als Datensatz wurden die ersten 60~Filme (alphabetisch sortiert) aus der DBpedia verwendet. Jeder Film hatte folgende Attribute:
+
+\begin{itemize}
+	\item Titel
+	\item Beschreibung
+	\item Wikipedia Link
+	\item Budget
+	\item Einnahmen
+	\item Datum der Veröffentlichung
+	\item Studio
+\end{itemize}
+
+\subsection{Aufgaben}
+
+
 
 % ein paar aufgaben, zwischen 3 und 5, die nicht ganz offensichtlich sind. abhängigkeiten zwischen komponenten wären eine variante (zb highlight in linechart nur über tabelle) oder versteckte funktionen (doppelklick to pan, anyone?). 3 aufgaben mind., zwei ist ne komische zahl.
 % zeitlimit 2 minuten pro aufgabe
@@ -2531,11 +2618,39 @@ Im nächsten Abschnitt wird untersucht, ob Aufgabe~1 erfüllt wird. Abschnitt~\r
 
 \subsection{Teilnehmer}
 
+Die Teilnehmer der Nutzerstudie wurden im Starbucks in Dresden (Prager Straße) zufällig ausgewählt. \todo[inline]{Wobei ich jetzt nicht ausschließen kann, dass ich einen Auswahl-Bias zu jüngeren, netteren, hipperen, sympathischeren, gepflegteren Menschen hatte.} Sie waren zwischen X und Y Jahre alt und zu~50~\% weiblich. Als Gegenleistung für ihre Zeit bekamen sie einen Gutschein über 5~Euro.
+
 % je 5 leute kontroll- und treatment-group
 % bei starbucks gegen 5 € kaffee gutschein eintauschen. bei 15 min. studie sind das immerhin 20 €/h!
 
+\subsection{Durchführung}
+
+Zunächst wurde den Teilnehmern der Studie grob erklärt, was ein Mashup ausmacht: Es gäbe verschiedene Fenster, welche dieselben Daten auf unterschiedliche Weise darstellen. Außerdem bestünden Zusammenhänge zwischen diesen Fenstern in dem Sinne, dass sie auf Änderungen in anderen Fenstern reagierten. Jedoch gelte das nicht für alle Fenster und nicht in jede Richtung. Danach wurden sie über die zu lösenden Aufgaben aufgeklärt. Die Teilnehmer der Treatment Group wurden gebeten, dass sie, falls sie nicht weiter wissen, die Hilfefunktionen nutzen sollten anstatt lange zu probieren. Sie wurden auf die Bedienungs- und Kommunikationshilfe aufmerksam gemacht und erhielten außerdem den Hinweis, dass sie währenddessen nachfragen dürften um eine der Hilfefunktionen zu finden.
+
+Danach wurden sie gebeten, die fünf Fragen zu beantworten. Dazu verwendeten sie das vorgestellte Mashup auf einem 13\" Macbook Air (Mid 2012). Es wurde keine Maus zur Verfügung gestellt, sie benutzten das Touchpad des Notebooks. Für jede Aufgabe wurde die Zeit gestoppt und (im Falle der Treatment Group) festgehalten, ob sie eine Hilfefunktion verwendeten. Danach füllten die Teilnehmer einen Fragebogen mit allgemeinen Informationen (Alter, Beruf, Geschlecht, Sprachniveau Englisch) und einen SUS \cite{Brooke1996} Fragebogen aus.
+
 \subsection{Ergebnisse}
 
+% nur in 30 % der fälle wurde bedienungshilfe verwendet, obwohl ich sie dazu ermuntert habe
+% das kann jetzt ein paar gründe haben. einerseits ist es ja so, dass heutzutage kaum wer anleitungen liest oder eben hilfefunktionen verwendet (zumindest bei mir weil meistens weil die erwartungen eh sehr niedrig sind). alles muss intuitiv sein etc. dafür hab ich eigentlich die dyn. meta-hilfe konzipiert.
+% weitere folge: technisch gesehen ist meine kontrollgruppe nicht viel anders als die treatment group
+% außerdem: da, wo es eigentlich gepasst hat, dass sie die hilfe aufrufen, ist der funke nicht so richtig übergesprungen. und ansonsten scheint es nicht das gewesen zu sein, was sie erwartet haben. leider weiß ich nicht, WAS sie erwartet haben, da war ich nicht geistesgegenwärtig genug um das zu fragen
+
+Zunächst muss festgestellt werden, dass die Treatment Group in nur 8~von möglichen 25~Fällen (fünf Aufgaben pro fünf Personen) die Bedienungshilfe verwendete (Abbildung~\ref{figure:result-helptask}). 
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/evaluation-result-helptask.png}
+   \caption{Wie viele Teilnehmer die Hilfe aufriefen, aufgeschlüsselt nach Aufgabe}
+   \label{figure:result-helptask}
+\end{figure}
+
+% kommunikationshilfe wurde gar nicht verwendet, obwohl sie einigen wahrscheinlich geholfen hätte. zeichen dafür, dass dyn. hilfefkt. schon gut wären.
+% leider hab ich auch keinen gefragt, ob er die komm.hilfe verstanden hätte. ich sag einfach ja.
+
+Kein Teilnehmer rief die Kommunikationshilfe auf oder fragte danach, obwohl sie ihnen vermutlich geholfen hätte.
+
+% nach dem jetzt kontrollgruppe und treatment group vom verhalten her quasi identisch ist, macht es auch keinen sinn, hier irgendwelche regressionsanalysen zu machen, mal ganz davon abgesehen, dass die sample size so klein ist.
 
 
 \section{Entwicklungsaufwand}
@@ -2581,12 +2696,12 @@ $( this.body.el.dom ).append( help );
 \subsection{Vorgestelltes Hilfekonzept}
 \label{section:evaluation:entwicklungsaufwand:konzept}
 
-Für die Integration der Komponente in das vorgestellte Hilfekonzept müssen zunächst die notwendigen Informationen in die SMCDL Datei eingefügt werden. Dabei ist hauptsächlich die Beschreibung der Capabilities relevant (Listing~\ref{code:integration-capability}). Der Tippaufwand beträgt 5~Minuten, für die anderen Annotationen werden noch einmal 5~Minuten veranschlagt. Die SMCDL ist danach um 40~Zeilen länger.
-
-Falls die Komponente auch Kommentare unterstützen soll, müssen danach das Wurzelelement der Visualisierung sowie die enthaltenen Ressourcen mit einem Datenattribut versehen werden. In den meisten Fällen ist das eine zusätzliche Zeile Sourcecode.
+Für die Integration der Bedienungshilfe in die Komponente müssen die notwendigen Informationen in die SMCDL Datei eingefügt werden. Für diese Aufgabe wurde ebenfalls ein Kommilitone angeheuert. Er bekam ein Tutorial\footnote{\url{https://trac.mmt.inf.tu-dresden.de/CRUISe/wiki/tutorials/assistance}, ein TRAC Account ist nötig.} zu lesen und sollte danach die SIMILE Timeline, welche er bereits in einer CRUISe Komponente gekapselt hatte, entsprechend anpassen und die Zeit messen. Er benötigte nach eigenen Aussagen 10~Minuten, um das Tutorial zu lesen und 22~Minuten für die tatsächliche Umsetzung, also insgesamt 32~Minuten.
 
 \subsection{Auswertung}
 \label{section:evaluation:entwicklungsaufwand:auswertung}
+
+40 Minuten und 30 Minuten nimmt sich zeitlich jetzt nicht SO viel, aber! Meine Hilfe ist flexibler und einfacher wartbar, davon abgesehen, dass ich mit ihr Sachen erreichen kann, die mit der eigenen Hilfe sowieso nicht gehen (einheitliche Bezeichnungen, Interaktionen etc.)
 
 
 
