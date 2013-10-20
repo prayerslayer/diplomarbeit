@@ -1913,6 +1913,7 @@ Die einfachste Lösung für die statische Meta-Hilfe wäre ein Button in der rec
 In der Nutzerstudie war die Kommentarfunktion nicht offensichtlich. Die Teilnehmer hatten Probleme sie aufzurufen, zu benutzen und die möglichen Funktionen zu erkennen. Deswegen sollte das Intro (Abschnitt~\ref{section:konzeption:intro}) am Ende zusätzlich das notwendigste für die Nutzung der Kommentarfunktion erklären. Dazu gehört zum Beispiel, wie Kommentare angezeigt oder geschrieben werden (inklusive möglicher Annotationen) und dass sie bewertet werden können. Außerdem sollte das Intro auf die statische Meta-Hilfe hinweisen.
 
 \subsection{Dynamische Meta-Hilfe}
+\label{section:konzeption:meta-hilfe:dynamisch}
 
 % zweite lösung: kontextabhängige dynamische hilfe
 Ein Nachteil der statischen Hilfe ist, dass sie nicht lernt und sich dem Benutzer nicht anpasst. Die dynamische Hilfe ändert das. Allerdings stellt sich die Frage, woher sie weiß, wann sie welche Hilfe anbieten soll.
@@ -2628,7 +2629,7 @@ Im nächsten Abschnitt wird untersucht, ob Aufgabe~1 erfüllt wird. Abschnitt~\r
 \section{Nutzerstudie}
 \label{section:evaluation:nutzerstudie}
 
-Das Hilfesystem soll die Effektivität und Effizienz der Nutzung eines Mashups erhöhen. Ziel ist nun zu überprüfen, wie das Hilfesystem angenommen wird und ob es verständlich genug ist. Zehn Teilnehmer verwenden dieselbe Mashup Komposition, wobei je fünf die Hilfe benutzen (Treatment Group) und fünf ohne Hilfe auskommen müssen (Control Group). Jeder Teilnehmer muss fünf Fragen beantworten, deren Lösung mehr oder weniger offensichtlich ist. Wenn die Bedienungshilfe verständlich und tatsächlich hilfreich ist, müssten mehr Teilnehmer der Treatment Group die Fragen korrekt beantworten als Teilnehmer der Control Group (Effektivität). Außerdem müssten sie die Antworten schneller finden (Effizienz), weil sie kürzer nach Funktionen suchen müssen.
+Das Hilfesystem soll die Effektivität und Effizienz der Nutzung eines Mashups erhöhen. Ziel ist nun zu überprüfen, wie das Hilfesystem angenommen wird und ob es verständlich genug ist. Zehn Teilnehmer verwendeten dieselbe Mashup Komposition und mussten fünf Fragen beantworten, deren Lösung mehr oder weniger offensichtlich ist. Währenddessen wurde falls notwendig nachgefragt, ob die Erklärungen verständlich sind, ob etwas anderes erwartet wurde und ob eine andere Darstellung der Hilfe mehr geholfen hätte. Es wurden Effizienz- und Effektivitätsmetriken in Form der benötigten Zeit zur Lösung und der Korrektheit der Lösung für jede Frage aufgenommen.
 
 \subsection{Mashupkomposition}
 
@@ -2641,17 +2642,7 @@ Die Teilnehmer benutzten ein Mashup aus drei Komponenten (Abbildung~\ref{figure:
    \label{figure:objekt}
 \end{figure}
 
-Als Datensatz wurden die ersten 60~Filme (alphabetisch sortiert) aus der DBpedia verwendet. Jeder Film hatte folgende Attribute:
-
-\begin{itemize}
-	\item Titel
-	\item Beschreibung
-	\item Wikipedia Link
-	\item Budget
-	\item Einnahmen
-	\item Datum der Veröffentlichung
-	\item Studio
-\end{itemize}
+Als Datensatz wurden die ersten 60~Filme (alphabetisch sortiert) aus der DBpedia verwendet. Jeder Film hatte folgende Attribute: Titel, Beschreibung, Wikipedia Link, Budget, Einnahmen, Datum der Veröffentlichung, Studio. Eine Selektion in der Tabelle hatte Hervorhebungen in den anderen zwei Komponenten zur Folge, ein Selektion in der Timeline passte das Liniendiagramm an.
 
 \subsection{Aufgaben}
 
@@ -2664,16 +2655,33 @@ Als Datensatz wurden die ersten 60~Filme (alphabetisch sortiert) aus der DBpedia
 
 \subsection{Teilnehmer}
 
-Die Teilnehmer der Nutzerstudie wurden im Starbucks in Dresden (Prager Straße) zufällig ausgewählt. \todo[inline]{Wobei ich jetzt nicht ausschließen kann, dass ich einen Auswahl-Bias zu jüngeren, netteren, hipperen, sympathischeren, gepflegteren Menschen hatte.} Sie waren zwischen X und Y Jahre alt und zu~50~\% weiblich. Als Gegenleistung für ihre Zeit bekamen sie einen Gutschein über 5~Euro.
+Die Teilnehmer der Nutzerstudie wurden im Starbucks in der Prager Straße in Dresden (Abbildung~\ref{}) zufällig ausgewählt. Sie waren zwischen~18 und 53~Jahren alt (Durchschnitt 30.3~Jahre, Median 27.5~Jahre, Standardabweichung 10.84~Jahre) und zu 60~\% weiblich (siehe Tabelle~\ref{table:evaluation-teilnehmer}). Als Gegenleistung für ihre Zeit bekamen sie einen Gutschein über 5~Euro.
 
-% je 5 leute kontroll- und treatment-group
-% bei starbucks gegen 5 € kaffee gutschein eintauschen. bei 15 min. studie sind das immerhin 20 €/h!
+\begin{table}[htbp]
+	\centering
+    \begin{tabular}{c|c|c|c|c}
+    Teilnehmer   & Geschlecht & Alter & Domäne/Beruf & Englisch	 \\
+    \hline
+    Teilnehmer 1 & M          & 30    & Fachberater 			& B2 \\ 
+    Teilnehmer 2 & W          & 28    & Krankenpflegerin 		& B1 \\ 
+    Teilnehmer 3 & W          & 18    & Studentin  			& B1 \\ 
+    Teilnehmer 4 & M          & 20    & Student  				& B2 \\ 
+    Teilnehmer 5 & M          & 27    & IT 					& C1 \\ 
+	Teilnehmer 6 & M          & 26    & IT 					& A1 \\ 
+	Teilnehmer 7 & W          & 22    & Studentin (Psychologie)& C1 \\ 
+	Teilnehmer 8 & W          & 42    & Bürokauffrau 			& A1 \\ 
+	Teilnehmer 9 & W          & 53    & Grundschullehrerin 	& A1 \\ 
+	Teilnehmer 10 & W         & 37    & Betriebswirtin 		& B1 \\ 
+    \end{tabular}
+    \caption{Teilnehmer der Nutzerstudie}
+    \label{table:evaluation-teilnehmer}
+\end{table}
 
 \subsection{Durchführung}
 
-Zunächst wurde den Teilnehmern der Studie grob erklärt, was ein Mashup ausmacht: Es gäbe verschiedene Fenster, welche dieselben Daten auf unterschiedliche Weise darstellen. Außerdem bestünden Zusammenhänge zwischen diesen Fenstern in dem Sinne, dass sie auf Änderungen in anderen Fenstern reagierten. Jedoch gelte das nicht für alle Fenster und nicht in jede Richtung. Danach wurden sie über die zu lösenden Aufgaben aufgeklärt. Die Teilnehmer der Treatment Group wurden gebeten, dass sie, falls sie nicht weiter wissen, die Hilfefunktionen nutzen sollten anstatt lange zu probieren. Sie wurden auf die Bedienungs- und Kommunikationshilfe aufmerksam gemacht und erhielten außerdem den Hinweis, dass sie währenddessen nachfragen dürften um eine der Hilfefunktionen zu finden.
+Zunächst wurde den Teilnehmern der Studie grob erklärt, was ein Mashup ausmacht: Es gäbe verschiedene Fenster, welche dieselben Daten auf unterschiedliche Weise darstellen. Außerdem bestünden Zusammenhänge zwischen diesen Fenstern in dem Sinne, dass sie auf Änderungen in anderen Fenstern reagierten und sich anpassten. Jedoch gelte das nicht für alle Fenster und nicht in jede Richtung. Danach wurden sie über die zu lösenden Aufgaben aufgeklärt. Die Teilnehmer der Treatment Group wurden gebeten, dass sie, falls sie nicht weiter wissen, die Hilfefunktionen nutzen sollten anstatt lange zu probieren. Sie wurden auf die Bedienungs- und Kommunikationshilfe aufmerksam gemacht und erhielten außerdem den Hinweis, dass sie währenddessen nachfragen dürften um eine der Hilfefunktionen zu finden.
 
-Danach wurden sie gebeten, die fünf Fragen zu beantworten. Dazu verwendeten sie das vorgestellte Mashup auf einem 13\" Macbook Air (Mid 2012). Es wurde keine Maus zur Verfügung gestellt, sie benutzten das Touchpad des Notebooks. Für jede Aufgabe wurde die Zeit gestoppt und (im Falle der Treatment Group) festgehalten, ob sie eine Hilfefunktion verwendeten. Danach füllten die Teilnehmer einen Fragebogen mit allgemeinen Informationen (Alter, Beruf, Geschlecht, Sprachniveau Englisch) und einen SUS \cite{Brooke1996} Fragebogen aus.
+Danach wurden sie gebeten, die fünf Fragen zu beantworten. Dazu verwendeten sie das vorgestellte Mashup auf einem 13" Macbook Air (Mid 2012). Es wurde keine Maus zur Verfügung gestellt, sie benutzten das Touchpad des Notebooks. Für jede Aufgabe wurde die Zeit gestoppt und festgehalten, ob sie eine Hilfefunktion verwendeten. Danach füllten die Teilnehmer einen Fragebogen mit allgemeinen Informationen (Alter, Beruf, Geschlecht, Sprachniveau Englisch) und einen SUS \cite{Brooke1996} Fragebogen aus.
 
 \subsection{Ergebnisse}
 
@@ -2682,7 +2690,7 @@ Danach wurden sie gebeten, die fünf Fragen zu beantworten. Dazu verwendeten sie
 % weitere folge: technisch gesehen ist meine kontrollgruppe nicht viel anders als die treatment group
 % außerdem: da, wo es eigentlich gepasst hat, dass sie die hilfe aufrufen, ist der funke nicht so richtig übergesprungen. und ansonsten scheint es nicht das gewesen zu sein, was sie erwartet haben. leider weiß ich nicht, WAS sie erwartet haben, da war ich nicht geistesgegenwärtig genug um das zu fragen
 
-Zunächst muss festgestellt werden, dass die Treatment Group in nur 8~von möglichen 25~Fällen (fünf Aufgaben pro fünf Personen) die Bedienungshilfe verwendete (Abbildung~\ref{figure:result-helptask}). 
+Zunächst muss festgestellt werden, dass die Teilnehmer nur in einem Drittel der möglichen Fälle (17 von 50 Fragen) die Bedienungshilfe verwendete (Abbildung~\ref{figure:result-helptask}). Das legt den Schluss nahe, dass die Bedienungshilfe in der Praxis noch weniger aufgerufen würde, da die Teilnehmer vor der Studie dazu ermuntert wurden. Ausprobieren war bei 90~\% der Teilnehmer die bevorzugte Strategie, dabei hätte ihnen die dynamische Meta-Hilfe (Abschnitt~\ref{section:konzeption:meta-hilfe:dynamisch} im Konzept) vermutlich mehr geholfen als die statische Bedienungshilfe.
 
 \begin{figure}[htbp]
    \centering
@@ -2691,12 +2699,17 @@ Zunächst muss festgestellt werden, dass die Treatment Group in nur 8~von mögli
    \label{figure:result-helptask}
 \end{figure}
 
+% gängige probleme bei der bedienungshilfe
+% die panels als aktionselemente verkannt, war tw. schon bei formativer studie so --> besseres layout
+% wording war nicht immer super. was heißt "click left button", wenn da nur ein touchpad ohne sichtbare buttons ist? sollte vielleicht vereinfacht werden, sodass left button default modifier ist und nicht explizit erwähnt wird
+% versucht die gehighlighteten elemente der hilfe zu benutzen. vielleicht hilfefenster shaky shaky wenn das passiert? um drauf hinzuweisen, dass das erst geschlossen werden muss
+% und "highlight by example" funktioniert nicht so toll.
+
 % kommunikationshilfe wurde gar nicht verwendet, obwohl sie einigen wahrscheinlich geholfen hätte. zeichen dafür, dass dyn. hilfefkt. schon gut wären.
-% leider hab ich auch keinen gefragt, ob er die komm.hilfe verstanden hätte. ich sag einfach ja.
 
-Kein Teilnehmer rief die Kommunikationshilfe auf oder fragte danach, obwohl sie ihnen vermutlich geholfen hätte.
+Nur ein Teilnehmer rief die Kommunikationshilfe auf. Die anderen hatten sie vergessen oder erhofften sich nicht viel davon, obwohl sie ihnen vermutlich geholfen hätte. Um die Benutzer stärker darauf hinzuweisen, sollte die dynamische Kommunikationshilfe umgesetzt und in einer Studie evaluiert werden. Den Testpersonen, welche die Kommunikationshilfe nicht von selber benutzen, wurde sie am Ende gezeigt. Sie war für alle verständlich, was wohl auch daran liegt, dass die Captions der Bilder einen erklärenden Satz bilden (\enquote{Select a movie to highlight a movie.}).
 
-% nach dem jetzt kontrollgruppe und treatment group vom verhalten her quasi identisch ist, macht es auch keinen sinn, hier irgendwelche regressionsanalysen zu machen, mal ganz davon abgesehen, dass die sample size so klein ist.
+% vergleich von effizienz und effektivität unter teilnehmern mit/ohne hilfe pro aufgabe ist wahrscheinlich sinnlos. die leute, welche keine hilfe brauchten, hatten oft einen ungefähren plan, brauchten sie also gar nicht. natürlich sind sie schneller als die leute, welche erst die hilfe aufrufen und verstehen müssen.
 
 
 \section{Entwicklungsaufwand}
