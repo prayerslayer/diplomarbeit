@@ -57,7 +57,7 @@
 \colorlet{punct}{red!60!black}
 \definecolor{delim}{RGB}{20,105,176}
 \lstdefinelanguage{json}{
-    basicstyle=\normalfont\ttfamily,
+    basicstyle=\small\ttfamily,
     showstringspaces=false,
     breaklines=true,
     literate=
@@ -2373,6 +2373,8 @@ Zwischen Front- und Backend wird ein Kommentar auf verschiedene Weise serialisie
    \label{figure:kommentare-backend}
 \end{figure}
 
+Die verschiedenen Serialisierungsformate sind im Anhang zu finden.
+
 \subsubsection{Architektur}
 
 Die Architektur des Backends für Kommentare orientiert sich an den verschiedenen notwendigen Serialisierungen eines Kommentars (siehe vorhergehender Abschnitt). Sie besteht aus drei Klassen, die dem \enquote{Separation of Concerns} Prinzip folgend genau eine Zuständigkeit haben:
@@ -2479,7 +2481,7 @@ Um zusätzlich angeben zu können, wie weit der Hilfeservice scrollen soll, kann
 
 Falls der Entwickler keine Hilfe wünscht, müssen keine Elemente außer \texttt{capability} und dessen Attribute \texttt{id}, \texttt{activity} und \texttt{entity} angegeben werden. Soll für diese Capability Hilfe generiert werden, müssen \texttt{generateAssistance} und die \texttt{atomicoperation} ohne \texttt{exampledata} unbedingt angegeben werden. 
 
-Falls die Capability nicht vom Benutzer (UI Capability), sondern von der Komponente ausgeführt wird (System Capability), enthält der \texttt{capability} Tag Beispieldaten, die an die entsprechende Operation der Komponente weitergegeben werden.
+Falls die Capability nicht vom Benutzer (UI Capability), sondern von der Komponente ausgeführt wird (System Capability), enthält \texttt{capability} Beispieldaten, die an die entsprechende Operation der Komponente weitergegeben werden.
 
 \lstset{language=XML}
 \begin{lstlisting}[caption={SMCDL für System Capability}, label=code:smcdl-system]
@@ -2755,6 +2757,89 @@ Für die Integration der Bedienungshilfe in die Komponente müssen die notwendig
 
 \appendix
 \chapter{Anhang}
+
+\section{Implementierung}
+
+\subsection{JSON Format eines Kommentars}
+
+\lstset{language=JSON}
+\begin{lstlisting}
+{
+  "comment_id": "id",
+  "user_id": "bob",
+  "dataset_id": "testdataset",
+  "component_id": "http://cruise/ui/SimileTimeline",
+  "score": 0,
+  "response_to": null, // id of other comment
+  "memento": {
+    "selection": null,
+    "centerDate": "2011-09-14T12:00:00.000Z",
+    "mousewheelscroll": true,
+    "height": 375,
+    "width": 600
+  },
+  "visualized_properties": [
+    // strings of form
+    // dataset + class uri + property uri
+  ],
+  "versions": [
+    {
+      "number": 1,
+      "text": "This is a test.",
+      "timestamp": 1382258459433,
+      "annotations": [{
+        "uri": "http://dbpedia.org/resource/Date_Movie",
+        "values": {
+          // values of properties
+        },
+        "type": "point"
+      },
+      {
+        "type": "area",
+        "visualization_width": 800,
+        "visualization_height": 352,
+        "elements": [
+          {
+            "type": "arrow",
+            "x1": 56.75,
+            "x2": 58.875,
+            "y1": 20.738636,
+            "y2": 42.613636
+          },
+          {
+            "type": "text",
+            "x": 51.375,
+            "text": "Testcomment",
+            "y": 17.329546
+          }
+        ]},
+        {
+          "type": "data",
+          "items": [
+            {
+              "uri": "http://mmt.inf.tu-dresden.de/testdata/films#release",
+              "from": "2010-01-20T06:00:00.000Z",
+              "to": "2019-11-24T12:00:00.000Z"
+            }]
+         }]
+     }]
+  }
+\end{lstlisting}
+
+\subsection{RDF Format eines Kommentars}
+
+\todo[inline]{Das muss ich noch machen, aber im Prinzip isses nur ein semantisches Äquivalent zum Java Klassendiagramm. Aber gut, man muss auch wissen, wie alles heißt.}
+
+\subsection{Java Klassendiagramm eines Kommentars}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/implementierung-kommentare-klassendiagramm.png}
+   \caption{Java Klassendiagramm für Kommentare}
+   \label{figure:kommentare-klassendiagramm}
+\end{figure}
+
+\section{Evaluation}
 
 \lstset{language=XML}
 \begin{lstlisting}[caption={Beschreibung der Capabilities}, label=code:integration-capability]
