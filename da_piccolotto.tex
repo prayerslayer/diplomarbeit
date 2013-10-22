@@ -2236,6 +2236,8 @@ Außerdem wurde das Markup einer Komponente entsprechend erweitert. Die Visualis
 
 Im Folgenden wird auf die Implementierung der Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) eingegangen. Sie erlauben es Benutzern, Erkenntnisse untereinander auszutauschen.
 
+\subsubsection{Kommentar schreiben}
+
 Kommentare werden über Buttons in der Titelleiste einer Komponente aufgerufen. Unterstützt eine Komponente keine Kommentare, sind die Buttons inaktiv. In Abbildung~\ref{figure:ui-write-comment} ist zu sehen, wie ein Kommentar verfasst wird. Um den Bereich um die Visualisierung herum abzudunkeln, wird ein SVG-Element in die Komponente eingefügt. Es enthält eine Maske\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Clipping_and_masking}}, welche die Visualisierung freistellt.
 
 \begin{figure}[htbp]
@@ -2251,6 +2253,19 @@ Selektionen verhalten sich etwas anders als Text, Rechtecke und Pfeile, da sie n
 
 Nachdem der Benutzer den Kommentar bestätigt hat, werden die Koordinaten und Dimensionen der Annotationen in relative Einheiten (zur Größe der Visualisierung) umgerechnet und an das Kommentar Backend (siehe Abschnitt~\ref{section:implementierung:backend:kommentare}) gesendet.
 
+\subsubsection{Kommentare lesen}
+
+Um Kommentare zu lesen, muss erst ein Button in der Titelleiste der jeweiligen Komponente betätigt werden. Danach wird das entsprechende User Interface neben der Komponente angezeigt (Abbildung~\ref{figure:ui-read-comments}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=\textwidth]{images/implementierung-ui-read-comments.png}
+   \caption{User Interface um Kommentare zu lesen}
+   \label{figure:ui-read-comments}
+\end{figure}
+
+Die Annotationen sind verschiedene DOM Elemente, welche bei Bedarf angezeigt oder versteckt werden. Flächenbasierte Annotationen werden als SVG \texttt{rect}s, \texttt{line}s und \texttt{text}s umgesetzt, deren Position relativ zur Größe der Visualisierung ist (siehe vorheriger Abschnitt).
+
 \subsubsection{Einschränkungen}
 
 Die Lösung, \texttt{mouseover} über Datenpunkten mit Hilfe der Bounding Box festzustellen funktioniert zwar, hat aber einen Nachteil: Da die Bounding Box immer rechteckig ist, können \enquote{false positives} auftreten (Abbildung~\ref{figure:kommentar-bbox}). Variante A ist der Idealfall; die Bounding Box ist gleich groß wie die Repräsentation des Datenpunkts. Das ändert sich allerdings, wenn die Repräsentation transformiert wird (45$^\circ$ Rotation in Variante B) oder eine nicht-eckige Form hat (Kreis in Variante C).
@@ -2263,6 +2278,17 @@ Die Lösung, \texttt{mouseover} über Datenpunkten mit Hilfe der Bounding Box fe
 \end{figure}
 
 Eine Möglichkeit, um diese Einschränkung zu umgehen, ist eine weitere Funktion in die API einer Komponente hinzuzufügen. Sie teilt dem Hilfesystem mit, ob ein Punkt $(x,y)$ innerhalb eines Datenpunkts liegt oder nicht. Diese Funktion kann optional genutzt werden: Ist sie implementiert, verwendet sie das Hilfesystem. Ansonsten arbeitet es wie bisher mit Bounding Boxes.
+
+Flächenbasierte Annotationen werden relativ zur Größe der Visualisierung positioniert. Das kann problematisch sein, wenn die Visualisierung genau so groß wie die Komponente ist und diese in unterschiedlicher Größe gerendert wird (siehe Abbildung~\ref{figure:area-anno}).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.75\textwidth]{images/implementierung-area-anno.png}
+   \caption{Problem von flächenbasierten Annotationen bei unterschiedlicher Visualisierungsgröße: Das Zentrum ist in beiden Visualisierungen das Jahr~1990, in der unteren ist aber ein vollkommen anderer Bereich markiert.}
+   \label{figure:area-anno}
+\end{figure}
+
+Dieses Problem kann nicht wirklich umgangen werden, da die Komponenten \enquote{Black Boxes} sind und unbekannt ist, wie sich der Inhalt einer Visualisierung mit unterschiedlicher Größe ändert. Deswegen sollten Komponenten so weit wie möglich datenbasierte Annotationen unterstützen und, falls es aufgrund der visuellen Darstellung nicht möglich ist, den Inhalt einer Visualisierung proportional skalieren.
 
 \subsection{Bedienung}
 \label{section:implementierung:frontend:bedienung}
@@ -2582,7 +2608,7 @@ Handelt es sich um eine System Capability, sind keine UI Elemente beteiligt. In 
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/implementierung-ordner.png}
+   \includegraphics[width=0.4\textwidth]{images/implementierung-ordner.png}
    \caption{Beispielhafte Ordnerstruktur einer Komponente im Assistance Generator}
    \label{figure:ordner}
 \end{figure}
@@ -2608,7 +2634,7 @@ Damit das Frontend des Hilfesystems auf die generierten Bilder zugreifen kann, w
 }
 \end{lstlisting}
 
-\subsection{Zusammenfassung}
+\section{Zusammenfassung}
 \label{section:implementierung:zusammenfassung}
 
 %#####################################################
@@ -2741,9 +2767,9 @@ Die Ergebnisse des SUS Fragebogens sind durchwachsen, aber insgesamt positiv (Ab
 % 4: ist mein ausreisser nach unten, die hat weder einen plan gehabt, wie das system funktioniert noch ansatzweise eine lösungsstrategie. weiß auch gar nicht, was der geholfen hätte. weniger aufregung vielleicht.
 % 2: wirkte eigentlich sehr sicher. hat auch im feedback angemerkt, dass sie es ganz cool findet
 
-Auffällig sind die vier Teilnehmer, welche einen SUS Score von weniger als~60 vergaben. Nummer~2 wirkte während der Studie sehr sicher und merkte auch im Feedback an, dass sie das System VizBoard an sich interessant und nützlich findet. Zeitlich befand sie sich im Mittelfeld. Teilnehmerin~4 hatte kein mentales Modell dafür, wie Mashups funktionieren und konnte deswegen auch keine Lösungsstrategie planen, weswegen sie sehr lange für jede Frage benötigte. Teilnehmerin Nummer~7 sah sich erst alle Hilfefunktionen an und löste danach alle Fragen vergleichsweise schnell, bis auf die Letzte auch alle korrekt. Die letzte Teilnehmerin konnte alle Aufgaben lösen, benötigte aber bei zwei davon deutlich länger als die anderen. Sie hatte Probleme zu verstehen, dass die Hilfe Kopien erstellte, auf denen sie nicht arbeiten kann.
+Auffällig sind die vier Teilnehmer, welche einen SUS Score von weniger als~60 vergaben. Nummer~2 wirkte während der Studie sehr sicher und merkte auch im Feedback an, dass sie das System VizBoard an sich interessant und nützlich findet. Zeitlich befand sie sich im Mittelfeld. Teilnehmerin~4 hatte kein mentales Modell dafür, wie Mashups funktionieren und konnte deswegen auch keine Lösungsstrategie planen, weswegen sie sehr lange für jede Frage benötigte. Teilnehmerin Nummer~7 sah sich erst alle Hilfefunktionen an und löste danach alle Fragen vergleichsweise schnell, bis auf die letzte auch alle korrekt. Die letzte Teilnehmerin konnte alle Aufgaben lösen, benötigte aber bei zwei davon deutlich länger als die anderen. Sie hatte Probleme zu verstehen, dass die Hilfe Kopien erstellte, auf denen sie nicht arbeiten kann.
 
-Den Beobachtungen nach zu urteilen hätten die Bewertungen der Teilnehmerinnen~2 und~7 eigentlich besser ausfallen müssen. Zumindest bei ersterer fällt auf, dass sieben (von zehn) Aussagen mit einer~3, die anderen mit~2 und~4 bewertet wurden. Vielleicht ist sie einfach kein entscheidungsfreudiger Mensch. 
+Den Beobachtungen nach zu urteilen hätten zumindest die Bewertungen der Teilnehmerinnen~2 und~7 eigentlich besser ausfallen müssen.
 
 \section{Entwicklungsaufwand}
 \label{section:evaluation:entwicklungsaufwand}
@@ -2785,17 +2811,36 @@ help.on( "click", function() {
 $( this.body.el.dom ).append( help );
 \end{lstlisting}
 
+Alles in allem wurden 43~Minuten für diese Hilfefunktion aufgewendet.
+
 \subsection{Vorgestelltes Hilfekonzept}
 \label{section:evaluation:entwicklungsaufwand:konzept}
 
-Für die Integration der Bedienungshilfe in die Komponente müssen die notwendigen Informationen in die SMCDL Datei eingefügt werden. Für diese Aufgabe wurde ebenfalls ein Kommilitone angeheuert. Er bekam ein Tutorial\footnote{\url{https://trac.mmt.inf.tu-dresden.de/CRUISe/wiki/tutorials/assistance}, ein TRAC Account ist nötig.} zu lesen und sollte danach die SIMILE Timeline, welche er bereits in einer CRUISe Komponente gekapselt hatte, entsprechend anpassen und die Zeit messen. Er benötigte nach eigenen Aussagen 10~Minuten, um das Tutorial zu lesen und 22~Minuten für die tatsächliche Umsetzung, also insgesamt 32~Minuten.
+Für die Integration der Bedienungshilfe in die Komponente müssen die notwendigen Informationen in die SMCDL Datei eingefügt werden. Wie im vorherigen Abschnitt auch wurde ein Kommilitone gebeten, diese Aufgabe auszuführen. Er hat bereits Erfahrung mit CRUISe Komponenten und integrierte z.\,B. die SIMILE Timeline. Nachdem er ein Tutorial\footnote{\url{https://trac.mmt.inf.tu-dresden.de/CRUISe/wiki/tutorials/assistance}, ein TRAC Account ist nötig.} gelesen hatte, sollte er die SMCDL \enquote{seiner} SIMILE Timeline entsprechend anpassen. Er benötigte nach eigenen Aussagen 10~Minuten, um das Tutorial zu lesen und 22~Minuten für die tatsächliche Umsetzung, also insgesamt 32~Minuten.
 
 \subsection{Auswertung}
 \label{section:evaluation:entwicklungsaufwand:auswertung}
 
-40 Minuten und 30 Minuten nimmt sich zeitlich jetzt nicht SO viel, aber! Meine Hilfe ist flexibler und einfacher wartbar, davon abgesehen, dass ich mit ihr Sachen erreichen kann, die mit der eigenen Hilfe sowieso nicht gehen (einheitliche Bezeichnungen, Interaktionen etc.)
+Für die Integration einer individuellen Hilfefunktion waren 43~Minuten nötig; die SMCDL einer bestehenden Komponente anzupassen erforderte einen Zeitaufwand von 32~Minuten (Abbildung~\ref{figure:zeit}). Das vorgestellte Hilfekonzept kann also schneller integriert werden als individuelle Hilfefunktionen.
 
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.25\textwidth]{images/evaluation-zeit.png}
+   \caption{Benötigte Zeit zur Integration}
+   \label{figure:zeit}
+\end{figure}
 
+Der Unterschied beträgt aber nur 11~Minuten und es waren verschiedene Personen beteiligt, weswegen die Zahlen eher als Richtwerte zu sehen sind. Allerdings ist festzuhalten, dass das vorgestellte Hilfekonzept einige Vorteile gegenüber einer individuellen Hilfe hat.
+
+Zunächst ist es flexibler: Kommen Funktionen hinzu oder werden welche im Laufe der Entwicklung entfernt, muss im Falle der individuellen Hilfe der ganze Prozess der Hilfeerstellung erneut durchlaufen werden. Das bedeutet Screenshots machen, in ein Grafikverarbeitungsprogramm wie Photoshop laden, dort die Hilfestellungen einfügen, exportieren, alle Bilder in eine andere Software laden und die Sequenz als GIF exportieren. Verwendet der Entwickler aber das vorgestellte Hilfekonzept, muss er nur die SMCDL anpassen und updaten.
+
+Ein weiterer Vorteil ist die einfachere Wartbarkeit. Im vorgestellten Beispiel waren nur acht Zeilen Quellcode nötig, allerdings hindert den Komponentenentwickler nichts daran bessere und fortgeschrittenere Hilfefunktionen zu implementieren, die mehr Quellcode nötig machen. Dieser zusätzliche Quellcode, der beim vorgestellten Hilfekonzept nicht notwendig ist, erhöht die Komplexität der Software und macht sie damit schwieriger wartbar.
+
+Zuletzt gibt es Eigenschaften, die mit einem individuellen Hilfesystem gar nicht umgesetzt werden können. Dazu gehören einheitliche Formulierungen, Interaktionen und Aussehen. Ein einheitliches Look and Feel ist jedoch wichtig für die Bedienbarkeit von Software (vgl. verwandte Arbeiten, Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}).
+
+\section{Zusammenfassung}
+
+\chapter{Zusammenfassung und Ausblick}
 
 \newpage % needed because of changing pagenumbering and missing backmatter
 %\backmatter % no numbering (letters) of appendices, if backmatter activated
