@@ -946,7 +946,7 @@ Basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}),
 \section{Einführung}
 \label{section:konzeption:einfuehrung}
 
-Blublublu\todo{:/}
+In diesem Abschnitt werden für die Konzeption notwendige Vorbetrachtungen getätigt. So wird zunächst ein Rollenmodell eingeführt (Abschnitt~\ref{section:konzeption:einfuehrung:rollenmodell}), damit Aufgaben korrekt verteilt werden. Danach werden Designrichtlinien für das User Interface des Hilfesystems entworfen (Abschnitt~\ref{section:konzeption:einfuehrung:ui}). Zuletzt wird auf die formative Nutzerstudie eingegangen, welche nach dem ersten Entwurf des Konzepts durchgeführt wurde (Abschnitt~\ref{section:konzeption:einfuehrung:nutzerstudie}). Deren Ergebnisse wurden im zweiten Entwurf, welcher in den folgenden Kapiteln vorgestellt wird, bereits berücksichtigt.
 
 \subsection{Rollenmodell}
 \label{section:konzeption:einfuehrung:rollenmodell}
@@ -995,18 +995,6 @@ Das User Interface für die ausgewählte Hilfefunktion wird links oder rechts de
    \label{figure:ui-basics}
 \end{figure}
 
-\subsubsection{Ort}
-\todo[inline]{Überlegen, das zu streichen. Verwirrend und kaum relevant.}
-Dass die Sidebar mal links, mal rechts angezeigt wird, könnte beim Nutzer für Verwirrung sorgen. Jedoch scheint dieses Problem das kleinste zu sein, wenn man über die Alternativen nachdenkt.
-Beispielsweise könnte das Hilfesystem die Buttons in einer eigenen Button-Sidebar platzieren (Abbildung~\ref{figure:ui-buttonleiste}). Allerdings erscheint dann in 50~\% der Fälle die UI Sidebar auf der anderen Seite, was noch verwirrender ist (Abbildung~\ref{figure:ui-buttonleiste}, 1 und 2). Zwar wäre es möglich, die Button-Sidebar auf beiden Seiten der Komponente anzuzeigen und eine davon zu deaktivieren (Abbildung~\ref{figure:ui-buttonleiste}, 3). Diese Variante unterscheidet sich aber nicht viel von der eben beschriebenen, da der Benutzer dann nicht die Buttons selbst, sondern aktivierte Buttons suchen muss.
-
-\begin{figure}[htbp]
-   \centering
-   \includegraphics[width=0.5\textwidth]{images/konzeption-ui-buttonleiste.png}
-   \caption{Alternative zu Buttons in der Titelleiste}
-   \label{figure:ui-buttonleiste}
-\end{figure}
-
 \subsubsection{Optik}
 
 Visuelle Konsistenz ist wichtig, damit der Benutzer Elemente gleichen Typs erkennen kann (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}). Deswegen hat der Bereich, in der Hilfefunktionen angezeigt werden, abgerundete Ecken. So hebt sich die UI für Hilfe von der normalen UI der Komponente, welche spitze Ecken aufweist, ab. Aus demselben Grund wird für die Hilfe UI ein dunkler Hintergrund gewählt, da der Hintergrund von VizBoard hell gehalten ist. Um etwas hervorzuheben, wird prinzipiell die Farbe Orange benutzt, da dies im bestehenden VizBoard Farbschema so festgelegt wurde. Eine Überlagerung der Komponente mit einem leichten Grau dient der Blickführung zu einem nicht überlagerten Element. Ist die Komponente hingegen mit einem tiefen Grau überlagert, signalisiert die dunkle Fläche eine \enquote{No Click Area}, wo keine Interaktionen ausgeführt werden können. 
@@ -1014,7 +1002,7 @@ Visuelle Konsistenz ist wichtig, damit der Benutzer Elemente gleichen Typs erken
 Offensichtlich sind die gewählten visuellen Effekte nicht mehr so nützlich, wenn eine Komponente einen dunklen Hintergrund aufweist. Schwarz mit Dunkelgrau zu überlagern macht für das menschliche Auge nur wenig Unterschied. Deswegen werden in diesem Fall dieselben Effekte mit Weiß und Hellgrau verwendet.
 
 \subsection{Nutzerstudie}
-\label{section:konzeption:einleitung:nutzerstudie}
+\label{section:konzeption:einfuehrung:nutzerstudie}
 
 Das entworfene Konzept wurde mit einer formativen Nutzerstudie evaluiert und danach entsprechend überarbeitet. Die wichtigste zu beantwortende Frage war dabei, ob die Kommunikationshilfe statisch (d.\,h. nach Klick auf einen Button) oder dynamisch (d.\,h. sobald eine Nachricht zwischen Komponenten ausgetauscht wurde) aufgerufen werden soll. Dazu wurde ein Paper Mockup \cite{Virzi1996} erstellt (Abbildung~\ref{figure:paper-mockup}). Er besteht aus einem Balkendiagramm, einer Karte und einer Tabelle. Als Datengrundlage wurden NBA Spieler gewählt. Die Balken des Balkendiagramms konnten ausgewählt werden, woraufhin sich die Tabelle und die Karte anpassten.
 
@@ -1412,7 +1400,7 @@ Im kompositen Infomationsvisualisierungssystem VizBoard kommunizieren Komponente
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:kommunikation:ui}
 
-Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte ein Fragezeichen enthält. Das Fragezeichen wurde gewählt, da es konsistent mit dem Rest der Hilfe ist und ein Brief in der Nutzerstudie Assoziationen mit \enquote{Email} oder \enquote{in sozialen Netzwerken teilen} weckte. Sollten mehrere Empfänger vorhanden sein, existiert für jeden davon ein Fragezeichen. Die Kommunikationshilfe wird gleichzeitig mit der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) aufgerufen, solange wenig genug Komponenten im Mashup vorhanden sind (Abschnitt~\ref{section:konzeption:einleitung:nutzerstudie}). Ansonsten wird zusätzlich bei jeder Nachricht ein entsprechender Pfeil eingeblendet und nach kurzer Zeit (ca. 200--500~ms) wieder ausgeblendet.
+Wie im vorigen Abschnitt erläutert, wird zuerst der Nachrichtenaustausch zwischen Komponenten sichtbar gemacht (Abbildung~\ref{figure:kommunikation-step1}). Dazu wird ein Pfeil vom Sender der Nachricht zum Empfänger animiert und gezeichnet, der in der Mitte ein Fragezeichen enthält. Das Fragezeichen wurde gewählt, da es konsistent mit dem Rest der Hilfe ist und ein Brief in der Nutzerstudie Assoziationen mit \enquote{Email} oder \enquote{in sozialen Netzwerken teilen} weckte. Sollten mehrere Empfänger vorhanden sein, existiert für jeden davon ein Fragezeichen. Die Kommunikationshilfe wird gleichzeitig mit der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) aufgerufen, solange wenig genug Komponenten im Mashup vorhanden sind (Abschnitt~\ref{section:konzeption:einfuehrung:nutzerstudie}). Ansonsten wird zusätzlich bei jeder Nachricht ein entsprechender Pfeil eingeblendet und nach kurzer Zeit (ca. 200--500~ms) wieder ausgeblendet.
 
 \begin{figure}[htbp]
    \centering
