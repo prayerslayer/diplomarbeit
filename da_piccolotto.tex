@@ -263,15 +263,14 @@ CRUISe \cite{Pietschmann2009, Pietschmann2012} ist ein Framework zur Konstruktio
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.75\textwidth]{images/grundlagen-cruise_architektur.png}
+	\includegraphics[width=\textwidth]{images/grundlagen-cruise_component_integration.png}
 	\caption{CRUISe Architektur aus \cite{Pietschmann2012}}
 	\label{figure:cruise_architektur}
 \end{figure}
 
 CRUISe geht davon aus, dass professionelle Softwarentwickler Komponenten zu kompositen Sichten modellieren, welche dann von Endnutzern nur noch aufgerufen werden. EDYRA \cite{Ruempel2011} greift auf das CRUISe Framework zurück, um es Endnutzern selbst zu ermöglichen, diese Aufgabe auszuführen. Dazu schlägt EDYRA zur Laufzeit Komponenten vor, welche sofort integriert oder gelöscht werden können.
 
-VizBoard \cite{Voigt2013} benutzt das CRUISe Framework, um Endnutzern die Möglichkeit zu geben, semantische Datensätze mit Hilfe verschiedener InfoVis verstehen zu können. Abbildung~\ref{figure:vizboard_architektur} zeigt die Architektur von VizBoard. Die Daten werden zuerst aus verschiedenen Quellen in eine semantische Repräsentation konvertiert und im Data Repository (DaRe, 1) gespeichert. Das Component Repository (CoRe, 3) verwaltet die verschiedenen Visualisierungskomponenten (2) und ist für Matching und Ranking von Komponenten zuständig, bevor sie in der Runtime (4) integriert werden. Sowohl das DaRe als auch das CoRe greifen auf die Visualization Ontology (VISO, 5) zurück, die Wissen über verschiedene Aspekte von Visualisierungen, wie z.\,B. Struktur der visualisierten Daten, Mapping der Daten auf visuelle Attribute oder Interaktionsmöglichkeiten, enthält \cite{Polowinski2013}.
-% architekturbild --> vizboard paper
+VizBoard \cite{Voigt2013} benutzt das CRUISe Framework, um Endnutzern die Möglichkeit zu geben, semantische Datensätze mit Hilfe verschiedener InfoVis verstehen zu können. Abbildung~\ref{figure:vizboard_architektur} zeigt die Architektur von VizBoard. Die Daten werden zuerst aus verschiedenen Quellen in eine semantische Repräsentation konvertiert und im Data Repository (DaRe, 2) gespeichert. Das Composition Repository (CoRe, 4) verwaltet die verschiedenen Visualisierungskomponenten und ist für Matching und Ranking von Komponenten zuständig, bevor sie in der Runtime (5) integriert werden. Sowohl das DaRe als auch das CoRe greifen auf die Visualization Ontology (VISO, 1) zurück, die Wissen über verschiedene Aspekte von Visualisierungen, wie z.\,B. Struktur der visualisierten Daten, Mapping der Daten auf visuelle Attribute oder Interaktionsmöglichkeiten, enthält \cite{Polowinski2013}.
 
 \begin{figure}[htbp]
 	\centering
@@ -290,13 +289,13 @@ Im DaRe werden Daten aus verschiedenen Quellen in einer semantischen Repräsenta
 \label{section:standderforschung:grundlagen:cruise_vizboard:komponentenbeschreibung}
 
 % komponentenbeschreibung 5.1.3
-Komponenten in CRUISe werden generisch und einheitlich durch Properties, Events und Operationen sowie Metainformationen beschrieben. Properties geben Auskunft über den Zustand einer Komponente, also beispielsweise Breite und Höhe oder die Sortierreihenfolge der Elemente. Events weisen andere Komponenten auf interne Zustandsänderungen hin, zum Beispiel wenn sich die Sortierreihenfolge geändert hat. Operationen sind Methoden einer Komponente, die durch Events ausgelöst werden, z.\,B. \texttt{reassignNumbers(order)}, um die Nummerierung der Pins in einer Karte anzupassen. Zu den Metainformationen gehören u.\,a. der Name einer Komponente oder der Preis.
+Komponenten in CRUISe werden generisch und einheitlich durch propertys, Events und Operationen sowie Metainformationen beschrieben. propertys geben Auskunft über den Zustand einer Komponente, also beispielsweise Breite und Höhe oder die Sortierreihenfolge der Elemente. Events weisen andere Komponenten auf interne Zustandsänderungen hin, zum Beispiel wenn sich die Sortierreihenfolge geändert hat. Operationen sind Methoden einer Komponente, die durch Events ausgelöst werden, z.\,B. \texttt{reassignNumbers(order)}, um die Nummerierung der Pins in einer Karte anzupassen. Zu den Metainformationen gehören u.\,a. der Name einer Komponente oder der Preis.
 
 \subsubsection{Kommunikationsmodell}
 \label{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}
 
 % kommunikationsmodell 5.2.2
-Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. eine Komponente veröffentlicht ein Event, dessen Nachricht mit Hilfe des Publish/Subscribe Paradigma an alle Subscriber in diesem Kanal (Link) übertragen wird. Subscriber reagieren auf das Event, indem sie bestimmte Operationen ausführen. Die Übertragung der Nachrichten wird durch sogenannte Links umgesetzt, welche $n$ Events mit $m$ Operationen verbinden. Spezielle Links sind Backlinks, die eine Zweiwegekommunikation zwischen Komponenten ermöglichen und PropertyLinks, die Properties synchron halten. Ein Überblick über die verschiedenen Links ist in Abbildung~\ref{figure:cruise_links} zu sehen.
+Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. eine Komponente veröffentlicht ein Event, dessen Nachricht mit Hilfe des Publish/Subscribe Paradigma an alle Subscriber in diesem Kanal (Link) übertragen wird. Subscriber reagieren auf das Event, indem sie bestimmte Operationen ausführen. Die Übertragung der Nachrichten wird durch sogenannte Links umgesetzt, welche $n$ Events mit $m$ Operationen verbinden. Spezielle Links sind Backlinks, die eine Zweiwegekommunikation zwischen Komponenten ermöglichen und PropertyLinks, die propertys synchron halten. Ein Überblick über die verschiedenen Links ist in Abbildung~\ref{figure:cruise_links} zu sehen.
 
 \begin{figure}[htbp]
 	\centering
@@ -373,7 +372,7 @@ Eine Ontologie ist \enquote{an explicit specification of a conceptualization} \c
 \begin{itemize}
 	\item Eine Klasse repräsentiert ein Konzept, eine Entität, ein Ding, beispielsweise ein \textit{Smartphone}.
 	\item Eine Instanz ist ein konkretes Objekt einer Klasse, zum Beispiel das \textit{iPhone mit der Seriennummer XYZ-ABC}.
-	\item Datatype Properties beschreiben eine Instanz näher, zum Beispiel die \textit{Seriennummer} oder \textit{Bildschirmgröße} des iPhones.
+	\item Datatype propertys beschreiben eine Instanz näher, zum Beispiel die \textit{Seriennummer} oder \textit{Bildschirmgröße} des iPhones.
 	\item Objektattribute beschreiben Beziehungen zwischen Klassen und deren Instanzen, beispielsweise eine Person \textit{besitzt} ein Smartphone.
 	\item Außerdem existieren noch Axiome, Regeln, Funktionen und Einschränkungen, welche die Logik einer Ontologie beschreiben.
 \end{itemize}
@@ -389,11 +388,11 @@ Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortiu
 
 % rdf
 
-RDF ist von den genannten die Sprache mit den wenigsten Features, sie kann nur Tripel der Form (Subjekt, Prädikat, Objekt) darstellen. Die Elemente der Tripel sind Resourcen (durch URIs gekennzeichnet), welche Objekte beschreiben. So drückt der Tripel (\texttt{http://alice.de}, \texttt{http://foaf.de/knows}, \texttt{http://bob.de}) aus, dass das Element \enquote{Alice} mit \enquote{Bob} über die Relation \enquote{knows} verbunden ist. In RDF existieren noch keine Vererbung, Klassen, Properties oder Logik.
+RDF ist von den genannten die Sprache mit den wenigsten Features, sie kann nur Tripel der Form (Subjekt, Prädikat, Objekt) darstellen. Die Elemente der Tripel sind Resourcen (durch URIs gekennzeichnet), welche Objekte beschreiben. So drückt der Tripel (\texttt{http://alice.de}, \texttt{http://foaf.de/knows}, \texttt{http://bob.de}) aus, dass das Element \enquote{Alice} mit \enquote{Bob} über die Relation \enquote{knows} verbunden ist. In RDF existieren noch keine Vererbung, Klassen, propertys oder Logik.
 
 % rdfs
 
-RDFS ist eine Erweiterung von RDF, nämlich um Klassen und Vererbung, Datatype Properties und Objektattribute. Allerdings ist RDFS damit noch immer nicht so mächtig wie OWL.
+RDFS ist eine Erweiterung von RDF, nämlich um Klassen und Vererbung, Datatype propertys und Objektattribute. Allerdings ist RDFS damit noch immer nicht so mächtig wie OWL.
 
 % owl
 
@@ -698,7 +697,7 @@ Nachdem betrachtet wurde, wie Verständnis funktioniert, stellt sich die Frage, 
 \begin{quote}
 A mental model is a functional analogue representation to an external interactive visualization system with the following characteristics:
 	\begin{itemize}
-		\item The structural and behavioral properties of external systems are preserved in mental models.
+		\item The structural and behavioral propertys of external systems are preserved in mental models.
 		\item A mental model can preserve schematic, semantic or item-specific information about the underlying data.
 		\item Given a problem, a mental model of an interactive visualization can be constructed and simulated in working memory for reasoning.
 	\end{itemize}
@@ -923,7 +922,7 @@ Auf Basis des Szenarios wurde eine Anforderungsanalyse durchgeführt. Funktional
 
 % grundlagen: cruise, semantische daten, infovis, user assistance
 
-Danach wurde in den Grundlagen ein Überblick über die CRUISe Mashup Plattform gegeben, auf der EDYRA und VizBoard aufbauen. Es wurde aufgeführt, dass Properties den Zustand einer Komponente vollständig beschreiben und Komponenten über Links zwischen Events und Operationen miteinander Nachrichten austauschen. Darauf folge eine kurze Einführung in semantische Daten. Dort wurden die wichtigsten Konzepte (Klassen, Instanzen und Properties) erläutert sowie gängige Beschreibungssprachen (RDF, RDFS, OWL) aufgezeigt. Im Abschnitt über Informationsvisualisierungen wurde der Begriff als \enquote{the use of computer-supported, interactive, visual representations of abstract data to amplify cognition} definiert. Mit Hilfe einer Klassifikation anhand der dargestellten Daten, Visualisierungs- und Interaktionstechnik einer InfoVis konnte ein Überblick über selbige gegeben werden. Zuletzt wurden in diesem Abschnitt die Begriffe \enquote{User Assistance} und \enquote{Sensemaking} erklärt. User Assistance ist eine Hilfestellung für den Benutzer, der sein Ziel aber auch ohne sie erfüllen kann. Sensemaking meint den menschlichen Verständnisprozess. Es wurde beispielsweise festgestellt, dass das Medium selbst keinen Einfluss auf die Lernfähigkeit einer Person hat und möglichst gleichzeitig multimodal erklärt werden sollte. In der Domäne InfoVis müssen besonders das Verhalten und die Struktur einer Visualisierung erklärt werden, um das mentale Modell des Benutzers anzusprechen.
+Danach wurde in den Grundlagen ein Überblick über die CRUISe Mashup Plattform gegeben, auf der EDYRA und VizBoard aufbauen. Es wurde aufgeführt, dass propertys den Zustand einer Komponente vollständig beschreiben und Komponenten über Links zwischen Events und Operationen miteinander Nachrichten austauschen. Darauf folge eine kurze Einführung in semantische Daten. Dort wurden die wichtigsten Konzepte (Klassen, Instanzen und propertys) erläutert sowie gängige Beschreibungssprachen (RDF, RDFS, OWL) aufgezeigt. Im Abschnitt über Informationsvisualisierungen wurde der Begriff als \enquote{the use of computer-supported, interactive, visual representations of abstract data to amplify cognition} definiert. Mit Hilfe einer Klassifikation anhand der dargestellten Daten, Visualisierungs- und Interaktionstechnik einer InfoVis konnte ein Überblick über selbige gegeben werden. Zuletzt wurden in diesem Abschnitt die Begriffe \enquote{User Assistance} und \enquote{Sensemaking} erklärt. User Assistance ist eine Hilfestellung für den Benutzer, der sein Ziel aber auch ohne sie erfüllen kann. Sensemaking meint den menschlichen Verständnisprozess. Es wurde beispielsweise festgestellt, dass das Medium selbst keinen Einfluss auf die Lernfähigkeit einer Person hat und möglichst gleichzeitig multimodal erklärt werden sollte. In der Domäne InfoVis müssen besonders das Verhalten und die Struktur einer Visualisierung erklärt werden, um das mentale Modell des Benutzers anzusprechen.
 
 % verwandte arbeiten: mashups, visualisierungstools, user assistance
 
@@ -1181,7 +1180,7 @@ Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:vi
 
 % core erweiterung
 
-Damit das Hilfesystem aber die URIs der aktuell visualisierten Datatype Properties bekommt, muss das CoRe erweitert werden. Aktuell gehen die URIs bei der Transformation in das generische Datenschema verloren, weil sie umbenannt werden. Um dem Komponentenentwickler Aufwand zu ersparen sollte deswegen das CoRe dahingehend erweitert werden, dass das ursprüngliche Mapping der MRE mitgeliefert wird.
+Damit das Hilfesystem aber die URIs der aktuell visualisierten Datatype propertys bekommt, muss das CoRe erweitert werden. Aktuell gehen die URIs bei der Transformation in das generische Datenschema verloren, weil sie umbenannt werden. Um dem Komponentenentwickler Aufwand zu ersparen sollte deswegen das CoRe dahingehend erweitert werden, dass das ursprüngliche Mapping der MRE mitgeliefert wird.
 
 
 \section{Bedienung einer Komponente}
@@ -1590,7 +1589,7 @@ Diesbezüglich bietet sich ein Memento-Pattern \cite{Gamma1994} an:
 Without violating encapsulation, capture and externalize an object's internal state allowing the object to be restored to this state later.
 \end{quote} 
 
-Um Mementos umzusetzen, wird auf Properties zurückgegriffen. Eine Komponente muss ihren Zustand als Properties öffentlich machen und zwar so, dass durch Ändern von Properties kein inkonsistenter Zustand erreicht werden kann. Sie definiert das Format ihres Mementos, also welche Properties es ausmachen, in der Komponentenbeschreibung. Das Hilfesystem kann dann über die Methoden \texttt{getProperty(p)} und \texttt{setProperty(p,v)}, welche schon in der API der Komponente vorhanden sind, das Memento abrufen bzw. wiederherstellen. Eventuell registrierte PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) würden aktiviert und andere Komponenten ebenfalls verändert. Nachdem Events für eine Komponente zurückgehalten werden müssen, da sich das User Interface sonst ändern könnte, während der Benutzer Kommentare liest, haben PropertyLinks keinen Effekt.
+Um Mementos umzusetzen, wird auf propertys zurückgegriffen. Eine Komponente muss ihren Zustand als propertys öffentlich machen und zwar so, dass durch Ändern von propertys kein inkonsistenter Zustand erreicht werden kann. Sie definiert das Format ihres Mementos, also welche propertys es ausmachen, in der Komponentenbeschreibung. Das Hilfesystem kann dann über die Methoden \texttt{getProperty(p)} und \texttt{setProperty(p,v)}, welche schon in der API der Komponente vorhanden sind, das Memento abrufen bzw. wiederherstellen. Eventuell registrierte PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) würden aktiviert und andere Komponenten ebenfalls verändert. Nachdem Events für eine Komponente zurückgehalten werden müssen, da sich das User Interface sonst ändern könnte, während der Benutzer Kommentare liest, haben PropertyLinks keinen Effekt.
 
 \subsubsection{Ortsbezogene Bereichskommentare}
 
@@ -1695,7 +1694,7 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:features
 	\item ID der Komponente, in der der Kommentar verfasst wurde. Das ist notwendig um ortsbezogene Kommentare wiederherstellen zu können. Bei datenbezogenen Kommentaren kann eventuell ein Verweis auf die ursprüngliche Komponente erstellt werden.
 	\item ID des Datensatzes, der visualisiert wurde
 	\item ID des Verfassers
-	\item URIs der Datatype Properties, die visualisiert wurden
+	\item URIs der Datatype propertys, die visualisiert wurden
 	\item Memento der Komponente zum Zeitpunkt des Kommentars
 	\item \textit{Für jede Version des Kommentars}
 	\begin{itemize}
@@ -1713,12 +1712,12 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:features
 		\end{itemize}
 	\item \textit{Für jedes datenbezogene Element}
 		\begin{itemize}
-			\item Grenzwerte der visualisierten Datatype Properties. Ist ein Datatype Property nominalen Typs, besitzt also keine inhärente Ordnung (z.\,B. Länder), muss eine Menge von Datenpunkten angegeben werden.
+			\item Grenzwerte der visualisierten Datatype propertys. Ist ein Datatype Property nominalen Typs, besitzt also keine inhärente Ordnung (z.\,B. Länder), muss eine Menge von Datenpunkten angegeben werden.
 		\end{itemize}
 	\item \textit{Für jeden Datenpunkt}
 		\begin{itemize}
 			\item URI
-			\item Werte der visualisierten Datatype Properties
+			\item Werte der visualisierten Datatype propertys
 		\end{itemize}
 	\end{itemize}
 \end{itemize}
@@ -1757,7 +1756,7 @@ In diesem Abschnitt wird untersucht, wie in einem CRUISe Mashup, in dem die Komp
    \label{figure:dependency-graph-example}
 \end{figure}
 
-In Abschnitt~\ref{section:konzeption:kommentare:api} wurde ein Memento-Pattern für Komponenten eingeführt. Damit kann das Hilfesystem Zustände von Komponenten abrufen, speichern und wiederherstellen. Im Folgenden wird davon ausgegangen, dass diese Mementos ausreichen, um eine Komponente von einem konsistenten Zustand in einen anderen konsistenten Zustand zu überführen (und beispielsweise keine Operationen ausgeführt werden müssen). Das deckt sich mit dem Paradigma von CRUISe, wonach die Menge an Properties den Zustand einer Komponente vollständig beschreiben. Gegebenenfalls muss die Komponente selbst ihre Konsistenz überprüfen, beispielsweise wenn eine Liste von Flügen in einen späteren Zustand wiederhergestellt werden soll und einige inzwischen ausgebucht sind. Es stellt sich nun die Frage, wann die Mementos der Komponenten abgerufen werden sollen. Prinzipiell kann es vor oder nach einem Event (welches Operationen aufruft, die potentiell den Zustand der Komponente ändern) passieren.
+In Abschnitt~\ref{section:konzeption:kommentare:api} wurde ein Memento-Pattern für Komponenten eingeführt. Damit kann das Hilfesystem Zustände von Komponenten abrufen, speichern und wiederherstellen. Im Folgenden wird davon ausgegangen, dass diese Mementos ausreichen, um eine Komponente von einem konsistenten Zustand in einen anderen konsistenten Zustand zu überführen (und beispielsweise keine Operationen ausgeführt werden müssen). Das deckt sich mit dem Paradigma von CRUISe, wonach die Menge an propertys den Zustand einer Komponente vollständig beschreiben. Gegebenenfalls muss die Komponente selbst ihre Konsistenz überprüfen, beispielsweise wenn eine Liste von Flügen in einen späteren Zustand wiederhergestellt werden soll und einige inzwischen ausgebucht sind. Es stellt sich nun die Frage, wann die Mementos der Komponenten abgerufen werden sollen. Prinzipiell kann es vor oder nach einem Event (welches Operationen aufruft, die potentiell den Zustand der Komponente ändern) passieren.
 
 % vorher - klappt nicht, funkt der dev dazwischen 
 
@@ -1819,7 +1818,7 @@ Für das Timeout $t_D$, welches auf die Ausführung der Operation der letzten be
    \label{figure:dependency-graph-diagram}
 \end{figure}
 
-Außerdem ist zu beachten, dass für die korrekte Arbeitsweise des vorgestellten Algorithmus jedes Event eine Nachricht senden \textbf{muss}, sei es auch nur \enquote{Methode ausgeführt}. Ansonsten könnte eine Komponente ihren Zustand verändern, ohne dass es der Event Broker und damit das Hilfesystem merkt. Die Undo-Reihenfolge wäre dann nicht mehr korrekt. Das impliziert weiterhin, dass Zustandsveränderungen ein Event feuern müssen. Diese Forderung ist schon umgesetzt, da zum Beispiel \texttt{setProperty(p,v)} eine Operation ist, die \texttt{propertyChanged} Events feuert und die Menge an Properties den Zustand einer Komponente vollständig beschreiben.
+Außerdem ist zu beachten, dass für die korrekte Arbeitsweise des vorgestellten Algorithmus jedes Event eine Nachricht senden \textbf{muss}, sei es auch nur \enquote{Methode ausgeführt}. Ansonsten könnte eine Komponente ihren Zustand verändern, ohne dass es der Event Broker und damit das Hilfesystem merkt. Die Undo-Reihenfolge wäre dann nicht mehr korrekt. Das impliziert weiterhin, dass Zustandsveränderungen ein Event feuern müssen. Diese Forderung ist schon umgesetzt, da zum Beispiel \texttt{setProperty(p,v)} eine Operation ist, die \texttt{propertyChanged} Events feuert und die Menge an propertys den Zustand einer Komponente vollständig beschreiben.
 
 % mögliche stolpersteine
 
@@ -2171,10 +2170,10 @@ Die notwendigen Informationen zu einer Komponente sind folgende:
 	\item \texttt{component\_id}: Die URI der Komponente.
 	\item \texttt{component}: Die ID des DOM Elements, in dem sich die Komponente befindet.
 	\item \texttt{visualization}: Die ID des DOM Elements, welches die Visualisierung enthält.
-	\item \texttt{visualized\_properties}: Ein Array der dargestellten Properties.
+	\item \texttt{visualized\_propertys}: Ein Array der dargestellten propertys.
 	\item \texttt{data\_annotations\_enabled}: Ob datenbezogene Bereichskommentare zulässig sind.
 	\item \texttt{reference}: Eine Referenz zur Instanz der Komponente, um die API aufrufen zu können.
-	\item \texttt{memento}: Ein Array der Properties, welche das Memento der Komponente ausmachen.
+	\item \texttt{memento}: Ein Array der propertys, welche das Memento der Komponente ausmachen.
 	\item \texttt{capabilities}: Ein Array von Objekten mit Informationen über jede Capability.
 \end{itemize}
 
@@ -2188,7 +2187,7 @@ Für jede Capability müssen folgende Informationen angegeben werden:
 	\item \texttt{elements}: Der CSS Selektor, welcher die DOM Elemente für diese Capability findet.
 \end{itemize}
 
-Alle diese Informationen werden vom ApplicationManager aus den SMCDLs der Komponenten gelesen, nachdem diese erfolgreich integriert wurden. Um festzustellen, ob eine Komponente datenbezogene Bereichskommentare unterstützt, wird ein Request ans CoRe gesendet, der die Kodierung der visuellen Attribute aller Properties zurückgibt. Findet sich darunter mindestens einmal die Position oder Breite beziehungsweise Höhe -- also etwas, was sich entlang der X- oder Y-Achse messen lässt -- so werden die angesprochenen Kommentare unterstützt. Für die Generierung eines passenden Labels wird der \texttt{LabelGenerator} von EDYRA herangezogen.
+Alle diese Informationen werden vom ApplicationManager aus den SMCDLs der Komponenten gelesen, nachdem diese erfolgreich integriert wurden. Um festzustellen, ob eine Komponente datenbezogene Bereichskommentare unterstützt, wird ein Request ans CoRe gesendet, der die Kodierung der visuellen Attribute aller propertys zurückgibt. Findet sich darunter mindestens einmal die Position oder Breite beziehungsweise Höhe -- also etwas, was sich entlang der X- oder Y-Achse messen lässt -- so werden die angesprochenen Kommentare unterstützt. Für die Generierung eines passenden Labels wird der \texttt{LabelGenerator} von EDYRA herangezogen.
 
 
 \subsection{API einer Komponente}
@@ -2198,10 +2197,10 @@ Wie in der Konzeption (Abschnitt~\ref{chapter:konzeption}) erläutert, muss die 
 
 \begin{itemize}
 	\item \texttt{loadTestdata( data )} lädt Testdaten in die Komponente. Diese Methode muss als einzige unbedingt implementiert werden. Die Testdaten werden als String übergeben, um kein Serialisierungsformat (z.\,B. JSON oder XML) vorzuschreiben. Das Parsen des Strings ist der Komponente überlassen. Nachdem in der Regel bereits eine interne Methode besteht, die Daten in die Komponente lädt, stellt die Implementierung von \texttt{loadTestdata} kaum Mehraufwand dar.
-	\item \texttt{coordinatesToData( x1, y1, x2, y2 )} wandelt das durch die vier Koordinaten angegebene Rechteck in Grenzwerte von Properties um. Dabei wird ein JSON Array von Objekten mit Attributen \texttt{uri}, \texttt{from} und \texttt{to} zurückgegeben. Für jede in der Komponente dargestellte Property, welche mit den visuellen Attributen Breite, Höhe oder Position kodiert ist, findet sich ein durch die URI gekennzeichnetes Objekt im Array (siehe Abbildung~\ref{figure:coordinatesToData}). Weist eine Property ein nominales Scale of Measurement auf, sind \texttt{from} und \texttt{to} identisch und enthalten ein Array von möglichen Werten.
+	\item \texttt{coordinatesToData( x1, y1, x2, y2 )} wandelt das durch die vier Koordinaten angegebene Rechteck in Grenzwerte von propertys um. Dabei wird ein JSON Array von Objekten mit Attributen \texttt{uri}, \texttt{from} und \texttt{to} zurückgegeben. Für jede in der Komponente dargestellte Property, welche mit den visuellen Attributen Breite, Höhe oder Position kodiert ist, findet sich ein durch die URI gekennzeichnetes Objekt im Array (siehe Abbildung~\ref{figure:coordinatesToData}). Weist eine Property ein nominales Scale of Measurement auf, sind \texttt{from} und \texttt{to} identisch und enthalten ein Array von möglichen Werten.
 	\item \texttt{dataToCoordinates( p1, p2 ... )} wandelt von \texttt{coordinatesToData} erhaltene datenbezogene \enquote{Grenzpunkte} wieder in Koordinaten um. Dazu liefert die Methode ein Objekt mit den Attributen \texttt{x1}, \texttt{x2}, \texttt{y1} und \texttt{y2} zurück.
-	\item \texttt{getVisualizedProperties()} liefert ein Array mit den URIs der in der Komponente visualisierten Propertys zurück. Das ist notwendig, damit das Hilfesystem Kommentare für Komponenten laden kann. Diese Propertys bestehen zur Zeit aus der Kombination von Datensatz ID, URI der Klasse der Property (rdfs:domain) und URI der Property. So sind sie eindeutig identifizierbar. Jedoch wäre es möglich, dass eine andere Property owl:sameAs implementiert. Diese identischen Propertys können nicht gefunden werden. Deswegen sollte in Zukunft kein einzelner String, sondern ein Objekt für jede Property geliefert werden, sodass das Backend nach identischen Propertys suchen kann.
-	\item \texttt{getDataFromResource()} gibt die Werte der dargestellten Properties eines Datenpunkts zurück.
+	\item \texttt{getVisualizedpropertys()} liefert ein Array mit den URIs der in der Komponente visualisierten Propertys zurück. Das ist notwendig, damit das Hilfesystem Kommentare für Komponenten laden kann. Diese Propertys bestehen zur Zeit aus der Kombination von Datensatz ID, URI der Klasse der Property (rdfs:domain) und URI der Property. So sind sie eindeutig identifizierbar. Jedoch wäre es möglich, dass eine andere Property owl:sameAs implementiert. Diese identischen Propertys können nicht gefunden werden. Deswegen sollte in Zukunft kein einzelner String, sondern ein Objekt für jede Property geliefert werden, sodass das Backend nach identischen Propertys suchen kann.
+	\item \texttt{getDataFromResource()} gibt die Werte der dargestellten propertys eines Datenpunkts zurück.
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -2313,7 +2312,7 @@ Der Algorithmus, um alle eine Aktion auslösenden UI Elemente in ein anderes \te
 	\item Damit Kopien in der Rootcopy möglichst gleich aussehen wie die Originale, werden in der Komponente gesetzte CSS Styles auf die Rootcopy übertragen.
 	\item Danach werden alle von einem CSS Selektor getroffenen Elemente entweder in die Rootcopy selbst oder ins \texttt{svg} kopiert und gleich wie die Originale positioniert. Bei SVG-Elementen ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt.
 	\item Bei jedem durch Selektor $s_i$ getroffenen Element und dessen Kopie wird außerdem ein Attribut \texttt{data-vizboard-copy} auf \texttt{copy<i>} gesetzt. Der Grund dafür ist die Verbindung zwischen Aktionen und UI Elementen: Bei \texttt{mouseover} über einer Aktion in der Liste werden alle dafür notwendigen UI Elemente hervorgehoben. Um diese zu finden, kann der Selektor nicht in der Rootcopy ausgeführt werden: Selektoren wie z.\,B. \texttt{:nth-child(odd)} würden falsche Ergebnisse liefern. Aus diesem Grund werden die Selektoren bei \texttt{mouseover} in der Komponente ausgeführt und die Kopien der Elemente über den Wert von \texttt{data-vizboard-copy} gefunden (siehe Abbildung~\ref{figure:rootcopy}).
-	\item Die aktionsauslösenden UI Elemente müssen nicht leer sein, weswegen dort gesetzte Styles auch bei Kindknoten sichtbar sein könnten, z.\,B. wenn eine CSS Property auf \texttt{inherit} gesetzt ist. Aus diesem Grund werden bestimmte CSS Properties (\texttt{border}, \texttt{color}, \texttt{background}) in den Kopien auf die Werte der Originale fixiert.
+	\item Die aktionsauslösenden UI Elemente müssen nicht leer sein, weswegen dort gesetzte Styles auch bei Kindknoten sichtbar sein könnten, z.\,B. wenn eine CSS Property auf \texttt{inherit} gesetzt ist. Aus diesem Grund werden bestimmte CSS propertys (\texttt{border}, \texttt{color}, \texttt{background}) in den Kopien auf die Werte der Originale fixiert.
 	\item Aktionsauslösende UI Elemente können andere aktionsauslösende UI Elemente enthalten. Das wäre beispielsweise der Fall, wenn das anonyme \texttt{div} in Abbildung~\ref{figure:rootcopy}, welches die \texttt{div.bar} enthält, eine dritte Aktion auslösen würde. Damit diese nicht mehrfach in der Rootcopy vorhanden sind, wird für jedes Original einer Kopie überprüft, ob es Knoten mit dem Attribut \texttt{data-vizboard-copy} enthält. Falls ja, wird ein CSS Selektor aus dem Knoten generiert und alle davon getroffenen Elemente in der Kopie gelöscht.
 \end{enumerate}
 
@@ -2443,7 +2442,7 @@ Es spricht natürlich nichts dagegen in solchen Fällen ein Kommentar direkt von
 Um Kommentare dem Frontend zur Verfügung zu stellen, bot sich eine REST API an, da kein Zustand gespeichert werden muss. Eine SOAP Schnittstelle kam nicht in Frage, da das DaRe bereits ein REST Schnittstelle anbietet und einfach ergänzt werden konnte. Es wurden vier Methoden implementiert:
 
 \begin{itemize}
-	\item \texttt{GET dare/comment} gibt alle Kommentare aus. Sind \texttt{property} (für visualisierte Properties) oder \texttt{component} (für Komponenten) Query Parameter vorhanden, wird nach diesen gefiltert und Kommentare gesucht, die mindestens ein Kriterium erfüllen.
+	\item \texttt{GET dare/comment} gibt alle Kommentare aus. Sind \texttt{property} (für visualisierte propertys) oder \texttt{component} (für Komponenten) Query Parameter vorhanden, wird nach diesen gefiltert und Kommentare gesucht, die mindestens ein Kriterium erfüllen.
 	\item \texttt{GET dare/comment/\{id\}} gibt Kommentar mit ID \texttt{id} aus.
 	\item \texttt{POST dare/comment} nimmt ein Kommentar in \texttt{application/json} entgegen, speichert es ab und antwortet im Erfolgsfall mit Statuscode \texttt{201 Created}.
 	\item \texttt{PUT dare/comment/vote/\{id\}} nimmt ein JSON Objekt entgegen und setzt die Anzahl an angegebenen Stimmen. Ist kein \texttt{Authorization} Header vorhanden, antwortet die Methode mit \texttt{401 Unauthorized}. Hat der Benutzer schon einmal diese Anzahl an Stimmen abgegeben, ist die Antwort \texttt{403 Forbidden} und ansonsten \texttt{200 OK}. Auf diese Weise ist \texttt{PUT} wie von RFC 2616 \cite{W3C:rfc2616} gefordert idempotent.
@@ -2541,7 +2540,7 @@ Damit die Komponente während der Hilfegenerierung auch tatsächlich Daten anzei
 </testdata>
 \end{lstlisting}
 
-Zur Laufzeit und während der Hilfegenerierung muss das Hilfesystem Komponenten in zuvor gespeicherte Zustände zurücksetzen können. Dazu wird das Memento verwendet, welches eine Menge von Propertys ist, deren Werte gespeichert werden müssen. Um anzugeben, welche Properties einer Komponente Teil ihres Mementos sind, kann der Entwickler diese mit einem Attribut \texttt{isMemento} versehen (Listing~\ref{code:smcdl-memento}). Sie unterscheiden sich von \texttt{required} Propertys, die zur Initialisierung der Komponente unbedingt gesetzt sein müssen, weil bei Mementos eben das nicht der Fall ist: Eine Property \texttt{sorted}, welche angibt wonach eine Tabelle aktuell sortiert ist, muss bei der Initialisierung nicht bekannt, aber dennoch Teil des Mementos sein.
+Zur Laufzeit und während der Hilfegenerierung muss das Hilfesystem Komponenten in zuvor gespeicherte Zustände zurücksetzen können. Dazu wird das Memento verwendet, welches eine Menge von Propertys ist, deren Werte gespeichert werden müssen. Um anzugeben, welche propertys einer Komponente Teil ihres Mementos sind, kann der Entwickler diese mit einem Attribut \texttt{isMemento} versehen (Listing~\ref{code:smcdl-memento}). Sie unterscheiden sich von \texttt{required} Propertys, die zur Initialisierung der Komponente unbedingt gesetzt sein müssen, weil bei Mementos eben das nicht der Fall ist: Eine Property \texttt{sorted}, welche angibt wonach eine Tabelle aktuell sortiert ist, muss bei der Initialisierung nicht bekannt, aber dennoch Teil des Mementos sein.
 
 \lstset{language=XML}
 \begin{lstlisting}[ caption={SMCDL für Memento}, label=code:smcdl-memento ]
@@ -2878,7 +2877,7 @@ Zuletzt gibt es Eigenschaften, die mit einem individuellen Hilfesystem gar nicht
     "height": 375,
     "width": 600
   },
-  "visualized_properties": [
+  "visualized_propertys": [
     // strings of form
     // dataset + class uri + property uri
   ],
@@ -2890,7 +2889,7 @@ Zuletzt gibt es Eigenschaften, die mit einem individuellen Hilfesystem gar nicht
       "annotations": [{
         "uri": "http://dbpedia.org/resource/Date_Movie",
         "values": {
-          // values of properties
+          // values of propertys
         },
         "type": "point"
       },
