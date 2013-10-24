@@ -1111,7 +1111,7 @@ Weitere Vorschläge, die hier den Rahmen sprengen würden und in weiteren Arbeit
 \section{Intro in die Funktionalität einer Komponente}
 \label{section:konzeption:intro}
 
-Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) und den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde deutlich, dass dem Endnutzer zuerst ein Überblick über die verschiedenen ausgewählten Komponenten gegeben werden muss, sodass ihm die Struktur der kompositen InfoVis klar wird. Diese beinhaltet folgende Punkte.
+Aus dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}) und den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) wurde deutlich, dass dem Endnutzer zuerst ein Überblick über die verschiedenen ausgewählten Komponenten gegeben werden muss, sodass ihm die Struktur der kompositen InfoVis klar wird. Sie ist zusammen mit dem Verhalten eines Systems ein wichtiger Teil des mentalen Modells. Der Überblick beinhaltet folgende Punkte:
 
 % was kommt rein?
 
@@ -1129,7 +1129,7 @@ Eine Möglichkeit -- so ist die Beschreibung einer Komponente bereits umgesetzt 
 % was bleibt draußen?
 
 % links zu externen quellen
-Nach Grammel \cite{Grammel2012} können Links zu Tutorials und Erklärungen hilfreich sein, Endnutzern Visualisierungen zu erklären. Da externe Quellen aber nicht durch das Hilfesystem kontrolliert werden, kann es nicht sicherstellen, dass überall ein einheitliches Vokabular benutzt wird. Wie bereits erwähnt ist ein konsistentes Vokabular wichtig für effektive Hilfestellungen, weswegen dieser Punkt in dieser Form nicht umgesetzt werden kann. Was allerdings möglich ist, sind vom VizBoard-Betreiber erstellte Tutorialvideos in Form von vertonten Animationen, die Aufbau und Vor- bzw. Nachteile grafischer Repräsentationen erklären. Das sind zwar viele Videos, aber die Anzahl der Repräsentationen ist endlich und nicht alle sind gleich wichtig\footnote{Ein Balkendiagramm ist gängiger und deswegen leichter verständlich als eine Scatterplot Matrix.}, weswegen der nötige Aufwand gerechtfertigt scheint.
+Nach Grammel \cite{Grammel2012} können Links zu Tutorials und Erklärungen hilfreich sein, Endnutzern Visualisierungen zu erklären. Da externe Quellen aber nicht durch das Hilfesystem kontrolliert werden, kann es nicht sicherstellen, dass überall ein einheitliches Vokabular benutzt wird. Wie bereits erwähnt ist ein konsistentes Vokabular wichtig für effektive Hilfestellungen, weswegen dieser Punkt in dieser Form nicht umgesetzt werden kann. Was allerdings möglich ist, sind vom Operator erstellte Tutorialvideos in Form von vertonten Animationen, die Aufbau und Vor- bzw. Nachteile grafischer Repräsentationen erklären. Das sind zwar viele Videos, aber die Anzahl der Repräsentationen ist endlich und nicht alle sind gleich wichtig\footnote{Ein Balkendiagramm ist gängiger und deswegen leichter verständlich als eine Scatterplot Matrix.}, weswegen der nötige Aufwand gerechtfertigt scheint.
 
 % vor- und nachteile
 Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von verschiedenen Visualisierungstypen und visuellen Mappings lernen sollten \cite[S. 125]{Grammel2012}. Es wäre möglich, allgemeine Eigenschaften von grafischen Repräsentationen in der VISO zu beschreiben. Diese sind abhängig von den dargestellten Daten und den visuellen Mappings. Die Eigenschaft \enquote{Übersichtlichkeit} ist bei einem Balkendiagramm mit drei Balken gegeben (Vorteil), bei 15 Balken nicht (Nachteil). Ähnlich verhält es sich mit der Farbkodierung: Ein Mensch kann bis zu acht Farben in einer Visualisierung gut unterscheiden (Vorteil) \cite{Mazza2009}, aber mehr nicht (Nachteil). Das Hilfesystem müsste dem Benutzer demnach sowohl die unterschiedlichen Vor- und Nachteile als auch deren Bedingungen präsentieren, was sehr viel Information für eine Einführung darstellt. Im schlechtesten Fall kann der Benutzer auch keinen Bezug zur konkreten Visualisierung herstellen, weil keine der aufgeführten Bedingungen erfüllt ist. Er kann die aufgestellte Hypothese nicht am Beispiel überprüfen, was laut Grundlagen schlecht für seinen Verständnisprozess ist (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance:sensemaking}). Hinzu kommt, dass diese Erklärung einen Schritt früher im VizBoard Workflow konzeptionell mehr Sinn macht. Dort wählt der Benutzer -- von VizBoard unterstützt -- die visuellen Mappings aus.
@@ -1143,11 +1143,11 @@ Aus den eben aufgeführten Gründen zeigt das Intro für eine Komponente folgend
 	\item Tutorialvideo, wenn vorhanden
 \end{enumerate}
 
-Davon ist Punkt~3 spezifisch für die Domäne der Informationsvisualisierung, da CRUISe Komponenten keine Daten visualisieren müssen. Die anderen Punkte sind für alle auf CRUISe basierenden Mashups hilfreich.
+Davon ist Punkt~3 spezifisch für die Domäne der Informationsvisualisierung, da CRUISe Komponenten keine Daten visualisieren müssen. Die anderen Punkte sind für alle auf CRUISe basierenden Mashups hilfreich. Über die Interaktion mit der Visualisierung wird hier noch keine Aussage gemacht, da sie sehr umfangreich sein kann und den Rahmen des Intros sprengen würde. In Abschnitt~\ref{section:konzeption:bedienung} wird eine Hilfestellung zur Bedienung einer Komponente erarbeitet.
 
-% interaktionshilfen - kommen später
+% davor: allgemeine hinweise
 
-Über die Interaktion mit der Visualisierung wird hier noch keine Aussage gemacht, da sie sehr umfangreich sein kann und den Rahmen des Intros sprengen würde. In Abschnitt~\ref{section:konzeption:bedienung} wird eine Hilfestellung zur Bedienung einer Komponente erarbeitet.
+In der Nutzerstudie (Abschnitt~\ref{section:konzeption:einfuehrung:nutzerstudie}) war die Kommentarfunktion nicht ersichtlich. Die Teilnehmer hatten Probleme sie aufzurufen, zu benutzen und die möglichen Funktionen zu erkennen. Deswegen sollte das Intro einer Komponente zusätzlich grundlegende Informationen über Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) und einen Hinweis auf die statische Meta-Hilfe (Abschnitt~\ref{section:konzeption:meta-hilfe}) enthalten.
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:intro:ui}
@@ -1168,7 +1168,7 @@ Die VISO (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard:vi
 
 % core erweiterung
 
-Damit das Hilfesystem aber die URIs der aktuell visualisierten Datatype propertys bekommt, muss das CoRe erweitert werden. Aktuell gehen die URIs bei der Transformation in das generische Datenschema verloren, weil sie umbenannt werden. Um dem Komponentenentwickler Aufwand zu ersparen sollte deswegen das CoRe dahingehend erweitert werden, dass das ursprüngliche Mapping der MRE mitgeliefert wird.
+Damit das Hilfesystem aber die URIs der aktuell visualisierten Datatype Propertys bekommt, muss das CoRe erweitert werden. Aktuell gehen die URIs bei der Transformation in das generische Datenschema verloren, weil sie umbenannt werden. Um dem Komponentenentwickler Aufwand zu ersparen sollte deswegen das CoRe dahingehend erweitert werden, dass das ursprüngliche Mapping der MRE mitgeliefert wird.
 
 
 \section{Bedienung einer Komponente}
@@ -1205,7 +1205,7 @@ Die VISO enthält im Namensraum \texttt{viso:activity} Konzepte der hierarchisch
 
 Für das Hilfesystem sind Operationen und Aktionen relevant, da Aktivitäten nicht beeinflusst werden können. Aktionen einer Komponente sind beispielsweise zoomen, suchen oder filtern; Operationen sind etwa Klicks, Drags oder Multitouch-Gesten.
 
-Die CRUISe Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Diese können entweder mit (UI Capability) oder ohne Nutzerinteraktion (System Capability) ausgeführt werden. Für die Bedienungshilfe sind erster Linie UI Capabilities interessant. Allerdings wird sich bei der Hilfe zur Kommunikation (Abschnitt~\ref{section:konzeption:kommunikation} zeigen, dass System Capabilities ebenfalls behandelt werden müssen. Im Folgenden werden zunächst UI Capabilities beschrieben.
+Die CRUISe Komponentenbeschreibung gibt bereits Auskunft über die verfügbaren Aktionen in einer Komponente (Capabilities). Diese können entweder mit (UI Capability) oder ohne Nutzerinteraktion (System Capability) ausgeführt werden. Für die Bedienungshilfe sind erster Linie UI Capabilities interessant. Allerdings wird sich bei der Hilfe zur Kommunikation (Abschnitt~\ref{section:konzeption:kommunikation}) zeigen, dass System Capabilities ebenfalls behandelt werden müssen. Im Folgenden werden zunächst UI Capabilities beschrieben.
 
 \subsubsection{UI Capabilities}
 
@@ -1252,7 +1252,7 @@ Bei der Generierung der Panels ist zuerst das Component Repository beteiligt. So
 	\item Component Repository: Das CoRe enthält alle verfügbaren Komponenten und stellt sie dem Hilfeservice zur Verfügung.
 \end{itemize}
 
-Es wurde eben erklärt, dass das DaRe die (Test-)Daten für eine Komponente liefern kann. Der Komponentenentwickler gibt in der Komponentenbeschreibung den gewünschten Datensatz und die zu visualisierenden Daten in Form einer SPARQL Query an, welche die Laufzeitumgebung bei der Generierung der Assistance der Komponente zur Verfügung stellt. Das kann ein \enquote{echter} Datensatz oder ein vom VizBoard-Betreiber zur Verfügung gestellter Testdatensatz sein. Es kann allerdings passieren, dass das DaRe keine passenden Daten enthält, weil die Komponente sehr spezielle Daten visualisiert (z.\,B. 3-Sterne-Hotels in Andorra). Dann sollte der Komponentenentwickler zusammen mit der Komponente Testdaten hochladen können oder eine URL angeben, unter der sie zu finden sind. Das ist zwar etwas Mehraufwand, aber es kann angenommen werden, dass im Laufe der Entwicklung einer Komponente sowieso Testdaten verwendet wurden. Sie müssen in den meisten Fällen also nicht mehr erstellt, sondern nur noch zur Verfügung gestellt werden. Die Bedienungshilfe kann für alle auf CRUISe basierenden Mashups hilfreich sein. Allerdings kann nicht davon ausgegangen werden, dass diese über ein Data Repository verfügen. Dann muss der Komponentenentwickler in jedem Fall Testdaten zur Generierung der Hilfe zur Verfügung stellen.
+Es wurde eben erklärt, dass das DaRe die (Test-)Daten für eine Komponente liefern kann. Der Komponentenentwickler gibt in der Komponentenbeschreibung den gewünschten Datensatz und die zu visualisierenden Daten in Form einer SPARQL Query an, welche die Laufzeitumgebung bei der Generierung der Assistance der Komponente zur Verfügung stellt. Das kann ein \enquote{echter} Datensatz oder ein vom Operator zur Verfügung gestellter Testdatensatz sein. Es kann allerdings passieren, dass das DaRe keine passenden Daten enthält, weil die Komponente sehr spezielle Daten visualisiert (z.\,B. 3-Sterne-Hotels in Andorra). Dann sollte der Komponentenentwickler zusammen mit der Komponente Testdaten hochladen können oder eine URL angeben, unter der sie zu finden sind. Das ist zwar etwas Mehraufwand, aber es kann angenommen werden, dass im Laufe der Entwicklung einer Komponente sowieso Testdaten verwendet wurden. Sie müssen in den meisten Fällen also nicht mehr erstellt, sondern nur noch zur Verfügung gestellt werden. Die Bedienungshilfe kann für alle auf CRUISe basierenden Mashups hilfreich sein. Allerdings kann nicht davon ausgegangen werden, dass diese über ein Data Repository verfügen. Dann muss der Komponentenentwickler in jedem Fall Testdaten zur Generierung der Hilfe zur Verfügung stellen.
 
 Nachdem die Komponente von der Laufzeitumgebung vollständig initialisiert und integriert wurde, führt der Hilfeservice folgende Schritte aus:
 
@@ -1334,7 +1334,7 @@ Danach wird die kürzeste Operationsfolge für die ausgewählte Aktion erklärt.
    \label{figure:bedienung-comic}
 \end{figure}
 
-Die Panels haben eine festgelegte Mindestgröße, um lesbar zu bleiben. Heer et al. \cite{Heer2008} verwenden in ihrer History, die ebenfalls Screenshots enthält, eine Seitenlänge von 120~Pixel. Falls die Komponente nicht breit genug sein sollte, um die nötige Anzahl von 120~Pixel großen Panels in einer Zeile anzuzeigen, wird die Bedienungshilfe in einem Fenster angezeigt. So können unterschiedliche, alternative Operationen immer gescrollt werden.
+Die Panels haben eine festgelegte Mindestgröße, um lesbar zu bleiben. Heer et al. \cite{Heer2008} verwenden in ihrer History, die ebenfalls Screenshots enthält, eine Seitenlänge von 120~Pixel. Falls die Komponente nicht breit genug sein sollte, um die nötige Anzahl von 120~Pixel großen Panels in einer Zeile anzuzeigen, wird die Bedienungshilfe in einem Fenster angezeigt. So können parallele Operationen immer gescrollt werden.
 
 Die Texte in den Panels werden zur Laufzeit hinzugefügt, da so beispielsweise auf die Sprache des Nutzers reagiert werden kann. Ansonsten müsste der Hilfeservice für jede unterstützte Sprache ein eigenes Bild erzeugen. Die dafür notwendigen Informationen sind:
 
@@ -1351,7 +1351,7 @@ Diese werden aber schon im Schritt davor (Abbildung~\ref{figure:bedienung-step2}
 
 Wie bei jeder Software können bei den Komponenten in VizBoard Fehler auftreten. Externe APIs, die sie benutzen, wie zum Beispiel von Facebook oder Twitter können sich ändern. Visualisierte Daten können Fehler in der Komponente verursachen, beispielsweise durch nicht überprüfte \texttt{null} Werte oder wenn sie ein unerwartetes Format haben. Ebenso ist es möglich, dass VizBoard selbst Bugs enthält. Schlimmstenfalls fallen diese Fehler erst dem Endnutzer auf, welcher sie dann melden können soll.
 
-Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. VizBoard-Betreiber -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Liegt es an der Komponente (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API)? Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben, und die Möglichkeit haben, die Komponente prinzipiell als gut oder schlecht zu bewerten. Letztere Funktion existiert bereits in VizBoard und wird in die Feedback UI integriert. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
+Für diejenigen, die sich mit dem Bug Report befassen müssen -- also Komponentenentwickler bzw. Operator -- sind möglichst genaue Angaben sehr wichtig. Welcher Browser wurde benutzt? Welche Version? Welches Betriebssystem? Was genau hat nicht funktioniert? Ist der Fehler reproduzierbar? Wenn ja, wie? Diese und andere Fragen müssen beantwortet werden, um letzten Endes die Fehlerquelle zu finden. Liegt es an der Komponente (z.\,B. wegen veralteten API Anfragen), an VizBoard (z.\,B. ein Bug im Event Broker) oder keinen der beiden (z.\,B. fehlerhafte Daten von der externen API)? Aus Sicht des Endnutzers \enquote{funktioniert es nicht}, da er keine Kenntnisse der Programmierung besitzt und deswegen keine sinnvollen Hypothesen aufstellen, überprüfen und Schlußfolgerungen ziehen kann. Deswegen sollte der Endnutzer einen möglichst ausführlichen Text verfassen, um das Problem zu beschreiben, und die Möglichkeit haben, die Komponente prinzipiell als gut oder schlecht zu bewerten. Letztere Funktion existiert bereits in VizBoard und wird in die Feedback UI integriert. Die anderen Informationen, wie eben beispielsweise die Browserversion, sollten automatisch gesammelt und mitgeschickt werden.
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:feedback:ui}
@@ -1423,7 +1423,7 @@ Die Abhängigkeiten zwischen den beiden Komponenten werden erklärt, nachdem auf
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/konzeption-kommunikation-step3.png}
-   \caption{UI Mockup: Comic erklärt Kommunikation. Verändern des Kartenausschnittes (Akßtion: Panning, Operation: Drag) bewirkt ein Update im Balkendiagramm.}
+   \caption{UI Mockup: Comic erklärt Kommunikation. Verändern des Kartenausschnittes (Aktion: Panning, Operation: Drag) bewirkt ein Update im Balkendiagramm.}
    \label{figure:kommunikation-step3}
 \end{figure}
 
@@ -1441,12 +1441,12 @@ Zu beachten ist allerdings, dass es Operationen geben kann, welche das User Inte
 
 % einführung - warum brauchen wir verlinkung?
 
-Ein Punkt, der in den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) kaum behandelt wurde, ist dass der Benutzer mehr Informationen über die visualisierten Daten benötigen könnte. Er könnte auf vollständig (\enquote{Was ist ein Säurezeiger\footnote{Eine Pflanze, die nur auf Böden mit einem bestimmten ph-Wert wachsen kann.}?}) oder teilweise (\enquote{Wie ist das BIP definiert\footnote{Der Gesamtwert aller Waren und Dienstleistungen, die innerhalb eines Jahres in einer Volkswirtschaft hergestellt wurden und dem Endverbrauch dienen.}?}) unbekannte Begriffe treffen. Um das Verständnis der Daten zu fördern, müssen diese erklärt werden, weswegen sie mit einer externen Wissensbasis verlinkt sein sollen. Zu erklärende Begriffe werden vermutlich hauptsächlich in Legenden von Visualisierungen zu finden sein, können aber auch in Freitexten oder in Interaktionselementen vorkommen.
+Ein Punkt, der in den verwandten Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) kaum behandelt wurde, ist dass der Benutzer mehr Informationen über die visualisierten Daten benötigen könnte. Er könnte auf vollständig (\enquote{Was ist ein Säurezeiger?\footnote{Eine Pflanze, die nur auf Böden mit einem bestimmten ph-Wert wachsen kann.}}) oder teilweise (\enquote{Wie ist das BIP definiert?\footnote{Der Gesamtwert aller Waren und Dienstleistungen, die innerhalb eines Jahres in einer Volkswirtschaft hergestellt wurden und dem Endverbrauch dienen.}}) unbekannte Begriffe treffen. Um das Verständnis der Daten zu fördern, müssen diese erklärt werden, weswegen sie mit einer externen Wissensbasis verlinkt sein sollen. Zu erklärende Begriffe werden vermutlich hauptsächlich in Legenden von Visualisierungen zu finden sein, können aber auch in Freitexten oder in Interaktionselementen vorkommen.
 
 \subsection{Markup und Backend}
 \label{section:konzeption:verlinkung:backend}
 
-Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einem dafür vorgesehenen Datenattribut aus: Eines für Legenden, eines für Freitext. Diese können entweder in der Komponentenbeschreibung angegeben und so selbst gewählt werden, oder sie werden vom Vizboard-Betreiber festgelegt. Hier wird die letzte Variante umgesetzt, weil sie dem Komponentenentwickler etwas Aufwand erspart und \enquote{Kollisionen} mit bereits vorhandenen Klassen erstens unwahrscheinlich sind und zweitens einfach behoben werden können (beispielsweise mit dem Präfix \texttt{my-}). Der zu erklärende Begriff ist dann der Textinhalt des Tags mit der entsprechenden Klasse. Bei Interaktionselementen sind die CSS Selektoren für die Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) schon vorhanden und das Konzept wird in Form einer URI in die Komponentenbeschreibung eingefügt.
+Um zu erklärende Begriffe für das Hilfesystem auffindbar zu machen, zeichnet der Komponentenentwickler sie mit einem dafür vorgesehenen Datenattribut aus: Eines für Legenden, eines für Freitext. Diese können entweder in der Komponentenbeschreibung angegeben und so selbst gewählt werden, oder sie werden vom Vizboard-Betreiber festgelegt. Hier wird die letzte Variante umgesetzt, weil sie dem Komponentenentwickler etwas Aufwand erspart und \enquote{Kollisionen} mit bereits vorhandenen Attributen erstens unwahrscheinlich sind und zweitens einfach behoben werden können (beispielsweise mit dem Präfix \texttt{my-}). Der zu erklärende Begriff ist dann der Textinhalt des Elements mit dem entsprechenden Datenattribut. Bei Interaktionselementen sind die CSS Selektoren für die Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) schon vorhanden und das Konzept wird in Form einer URI in die Komponentenbeschreibung eingefügt.
 
 Auf diese Weise können die erklärungsbedürftigen Konzepte über CSS Selektoren gefunden werden. Allerdings stellt sich die Frage, wie das Hilfesystem die Beschreibung lesen kann. Die Konzepte sind im Falle von Freitext dynamisch, bei Legenden statisch, aber abhängig vom Datensatz und bei Interaktionselementen statisch in Abhängigkeit der Komponente. Es erscheint sinnvoll eine einheitliche Zugriffsschicht für Konzeptbeschreibungen zu etablieren. Dabei bietet sich im Fall von VizBoard das DaRe an, welches als einheitliche Zugriffsschicht auf Daten konzipiert ist. Bei anderen auf CRUISe aufbauenden Mashups sollte das CoRe diese Funktion übernehmen.
 
@@ -1485,9 +1485,9 @@ Kommentare waren in den verwandten Arbeiten (Abschnitt~\ref{section:standderfors
 
 % wie können kommentare umgesetzt werden? dev vs us! warum machen wir es so wie geplant?
 
-Prinzipiell gibt es zwei Varianten, wie Kommentare in einer InfoVis-Komponente umgesetzt werden können. In der ersten kümmert sich die Komponente darum, wie und wann sie Kommentare lädt und anzeigt. Der Vorteil daran ist, dass die Handhabung von Kommentaren speziell auf jede Komponente angepasst wird. Allerdings kann so kein \emph{einheitliches} Look \& Feel gewährleistet werden. Zwar könnten Designrichtlinien Aussehen und Interaktionen vorschreiben, sie sind aber zwecklos wenn der Komponentenentwickler sie nicht einhält. Außerdem erhöht diese Variante den Entwicklungsaufwand der Komponente stark (\emph{Minimalität}).
+Prinzipiell gibt es zwei Varianten, wie Kommentare in einer InfoVis-Komponente umgesetzt werden können. In der ersten kümmert sich die Komponente darum, wie und wann sie Kommentare lädt und anzeigt. Der Vorteil daran ist, dass die Handhabung von Kommentaren speziell auf jede Komponente angepasst wird. Allerdings kann so kein \emph{einheitliches} Look \& Feel gewährleistet werden. Zwar könnten Designrichtlinien Aussehen und Interaktionen vorschreiben, sie sind aber zwecklos wenn der Komponentenentwickler sie nicht einhält. Außerdem erhöht diese Variante den Entwicklungsaufwand der Komponente stark (gegenläufig zum Ziel der \emph{Minimalität}).
 
-In der zweiten Variante ist es Aufgabe des Hilfesystems, Kommentare zu verwalten und anzuzeigen. Die vorhin genannten Nachteile werden hier zu Vorteilen: Einheitliches Look \& Feel wird sichergestellt und der Komponentenentwickler hat keinen zusätzlichen Entwicklungsaufwand. Allerdings hat das Hilfesystem auf Grund des \enquote{Black Box} Prinzips keinen Zugriff auf die in der Komponente verwendeten Daten. Aus demselben Grund kommt hinzu, dass das User Interface für Kommentare sich verschiedenen Interaktionen der Komponente wie z.\,B. scrollen, Tab wechseln, zoomen etc. anpassen muss, ohne darüber informiert zu werden. Im folgenden wird erläutert, wie diese Nachteile umgangen werden können.
+In der zweiten Variante ist es Aufgabe des Hilfesystems, Kommentare zu verwalten und anzuzeigen. Die vorhin genannten Nachteile werden hier zu Vorteilen: Einheitliches Look \& Feel wird sichergestellt und der Komponentenentwickler hat keinen oder kaum zusätzlichen Entwicklungsaufwand. Allerdings muss das User Interface für Kommentare sich verschiedenen Interaktionen der Komponente wie z.\,B. scrollen, Tab wechseln, zoomen etc. anpassen, ohne darüber informiert zu werden oder über die konkrete Darstellung der Daten Bescheid zu wissen (\enquote{Black Box} Prinzip von Komponenten). Im folgenden wird erläutert, wie diese Nachteile umgangen werden können.
 
 \subsection{Features}
 \label{section:konzeption:kommentare:features}
@@ -1559,8 +1559,8 @@ Um den Fall von eigenen externen Daten für das Hilfesystem beliebiger CRUISe Ma
 Damit Bereichskommentare Daten referenzieren können, müssen drei Voraussetzungen gegeben sein:
 
 \begin{enumerate}
-	\item Falls der Bereich leer ist, muss die grafische Repräsentation die Position als visuelles Mapping benutzen, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann.
-	\item In jedem Fall muss die Komponente eine Operation bereitstellen, welche kartesische Koordinaten $(x_1,y_1)$ in Datenbereiche (2000 \$, 14. Mai 1998) transformiert sowie deren Umkehrung. Komponenten sind \enquote{Black Boxes} und es kann deswegen keine Annahme über die verwendete Skala (linear oder logarithmisch) oder andere Interna getroffen werden. Aus diesem Grund ist es nicht möglich, aus Auswahlkoordinaten $(x_1,y_1,x_2,y_2)$ direkt auf Daten zu schließen.
+	\item Die grafische Repräsentation mindestens einer Datenvariable muss die Position, Breite oder Höhe als visuelles Mapping benutzen, damit eine Transformation zwischen kartesischen Koordinaten und Daten durchgeführt werden kann.
+	\item Die Komponente muss eine Operation bereitstellen, welche kartesische Koordinaten $(x_1,y_1)$ in Datenbereiche (2000 \$, 14. Mai 1998) transformiert sowie deren Umkehrung. Komponenten sind \enquote{Black Boxes} und es kann deswegen keine Annahme über die verwendete Skala (linear oder logarithmisch) oder andere Interna getroffen werden. Aus diesem Grund ist es nicht möglich, aus Auswahlkoordinaten $(x_1,y_1,x_2,y_2)$ direkt auf Daten zu schließen.
 	\item Die verwendeten Daten müssen im Data Repository gespeichert sein, da ansonsten keine Daten referenziert werden können. Aus diesem Grund darf weder die Komponente selbst Datenverarbeitung in Form von Aggregationen o.\,ä. durchführen, noch dürfen die Daten selbst bereits aggregiert in der Komponente ankommen.
 \end{enumerate}
 
@@ -1577,7 +1577,7 @@ Diesbezüglich bietet sich ein Memento-Pattern \cite{Gamma1994} an:
 Without violating encapsulation, capture and externalize an object's internal state allowing the object to be restored to this state later.
 \end{quote} 
 
-Um Mementos umzusetzen, wird auf propertys zurückgegriffen. Eine Komponente muss ihren Zustand als propertys öffentlich machen und zwar so, dass durch Ändern von propertys kein inkonsistenter Zustand erreicht werden kann. Sie definiert das Format ihres Mementos, also welche propertys es ausmachen, in der Komponentenbeschreibung. Das Hilfesystem kann dann über die Methoden \texttt{getProperty(p)} und \texttt{setProperty(p,v)}, welche schon in der API der Komponente vorhanden sind, das Memento abrufen bzw. wiederherstellen. Eventuell registrierte PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) würden aktiviert und andere Komponenten ebenfalls verändert. Nachdem Events für eine Komponente zurückgehalten werden müssen, da sich das User Interface sonst ändern könnte, während der Benutzer Kommentare liest, haben PropertyLinks keinen Effekt.
+Um Mementos umzusetzen, wird auf Propertys zurückgegriffen. Eine Komponente muss ihren Zustand als Propertys öffentlich machen und zwar so, dass durch Ändern von Propertys kein inkonsistenter Zustand erreicht werden kann. Sie definiert das Format ihres Mementos, also welche Propertys es ausmachen, in der Komponentenbeschreibung. Das Hilfesystem kann dann über die Methoden \texttt{getProperty(p)} und \texttt{setProperty(p,v)}, welche schon in der API der Komponente vorhanden sind, das Memento abrufen bzw. wiederherstellen. Eventuell registrierte PropertyLinks (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}) würden aktiviert und andere Komponenten ebenfalls verändert. Nachdem Events für eine Komponente zurückgehalten werden müssen, da sich das User Interface sonst ändern könnte, während der Benutzer Kommentare liest, haben PropertyLinks keinen Effekt.
 
 \subsubsection{Ortsbezogene Bereichskommentare}
 
@@ -1594,7 +1594,7 @@ Datenbezogene Kommentare haben den Vorteil, dass sie auch in anderen Komponenten
 
 % speichern
 
-Mit Datenpunkten verhält sich die Situation etwas einfacher als bei Bereichen. Es kann davon ausgegangen werden, dass Datenpunkte und deren DOM Elemente in einer $1:1$ (z.\,B. Balkendiagramm) oder $1:n$ (z.\,B. Scatterplot-Matrix) Relation stehen, da die Komponente sonst aggregieren würde. Im vorigen Abschnitt wurde für datenbezogene Kommentare ausgeschlossen, dass Komponenten Datenverarbeitung durchführen. Wenn der Komponentenentwickler im Markup der Komponente sichtbar machen würde, zu welchem Datenpunkt ein Element gehört, könnte das Hilfesystem mit Hilfe von CSS Selektoren diese finden und beispielsweise auswählbar machen, wenn ein Kommentar verfasst werden soll. Wird der Kommentar abgeschickt, muss die Komponente dem Hilfesystem zuerst mitteilen, welche Werte die visualisierten Attribute eines Datenpunkts haben. Das kann nicht automatisch aus dem DOM Element berechnet werden, weil der Maßstab unbekannt ist: Entspricht eine Fläche von $100\times100$~Pixel in der Treemap 10~Quadratmetern oder 1000~Hektar? Der Maßstab kann auch nicht in der Komponentenbeschreibung angegeben werden, weil von der Größe der Komponente abhängig ist. Bei einer Breite von 500~Pixel wäre er z.\,B. $1:100$, bei 250~Pixel Breite aber schon $1:200$. Die URI des Datenpunkts sowie die Werte der Attribute werden im Kommentar gespeichert, sodass sie in anderen Visualisierungen wiederverwendet werden können.
+Mit Datenpunkten verhält sich die Situation etwas einfacher als bei Bereichen. Es kann davon ausgegangen werden, dass Datenpunkte und deren DOM Elemente in einer $1:1$ (z.\,B. Balkendiagramm) oder $1:n$ (z.\,B. Scatterplot-Matrix) Relation stehen, da die Komponente sonst aggregieren würde. Im vorigen Abschnitt wurde für datenbezogene Kommentare ausgeschlossen, dass Komponenten Datenverarbeitung durchführen. Wenn der Komponentenentwickler im Markup der Komponente sichtbar machen würde, zu welchem Datenpunkt ein Element gehört, könnte das Hilfesystem mit Hilfe von CSS Selektoren diese finden und beispielsweise auswählbar machen, wenn ein Kommentar verfasst werden soll. Wird der Kommentar abgeschickt, muss die Komponente dem Hilfesystem zuerst mitteilen, welche Werte die visualisierten Attribute eines Datenpunkts haben. Das kann nicht automatisch aus dem DOM Element berechnet werden, weil der Maßstab unbekannt ist: Entspricht eine Fläche von $100\times100$~Pixel in der Treemap 10~Quadratmetern oder 1000~Hektar? Der Maßstab kann auch nicht in der Komponentenbeschreibung angegeben werden, weil er von der Größe der Komponente abhängig ist. Bei einer Breite von 500~Pixel wäre er z.\,B. $1:100$, bei 250~Pixel Breite aber schon $1:200$. Die URI des Datenpunkts sowie die Werte der Datatype Propertys werden im Kommentar gespeichert, sodass sie in anderen Visualisierungen wiederverwendet werden können.
 
 % markup
 
@@ -1631,7 +1631,7 @@ Möchte der Benutzer Kommentare anderer lesen, wechselt der Inhalt der Sidebar z
 		\item Editieren/Löschen-Buttons, falls der Kommentar selbst verfasst wurde.
 		\item Antworten: Eine zweite Möglichkeit als die ID des Kommentars einzutippen. Die UI wechselt zu \enquote{Kommentar verfassen} und inkludiert die ID des betreffenden Kommentars.
 		\item Annotationen anzeigen: Zeigt die Annotationen des Kommentars in der Visualisierung.
-		\item Voting: Ein Benutzer kann einen fremden Kommentar genau einmal bewerten. Die Anzahl der Stimmen wird ebenfalls angezeigt. Anstatt \enquote{upvote/downvote} wird hier die Wortkombination \enquote{agree/disagree} verwendet, da bei der Nutzerstudie ersteres selten mit \enquote{bewerten} und manchmal mit \enquote{scrollen} assoziiert wurde.
+		\item Voting: Ein Benutzer kann einen fremden Kommentar genau einmal bewerten. Die Anzahl der Stimmen wird ebenfalls angezeigt. Anstatt \enquote{upvote/downvote} wird hier die Wortkombination \enquote{agree/disagree} verwendet, da bei der Nutzerstudie (Abschnitt~\ref{section:konzeption:einfuehrung:nutzerstudie}) ersteres selten mit \enquote{bewerten} und manchmal mit \enquote{scrollen} assoziiert wurde.
 	\end{itemize}
 	\item Rechte Spalte
 	\begin{itemize}
@@ -1682,7 +1682,7 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:features
 	\item ID der Komponente, in der der Kommentar verfasst wurde. Das ist notwendig um ortsbezogene Kommentare wiederherstellen zu können. Bei datenbezogenen Kommentaren kann eventuell ein Verweis auf die ursprüngliche Komponente erstellt werden.
 	\item ID des Datensatzes, der visualisiert wurde
 	\item ID des Verfassers
-	\item URIs der Datatype propertys, die visualisiert wurden
+	\item URIs der Datatype Propertys, die visualisiert wurden
 	\item Memento der Komponente zum Zeitpunkt des Kommentars
 	\item \textit{Für jede Version des Kommentars}
 	\begin{itemize}
@@ -1700,12 +1700,12 @@ Den Ausführungen in den Abschnitten~\ref{section:konzeption:kommentare:features
 		\end{itemize}
 	\item \textit{Für jedes datenbezogene Element}
 		\begin{itemize}
-			\item Grenzwerte der visualisierten Datatype propertys. Ist ein Datatype Property nominalen Typs, besitzt also keine inhärente Ordnung (z.\,B. Länder), muss eine Menge von Datenpunkten angegeben werden.
+			\item Grenzwerte der visualisierten Datatype Propertys. Ist eine Datatype Property nominalen Typs, besitzt also keine inhärente Ordnung (z.\,B. Länder), muss eine Menge von gültigen Werten angegeben werden.
 		\end{itemize}
 	\item \textit{Für jeden Datenpunkt}
 		\begin{itemize}
 			\item URI
-			\item Werte der visualisierten Datatype propertys
+			\item Werte der visualisierten Datatype Propertys
 		\end{itemize}
 	\end{itemize}
 \end{itemize}
@@ -1744,7 +1744,7 @@ In diesem Abschnitt wird untersucht, wie in einem CRUISe Mashup, in dem die Komp
    \label{figure:dependency-graph-example}
 \end{figure}
 
-In Abschnitt~\ref{section:konzeption:kommentare:api} wurde ein Memento-Pattern für Komponenten eingeführt. Damit kann das Hilfesystem Zustände von Komponenten abrufen, speichern und wiederherstellen. Im Folgenden wird davon ausgegangen, dass diese Mementos ausreichen, um eine Komponente von einem konsistenten Zustand in einen anderen konsistenten Zustand zu überführen (und beispielsweise keine Operationen ausgeführt werden müssen). Das deckt sich mit dem Paradigma von CRUISe, wonach die Menge an propertys den Zustand einer Komponente vollständig beschreiben. Gegebenenfalls muss die Komponente selbst ihre Konsistenz überprüfen, beispielsweise wenn eine Liste von Flügen in einen späteren Zustand wiederhergestellt werden soll und einige inzwischen ausgebucht sind. Es stellt sich nun die Frage, wann die Mementos der Komponenten abgerufen werden sollen. Prinzipiell kann es vor oder nach einem Event (welches Operationen aufruft, die potentiell den Zustand der Komponente ändern) passieren.
+In Abschnitt~\ref{section:konzeption:kommentare:api} wurde ein Memento-Pattern für Komponenten eingeführt. Damit kann das Hilfesystem Zustände von Komponenten abrufen, speichern und wiederherstellen. Im Folgenden wird davon ausgegangen, dass diese Mementos ausreichen, um eine Komponente von einem konsistenten Zustand in einen anderen konsistenten Zustand zu überführen (und beispielsweise keine Operationen ausgeführt werden müssen). Das deckt sich mit dem Paradigma von CRUISe, wonach die Menge von Propertys den Zustand einer Komponente vollständig beschreibt. Gegebenenfalls muss die Komponente selbst ihre Konsistenz überprüfen, beispielsweise wenn eine Liste von Flügen in einen späteren Zustand wiederhergestellt werden soll und einige inzwischen ausgebucht sind. Es stellt sich nun die Frage, wann die Mementos der Komponenten abgerufen werden sollen. Prinzipiell kann es vor oder nach einem Event (welches Operationen aufruft, die potentiell den Zustand der Komponente ändern) passieren.
 
 % vorher - klappt nicht, funkt der dev dazwischen 
 
@@ -1755,7 +1755,7 @@ Eine mögliche Lösung wäre den Lebenszyklus der Komponenten zu modifizieren. E
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.75\textwidth]{images/konzeption-cruise-lifecycle.png}
-   \caption{UI Mockup: Modifizierter CRUISe Komponentenlebenszyklus}
+   \caption{Modifizierter CRUISe Komponentenlebenszyklus}
    \label{figure:cruise-lifecycle}
 \end{figure}
 
@@ -1767,7 +1767,7 @@ Es bleibt die Möglichkeit \textbf{nach} einem Event Mementos abzurufen. Zunäch
 
 % voraussetzungen
 
-Ein Ansatz zur Lösung des Problems ist die aufrufende Methode in die Eventnachricht zu schreiben. Das muss der Komponentenentwickler übernehmen. So kann das Hilfesystem bzw. der Event Broker zur Laufzeit Eventkaskaden erkennen, da das Ziel einer Nachricht (CRUISe Operation) denselben Wert enthält wie die aufrufende Methode einer anderen Nachricht. Zusätzlich zur aufrufenden Methode muss noch ein Timestamp, eine eindeutige Event ID und die Instanz-ID der Komponente angegeben in einer Nachricht enthalten sein, was aber der Event Broker übernehmen kann.
+Ein Ansatz zur Lösung des Problems ist die aufrufende Methode in die Eventnachricht zu schreiben. Das muss der Komponentenentwickler übernehmen. So kann das Hilfesystem bzw. der Event Broker zur Laufzeit Eventkaskaden erkennen, da das Ziel einer Nachricht (CRUISe Operation) denselben Wert enthält wie die aufrufende Methode einer anderen Nachricht. Zusätzlich zur aufrufenden Methode muss noch ein Timestamp, eine eindeutige Event ID und die Instanz ID der Komponente angegeben in einer Nachricht enthalten sein, was aber der Event Broker übernehmen kann.
 
 % algorithmus
 
@@ -1795,7 +1795,7 @@ Der Algorithmus funktioniert wie folgt:
 
 % anmerkungen
 
-Ein noch nicht betrachteter Punkt sind asynchrone Operationen (z.\,B. \texttt{setTimeout()}). Die Reihenfolge der Nachrichten spielt im vorgestellten Algorithmus keine Rolle\todo{proof?}, weswegen asynchrone Operationen wie synchrone behandelt werden, solange sie innerhalb des Timeouts $t$ ein Event feuern. Das festgelegte Timeout ist aber keine gute Designentscheidung, wenn es um Zugriffe auf externe APIs geht. Es kann nicht davon ausgegangen werden, dass sie innerhalb des Timeouts beantwortet werden. Aus diesem Grund wird bei der History -- wie bei den Kommentaren (Abschnitt~\ref{section:konzeption:kommentare}) auch -- ausgeschlossen, dass Komponenten externe Daten laden können.
+Ein noch nicht betrachteter Punkt sind asynchrone Operationen. Die Reihenfolge der Nachrichten spielt im vorgestellten Algorithmus keine Rolle, weswegen asynchrone Operationen wie synchrone behandelt werden, solange sie innerhalb des Timeouts $t$ ein Event feuern. Das festgelegte Timeout ist aber keine gute Designentscheidung, wenn es um Zugriffe auf externe APIs geht. Es kann nicht davon ausgegangen werden, dass sie innerhalb des Timeouts beantwortet werden. Aus diesem Grund wird bei der History -- wie bei den Kommentaren (Abschnitt~\ref{section:konzeption:kommentare}) auch -- ausgeschlossen, dass Komponenten externe Daten laden können.
 
 Für das Timeout $t_D$, welches auf die Ausführung der Operation der letzten beteiligten Komponente wartet, kann der Wert aus der Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) herangezogen werden, wenn vorhanden. Dieser teilt dem Hilfeservice, der die Comic Panels generiert, mit, wann die Zustandsveränderung der Komponente abgeschlossen ist. Ansonsten wird ein durch Tests bestimmter Standardwert verwendet.
 
@@ -1810,7 +1810,7 @@ Außerdem ist zu beachten, dass für die korrekte Arbeitsweise des vorgestellten
 
 % mögliche stolpersteine
 
-Bevor konkrete visuelle Umsetzungen der History präsentiert werden, muss diskutiert werden, wie mit von Komponenten (anstatt vom Benutzer) ausgelösten Aktionen umgegangen wird. Beispielsweise wäre eine Uhrzeit-Komponente denkbar, die jede volle Minute ein \texttt{minutePassed} Event auslöst. Klassische Implementierungen einer History löschen den Redo-Stack, wenn nach einem Undo eine neue, nicht in der History vorhandene Aktion ausgeführt wird. Im Falle der Uhrzeit-Komponente wäre das äußerst ungünstig, da sie spätestens nach einer Minute unerwünschterweise den Redo-Stack löschen würde. Derartige Komponenten von der History auszuschließen ist jedoch keine Option, da sie aufgrund des Ziels der \textit{Universalität} alle Komponenten unterstützen muss. Events nach einem Undo zu pausieren ist ebenfalls nicht möglich, da dann überhaupt keine neuen Aktionen mehr ausgeführt werden können. Deswegen sollten neue, durch Komponenten ausgelöste Aktionen, nach einem Undo weiter auf den Redo-Stack gelegt werden. Dieser kann gelöscht werden, sobald der Benutzer eine Aktion ausführt. Der im vorhergehenden Abschnitt vorgestellte Algorithmus kann eine Nutzeraktion aber nicht in allen Fällen von einer Komponentenaktion unterscheiden. Zwar gibt es in der SMCDL ein Attribut \texttt{trigger}, welches angibt, ob ein Event durch Nutzerinteraktion, infolge einer Operation oder interner Logik ausgelöst wird \cite[S. 98]{Pietschmann2012}. Dieses ist jedoch optional und außerdem muss es nicht immer festgelegt sein: Es ist möglich, dass ein Event sowohl durch eine Operation als auch durch Nutzerinteraktion ausgelöst wird.
+Bevor konkrete visuelle Umsetzungen der History präsentiert werden, muss diskutiert werden, wie mit von Komponenten (anstatt vom Benutzer) ausgelösten Aktionen umgegangen wird. Beispielsweise wäre eine Uhrzeit-Komponente denkbar, die jede volle Minute ein \texttt{minutePassed} Event auslöst. Klassische Implementierungen einer History löschen den Redo-Stack, wenn nach einem Undo eine neue, nicht in der History vorhandene Aktion ausgeführt wird. Im Falle der Uhrzeit-Komponente wäre das äußerst ungünstig, da sie spätestens nach einer Minute unerwünschterweise den Redo-Stack löschen würde. Derartige Komponenten von der History auszuschließen ist jedoch keine Option, da sie aufgrund des Ziels der \textit{Universalität} alle Komponenten unterstützen muss. Events nach einem Undo zu pausieren ist ebenfalls nicht möglich, da dann überhaupt keine neuen Aktionen mehr ausgeführt werden können. Deswegen sollten neue, durch Komponenten ausgelöste Aktionen nach einem Undo weiter auf den Redo-Stack gelegt werden. Dieser kann gelöscht werden, sobald der Benutzer eine Aktion ausführt. Der im vorhergehenden Abschnitt vorgestellte Algorithmus kann eine Nutzeraktion aber nicht in allen Fällen von einer Komponentenaktion unterscheiden. Zwar gibt es in der SMCDL ein Attribut \texttt{trigger}, welches angibt, ob ein Event durch Nutzerinteraktion, infolge einer Operation oder interner Logik ausgelöst wird \cite[S. 98]{Pietschmann2012}. Dieses ist jedoch optional und außerdem muss es nicht immer festgelegt sein: Es ist möglich, dass ein Event sowohl durch eine Operation als auch durch Nutzerinteraktion ausgelöst wird.
 
 Um dem beizukommen, kann das Hilfesystem eigene Eventhandler auf aktionsrelevanten UI Elementen registrieren. Diese sind in Folge der Erweiterungen durch die Bedienungshilfe (Abschnitt~\ref{section:konzeption:bedienung}) bekannt. Abbildung~\ref{figure:undo-ablauf} verdeutlicht die Funktionsweise: Zuerst wird eine Nachricht $e_1$ an den Event Broker gesendet (1). Dieser fügt sie einer Collection hinzu (2). Danach wird der Eventhandler des Hilfesystems aufgerufen (3). Das Hilfesystem weiß, zu welcher Komponente, Aktion und Operation der Eventhandler gehört (Abschnitt~\ref{section:konzeption:bedienung:api}) und kann in den Collections des Event Brokers nach entsprechenden Nachrichten suchen. Von diesen wird die aufrufende Methode gelöscht und sie werden in eine neue Collection eingefügt (4). Danach kann das Hilfesystem den Redo-Stack löschen, falls nötig.
 
@@ -1820,6 +1820,8 @@ Um dem beizukommen, kann das Hilfesystem eigene Eventhandler auf aktionsrelevant
    \caption{Erkennung von Nutzerinteraktionen}
    \label{figure:undo-ablauf}
 \end{figure}
+
+Diese Vorgehensweise funktioniert allerdings nicht, wenn der Entwickler ein Event auslöst, indem er programmatisch ein UI Element betätigt, beispielsweise durch jQuerys \texttt{click()} Methode. Eine Möglichkeit, dies zu verhindern, wäre mit Hilfe statischer Codeanalyse während der Registrierung einer Komponente.
 
 \subsection{User Interface und Interaktion}
 \label{section:konzeption:history:ui}
@@ -1896,8 +1898,6 @@ In diesem Konzept wurden bisher sieben unterschiedliche Hilfefunktionen erarbeit
 % statische hilfe
 
 Die einfachste Lösung für die statische Meta-Hilfe wäre ein Button in der rechten oberen Ecke, der bei Bedarf eine klassische Hilfefunktion aufruft. Dort werden die verschiedenen Funktionen in Wort und Bild erklärt und ein Tutorialvideo gezeigt. Das bedeutet relativ viel Zeit- und Klickaufwand, bis der Nutzer bei den gewünschten Informationen ist, aber es hat auch Vorteile: Durch den statischen Hilfeknopf ist immer klar, wo weitergeholfen wird. Außerdem kann er gegebenenfalls für andere Sachen benutzt werden, beispielsweise könnte dort konfiguriert werden, ob der Pfeil in der Kommunikationshilfe bei jeder Nachricht angezeigt werden soll.
-
-In der Nutzerstudie war die Kommentarfunktion nicht offensichtlich. Die Teilnehmer hatten Probleme sie aufzurufen, zu benutzen und die möglichen Funktionen zu erkennen. Deswegen sollte das Intro (Abschnitt~\ref{section:konzeption:intro}) am Ende zusätzlich das notwendigste für die Nutzung der Kommentarfunktion erklären. Dazu gehört zum Beispiel, wie Kommentare angezeigt oder geschrieben werden (inklusive möglicher Annotationen) und dass sie bewertet werden können. Außerdem sollte das Intro auf die statische Meta-Hilfe hinweisen.
 
 \subsection{Dynamische Meta-Hilfe}
 \label{section:konzeption:meta-hilfe:dynamisch}
@@ -2098,7 +2098,7 @@ Für die History müssen folgende Attribute enthalten sein:
 \chapter{Implementierung}
 \label{chapter:implementierung}
 
-In den folgenden Abschnitten wird die prototypische Implementierung der Konzepte Bedienung (Abschnitt~\ref{section:konzeption:bedienung}), Kommunikation (Abschnitt~\ref{section:konzeption:kommunikation}) und Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) beschrieben. Sie sind aufgeilt in Frontend (Abschnitt~\ref{section:implementierung:frontend}) und Backend (Abschnitt~\ref{section:implementierung:backend}).
+In den folgenden Abschnitten wird die prototypische Implementierung der Konzepte Bedienung (Abschnitt~\ref{section:konzeption:bedienung}), Kommunikation (Abschnitt~\ref{section:konzeption:kommunikation}) und Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) beschrieben. Sie sind aufgeteilt in Frontend (Abschnitt~\ref{section:implementierung:frontend}) und Backend (Abschnitt~\ref{section:implementierung:backend}).
 
 \section{Frontend}
 \label{section:implementierung:frontend}
@@ -2158,10 +2158,10 @@ Die notwendigen Informationen zu einer Komponente sind folgende:
 	\item \texttt{component\_id}: Die URI der Komponente.
 	\item \texttt{component}: Die ID des DOM Elements, in dem sich die Komponente befindet.
 	\item \texttt{visualization}: Die ID des DOM Elements, welches die Visualisierung enthält.
-	\item \texttt{visualized\_propertys}: Ein Array der dargestellten propertys.
+	\item \texttt{visualized\_propertys}: Ein Array der dargestellten Propertys.
 	\item \texttt{data\_annotations\_enabled}: Ob datenbezogene Bereichskommentare zulässig sind.
 	\item \texttt{reference}: Eine Referenz zur Instanz der Komponente, um die API aufrufen zu können.
-	\item \texttt{memento}: Ein Array der propertys, welche das Memento der Komponente ausmachen.
+	\item \texttt{memento}: Ein Array der Propertys, welche das Memento der Komponente ausmachen.
 	\item \texttt{capabilities}: Ein Array von Objekten mit Informationen über jede Capability.
 \end{itemize}
 
@@ -2175,7 +2175,7 @@ Für jede Capability müssen folgende Informationen angegeben werden:
 	\item \texttt{elements}: Der CSS Selektor, welcher die DOM Elemente für diese Capability findet.
 \end{itemize}
 
-Alle diese Informationen werden vom ApplicationManager aus den SMCDLs der Komponenten gelesen, nachdem diese erfolgreich integriert wurden. Um festzustellen, ob eine Komponente datenbezogene Bereichskommentare unterstützt, wird ein Request ans CoRe gesendet, der die Kodierung der visuellen Attribute aller propertys zurückgibt. Findet sich darunter mindestens einmal die Position oder Breite beziehungsweise Höhe -- also etwas, was sich entlang der X- oder Y-Achse messen lässt -- so werden die angesprochenen Kommentare unterstützt. Für die Generierung eines passenden Labels wird der \texttt{LabelGenerator} von EDYRA herangezogen.
+Alle diese Informationen werden vom ApplicationManager aus den SMCDLs der Komponenten gelesen, nachdem diese erfolgreich integriert wurden. Um festzustellen, ob eine Komponente datenbezogene Bereichskommentare unterstützt, wird ein Request ans CoRe gesendet, der die Kodierung der visuellen Attribute aller Propertys zurückgibt. Findet sich darunter mindestens einmal die Position oder Breite beziehungsweise Höhe -- also etwas, was sich entlang der X- oder Y-Achse messen lässt -- so werden die angesprochenen Kommentare unterstützt. Für die Generierung eines passenden Labels wird der \texttt{LabelGenerator} von EDYRA herangezogen.
 
 
 \subsection{API einer Komponente}
@@ -2184,11 +2184,11 @@ Alle diese Informationen werden vom ApplicationManager aus den SMCDLs der Kompon
 Wie in der Konzeption (Abschnitt~\ref{chapter:konzeption}) erläutert, muss die API einer Komponente um zusätzliche Funktionalität erweitert werden, um Kommentare zu unterstützen und Hilfegenerierung möglich zu machen. Das ist hauptsächlich deswegen nötig, weil die Komponente eine \enquote{Black Box} ist und das Hilfesystem keine Annahmen über die Art der Darstellung von Informationen machen kann. Allerdings sind die meisten Methoden optional: Möchte der Komponentenentwickler keine Kommentare unterstützen, sollen sie einfach nicht implementiert werden.
 
 \begin{itemize}
-	\item \texttt{loadTestdata( data )} lädt Testdaten in die Komponente. Diese Methode muss als einzige unbedingt implementiert werden. Die Testdaten werden als String übergeben, um kein Serialisierungsformat (z.\,B. JSON oder XML) vorzuschreiben. Das Parsen des Strings ist der Komponente überlassen. Nachdem in der Regel bereits eine interne Methode besteht, die Daten in die Komponente lädt, stellt die Implementierung von \texttt{loadTestdata} kaum Mehraufwand dar.
-	\item \texttt{coordinatesToData( x1, y1, x2, y2 )} wandelt das durch die vier Koordinaten angegebene Rechteck in Grenzwerte von propertys um. Dabei wird ein JSON Array von Objekten mit Attributen \texttt{uri}, \texttt{from} und \texttt{to} zurückgegeben. Für jede in der Komponente dargestellte Property, welche mit den visuellen Attributen Breite, Höhe oder Position kodiert ist, findet sich ein durch die URI gekennzeichnetes Objekt im Array (siehe Abbildung~\ref{figure:coordinatesToData}). Weist eine Property ein nominales Scale of Measurement auf, sind \texttt{from} und \texttt{to} identisch und enthalten ein Array von möglichen Werten.
+	\item \texttt{loadTestdata( data )} lädt Testdaten in die Komponente. Diese Methode muss implementiert werden, sofern die Komponente Bedienungshilfe für irgendeine Capability zur Verfügung stellen soll. Die Testdaten werden als String übergeben, um kein Serialisierungsformat (z.\,B. JSON oder XML) vorzuschreiben. Das Parsen des Strings ist der Komponente überlassen. Nachdem in der Regel bereits eine interne Methode besteht, die Daten in die Komponente lädt, stellt die Implementierung von \texttt{loadTestdata} kaum Mehraufwand dar.
+	\item \texttt{coordinatesToData( x1, y1, x2, y2 )} wandelt das durch die vier Koordinaten angegebene Rechteck in Grenzwerte von Propertys um. Dabei wird ein JSON Array von Objekten mit Attributen \texttt{uri}, \texttt{from} und \texttt{to} zurückgegeben. Für jede in der Komponente dargestellte Property, welche mit den visuellen Attributen Breite, Höhe oder Position kodiert ist, findet sich ein durch die URI gekennzeichnetes Objekt im Array (siehe Abbildung~\ref{figure:coordinatesToData}). Weist eine Property ein nominales Scale of Measurement auf, sind \texttt{from} und \texttt{to} identisch und enthalten ein Array von möglichen Werten.
 	\item \texttt{dataToCoordinates( p1, p2 ... )} wandelt von \texttt{coordinatesToData} erhaltene datenbezogene \enquote{Grenzpunkte} wieder in Koordinaten um. Dazu liefert die Methode ein Objekt mit den Attributen \texttt{x1}, \texttt{x2}, \texttt{y1} und \texttt{y2} zurück.
-	\item \texttt{getVisualizedpropertys()} liefert ein Array mit den URIs der in der Komponente visualisierten Propertys zurück. Das ist notwendig, damit das Hilfesystem Kommentare für Komponenten laden kann. Diese Propertys bestehen zur Zeit aus der Kombination von Datensatz ID, URI der Klasse der Property (rdfs:domain) und URI der Property. So sind sie eindeutig identifizierbar. Jedoch wäre es möglich, dass eine andere Property owl:sameAs implementiert. Diese identischen Propertys können nicht gefunden werden. Deswegen sollte in Zukunft kein einzelner String, sondern ein Objekt für jede Property geliefert werden, sodass das Backend nach identischen Propertys suchen kann.
-	\item \texttt{getDataFromResource()} gibt die Werte der dargestellten propertys eines Datenpunkts zurück.
+	\item \texttt{getVisualizedpropertys()} liefert ein Array mit den URIs der in der Komponente visualisierten Propertys zurück. Das ist notwendig, damit das Hilfesystem Kommentare für Komponenten laden kann. Diese Propertys bestehen zur Zeit aus der Kombination von Datensatz ID, URI der Klasse der Property (rdfs:domain) und URI der Property. So sind sie eindeutig identifizierbar.
+	\item \texttt{getDataFromResource()} gibt die Werte der dargestellten Propertys eines Datenpunkts zurück.
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -2298,7 +2298,7 @@ Der Algorithmus, um alle eine Aktion auslösenden UI Elemente in ein anderes \te
 	\item Danach wird ein weiteres \texttt{div} erstellt, die \enquote{Rootcopy}. Diese hat dieselbe Größe und Position wie die Komponente.
 	\item In die Rootcopy wird wiederum ein \texttt{svg} Element eingefügt, welches sie ausfüllt. Das hat den Grund, dass aktionsauslösende UI Elemente auch SVG \texttt{rect}s oder ähnliches sein können. Sie werden vom Browser nur gerendert, wenn sie sich auch in einem \texttt{svg} befinden.
 	\item Damit Kopien in der Rootcopy möglichst gleich aussehen wie die Originale, werden in der Komponente gesetzte CSS Styles auf die Rootcopy übertragen.
-	\item Danach werden alle von einem CSS Selektor getroffenen Elemente entweder in die Rootcopy selbst oder ins \texttt{svg} kopiert und gleich wie die Originale positioniert. Bei SVG-Elementen ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt.
+	\item Danach werden alle von einem CSS Selektor getroffenen Elemente entweder in die Rootcopy selbst oder ins \texttt{svg} kopiert und gleich wie die Originale positioniert. Sofern sich SVG-Elemente nicht in transformierten Gruppen befinden, ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt.
 	\item Bei jedem durch Selektor $s_i$ getroffenen Element und dessen Kopie wird außerdem ein Attribut \texttt{data-vizboard-copy} auf \texttt{copy<i>} gesetzt. Der Grund dafür ist die Verbindung zwischen Aktionen und UI Elementen: Bei \texttt{mouseover} über einer Aktion in der Liste werden alle dafür notwendigen UI Elemente hervorgehoben. Um diese zu finden, kann der Selektor nicht in der Rootcopy ausgeführt werden: Selektoren wie z.\,B. \texttt{:nth-child(odd)} würden falsche Ergebnisse liefern. Aus diesem Grund werden die Selektoren bei \texttt{mouseover} in der Komponente ausgeführt und die Kopien der Elemente über den Wert von \texttt{data-vizboard-copy} gefunden (siehe Abbildung~\ref{figure:rootcopy}).
 	\item Die aktionsauslösenden UI Elemente müssen nicht leer sein, weswegen dort gesetzte Styles auch bei Kindknoten sichtbar sein könnten, z.\,B. wenn eine CSS Property auf \texttt{inherit} gesetzt ist. Aus diesem Grund werden bestimmte CSS propertys (\texttt{border}, \texttt{color}, \texttt{background}) in den Kopien auf die Werte der Originale fixiert.
 	\item Aktionsauslösende UI Elemente können andere aktionsauslösende UI Elemente enthalten. Das wäre beispielsweise der Fall, wenn das anonyme \texttt{div} in Abbildung~\ref{figure:rootcopy}, welches die \texttt{div.bar} enthält, eine dritte Aktion auslösen würde. Damit diese nicht mehrfach in der Rootcopy vorhanden sind, wird für jedes Original einer Kopie überprüft, ob es Knoten mit dem Attribut \texttt{data-vizboard-copy} enthält. Falls ja, wird ein CSS Selektor aus dem Knoten generiert und alle davon getroffenen Elemente in der Kopie gelöscht.
@@ -2376,9 +2376,9 @@ Das Backend der Kommentare wurde ins Data Repository integriert, da dort bereits
 
 \subsubsection{Repository}
 
-In der Konzeption der Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) wurde das Data Repository als geeigneter Speicherort identifiziert. Dieses enthält durch Metainformationen erweiterte semantische Datensätze, die im Frontend von Komponenten geladen und visualisiert werden können. Aus diesem Grund wurde für Kommentare ein eigenes Modell angelegt, sodass sie von \enquote{regulären} Daten getrennt sind.
+In der Konzeption der Kommentare (Abschnitt~\ref{section:konzeption:kommentare}) wurde das Data Repository als geeigneter Speicherort identifiziert, da es bereits eine Infrastruktur zur Persistierung von Daten zur Verfügung stellt. Dieses enthält durch Metainformationen erweiterte semantische Datensätze, die im Frontend von Komponenten geladen und visualisiert werden können. Aus diesem Grund wurde für Kommentare ein eigenes Modell angelegt, sodass sie von \enquote{regulären} Daten getrennt sind.
 
-Zwischen Front- und Backend wird ein Kommentar auf verschiedene Weise serialisiert (Abbildung~\ref{figure:kommentare-backend}). Das webbasierte Frontend kann JSON am besten verarbeiten, das DaRe Backend ist in Java geschrieben und arbeitet mit einem Jena TDB Triplestore, wo Kommentare letztendlich abgelegt werden. Zwar könnte das Backend ausschließlich zwischen JSON und RDF konvertieren, aber so ist es möglich bestehende Java-Bibliotheken für verschiedene Zwecke (wie z.\,B. Textklassifikation) einzusetzen.
+Zwischen Front- und Backend wird ein Kommentar auf verschiedene Weise serialisiert (Abbildung~\ref{figure:kommentare-backend}). Das webbasierte Frontend kann JSON am besten verarbeiten, das DaRe Backend ist in Java geschrieben und arbeitet mit einem Jena TDB Triplestore, wo Kommentare letztendlich abgelegt werden. Zwar könnte das Backend ausschließlich zwischen JSON und RDF konvertieren, aber so ist es in Zukunft möglich bestehende Java-Bibliotheken für verschiedene Zwecke (wie z.\,B. Textklassifikation) einzusetzen.
 
 \begin{figure}[htbp]
    \centering
@@ -2394,8 +2394,8 @@ Die verschiedenen Serialisierungsformate sind im Anhang zu finden.
 Die Architektur des Backends für Kommentare orientiert sich an den verschiedenen notwendigen Serialisierungen eines Kommentars (siehe vorhergehender Abschnitt). Sie besteht aus drei Klassen, die dem \enquote{Separation of Concerns} Prinzip folgend genau eine Zuständigkeit haben:
 
 \begin{itemize}
-	\item Der \textbf{CommentRequestHandler} nimmt HTTP Requests entgegen und leitet sie an das CommentBackend weiter.
-	\item Das \textbf{CommentBackend} stellt das Interface zum Triplestore dar, in dem die Kommentare abgelegt werden.
+	\item Der \textbf{CommentRequestHandler} nimmt HTTP Requests entgegen, leitet sie an das CommentBackend weiter und antwortet mit JSON.
+	\item Das \textbf{CommentBackend} stellt das Interface zum Triplestore dar, in dem die Kommentare abgelegt werden. Es gibt Kommentare in Java aus, sodass hier andere Java Bibliotheken ansetzen können.
 	\item Der \textbf{CommentConverter} setzt zwischen verschiedenen Serialisierungen eines Kommentars (JSON, RDFS, Java) um.
 \end{itemize}
 
@@ -2423,7 +2423,7 @@ Folgende Schritte werden durchlaufen:
 	\item Der Request Handler sendet den JSON String an das Frontend.
 \end{enumerate}
 
-Es spricht natürlich nichts dagegen in solchen Fällen ein Kommentar direkt von RDF in JSON zu konvertieren, ohne den Umweg über Java. Im Prototyp wurde darauf aber verzichtet, da es nur zusätzliche Schreibarbeit dargestellt und keinen merkbaren Nutzen gebracht hätte.
+Es spricht natürlich nichts dagegen für solche Fälle ein Kommentar direkt von RDF in JSON zu konvertieren, ohne den Umweg über Java. Im Prototyp wurde darauf aber verzichtet, da es nur zusätzliche Schreibarbeit dargestellt und keinen merkbaren Nutzen gebracht hätte.
 
 \subsubsection{REST API}
 
@@ -2528,7 +2528,7 @@ Damit die Komponente während der Hilfegenerierung auch tatsächlich Daten anzei
 </testdata>
 \end{lstlisting}
 
-Zur Laufzeit und während der Hilfegenerierung muss das Hilfesystem Komponenten in zuvor gespeicherte Zustände zurücksetzen können. Dazu wird das Memento verwendet, welches eine Menge von Propertys ist, deren Werte gespeichert werden müssen. Um anzugeben, welche propertys einer Komponente Teil ihres Mementos sind, kann der Entwickler diese mit einem Attribut \texttt{isMemento} versehen (Listing~\ref{code:smcdl-memento}). Sie unterscheiden sich von \texttt{required} Propertys, die zur Initialisierung der Komponente unbedingt gesetzt sein müssen, weil bei Mementos eben das nicht der Fall ist: Eine Property \texttt{sorted}, welche angibt wonach eine Tabelle aktuell sortiert ist, muss bei der Initialisierung nicht bekannt, aber dennoch Teil des Mementos sein.
+Zur Laufzeit und während der Hilfegenerierung muss das Hilfesystem Komponenten in zuvor gespeicherte Zustände zurücksetzen können. Dazu wird das Memento verwendet, welches eine Menge von Propertys ist, deren Werte gespeichert werden müssen. Um anzugeben, welche Propertys einer Komponente Teil ihres Mementos sind, kann der Entwickler diese mit einem Attribut \texttt{isMemento} versehen (Listing~\ref{code:smcdl-memento}). Sie unterscheiden sich von \texttt{required} Propertys, die zur Initialisierung der Komponente unbedingt gesetzt sein müssen, weil bei Mementos eben das nicht der Fall ist: Eine Property \texttt{sorted}, welche angibt wonach eine Tabelle aktuell sortiert ist, muss bei der Initialisierung nicht bekannt, aber dennoch Teil des Mementos sein, sodass Annotationen die korrekten Bereiche referenzieren. Andersherum müssen \texttt{required} Propertys nicht Teil des Mementos sein. Die Propertys \texttt{width} und \texttt{height} sollten beispielsweise nicht ins Memento aufgenommen werden, da die Komponente später ansonsten plötzlich ihre Größe ändern kann.
 
 \lstset{language=XML}
 \begin{lstlisting}[ caption={SMCDL für Memento}, label=code:smcdl-memento ]
@@ -2629,7 +2629,7 @@ Damit das Frontend des Hilfesystems auf die generierten Bilder zugreifen kann, w
 \chapter{Evaluation}
 \label{chapter:evaluation}
 
-Nachdem basierend auf dem Szenario, den Grundlagen und dem Konzept ein Prototyp entwickelt wurde, wird in diesem Abschnitt dessen Tauglichkeit überprüft. Das Hilfesystem soll drei Aufgaben erfüllen:
+Nachdem basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:szenario}), den Grundlagen (Abschnitt~\ref{section:standderforschung:grundlagen}) und dem Konzept (Kapitel~\ref{chapter:konzeption}) ein Prototyp entwickelt wurde (Kapitel~\ref{chapter:implementierung}), wird in diesem Abschnitt dessen Tauglichkeit überprüft. Das Hilfesystem soll drei Aufgaben erfüllen:
 
 \begin{enumerate}
 	\item Es soll dem Benutzer erleichtern, Komponenten verschiedener Entwickler zu bedienen (Abschnitte \ref{section:konzeption:intro}, \ref{section:konzeption:bedienung}, \ref{section:konzeption:feedback}, \ref{section:konzeption:kommunikation}, \ref{section:konzeption:history}, \ref{section:konzeption:meta-hilfe}).
