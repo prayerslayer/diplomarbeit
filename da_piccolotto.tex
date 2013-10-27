@@ -2027,8 +2027,8 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item Annotation, ob eine Property Teil des Mementos ist (Kommentare, History).
 	\item VISO Operationen, welche eine Aktion ausführen (Bedienung).
 	\item CSS Selektoren für jede Operation, um UI Elemente für Operation zu kennzeichnen (Bedienung).
-	\item Konzept, welches Aktion näher beschreibt (Verlinkung).
-	\item Anzahl an Sekunden, die vor einem Screenshot gewartet werden soll (Bedienung).
+	\item Konzept, welches eine Aktion näher beschreibt (Verlinkung).
+	\item Anzahl an Sekunden, die zur vollständigen Änderung des User Interfaces benötigt werden (Bedienung).
 	\item Nähere Beschreibung einer Aktion durch Freitext oder Referenz auf Datenvariable (Bedienung).
 	\item Ob Hilfe für Capability/Operation generiert werden soll oder nicht (Bedienung).
 	\item Optionale Zusatzinformationen zur VISO Operation, beispielsweise welche Taste gedrückt werden muss (Bedienung).
@@ -2045,6 +2045,7 @@ Für das Konzept wurde das Markup einer Komponente, die Komponentenbeschreibung 
 	\item Eine Methode, um Koordinaten in Datenpunkte umzurechnen (Kommentare).
 	\item Die Umkehrung der Methode (Datenpunkte $\to$ Koordinaten) (Kommentare).
 	\item Eine Methode, welche Attribute zu URIs von Datenpunkten ausgibt (Kommentare).
+	\item Eine Methode, welche Testdaten in die Komponente lädt (Bedienung).
 \end{itemize}
 
 \subsubsection{VISO}
@@ -2100,7 +2101,7 @@ Für die History müssen folgende Attribute enthalten sein:
 \section{Zusammenfassung}
 \label{section:konzeption:zusammenfassung}
 
-In diesem Kapitel wurde ein Hilfesystem für InfoVis Mashups vorgestellt. Es besteht aus folgenden acht Teilkonzepten:
+In diesem Kapitel wurde ein Hilfesystem für InfoVis Mashups vorgestellt, welches großteils auch für andere, auf CRUISe basierende Mashups eingesetzt werden kann. Es besteht aus folgenden acht Teilkonzepten:
 
 \begin{enumerate}
 	\item Intro in die Funktionalität einer Komponente (Abschnitt~\ref{section:konzeption:intro})
@@ -2108,7 +2109,7 @@ In diesem Kapitel wurde ein Hilfesystem für InfoVis Mashups vorgestellt. Es bes
 	\item Feedback zu einer Komponente (Abschnitt~\ref{section:konzeption:feedback})
 	\item Kommunikation zwischen Komponenten (Abschnitt~\ref{section:konzeption:kommunikation})
 	\item Verlinkung von unbekannten Konzepten (Abschnitt~\ref{section:konzeption:verlinkung})
-	\item Kommentare in Visualisierunen (Abschnitt~\ref{section:konzeption:kommentare})
+	\item Kommentare in Visualisierungen (Abschnitt~\ref{section:konzeption:kommentare})
 	\item History (Abschnitt~\ref{section:konzeption:history})
 	\item Meta-Hilfe (Abschnitt~\ref{section:konzeption:meta-hilfe})
 \end{enumerate}
@@ -2348,7 +2349,7 @@ Dafür wird die Komponente zunächst abgedunkelt und für Aktionen notwendige UI
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-howto-step1.png}
+   \includegraphics[width=0.75\textwidth]{images/implementierung-ui-howto-step1.png}
    \caption{Assistance zur Bedienung, Schritt 1}
    \label{figure:ui-howto-step1}
 \end{figure}
@@ -2389,7 +2390,7 @@ Auch die Darstellung von Panels unterliegt gewissen Einschränkungen. Abbildung~
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-howto-step2.png}
+   \includegraphics[width=\textwidth]{images/implementierung-ui-howto-step2.png}
    \caption{Assistance zur Bedienung, Liniendiagramm}
    \label{figure:ui-howto-step2}
 \end{figure}
@@ -2412,7 +2413,7 @@ Im Folgenden wird auf die Hilfe zur Kommunikation zwischen Komponenten (Abschnit
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-capview.png}
+   \includegraphics[width=0.75\textwidth]{images/implementierung-ui-capview.png}
    \caption{Erweiterter CapView}
    \label{figure:ui-capview}
 \end{figure}
@@ -2421,7 +2422,7 @@ Dazu wird das schwarze Fragezeichen in der Methode \texttt{drawPath} im Connecti
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-communication.png}
+   \includegraphics[width=\textwidth]{images/implementierung-ui-communication.png}
    \caption{Assistance zur Kommunikation}
    \label{figure:ui-communication}
 \end{figure}
