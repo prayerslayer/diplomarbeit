@@ -59,14 +59,7 @@
 \lstdefinelanguage{json}{
     basicstyle=\small\ttfamily,
     showstringspaces=false,
-    breaklines=true,
-    literate=
-     *{:}{{{\color{punct}{:}}}}{1}
-      {,}{{{\color{punct}{,}}}}{1}
-      {\{}{{{\color{delim}{\{}}}}{1}
-      {\}}{{{\color{delim}{\}}}}}{1}
-      {[}{{{\color{delim}{[}}}}{1}
-      {]}{{{\color{delim}{]}}}}{1},
+    breaklines=true
 }
 
 
@@ -3014,8 +3007,8 @@ Danach kann das Konzept um zusätzliche Hilfestellungen erweitert werden. Beispi
 \subsection{JSON Format eines Kommentars}
 \label{appendix:implementierung:json}
 
-\lstset{language=JSON}[caption={JSON Format eines Kommentars}, label=code:implementierung-format-json]
-\begin{lstlisting}
+\lstset{language=JSON}
+\begin{lstlisting}[caption={JSON Format eines Kommentars}, label=code:implementierung-format-json]
 {
   "comment_id": "id",
   "user_id": "bob",
@@ -3031,8 +3024,7 @@ Danach kann das Konzept um zusätzliche Hilfestellungen erweitert werden. Beispi
     "width": 600
   },
   "visualized_propertys": [
-    // strings of form
-    // dataset + class uri + property uri
+    // strings of form: dataset + class uri + property uri
   ],
   "versions": [
     {
@@ -3069,7 +3061,7 @@ Danach kann das Konzept um zusätzliche Hilfestellungen erweitert werden. Beispi
           "type": "data",
           "items": [
             {
-              "uri": "http://mmt.inf.tu-dresden.de/testdata/films#release",
+              "uri": "http://tu-dresden.de/films#release",
               "from": "2010-01-20T06:00:00.000Z",
               "to": "2019-11-24T12:00:00.000Z"
             }]
