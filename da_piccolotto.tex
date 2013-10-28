@@ -130,7 +130,7 @@ Im Laufe der letzten Jahre wurden immer mehr Daten veröffentlicht und im Intern
 
 % InfoVis sind gut, weil man Patterns, Ausreisser und Trends in Daten schneller erkennen kann, sie also das Verständnis der Daten fördern.
 
-In roher Form können Menschen diese Daten aber nur sehr schwer verarbeiten: Ein Computer kann mehrere Megabyte Text innerhalb von Sekunden lesen und im Arbeitsspeicher halten, ein Mensch benötigt viel Zeit und vergisst große Teile wieder. Hier setzen gemäß dem Sprichwort \enquote{Ein Bild sagt mehr als tausend Worte} Informationsvisualisierungen an. Sie bereiten Daten visuell auf, beispielsweise in Form von Diagrammen, und machen so die enthaltenen Informationen für Menschen einfacher zugänglich. So können in den Daten enthaltene Muster, Ausreisser, Zusammenhänge und Trends leicher erkannt werden.
+In roher Form können Menschen diese Daten aber nur sehr schwer verarbeiten: Ein Computer kann mehrere Megabyte Text innerhalb von Sekunden lesen und im Arbeitsspeicher halten, ein Mensch benötigt viel Zeit und vergisst große Teile wieder. Hier setzen gemäß dem Sprichwort \enquote{Ein Bild sagt mehr als tausend Worte} Informationsvisualisierungen an. Sie bereiten Daten visuell auf, beispielsweise in Form von Diagrammen, und machen so die enthaltenen Informationen für Menschen einfacher zugänglich. So können in den Daten enthaltene Muster, Ausreisser, Zusammenhänge und Trends leichter erkannt werden.
 
 % Komposite InfoVis sind für den Benutzer gut, weil der mehr als eine Sicht auf die Daten hat. Für den Systembetreiber sind sie gut, weil...? Jeder macht, was er am besten kann?
 
@@ -138,7 +138,7 @@ Bei komplexen Daten, die mehrere Variablen unterschiedlichen Typs beinhalten, is
 
 % komposite infovis sind mashups. die infovis stammen von verschiedenen entwicklern, schauen verschieden aus, haben verschiedene interaktionsmetaphern, unterschiedliches look and feel, unterschiedliche funktionen
 
-Einige Forschungsarbeiten \cite{Cappiello2011, Pietschmann2012, Chudnovskyy2012} befassen sich damit, diese multiplen Sichten in Form eines Mashups von UI Bestandteilen umzusetzen. Dessen einzelne Komponenten können dabei von unterschiedlichen, unabhängigen Entwicklern erstellt und in unterschiedlichen Domänen bzw. Anwendungsfällen eingesetzt werden. Das ist sinnvoll, da auf diese Weise die Anzahl an vorhandenen Komponenten und damit der Nutzen für den Anwender maximiert werden kann. Diese Strategie bringt aber auch Nachteile für den Anwender mit sich. Da die Komponenten von unterschiedlichen Entwicklern gebaut werden, können sie unterschiedlich aussehen: Was bei einer Komponente eine Auswahl signalisiert, ist bei der anderen normale Hintergrundfarbe. Die Komponenten verfügen möglicherweise über unterschiedliche Interaktionsmetaphern: Beim Balkendiagramm von Entwickler A müssen die Buttons geklickt werden, beim Liniendiagramm von Entwickler B reicht ein \texttt{mouseover}. Hinzu kommt, dass verschiedene Entwickler unterschiedliche Bezeichnungen für die dieselbe Interaktion wählen können, falls sie eine Hilfefunktion für ihre Komponenten anbieten. So verwendet Entwickler A den Begriff \enquote{MouseOver} und Entwickler B \enquote{Hover}. Das ist gegenläufig zur Bedienbarkeit des Mashups, da in verschiedenen Usability Guidelines ein konsistentes Vokabular gefordert wird. Aus diesen und anderen Gründen muss dem Anwender eine einheitliche, universelle Hilfestellung angeboten werden.
+Einige Forschungsarbeiten \cite{Cappiello2011, Pietschmann2012, Chudnovskyy2012, Voigt2013} befassen sich damit, diese multiplen Sichten in Form eines Mashups von User Interface Bestandteilen umzusetzen. Dessen einzelne Komponenten können dabei von unterschiedlichen, unabhängigen Entwicklern erstellt und in unterschiedlichen Domänen bzw. Anwendungsfällen eingesetzt werden. Das ist sinnvoll, da auf diese Weise die Anzahl an vorhandenen Komponenten und damit der Nutzen für den Anwender maximiert werden kann. Diese Strategie bringt aber auch Nachteile für den Anwender mit sich. Da die Komponenten von unterschiedlichen Entwicklern gebaut werden, können sie unterschiedlich aussehen: Was bei einer Komponente eine Auswahl signalisiert, ist bei der anderen normale Hintergrundfarbe. Die Komponenten verfügen möglicherweise über unterschiedliche Interaktionsmetaphern: Beim Balkendiagramm von Entwickler A müssen die Buttons geklickt werden, beim Liniendiagramm von Entwickler B reicht ein \texttt{mouseover}. Hinzu kommt, dass verschiedene Entwickler unterschiedliche Bezeichnungen für die dieselbe Interaktion wählen können, falls sie eine Hilfefunktion für ihre Komponenten anbieten. So verwendet Entwickler A den Begriff \enquote{MouseOver} und Entwickler B \enquote{Hover}. Das ist gegenläufig zur Bedienbarkeit des Mashups, da in verschiedenen Usability Guidelines ein konsistentes Vokabular gefordert wird. Aus diesen und anderen Gründen muss dem Anwender eine einheitliche, universelle Hilfestellung angeboten werden.
 
 % ###################################################
 \section{Problemstellung und Zielsetzung}
@@ -146,35 +146,35 @@ Einige Forschungsarbeiten \cite{Cappiello2011, Pietschmann2012, Chudnovskyy2012}
 
 % welche probleme? Visualisierungen auseinanderhalten und einordnen können (intro), visualisierungen bedienen können (bedienung), fragen über daten stellen können (kommentare), konzept der zusammenarbeit von komponenten verstehen (kommunikation), fehler melden können (Feedback), unbekannte konzepte beschrieben bekommen (verlinkung)
 
-Einem Anwender, der ein Informationsvisualisierungs-Mashup nutzen will, stellen sich einige Fragen. Zunächst sieht er mehrere unterschiedliche Komponenten und muss diese nach der Reihe inspizieren und einordnen: Welche Daten stellen sie dar, wie sind diese kodiert und wie müssen sie interpretiert werden? Außerdem ist unklar, welche Funktionen die Komponenten zur Verfügung stellen und wie diese aufgerufen werden: Kann die Tabelle sortiert werden und wenn ja, wie? Welche Operation auf welchen Elementen führt welche Sortierreihenfolge aus? Welche Alternativen gibt es? Möglicherweise tauschen Komponenten untereinander Nachrichten aus, um gegenseitig ihr User Interface zu aktualisieren. Dieser Vorgang ist für den Benutzer unsichtbar und seine Auswirkungen wahrscheinlich irritierend. Warum aktualisiert sich die Karte, wenn die Interaktion im Balkendiagramm stattfindet? Während der Inspektion der Daten werden sich dem Anwender weitere Fragen stellen: Was bedeutet ein bestimmter Begriff, wie ist eine Metrik definiert und warum fällt sie so plötzlich ab?
+Aus diesen Gründen stellen sich einem Anwender eines Mashups verschiedene Fragen. Zunächst sieht er mehrere unterschiedliche Komponenten und muss diese nach der Reihe inspizieren und einordnen, sodass er ein ungefähres Bild über ihren Nutzens hat. Außerdem ist unklar, welche Funktionen die Komponenten zur Verfügung stellen und wie diese aufgerufen werden: Kann die Tabelle sortiert werden und wenn ja, wie? Welche Operation auf welchen Elementen führt welche Sortierreihenfolge aus? Welche Alternativen gibt es? Möglicherweise tauschen Komponenten untereinander Nachrichten aus, um gegenseitig ihr User Interface zu aktualisieren. Dieser Vorgang ist für den Benutzer unsichtbar und seine Auswirkungen wahrscheinlich irritierend. Warum aktualisiert sich die Karte, wenn die Interaktion im Balkendiagramm stattfindet? Sind die Komponenten Informationsvisalisierungen, stellen sich zusätzliche Fragen: Was bedeutet ein bestimmter Begriff, wie ist eine Metrik definiert und warum fällt sie so plötzlich ab?
 
 % für entwickler allein ist es nicht praktikabel, diese fragen anzugehen
 % hilfe = entwicklungsaufwand = zeit = geld
 % individuelle hilfe hat selbes problem wie komponenten: uneinheitlich, schwer zu verstehen
 % andererseits isses mega aufwändig, sich abzusprechen
 
-Jedoch ist es für einzelne Komponentenentwickler nicht praktikabel, dem Benutzer Antworten auf diese Fragen zu geben. Hilfefunktionen erfordern ein durchdachtes Konzept, da sie ansonsten nicht effektiv sind. Das erhöht den Entwicklungsaufwand für Komponenten, welchen die Entwickler stets zu minimieren suchen. Deswegen werden in den meisten Fällen keine Hilfefunktionen zu finden sein. Wenn ein Entwickler sich die Mühe macht und eine Hilfefunktion implementiert, dann ist diese vom selben Problem betroffen wie die Komponenten selbst: Die Darstellungen, Bezeichnungen und Interaktionen der Hilfe sind uneinheitlich und erfordern daher einen hohen mentalen Aufwand des Nutzers, um sie zu verstehen. Anwender sind bestrebt ihren mentalen Aufwand zu minimieren und werden die Hilfefunktionen daher selten nutzen. Auf der anderen Seite ist es für Komponentenentwickler sehr aufwändig, sich über einheitliche Richtlinien zur Gestaltung von Bildern, Interaktionen, Animationen und Bezeichnungen zu verständigen und zu einigen. Selbst wenn sie es schaffen würden, gäbe es keine Garantie, dass sich alle Entwickler vollständig daran halten. Aus diesen Gründen müssen die Hilfefunktionen auf Plattformebene umgesetzt werden.
+Ein einzelner Komponentenentwickler kann dem Benutzer jedoch nur sehr schwer Antworten auf diese Fragen geben. Hilfefunktionen erfordern ein durchdachtes Konzept, da sie ansonsten nicht effektiv sind. Das erhöht den Entwicklungsaufwand für Komponenten, welchen die Entwickler versuchen zu minimieren. Deswegen werden in den meisten Fällen keine Hilfefunktionen zu finden sein. Wenn ein Entwickler sich die Mühe macht und eine Hilfefunktion implementiert, dann ist diese vom selben Problem betroffen wie die Komponenten selbst: Die Darstellungen, Bezeichnungen und Interaktionen der Hilfe sind uneinheitlich und erfordern daher einen hohen mentalen Aufwand des Nutzers, um sie zu verstehen. Anwender sind bestrebt ihren mentalen Aufwand zu minimieren und werden die Hilfefunktionen daher selten nutzen. Auf der anderen Seite ist es für Komponentenentwickler sehr aufwändig, sich über einheitliche Richtlinien zur Gestaltung von Bildern, Interaktionen, Animationen und Bezeichnungen zu verständigen und zu einigen. Selbst wenn sie es schaffen würden, gäbe es keine Garantie, dass sich alle Entwickler vollständig daran halten. Aus diesen Gründen müssen die Hilfefunktionen auf Plattformebene umgesetzt werden.
 
 % ziel der arbeit: hilfesystem konzept, prototypisch umsetzen, aber quasi "real-world" prototyp. kein paper mockup.
 
-Ziel dieser Arbeit ist die Entwicklung eines Konzepts für ein semantik-gestütztes Hilfesystem für VizBoard, ein komposites Informationsvisualisierungssystem auf Basis der Mashupplattform CRUISe. Das Konzept soll die eben beschriebenen Probleme lösen, den Aufwand für Komponentenentwickler so gering wie möglich halten und auf alle Komponenten anwendbar sein. Das Konzept soll prototypisch umgesetzt und in CRUISe integriert werden.
+Ziel dieser Arbeit ist die Entwicklung eines Konzepts für ein semantik-gestütztes Hilfesystem für VizBoard, ein komposites Informationsvisualisierungssystem auf Basis der Mashup Plattform CRUISe. Das Konzept soll die eben beschriebenen Probleme lösen, den Aufwand für Komponentenentwickler so gering wie möglich halten und auf alle Komponenten anwendbar sein. Das Konzept soll prototypisch umgesetzt und in CRUISe integriert werden.
 
 % Welche teilziele? Erstmal gucken, was es so für infovis gibt, was man so über assistance wissen muss. und sonst so?
 
-Daraus leiten sich die folgenden Teilziele der Arbeit ab: Da die angebotenen Hilfestellungen auch verständlich sein müssen, soll zunächst erarbeitet werden, wie diese präsentiert werden sollen und worauf geachtet werden muss. Auch ist es wichtig zu wissen mit welchen verschiedenen Interaktionen und Präsentationen die Komponenten arbeiten könnten, weswegen ein Überblick über Informationsvisualisierungen geschaffen werden muss. Bestehende Hilfekonzepte in Mashups und Visualisierungstools müssen betrachtet und ihre Anwendbarkeit auf VizBoard untersucht werden. Diese Informationen sollen danach in das Konzept einfließen.
+Daraus leiten sich die folgenden Teilziele der Arbeit ab: Da die angebotenen Hilfestellungen auch verständlich sein müssen, soll zunächst erarbeitet werden, wie diese präsentiert werden sollen und worauf geachtet werden muss. Auch ist es wichtig zu wissen, mit welchen verschiedenen Interaktionen und Präsentationen die Komponenten arbeiten könnten, weswegen ein Überblick über Informationsvisualisierungen geschaffen werden muss. Bestehende Hilfekonzepte in Mashups und Visualisierungstools müssen betrachtet und ihre Anwendbarkeit auf VizBoard untersucht werden. Diese Informationen sollen danach in das Konzept einfließen, welches prototypisch implementiert und anhand einer kleinen Studie evaluiert wird.
 
 % ###################################################
 \section{Aufbau der Arbeit}
 \label{section:einleitung:aufbau}
 
 % Aufbau der Arbeit erklären, kommt zum Schluss
-Zunächst wird die Aufgabenstellung noch einmal an einem beispielhaften Szenario verdeutlicht und daraus Anforderungen an das Konzept abgeleitet. Da für die Entwicklung des Konzepts Kenntnisse der betroffenen Themengebiete nötig sind, werden in den Grundlagen CRUISe und VizBoard, semantische Daten, Informationsvisualisierungen und User Assistance eingeführt. Danach werden in den verwandten Arbeiten die Vor- und Nachteile bestehender Lösungen betrachtet und Schlussfolgerungen für das Konzept gezogen, welches in Kapitel~\ref{chapter:konzeption} vorgestellt wird. In Kapitel~\ref{chapter:implementierung} wird danach auf die Umsetzung des Prototypen eingegangen und dieser evaluiert (Kapitel~\ref{chapter:evaluation}). Daraufhin wird die Arbeit mit einer Zusammenfassung und einem Ausblick geschlossen (Kapitel~\ref{chapter:zusammenfassung}).
+Zunächst wird die Aufgabenstellung anhand eines beispielhaften Szenarios verdeutlicht und daraus Anforderungen an das Konzept abgeleitet. Da für die Entwicklung des Konzepts Kenntnisse der betroffenen Themengebiete nötig sind, werden in den Grundlagen CRUISe und VizBoard, semantische Daten, Informationsvisualisierungen und User Assistance eingeführt. Danach werden in den verwandten Arbeiten die Vor- und Nachteile bestehender Lösungen betrachtet und Schlussfolgerungen für das Konzept gezogen, welches in Kapitel~\ref{chapter:konzeption} vorgestellt wird. In Kapitel~\ref{chapter:implementierung} wird danach auf die Umsetzung des Prototypen eingegangen und dieser evaluiert (Kapitel~\ref{chapter:evaluation}). Daraufhin wird die Arbeit mit einer Zusammenfassung und einem Ausblick geschlossen (Kapitel~\ref{chapter:zusammenfassung}).
 
 % ###################################################
 \chapter{Stand der Forschung und Technik}
 \label{chapter:standderforschung}
 
-Der folgende Abschnitt besteht aus drei Teilen. Zuerst wird die Aufgabenstellung in einem Szenario verdeutlicht (Abschnitt~\ref{section:standderforschung:szenario}). Daraus werden Anforderungen an das Hilfesystem abgeleitet (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}) und danach die Grundlagen von semantischen Daten, Informationsvisualisierungen und Software Support erläutert (Abschnitt~\ref{section:standderforschung:grundlagen}).
+Der folgende Abschnitt besteht aus fünft Teilen. Zuerst wird die Aufgabenstellung in einem Szenario verdeutlicht (Abschnitt~\ref{section:standderforschung:szenario}). Daraus werden Anforderungen an das Hilfesystem abgeleitet (Abschnitt~\ref{section:standderforschung:anforderungsanalyse}) und danach die Grundlagen von semantischen Daten, Informationsvisualisierungen und User Assistance bzw. Sensemaking erläutert (Abschnitt~\ref{section:standderforschung:grundlagen}). Konzepte verwandter Arbeiten (Abschnitt~\ref{section:standderforschung:verwandte_arbeiten}) werden auf ihre Anwendbarkeit untersucht, bevor das Kapitel mit einer Zusammenfassung (Abschnitt~\ref{section:standderforschung:zusammenfassung}) beendet wird.
 
 % ###################################################
 \section{Szenario}
@@ -187,7 +187,7 @@ Wie in Kapitel~\ref{chapter:einleitung} erläutert, ist das komposite InfoVis-Sy
 % einführung der problemstellung
 Anna möchte für ihr Biologiestudium mehr über die geografische Verteilung verschiedener Genvarationen herausfinden. Dazu sucht sie im Internet nach einem Datensatz, welchen sie auch findet. 
 % unbekanntes format, kann es nirgends ordentlich öffen und selbst wenn es in excel ginge, wüsste sie nicht, welche charts sie am besten erstellen sollte
-Leider ist er in einem für Anna unbekannten Format abgespeichert, nämlich OWL. Sie versucht die Datei mit Microsoft Excel und SPSS zu öffnen, weil sie keine anderen Programme zur Datenverarbeitung kennt, aber scheitert. Anna stellt fest, dass nur ihr Texteditor OWL öffnen und vernünftig darstellen kann. Als sie die Datei überfliegt, kann sie den Inhalt zwar erahnen, aber es ist einfach zu viel Text um ihn vollständig zu lesen. Davon abgesehen sind geografische Breite und Länge als Zahlenkombination keine anschauliche Repräsentation von Orten, auch Verteilungen von Werten sind so schwer ersichtlich. Anna würde viel Zeit aufwenden müssen um sehr wenig des Inhalts zu verstehen. Aber selbst wenn sie die Datei in Excel hätte öffnen können, hätte sie nicht gewusst, mit welchen Diagrammen die vorhandenen Daten am Besten verstanden würden. Anna hört von einem Freund, dass VizBoard gut geeignet ist, um semantische Datensätze anzusehen und probiert es aus.
+Leider ist er in einem für Anna unbekannten Format abgespeichert, nämlich OWL. Sie versucht die Datei mit Microsoft Excel und SPSS zu öffnen, weil sie keine anderen Programme zur Datenverarbeitung kennt, aber scheitert. Anna stellt fest, dass nur ihr Texteditor OWL öffnen und vernünftig darstellen kann. Als sie die Datei überfliegt, kann sie den Inhalt zwar erahnen, aber es ist einfach zu viel Text um ihn vollständig zu lesen. Davon abgesehen sind beispielsweise geografische Breite und Länge als Zahlenkombination keine anschauliche Repräsentation von Orten. Anna würde viel Zeit aufwenden müssen um sehr wenig des Inhalts zu verstehen. Aber selbst wenn sie die Datei in Excel hätte öffnen können, hätte sie nicht gewusst, mit welchen Diagrammen die vorhandenen Daten am Besten verstanden würden. Anna hört von einem Freund, dass VizBoard gut geeignet ist, um semantische Datensätze anzusehen und probiert es aus.
 
 % Der Benutzer ist laut unserem Rollenmodell weder Developer noch Visualisierungsexperte, d.h. er hat erstmal Schwierigkeiten zu erfassen, was hier überhaupt abgeht
 
@@ -218,12 +218,12 @@ In der Tabelle findet sie auch eine Spalte \enquote{SNP}. Anna weiß zwar, dass 
 \section{Anforderungsanalyse}
 \label{section:standderforschung:anforderungsanalyse}
 
-Aus dem Szenario (Kapitel~\ref{section:standderforschung:szenario}) lassen sich nun verschiedene Anforderungen an ein Hilfesystem für komposite Informationsvisualisierungssysteme ableiten.
+Aus dem Szenario (Kapitel~\ref{section:standderforschung:szenario}) lassen sich nun verschiedene Anforderungen an ein Hilfesystem für komposite Informationsvisualisierungssysteme ableiten. Diese sind in funktionale und nicht-funktionale Anforderungen unterteilt (Abschnitte~\ref{section:standderforschung:anforderungsanalyse:funktionale_anforderungen} und~\ref{section:standderforschung:anforderungsanalyse:nichtfunktionale_anforderungen}).
 
 \subsection{Funktionale Anforderungen}
 \label{section:standderforschung:anforderungsanalyse:funktionale_anforderungen}
 
-Blabla
+Funktionale Anforderungen geben Funktionen an, die das Hilfesystem unterstützen bzw. dem Anwender zur Verfügung stellen muss. Aus dem Szenario ergeben sich folgende:
 
 \begin{itemize}
 	\item\textbf{Intro}: Das Hilfesystem soll einen kurzen Überblick über das InfoVis-System geben und Darstellungsform sowie Inhalt jeder Komponente kurz erläutern.
@@ -234,16 +234,10 @@ Blabla
 	\item\textbf{Kommentare}: Der Benutzer soll die Möglichkeit haben Daten zu kommentieren und Bereiche der Visualisierung zu markieren und mit ebenfalls mit einem Kommentar zu versehen, sodass auch auf fehlende Daten hingewiesen werden kann.
 \end{itemize}
 
-% was muss also ins related work?
-% wie der wissensaufnahmeprozess funktioniert, weil ich ja erklärungen gebe, speziell planerklärung
-% was es so für infovis gibt, weil ich mit denen arbeite
-% was es so für hilfekonzepte gibt, weil es das ist was ich tue
-% social web, weil kommentare implementiert werden
-
 \subsection{Nichtfunktionale Anforderungen}
 \label{section:standderforschung:anforderungsanalyse:nichtfunktionale_anforderungen}
 
-Bla bla
+Nichtfunktionale Anforderungen beschreiben Grenzen, innerhalb derer die Funktionalität des Systems arbeiten muss. Für das Hilfesystem erscheinen folgende sinnvoll:
 
 \begin{itemize}
 	\item\textbf{Korrektheit}: Eine gegebene Hilfestellung darf keine Fehlinformationen enthalten, weil sie sonst mehr verwirrt als hilft.
@@ -260,7 +254,7 @@ Bla bla
 \section{Grundlagen}
 \label{section:standderforschung:grundlagen}
 
-Hurrrrr derp herp
+Dieser Abschnitt beschäftigt sich mit den zur Konzeption nötigen Grundlagen. Diese beinhalten die CRUISe Plattform (Abschnitt~\ref{section:standderforschung:grundlagen:cruise_vizboard}), semantische Datensätze (Abschnitt~\ref{section:standderforschung:grundlagen:semantische_daten}), Informationsvisualisierung (Abschnitt~\ref{section:standderforschung:grundlagen:informationsvisualisierung}) und User Assistance (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}). 
 
 \subsection{CRUISe, EDYRA \& VizBoard}
 \label{section:standderforschung:grundlagen:cruise_vizboard}
@@ -296,13 +290,13 @@ Im DaRe werden Daten aus verschiedenen Quellen in einer semantischen Repräsenta
 \label{section:standderforschung:grundlagen:cruise_vizboard:komponentenbeschreibung}
 
 % komponentenbeschreibung 5.1.3
-Komponenten in CRUISe werden generisch und einheitlich durch propertys, Events und Operationen sowie Metainformationen beschrieben. propertys geben Auskunft über den Zustand einer Komponente, also beispielsweise Breite und Höhe oder die Sortierreihenfolge der Elemente. Events weisen andere Komponenten auf interne Zustandsänderungen hin, zum Beispiel wenn sich die Sortierreihenfolge geändert hat. Operationen sind Methoden einer Komponente, die durch Events ausgelöst werden, z.\,B. \texttt{reassignNumbers(order)}, um die Nummerierung der Pins in einer Karte anzupassen. Zu den Metainformationen gehören u.\,a. der Name einer Komponente oder der Preis.
+Komponenten in CRUISe werden generisch und einheitlich durch Propertys, Events und Operationen sowie Metainformationen beschrieben. Propertys geben Auskunft über den Zustand einer Komponente, also beispielsweise Breite und Höhe oder die Sortierreihenfolge der Elemente. Events weisen andere Komponenten auf interne Zustandsänderungen hin, zum Beispiel wenn sich die Sortierreihenfolge geändert hat. Operationen sind Methoden einer Komponente, die durch Events ausgelöst werden, z.\,B. \texttt{reassignNumbers(order)}, um die Nummerierung der Pins in einer Karte anzupassen. Zu den Metainformationen gehören u.\,a. der Name einer Komponente oder der Preis.
 
 \subsubsection{Kommunikationsmodell}
 \label{section:standderforschung:grundlagen:cruise_vizboard:kommunikationsmodell}
 
 % kommunikationsmodell 5.2.2
-Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. eine Komponente veröffentlicht ein Event, dessen Nachricht mit Hilfe des Publish/Subscribe Paradigma an alle Subscriber in diesem Kanal (Link) übertragen wird. Subscriber reagieren auf das Event, indem sie bestimmte Operationen ausführen. Die Übertragung der Nachrichten wird durch sogenannte Links umgesetzt, welche $n$ Events mit $m$ Operationen verbinden. Spezielle Links sind Backlinks, die eine Zweiwegekommunikation zwischen Komponenten ermöglichen und PropertyLinks, die propertys synchron halten. Ein Überblick über die verschiedenen Links ist in Abbildung~\ref{figure:cruise_links} zu sehen.
+Die Kommunikation von Komponenten untereinander ist ereignisgesteuert, d.\,h. eine Komponente veröffentlicht ein Event, dessen Nachricht mit Hilfe des Publish/ Subscribe Paradigma an alle Subscriber in diesem Kanal (Link) übertragen wird. Subscriber reagieren auf das Event, indem sie bestimmte Operationen ausführen. Die Übertragung der Nachrichten wird durch sogenannte Links umgesetzt, welche $n$ Events mit $m$ Operationen verbinden. Spezielle Links sind Backlinks, die eine Zweiwegekommunikation zwischen Komponenten ermöglichen und PropertyLinks, die Propertys synchron halten. Ein Überblick über die verschiedenen Links ist in Abbildung~\ref{figure:cruise_links} zu sehen.
 
 \begin{figure}[htbp]
 	\centering
@@ -324,13 +318,13 @@ Die Laufzeitumgebung (Mashup Runtime Environment, MRE) ist für die Ausführung 
 	\label{figure:cruise_mre}
 \end{figure}
 
-Der \textbf{Application Manager} initialisiert alle anderen Module und ist für die globale Fehlerbehandlung zuständig. Für den Lebenszyklus der einzelnen Komponenten ist der \textbf{Component Manager} zuständig. Die Integration übernimmt allerdings der \textbf{Integration Manager}. Im Mashup Modell definierte Sichten und Übergänge zwischen ihnen werden vom \textbf{Screenflow Manager} interpretiert. Gerendert werden die Komponenten aber vom \textbf{Layout Manager}. Nachrichten zwischen Komponenten der Anwendung und Modulen der MRE werden durch den \textbf{Event Broker} übermittelt. Sind die Parameter von Event und Operation syntaktisch nicht äquivalent, aber semantisch aufeinander abbildbar (z.\,B. zwei gleiche Konzepte aus verschiedenen Namespaces wie \texttt{dbpedia:city} und \texttt{geonames:city}), übernimmt dies der \textbf{Mediator}. Die dynamische Anpassung der Anwendung (z.\,B. von Komponenten, Layout und Kommunikationsmodell) wird gegebenenfalls durch den \textbf{Adaptation Manager} durchgeführt. Der \textbf{Context Service} \cite{Pietschmann2008} speichert Informationen über den Nutzungskontext, beispielsweise den Aufenthaltsort des Nutzers. Letztlich erlaubt das \textbf{Service Access} Modul Zugriff auf Web-Dienste und Ressourcen im Backend.
+Der \textbf{Application Manager} initialisiert alle anderen Module und ist für die globale Fehlerbehandlung zuständig. Für den Lebenszyklus der einzelnen Komponenten ist der \textbf{Component Manager} zuständig. Die Integration übernimmt allerdings der \textbf{Integration Manager}. Im Mashup Modell definierte Sichten und Übergänge zwischen ihnen werden vom \textbf{Screenflow Manager} interpretiert. Gerendert werden die Komponenten aber vom \textbf{Layout Manager}. Nachrichten zwischen Komponenten der Anwendung und Modulen der MRE werden durch den \textbf{Event Broker} übermittelt. Sind die Parameter von Event und Operation syntaktisch nicht äquivalent, aber semantisch aufeinander abbildbar (z.\,B. zwei gleiche Konzepte aus verschiedenen Namespaces wie \texttt{dbpedia:city} und \texttt{geonames:city}), übernimmt dies der \textbf{Mediator}. Die dynamische Anpassung der Anwendung (z.\,B. von Komponenten, Layout und Kommunikationsmodell) wird gegebenenfalls durch den \textbf{Adaptation Manager} durchgeführt. Der \textbf{Context Service} \cite{Pietschmann2008} speichert Informationen über den Nutzungskontext, beispielsweise den Aufenthaltsort des Nutzers. Letztlich erlaubt das \textbf{Service Access} Modul Zugriff auf Webdienste und Ressourcen im Backend.
 
 \subsubsection{VISO}
 \label{section:standderforschung:grundlagen:cruise_vizboard:viso}
 
 % viso
-In der Visualization Ontology (VISO) ist Visualisierungswissen gespeichert. Sie kann dabei helfen, zur Laufzeit die Domäne dargestellter Daten zu identifizieren oder notwendiges Wissen zur User Assistance (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) zur Komponentenbeschreibung hinzuzufügen. Unter anderem enthält sie folgende Konzepte und deren Verbindungen untereinander:
+In der Visualization Ontology (VISO) ist Visualisierungswissen gespeichert. Sie kann dabei helfen, zur Laufzeit die Domäne dargestellter Daten zu identifizieren oder zur User Assistance (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance}) notwendiges Wissen zur Komponentenbeschreibung hinzuzufügen. Unter anderem enthält sie folgende Konzepte und deren Verbindungen untereinander:
 
 \begin{itemize}
 	\item Visualisierte Daten (\texttt{viso:data})
@@ -379,8 +373,8 @@ Eine Ontologie ist \enquote{an explicit specification of a conceptualization} \c
 \begin{itemize}
 	\item Eine Klasse repräsentiert ein Konzept, eine Entität, ein Ding, beispielsweise ein \textit{Smartphone}.
 	\item Eine Instanz ist ein konkretes Objekt einer Klasse, zum Beispiel das \textit{iPhone mit der Seriennummer XYZ-ABC}.
-	\item Datatype propertys beschreiben eine Instanz näher, zum Beispiel die \textit{Seriennummer} oder \textit{Bildschirmgröße} des iPhones.
-	\item Objektattribute beschreiben Beziehungen zwischen Klassen und deren Instanzen, beispielsweise eine Person \textit{besitzt} ein Smartphone.
+	\item Datatype Propertys beschreiben eine Instanz näher, zum Beispiel die \textit{Seriennummer} oder \textit{Bildschirmgröße} des iPhones.
+	\item Object Propertys beschreiben Beziehungen zwischen Klassen und deren Instanzen, beispielsweise eine Person \textit{besitzt} ein Smartphone.
 	\item Außerdem existieren noch Axiome, Regeln, Funktionen und Einschränkungen, welche die Logik einer Ontologie beschreiben.
 \end{itemize}
 
@@ -395,15 +389,15 @@ Um eine Ontologie maschinenlesbar darzustellen, hat das World Wide Web Consortiu
 
 % rdf
 
-RDF ist von den genannten die Sprache mit den wenigsten Features, sie kann nur Tripel der Form (Subjekt, Prädikat, Objekt) darstellen. Die Elemente der Tripel sind Resourcen (durch URIs gekennzeichnet), welche Objekte beschreiben. So drückt der Tripel (\texttt{http://alice.de}, \texttt{http://foaf.de/knows}, \texttt{http://bob.de}) aus, dass das Element \enquote{Alice} mit \enquote{Bob} über die Relation \enquote{knows} verbunden ist. In RDF existieren noch keine Vererbung, Klassen, propertys oder Logik.
+RDF ist von den genannten die Sprache mit den wenigsten Features, sie kann nur Tripel der Form (Subjekt, Prädikat, Objekt) darstellen. Die Elemente der Tripel sind Resourcen (durch URIs gekennzeichnet), welche Objekte beschreiben. So drückt der Tripel (\texttt{http://alice.de}, \texttt{http://foaf.de/knows}, \texttt{http://bob.de}) aus, dass das Element \enquote{Alice} mit \enquote{Bob} über die Relation \enquote{knows} verbunden ist. In RDF existieren noch keine Vererbung, Klassen, Propertys oder Logik.
 
 % rdfs
 
-RDFS ist eine Erweiterung von RDF, nämlich um Klassen und Vererbung, Datatype propertys und Objektattribute. Allerdings ist RDFS damit noch immer nicht so mächtig wie OWL.
+RDFS ist eine Erweiterung von RDF, nämlich um Klassen und Vererbung, Datatype und Object Propertys. Allerdings ist RDFS damit noch immer nicht so mächtig wie OWL.
 
 % owl
 
-OWL erweitert wiederum RDFS um einige Konzepte. So können beispielsweise Axiome definiert werden, Attribute können als transitiv oder symmetrisch deklariert werden, es existieren Mengenoperationen und Kardinalitäten und Wertebereiche können eingeschränkt werden. OWL existiert in zwei Versionen, da in den meisten Fällen nicht der volle Funktionsumfang benötigt wird: OWL Lite ist für Anwendungen gedacht, die kaum mehr als eine Klassenhierarchie und Attribute benötigen. OWL-DL ist auf die Logik in der Ontologie fokussiert und wird vor allem für Reasoner eingesetzt, um selbstständig Schlüsse innerhalb des vorgegebenen formalen Systems ziehen zu können. OWL 2 wurde 2009 eingeführt, dieser Standard erweitert OWL zum Beispiel um asymmetrische, reflexive und disjunkte Attribute.
+OWL erweitert wiederum RDFS um einige Konzepte. So können beispielsweise Axiome definiert werden, Propertys können als transitiv oder symmetrisch deklariert werden, es existieren Mengenoperationen und Kardinalitäten und Wertebereiche können eingeschränkt werden. OWL existiert in zwei Versionen, da in den meisten Fällen nicht der volle Funktionsumfang benötigt wird: OWL Lite ist für Anwendungen gedacht, die kaum mehr als eine Klassenhierarchie und Attribute benötigen. OWL-DL ist auf die Logik in der Ontologie fokussiert und wird vor allem für Reasoner eingesetzt, um selbstständig Schlüsse innerhalb des vorgegebenen formalen Systems ziehen zu können. OWL 2 wurde 2009 eingeführt, dieser Standard erweitert OWL zum Beispiel um asymmetrische, reflexive und disjunkte Propertys.
 
 \subsection{Informationsvisualisierung}
 \label{section:standderforschung:grundlagen:informationsvisualisierung}
@@ -452,7 +446,7 @@ Im Folgenden wird ein Überblick über verschiedene Informationsvisualisierungen
 \subsubsection{Dargestellte Daten}
 \label{section:standderforschung:grundlagen:informationsvisualisierung:dargestellte_daten}
 
-\textbf{Eindimensionale Daten} sind beispielsweise Zeitreihen, also Folgen von Daten (1992, 1993, 1995...). Nach Keim können diese aber mit anderen Datenobjekten assoziiert sein. Beispiele für InfoVis eindimensionaler Daten wären demnach ein Index Chart (Abbildung~\ref{figure:index_chart}) oder eine einfache Timeline.
+\textbf{Eindimensionale Daten} sind beispielsweise Zeitreihen, also Folgen von Daten (z.\,B. 1992, 1993, 1995...). Nach Keim können diese aber mit anderen Datenobjekten assoziiert sein. Beispiele für InfoVis eindimensionaler Daten wären demnach ein Index Chart (Abbildung~\ref{figure:index_chart}) oder eine einfache Timeline.
 
 \begin{figure}[htbp]
    \centering
@@ -654,7 +648,7 @@ Besonders die Modalität der Assistance erscheint von großer Bedeutung für ein
 
 % effektivität von textuellen, akustischen, visuellen, gemischten erklärungen
 
-Da kein Medium (Film, Audio, Buch etc.) besser zum Lernen geeignet ist als ein anderes \cite{Clark1994, Kozma1994} und multimodale Erklärungen effektiver als monomodale sind \cite{Mayer2002}, stellt sich die Frage, wie Multimedia-Hilfe konstruiert werden soll. Dazu kann auf die kognitive Multimedia-Lerntheorie zurückgegriffen werden. Sie geht davon aus, dass Menschen Wissen grundsätzlich über zwei Kanäle (visuell und verbal) aufnehmen, entsprechende Repräsentationen bilden und mit vorhandenem Wissen verknüpfen (Abbildung~\ref{figure:kognitive_multimedia_lerntheorie}). Die beiden Aufnahmekanäle sind in ihrer Kapazität beschränkt. Müssen zu viele Informationen verarbeitet werden, kommt es zum \enquote{Cognitive Overload} und die Lernfähigkeit wird eingeschränkt. Daraus ergeben sich vier Richtlinien zur Kontruktion der Multimedia-Erklärungen:
+Da kein Medium (Film, Audio, Buch etc.) besser zum Lernen geeignet ist als ein anderes \cite{Clark1994, Kozma1994} und multimodale Erklärungen effektiver als monomodale sind \cite{Mayer2002}, stellt sich die Frage, wie Multimedia-Hilfe konstruiert werden soll. Dazu kann auf die kognitive Multimedia-Lerntheorie zurückgegriffen werden. Sie geht davon aus, dass Menschen grundsätzlich über zwei Kanäle (visuell und verbal) Wissen aufnehmen, entsprechende Repräsentationen bilden und mit vorhandenem Wissen verknüpfen (Abbildung~\ref{figure:kognitive_multimedia_lerntheorie}). Die beiden Aufnahmekanäle sind in ihrer Kapazität beschränkt. Müssen zu viele Informationen verarbeitet werden, kommt es zum \enquote{Cognitive Overload} und die Lernfähigkeit wird eingeschränkt. Daraus ergeben sich vier Richtlinien zur Kontruktion der Multimedia-Erklärungen:
 
 \begin{itemize}
 	\item \textbf{Gleichzeitigkeit}: Werden akustische und visuelle Mittel eingesetzt, so sollen sie gleichzeitig präsentiert werden \cite{Mayer1991}. So können Lernende ihre visuellen und verbalen Wissensrepräsentationen besser miteinander verknüpfen.
@@ -672,7 +666,7 @@ Da kein Medium (Film, Audio, Buch etc.) besser zum Lernen geeignet ist als ein a
 
 % user assistance möglichkeiten für jede modalität
 
-Wie kann User Assistance im visuellen bzw. verbalen Aufnahmekanal aussehen? Verbale Erklärungen können zur Laufzeit generiert werden \cite{Bauer2011, Gesell2012, Matheson2012}, sind jedoch tendenziell zu langatmig formuliert und enthalten viele Wiederholungen. Auf Grund der vorhin erwähnten Designprinzipien \enquote{Prägnanz} und \enquote{Keine Redundanz} sollte davon wahrscheinlich abgesehen und verbale Erklärungen handgeschrieben oder sehr kurz gehalten werden.
+Wie kann User Assistance im visuellen bzw. verbalen Aufnahmekanal aussehen? Verbale Erklärungen können zur Laufzeit generiert werden \cite{Bauer2011, Gesell2012, Matheson2012}, sind jedoch tendenziell zu langatmig formuliert und enthalten viele Wiederholungen. Auf Grund der vorhin erwähnten Designprinzipien \enquote{Prägnanz} und \enquote{Keine Redundanz} sollte davon wahrscheinlich abgesehen und verbale Erklärungen handgeschrieben oder, falls automatisch generiert, zumindest sehr kurz gehalten werden.
 
 Die naheliegendste Möglichkeit für visuelle User Assistance sind Bilder. Illustrationen/Schemata sind in der Tat hilfreich, solange sowohl die Bestandteile des Systems (z.\,B. eine Luftpumpe) als auch die einzelnen Schritte des Prozesses (z.\,B. Luft einziehen, Luft auspumpen) dargestellt werden \cite{Mayer1990}. Auch Comics sind gut geeignet um Sachverhalte zu erklären (Beispiele dafür sind u.\,a. \cite{McCloud1994, McCloud2008}) und eine ansprechende Variante für User Assistance \cite{Webb2012}.
 
@@ -682,7 +676,7 @@ Animationen im Sinne von kurzen Videos mit abstrahiertem Inhalt können ebenfall
 \label{section:standderforschung:grundlagen:user_assistance:sensemaking}
 
 % was ist der unterschied zwischen learning und sensemaking?
-Im vorhergehenden Abschnitt wurde der Prozess der Wissensvermittlung betrachtet. Um Wissen dauerhaft aufzunehmen, müssen Lernende den Inhalt \emph{verstehen}. Der Begriff \enquote{Understanding} (gleichbedeutend mit Sensemaking) wird angewandt, wenn das Gehirn mehr Elemente des Inhalts (z.\,B. Variablen einer Gleichung) verarbeiten muss als ins Arbeitsgedächtnis passen \cite{Sweller1998}. \emph{Verstanden} hat der Lernende dann, wenn diese Elemente zu einem sogenannten Schema (mentalen Modell) verarbeitet wurden und als ein einziges Element im Arbeitsgedächtnis gehalten werden können (z\,B. eine komplexe Zahl statt drei Variablen $a$, $b$ und $i$).
+Im vorhergehenden Abschnitt wurde der Prozess der Wissensvermittlung betrachtet. Um Wissen dauerhaft aufzunehmen, müssen Lernende den Inhalt \emph{verstehen}. Der Begriff \enquote{Understanding} (gleichbedeutend mit Sensemaking) wird angewandt, wenn das Gehirn mehr Elemente des Inhalts (z.\,B. Variablen einer Gleichung) verarbeiten muss als ins Arbeitsgedächtnis passen \cite{Sweller1998}. \emph{Verstanden} hat der Lernende dann, wenn diese Elemente zu einem sogenannten Schema (mentalen Modell) verarbeitet wurden und als ein einziges Element im Arbeitsgedächtnis gehalten werden können (z.\,B. eine komplexe Zahl statt drei Variablen $a$, $b$ und $i$).
 
 % wie funktioniert der prozess der wissensaneignung?
 
@@ -713,7 +707,7 @@ A mental model is a functional analogue representation to an external interactiv
 \section{Verwandte Arbeiten}
 \label{section:standderforschung:verwandte_arbeiten}
 
-Im Folgenden werden verwandte Arbeiten behandelt. Zuerst befasst sich Abschnitt~\ref{section:standderforschung:verwandte_arbeiten:mashups} mit Mashup Plattformen. Darauf folgen Visualisierungstools und Teilaspekte davon, die das Sensemaking der Nutzer verbessern sollen. Danach werden verwandte Arbeiten zu User Assistance Konzepten in Mashups und im Allgemeinen vorgestellt und zuletzt eine Zusammenfassung gegeben.
+Im Folgenden werden verwandte Arbeiten behandelt. Zuerst befasst sich Abschnitt \ref{section:standderforschung:verwandte_arbeiten:mashups} mit Mashup Plattformen. Darauf folgen Visualisierungstools und Teilaspekte davon, die das Sensemaking der Nutzer verbessern sollen. Danach werden verwandte Arbeiten zu User Assistance Konzepten in Mashups und im Allgemeinen vorgestellt und zuletzt eine Zusammenfassung gegeben.
 
 \subsection{Webbasierte Mashup Plattformen}
 \label{section:standderforschung:verwandte_arbeiten:mashups}
@@ -724,7 +718,7 @@ In diesem Abschnitt werden Mashup Plattformen vorgestellt, mit denen Endnutzer D
 % gut: intro und kommunikation
 % schlecht: es können kaputte kompositionen erstellt werden (iso norm aussagekräftige fehlermeldungen)
 
-Yahoo Pipes\footnote{\url{http://pipes.yahoo.com/pipes/}} ist eine Mashup Plattform von Yahoo, bei dem der Benutzer verschiedene Webservices mit Hilfe von Operatoren kombiniert, indem er sie interaktiv verdrahtet.
+Yahoo Pipes\footnote{\url{http://pipes.yahoo.com/pipes/}} ist eine Mashup Plattform von Yahoo, wo der Benutzer verschiedene Webservices mit Hilfe von Operatoren kombinieren kann, indem er sie interaktiv verdrahtet.
 Pipes erfüllt die funktionale Anforderung \emph{Intro}, da zwei Tutorialvideos angeboten werden und eine kurze Beschreibung zu jedem Element inklusive Link zu einem Beispiel und mehr Informationen vorhanden ist. Die \emph{Kommunikation} ist durch die Drähte sichtbar, allerdings ist die Richtung des Datenflusses nicht sofort eindeutig. Pipes erleichtert die \emph{Bedienung} indem während der Drag \& Drop Operation mögliche Anknüpfungspunkte für Drähte blau eingefärbt werden.
 Allerdings erschwert es die Bedienung gleichermaßen, da kaputte Kompositionen erstellt werden können und Pipes keine aussagekräftigen Fehlermeldungen ausgibt.
 Für die Arbeit mit VizBoard ist es ebenfalls wichtig, die Kommunikation zwischen Komponenten nachvollziehen zu können. Da bei VizBoard der Datenfluss in beide Richtungen fließen kann, sollte darauf geachtet werden, dessen Richtung klar ersichtlich ist.
@@ -733,7 +727,7 @@ Für die Arbeit mit VizBoard ist es ebenfalls wichtig, die Kommunikation zwische
 % gut: nutzerstudie
 % schlecht: 
 
-DashMash \cite{Cappiello2011} ist eine Mashup Plattform, die besonders auf Endnutzer ausgerichtet ist. Dazu setzt es auf das WYSIWYG\footnote{What you see is what you get.} Prinzip und abstrahiert von Mashup-Interna wie dem Binding zwischen Datenquellen und Komponenten. Es ist nicht möglich Erkenntnisse aus den Daten mit anderen zu teilen oder selbst Anmerkungen anderer zu lesen. Obwohl keine sichtbaren\footnote{Ein Demo-Video ist unter \url{http://home.dei.polimi.it/cappiell/demo/DemoDashMash.mov} verfügbar.} Hilfestellungen bezüglich \emph{Intro}, \emph{Bedienung} oder \emph{Kommunikation} verfügbar sind, fiel die Nutzerstudie mit 35~Teilnehmern durchweg positiv aus. Der Grund dafür ist wahrscheinlich, dass die Erklärungen am Anfang der Studie so gewählt wurden, dass die Testpersonen ein \enquote{korrektes} mentales Modell von DashMash hatten. Für die Hilfe in VizBoard sollte deswegen auch soweit möglich Technisches abstrahiert oder vor dem Benutzer versteckt werden. Des weiteren sollten Erklärungen dem mentalen Modell des Benutzers entsprechen.
+DashMash \cite{Cappiello2011} ist eine Mashup Plattform, die besonders auf Endnutzer ausgerichtet ist. Dazu setzt sie auf das WYSIWYG\footnote{What you see is what you get.} Prinzip und abstrahiert von Mashup-Interna wie dem Binding zwischen Datenquellen und Komponenten. Es ist nicht möglich, Erkenntnisse aus den Daten mit anderen zu teilen oder selbst Anmerkungen anderer zu lesen. Obwohl keine sichtbaren\footnote{Ein Demo-Video ist unter \url{http://home.dei.polimi.it/cappiell/demo/DemoDashMash.mov} verfügbar.} Hilfestellungen bezüglich \emph{Intro}, \emph{Bedienung} oder \emph{Kommunikation} verfügbar sind, fiel die Nutzerstudie mit 35~Teilnehmern durchweg positiv aus. Der Grund dafür ist wahrscheinlich, dass die Erklärungen am Anfang der Studie so gewählt wurden, dass die Testpersonen ein \enquote{korrektes} mentales Modell von DashMash hatten. Für die Hilfe in VizBoard sollte deswegen auch soweit möglich Technisches abstrahiert oder vor dem Benutzer versteckt werden. Des weiteren sollten Erklärungen dem mentalen Modell des Benutzers entsprechen.
 
 % omelette auch (weil datenquellen in komponenten drin)
 % gut: einfache interaktion (widget hinzufügen und das wars
@@ -868,7 +862,7 @@ VizBoard ist ein Mashup von Informationsvisualisierungen, weswegen häufige Hind
 % gut: es geht
 % schlecht: sie sind langatmig
 
-Erklärungen können nicht nur Bilder oder Videos sein, sondern auch texbasiert. Einige Arbeiten, wie z.\,B. \cite{Gesell2012, Matheson2012}, befassen sich mit der Generierung von textuellen Erklärungen. In beiden Arbeiten ist eine formale Repräsentation des Erklärungsgegenstands notwendig, beispielsweise als Baum von Vorbedingungen und \enquote{ist Teil von} Relationen oder einer Ontologie. In der Evaluation von Matheson et al. merkten einige Probanden an, dass deren Erklärungen zu langatmig seien, was gegenläufig zur Anforderung \emph{Verständlichkeit} ist.
+Erklärungen können nicht nur Bilder oder Videos sein, sondern auch textbasiert. Einige Arbeiten, wie z.\,B. \cite{Gesell2012, Matheson2012}, befassen sich mit der Generierung von textuellen Erklärungen. In beiden Arbeiten ist eine formale Repräsentation des Erklärungsgegenstands notwendig, beispielsweise als Baum von Vorbedingungen und \enquote{ist Teil von} Relationen oder einer Ontologie. In der Evaluation von Matheson et al. merkten einige Probanden an, dass deren Erklärungen zu langatmig seien, was gegenläufig zur Anforderung \emph{Verständlichkeit} ist.
 
 % erklärung mit screenshots
 % gut: visuell
@@ -904,7 +898,7 @@ Mit Designrichtlinien im weitesten Sinne beschäftigten sich auch Kuttal et al. 
 % gut: verständlich, einfach zu nutzen
 % schlecht: 
 
-Um die Undo-Funktionalität in Tableau zu verbessern entwickelten Heer et al. \cite{Heer2008} eine grafische History für Tableau. Sie zeigt Screenshots des Visualisierungszustands, die chronologisch wie eine Timeline angeordnet sind. Ein Klick auf einen Screenshot setzt die Visualisierung in den angezeigten Zustand zurück. Dieses Konzept könnte zur \emph{Verständlichkeit} von VizBoard beitragen, wenn es umsetzbar ist.
+Um die Undo-Funktionalität in Tableau zu verbessern, entwickelten Heer et al. \cite{Heer2008} eine grafische History für Tableau. Sie zeigt Screenshots des Visualisierungszustands, die chronologisch wie eine Timeline angeordnet sind. Ein Klick auf einen Screenshot setzt die Visualisierung in den angezeigten Zustand zurück. Dieses Konzept könnte zur \emph{Verständlichkeit} von VizBoard beitragen, wenn es umsetzbar ist.
 
 % lessons learned
 
@@ -929,7 +923,7 @@ Auf Basis des Szenarios wurde eine Anforderungsanalyse durchgeführt. Funktional
 
 % grundlagen: cruise, semantische daten, infovis, user assistance
 
-Danach wurde in den Grundlagen ein Überblick über die CRUISe Mashup Plattform gegeben, auf der EDYRA und VizBoard aufbauen. Es wurde aufgeführt, dass propertys den Zustand einer Komponente vollständig beschreiben und Komponenten über Links zwischen Events und Operationen miteinander Nachrichten austauschen. Darauf folge eine kurze Einführung in semantische Daten. Dort wurden die wichtigsten Konzepte (Klassen, Instanzen und propertys) erläutert sowie gängige Beschreibungssprachen (RDF, RDFS, OWL) aufgezeigt. Im Abschnitt über Informationsvisualisierungen wurde der Begriff als \enquote{the use of computer-supported, interactive, visual representations of abstract data to amplify cognition} definiert. Mit Hilfe einer Klassifikation anhand der dargestellten Daten, Visualisierungs- und Interaktionstechnik einer InfoVis konnte ein Überblick über selbige gegeben werden. Zuletzt wurden in diesem Abschnitt die Begriffe \enquote{User Assistance} und \enquote{Sensemaking} erklärt. User Assistance ist eine Hilfestellung für den Benutzer, der sein Ziel aber auch ohne sie erfüllen kann. Sensemaking meint den menschlichen Verständnisprozess. Es wurde beispielsweise festgestellt, dass das Medium selbst keinen Einfluss auf die Lernfähigkeit einer Person hat und möglichst gleichzeitig multimodal erklärt werden sollte. In der Domäne InfoVis müssen besonders das Verhalten und die Struktur einer Visualisierung erklärt werden, um das mentale Modell des Benutzers anzusprechen.
+Danach wurde in den Grundlagen ein Überblick über die CRUISe Mashup Plattform gegeben, auf der EDYRA und VizBoard aufbauen. Es wurde aufgeführt, dass Propertys den Zustand einer Komponente vollständig beschreiben und Komponenten über Links zwischen Events und Operationen miteinander Nachrichten austauschen. Darauf folge eine kurze Einführung in semantische Daten. Dort wurden die wichtigsten Konzepte (Klassen, Instanzen und Propertys) erläutert sowie gängige Beschreibungssprachen (RDF, RDFS, OWL) aufgezeigt. Im Abschnitt über Informationsvisualisierungen wurde der Begriff als \enquote{the use of computer-supported, interactive, visual representations of abstract data to amplify cognition} definiert. Mit Hilfe einer Klassifikation anhand der dargestellten Daten, Visualisierungs- und Interaktionstechnik einer InfoVis konnte ein Überblick über selbige gegeben werden. Zuletzt wurden in diesem Abschnitt die Begriffe \enquote{User Assistance} und \enquote{Sensemaking} erklärt. User Assistance ist eine Hilfestellung für den Benutzer, der sein Ziel aber auch ohne sie erfüllen kann. Sensemaking meint den menschlichen Verständnisprozess. Es wurde beispielsweise festgestellt, dass das Medium selbst keinen Einfluss auf die Lernfähigkeit einer Person hat und möglichst gleichzeitig multimodal erklärt werden sollte. In der Domäne InfoVis müssen besonders das Verhalten und die Struktur einer Visualisierung erklärt werden, um das mentale Modell des Benutzers anzusprechen.
 
 % verwandte arbeiten: mashups, visualisierungstools, user assistance
 
@@ -1142,7 +1136,7 @@ Nach Grammel \cite{Grammel2012} können Links zu Tutorials und Erklärungen hilf
 Grammel schreibt ebenfalls, dass InfoVis-Novizen die Vor- und Nachteile von verschiedenen Visualisierungstypen und visuellen Mappings lernen sollten \cite[S. 125]{Grammel2012}. Es wäre möglich, allgemeine Eigenschaften von grafischen Repräsentationen in der VISO zu beschreiben. Diese sind abhängig von den dargestellten Daten und den visuellen Mappings. Die Eigenschaft \enquote{Übersichtlichkeit} ist bei einem Balkendiagramm mit drei Balken gegeben (Vorteil), bei 15 Balken nicht (Nachteil). Ähnlich verhält es sich mit der Farbkodierung: Ein Mensch kann bis zu acht Farben in einer Visualisierung gut unterscheiden (Vorteil) \cite{Mazza2009}, aber mehr nicht (Nachteil). Das Hilfesystem müsste dem Benutzer demnach sowohl die unterschiedlichen Vor- und Nachteile als auch deren Bedingungen präsentieren, was sehr viel Information für eine Einführung darstellt. Im schlechtesten Fall kann der Benutzer auch keinen Bezug zur konkreten Visualisierung herstellen, weil keine der aufgeführten Bedingungen erfüllt ist. Er kann die aufgestellte Hypothese nicht am Beispiel überprüfen, was laut Grundlagen schlecht für seinen Verständnisprozess ist (Abschnitt~\ref{section:standderforschung:grundlagen:user_assistance:sensemaking}). Hinzu kommt, dass diese Erklärung einen Schritt früher im VizBoard Workflow konzeptionell mehr Sinn macht. Dort wählt der Benutzer -- von VizBoard unterstützt -- die visuellen Mappings aus.
 
 Aus den eben aufgeführten Gründen zeigt das Intro für eine Komponente folgende Informationen:
-
+\pagebreak
 \begin{enumerate}
 	\item Art der Visualisierung
 	\item Beschreibung
@@ -1163,7 +1157,7 @@ Nachdem der Benutzer bei der Visualisierung angekommen ist und die Komponenten s
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/konzeption-ueberblick.png}
+   \includegraphics[width=\textwidth]{images/konzeption-ueberblick.png}
    \caption{UI Mockup: Intro}
    \label{figure:ueberblick}
 \end{figure}
@@ -1401,7 +1395,7 @@ Im kompositen Infomationsvisualisierungssystem VizBoard kommunizieren Komponente
 
 \begin{enumerate}
 	\item die Kommunikation zwischen Komponenten sichtbar gemacht wird und
-	\item die Abhängigkeiten zwischen Komponenten wie bei der Bedienung (Abschnitt~\ref{section:konzeption:bedienung}) mit Comics erklärt werden.
+	\item die Abhängigkeiten zwischen Komponenten mit Comics erklärt werden, genau wie bei der Bedienung (Ab\-schnitt~\ref{section:konzeption:bedienung}).
 \end{enumerate}
 
 \subsection{User Interface und Interaktion}
@@ -1674,6 +1668,8 @@ Annotationen eines Kommentars müssen durch einen Klick auf den Button \enquote{
    \caption{UI Mockup: Ausgewählter Kommentar mit referenziertem Bereich und Datenpunkten}
    \label{figure:kommentare-step3a}
 \end{figure}
+
+\pagebreak
 
 \subsection{Backend}
 \label{section:konzeption:kommentare:backend}
@@ -2190,7 +2186,7 @@ Nun stellt sich noch die Frage, warum gerade Backbone.js und nicht eines der vie
 Marionette.js erweitert Backbone um verschiedene Konzepte (z.\,B. Regionen und unterschiedliche Views für Items, Collections und Bäume) und automatisiert oft vorkommende Anweisungen, wie zum Beispiel einen View zu rendern und in den DOM einzufügen. Der Code ist dadurch kürzer, lesbarer und einfacher zu warten.
 
 % und was hat d3 hier zu suchen?
-D3 wird hauptsächlich beim Hinzufügen von Annotationen eingesetzt, wo ein SVG-Element über die Komponente gelegt wird, in welchem der Benutzer seine Annotationen zeichnen kann. Außerdem kann D3 im Gegensatz zu jQuery sowohl mit HTML- als auch mit SVG-Elementen umgehen. Einige Methoden, die im Frontend gebraucht werden, unterstützt jQuery nicht für DOM Elemente mit SVG Namespace (Beispiele dafür sind \texttt{.width()}, \texttt{.addClass()} oder jQuery UIs \texttt{.position()}). Zwar existiert ein SVG Plugin\footnote{\url{https://github.com/kbwood/svg}} für jQuery, dieses weist aber eine unnötig komplizierte API auf. Deswegen wird für die Größenbestimmung oder Positionierung von SVG Elementen D3 verwendet, da es ohnehin schon eingesetzt wird.
+D3 wird hauptsächlich beim Hinzufügen von Annotationen eingesetzt, wo ein SVG Element über die Komponente gelegt wird, in welchem der Benutzer seine Annotationen zeichnen kann. Außerdem kann D3 im Gegensatz zu jQuery sowohl mit HTML als auch mit SVG Elementen umgehen. Einige Methoden, die im Frontend gebraucht werden, unterstützt jQuery nicht für DOM Elemente mit SVG Namespace (Beispiele dafür sind \texttt{.width()}, \texttt{.addClass()} oder jQuery UIs \texttt{.position()}). Zwar existiert ein SVG Plugin\footnote{\url{https://github.com/kbwood/svg}} für jQuery, dieses weist aber eine unnötig komplizierte API auf. Deswegen wird für die Größenbestimmung oder Positionierung von SVG Elementen D3 verwendet, da es ohnehin schon eingesetzt wird.
 
 \subsection{Clientseitige Architektur}
 \label{section:implementierung:frontend:architektur}
@@ -2199,7 +2195,7 @@ Das Assistance Subsystem arbeitet unabhängig vom Rest der Thin Server Runtime (
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/implementierung-cruise-architektur.png}
+   \includegraphics[width=0.85\textwidth]{images/implementierung-cruise-architektur.png}
    \caption{Architektur von CRUISe mit Assistance}
    \label{figure:cruise-architektur-assistance}
 \end{figure}
@@ -2261,11 +2257,11 @@ Wie in der Konzeption (Abschnitt~\ref{chapter:konzeption}) erläutert, muss die 
    \label{figure:coordinatesToData}
 \end{figure}
 
-Außerdem wurde das Markup einer Komponente entsprechend erweitert. Die Visualisierung in der Komponente wird mit einem Datenattribut \texttt{data-vizboard-visualization} gekennzeichnet. Das Visualisierungselement muss genau so groß sein wie der dargestellte Datenbereich und die Repräsentationen der Datenpunkte enthalten. Abbildung~\ref{figure:ui-visualization} zeigt ein Beispiel. Damit das Hilfesystem die Repräsentationen der Datenpunkte finden kann, wird deren kodierte URI mit dem RDFa Attribut \texttt{resource} annotiert (siehe Listing~\ref{code:visualization-markup}).
+Außerdem wurde das Markup einer Komponente entsprechend erweitert. Die Visualisierung in der Komponente wird mit einem Datenattribut \texttt{data\--vizboard\-visualization} gekennzeichnet. Das Visualisierungselement muss genau so groß sein wie der dargestellte Datenbereich und die Repräsentationen der Datenpunkte enthalten. Abbildung~\ref{figure:ui-visualization} zeigt ein Beispiel. Damit das Hilfesystem die Repräsentationen der Datenpunkte finden kann, wird deren kodierte URI mit dem RDFa Attribut \texttt{resource} annotiert (siehe Listing~\ref{code:visualization-markup}).
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.5\textwidth]{images/implementierung-ui-visualization.png}
+   \includegraphics[width=0.3\textwidth]{images/implementierung-ui-visualization.png}
    \caption{Visualisierungselement in einem Liniendiagramm}
    \label{figure:ui-visualization}
 \end{figure}
@@ -2288,7 +2284,7 @@ Im Folgenden wird auf die Implementierung der Kommentare (Abschnitt~\ref{section
 
 \subsubsection{Kommentar schreiben}
 
-Kommentare werden über Buttons in der Titelleiste einer Komponente aufgerufen. Unterstützt eine Komponente keine Kommentare, sind die Buttons inaktiv. In Abbildung~\ref{figure:ui-write-comment} ist zu sehen, wie ein Kommentar verfasst wird. Um den Bereich um die Visualisierung herum abzudunkeln, wird ein SVG-Element in die Komponente eingefügt. Es enthält eine Maske\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Clipping_and_masking}}, welche die Visualisierung freistellt.
+Kommentare werden über Buttons in der Titelleiste einer Komponente aufgerufen. Unterstützt eine Komponente keine Kommentare, sind die Buttons inaktiv. In Abbildung~\ref{figure:ui-write-comment} ist zu sehen, wie ein Kommentar verfasst wird. Um den Bereich um die Visualisierung herum abzudunkeln, wird ein SVG Element in die Komponente eingefügt. Es enthält eine Maske\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Clipping_and_masking}}, welche die Visualisierung freistellt.
 
 \begin{figure}[htbp]
    \centering
@@ -2354,6 +2350,8 @@ Dafür wird die Komponente zunächst abgedunkelt und für Aktionen notwendige UI
    \label{figure:ui-howto-step1}
 \end{figure}
 
+\pagebreak
+
 Der Algorithmus, um alle eine Aktion auslösenden UI Elemente in ein anderes \texttt{div} zu kopieren, ist wie folgt: 
 
 \begin{enumerate}
@@ -2361,7 +2359,7 @@ Der Algorithmus, um alle eine Aktion auslösenden UI Elemente in ein anderes \te
 	\item Danach wird ein weiteres \texttt{div} erstellt, die \enquote{Rootcopy}. Diese hat dieselbe Größe und Position wie die Komponente.
 	\item In die Rootcopy wird wiederum ein \texttt{svg} Element eingefügt, welches sie ausfüllt. Das hat den Grund, dass aktionsauslösende UI Elemente auch SVG \texttt{rect}s oder ähnliches sein können. Sie werden vom Browser nur gerendert, wenn sie sich auch in einem \texttt{svg} befinden.
 	\item Damit Kopien in der Rootcopy möglichst gleich aussehen wie die Originale, werden in der Komponente gesetzte CSS Styles auf die Rootcopy übertragen.
-	\item Danach werden alle von einem CSS Selektor getroffenen Elemente entweder in die Rootcopy selbst oder ins \texttt{svg} kopiert und gleich wie die Originale positioniert. Sofern sich SVG-Elemente nicht in transformierten Gruppen befinden, ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt.
+	\item Danach werden alle von einem CSS Selektor getroffenen Elemente entweder in die Rootcopy selbst oder ins \texttt{svg} kopiert und gleich wie die Originale positioniert. Sofern sich SVG Elemente nicht in transformierten Gruppen befinden, ist das durch die Kopie des DOM Elements schon geschehen, da ihr visueller Zustand im Markup gespeichert ist (z.\,B. in Form von \texttt{x}, \texttt{transform} oder \texttt{width} Attributen). Bei HTML Elementen werden die CSS Klassen mitkopiert. Das CSS kann allerdings Regeln enthalten, die von der Struktur des Markups abhängig sind, z.\,B. \texttt{position: relative; width: 80\%;}. Da diese in der Rootcopy nicht dasselbe Ergebnis liefern, werden Breite und Höhe noch einmal explizit gesetzt.
 	\item Bei jedem durch Selektor $s_i$ getroffenen Element und dessen Kopie wird außerdem ein Attribut \texttt{data-vizboard-copy} auf \texttt{copy<i>} gesetzt. Der Grund dafür ist die Verbindung zwischen Aktionen und UI Elementen: Bei \texttt{mouseover} über einer Aktion in der Liste werden alle dafür notwendigen UI Elemente hervorgehoben. Um diese zu finden, kann der Selektor nicht in der Rootcopy ausgeführt werden: Selektoren wie z.\,B. \texttt{:nth-child(odd)} würden falsche Ergebnisse liefern. Aus diesem Grund werden die Selektoren bei \texttt{mouseover} in der Komponente ausgeführt und die Kopien der Elemente über den Wert von \texttt{data-vizboard-copy} gefunden (siehe Abbildung~\ref{figure:rootcopy}).
 	\item Die aktionsauslösenden UI Elemente müssen nicht leer sein, weswegen dort gesetzte Styles auch bei Kindknoten sichtbar sein könnten, z.\,B. wenn eine CSS Property auf \texttt{inherit} gesetzt ist. Aus diesem Grund werden bestimmte CSS propertys (\texttt{border}, \texttt{color}, \texttt{background}) in den Kopien auf die Werte der Originale fixiert.
 	\item Aktionsauslösende UI Elemente können andere aktionsauslösende UI Elemente enthalten. Das wäre beispielsweise der Fall, wenn das anonyme \texttt{div} in Abbildung~\ref{figure:rootcopy}, welches die \texttt{div.bar} enthält, eine dritte Aktion auslösen würde. Damit diese nicht mehrfach in der Rootcopy vorhanden sind, wird für jedes Original einer Kopie überprüft, ob es Knoten mit dem Attribut \texttt{data-vizboard-copy} enthält. Falls ja, wird ein CSS Selektor aus dem Knoten generiert und alle davon getroffenen Elemente in der Kopie gelöscht.
@@ -2413,7 +2411,7 @@ Im Folgenden wird auf die Hilfe zur Kommunikation zwischen Komponenten (Abschnit
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.75\textwidth]{images/implementierung-ui-capview.png}
+   \includegraphics[width=\textwidth]{images/implementierung-ui-capview.png}
    \caption{Erweiterter CapView}
    \label{figure:ui-capview}
 \end{figure}
@@ -2422,7 +2420,7 @@ Dazu wird das schwarze Fragezeichen in der Methode \texttt{drawPath} im Connecti
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[width=\textwidth]{images/implementierung-ui-communication.png}
+   \includegraphics[width=0.75\textwidth]{images/implementierung-ui-communication.png}
    \caption{Assistance zur Kommunikation}
    \label{figure:ui-communication}
 \end{figure}
@@ -2582,7 +2580,7 @@ Falls die Capability nicht vom Benutzer (UI Capability), sondern von der Kompone
 </operation>
 \end{lstlisting}
 
-Damit die Komponente während der Hilfegenerierung auch tatsächlich Daten anzeigt, muss der Komponentenentwickler in der SMCDL eine URL zu Testdaten angeben (Listing~\ref{code:smcdl-testdata}). Dafür wurde ein weiteres Element \texttt{testdata} hinzugefügt. Es kann entweder eine \texttt{url} zu Testdaten enthalten, welche vor der Hilfegenerierung abgerufen werden, oder aus einer Datensatz ID des DaRe (\texttt{darefileid}) und einer SPARQL Query (\texttt{mapping}) bestehen, welche die zu ladenden Daten definieren.
+Damit die Komponente während der Hilfegenerierung auch tatsächlich Daten anzeigt, muss der Komponentenentwickler in der SMCDL eine URL zu Testdaten angeben (Listing~\ref{code:smcdl-testdata}). Dafür wurde ein weiteres Element \texttt{testdata} hinzugefügt. Im Gegensatz zu \texttt{exampledata} sind sie nicht Beispieldaten einer Eventnachricht, sondern ein ganzer Datensatz, der in die Komponente geladen wird. Es kann entweder eine \texttt{url} zu Testdaten enthalten, welche vor der Hilfegenerierung abgerufen werden, oder aus einer Datensatz ID des DaRe (\texttt{darefileid}) und einer SPARQL Query (\texttt{mapping}) bestehen, welche die zu ladenden Daten definieren.
 
 \lstset{language=XML}
 \begin{lstlisting}[ caption={SMCDL für Testdaten}, label=code:smcdl-testdata ]
@@ -2591,7 +2589,7 @@ Damit die Komponente während der Hilfegenerierung auch tatsächlich Daten anzei
 </testdata>
 \end{lstlisting}
 
-Zur Laufzeit und während der Hilfegenerierung muss das Hilfesystem Komponenten in zuvor gespeicherte Zustände zurücksetzen können. Dazu wird das Memento verwendet, welches eine Menge von Propertys ist, deren Werte gespeichert werden müssen. Um anzugeben, welche Propertys einer Komponente Teil ihres Mementos sind, kann der Entwickler diese mit einem Attribut \texttt{isMemento} versehen (Listing~\ref{code:smcdl-memento}). Sie unterscheiden sich von \texttt{required} Propertys, die zur Initialisierung der Komponente unbedingt gesetzt sein müssen, weil bei Mementos eben das nicht der Fall ist: Eine Property \texttt{sorted}, welche angibt wonach eine Tabelle aktuell sortiert ist, muss bei der Initialisierung nicht bekannt, aber dennoch Teil des Mementos sein, sodass Annotationen die korrekten Bereiche referenzieren. Andersherum müssen \texttt{required} Propertys nicht Teil des Mementos sein. Die Propertys \texttt{width} und \texttt{height} sollten beispielsweise nicht ins Memento aufgenommen werden, da die Komponente später ansonsten plötzlich ihre Größe ändern kann.
+Zur Laufzeit und während der Hilfegenerierung muss das Hilfesystem Komponenten in zuvor gespeicherte Zustände zurücksetzen können. Dazu wird das Memento verwendet, welches eine Menge von Propertys ist, deren Werte gespeichert werden müssen. Um anzugeben, welche Propertys einer Komponente Teil ihres Mementos sind, kann der Entwickler diese mit einem Attribut \texttt{isMemento} versehen (Listing~\ref{code:smcdl-memento}). Sie unterscheiden sich von \texttt{required} Propertys, die zur Initialisierung der Komponente unbedingt gesetzt sein müssen, weil bei Mementos eben das nicht der Fall ist: Eine Property \texttt{sorted}, welche angibt wonach eine Tabelle aktuell sortiert ist, muss bei der Initialisierung nicht bekannt, aber dennoch Teil des Mementos sein, sodass Annotationen die korrekten Bereiche referenzieren. Andersherum müssen \texttt{required} Propertys nicht Teil des Mementos sein. Die Propertys \texttt{width} und \texttt{height} sollten beispielsweise nicht ins Memento aufgenommen werden, da die Komponente später ansonsten plötzlich ihre Größe ändern kann. Ortsbezogene Bereichskommentare funktionieren trotzdem, sofern der Inhalt der Komponente proportional skaliert dargestellt wird.
 
 \lstset{language=XML}
 \begin{lstlisting}[ caption={SMCDL für Memento}, label=code:smcdl-memento ]
@@ -2599,6 +2597,8 @@ Zur Laufzeit und während der Hilfegenerierung muss das Hilfesystem Komponenten 
 \end{lstlisting}
 
 Im Konzept wurde festgelegt, dass Komponenten keine externen Daten laden oder selbst Datenverarbeitung durchführen dürfen, falls sie Kommentare unterstützen wollen. Für die History ist es notwendig zu wissen, ob das CSS einer Komponente auf relativen Einheiten basiert. Diese Informationen werden am Wurzelelement in der SMCDL als Attribute angegeben (Listing~\ref{code:smcdl-zusatz}).
+
+\pagebreak
 
 \lstset{language=XML}
 \begin{lstlisting}[ caption={SMCDL für Zusatzinformationen}, label=code:smcdl-zusatz ]
@@ -2648,11 +2648,11 @@ Das Skript liest die Informationen der \texttt{mcdl.json} ein und führt den in 
 \begin{enumerate}
 	\item Zunächst wird der Konstruktor der Komponente sowie die Operationen \texttt{enable} und \texttt{show} aufgerufen.
 	\item Danach wird ein Memento vom initialen Zustand der Komponente abgerufen, um diesen später wiederherstellen zu können.
-	\item Die Testdaten der Komponente werden geladen, indem selbige aus der \texttt{mcdl.json} über die Methode \texttt{loadTestdata} an die Komponente gegeben werden.
+	\item Die Testdaten der Komponente werden geladen, indem selbige aus der Datei \texttt{mcdl.json} über die Methode \texttt{loadTestdata} an die Komponente gegeben werden.
 	\item Es werden sequentiell für alle Capabilities Screenshots generiert. Die Größe der Bilder entspricht dabei den in der SMCDL angegebenen \texttt{default} Werten für Breite und Höhe einer Komponente. Es wird nacheinander jeweils die erste atomare Operation jeder (UI) Capability behandelt. Für den Prototypen wurde hier auf sequentielle und parallele Operationen verzichtet, sie stellen aber nur eine Erweiterung des umgesetzten Prinzips dar und können bei Bedarf einfach implementiert werden.
 \end{enumerate}
 
-Ist die aktuell Behandelte eine UI Capability, werden die dazugehörigen UI Elemente mit dem CSS Selektor aus der SMCDL gefunden, hervorgehoben und die Bounding Box des ersten Elements abgefragt. Danach wird ein Screenshot der Komponente erstellt und als PNG Datei abgespeichert. Der Dateiname setzt sich aus der ID der Operation und der Bounding Box im Format \texttt{XxYxWxH} zusammen, also beispielsweise \texttt{clickButton-12.5x12.5x50x50.png}. Das Bild wird in einem Ordner, der nach der ID der Capability benannt ist, abgelegt (z.\,B. capSelect in Abbildung~\ref{figure:ordner}). Danach wird das CSS der hervorgehobenen DOM Elemente zurückgesetzt und die VISO Operation (also z.\,B. ein Klick) auf dem ersten der Elemente ausgeführt. Das Hilfesystem wartet die angegebene Anzahl von Sekunden, bevor es ein letztes Bild \texttt{result.png} erstellt und im Ordner der Komponente ablegt.
+Ist die aktuell behandelte eine UI Capability, werden die dazugehörigen UI Elemente mit dem CSS Selektor aus der SMCDL gefunden, hervorgehoben und die Bounding Box des ersten Elements abgefragt. Danach wird ein Screenshot der Komponente erstellt und als PNG Datei abgespeichert. Der Dateiname setzt sich aus der ID der Operation und der Bounding Box im Format \texttt{XxYxWxH} zusammen, also beispielsweise \texttt{clickButton-12.5x12.5x50x50.png}. Das Bild wird in einem Ordner, der nach der ID der Capability benannt ist, abgelegt (z.\,B. capSelect in Abbildung~\ref{figure:ordner}). Danach wird das CSS der hervorgehobenen DOM Elemente zurückgesetzt und die VISO Operation (also z.\,B. ein Klick) auf dem ersten der Elemente ausgeführt. Das Hilfesystem wartet die angegebene Anzahl von Sekunden, bevor es ein letztes Bild \texttt{result.png} erstellt und im Ordner der Komponente ablegt.
 
 Handelt es sich um eine System Capability, sind keine UI Elemente beteiligt. In diesem Fall wird nur die CRUISe Operation mit den angegebenen Beispieldaten ausgeführt und danach ein Screenshot \texttt{result.png} erstellt.
 
@@ -2695,11 +2695,11 @@ In diesem Kapitel wurden die prototypische Implementierung der Konzepte Bedienun
 % genauer auf viso operationen eingehen
 % nachdem die smcdl hochgeladen wurde, startet der headless browser phantomjs und generiert die notwendigen screenshots auf basis der informatoinen in der smcdl. die werden über die SOAP API des CoRe dem frontend zur verfügung gestellt.
 
-Für das Backend der Bedienungshilfe (Abschnitt~\ref{section:implementierung:backend:bedienung}) wurden die SMCDL und MCDO erweitert, sodass der Entwickler mögliche Interaktionen für eine Capability angeben kann. Dazu greift er auf atomare Operationen wie z.\,B. klicken zurück, welche auf sequentielle (Ausführung hintereinander) und parallele (Ausführung gleichzeitig) Weise kombininiert werden können. Falls die Capability nicht vom Nutzer, sondern von der Komponente initiiert wird, muss der Entwickler Beispieldaten für die entsprechende CRUISe Operation angeben. Nachdem eine Komponente registriert wurde, startet der Assistance Generator den Headless Browser PhantomJS, welcher die notwendigen Bilder generiert. Im Prototypen kann PhantomJS nur atomare Mausoperationen (Klick, Doppelklick, Drag, Scroll, Hover) verarbeiten, die Erweiterung auf sequentielle Operationen und die Unterstützung von Tastaturoperationen sollten aber kein Problem darstellen, da die wichtigsten Funktionen bereits implementiert wurden. Am Ende wird der Assistance Service informiert, welcher die Bilder in den öffentlich zugänglichen Ordner des CoRe kopiert, sodass das Frontend des Hilfesystems darauf zugreifen kann.
+Für das Backend der Bedienungshilfe (Abschnitt~\ref{section:implementierung:backend:bedienung}) wurden die SMCDL und MCDO erweitert, sodass der Entwickler mögliche Interaktionen für eine Capability angeben kann. Dazu greift er auf atomare Operationen wie z.\,B. klicken zurück, welche auf sequentielle und parallele Weise kombininiert werden können. Falls die Capability nicht vom Nutzer, sondern von der Komponente initiiert wird, muss der Entwickler Beispieldaten für die entsprechende CRUISe Operation angeben. Nachdem eine Komponente registriert wurde, startet der Assistance Generator den Headless Browser PhantomJS, welcher die notwendigen Bilder generiert. Im Prototypen kann PhantomJS nur atomare Mausoperationen (Klick, Doppelklick, Drag, Scroll, Hover) verarbeiten, die Erweiterung auf sequentielle Operationen und die Unterstützung von Tastaturoperationen sollten aber kein Problem darstellen, da die wichtigsten Funktionen bereits implementiert wurden. Am Ende wird der Assistance Service informiert, welcher die Bilder in den öffentlich zugänglichen Ordner des CoRe kopiert, sodass das Frontend des Hilfesystems darauf zugreifen kann.
 
 % probleme mit bedienungsbackend? soweit eigentlich keine, außer dass draggen nicht so wahnsinnig gut klappt
 
-Die Mausoperationen werden in PhantomJS teilweise durch eine Kombination von synthetitschen Mausevents des Browsers simuliert. Das funktioniert bis auf die Operation Drag auch sehr gut. Dort jedoch besteht das Problem, dass die Reaktion der Komponente auf die synthetischen Events von der Implementierung abhängt. Manche Komponenten wollen am Ende des Draggens ein anderes Event Target als beim Start (z.\,B. wenn eine Spalte einer Tabelle verschoben werden soll), während es bei anderen gleich bleiben soll (z.\,B. panning einer Karte). Um dem beizukommen sollte in Zukunft das gewünschte Target bei DragEnd in den Zusatzinformationen zur Operation angegeben werden können.
+Die Mausoperationen werden in PhantomJS teilweise durch eine Kombination von synthetitschen Mausevents des Browsers simuliert. Das funktioniert bis auf die Operation Drag auch sehr gut. Dort jedoch besteht das Problem, dass der Effekt von der Implementierung abhängt. Manche Komponenten wollen am Ende des Draggens ein anderes Event Target als beim Start (z.\,B. wenn eine Spalte einer Tabelle verschoben werden soll), während es bei anderen gleich bleiben soll (z.\,B. panning einer Karte). Um dem beizukommen sollte in Zukunft das gewünschte Target bei DragEnd in den Zusatzinformationen zur Operation angegeben werden können.
 
 % das hilfe frontend bekommt die meisten informationen über eine komponente auch aus der smcdl (weil die über die tsr zugänglich ist). wichtig dabei halt gerade welche capabilities vorhanden sind. wenn der benutzer die bedienungshilfe dann aufruft, wird eine anfrage ans core gesendet, welche die pfade zu den bildern zurückschickt. die werden dann zusammen mit den captions eingeblendet.
 
@@ -2719,11 +2719,11 @@ Für die Umsetzung der Kommunikationshilfe (Abschnitt~\ref{section:implementieru
 
 % bei den kommentaren wurde zunächst das dare so erweitert, dass es kommentare in rdf speichert (weil halt schon eine rdf speicher infrastruktur da war) und eine rest api, welche die kommentare in json ausgibt. es wurden methoden implementiert um ein kommentar hinzuzufügen, abzurufen, zu bewerten und zu löschen.
 
-Das Backend der Kommentare (Abschnitt~\ref{section:implementierung:backend:kommentare}) wurde ins Data Repository integriert, da dort bereits eine Infrastruktur zur Datenspeicherung vorhanden ist. Die Kommentare werden als RDF in einem Jena TDB Triplestore abgelegt und ausgelesen. Damit das Frontend diese anzeigen kann, wurde die REST API des DaRe entsprechend erweitert. Es existieren Methoden um Kommentare hinzuzufügen, abzurufen, zu bewerten und zu löschen.
+Das Backend der Kommentare (Abschnitt~\ref{section:implementierung:backend:kommentare}) wurde ins Data Repository integriert, da dort bereits eine Infrastruktur zur Datenspeicherung vorhanden ist. Die Kommentare werden als RDF in einem Jena TDB Triplestore abgelegt und ausgelesen. Damit das Frontend diese anzeigen kann, wurde die REST API des DaRe entsprechend erweitert. Es existieren Methoden, um Kommentare hinzuzufügen, abzurufen, zu bewerten und zu löschen.
 
 % im hilfe frontend werden annotationen mit hilfe von svg elementen umgesetzt, auf denen der benutzer zeichnet. deren position und größe wird dann mit der von der komponente implementierten methoden in datenbereiche umgewandelt. wenn kommentare angezeigt werden sollen, werden diese datenbereiche wieder zurück in koordinaten konvertiert und gezeichnet.
 
-Das Frontend der Kommentare (Abschnitt~\ref{section:implementierung:frontend:kommentare}) zeigt Annotationen mit Hilfe von SVG Elementen an. Deren korrekte Position und Größe wird durch die von der Komponente implementierten Methode \texttt{dataToCoordinates} bestimmt, welche Daten in Koordinaten konvertiert. Nachdem ein Kommentar inklusive Annotationen verfasst wurde, werden die betroffenen Datenbereiche mit \texttt{coordinatesToData} ausgelesen und das Kommentar ans Backend geschickt.
+Das Frontend der Kommentare (Abschnitt~\ref{section:implementierung:frontend:kommentare}) zeigt Annotationen mit Hilfe von SVG Elementen an. Deren korrekte Position und Größe wird durch die von der Komponente implementierten Methode \texttt{dataToCoordinates} bestimmt, welche Daten in Koordinaten konvertiert. Nachdem ein Kommentar inklusive Annotationen verfasst wurde, werden die betroffenen Datenbereiche mit \texttt{coordinatesToData} ausgelesen und das Kommentar ans Backend geschickt. Danach kann es in einer anderen Komponente wieder geladen und dargestellt werden.
 
 % einschränkung bezüglich bounding box von datenpunkten und relative größenangaben von ortsbezogenen bereichskommentaren und unterschiedlicher größe der komponente.
 
@@ -2738,16 +2738,17 @@ Nachdem basierend auf dem Szenario (Abschnitt~\ref{section:standderforschung:sze
 
 \begin{enumerate}
 	\item Es soll dem Benutzer erleichtern, Komponenten verschiedener Entwickler zu bedienen (Abschnitte \ref{section:konzeption:intro}, \ref{section:konzeption:bedienung}, \ref{section:konzeption:feedback}, \ref{section:konzeption:kommunikation}, \ref{section:konzeption:history}, \ref{section:konzeption:meta-hilfe}).
+	\item Dem Komponentenentwickler soll die Möglichkeit gegeben werden, seine Komponenten schnell und einfach in das Hilfesystem zu integrieren.
 	\item Es soll dem Benutzer helfen, die in den Komponenten dargestellten Informationen zu verstehen und Erkenntnisse zu gewinnen (Abschnitte \ref{section:konzeption:verlinkung}, \ref{section:konzeption:kommentare}).
-	\item Gleichzeitig soll dem Komponentenentwickler die Möglichkeit gegeben werden, seine Komponenten schnell und einfach in das Hilfesystem zu integrieren.
+	
 \end{enumerate}
 
-Im nächsten Abschnitt wird untersucht, ob Aufgabe~1 erfüllt wird. Abschnitt~\ref{section:evaluation:entwicklungsaufwand} behandelt Aufgabe~3. Da Aufgabe~2 im Prototypen durch Kommentare umgesetzt wird, kann für sie keine qualitative Evaluation durchgeführt werden. Maximal würde das Leseverständnis der Testpersonen überprüft. Durch die Implementierung im Prototypen wurde aber die Umsetzbarkeit des Konzepts nachgewiesen.
+Im nächsten Abschnitt wird untersucht, ob Aufgabe~1 erfüllt wird. Abschnitt~\ref{section:evaluation:entwicklungsaufwand} behandelt Aufgabe~3. Da Aufgabe~2 im Prototypen durch Kommentare umgesetzt wird, kann für sie keine qualitative Evaluation durchgeführt werden. Maximal würde das Leseverständnis der Testpersonen überprüft. Durch die Implementierung im Prototypen wurde aber die Umsetzbarkeit des Konzepts nachgewiesen, womit Kommentare über Komponenten hinweg wiederverwendet werden und so den Erkenntnisgewinn bei den Anwendern fördern können.
 
 \section{Nutzerstudie}
 \label{section:evaluation:nutzerstudie}
 
-Das Hilfesystem soll die Usability eines Mashups, bestehend aus Effektivität, Effizienz und Zufriedenheit der Nutzung, erhöhen. Ziel ist nun zu überprüfen, wie das Hilfesystem angenommen wird und ob es verständlich genug ist. Zehn Teilnehmer verwendeten dieselbe Mashup Komposition und mussten fünf Fragen beantworten, deren Lösung mehr oder weniger offensichtlich ist. Währenddessen wurde falls notwendig nachgefragt, ob die Erklärungen verständlich sind, ob etwas anderes erwartet wurde und ob eine andere Darstellung der Hilfe mehr geholfen hätte. Es wurden Effizienz- und Effektivitätsmetriken in Form der benötigten Zeit zur Lösung und der Korrektheit der Lösung für jede Frage aufgenommen. Um die Zufriedenheit zu überprüfen, wurde am Ende ein Usability Fragebogen ausgefülllt.
+Das Hilfesystem soll die Usability eines Mashups, bestehend aus Effektivität, Effizienz und Zufriedenheit der Nutzung, erhöhen \cite{ISO9241}. Ziel ist zu überprüfen, wie das Hilfesystem angenommen wird und ob es verständlich genug ist. Zehn Teilnehmer verwendeten dieselbe Mashup Komposition und mussten fünf Fragen beantworten, deren Lösung mehr oder weniger offensichtlich ist. Währenddessen wurde falls notwendig nachgefragt, ob die Erklärungen verständlich sind, ob etwas anderes erwartet wurde und ob eine andere Darstellung der Hilfe mehr geholfen hätte. Es wurden Effizienz- und Effektivitätsmetriken in Form der benötigten Zeit zur Lösung und der Korrektheit der Lösung für jede Frage aufgenommen. Um die Zufriedenheit zu überprüfen, wurde am Ende ein Usability Fragebogen ausgefülllt.
 
 \subsection{Mashupkomposition}
 
@@ -2776,7 +2777,7 @@ Die Teilnehmer sollten folgende Aufgaben lösen:
 
 \subsection{Teilnehmer}
 
-Die Teilnehmer der Nutzerstudie wurden im Starbucks in der Prager Straße in Dresden (Abbildung~\ref{figure:location}) zufällig ausgewählt. Sie waren zwischen~18 und 53~Jahren alt (Durchschnitt 30.3~Jahre, Median 27.5~Jahre, Standardabweichung 10.84~Jahre) und zu 60~\% weiblich (siehe Tabelle~\ref{table:evaluation-teilnehmer}). Als Gegenleistung für ihre Zeit bekamen sie einen Gutschein über 5~Euro.
+Für die Nutzerstudie wurden 10~Teilnehmer im Starbucks in der Prager Straße in Dresden (Abbildung~\ref{figure:location}) zufällig ausgewählt, da laut Virzi \cite{Virzi1992} mit sieben schon 80~\% der dringendsten Usabilityprobleme gefunden werden können. Die Teilnehmer waren zwischen~18 und 53~Jahren alt (Durchschnitt 30.3~Jahre, Median 27.5~Jahre, Standardabweichung 10.84~Jahre) und zu 60~\% weiblich (siehe Tabelle~\ref{table:evaluation-teilnehmer}). Es gab keine Kriterien, welche die Teilnahme an der Studie verhindert hätten.
 
 \begin{table}[htbp]
 	\centering
@@ -2787,8 +2788,8 @@ Die Teilnehmer der Nutzerstudie wurden im Starbucks in der Prager Straße in Dre
     Teilnehmer 2 & W          & 28    & Krankenpflegerin 		& B1 \\ 
     Teilnehmer 3 & W          & 18    & Studentin  			& B1 \\ 
     Teilnehmer 4 & M          & 20    & Student  				& B2 \\ 
-    Teilnehmer 5 & M          & 27    & IT 					& C1 \\ 
-	Teilnehmer 6 & M          & 26    & IT 					& A1 \\ 
+    Teilnehmer 5 & M          & 27    & Softwareentwickler		& C1 \\ 
+	Teilnehmer 6 & M          & 26    & IT Consultant			& A1 \\ 
 	Teilnehmer 7 & W          & 22    & Studentin (Psychologie)& C1 \\ 
 	Teilnehmer 8 & W          & 42    & Bürokauffrau 			& A1 \\ 
 	Teilnehmer 9 & W          & 53    & Grundschullehrerin 	& A1 \\ 
@@ -2807,9 +2808,9 @@ Die Teilnehmer der Nutzerstudie wurden im Starbucks in der Prager Straße in Dre
 
 \subsection{Durchführung}
 
-Zunächst wurde den Teilnehmern der Studie grob erklärt, was ein Mashup ausmacht: Es gäbe verschiedene Fenster, welche dieselben Daten auf unterschiedliche Weise darstellen. Außerdem bestünden Zusammenhänge zwischen diesen Fenstern in dem Sinne, dass sie auf Änderungen in anderen Fenstern reagierten und sich anpassten. Jedoch gelte das nicht für alle Fenster und nicht in jede Richtung. Danach wurden sie über die zu lösenden Aufgaben aufgeklärt. Die Teilnehmer wurden gebeten, dass sie, falls sie nicht weiter wissen, die Hilfefunktionen nutzen sollten anstatt lange zu probieren. Sie wurden auf die Bedienungs- und Kommunikationshilfe aufmerksam gemacht und erhielten außerdem den Hinweis, dass sie währenddessen nachfragen dürften um eine der Hilfefunktionen zu finden.
+Zunächst wurde den Teilnehmern der Studie grob erklärt, was ein Mashup ausmacht: Es gäbe verschiedene Fenster, welche dieselben Daten auf unterschiedliche Weise darstellen. Außerdem bestünden Zusammenhänge zwischen diesen Fenstern in dem Sinne, dass sie auf Änderungen in anderen Fenstern reagierten und sich anpassten. Jedoch gelte das nicht für alle Fenster und nicht in jede Richtung. Danach wurden sie über die zu lösenden Aufgaben aufgeklärt. Die Teilnehmer wurden gebeten, dass sie, falls sie nicht weiter wissen, die Hilfefunktionen nutzen sollten anstatt lange zu probieren. Sie wurden auf die Bedienungs- und Kommunikationshilfe aufmerksam gemacht und erhielten außerdem den Hinweis, dass sie währenddessen nachfragen dürften, um eine der Hilfefunktionen zu finden.
 
-Danach wurden sie gebeten, die fünf Fragen zu beantworten. Dazu verwendeten sie das vorgestellte Mashup auf einem Macbook Air (13~Zoll, Mid 2012). Es wurde keine Maus zur Verfügung gestellt, die Teilnehmer benutzten das Touchpad des Notebooks. Nach dem ersten Teilnehmer wurde die \enquote{Natural Scroll} Funktion\footnote{Wenn der Inhalt eines Fensters als Dokument unter einer Lupe vergegenwärtigt wird, geht es darum, was beim scrollen bewegt wird. Natural Scroll bewegt das Dokument, es muss also nach \emph{oben} wandern, um Text weiter unten lesen zu können. In Windows Systemen ist es üblich, dass beim scrollen die Lupe bewegt wird. Sie muss ihre Position nach \emph{unten} verändern, um Text weiter unten zu lesen.} deaktiviert. Für jede Aufgabe wurde die Zeit gestoppt und festgehalten, ob sie eine Hilfefunktion verwendeten. Danach füllten die Teilnehmer einen Fragebogen mit allgemeinen Informationen (Alter, Beruf, Geschlecht, Sprachniveau Englisch) und einen SUS Fragebogen \cite{Brooke1996} aus. Das \enquote{System}, welches in den SUS Fragen angesprochen wird, referenzierte dabei VizBoard als Ganzes, inklusive Hilfesystem. Den Teilnehmern sollte nicht zugemutet werden, mental zwischen Hilfesystem und VizBoard zu trennen.
+Danach wurden sie gebeten, die fünf Fragen zu beantworten. Dazu verwendeten sie das vorgestellte Mashup auf einem Macbook Air (13~Zoll, Mid 2012). Es wurde keine Maus zur Verfügung gestellt, die Teilnehmer benutzten das Touchpad des Notebooks. Nach dem ersten Teilnehmer wurde die \enquote{Natural Scroll} Funktion\footnote{Wenn der Inhalt eines Fensters als Dokument unter einer Lupe vergegenwärtigt wird, geht es darum, was beim scrollen bewegt wird. Natural Scroll bewegt das Dokument, es muss also nach \emph{oben} wandern, um Text weiter unten lesen zu können. In Windows Systemen ist es üblich, dass beim scrollen die Lupe bewegt wird. Sie muss ihre Position nach \emph{unten} verändern, um Text weiter unten zu lesen.} deaktiviert. Für jede Aufgabe wurde die Zeit gestoppt und festgehalten, ob sie eine Hilfefunktion verwendeten. Danach füllten die Teilnehmer einen Fragebogen mit allgemeinen Informationen (Alter, Beruf, Geschlecht, Sprachniveau Englisch) und einen SUS Fragebogen \cite{Brooke1996, Rummel2013} aus. Das \enquote{System}, welches in den SUS Fragen angesprochen wird, referenzierte dabei VizBoard als Ganzes, inklusive Hilfesystem. Den Teilnehmern sollte nicht zugemutet werden, mental zwischen Hilfesystem und VizBoard zu trennen.
 
 \subsection{Ergebnisse}
 
@@ -2862,14 +2863,14 @@ Die Ergebnisse des SUS Fragebogens sind durchwachsen, aber insgesamt positiv (Ab
 % 4: ist mein ausreisser nach unten, die hat weder einen plan gehabt, wie das system funktioniert noch ansatzweise eine lösungsstrategie. weiß auch gar nicht, was der geholfen hätte. weniger aufregung vielleicht.
 % 2: wirkte eigentlich sehr sicher. hat auch im feedback angemerkt, dass sie es ganz cool findet
 
-Auffällig sind die vier Teilnehmer, welche einen SUS Score von weniger als~60 vergaben. Nummer~2 wirkte während der Studie sehr sicher und merkte auch im Feedback an, dass sie das System VizBoard an sich interessant und nützlich findet. Zeitlich befand sie sich im Mittelfeld und hatte keine offensichtlichen Probleme. Teilnehmerin~4 hatte kein mentales Modell dafür, wie Mashups funktionieren und konnte deswegen auch keine Lösungsstrategie planen, weswegen sie sehr lange für jede Frage benötigte. Ihr hätte wahrscheinlich die dynamische Kommunikationshilfe genützt Teilnehmerin Nummer~7 sah sich erst alle Hilfefunktionen an und löste danach alle Fragen vergleichsweise schnell, bis auf die letzte auch alle korrekt. Sie wirkte dabei kaum angestrengt und sicher. Die letzte Teilnehmerin konnte alle Aufgaben lösen, benötigte aber bei zwei davon deutlich länger als die anderen. Sie hatte Probleme zu verstehen, dass die Hilfe Kopien erstellte, auf denen sie nicht arbeiten kann. Für sie wären die zuvor erarbeiteten Änderungen hilfreich gewesen. Zusammenfassend kann gesagt werden, dass den Beobachtungen nach zu urteilen zumindest die Bewertungen der Teilnehmerinnen~2 und~7 eigentlich besser ausfallen hätten müssen, da sie keine offensichtlichen Probleme hatten. Für die anderen zwei ist eine Lösung entweder im Konzept vorgesehen oder wurde nach der Studie erarbeitet.
+Auffällig sind die vier Teilnehmer, welche einen SUS Score von ungefähr~50 vergaben. Nummer~2 wirkte während der Studie sehr sicher und merkte auch im Feedback an, dass sie das System VizBoard an sich interessant und nützlich findet. Zeitlich befand sie sich im Mittelfeld und hatte keine offensichtlichen Probleme. Teilnehmerin~4 hatte kein mentales Modell dafür, wie Mashups funktionieren und konnte deswegen auch keine Lösungsstrategie planen, weswegen sie sehr lange für jede Frage benötigte. Ihr hätte wahrscheinlich die dynamische Kommunikationshilfe genützt Teilnehmerin Nummer~7 sah sich erst alle Hilfefunktionen an und löste danach alle Fragen vergleichsweise schnell, bis auf die letzte auch alle korrekt. Sie wirkte dabei kaum angestrengt und sicher. Die letzte Teilnehmerin konnte alle Aufgaben lösen, benötigte aber bei zwei davon deutlich länger als die anderen. Sie hatte Probleme zu verstehen, dass die Hilfe Kopien erstellte, auf denen sie nicht arbeiten kann. Für sie wären die zuvor erarbeiteten Änderungen hilfreich gewesen. Zusammenfassend kann gesagt werden, dass den Beobachtungen nach zu urteilen zumindest die Bewertungen der Teilnehmerinnen~2 und~7 eigentlich besser ausfallen hätten müssen, da sie keine offensichtlichen Probleme hatten. Für die anderen zwei ist eine Lösung entweder im Konzept vorgesehen oder wurde nach der Studie erarbeitet.
 
 Nachdem die Studie mit nur 10~Teilnehmern durchgeführt wurde, nur zwei der fünf Hilfefunktionen zur Bedienung enthielt und das Mashup klein genug war, um die Aufgaben auch ohne Hilfe zu lösen, sollte in Zukunft eine weitere Studie durchgeführt werden. Idealerweise mit mehr Teilnehmern, mehr Komponenten im Mashup mit komplizierterer Kommunikation und weiteren Hilfefunktionen.
 
 \section{Entwicklungsaufwand}
 \label{section:evaluation:entwicklungsaufwand}
 
-Wie einführend erwähnt ist ein Ziel des vorgestellten Konzepts, Komponenten mit möglichst wenig Aufwand in das Hilfesystem integrieren zu können. Unter Aufwand fällt hier sowohl zeitlicher Aufwand für Planung und Umsetzung als auch Entwicklungsaufwand beispielsweise in Form von Lines of Code (LOC). Je größer die Codebase einer Komponente, desto höher ist der Wartungsaufwand im Laufe der Zeit.
+Wie einführend erwähnt, ist ein Ziel des vorgestellten Konzepts, Komponenten mit möglichst wenig Aufwand in das Hilfesystem integrieren zu können. Unter Aufwand fällt hier sowohl zeitlicher Aufwand für Planung und Umsetzung als auch Entwicklungsaufwand beispielsweise in Form von Lines of Code (LOC). Je größer die Codebase einer Komponente, desto höher ist der Wartungsaufwand im Laufe der Zeit.
 
 Nun ist es nicht möglich, alle verschiedenen Varianten einer Hilfefunktion zu analysieren und zu vergleichen, weswegen beispielhaft nur ein Konzept umgesetzt wird. Als Testobjekt kommt die SIMILE Timeline\footnote{\url{http://www.simile-widgets.org/timeline/}} (Abbildung~\ref{figure:simile-timeline}) zum Einsatz, da sie mehr Interaktionen als nur \enquote{Auswahl} bietet.
 
@@ -2883,7 +2884,7 @@ Nun ist es nicht möglich, alle verschiedenen Varianten einer Hilfefunktion zu a
 \subsection{Individuelle Hilfefunktion}
 \label{section:evaluation:entwicklungsaufwand:eigeneskonzept}
 
-Da der Autor der Arbeit sich in den Grundlagen schon mit der Präsentation und dem Aufbau von Hilfefunktionen und Erklärungen beschäftigt hat, ist er keine geeignete Testperson. Aus diesem Grund wurde ein befreundeter Medieninformatikstudent gefragt, auf welche Weise er die verschiedenen möglichen Interaktionen der SIMILE Timeline einem Benutzer erklären würde. Er entschied sich für ein animiertes GIF, welches am Anfang eingeblendet wird. Die Konzeption dauerte 11~Minuten. Der Autor hat danach die entsprechenden Bilder und die Animation erstellt (Abbildung~\ref{figure:entwicklung-gif}). Das dauerte insgesamt 22~Minuten.
+Da der Autor der Arbeit sich in den Grundlagen schon mit der Präsentation und dem Aufbau von Hilfefunktionen und Erklärungen beschäftigt hat, ist er keine geeignete Testperson. Aus diesem Grund wurde ein Medieninformatikstudent gefragt, auf welche Weise er die möglichen Interaktionen der SIMILE Timeline einem Benutzer erklären würde. Er entschied sich für ein animiertes GIF, welches am Anfang eingeblendet wird. Die Konzeption dauerte 11~Minuten. Der Autor hat danach die entsprechenden Bilder und die Animation erstellt (Abbildung~\ref{figure:entwicklung-gif}). Das dauerte insgesamt 22~Minuten.
 
 \begin{figure}[htbp]
    \centering
@@ -2892,7 +2893,7 @@ Da der Autor der Arbeit sich in den Grundlagen schon mit der Präsentation und d
    \label{figure:entwicklung-gif}
 \end{figure}
 
-Die Integration in die Komponente dauerte weitere 10~Minuten und benötigte 8~Zeilen (Listing~\ref{code:integration-gif}).
+Die Integration in die Komponente dauerte weitere 10~Minuten und benötigte 8~Zeilen (Listing~\ref{code:integration-gif}). Alles in allem wurden 43~Minuten für diese Hilfefunktion aufgewendet.
 
 \lstset{language=Java}
 \begin{lstlisting}[caption={Integration des GIFs}, label=code:integration-gif]
@@ -2905,8 +2906,6 @@ help.on( "click", function() {
 });
 $( this.body.el.dom ).append( help );
 \end{lstlisting}
-
-Alles in allem wurden 43~Minuten für diese Hilfefunktion aufgewendet.
 
 \subsection{Vorgestelltes Hilfesystem}
 \label{section:evaluation:entwicklungsaufwand:konzept}
@@ -2941,9 +2940,7 @@ In diesem Kapitel wurde der Prototyp hinsichtlich zwei seiner Aufgaben evaluiert
 % nutzertudie mit 10 teilnehmern im starbucks, entschädigung 5 euro, fünf fragen mit mashup lösen, danach sus fragebogen
 % ergebnis: einige fehlinterpretationen wurden aufgedeckt, hauptsächlich haben die mit kopien von originalen (ein weiterer grund, das nicht so umzusetzen) und den beschriftungen des operationspanels zu tun. hilfe nicht so wahnsinnig viel verwendet (komm nur 1x), weswegen dyn. hilfe noch wert wäre implementeirt zu werden. usability fragebogen durchwachsen, aber insgesamt gutes ergebnis
 
-Die Nutzerstudie wurde mit 10~Teilnehmern zwischen~18 und 53~Jahren (davon 6~Frauen) im Starbucks in der Prager Straße, Dresden, durchgeführt. Sie erhielten einen Gutschein über 5~Euro als Aufwandsentschädigung. Die Studie selbst bestand aus fünf Fragen, die sie mit Hilfe eines Mashups aus drei Komponenten (SIMILE Timeline, Liniendiagramm, Tabelle) lösen sollten. Danach füllten sie einen SUS Usability Fragebogen aus.
-
-Es konnten einige Fehlinterpretationen der Hilfe UI identifiziert werden. Die meisten davon hatten entweder damit zu tun, dass die Teilnehmer versuchten, auf den von der Hilfe hervorgehobenen UI Elementen zu arbeiten, oder es gab Missverständnisse bezüglich der Formulierung von Anweisungen. Zur Lösung von ersterem Problem kann eine Abfrage helfen, um zu klären ob Hilfe angezeigt oder die vorgesehene Aktion ausgeführt werden soll. Bezüglich der Formulierungen wird in Zukunft der kleinste gemeinsame Nenner verwendet. Auffällig war außerdem, dass die Hilfe relativ selten aufgerufen wurde, obwohl die Teilnehmer am Anfang der Studie dazu ermuntert wurden. Das ist ein Hinweis darauf, dass die dynamische Meta-Hilfe sehr nützlich gewesen wäre.
+Die Nutzerstudie wurde mit 10~Teilnehmern zwischen~18 und 53~Jahren (davon 6~Frauen) durchgeführt. Die Studie selbst bestand aus fünf Fragen, die sie mit Hilfe eines Mashups aus drei Komponenten (SIMILE Timeline, Liniendiagramm, Tabelle) lösen sollten. Danach füllten sie einen SUS Usability Fragebogen aus. Dieser fiel insgesamt gut aus, was darauf hindeutet, dass das System mit den weiteren Funktionen aus dem Konzept noch benutzerfreundlicher ist. Es konnten einige Fehlinterpretationen der Hilfe UI identifiziert werden. Die meisten davon hatten entweder damit zu tun, dass die Teilnehmer versuchten, auf den von der Hilfe hervorgehobenen UI Elementen zu arbeiten, oder es gab Missverständnisse bezüglich der Formulierung von Anweisungen. Zur Lösung von ersterem Problem kann eine Abfrage helfen, um zu klären ob Hilfe angezeigt oder die vorgesehene Aktion ausgeführt werden soll. Bezüglich der Formulierungen wird in Zukunft der kleinste gemeinsame Nenner verwendet. Auffällig war außerdem, dass die Hilfe relativ selten aufgerufen wurde, obwohl die Teilnehmer am Anfang der Studie dazu ermuntert wurden. Das ist ein Hinweis darauf, dass die dynamische Meta-Hilfe sehr nützlich gewesen wäre.
 
 % vergleich einer von kommilitione gewählten individuellen hilfefunktion für simile timeline mit integration hilfesystem. invididuelle hilfe war ein gif, dauerte 43 min zu integrieren und 8 zeilen code. hilfesystem (hat ein andrer gemacht) dauerte 32 minuten und 0 zeilen code. geht also schneller, aber wichtig sind eigentlich die andern vorteile: flexibilität, bessere wartbarkeit, einheitliche begriffe/bezeichnungen.
 
@@ -2952,39 +2949,47 @@ Für die Einschätzung des nötigen Entwicklungsaufwandes wurde eine von einem K
 \chapter{Zusammenfassung und Ausblick}
 \label{chapter:zusammenfassung}
 
-Diese Arbeit setzte sich damit auseinander, welche Hilfefunktionen eine Mashup Plattform seinen Benutzern bieten kann, wie diese umgesetzt werden können und wie dabei der Aufwand für Entwickler, die diese Hilfefunktionen für ihre Komponenten einsetzen wollen, möglichst gering gehalten wird. Drei der aufgezeigten Lösungsansätze wurden prototyptisch implementiert.
+Diese Arbeit setzte sich damit auseinander, welche Hilfefunktionen eine Mashup Plattform seinen Benutzern bieten kann, wie diese umgesetzt werden können und wie dabei der Aufwand für Entwickler, die diese Hilfefunktionen für ihre Komponenten einsetzen wollen, möglichst gering gehalten wird. Es wurde ein Konzept bestehend aus acht Lösungsansätzen vorgestellt, von denen drei prototypisch implementiert wurden.
 
 \section{Zusammenfassung}
 
 % grundlagen, was hab ich gelernt
 
-Zu diesem Zweck wurden zuerst die Grundlagen von Informationsvisualisierungen und User Assistance in Mashups sowie im Allgemeinen erarbeitet. Dabei wurden Beispiele für mögliche Informationsvisualisierungen nach dargestellten Daten, Art der Visualisierung und Art der Interaktion kategorisiert vorgestellt. Es stellte sich heraus, dass besonders die Darstellung viele verschiedene, auch weniger gängige Formen annehmen kann (z.\,B. verschachtelt, Dense Pixel). Trotzdem muss das Hilfesystem generisch genug arbeiten, um mit allen davon umgehen zu können. Um mehr darüber zu lernen, wie Hilfefunktionen aussehen sollen und was dabei beachtet werden muss, wurde einerseits ein Einblick in die kognitive Multimedia-Lerntheorie gegeben. Dabei stellte sich heraus, dass kein Medium inhärent besser zum Lernen geeignet ist als ein anderes. Erklärungen sollen nur relevante Informationen enthalten und keine Redundanz enthalten, um zu verhindern, dass ein Aufnahmekanal überlastet wird. Andererseits wurde der Verständnisprozess des Menschen genauer untersucht. Um Menschen effektiv etwas erklären zu können, sollte ihr mentales Modell verwendet werden, was im Kontext von Informationsvisualisierungen vor allem die Struktur und das Verhalten ist. Des weiteren wurden bestehende Mashups und Visualisierungstools auf ihre Interaktions- und User Assistance Konzepte untersucht. Dabei stellte sich heraus, dass gar nicht so viele Hilfestellungen nötig sind, sofern der Anwender ein korrektes mentales Modell der Anwendung hat. Um das Verständnis der Daten zu fördern, wurden oft Kommentare eingesetzt, deren Wiederverwendbarkeit in anderen Visualisierungen allerdings variierte. Einige Designrichtlinien beinhalteten visuelle und sprachliche Konsistenz, Undo/Redo und wo möglich den mentalen Aufwand des Nutzers zu reduzieren.
+Um die Basis für das Konzept zu schaffen, wurden zuerst die Grundlagen von Informationsvisualisierungen und User Assistance in Mashups sowie im Allgemeinen erarbeitet. Dabei wurden Beispiele für mögliche Informationsvisualisierungen nach dargestellten Daten, Art der Visualisierung und Art der Interaktion kategorisiert vorgestellt. Es stellte sich heraus, dass besonders die Darstellung viele verschiedene, auch weniger gängige Formen annehmen kann (z.\,B. verschachtelt, Dense Pixel). Trotzdem muss das Hilfesystem generisch genug arbeiten, um mit allen davon umgehen zu können. Um mehr darüber zu lernen, wie Hilfefunktionen aussehen sollen und was dabei beachtet werden muss, wurde einerseits ein Einblick in die kognitive Multimedia-Lerntheorie gegeben. Dabei stellte sich heraus, dass kein Medium inhärent besser zum Lernen geeignet ist als ein anderes. Erklärungen sollen nur relevante Informationen und keine Redundanz enthalten, um zu verhindern, dass ein Aufnahmekanal überlastet wird. Andererseits wurde der Verständnisprozess des Menschen genauer untersucht. Um Menschen effektiv etwas erklären zu können, sollte ihr mentales Modell verwendet werden, was im Kontext von Informationsvisualisierungen vor allem der Aufbau und das Verhalten von Visualisierungen ist. Des Weiteren wurden bestehende Mashups und Visualisierungstools auf ihre Interaktions- und User Assistance Konzepte untersucht. Dabei stellte sich heraus, dass gar nicht so viele Hilfestellungen nötig sind, sofern der Anwender ein korrektes mentales Modell der Anwendung hat. Um das Verständnis der Daten zu fördern, wurden oft Kommentare eingesetzt, deren Wiederverwendbarkeit in anderen Visualisierungen allerdings variierte. Einige Designrichtlinien beinhalteten visuelle und sprachliche Konsistenz, Undo/Redo und wo möglich den mentalen Aufwand des Nutzers zu reduzieren.
 
 % konzept
 
-Daraufhin wurde ein Konzept bestehend aus acht Hilfestellungen erarbeitet, in einer formativen Nutzerstudie mit Hilfe eines Paper Mockups und fünf Teilnehmern überprüft und danach leicht überarbeitet. Die Hilfestellungen des Konzepts betreffen im Prinzip zwei Aufgaben: Einerseits soll es dem Benutzer erleichtern, Komponenten verschiedener Entwickler zu bedienen und andererseits soll es ihn dabei unterstützen, in Daten enthaltene Informationen aufzunehmen und Erkenntnisse zu gewinnen. Um die Bedienung zu erleichtern, wird der Anwender vor dem Start der Nutzung des Mashups durch jede enthaltene Komponente \enquote{geführt}. Dabei werden grundlegende Informationen wie die Art der Visualisierung, eine Beschreibung und die enthaltenen Daten vermittelt. Damit der Benutzer herausfindet, welche Aktionen wie ausgeführt werden können, wird ein Comic bestehend aus drei Panels eingesetzt. Das erste Panel zeigt dabei das UI Element, welches die Aktion ausführt (zum Beispiel ein Button), das zweite Panel die notwendige Operation (etwa klicken) und das Dritte das Ergebnis der Aktion (etwa eine sortierte Tabelle). Nachdem keine Software frei von Bugs ist, soll der Anwender Fehler in einer Komponente melden können oder allgemeines Feedback geben. Dazu verfasst er eine möglichst ausführliche Textbeschreibung, da er nicht über die nötigen Kenntnisse für vorgefertigte Formulare (\enquote{Ursache des Fehlers}) verfügt. Für den Anwender kann die Nutzung eines Mashups verwirrend sein, da andere Komponenten als die aktuell verwendete auf Interaktionen reagieren. Um diese Kommunikation transparenter zu machen, werden einerseits dynamisch für kurze Zeit Pfeile eingeblendet, sobald Nachrichten ausgetauscht wurden. Auf der anderen Seite wird eine statische Version davon in die Hilfe zur Bedienung eingearbeitet, welche ebenfalls mit Comics arbeitet. Es ist völlig offen, welche Konzepte in den Komponenten dargestellt werden und wie viel Kenntnisse der Benutzer darüber verfügt. Aus diesem Grund soll eine Beschreibung eingeblendet werden können, was vor allem bei Legenden Sinn macht. Beispielsweise ist es bei der Interpretation eines Diagramms hilfreich zu wissen, wie eine dargestellte Metrik definiert ist. Um auf Ausreisser und Trends in Daten hinzuweisen, können Anwender Kommentare verfassen. Diese beinhalten möglicherweise Annotationen in der Visualisierung und können, sofern die Darstellungsform der Komponente es zulässt, an den Daten selbst gespeichert und in anderen Komponenten wiederverwendet werden. Nachdem ein Anwender auf Grund der vorhandenen Kommunikationskanäle nie isoliert mit einer einzigen Komponente arbeitet, muss die Plattform eine History zur Verfügung stellen, mit der ungewollte Änderungen komponentenübergreifend und einfach rückgängig gemacht werden können. Zuletzt ist es nötig Hilfefunktionen für die Hilfe anzubieten, da diese das Mashup doch viel komplexer macht. Hier wird eine statische Variante bestehend aus Text und Bildern, sowie eine Dynamische eingesetzt, welche mit Machine Learning Algorithmen auf Basis von Nutzerinformationen und Nutzerinteraktionen arbeitet.
+Daraufhin wurde ein Konzept bestehend aus acht Hilfestellungen erarbeitet, in einer formativen Nutzerstudie mit Hilfe eines Paper Mockups und fünf Teilnehmern überprüft und danach leicht überarbeitet. Die Hilfestellungen des Konzepts betreffen im Prinzip zwei Aufgaben: Einerseits soll es dem Benutzer erleichtern, Komponenten verschiedener Entwickler zu bedienen und andererseits soll es ihn dabei unterstützen, in Daten enthaltene Informationen aufzunehmen und Erkenntnisse zu gewinnen. Um die Bedienung zu erleichtern, wird der Anwender vor dem Start der Nutzung des Mashups durch jede enthaltene Komponente \enquote{geführt}. Dabei werden grundlegende Informationen wie die Art der Visualisierung, eine Beschreibung und die enthaltenen Daten vermittelt. Damit der Benutzer herausfindet, welche Aktionen wie ausgeführt werden können, wird ein kurzer Comic eingesetzt. Nachdem keine Software frei von Bugs ist, soll der Anwender Fehler in einer Komponente melden können oder allgemeines Feedback geben. Dazu verfasst er eine möglichst ausführliche Textbeschreibung, da er nicht über die nötigen Kenntnisse für vorgefertigte Formulare (\enquote{Ursache des Fehlers}) verfügt. Für den Anwender kann die Nutzung eines Mashups verwirrend sein, da andere Komponenten als die aktuell verwendete auf Interaktionen reagieren. Um diese Kommunikation transparenter zu machen, werden einerseits dynamisch für kurze Zeit Pfeile eingeblendet, sobald Nachrichten ausgetauscht wurden. Auf der anderen Seite wird eine statische Version davon in die Hilfe zur Bedienung eingearbeitet, welche ebenfalls mit Comics arbeitet. Es ist völlig offen, welche Konzepte in den Komponenten dargestellt werden und wie viel Kenntnisse der Benutzer darüber verfügt. Aus diesem Grund soll eine Beschreibung eingeblendet werden können, um zum Beispiel zu erklären, wie eine dargestellte Metrik definiert ist. Um auf Ausreisser und Trends in Daten hinzuweisen, können Anwender Kommentare verfassen. Diese beinhalten möglicherweise Annotationen in der Visualisierung und können, sofern die Darstellungsform der Komponente es zulässt, an den Daten selbst gespeichert und in anderen Komponenten wiederverwendet werden. Nachdem ein Anwender auf Grund der vorhandenen Kommunikationskanäle nie isoliert mit einer einzigen Komponente arbeitet, muss die Plattform eine History zur Verfügung stellen, mit der ungewollte Änderungen komponentenübergreifend und einfach rückgängig gemacht werden können. Zuletzt ist es nötig Hilfefunktionen für die Hilfe anzubieten, da diese das Mashup doch viel komplexer macht. Hier wird eine statische Variante bestehend aus Text und Bildern, sowie eine Dynamische eingesetzt, welche mit Machine Learning Algorithmen auf Basis von Nutzerinformationen und Nutzerinteraktionen arbeitet.
 
 % implementierung
 
-Die Bedienungshilfe, Kommunikationshilfe sowie die Kommentarfunktion wurden in einem Prototypen umgesetzt. Das Frontend wurde mit gängigen Webtechnologien (Backbone.js, D3, jQuery, CSS3) realisiert. Die größte Schwierigkeit war dabei die Art der Darstellung von hervorgehobenen Elementen in der Bedienungshilfe. Nachdem im Konzept ein dunkler Hintergrund vorgesehen war, mussten sie kopiert und vor diesen eingefügt werden. Jedoch ist es sehr aufwändig und, wie sich zeigte, unperformant trotzdem das originale Aussehen beibehalten zu wollen. Außerdem konnte keine einheitliche Logik für SVG und HTML Elemente geschrieben werden, da keine der gewählten Bibliotheken beides uneingeschränkt unterstützt. Im CoRe Backend wurde PhantomJS als Headless Browser integriert, welcher die Bilder für die Assistance generiert. Außerdem wurde das DaRe erweitert, sodass es Kommentare speichern und über eine REST API ausgeben kann.
+Die Bedienungshilfe, Kommunikationshilfe sowie die Kommentarfunktion wurden in einem Prototypen umgesetzt, da sie repräsentativ für die zwei Aufgaben des Hilfesystems sind. Das Frontend wurde mit gängigen Webtechnologien (Backbone.js, D3, jQuery, CSS3) realisiert. Die größte Schwierigkeit war dabei die Art der Darstellung von hervorgehobenen Elementen in der Bedienungshilfe. Nachdem im Konzept ein dunkler Hintergrund vorgesehen war, mussten sie kopiert und über ihren Originalen eingefügt werden. Jedoch zeigte sich, dass der Algorithmus, um den Kopien trotzdem das Aussehen der Originale zu geben, sehr aufwändig und unperformant ist. Außerdem konnte keine einheitliche Logik für SVG und HTML Elemente geschrieben werden, da keine der gewählten Bibliotheken beides uneingeschränkt unterstützt. Im CoRe Backend wurde PhantomJS als Headless Browser integriert, welcher die Bilder für die Assistance generiert. Außerdem wurde das DaRe erweitert, sodass es Kommentare speichern und über eine REST API ausgeben kann.
 
 % evaluation
 
-Der Prototyp wurde danach evaluiert. Um zu überprüfen, ob die implementierten Hilfefunktionen verständlich genug sind und um zu sehen, wie sie angenommen werden, wurde eine Nutzerstudie mit 10~zufällig ausgewählten Teilnehmern in einer Starbucks Filiale durchgeführt. Die Testpersonen waren zwischen 18 und 53~Jahren alt und zu 60~\% weiblich. Sie mussten fünf Fragen mit Hilfe eines Mashups aus drei Komponenten beantworten und danach einen SUS Usability Fragebogen ausfüllen. Es konnten ein paar Probleme bei der Nutzung der Hilfe identifiziert werden, denen relativ einfach beigekommen werden kann. Jedoch war vor allem auffällig, dass die Hilfe relativ wenig genutzt wurde, vor allem in Anbetracht der Tatsache, dass die Teilnehmer am Anfang dazu ermuntert wurden. Daraus wird einerseits geschlossen, dass die dynamische Meta-Hilfe nützlich gewesen wäre und andererseits sollte eine weitere Studie mit mehr Daten und Komponenten durchgeführt werden. Ein erklärtes Ziel des Hilfesystems war es außerdem, den Entwicklungsaufwand für Komponentenentwickler möglichst gering zu halten. Dazu wurde eine individuell konzipierte Hilfefunktion testweise in die SIMILE Timeline integriert und mit dem Aufwand für das Hilfesystem verglichen. Letzteres konnte 11~Minuten schneller integriert werden, aber vor allem überwiegen andere Vorteile des Hilfesystems: Es ist einfacher wartbar, flexibler und ermöglicht komponentenübergreifend einheitliche Bezeichnungen und Interaktionen.
+Der Prototyp wurde danach evaluiert. Um zu überprüfen, ob die implementierten Hilfefunktionen verständlich genug sind und um zu sehen, wie sie angenommen werden, wurde eine Nutzerstudie mit 10~zufällig ausgewählten Teilnehmern in einer Starbucks Filiale durchgeführt. Die Testpersonen waren zwischen 18 und 53~Jahren alt und zu 60~\% weiblich. Sie mussten fünf Fragen mit Hilfe eines Mashups aus drei Komponenten beantworten und danach einen SUS Usability Fragebogen ausfüllen. Dieser fiel insgesamt gut aus und lässt vermuten, dass er mit mehr Hilfefunktionen des Konzepts noch besser wäre. Es konnten außerdem ein paar Probleme bei der Nutzung der Hilfe identifiziert werden, denen relativ einfach beigekommen werden kann. Jedoch war vor allem auffällig, dass die Hilfe relativ wenig genutzt wurde, vor allem in Anbetracht der Tatsache, dass die Teilnehmer am Anfang dazu ermuntert wurden. Daraus wird einerseits geschlossen, dass die dynamische Meta-Hilfe nützlich gewesen wäre und andererseits sollte eine weitere Studie mit mehr Daten und Komponenten durchgeführt werden. Ein erklärtes Ziel des Hilfesystems war es außerdem, den Entwicklungsaufwand für Komponentenentwickler möglichst gering zu halten. Dazu wurde eine individuell konzipierte Hilfefunktion testweise in die SIMILE Timeline integriert und mit dem Aufwand für das Hilfesystem verglichen. Letzteres konnte 11~Minuten schneller integriert werden, aber vor allem überwiegen andere Vorteile des Hilfesystems: Es ist einfacher wartbar, flexibler und ermöglicht komponentenübergreifend einheitliche Bezeichnungen und Interaktionen.
 
 \section{Ausblick}
 
-% was in den grundlagen gefunden wurde: dezidierter knowledge view mit asynchron-kollaborative mind map
+% was muss in der aktuellen impl angepasst werden
 
-% frontend: was in der 1. studie gefunden wurde: animierte mauszeiger. sofern man animationen beibehält
+Der vorgestellte Prototyp kann noch weiter verbessert werden. Zunächst sollten bei der Hervorhebung von aktionsauslösenden UI Elementen keine aufwändigen Kopien mehr erstellt werden, sodass \enquote{Layout Thrashing} verhindert und die Hilfefunktion dementsprechend schneller angezeigt werden kann. Zudem müsste für die Comicpanels ein Layoutalgorithmus geschrieben werden, der sowohl \enquote{ansprechendes Layout} als auch \enquote{effiziente Platznutzung} optimieren kann. Danach müssten im Frontend sowie im Backend bei der Hilfegenerierung parallele und sequentielle Operationen berücksichtigt und Tastaturoperationen unterstützt werden. Dabei kann gleichzeitig die Operation \emph{Drag} so erweitert werden, dass der Entwickler das erwünschte Event Target angeben kann. Außerdem wäre es für Anwender praktisch, wenn sie ihre Kommentare editieren könnten.
 
-Das User Interface des Prototypen kann noch weiter verbessert werden. Offensichtlich sollten zunächst die fünf anderen Teilkonzepte implementiert und getestet werden. Darüber hinaus kann überlegt werden, wie in den verwandten Arbeiten erwähnt, einen dezidierten \enquote{Knowledge View} umzusetzen. Dieser bietet Anwendern Platz und Werkzeuge, um ihr Wissen zu externalisieren, was den Verständnisprozess fördert. Zusätzlich müsste untersucht werden, ob dieses externalisiertes Wissen automatisch in einer datensatzspezifischen Wissensbasis zusammengeführt werden kann. Dann könnten zukünftige Anwender diese Wissensbasis als Ausgangspunkt nehmen und weiter verbessern, was ebenfalls den Verständnisprozess beschleunigt. Sofern die Bedienungshilfe die Animationen beibehält, sollte deren Geschwindigkeit vom Benutzer kontrollierbar sein. Zusätzlich könnte eventuell ein Mauszeiger animiert werden, um die auszuführende Operation noch deutlicher zu machen.
+% howtolistview layout thrashing
+% parallele, sequentielle operationen, tastaturoperationen
 
-% backend? weitere operationen und andre teilkonzepte unterstützen
-% kategorisierung hell/dunkle komponente
-% wenn man jetzt die animationen rauslässt: layoutalgo, eventuell mehr comic-like die bilder - kann man auf alle fälle ausprobieren, ist ja nicht viel aufwand
-% was jetzt in der smcdl ist (hasrelativestyle) kann auch im core analysiert werden, vielleicht kann das core auch ein relatives stylesheet generieren und einbinden
-Im Backend des Prototypen wäre es zuerst von Nutzen, die fehlenden Operationen und Teilkonzepte zu implementieren. Danach kann am Ende des Generierungsprozesses der Bilder eine automatische Kategorisierung stattfinden, ob eine Komponente hell oder dunkel ist. So kann das Frontend des Hilfesystems automatisch anpassen, falls notwendig. Sollten Animationen in der Bedienungshilfe nicht beibehalten werden, muss am Ende der Generierung von einzelnen Bildern ein weiterer Prozess ansetzen, welche diese zu einem Comicstrip zusammensetzt. Außerdem wäre denkbar, die Bilder mehr nach Comics aussehen zu lassen, indem eine Bildverarbeitungsbibliothek festgelegte Filter anwendet. Ob darunter die Erkennbarkeit und damit das Verständnis leidet, sollte aber unbedingt in einer Nutzerstudie überprüft werden. Momentan muss der Komponentenentwickler in der SMCDL angeben, ob seine Komponente ein vollständig relatives Stylesheet verwendet. Es kann überlegt werden, ob das diese Angabe nicht überflüssig ist. Das CoRe könnte die CSS Dependencies analysieren und gegebenenfalls transformieren und ersetzen.
+% was muss vom konzept angepasst und umgesetzt werden
+
+Des Weiteren sollten die anderen fünf Teillösungen des Konzepts umgesetzt und in Nutzerstudien evaluiert werden. Einige sollten schnell implementiert sein, da sie nur aus der VISO gelesene Informationen darstellen. Andere, wie zum Beispiel die dynamische Meta-Hilfe oder die History, erfordern hingegen mehr Zeitaufwand, sollten den Anwendern aber auch mehr Nutzen bringen. Zudem sollte noch einmal überprüft werden, ob die eine statische Darstellung der Comicpanels besser geeignet ist die animierte, welche zur Zeit eingesetzt wird.
+
+% comic panels entweder ganz statisch generieren oder dynamischen layout algo einbauen
+
+% was geht über mein konzept hinaus?
+
+% knowledge view
+Danach kann das Konzept um zusätzliche Hilfestellungen erweitert werden. Beispielsweise kann, wie in den verwandten Arbeiten erwähnt, ein dezidierter \enquote{Knowledge View} dem Anwender noch mehr beim Verständnis der Daten helfen. Er bietet Benutzern Platz und Werkzeuge, um ihr Wissen zu externalisieren, was den Verständnisprozess fördert. Zusätzlich müsste untersucht werden, ob dieses externalisiertes Wissen automatisch in einer datensatzspezifischen Wissensbasis zusammengeführt werden kann. Dann könnten zukünftige Anwender diese Wissensbasis als Ausgangspunkt nehmen und weiter verbessern, was ebenfalls den Verständnisprozess beschleunigt. 
+
+
 
 
 \newpage % needed because of changing pagenumbering and missing backmatter
